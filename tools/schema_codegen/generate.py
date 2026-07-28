@@ -44,6 +44,12 @@ from sip.contracts import (
     SceneEntityContract,
     SpatialAnnotationContract,
     SpatialTransformContract,
+    ViewerSessionContract,
+    ViewerSessionReplayContract,
+    TemporalComparisonContract,
+    ChangeCandidateContract,
+    ChangeReviewContract,
+    ChangeBenchmarkContract,
 )
 
 MODELS = {
@@ -58,6 +64,12 @@ MODELS = {
     "assertion": AssertionContract,
     "derivation-event": DerivationEventContract,
     "spatial-annotation": SpatialAnnotationContract,
+    "viewer-session": ViewerSessionContract,
+    "viewer-session-replay": ViewerSessionReplayContract,
+    "temporal-comparison": TemporalComparisonContract,
+    "change-candidate": ChangeCandidateContract,
+    "change-review": ChangeReviewContract,
+    "change-benchmark": ChangeBenchmarkContract,
     "event-envelope": EventEnvelopeContract,
     "measurement": MeasurementContract,
     "model-manifest": ModelManifestContract,

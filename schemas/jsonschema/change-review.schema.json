@@ -1,0 +1,107 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/change-review.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "comparison_id": {
+      "title": "Comparison Id",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "accepted",
+        "rejected",
+        "disputed"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "rationale": {
+      "minLength": 1,
+      "title": "Rationale",
+      "type": "string"
+    },
+    "request_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "review_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Review Hash",
+      "type": "string"
+    },
+    "review_id": {
+      "title": "Review Id",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.change-review/v1.1",
+      "default": "sip.change-review/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_id",
+    "comparison_id",
+    "candidate_id",
+    "tenant_id",
+    "project_id",
+    "reviewer_id",
+    "outcome",
+    "rationale",
+    "policy_snapshot_hash",
+    "request_hash",
+    "idempotency_key",
+    "review_hash",
+    "reviewed_at"
+  ],
+  "title": "ChangeReviewContract",
+  "type": "object"
+}

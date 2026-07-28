@@ -670,6 +670,79 @@ class HybridViewCreate(StrictModel):
     ttl_seconds: int = Field(default=300, ge=30, le=3600)
 
 
+class ViewerSessionCreate(StrictModel):
+    purpose: str = Field(min_length=1)
+    audience: Audience = Audience.PROJECT
+    publication_class: Literal['working', 'audit', 'report'] = 'working'
+    scene_commit_ids: list[str] = Field(min_length=1, max_length=2)
+    saved_hybrid_views: list[dict[str, Any]] = Field(default_factory=list)
+    device_profile: str = Field(default='web_desktop_reference', min_length=1)
+    intended_uses: list[str] = Field(min_length=1)
+    spatial_region_ids: list[str] = Field(default_factory=list)
+    camera: dict[str, Any] = Field(min_length=1)
+    navigation_mode: Literal['orbit', 'walk', 'fly', 'teleport', 'guided'] = 'orbit'
+    layers: list[dict[str, Any]] = Field(min_length=1)
+    clipping_planes: list[dict[str, Any]] = Field(default_factory=list, max_length=12)
+    section_box: dict[str, Any] | None = None
+    selected_entity_ids: list[str] = Field(default_factory=list)
+    timeline: dict[str, Any] = Field(default_factory=dict)
+    filters: dict[str, Any] = Field(default_factory=dict)
+    redaction: dict[str, Any] = Field(default_factory=dict)
+    accessibility: dict[str, Any] = Field(default_factory=lambda: {
+        'reduced_motion': False,
+        'high_contrast': False,
+        'captions': True,
+    })
+    comparison: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    supersedes_session_id: str | None = None
+
+
+class ViewerSessionReplay(StrictModel):
+    ttl_seconds: int = Field(default=300, ge=30, le=900)
+
+
+class TemporalComparisonCreate(StrictModel):
+    baseline_commit_id: str
+    candidate_commit_id: str
+    viewer_session_id: str | None = None
+    comparable_region: dict[str, Any] = Field(min_length=1)
+    registration_quality: dict[str, Any] = Field(min_length=1)
+    thresholds: dict[str, Any] = Field(min_length=1)
+    evidence_ids: list[str] = Field(min_length=1)
+    algorithm_id: str = Field(min_length=1)
+    algorithm_version: str = Field(min_length=1)
+    executable_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    parameters_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    observed_coverage: dict[str, Any] = Field(min_length=1)
+    candidates: list[dict[str, Any]] = Field(default_factory=list)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
+class ChangeReviewCreate(StrictModel):
+    outcome: Literal['accepted', 'rejected', 'disputed']
+    rationale: str = Field(min_length=1)
+    evidence_ids: list[str] = Field(default_factory=list)
+    policy_snapshot_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
+class ApplySemanticChanges(StrictModel):
+    branch: str = 'main'
+    expected_head: str
+    message: str = Field(min_length=1)
+
+
+class ChangeBenchmarkCreate(StrictModel):
+    algorithm_id: str = Field(min_length=1)
+    algorithm_version: str = Field(min_length=1)
+    executable_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    benchmark_profile: str = Field(min_length=1)
+    fixture_root_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    metrics_by_class: dict[str, dict[str, float]] = Field(min_length=1)
+    environment: dict[str, Any] = Field(min_length=1)
+
+
 class InteractionProfileCreate(StrictModel):
     profile_id: str
     profile_type: Literal['collision', 'navigation', 'occlusion', 'spatial_audio', 'picking']
@@ -1111,6 +1184,183 @@ def _routers() -> dict[str, APIRouter]:
             actor_id=principal.subject_id,
             message=body.message,
             approved_review_categories=body.approved_review_categories,
+        )
+
+    @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions', status_code=201, operation_id='create_viewer_session')
+    def create_viewer_session(project_id: str, scene_id: str, body: ViewerSessionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(
+            request,
+            principal,
+            action='scene:read',
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            purpose=body.purpose,
+            audience=body.audience,
+        )
+        return _context(request).scene_runtime.create_viewer_session(
+            principal=principal,
+            project_id=project_id,
+            scene_id=scene_id,
+            purpose=body.purpose,
+            audience=body.audience,
+            publication_class=body.publication_class,
+            scene_commit_ids=body.scene_commit_ids,
+            saved_hybrid_views=body.saved_hybrid_views,
+            device_profile=body.device_profile,
+            intended_uses=body.intended_uses,
+            spatial_region_ids=body.spatial_region_ids,
+            camera=body.camera,
+            navigation_mode=body.navigation_mode,
+            layers=body.layers,
+            clipping_planes=body.clipping_planes,
+            section_box=body.section_box,
+            selected_entity_ids=body.selected_entity_ids,
+            timeline=body.timeline,
+            filters=body.filters,
+            redaction=body.redaction,
+            accessibility=body.accessibility,
+            comparison=body.comparison,
+            idempotency_key=body.idempotency_key,
+            supersedes_session_id=body.supersedes_session_id,
+        )
+
+    @scene.get('/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}', operation_id='get_viewer_session')
+    def get_viewer_session(project_id: str, scene_id: str, session_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:read', tenant_id=principal.tenant_id, project_id=project_id)
+        retained = _context(request).scene_runtime.get_viewer_session(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            session_id=session_id,
+        )
+        if retained['scene_id'] != scene_id:
+            raise NotFoundError('viewer_session', session_id)
+        if principal.subject_id != retained['principal_id'] and not set(principal.roles).intersection({'tenant_admin', 'project_admin', 'reviewer'}):
+            raise AuthorizationError('VIEWER_SESSION_PRINCIPAL_DENIED', 'viewer session is limited to its principal or a trusted reviewer')
+        _require(
+            request,
+            principal,
+            action='scene:read',
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            purpose=retained['purpose'],
+            audience=Audience(retained['audience']),
+        )
+        return retained
+
+    @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}/replays', status_code=201, operation_id='replay_viewer_session')
+    def replay_viewer_session(project_id: str, scene_id: str, session_id: str, body: ViewerSessionReplay, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:read', tenant_id=principal.tenant_id, project_id=project_id)
+        retained = _context(request).scene_runtime.get_viewer_session(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            session_id=session_id,
+        )
+        if retained['scene_id'] != scene_id:
+            raise NotFoundError('viewer_session', session_id)
+        return _context(request).scene_runtime.replay_viewer_session(
+            principal=principal,
+            project_id=project_id,
+            session_id=session_id,
+            ttl_seconds=body.ttl_seconds,
+        )
+
+    @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons', status_code=201, operation_id='create_temporal_comparison')
+    def create_temporal_comparison(project_id: str, scene_id: str, body: TemporalComparisonCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:commit', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).scene_runtime.create_temporal_comparison(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            scene_id=scene_id,
+            baseline_commit_id=body.baseline_commit_id,
+            candidate_commit_id=body.candidate_commit_id,
+            viewer_session_id=body.viewer_session_id,
+            comparable_region=body.comparable_region,
+            registration_quality=body.registration_quality,
+            thresholds=body.thresholds,
+            evidence_ids=body.evidence_ids,
+            algorithm_id=body.algorithm_id,
+            algorithm_version=body.algorithm_version,
+            executable_hash=body.executable_hash,
+            parameters_hash=body.parameters_hash,
+            observed_coverage=body.observed_coverage,
+            candidates=body.candidates,
+            idempotency_key=body.idempotency_key,
+            actor_id=principal.subject_id,
+        )
+
+    @scene.get('/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}', operation_id='get_temporal_comparison')
+    def get_temporal_comparison(project_id: str, scene_id: str, comparison_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:read', tenant_id=principal.tenant_id, project_id=project_id)
+        trusted = bool(set(principal.roles).intersection({'tenant_admin', 'project_admin', 'reviewer'}))
+        result = _context(request).scene_runtime.get_temporal_comparison(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            include_suppression_details=trusted,
+        )
+        if result['scene_id'] != scene_id:
+            raise NotFoundError('temporal_comparison', comparison_id)
+        return result
+
+    @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/candidates/{candidate_id}/reviews', status_code=201, operation_id='review_change_candidate')
+    def review_change_candidate(project_id: str, scene_id: str, comparison_id: str, candidate_id: str, body: ChangeReviewCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:review', tenant_id=principal.tenant_id, project_id=project_id)
+        comparison = _context(request).scene_runtime.get_temporal_comparison(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            include_suppression_details=True,
+        )
+        if comparison['scene_id'] != scene_id:
+            raise NotFoundError('temporal_comparison', comparison_id)
+        return _context(request).scene_runtime.review_change_candidate(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            candidate_id=candidate_id,
+            reviewer_id=principal.subject_id,
+            outcome=body.outcome,
+            rationale=body.rationale,
+            evidence_ids=body.evidence_ids,
+            policy_snapshot_hash=body.policy_snapshot_hash,
+            idempotency_key=body.idempotency_key,
+        )
+
+    @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/apply', status_code=201, operation_id='apply_accepted_changes')
+    def apply_accepted_changes(project_id: str, scene_id: str, comparison_id: str, body: ApplySemanticChanges, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:commit', tenant_id=principal.tenant_id, project_id=project_id)
+        comparison = _context(request).scene_runtime.get_temporal_comparison(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            include_suppression_details=True,
+        )
+        if comparison['scene_id'] != scene_id:
+            raise NotFoundError('temporal_comparison', comparison_id)
+        return _context(request).scene_runtime.apply_accepted_changes(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            branch=body.branch,
+            expected_head=body.expected_head,
+            message=body.message,
+            actor_id=principal.subject_id,
+        )
+
+    @scene.post('/v1/projects/{project_id}/change-benchmarks', status_code=201, operation_id='record_change_benchmark')
+    def record_change_benchmark(project_id: str, body: ChangeBenchmarkCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='scene:review', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).scene_runtime.record_change_benchmark(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            algorithm_id=body.algorithm_id,
+            algorithm_version=body.algorithm_version,
+            executable_hash=body.executable_hash,
+            benchmark_profile=body.benchmark_profile,
+            fixture_root_hash=body.fixture_root_hash,
+            metrics_by_class=body.metrics_by_class,
+            environment=body.environment,
+            actor_id=principal.subject_id,
         )
 
     @scene.post('/v1/projects/{project_id}/scenes/{scene_id}/measurements', status_code=201, operation_id='create_measurement')

@@ -7,8 +7,8 @@ PYTHONPATH := $(CURDIR)/src:$(CURDIR)
 REPORT_DIR := build/reports
 
 .PHONY: help bootstrap doctor dev test test-all lint typecheck security license-check spec-check benchmark \
-        demo-foundation demo-hybrid demo-construction demo-liveforever export-demo restore-demo \
-        contracts infrastructure migrations swift-test web-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
+        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever export-demo restore-demo \
+        contracts infrastructure migrations swift-test web-test desktop-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
 
 help:
 	@printf '%s\n' \
@@ -25,11 +25,13 @@ help:
 	  '  make spec-check         Validate complete specification and requirements control data' \
 	  '  make benchmark          Run deterministic CPU reference benchmarks' \
 	  '  make fixtures           Regenerate and verify the deterministic synthetic test corpus' \
+	  '  make demo-scene-runtime Run retained synthetic scene-runtime review demonstration' \
 	  '  make demo-construction  Run retained synthetic Construction demonstration' \
 	  '  make demo-liveforever   Run retained synthetic LiveForever demonstration' \
 	  '  make export-demo        Run preservation export demonstration' \
 	  '  make restore-demo       Run clean preservation restore demonstration' \
 	  '  make release            Build a hashed release candidate (release gates remain fail-closed)' \
+	  '  make desktop-test      Run the dependency-free local-first desktop review profile' \
 	  '  make web-acceptance     Run or explicitly block the Node 24.18.0/pnpm 10.28.2 frozen web profile' \
 	  '  make traceability-evidence  Verify post-commit evidence against the committed traceability map' \
 	  '  make release-mode       Execute fail-closed production release admission' \
@@ -62,6 +64,11 @@ web-test:
 	npm --workspace apps/web run verify-runtime 2>&1 | tee build/evidence/web-runtime-test.log
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/record_test_evidence.py
 
+desktop-test:
+	@mkdir -p build/evidence build/reports/tests
+	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest -q tests/integration/test_desktop_review.py --junitxml=$(REPORT_DIR)/tests/desktop-review-direct.xml 2>&1 | tee build/evidence/desktop-review-test.log
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/record_test_evidence.py
+
 web-acceptance:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/web_acceptance.py
 
@@ -85,7 +92,7 @@ infrastructure:
 migrations:
 	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest -q tests/migration --junitxml=$(REPORT_DIR)/tests/migration-direct.xml
 
-test-all: test web-test swift-test contracts infrastructure
+test-all: test web-test desktop-test swift-test contracts infrastructure
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/static_checks.py
@@ -119,6 +126,9 @@ demo-foundation:
 
 demo-hybrid:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py hybrid
+
+demo-scene-runtime:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py scene-runtime
 
 demo-construction:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py construction

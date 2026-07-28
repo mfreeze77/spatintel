@@ -1936,6 +1936,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review",
         "tests/integration/test_spatial_truth_twin.py::test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge"
       ],
       "test_result_evidence_paths": [
@@ -3829,6 +3830,134 @@
         "build/reports/tests/contract.xml"
       ]
     },
+    "PLTDESK-001": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_observations_synchronize_rgb_depth_trajectory_and_geometry",
+        "tests/integration/test_desktop_review.py::test_desktop_project_is_local_first_and_content_addressed"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "PLTDESK-002": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_supports_all_correspondence_types",
+        "tests/integration/test_desktop_review.py::test_desktop_undo_and_redo_append_history_instead_of_rewriting"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "PLTDESK-003": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_branch_history_preserves_base_commit_identity",
+        "tests/integration/test_desktop_review.py::test_desktop_offline_merge_preserves_conflicts"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "PLTDESK-004": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_records_factor_residuals_and_loop_constraints",
+        "tests/integration/test_desktop_review.py::test_desktop_records_source_weights_and_regional_uncertainty"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "PLTDESK-005": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_action_chain_detects_tampering",
+        "tests/integration/test_desktop_review.py::test_desktop_atomic_bundle_detects_input_tampering",
+        "tests/integration/test_desktop_review.py::test_desktop_lock_has_explicit_owner",
+        "tests/integration/test_desktop_review.py::test_desktop_reopen_is_deterministic_and_crash_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "PLTDESK-006": {
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_export_denies_authoritative_publish_and_bad_license",
+        "tests/integration/test_desktop_review.py::test_desktop_export_is_proposal_only_and_policy_gated"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
     "PLTGRPC-001": {
       "implementation_files": [
         "src/sip/worker_protocol.py",
@@ -4255,10 +4384,126 @@
         "schemas/jsonschema/spatial-query.schema.json"
       ]
     },
+    "PLTVIEW-001": {
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "PLTVIEW-003": {
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "PLTVIEW-005": {
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "PLTVIEW-006": {
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
     "PLTVIEW-007": {
       "implementation_files": [
         "apps/web",
+        "src/sip/scene_runtime.py",
         "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
         "tools/run_demo.py"
       ],
       "implementation_status": "VERIFIED",
@@ -4271,8 +4516,10 @@
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/e2e.xml"
+        "build/reports/tests/e2e.xml",
+        "build/reports/web-runtime-test-report.json"
       ]
     },
     "RECALIGN-001": {
@@ -4337,6 +4584,108 @@
         "build/reports/benchmark-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/e2e.xml"
+      ]
+    },
+    "RECCHANG-001": {
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ]
+    },
+    "RECCHANG-002": {
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ]
+    },
+    "RECCHANG-003": {
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ]
+    },
+    "RECCHANG-004": {
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
       ]
     },
     "RECCLEAN-004": {
@@ -5011,6 +5360,27 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTSEC-001": {
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe",
+        "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
       ]
     },
     "TSTSEC-003": {

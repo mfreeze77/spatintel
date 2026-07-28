@@ -20,6 +20,11 @@
     },
     {
       "method": "POST",
+      "operation_id": "record_change_benchmark",
+      "path": "/v1/projects/{project_id}/change-benchmarks"
+    },
+    {
+      "method": "POST",
       "operation_id": "register_coordinate_frame",
       "path": "/v1/projects/{project_id}/coordinate-frames"
     },
@@ -92,6 +97,41 @@
       "method": "POST",
       "operation_id": "tag_scene_commit",
       "path": "/v1/projects/{project_id}/scenes/{scene_id}/tags"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_temporal_comparison",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_temporal_comparison",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "apply_accepted_changes",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/apply"
+    },
+    {
+      "method": "POST",
+      "operation_id": "review_change_candidate",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/candidates/{candidate_id}/reviews"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_viewer_session",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_viewer_session",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "replay_viewer_session",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}/replays"
     },
     {
       "method": "POST",

@@ -100,6 +100,26 @@
       ],
       "status": "Accepted",
       "title": "ADR-0007: Versioned failure catalog and new-lineage recovery"
+    },
+    {
+      "id": "ADR-0008",
+      "path": "docs/adr/ADR-0008-policy-bound-viewer-sessions-and-temporal-change-review.md",
+      "requirement_ids": [
+        "PLTVIEW-001",
+        "PLTVIEW-003",
+        "PLTVIEW-005",
+        "RECCHANG-001",
+        "RECCHANG-002",
+        "RECCHANG-003",
+        "RECCHANG-004",
+        "PLTDESK-001",
+        "PLTDESK-003",
+        "PLTDESK-005",
+        "PLTDESK-006",
+        "DATGIT-004"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0008: Policy-bound viewer sessions and governed temporal change review"
     }
   ],
   "required_sections": [

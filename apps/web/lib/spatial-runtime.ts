@@ -159,3 +159,70 @@ export function serializeViewerSnapshot(snapshot: ViewerSnapshot): string {
   };
   return JSON.stringify(ordered);
 }
+
+export type HybridRole = "metric" | "visual" | "design" | "interaction" | "evidence";
+export interface LodLevel { readonly level: number; readonly representationId: string; readonly maximumScreenError: number; readonly triangles: number; readonly splats: number; readonly gpuBytes: number; }
+export interface ResourceBudget { readonly maxTriangles: number; readonly maxSplats: number; readonly maxGpuBytes: number; readonly maxDrawCalls: number; }
+export interface RenderResource { readonly id: string; readonly role: HybridRole; readonly priority: number; readonly triangles?: number; readonly splats?: number; readonly gpuBytes?: number; readonly drawCalls?: number; }
+
+const ROLE_ORDER: readonly HybridRole[] = ["metric", "visual", "design", "interaction", "evidence"];
+const CAPABILITY_KEYS = new Set(["token", "access_token", "refresh_token", "authorization", "bearer", "signed_url", "presigned_url", "credential", "secret", "password", "storage_key", "provider_key"]);
+function assertNoCapabilities(value: unknown, path = "root"): void {
+  if (Array.isArray(value)) { value.forEach((item, index) => assertNoCapabilities(item, `${path}[${index}]`)); return; }
+  if (!value || typeof value !== "object") return;
+  for (const [key, item] of Object.entries(value)) {
+    const normalized = key.toLowerCase().replaceAll("-", "_");
+    if (CAPABILITY_KEYS.has(normalized)) throw new Error(`VIEWER_CAPABILITY_MATERIAL_DENIED:${path}.${key}`);
+    assertNoCapabilities(item, `${path}.${key}`);
+  }
+}
+export function validateViewerSessionState(state: Readonly<Record<string, any>>): true {
+  assertNoCapabilities(state);
+  if (!Array.isArray(state.sceneCommitIds) || state.sceneCommitIds.length < 1 || state.sceneCommitIds.length > 2) throw new Error("VIEWER_COMMIT_SET_INVALID");
+  if (new Set(state.sceneCommitIds).size !== state.sceneCommitIds.length) throw new Error("VIEWER_COMMIT_SET_DUPLICATE");
+  if (state.redaction?.serverEnforced !== true) throw new Error("VIEWER_REDACTION_NOT_SERVER_ENFORCED");
+  for (const key of ["reducedMotion", "highContrast", "captions"]) if (typeof state.accessibility?.[key] !== "boolean") throw new Error(`VIEWER_ACCESSIBILITY_MISSING:${key}`);
+  if (state.sceneCommitIds.length === 2 && !state.comparison?.secondaryCommitId) throw new Error("VIEWER_COMPARISON_STATE_REQUIRED");
+  return true;
+}
+export function selectDeterministicLod(levels: readonly LodLevel[], targetScreenError: number, budget: ResourceBudget): LodLevel | null {
+  if (!Number.isFinite(targetScreenError) || targetScreenError < 0) throw new RangeError("targetScreenError must be non-negative");
+  const ordered = [...levels].sort((a, b) => b.level - a.level || a.representationId.localeCompare(b.representationId));
+  return ordered.find((item) => item.maximumScreenError <= targetScreenError && item.triangles <= budget.maxTriangles && item.splats <= budget.maxSplats && item.gpuBytes <= budget.maxGpuBytes)
+    ?? [...levels].sort((a, b) => a.level - b.level || a.representationId.localeCompare(b.representationId))[0] ?? null;
+}
+export function planResourceAdmission(resources: readonly RenderResource[], budget: ResourceBudget): { admitted: readonly RenderResource[]; rejected: readonly { id: string; reason: string }[]; totals: { triangles: number; splats: number; gpuBytes: number; drawCalls: number } } {
+  const totals = { triangles: 0, splats: 0, gpuBytes: 0, drawCalls: 0 }; const admitted: RenderResource[] = []; const rejected: { id: string; reason: string }[] = [];
+  const ordered = [...resources].sort((a, b) => a.priority - b.priority || ROLE_ORDER.indexOf(a.role) - ROLE_ORDER.indexOf(b.role) || a.id.localeCompare(b.id));
+  for (const resource of ordered) {
+    const next = { triangles: totals.triangles + (resource.triangles ?? 0), splats: totals.splats + (resource.splats ?? 0), gpuBytes: totals.gpuBytes + (resource.gpuBytes ?? 0), drawCalls: totals.drawCalls + (resource.drawCalls ?? 1) };
+    if (next.triangles <= budget.maxTriangles && next.splats <= budget.maxSplats && next.gpuBytes <= budget.maxGpuBytes && next.drawCalls <= budget.maxDrawCalls) { admitted.push(resource); Object.assign(totals, next); }
+    else rejected.push({ id: resource.id, reason: "resource_budget_exceeded" });
+  }
+  return { admitted, rejected, totals };
+}
+export function pickInteractionOnly<T extends { role: HybridRole; interactive: boolean; distance: number; stableEntityId: string }>(hits: readonly T[]): T | null {
+  return [...hits].filter((hit) => hit.role === "interaction" && hit.interactive).sort((a, b) => a.distance - b.distance || a.stableEntityId.localeCompare(b.stableEntityId))[0] ?? null;
+}
+export function pointPassesClipping(point: readonly [number, number, number], planes: readonly { normal: readonly [number, number, number]; constant: number }[] = [], sectionBox: { min: readonly [number, number, number]; max: readonly [number, number, number] } | null = null): boolean {
+  if (sectionBox && point.some((value, index) => value < sectionBox.min[index]! || value > sectionBox.max[index]!)) return false;
+  return planes.every((plane) => plane.normal[0] * point[0] + plane.normal[1] * point[1] + plane.normal[2] * point[2] + plane.constant >= 0);
+}
+export function synchronizedComparison<T extends { cameraId: string }>(primary: T, secondary: T, split = 0.5): { primary: T & { opacity: number }; secondary: T & { opacity: number }; synchronizedCameraId: string | null } {
+  if (!Number.isFinite(split) || split < 0 || split > 1) throw new RangeError("comparison split must be between zero and one");
+  return { primary: { ...primary, opacity: 1 - split }, secondary: { ...secondary, opacity: split }, synchronizedCameraId: primary.cameraId === secondary.cameraId ? primary.cameraId : null };
+}
+export function interactionDiagnostics(sources: Readonly<Record<string, { sourceId?: string }>>): { healthy: boolean; missing: readonly string[]; duplicateSourceIds: boolean } {
+  const required = ["collision", "navigation", "occlusion", "clipping", "spatial_audio"];
+  const missing = required.filter((key) => !sources[key]?.sourceId); const identifiers = required.map((key) => sources[key]?.sourceId).filter((value): value is string => Boolean(value)); const duplicate = identifiers.length !== new Set(identifiers).size;
+  return { healthy: missing.length === 0 && !duplicate, missing, duplicateSourceIds: duplicate };
+}
+export function semanticFallback(entities: readonly { stableEntityId: string; label: string; authorityLabel: string; evidenceIds?: readonly string[] }[], capabilities: { webgl: boolean; webgpu: boolean }): { mode: "hybrid" | "semantic"; entities: readonly { stableEntityId: string; label: string; authorityLabel: string; evidenceCount: number }[]; renderUnavailableReason: string | null } {
+  const renderAvailable = capabilities.webgl || capabilities.webgpu;
+  return { mode: renderAvailable ? "hybrid" : "semantic", entities: entities.map((entity) => ({ stableEntityId: entity.stableEntityId, label: entity.label, authorityLabel: entity.authorityLabel, evidenceCount: entity.evidenceIds?.length ?? 0 })), renderUnavailableReason: renderAvailable ? null : "WebGL/WebGPU unavailable; semantic scene tree retained." };
+}
+export function navigationFromKey<T extends { position: readonly [number, number, number]; savedPosition: readonly [number, number, number]; reducedMotion: boolean }>(state: T, key: string): T {
+  const step = state.reducedMotion ? 0.1 : 0.25; const position: [number, number, number] = [...state.position];
+  if (["ArrowUp", "w", "W"].includes(key)) position[2] -= step; else if (["ArrowDown", "s", "S"].includes(key)) position[2] += step; else if (["ArrowLeft", "a", "A"].includes(key)) position[0] -= step; else if (["ArrowRight", "d", "D"].includes(key)) position[0] += step; else if (key === "Home") return { ...state, position: [...state.savedPosition] } as T; else return state;
+  return { ...state, position } as T;
+}

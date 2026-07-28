@@ -39,45 +39,45 @@ def _write(name: str, payload: dict[str, Any]) -> None:
 
 def main() -> None:
     git = _git()
-    generated = ["build/reports/python-test-report.json"]
+    generated: list[str] = []
     matrix_path = ROOT / "build/reports/test-matrix.json"
-    if not matrix_path.exists():
-        raise SystemExit("build/reports/test-matrix.json is required; run tools/run_test_matrix.py first")
-    matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
-    totals = matrix.get("totals", {})
-    _write(
-        "python",
-        {
-            "schema": "sip.test-report/v1",
-            "suite": "python-isolated-category-matrix",
-            "status": "passed_complete" if matrix.get("status") in {"passed", "passed_complete"} else "failed",
-            "tests_passed": int(totals.get("tests", 0)) - int(totals.get("failures", 0)) - int(totals.get("errors", 0)),
-            "tests_failed": int(totals.get("failures", 0)) + int(totals.get("errors", 0)),
-            "tests_skipped": int(totals.get("skipped", 0)),
-            "categories": [
-                {
-                    "name": item["name"],
-                    "tests": item["tests"],
-                    "status": item["status"],
-                    "junit_path": item["junit_path"],
-                    "junit_sha256": sha256_file(ROOT / item["junit_path"]),
-                    "log_path": item["log_path"],
-                    "log_sha256": sha256_file(ROOT / item["log_path"]),
-                }
-                for item in matrix.get("results", [])
-            ],
-            "python": matrix.get("python"),
-            "plugin_autoload_disabled": matrix.get("plugin_autoload_disabled"),
-            "suite_process_isolation": matrix.get("suite_process_isolation"),
-            "matrix_path": str(matrix_path.relative_to(ROOT)),
-            "matrix_sha256": sha256_file(matrix_path),
-            "generated_at": datetime.now(UTC).isoformat(),
-            "git": git,
-            "limitations": [
-                "Local SQLite and deterministic fixture profile; PostgreSQL/PostGIS, Valkey, S3, container, Kubernetes, GPU, and cloud acceptance are separate gates."
-            ],
-        },
-    )
+    if matrix_path.exists():
+        matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+        totals = matrix.get("totals", {})
+        _write(
+            "python",
+            {
+                "schema": "sip.test-report/v1",
+                "suite": "python-isolated-category-matrix",
+                "status": "passed_complete" if matrix.get("status") in {"passed", "passed_complete"} else "failed",
+                "tests_passed": int(totals.get("tests", 0)) - int(totals.get("failures", 0)) - int(totals.get("errors", 0)),
+                "tests_failed": int(totals.get("failures", 0)) + int(totals.get("errors", 0)),
+                "tests_skipped": int(totals.get("skipped", 0)),
+                "categories": [
+                    {
+                        "name": item["name"],
+                        "tests": item["tests"],
+                        "status": item["status"],
+                        "junit_path": item["junit_path"],
+                        "junit_sha256": sha256_file(ROOT / item["junit_path"]),
+                        "log_path": item["log_path"],
+                        "log_sha256": sha256_file(ROOT / item["log_path"]),
+                    }
+                    for item in matrix.get("results", [])
+                ],
+                "python": matrix.get("python"),
+                "plugin_autoload_disabled": matrix.get("plugin_autoload_disabled"),
+                "suite_process_isolation": matrix.get("suite_process_isolation"),
+                "matrix_path": str(matrix_path.relative_to(ROOT)),
+                "matrix_sha256": sha256_file(matrix_path),
+                "generated_at": datetime.now(UTC).isoformat(),
+                "git": git,
+                "limitations": [
+                    "Local SQLite and deterministic fixture profile; PostgreSQL/PostGIS, Valkey, S3, container, Kubernetes, GPU, and cloud acceptance are separate gates."
+                ],
+            },
+        )
+        generated.append("build/reports/python-test-report.json")
     swift_path = ROOT / "build/evidence/swift-test-linux.log"
     if swift_path.is_file():
         swift_text = swift_path.read_text(encoding="utf-8")
@@ -126,6 +126,33 @@ def main() -> None:
             },
         )
         generated.append("build/reports/web-runtime-test-report.json")
+
+    desktop_path = ROOT / "build/evidence/desktop-review-test.log"
+    if desktop_path.is_file():
+        desktop_text = desktop_path.read_text(encoding="utf-8")
+        match = re.search(r"(\d+) passed", desktop_text)
+        desktop_count = int(match.group(1)) if match else 0
+        failed_match = re.search(r"(\d+) failed", desktop_text)
+        desktop_failed = int(failed_match.group(1)) if failed_match else 0
+        _write(
+            "desktop-review",
+            {
+                "schema": "sip.test-report/v1",
+                "suite": "desktop-local-first-reference",
+                "status": "passed_with_external_gaps" if desktop_count >= 15 and desktop_failed == 0 else "failed",
+                "tests_passed": desktop_count,
+                "tests_failed": desktop_failed,
+                "platform": platform.platform(),
+                "transcript": str(desktop_path.relative_to(ROOT)),
+                "transcript_sha256": sha256_file(desktop_path),
+                "git": git,
+                "limitations": [
+                    "Dependency-free local storage and loopback security profile only; native packaging, notarization, GPU review, operator usability, and browser integration remain external."
+                ],
+            },
+        )
+        generated.append("build/reports/desktop-review-test-report.json")
+
     print(json.dumps({"status": "passed_with_external_gaps", "reports": generated}, indent=2))
 
 

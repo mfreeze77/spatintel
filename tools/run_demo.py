@@ -50,7 +50,7 @@ from sip.database import (
 )
 from sip.errors import AuthorizationError, ValidationError
 from sip.geometry import change_detection, interaction_proxy, mesh_to_splats
-from sip.models import Audience, AuthorityClass, Classification, ProvenanceRef, RepresentationKind, SourceClass
+from sip.models import Audience, AuthorityClass, Classification, ProvenanceRef, RepresentationKind, SignedPrincipal, SourceClass
 from sip.scene import ProxyHit
 from tools.evidence_binding import current_source_binding
 
@@ -660,6 +660,247 @@ def hybrid(output: Path) -> dict[str, Any]:
     }
 
 
+
+def scene_runtime(output: Path) -> dict[str, Any]:
+    """Run the deterministic Progress 05 viewer-session and temporal-review scenario."""
+
+    context, tenant_id, project_id, actor = _bootstrap(output, vertical="scene-runtime")
+    scene = context.scene.create_scene(tenant_id, project_id, name="Progress 05 synthetic room", actor_id=actor)
+    scene_id = str(scene["scene_id"])
+    baseline_commit = str(scene["commit_id"])
+    entity_id = context.scene.create_entity(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        scene_id=scene_id,
+        entity_type="room",
+        name="Room 101",
+        attributes={"number": "101", "synthetic": True},
+        source_class=SourceClass.OBSERVED,
+        authority_class=AuthorityClass.EVIDENCE,
+        confidence=0.95,
+        provenance=ProvenanceRef(source_ids=["synthetic:progress-05-room"]),
+        policy={},
+        stable_support={"region_id": "room-101"},
+        actor_id=actor,
+    )
+    candidate_commit = str(
+        context.scene.commit(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            scene_id=scene_id,
+            branch="main",
+            expected_head=baseline_commit,
+            message="Record observed synthetic room",
+            actor_id=actor,
+            policy_checks={"synthetic_fixture": "passed"},
+        )["commit_id"]
+    )
+
+    evidence_payload = b"progress-05 deterministic temporal evidence"
+    evidence_asset = context.assets.ingest_bytes(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        data=evidence_payload,
+        media_type="application/octet-stream",
+        original_name="temporal-evidence.bin",
+        classification=Classification.INTERNAL,
+        retention_class="preservation",
+        source_class=SourceClass.DIRECT_CAPTURE,
+        authority_class=AuthorityClass.EVIDENCE,
+        provenance=ProvenanceRef(source_ids=["synthetic:progress-05-temporal"], output_hash=sha256_bytes(evidence_payload)),
+        actor_id=actor,
+    )
+    collected_at = datetime.now(UTC)
+    evidence = context.spatial_data.record_evidence(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        asset_id=evidence_asset.asset_id,
+        source_type="synthetic_temporal_fixture",
+        collected_at=collected_at,
+        collected_by=actor,
+        device_or_tool="deterministic-fixture",
+        location_context={"region_id": "room-101"},
+        relevant_region={"region_id": "room-101"},
+        relevant_time_start=collected_at,
+        relevant_time_end=collected_at,
+        retention_class="preservation",
+        consent_scope={"basis": "synthetic_fixture"},
+        access_policy={"allowed_purposes": ["construction", "operations"], "allowed_audiences": ["project"]},
+        actor_id=actor,
+    )
+    evidence_id = str(evidence["evidence_id"])
+    principal = SignedPrincipal(
+        subject_id=actor,
+        tenant_id=tenant_id,
+        project_ids=[project_id],
+        roles=["tenant_admin"],
+        purposes=["construction", "operations"],
+        audience=Audience.PROJECT,
+        attributes={"spatial_region_ids": ["room-101"]},
+    )
+    viewer = context.scene_runtime.create_viewer_session(
+        principal=principal,
+        project_id=project_id,
+        scene_id=scene_id,
+        purpose="construction",
+        audience=Audience.PROJECT,
+        publication_class="working",
+        scene_commit_ids=[baseline_commit, candidate_commit],
+        saved_hybrid_views=[],
+        device_profile="web_desktop_reference",
+        intended_uses=["review"],
+        spatial_region_ids=["room-101"],
+        camera={"position": [1.0, 1.6, 2.0], "target": [0.0, 1.0, 0.0]},
+        navigation_mode="walk",
+        layers=[
+            {"role": "metric", "binding_ids": [], "visible": True, "interactive": False, "authority_label": "metric evidence"},
+            {"role": "visual", "binding_ids": [], "visible": True, "interactive": False, "authority_label": "visual non-authoritative"},
+            {"role": "interaction", "binding_ids": [], "visible": True, "interactive": True, "authority_label": "disposable proxy"},
+        ],
+        clipping_planes=[{"normal": [1, 0, 0], "constant": 0}],
+        section_box={"min": [-5, 0, -5], "max": [5, 4, 5]},
+        selected_entity_ids=[entity_id],
+        timeline={"position": "candidate"},
+        filters={"systems": ["fire_alarm"]},
+        redaction={"restricted_regions": []},
+        accessibility={"reduced_motion": True, "high_contrast": True, "captions": True},
+        comparison={"primary_commit_id": baseline_commit, "secondary_commit_id": candidate_commit},
+        idempotency_key="scene-runtime-demo-viewer",
+    )
+    replay = context.scene_runtime.replay_viewer_session(
+        principal=principal,
+        project_id=project_id,
+        session_id=str(viewer["session_id"]),
+        ttl_seconds=60,
+    )
+    comparison = context.scene_runtime.create_temporal_comparison(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        scene_id=scene_id,
+        baseline_commit_id=baseline_commit,
+        candidate_commit_id=candidate_commit,
+        viewer_session_id=str(viewer["session_id"]),
+        comparable_region={"region_id": "room-101", "bounds": [[0, 0, 0], [4, 3, 5]]},
+        registration_quality={"accepted": True, "overlap_fraction": 0.91, "rmse_m": 0.012},
+        thresholds={"distance_m": 0.05, "confidence": 0.8},
+        evidence_ids=[evidence_id],
+        algorithm_id="sip.synthetic.change-detector",
+        algorithm_version="1.0.0",
+        executable_hash="a" * 64,
+        parameters_hash="b" * 64,
+        observed_coverage={"room-101": 0.91},
+        candidates=[
+            {
+                "change_class": "moved",
+                "entity_id": entity_id,
+                "region": {"region_id": "room-101"},
+                "metrics": {"distance_m": 0.2, "confidence": 0.93},
+                "evidence_ids": [evidence_id],
+                "coverage_status": "observed",
+                "difference_causes": ["geometry"],
+            },
+            {
+                "change_class": "removed",
+                "entity_id": "unobserved-device",
+                "region": {"region_id": "room-101-edge"},
+                "metrics": {"confidence": 0.99},
+                "evidence_ids": [evidence_id],
+                "coverage_status": "unobserved",
+                "difference_causes": ["geometry"],
+            },
+            {
+                "change_class": "modified",
+                "entity_id": entity_id,
+                "region": {"region_id": "room-101"},
+                "metrics": {"confidence": 0.97},
+                "evidence_ids": [evidence_id],
+                "coverage_status": "observed",
+                "difference_causes": ["lighting"],
+            },
+        ],
+        idempotency_key="scene-runtime-demo-comparison",
+        actor_id=actor,
+    )
+    active = [item for item in comparison["candidates"] if item["state"] == "active"]
+    suppressed = [item for item in comparison["candidates"] if item["state"] == "suppressed"]
+    if len(active) != 1 or len(suppressed) != 2:
+        raise ValidationError("DEMO_CHANGE_SUPPRESSION_FAILED", "temporal comparison did not preserve active and suppressed truth states")
+    review = context.scene_runtime.review_change_candidate(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=str(comparison["comparison_id"]),
+        candidate_id=str(active[0]["candidate_id"]),
+        reviewer_id="independent-demo-reviewer",
+        outcome="accepted",
+        rationale="synthetic evidence and registration support the movement",
+        evidence_ids=[evidence_id],
+        policy_snapshot_hash="c" * 64,
+        idempotency_key="scene-runtime-demo-review",
+    )
+    applied = context.scene_runtime.apply_accepted_changes(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=str(comparison["comparison_id"]),
+        branch="main",
+        expected_head=candidate_commit,
+        message="Apply independently reviewed synthetic temporal change",
+        actor_id="demo-publisher",
+    )
+    benchmark = context.scene_runtime.record_change_benchmark(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        algorithm_id="sip.synthetic.change-detector",
+        algorithm_version="1.0.0",
+        executable_hash="a" * 64,
+        benchmark_profile="progress-05-cpu-reference",
+        fixture_root_hash="e" * 64,
+        metrics_by_class={
+            "moved": {"precision": 1.0, "recall": 1.0, "localization_error_m": 0.01, "false_action_rate": 0.0},
+            "removed": {"precision": 1.0, "recall": 1.0, "localization_error_m": 0.0, "false_action_rate": 0.0},
+        },
+        environment={"fixture": "synthetic", "profile": "cpu-reference"},
+        actor_id=actor,
+    )
+    portable = _write_portable_viewer(
+        output,
+        {
+            "scene_id": scene_id,
+            "session_id": viewer["session_id"],
+            "layers": [
+                {"kind": "metric", "role": "measurement evidence", "authority": "eligible only after policy and evidence resolution"},
+                {"kind": "visual", "role": "photorealistic context", "authority": "non-authoritative"},
+                {"kind": "interaction", "role": "picking/navigation", "authority": "disposable proxy"},
+            ],
+            "evidence": {
+                "comparison_id": comparison["comparison_id"],
+                "review_id": review["review_id"],
+                "semantic_event_id": review["semantic_event_id"],
+                "applied_commit_id": applied["commit_id"],
+            },
+        },
+    )
+    return {
+        "scene_id": scene_id,
+        "viewer_session": viewer,
+        "viewer_replay": replay,
+        "comparison": comparison,
+        "review": review,
+        "applied_change": applied,
+        "benchmark": benchmark,
+        "portable_viewer": portable,
+        "acceptance": {
+            "session_immutable": viewer["immutable"] is True,
+            "capability_material_absent": "token" not in repr(viewer).lower(),
+            "unobserved_removal_suppressed": any(item["change_class"] == "unobserved" for item in suppressed),
+            "lighting_difference_suppressed": any("lighting" in item["difference_causes"] for item in suppressed),
+            "independent_review_recorded": review["reviewer_id"] != actor,
+            "semantic_event_created": bool(review["semantic_event_id"]),
+            "controlled_commit_created": applied["commit_id"] != candidate_commit,
+            "quantitative_benchmark_retained": bool(benchmark["metrics_by_class"]),
+            "production_claimed": False,
+        },
+    }
+
 def construction(output: Path) -> dict[str, Any]:
     context, tenant_id, project_id, actor = _bootstrap(output, vertical="construction", classification="confidential")
     _register_frame(context, tenant_id, project_id, actor)
@@ -897,6 +1138,7 @@ def liveforever(output: Path) -> dict[str, Any]:
 DEMONSTRATIONS: dict[str, Callable[[Path], dict[str, Any]]] = {
     "foundation": foundation,
     "hybrid": hybrid,
+    "scene-runtime": scene_runtime,
     "construction": construction,
     "liveforever": liveforever,
     "export": foundation,

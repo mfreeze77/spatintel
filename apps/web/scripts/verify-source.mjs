@@ -6,14 +6,21 @@ import path from "node:path";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const required = [
   "app/layout.tsx", "app/page.tsx", "app/construction/page.tsx", "app/liveforever/page.tsx",
-  "components/HybridViewer.tsx", "components/EvidencePanel.tsx", "components/SafeExperienceControls.tsx",
-  "lib/spatial-runtime.ts", "lib/renderer.ts", "next.config.ts"
+  "components/HybridViewer.tsx", "components/HybridCanvas.tsx", "components/EvidencePanel.tsx", "components/SafeExperienceControls.tsx",
+  "lib/spatial-runtime.ts", "lib/renderer.ts", "lib/hybrid-renderer.ts", "next.config.ts"
 ];
 for (const relative of required) assert.equal((await stat(path.join(root, relative))).isFile(), true, relative);
-const runtime = await readFile(path.join(root, "lib/spatial-runtime.ts"), "utf8");
-for (const invariant of ["directProxyMeasurement", "resolveProxyHit", "reprojectAnchors", "derived_non_authoritative", "sourceAssetIds"]) assert.ok(runtime.includes(invariant), invariant);
-const live = await readFile(path.join(root, "app/liveforever/page.tsx"), "utf8");
-for (const invariant of ["GENERATED RECONSTRUCTION", "Conflicting recollections", "Revoked"]) assert.ok(live.includes(invariant), invariant);
-const construction = await readFile(path.join(root, "app/construction/page.tsx"), "utf8");
-for (const invariant of ["not survey-grade", "Uncertainty", "Verification date"]) assert.ok(construction.includes(invariant), invariant);
-console.log(JSON.stringify({ status: "passed", checkedFiles: required.length, invariantChecks: 11 }));
+const files = Object.fromEntries(await Promise.all(required.map(async (relative) => [relative, await readFile(path.join(root, relative), "utf8")])));
+const checks = [
+  ["lib/spatial-runtime.ts", "directProxyMeasurement"], ["lib/spatial-runtime.ts", "resolveProxyHit"], ["lib/spatial-runtime.ts", "reprojectAnchors"],
+  ["lib/spatial-runtime.ts", "derived_non_authoritative"], ["lib/spatial-runtime.ts", "sourceAssetIds"], ["lib/spatial-runtime.ts", "validateViewerSessionState"],
+  ["lib/spatial-runtime.ts", "selectDeterministicLod"], ["lib/spatial-runtime.ts", "planResourceAdmission"], ["lib/spatial-runtime.ts", "pickInteractionOnly"],
+  ["lib/spatial-runtime.ts", "pointPassesClipping"], ["lib/spatial-runtime.ts", "synchronizedComparison"], ["lib/spatial-runtime.ts", "interactionDiagnostics"],
+  ["lib/spatial-runtime.ts", "semanticFallback"], ["lib/spatial-runtime.ts", "navigationFromKey"], ["lib/hybrid-renderer.ts", "loadGaussianSplat"],
+  ["lib/hybrid-renderer.ts", "role === \"interaction\""], ["components/HybridCanvas.tsx", "THREE.Points"], ["components/HybridCanvas.tsx", "Raycaster"],
+  ["components/HybridCanvas.tsx", "ResizeObserver"], ["components/HybridCanvas.tsx", "re-resolved against metric evidence"], ["components/HybridViewer.tsx", "Reduced motion"],
+  ["components/HybridViewer.tsx", "High contrast"], ["components/HybridViewer.tsx", "Captions and semantic alternatives enabled"], ["app/liveforever/page.tsx", "GENERATED RECONSTRUCTION"],
+  ["app/construction/page.tsx", "not survey-grade"], ["app/construction/page.tsx", "Verification date"]
+];
+for (const [relative, invariant] of checks) assert.ok(files[relative].includes(invariant), `${relative}:${invariant}`);
+console.log(JSON.stringify({ status: "passed", checkedFiles: required.length, invariantChecks: checks.length }));

@@ -1,0 +1,101 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/change-benchmark.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm_id": {
+      "title": "Algorithm Id",
+      "type": "string"
+    },
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "type": "string"
+    },
+    "benchmark_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Benchmark Hash",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_profile": {
+      "title": "Benchmark Profile",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "title": "Created By",
+      "type": "string"
+    },
+    "environment": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Environment",
+      "type": "object"
+    },
+    "executable_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Executable Hash",
+      "type": "string"
+    },
+    "fixture_root_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Fixture Root Hash",
+      "type": "string"
+    },
+    "metrics_by_class": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": "number"
+        },
+        "type": "object"
+      },
+      "minProperties": 1,
+      "title": "Metrics By Class",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.change-benchmark/v1.1",
+      "default": "sip.change-benchmark/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "benchmark_id",
+    "tenant_id",
+    "project_id",
+    "algorithm_id",
+    "algorithm_version",
+    "executable_hash",
+    "benchmark_profile",
+    "fixture_root_hash",
+    "metrics_by_class",
+    "environment",
+    "benchmark_hash",
+    "created_by",
+    "created_at"
+  ],
+  "title": "ChangeBenchmarkContract",
+  "type": "object"
+}

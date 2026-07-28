@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-28T02:55:19.606145+00:00",
+  "generated_at": "2026-07-28T14:34:21.250856+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -35619,11 +35619,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECCHANG-001",
@@ -35634,10 +35641,19 @@
       "source_title": "Temporal Change Detection and Semantic Diff",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECCHANG-001"
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
       ],
       "test_plan_path": "tests/spec/requirements/RECCHANG-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ],
       "text": "Every change result shall identify compared commits, comparable region, registration quality, thresholds, evidence frames, and algorithm version.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -35667,11 +35683,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECCHANG-002",
@@ -35682,10 +35705,17 @@
       "source_title": "Temporal Change Detection and Semantic Diff",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECCHANG-002"
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
       ],
       "test_plan_path": "tests/spec/requirements/RECCHANG-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ],
       "text": "The detector shall suppress differences caused by LOD, lighting, exposure, dynamic objects, and missing coverage where possible.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -35715,11 +35745,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECCHANG-003",
@@ -35730,10 +35767,17 @@
       "source_title": "Temporal Change Detection and Semantic Diff",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECCHANG-003"
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
       ],
       "test_plan_path": "tests/spec/requirements/RECCHANG-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ],
       "text": "Unobserved regions shall not be reported as removed.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -35763,11 +35807,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/scene_runtime.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "schemas/events"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "RECCHANG-004",
@@ -35778,10 +35829,17 @@
       "source_title": "Temporal Change Detection and Semantic Diff",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECCHANG-004"
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
       ],
       "test_plan_path": "tests/spec/requirements/RECCHANG-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ],
       "text": "A reviewer shall be able to inspect synchronized views and source evidence before accepting a change.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -41476,6 +41534,7 @@
       "source_title": "Spatial Git: Commits, Branches, Diffs, and Merges",
       "supersession_links": [],
       "test_ids": [
+        "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review",
         "tests/integration/test_spatial_truth_twin.py::test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge"
       ],
       "test_plan_path": "tests/spec/requirements/DATGIT-004.yaml",
@@ -46939,11 +46998,20 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTVIEW-001",
@@ -46954,10 +47022,20 @@
       "source_title": "Web Spatial Viewer and Evidence Interface",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTVIEW-001"
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
       ],
       "test_plan_path": "tests/spec/requirements/PLTVIEW-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "The viewer shall support orbit, walk/fly, saved views, floor/room navigation, clipping, section boxes, entity selection, timeline, and synchronized comparison.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47039,11 +47117,20 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTVIEW-003",
@@ -47054,10 +47141,18 @@
       "source_title": "Web Spatial Viewer and Evidence Interface",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTVIEW-003"
+        "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
       ],
       "test_plan_path": "tests/spec/requirements/PLTVIEW-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/e2e.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Selecting an entity shall show authority/source class, properties, history, evidence, tasks, permissions, and related documents when authorized.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47139,11 +47234,20 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTVIEW-005",
@@ -47154,10 +47258,18 @@
       "source_title": "Web Spatial Viewer and Evidence Interface",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTVIEW-005"
+        "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract",
+        "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
       ],
       "test_plan_path": "tests/spec/requirements/PLTVIEW-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Keyboard navigation, screen-reader metadata panels, captions/transcripts, reduced motion, and high-contrast controls shall be supported.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47189,11 +47301,20 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/web",
+        "src/sip/scene_runtime.py",
+        "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTVIEW-006",
@@ -47204,10 +47325,16 @@
       "source_title": "Web Spatial Viewer and Evidence Interface",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTVIEW-006"
+        "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
       ],
       "test_plan_path": "tests/spec/requirements/PLTVIEW-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Viewer sessions used for audit or reports shall be reproducible from saved camera, layers, commit, filters, and redaction state.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47241,7 +47368,11 @@
       "first_passing_release": null,
       "implementation_files": [
         "apps/web",
+        "src/sip/scene_runtime.py",
         "src/sip/representations.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0012_scene_runtime_review.py",
         "tools/run_demo.py"
       ],
       "implementation_status": "VERIFIED",
@@ -47264,8 +47395,10 @@
       "test_plan_path": "tests/spec/requirements/PLTVIEW-007.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/demos/scene-runtime.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/e2e.xml"
+        "build/reports/tests/e2e.xml",
+        "build/reports/web-runtime-test-report.json"
       ],
       "text": "Hybrid rendering shall keep visual, metric, interaction, design, and evidence roles independently selectable and labeled.",
       "verification_method": "Viewer integration test",
@@ -47543,11 +47676,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTDESK-001",
@@ -47558,10 +47696,15 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-001"
+        "tests/integration/test_desktop_review.py::test_desktop_observations_synchronize_rgb_depth_trajectory_and_geometry",
+        "tests/integration/test_desktop_review.py::test_desktop_project_is_local_first_and_content_addressed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The reviewer shall inspect synchronized frame/depth/trajectory/geometry and allow correspondence creation with undo and provenance.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47588,11 +47731,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTDESK-002",
@@ -47603,10 +47751,15 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-002"
+        "tests/integration/test_desktop_review.py::test_desktop_supports_all_correspondence_types",
+        "tests/integration/test_desktop_review.py::test_desktop_undo_and_redo_append_history_instead_of_rewriting"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The reviewer shall visualize factor residuals, loop constraints, source weights, and region uncertainty.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47633,11 +47786,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTDESK-003",
@@ -47648,10 +47806,15 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-003"
+        "tests/integration/test_desktop_review.py::test_desktop_branch_history_preserves_base_commit_identity",
+        "tests/integration/test_desktop_review.py::test_desktop_offline_merge_preserves_conflicts"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Offline changes shall preserve local identity, author, base commit, and conflict information.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47678,11 +47841,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTDESK-004",
@@ -47693,10 +47861,15 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-004"
+        "tests/integration/test_desktop_review.py::test_desktop_records_factor_residuals_and_loop_constraints",
+        "tests/integration/test_desktop_review.py::test_desktop_records_source_weights_and_regional_uncertainty"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The application shall not require cloud login for authorized local-only projects.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47723,11 +47896,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTDESK-005",
@@ -47738,10 +47916,17 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-005"
+        "tests/integration/test_desktop_review.py::test_desktop_action_chain_detects_tampering",
+        "tests/integration/test_desktop_review.py::test_desktop_atomic_bundle_detects_input_tampering",
+        "tests/integration/test_desktop_review.py::test_desktop_lock_has_explicit_owner",
+        "tests/integration/test_desktop_review.py::test_desktop_reopen_is_deterministic_and_crash_safe"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "GPU crashes shall not corrupt local project bundles.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -47768,11 +47953,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/desktop-review",
+        "src/sip/desktop_review.py",
+        "tests/integration/test_desktop_review.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTDESK-006",
@@ -47783,10 +47973,15 @@
       "source_title": "Desktop Expert Review Application",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTDESK-006"
+        "tests/integration/test_desktop_review.py::test_desktop_export_denies_authoritative_publish_and_bad_license",
+        "tests/integration/test_desktop_review.py::test_desktop_export_is_proposal_only_and_policy_gated"
       ],
       "test_plan_path": "tests/spec/requirements/PLTDESK-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/desktop-review-test-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Exports and publication shall still pass policy and license gates.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66970,11 +67165,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "TSTSEC-001",
@@ -66985,10 +67186,14 @@
       "source_title": "Security, Privacy, Consent, and Abuse Testing",
       "supersession_links": [],
       "test_ids": [
-        "REQ-TSTSEC-001"
+        "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe",
+        "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Tests shall attempt unauthorized discovery through IDs, counts, search snippets, vectors, thumbnails, tiles, caches, logs, share links, signed URLs, exports, and agent tools.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,

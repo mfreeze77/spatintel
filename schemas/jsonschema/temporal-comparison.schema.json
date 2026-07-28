@@ -1,0 +1,294 @@
+{
+  "$defs": {
+    "ChangeCandidateContract": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Candidate Hash",
+          "type": "string"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "change_class": {
+          "enum": [
+            "added",
+            "removed",
+            "moved",
+            "modified",
+            "occluded",
+            "unobserved",
+            "uncertain"
+          ],
+          "title": "Change Class",
+          "type": "string"
+        },
+        "coverage_status": {
+          "enum": [
+            "observed",
+            "partially_observed",
+            "unobserved"
+          ],
+          "title": "Coverage Status",
+          "type": "string"
+        },
+        "difference_causes": {
+          "items": {
+            "enum": [
+              "geometry",
+              "lod",
+              "lighting",
+              "exposure",
+              "dynamic_object",
+              "missing_coverage",
+              "registration",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "title": "Difference Causes",
+          "type": "array"
+        },
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "metrics": {
+          "additionalProperties": true,
+          "title": "Metrics",
+          "type": "object"
+        },
+        "region": {
+          "additionalProperties": true,
+          "minProperties": 1,
+          "title": "Region",
+          "type": "object"
+        },
+        "state": {
+          "enum": [
+            "active",
+            "suppressed",
+            "accepted",
+            "rejected",
+            "disputed"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "suppression_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suppression Reason"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "change_class",
+        "region",
+        "coverage_status",
+        "state",
+        "candidate_hash"
+      ],
+      "title": "ChangeCandidateContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/temporal-comparison.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm_id": {
+      "minLength": 1,
+      "title": "Algorithm Id",
+      "type": "string"
+    },
+    "algorithm_version": {
+      "minLength": 1,
+      "title": "Algorithm Version",
+      "type": "string"
+    },
+    "baseline_commit_id": {
+      "title": "Baseline Commit Id",
+      "type": "string"
+    },
+    "candidate_commit_id": {
+      "title": "Candidate Commit Id",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/ChangeCandidateContract"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "comparable_region": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Comparable Region",
+      "type": "object"
+    },
+    "comparison_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Comparison Hash",
+      "type": "string"
+    },
+    "comparison_id": {
+      "title": "Comparison Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "title": "Created By",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "executable_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Executable Hash",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "observed_coverage": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Observed Coverage",
+      "type": "object"
+    },
+    "parameters_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Parameters Hash",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "registration_quality": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Registration Quality",
+      "type": "object"
+    },
+    "request_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.temporal-comparison/v1.1",
+      "default": "sip.temporal-comparison/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "pending_review",
+        "reviewed",
+        "partially_applied",
+        "applied",
+        "superseded"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "thresholds": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Thresholds",
+      "type": "object"
+    },
+    "viewer_session_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Viewer Session Id"
+    }
+  },
+  "required": [
+    "comparison_id",
+    "tenant_id",
+    "project_id",
+    "scene_id",
+    "baseline_commit_id",
+    "candidate_commit_id",
+    "comparable_region",
+    "registration_quality",
+    "thresholds",
+    "evidence_ids",
+    "algorithm_id",
+    "algorithm_version",
+    "executable_hash",
+    "parameters_hash",
+    "observed_coverage",
+    "candidates",
+    "state",
+    "comparison_hash",
+    "request_hash",
+    "idempotency_key",
+    "created_by",
+    "created_at"
+  ],
+  "title": "TemporalComparisonContract",
+  "type": "object"
+}

@@ -19,6 +19,7 @@ from .operations import OperationService
 from .policy import PolicyService
 from .representations import ProviderRegistry, RepresentationPublisher, RepresentationService
 from .scene import SceneService
+from .scene_runtime import SceneRuntimeService
 from .search import SearchService
 from .security import EnvelopeCipher, SignedTokenCodec
 from .spatial_data import SpatialDataService
@@ -42,6 +43,7 @@ class PlatformContext:
     admission: AdmissionController
     scene: SceneService
     spatial_data: SpatialDataService
+    scene_runtime: SceneRuntimeService
     providers: ProviderRegistry
     representations: RepresentationService
     hybrid: HybridControlService
@@ -101,6 +103,8 @@ class PlatformContext:
             policy,
             environment=settings.environment,
         )
+        scene_service = SceneService(database, audit)
+        scene_runtime = SceneRuntimeService(database, audit, policy, hybrid, scene_service)
         return cls(
             settings=settings,
             database=database,
@@ -115,8 +119,9 @@ class PlatformContext:
             backup_recovery=BackupRecoveryService(database, preservation, assets, audit),
             key_rotation=KeyRotationService(database, assets, audit),
             admission=admission,
-            scene=SceneService(database, audit),
+            scene=scene_service,
             spatial_data=SpatialDataService(database, audit, policy, models),
+            scene_runtime=scene_runtime,
             providers=providers,
             representations=representations,
             hybrid=hybrid,

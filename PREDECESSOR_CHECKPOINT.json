@@ -1,0 +1,22 @@
+{
+  "schema": "sip.predecessor-checkpoint/v1",
+  "predecessor": {
+    "checkpoint_id": "sip-v1.1.0-progress-04",
+    "zip_name": "Spatial-Intelligence-Platform-v1.1.0-progress-04.zip",
+    "zip_sha256": "892f5b9d1995b2016eb80a524989af4813bfa408788e439edf0996a470b73bf5"
+  },
+  "import_mapping": {
+    "commit": "36e9c44d21a9c47d85971ee945daec8fc98e26d6",
+    "tree": "b34f93d98ab5ff8746e0c81cbf41e8af61e33a3f",
+    "subject": "chore: import progress 04 checkpoint source",
+    "relationship": "The import commit reproduces all 2,419 files of the predecessor Progress 04 ZIP byte-for-byte. The predecessor Git object originally claimed by Progress 04 was unavailable, so continuity is represented explicitly as an archive-to-import-commit mapping rather than a false parent relationship."
+  },
+  "accepted_checkpoint": {
+    "checkpoint_id": "sip-v1.1.0-progress-04-r1",
+    "branch": "progress-04-r1-remediation",
+    "commit": "8fe87d030c68157c50b477de8d2480065ca0b6a8",
+    "tree": "b31a615819f0a31ef820cd6864d229b1e7f3760d",
+    "project_zip_sha256": "0d5a2584b412d05d8cff933d8170d6faa411a7cc6be095356995442517254079",
+    "source_root_sha256": "248f762a3b9eef52503f69c0b19fb7067d77e5d447bc28787bef20e988655e28"
+  }
+}

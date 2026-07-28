@@ -71,6 +71,22 @@ def test_hybrid_representation_demonstration(tmp_path: Path) -> None:
 
 
 @pytest.mark.e2e
+def test_scene_runtime_review_demonstration(tmp_path: Path) -> None:
+    """REQ: PLTVIEW-001, PLTVIEW-003, RECCHANG-001, RECCHANG-002, RECCHANG-003, RECCHANG-004 deterministic scene review preserves truth and independent approval."""
+    report = _demo_module().scene_runtime(tmp_path / "scene-runtime")
+    acceptance = report["acceptance"]
+    assert acceptance["session_immutable"] is True
+    assert acceptance["capability_material_absent"] is True
+    assert acceptance["unobserved_removal_suppressed"] is True
+    assert acceptance["lighting_difference_suppressed"] is True
+    assert acceptance["independent_review_recorded"] is True
+    assert acceptance["semantic_event_created"] is True
+    assert acceptance["controlled_commit_created"] is True
+    assert acceptance["quantitative_benchmark_retained"] is True
+    assert acceptance["production_claimed"] is False
+
+
+@pytest.mark.e2e
 def test_mesh_splat_surface_roundtrip_reports_irreversible_loss() -> None:
     """REQ: HYBTEST-015, RECBIDI-003, RECBIDI-008 conversion never claims representation equivalence."""
     vertices = np.asarray(

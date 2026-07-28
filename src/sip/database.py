@@ -793,6 +793,166 @@ class InteractionProfileRow(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
 
 
+class ViewerSessionRow(Base):
+    __tablename__ = "viewer_sessions"
+    session_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    scene_id: Mapped[str] = mapped_column(String(64), index=True)
+    principal_id: Mapped[str] = mapped_column(String(128), index=True)
+    purpose: Mapped[str] = mapped_column(String(128), index=True)
+    audience: Mapped[str] = mapped_column(String(64), index=True)
+    publication_class: Mapped[str] = mapped_column(String(32), default="working", index=True)
+    scene_commit_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    saved_hybrid_views_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    device_profile: Mapped[str] = mapped_column(String(128))
+    intended_uses_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    spatial_region_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    camera_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    navigation_mode: Mapped[str] = mapped_column(String(32))
+    layers_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    clipping_planes_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    section_box_json: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    selected_entity_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    timeline_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    filters_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    redaction_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    accessibility_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    comparison_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    policy_snapshot_hash: Mapped[str] = mapped_column(String(64), index=True)
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    session_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    immutable: Mapped[bool] = mapped_column(Boolean, default=True)
+    supersedes_session_id: Mapped[str | None] = mapped_column(ForeignKey("viewer_sessions.session_id", ondelete="RESTRICT"), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "principal_id", "idempotency_key", name="uq_viewer_session_idempotency"),
+    )
+
+
+class ViewerSessionReplayRow(Base):
+    __tablename__ = "viewer_session_replays"
+    replay_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    session_id: Mapped[str] = mapped_column(ForeignKey("viewer_sessions.session_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    principal_id: Mapped[str] = mapped_column(String(128), index=True)
+    issued_views_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    exact: Mapped[bool] = mapped_column(Boolean, default=False)
+    degraded_reasons_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    policy_snapshot_hash: Mapped[str] = mapped_column(String(64))
+    replay_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class TemporalComparisonRow(Base):
+    __tablename__ = "temporal_comparisons"
+    comparison_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    scene_id: Mapped[str] = mapped_column(String(64), index=True)
+    baseline_commit_id: Mapped[str] = mapped_column(ForeignKey("scene_commits.commit_id", ondelete="RESTRICT"), index=True)
+    candidate_commit_id: Mapped[str] = mapped_column(ForeignKey("scene_commits.commit_id", ondelete="RESTRICT"), index=True)
+    viewer_session_id: Mapped[str | None] = mapped_column(ForeignKey("viewer_sessions.session_id", ondelete="RESTRICT"), index=True)
+    comparable_region_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    registration_quality_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    thresholds_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    algorithm_id: Mapped[str] = mapped_column(String(128), index=True)
+    algorithm_version: Mapped[str] = mapped_column(String(64))
+    executable_hash: Mapped[str] = mapped_column(String(64))
+    parameters_hash: Mapped[str] = mapped_column(String(64))
+    observed_coverage_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), default="pending_review", index=True)
+    comparison_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_temporal_comparison_idempotency"),
+    )
+
+
+class ChangeCandidateRow(Base):
+    __tablename__ = "change_candidates"
+    candidate_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    comparison_id: Mapped[str] = mapped_column(ForeignKey("temporal_comparisons.comparison_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    scene_id: Mapped[str] = mapped_column(String(64), index=True)
+    change_class: Mapped[str] = mapped_column(String(64), index=True)
+    entity_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    region_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    metrics_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    coverage_status: Mapped[str] = mapped_column(String(32))
+    difference_causes_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    suppression_reason: Mapped[str | None] = mapped_column(String(256))
+    candidate_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class ChangeReviewRow(Base):
+    __tablename__ = "change_reviews"
+    review_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    comparison_id: Mapped[str] = mapped_column(ForeignKey("temporal_comparisons.comparison_id", ondelete="RESTRICT"), index=True)
+    candidate_id: Mapped[str] = mapped_column(ForeignKey("change_candidates.candidate_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    reviewer_id: Mapped[str] = mapped_column(String(128), index=True)
+    outcome: Mapped[str] = mapped_column(String(32), index=True)
+    rationale: Mapped[str] = mapped_column(Text)
+    evidence_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    policy_snapshot_hash: Mapped[str] = mapped_column(String(64))
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    review_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    reviewed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "reviewer_id", "idempotency_key", name="uq_change_review_idempotency"),
+    )
+
+
+class SemanticChangeEventRow(Base):
+    __tablename__ = "semantic_change_events"
+    semantic_event_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    comparison_id: Mapped[str] = mapped_column(ForeignKey("temporal_comparisons.comparison_id", ondelete="RESTRICT"), index=True)
+    candidate_id: Mapped[str] = mapped_column(ForeignKey("change_candidates.candidate_id", ondelete="RESTRICT"), index=True)
+    review_id: Mapped[str] = mapped_column(ForeignKey("change_reviews.review_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    scene_id: Mapped[str] = mapped_column(String(64), index=True)
+    event_type: Mapped[str] = mapped_column(String(128), index=True)
+    entity_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    payload_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    source_commit_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    applied_commit_id: Mapped[str | None] = mapped_column(ForeignKey("scene_commits.commit_id", ondelete="RESTRICT"), index=True)
+    event_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class ChangeBenchmarkRow(Base):
+    __tablename__ = "change_benchmarks"
+    benchmark_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    algorithm_id: Mapped[str] = mapped_column(String(128), index=True)
+    algorithm_version: Mapped[str] = mapped_column(String(64))
+    executable_hash: Mapped[str] = mapped_column(String(64))
+    benchmark_profile: Mapped[str] = mapped_column(String(128))
+    fixture_root_hash: Mapped[str] = mapped_column(String(64))
+    metrics_by_class_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    environment_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    benchmark_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
 class ModelManifestRow(Base):
     __tablename__ = "model_manifests"
     model_id: Mapped[str] = mapped_column(String(128), primary_key=True)

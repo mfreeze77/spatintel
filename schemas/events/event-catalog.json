@@ -61,6 +61,20 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "change_benchmark",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "change_benchmark.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "change_review",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "change_candidate.reviewed",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "consent_grant",
       "classification": "restricted",
       "owner": "identity-policy",
@@ -320,6 +334,20 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "semantic_change_event",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "scene.change.accepted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "temporal_comparison",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "scene.change.applied",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "scene_commit",
       "classification": "inherits_project",
       "owner": "scene-service",
@@ -345,6 +373,27 @@
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "spatial_transform.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "temporal_comparison",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "temporal_comparison.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "viewer_session",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "viewer_session.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "viewer_session_replay",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "viewer_session.replayed",
       "version": "1.0.0"
     }
   ]

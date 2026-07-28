@@ -1,0 +1,313 @@
+{
+  "$defs": {
+    "Audience": {
+      "enum": [
+        "private",
+        "family",
+        "project",
+        "owner",
+        "public"
+      ],
+      "title": "Audience",
+      "type": "string"
+    },
+    "ViewerLayerContract": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_label": {
+          "minLength": 1,
+          "title": "Authority Label",
+          "type": "string"
+        },
+        "binding_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Binding Ids",
+          "type": "array"
+        },
+        "interactive": {
+          "default": false,
+          "title": "Interactive",
+          "type": "boolean"
+        },
+        "opacity": {
+          "default": 1.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Opacity",
+          "type": "number"
+        },
+        "role": {
+          "enum": [
+            "metric",
+            "visual",
+            "interaction",
+            "design",
+            "evidence",
+            "semantic",
+            "collision",
+            "navigation",
+            "occlusion",
+            "spatial_audio"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "visible": {
+          "default": true,
+          "title": "Visible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "role",
+        "authority_label"
+      ],
+      "title": "ViewerLayerContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/viewer-session.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accessibility": {
+      "additionalProperties": true,
+      "title": "Accessibility",
+      "type": "object"
+    },
+    "audience": {
+      "$ref": "#/$defs/Audience"
+    },
+    "camera": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Camera",
+      "type": "object"
+    },
+    "clipping_planes": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "maxItems": 12,
+      "title": "Clipping Planes",
+      "type": "array"
+    },
+    "comparison": {
+      "additionalProperties": true,
+      "title": "Comparison",
+      "type": "object"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "title": "Created By",
+      "type": "string"
+    },
+    "device_profile": {
+      "minLength": 1,
+      "title": "Device Profile",
+      "type": "string"
+    },
+    "filters": {
+      "additionalProperties": true,
+      "title": "Filters",
+      "type": "object"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "immutable": {
+      "const": true,
+      "default": true,
+      "title": "Immutable",
+      "type": "boolean"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/ViewerLayerContract"
+      },
+      "minItems": 1,
+      "title": "Layers",
+      "type": "array"
+    },
+    "navigation_mode": {
+      "enum": [
+        "orbit",
+        "walk",
+        "fly",
+        "teleport",
+        "guided"
+      ],
+      "title": "Navigation Mode",
+      "type": "string"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "principal_id": {
+      "title": "Principal Id",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "publication_class": {
+      "default": "working",
+      "enum": [
+        "working",
+        "audit",
+        "report"
+      ],
+      "title": "Publication Class",
+      "type": "string"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "redaction": {
+      "additionalProperties": true,
+      "title": "Redaction",
+      "type": "object"
+    },
+    "request_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "saved_hybrid_views": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Saved Hybrid Views",
+      "type": "array"
+    },
+    "scene_commit_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "title": "Scene Commit Ids",
+      "type": "array"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.viewer-session/v1.1",
+      "default": "sip.viewer-session/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "section_box": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Section Box"
+    },
+    "selected_entity_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Entity Ids",
+      "type": "array"
+    },
+    "session_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Session Hash",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "spatial_region_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Spatial Region Ids",
+      "type": "array"
+    },
+    "supersedes_session_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Session Id"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "timeline": {
+      "additionalProperties": true,
+      "title": "Timeline",
+      "type": "object"
+    }
+  },
+  "required": [
+    "session_id",
+    "tenant_id",
+    "project_id",
+    "scene_id",
+    "principal_id",
+    "purpose",
+    "audience",
+    "scene_commit_ids",
+    "device_profile",
+    "intended_uses",
+    "camera",
+    "navigation_mode",
+    "layers",
+    "policy_snapshot_hash",
+    "request_hash",
+    "session_hash",
+    "idempotency_key",
+    "created_by",
+    "created_at"
+  ],
+  "title": "ViewerSessionContract",
+  "type": "object"
+}

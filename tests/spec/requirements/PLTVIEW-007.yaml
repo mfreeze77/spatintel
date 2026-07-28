@@ -11,14 +11,20 @@ verification_method: Viewer integration test
 implementation_status: VERIFIED
 implementation_files:
 - apps/web
+- src/sip/scene_runtime.py
 - src/sip/representations.py
+- src/sip/api.py
+- src/sip/database.py
+- migrations/versions/0012_scene_runtime_review.py
 - tools/run_demo.py
 automated_test_ids:
 - tests/e2e/test_platform_demonstrations.py::test_hybrid_representation_demonstration
 retained_evidence:
 - build/evidence/demos/hybrid.json
+- build/evidence/demos/scene-runtime.json
 - build/reports/test-matrix.json
 - build/reports/tests/e2e.xml
+- build/reports/web-runtime-test-report.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

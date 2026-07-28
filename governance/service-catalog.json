@@ -992,11 +992,18 @@
       "events_produced": [
         "anchor.remapped",
         "annotation.created",
+        "change_benchmark.recorded",
+        "change_candidate.reviewed",
         "coordinate_frame.registered",
         "measurement.recorded",
+        "scene.change.accepted",
+        "scene.change.applied",
         "scene.committed",
         "scene.tagged",
-        "spatial_transform.registered"
+        "spatial_transform.registered",
+        "temporal_comparison.created",
+        "viewer_session.created",
+        "viewer_session.replayed"
       ],
       "inbound_apis": [
         {
@@ -1008,6 +1015,11 @@
           "method": "GET",
           "operation_id": "health_ready",
           "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_change_benchmark",
+          "path": "/v1/projects/{project_id}/change-benchmarks"
         },
         {
           "method": "POST",
@@ -1083,6 +1095,41 @@
           "method": "POST",
           "operation_id": "tag_scene_commit",
           "path": "/v1/projects/{project_id}/scenes/{scene_id}/tags"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_temporal_comparison",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_temporal_comparison",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "apply_accepted_changes",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/apply"
+        },
+        {
+          "method": "POST",
+          "operation_id": "review_change_candidate",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/temporal-comparisons/{comparison_id}/candidates/{candidate_id}/reviews"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_viewer_session",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_viewer_session",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "replay_viewer_session",
+          "path": "/v1/projects/{project_id}/scenes/{scene_id}/viewer-sessions/{session_id}/replays"
         },
         {
           "method": "POST",

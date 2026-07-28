@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import { AuthorityBadge } from "./AuthorityBadge";
 import { LayerControls } from "./LayerControls";
+import { HybridCanvas } from "./HybridCanvas";
 import {
   defaultLayers,
   directProxyMeasurement,
@@ -25,6 +26,9 @@ const anchors: readonly StableAnchor[] = [
 export function HybridViewer(): React.ReactNode {
   const [layers, setLayers] = useState<readonly LayerState[]>(() => defaultLayers());
   const [message, setMessage] = useState("Select an entity or proxy surface to inspect its evidence.");
+  const [reducedMotion, setReducedMotion] = useState(true);
+  const [highContrast, setHighContrast] = useState(false);
+  const [clippingEnabled, setClippingEnabled] = useState(false);
   const reprojection = useMemo(() => reprojectAnchors(anchors, surfaces), []);
 
   const patchLayer = (kind: RepresentationKind, patch: Partial<Pick<LayerState, "visible" | "opacity">>): void => {
@@ -46,13 +50,16 @@ export function HybridViewer(): React.ReactNode {
       </div>
       <div className="viewer-grid">
         <LayerControls layers={layers} onToggle={(kind, visible) => patchLayer(kind, { visible })} onOpacity={(kind, opacity) => patchLayer(kind, { opacity })} />
-        <div className="viewport" tabIndex={0} role="application" aria-label="Synthetic hybrid spatial scene. Keyboard users can use the semantic scene tree below.">
-          <div className="scene-card scene-metric"><strong>Metric room</strong><AuthorityBadge authority="observed" confidence={0.91} /></div>
-          <div className="scene-card scene-visual"><strong>Gaussian appearance</strong><AuthorityBadge authority="generated" /></div>
-          <div className="scene-card scene-proxy"><strong>Interaction proxy</strong><AuthorityBadge authority="derived_non_authoritative" /></div>
-          <div className="scene-card scene-design"><strong>Design overlay</strong><AuthorityBadge authority="derived_non_authoritative" /></div>
+        <div className="viewport" tabIndex={0} role="application" aria-label="Hybrid spatial scene. Arrow keys or W A S D navigate; Home restores the saved view; the semantic scene tree remains available.">
+          <HybridCanvas reducedMotion={reducedMotion} highContrast={highContrast} clippingEnabled={clippingEnabled} comparisonSplit={0.72} onSemanticPick={(entityId) => { inspectProxy(); setMessage(`Interaction proxy selected ${entityId}. Metric re-resolution is required before measurement.`); }} />
+          <div className="truth-overlay" aria-label="Persistent truth labels">
+            <AuthorityBadge authority="observed" confidence={0.91} />
+            <AuthorityBadge authority="generated" />
+            <AuthorityBadge authority="derived_non_authoritative" />
+          </div>
         </div>
       </div>
+      <fieldset className="accessibility-controls"><legend>Viewer accessibility and safety</legend><label><input type="checkbox" checked={reducedMotion} onChange={(event) => setReducedMotion(event.target.checked)} /> Reduced motion</label><label><input type="checkbox" checked={highContrast} onChange={(event) => setHighContrast(event.target.checked)} /> High contrast</label><label><input type="checkbox" checked={clippingEnabled} onChange={(event) => setClippingEnabled(event.target.checked)} /> Section clipping</label><span>Captions and semantic alternatives enabled</span></fieldset>
       <p className="status-message" role="status" aria-live="polite">{message}</p>
       <details><summary>Proxy replacement and anchor reprojection report</summary><p>{reprojection.resolved.length} anchor resolved; {reprojection.unresolved.length} unresolved.</p>{reprojection.unresolved.map((item) => <p key={item.anchorId}><code>{item.anchorId}</code>: {item.reason}</p>)}</details>
       <nav aria-label="Semantic scene tree"><ul className="scene-tree"><li><button type="button" onClick={() => setMessage("Room 101 selected. Observed geometry; not independently verified.")}>Room 101</button><ul><li>Fire alarm panel</li><li>Door 102</li><li>Supply diffuser</li></ul></li></ul></nav>

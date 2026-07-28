@@ -45,6 +45,9 @@ demo-foundation:
 demo-hybrid:
     make demo-hybrid
 
+demo-scene-runtime:
+    make demo-scene-runtime
+
 demo-construction:
     make demo-construction
 
@@ -56,6 +59,9 @@ export-demo:
 
 restore-demo:
     make restore-demo
+
+desktop-test:
+    make desktop-test
 
 web-acceptance:
     make web-acceptance

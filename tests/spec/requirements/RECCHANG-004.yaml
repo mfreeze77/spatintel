@@ -7,11 +7,22 @@ source:
   section: 4. Normative requirements
 requirement: A reviewer shall be able to inspect synchronized views and source evidence before accepting a change.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/scene_runtime.py
+- src/sip/database.py
+- src/sip/api.py
+- migrations/versions/0012_scene_runtime_review.py
+- schemas/events
 automated_test_ids:
-- REQ-RECCHANG-004
-retained_evidence: []
+- tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration
+- tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review
+retained_evidence:
+- build/evidence/demos/scene-runtime.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+- build/reports/tests/integration.xml
+- schemas/events/event-catalog.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +31,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

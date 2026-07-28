@@ -1,0 +1,118 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/change-candidate.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Hash",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "change_class": {
+      "enum": [
+        "added",
+        "removed",
+        "moved",
+        "modified",
+        "occluded",
+        "unobserved",
+        "uncertain"
+      ],
+      "title": "Change Class",
+      "type": "string"
+    },
+    "coverage_status": {
+      "enum": [
+        "observed",
+        "partially_observed",
+        "unobserved"
+      ],
+      "title": "Coverage Status",
+      "type": "string"
+    },
+    "difference_causes": {
+      "items": {
+        "enum": [
+          "geometry",
+          "lod",
+          "lighting",
+          "exposure",
+          "dynamic_object",
+          "missing_coverage",
+          "registration",
+          "unknown"
+        ],
+        "type": "string"
+      },
+      "title": "Difference Causes",
+      "type": "array"
+    },
+    "entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entity Id"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "region": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Region",
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "suppressed",
+        "accepted",
+        "rejected",
+        "disputed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "suppression_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suppression Reason"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "change_class",
+    "region",
+    "coverage_status",
+    "state",
+    "candidate_hash"
+  ],
+  "title": "ChangeCandidateContract",
+  "type": "object"
+}

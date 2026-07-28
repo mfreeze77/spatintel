@@ -1,0 +1,86 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/viewer-session-replay.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "degraded_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Degraded Reasons",
+      "type": "array"
+    },
+    "exact": {
+      "title": "Exact",
+      "type": "boolean"
+    },
+    "issued_views": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Issued Views",
+      "type": "array"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "principal_id": {
+      "title": "Principal Id",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "replay_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Replay Hash",
+      "type": "string"
+    },
+    "replay_id": {
+      "title": "Replay Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.viewer-session-replay/v1.1",
+      "default": "sip.viewer-session-replay/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "title": "Session Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "replay_id",
+    "session_id",
+    "tenant_id",
+    "project_id",
+    "principal_id",
+    "exact",
+    "policy_snapshot_hash",
+    "replay_hash",
+    "created_at"
+  ],
+  "title": "ViewerSessionReplayContract",
+  "type": "object"
+}

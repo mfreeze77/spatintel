@@ -1094,6 +1094,253 @@ class MeasurementContract(ContractModel):
         return self
 
 
+class ViewerLayerContract(ContractModel):
+    role: Literal["metric", "visual", "interaction", "design", "evidence", "semantic", "collision", "navigation", "occlusion", "spatial_audio"]
+    binding_ids: list[str] = Field(default_factory=list)
+    visible: bool = True
+    interactive: bool = False
+    opacity: float = Field(default=1.0, ge=0.0, le=1.0)
+    authority_label: str = Field(min_length=1)
+
+    @field_validator("binding_ids")
+    @classmethod
+    def binding_ids_are_unique(cls, value: list[str]) -> list[str]:
+        if len(value) != len(set(value)):
+            raise ValueError("viewer layer binding identifiers must be unique")
+        return value
+
+
+class ViewerSessionContract(ContractModel):
+    schema_name: Literal["sip.viewer-session/v1.1"] = Field(
+        default="sip.viewer-session/v1.1", alias="schema", serialization_alias="schema"
+    )
+    schema_version: Literal["1.1.0"] = "1.1.0"
+    session_id: str
+    tenant_id: str
+    project_id: str
+    scene_id: str
+    principal_id: str
+    purpose: str = Field(min_length=1)
+    audience: Audience
+    publication_class: Literal["working", "audit", "report"] = "working"
+    scene_commit_ids: list[str] = Field(min_length=1, max_length=2)
+    saved_hybrid_views: list[dict[str, Any]] = Field(default_factory=list)
+    device_profile: str = Field(min_length=1)
+    intended_uses: list[str] = Field(min_length=1)
+    spatial_region_ids: list[str] = Field(default_factory=list)
+    camera: dict[str, Any] = Field(min_length=1)
+    navigation_mode: Literal["orbit", "walk", "fly", "teleport", "guided"]
+    layers: list[ViewerLayerContract] = Field(min_length=1)
+    clipping_planes: list[dict[str, Any]] = Field(default_factory=list, max_length=12)
+    section_box: dict[str, Any] | None = None
+    selected_entity_ids: list[str] = Field(default_factory=list)
+    timeline: dict[str, Any] = Field(default_factory=dict)
+    filters: dict[str, Any] = Field(default_factory=dict)
+    redaction: dict[str, Any] = Field(default_factory=dict)
+    accessibility: dict[str, Any] = Field(default_factory=dict)
+    comparison: dict[str, Any] = Field(default_factory=dict)
+    policy_snapshot_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    request_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    session_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    immutable: Literal[True] = True
+    supersedes_session_id: str | None = None
+    created_by: str
+    created_at: datetime
+
+    @model_validator(mode="after")
+    def validate_reproducible_viewer_session(self) -> "ViewerSessionContract":
+        for name, values in {
+            "scene_commit_ids": self.scene_commit_ids,
+            "intended_uses": self.intended_uses,
+            "spatial_region_ids": self.spatial_region_ids,
+            "selected_entity_ids": self.selected_entity_ids,
+        }.items():
+            if len(values) != len(set(values)):
+                raise ValueError(f"{name} entries must be unique")
+        if len({layer.role for layer in self.layers}) != len(self.layers):
+            raise ValueError("viewer session can declare each layer role only once")
+        if len(self.scene_commit_ids) == 2 and not self.comparison:
+            raise ValueError("two-commit viewer sessions require comparison state")
+        if len(self.scene_commit_ids) == 1 and self.comparison.get("secondary_commit_id"):
+            raise ValueError("comparison state cannot reference a secondary commit not retained by the session")
+        if self.redaction.get("server_enforced") is not True:
+            raise ValueError("viewer session redaction state must be server-enforced")
+        required_accessibility = {"reduced_motion", "high_contrast", "captions"}
+        if not required_accessibility.issubset(self.accessibility):
+            raise ValueError("viewer session accessibility state must retain reduced_motion, high_contrast, and captions")
+        _reject_capability_material(self.model_dump(mode="json"))
+        return self
+
+
+class ViewerSessionReplayContract(ContractModel):
+    schema_name: Literal["sip.viewer-session-replay/v1.1"] = Field(
+        default="sip.viewer-session-replay/v1.1", alias="schema", serialization_alias="schema"
+    )
+    schema_version: Literal["1.1.0"] = "1.1.0"
+    replay_id: str
+    session_id: str
+    tenant_id: str
+    project_id: str
+    principal_id: str
+    issued_views: list[dict[str, Any]] = Field(default_factory=list)
+    exact: bool
+    degraded_reasons: list[str] = Field(default_factory=list)
+    policy_snapshot_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    replay_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    created_at: datetime
+
+    @model_validator(mode="after")
+    def prevent_persisted_capabilities(self) -> "ViewerSessionReplayContract":
+        # issued_views contain identifiers and expiry metadata only. Reusable bearer
+        # material is returned to the caller separately and is never persisted.
+        _reject_capability_material(self.model_dump(mode="json"))
+        return self
+
+
+class ChangeCandidateContract(ContractModel):
+    candidate_id: str
+    change_class: Literal["added", "removed", "moved", "modified", "occluded", "unobserved", "uncertain"]
+    entity_id: str | None = None
+    region: dict[str, Any] = Field(min_length=1)
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    evidence_ids: list[str] = Field(default_factory=list)
+    coverage_status: Literal["observed", "partially_observed", "unobserved"]
+    difference_causes: list[Literal["geometry", "lod", "lighting", "exposure", "dynamic_object", "missing_coverage", "registration", "unknown"]] = Field(default_factory=list)
+    state: Literal["active", "suppressed", "accepted", "rejected", "disputed"]
+    suppression_reason: str | None = None
+    candidate_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+    @model_validator(mode="after")
+    def enforce_change_suppression(self) -> "ChangeCandidateContract":
+        nuisance = {"lod", "lighting", "exposure", "dynamic_object", "missing_coverage"}
+        if self.change_class == "removed" and self.coverage_status != "observed":
+            raise ValueError("unobserved or partially observed regions cannot be classified as removed")
+        if set(self.difference_causes) & nuisance and self.state != "suppressed":
+            raise ValueError("known nuisance differences must be suppressed")
+        if self.state == "suppressed" and not self.suppression_reason:
+            raise ValueError("suppressed change candidates require a reason")
+        if self.state != "suppressed" and self.suppression_reason:
+            raise ValueError("suppression_reason is valid only for suppressed candidates")
+        return self
+
+
+class TemporalComparisonContract(ContractModel):
+    schema_name: Literal["sip.temporal-comparison/v1.1"] = Field(
+        default="sip.temporal-comparison/v1.1", alias="schema", serialization_alias="schema"
+    )
+    schema_version: Literal["1.1.0"] = "1.1.0"
+    comparison_id: str
+    tenant_id: str
+    project_id: str
+    scene_id: str
+    baseline_commit_id: str
+    candidate_commit_id: str
+    viewer_session_id: str | None = None
+    comparable_region: dict[str, Any] = Field(min_length=1)
+    registration_quality: dict[str, Any] = Field(min_length=1)
+    thresholds: dict[str, Any] = Field(min_length=1)
+    evidence_ids: list[str] = Field(min_length=1)
+    algorithm_id: str = Field(min_length=1)
+    algorithm_version: str = Field(min_length=1)
+    executable_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    parameters_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    observed_coverage: dict[str, Any] = Field(min_length=1)
+    candidates: list[ChangeCandidateContract]
+    state: Literal["pending_review", "reviewed", "partially_applied", "applied", "superseded"]
+    comparison_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    request_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    created_by: str
+    created_at: datetime
+
+    @model_validator(mode="after")
+    def validate_comparison_identity(self) -> "TemporalComparisonContract":
+        if self.baseline_commit_id == self.candidate_commit_id:
+            raise ValueError("temporal comparison requires distinct scene commits")
+        if len(self.evidence_ids) != len(set(self.evidence_ids)):
+            raise ValueError("temporal comparison evidence identifiers must be unique")
+        if len({candidate.candidate_id for candidate in self.candidates}) != len(self.candidates):
+            raise ValueError("change candidate identifiers must be unique")
+        quality = self.registration_quality
+        if quality.get("accepted") is not True:
+            raise ValueError("temporal comparison requires accepted registration quality")
+        if float(quality.get("overlap_fraction", 0.0)) <= 0.0:
+            raise ValueError("temporal comparison requires positive registered overlap")
+        return self
+
+
+class ChangeReviewContract(ContractModel):
+    schema_name: Literal["sip.change-review/v1.1"] = Field(
+        default="sip.change-review/v1.1", alias="schema", serialization_alias="schema"
+    )
+    schema_version: Literal["1.1.0"] = "1.1.0"
+    review_id: str
+    comparison_id: str
+    candidate_id: str
+    tenant_id: str
+    project_id: str
+    reviewer_id: str
+    outcome: Literal["accepted", "rejected", "disputed"]
+    rationale: str = Field(min_length=1)
+    evidence_ids: list[str] = Field(default_factory=list)
+    policy_snapshot_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    request_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    review_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    reviewed_at: datetime
+
+
+class ChangeBenchmarkContract(ContractModel):
+    schema_name: Literal["sip.change-benchmark/v1.1"] = Field(
+        default="sip.change-benchmark/v1.1", alias="schema", serialization_alias="schema"
+    )
+    schema_version: Literal["1.1.0"] = "1.1.0"
+    benchmark_id: str
+    tenant_id: str
+    project_id: str
+    algorithm_id: str
+    algorithm_version: str
+    executable_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    benchmark_profile: str
+    fixture_root_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    metrics_by_class: dict[str, dict[str, float]] = Field(min_length=1)
+    environment: dict[str, Any] = Field(min_length=1)
+    benchmark_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    created_by: str
+    created_at: datetime
+
+    @model_validator(mode="after")
+    def require_quantitative_change_metrics(self) -> "ChangeBenchmarkContract":
+        required = {"precision", "recall", "localization_error_m", "false_action_rate"}
+        for change_class, metrics in self.metrics_by_class.items():
+            if not required.issubset(metrics):
+                raise ValueError(f"benchmark class {change_class!r} lacks required metrics")
+            for name, value in metrics.items():
+                numeric = float(value)
+                if not math.isfinite(numeric) or numeric < 0:
+                    raise ValueError(f"benchmark metric {change_class}.{name} must be finite and non-negative")
+                if name in {"precision", "recall", "false_action_rate"} and numeric > 1:
+                    raise ValueError(f"benchmark metric {change_class}.{name} must be between zero and one")
+        return self
+
+
+def _reject_capability_material(value: Any, path: str = "root") -> None:
+    forbidden = {
+        "token", "access_token", "refresh_token", "authorization", "bearer", "signed_url",
+        "presigned_url", "credential", "secret", "password", "storage_key", "provider_key",
+    }
+    if isinstance(value, dict):
+        for key, item in value.items():
+            normalized = str(key).lower().replace("-", "_")
+            if normalized in forbidden or normalized.endswith("_token") or normalized.endswith("_secret"):
+                raise ValueError(f"viewer session may not persist reusable capability material at {path}.{key}")
+            _reject_capability_material(item, f"{path}.{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            _reject_capability_material(item, f"{path}[{index}]")
+
+
 class ConsentGrantContract(ContractModel):
     grant_id: str
     subject_id: str

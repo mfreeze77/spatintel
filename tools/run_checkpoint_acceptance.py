@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the Progress 04-R1 acceptance sequence and retain source-bound gate evidence."""
+"""Run the Progress 05 clean-source acceptance sequence and retain source-bound gate evidence."""
 from __future__ import annotations
 
 import argparse
@@ -25,6 +25,7 @@ REQUIRED_TARGETS = [
     "migrations",
     "swift-test",
     "web-test",
+    "desktop-test",
     "contracts",
     "infrastructure",
     "security",
@@ -32,6 +33,7 @@ REQUIRED_TARGETS = [
     "benchmark",
     "demo-foundation",
     "demo-hybrid",
+    "demo-scene-runtime",
     "demo-construction",
     "demo-liveforever",
     "export-demo",
@@ -118,7 +120,7 @@ def run(*, attestation_path: Path) -> dict[str, Any]:
     return {
         "schema": "sip.checkpoint-acceptance-gates/v1",
         "status": status,
-        "checkpoint_id": "sip-v1.1.0-progress-04-r1",
+        "checkpoint_id": "sip-v1.1.0-progress-05",
         "captured_at": datetime.now(UTC).isoformat(),
         "source": binding_before,
         "attestation_path": attestation_path.relative_to(ROOT).as_posix(),
@@ -130,7 +132,7 @@ def run(*, attestation_path: Path) -> dict[str, Any]:
         "required_failure_count": len(required_failures),
         "blocked_count": len(blockers),
         "release_authorized": False,
-        "release_block_reason": "Progress 04-R1 requires independent True North acceptance and retains external validation gaps.",
+        "release_block_reason": "Progress 05 requires independent True North acceptance and retains external validation gaps.",
     }
 
 
@@ -157,16 +159,16 @@ def main() -> None:
         "production_authorized": False,
         "external_validation_gaps": [
             "Ruff and mypy were unavailable.",
-            "Node 24.18.0, pnpm 10.28.2, a frozen pnpm lockfile, TypeScript typecheck, and the Next production build were unavailable.",
+            "Node 24.18.0, pnpm 10.28.2, a frozen pnpm lockfile, installed dependencies, TypeScript typecheck, ESLint, and the Next production build were unavailable.",
             "pip-audit, Gitleaks, and Trivy were unavailable.",
             "Docker Compose runtime, Kubernetes deployment, and Terraform execution were unavailable.",
             "Xcode, iOS simulator, signing, LiDAR, camera, thermal, battery, interruption, and physical-device validation remain external.",
             "Approved LingBot-Map checkpoint bytes, CUDA/GPU execution, and real-scene validation remain external.",
-            "Independent penetration testing, privacy review, browser accessibility audit, and legal approval remain incomplete.",
+            "Independent penetration testing, privacy review, browser accessibility audit, desktop operator-usability review, and legal approval remain incomplete.",
         ],
-        "next_action": "Run the independent checkpoint verifier, obtain True North Progress 04-R1 acceptance, then begin the authorized Progress 05 cluster.",
+        "next_action": "Build and independently verify the Progress 05 inner checkpoint and outer delivery envelope, then submit them for True North review; production remains NO-GO.",
     }
-    readiness_path = ROOT / "build/reports/release-readiness-progress-04-r1.json"
+    readiness_path = ROOT / "build/reports/release-readiness-progress-05.json"
     readiness_path.write_text(json.dumps(readiness, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
     raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)
