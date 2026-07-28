@@ -258,7 +258,12 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
     for priority in sorted(priorities):
         counter = priorities[priority]
         lines.append("| " + priority + " | " + " | ".join(str(counter[status]) for status in statuses) + f" | {sum(counter.values())} |")
-    lines += ["", "> Requirements outside VERIFIED remain incomplete or externally unverified. This report makes no complete-platform or production-readiness claim."]
+    lines += [
+        "",
+        "> Requirements outside VERIFIED remain incomplete or externally unverified. This report makes no complete-platform or production-readiness claim.",
+        "",
+        "Production deployment and release remain **NO-GO** until independent True North acceptance and all required external validation gates pass.",
+    ]
     return "\n".join(lines) + "\n"
 
 

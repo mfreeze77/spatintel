@@ -7,7 +7,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-from tools.build_progress05_checkpoint import CHECKPOINT_ID, TOP_LEVEL
+from tools.build_progress05_checkpoint import CHECKPOINT_ID, TOP_LEVEL, _render_coverage
 from tools.checkpoint_common import FIXED_ZIP_TIME
 from tools.verify_delivery_envelope import verify as verify_delivery
 from tools.verify_progress05_checkpoint import verify_archive
@@ -120,3 +120,23 @@ def test_progress05_acceptance_sequence_contains_new_runtime_gates() -> None:
     source = path.read_text(encoding="utf-8")
     assert "sip-v1.1.0-progress-05" in source
     assert "release-readiness-progress-05.json" in source
+
+
+def test_progress05_generated_coverage_states_production_no_go() -> None:
+    """CONTROL: every generated status document explicitly preserves the blocked production posture."""
+    rendered = _render_coverage(
+        {
+            "checkpoint_id": CHECKPOINT_ID,
+            "commit": "a" * 40,
+            "source_tree_root_sha256": "b" * 64,
+            "python_tests_passed": 1,
+            "requirements_total": 1,
+        },
+        {
+            "requirements": [
+                {"priority": "P0", "implementation_status": "IMPLEMENTED_UNVERIFIED"}
+            ]
+        },
+    )
+    assert "Production" in rendered
+    assert "NO-GO" in rendered
