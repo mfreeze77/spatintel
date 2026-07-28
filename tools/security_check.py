@@ -177,7 +177,7 @@ else:
         check=False,
     )
     detail = ((completed.stdout or "") + (completed.stderr or "")).strip()
-    return [Control("fail-closed-runtime-security", "passed" if completed.returncode == 0 else "failed", detail or "production key and token-tamper checks passed")]
+    return [Control("fail-closed-runtime-security", "passed_complete" if completed.returncode == 0 else "failed", detail or "production key and token-tamper checks passed")]
 
 
 def _external_controls(*, release: bool) -> list[Control]:
@@ -189,11 +189,11 @@ def _external_controls(*, release: bool) -> list[Control]:
     controls: list[Control] = []
     for name, (tool, command) in commands.items():
         if shutil.which(tool) is None:
-            controls.append(Control(name, "failed" if release else "external_validation_required", f"{tool} is not installed", required=release))
+            controls.append(Control(name, "blocked", f"{tool} is not installed", required=release))
             continue
         completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False, timeout=300)
         detail = ((completed.stdout or "") + (completed.stderr or ""))[-8000:]
-        controls.append(Control(name, "passed" if completed.returncode == 0 else "failed", detail, required=True))
+        controls.append(Control(name, "passed_complete" if completed.returncode == 0 else "failed", detail, required=True))
     return controls
 
 
@@ -203,7 +203,8 @@ def run(*, release: bool = False) -> dict[str, object]:
     controls = [*_runtime_controls(), *_external_controls(release=release)]
     errors = [item for item in findings if item.severity == "error"]
     failures = [item for item in controls if item.status == "failed"]
-    status = "passed" if not errors and not failures else "failed"
+    blocked = [item for item in controls if item.status == "blocked"]
+    status = "failed" if errors or failures else ("blocked" if release and blocked else ("passed_with_external_gaps" if blocked else "passed_complete"))
     return {
         "schema": "sip.security-report/v1",
         "mode": "release" if release else "development",
@@ -212,7 +213,7 @@ def run(*, release: bool = False) -> dict[str, object]:
         "scanned_files": sum(1 for _ in _files()),
         "findings": [asdict(item) for item in findings],
         "controls": [asdict(item) for item in controls],
-        "external_validation_required": [item.name for item in controls if item.status == "external_validation_required"],
+        "external_validation_required": [item.name for item in controls if item.status == "blocked"],
         "limitations": [
             "Static scanning does not replace dependency-database, container-image, penetration, or independent security review.",
             "External controls remain explicit and fail the release profile when their approved tools are unavailable.",
@@ -229,7 +230,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
-    raise SystemExit(0 if report["status"] == "passed" else 1)
+    raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)
 
 
 if __name__ == "__main__":

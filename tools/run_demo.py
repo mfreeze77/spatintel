@@ -52,6 +52,7 @@ from sip.errors import AuthorizationError, ValidationError
 from sip.geometry import change_detection, interaction_proxy, mesh_to_splats
 from sip.models import Audience, AuthorityClass, Classification, ProvenanceRef, RepresentationKind, SourceClass
 from sip.scene import ProxyHit
+from tools.evidence_binding import current_source_binding
 
 ROOT = Path(__file__).resolve().parents[1]
 DEMO_ROOT = ROOT / "runtime" / "demo"
@@ -132,13 +133,7 @@ def _json_evidence_value(value: Any) -> Any:
 
 
 def _git() -> dict[str, Any]:
-    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=False)
-    status = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True, check=False)
-    return {
-        "commit": commit.stdout.strip() if commit.returncode == 0 else None,
-        "working_tree_clean": status.returncode == 0 and not status.stdout.strip(),
-        "dirty_paths": len(status.stdout.splitlines()) if status.returncode == 0 else None,
-    }
+    return current_source_binding(ROOT)
 
 
 def _bootstrap(output: Path, *, vertical: str, classification: str = "internal") -> tuple[PlatformContext, str, str, str]:

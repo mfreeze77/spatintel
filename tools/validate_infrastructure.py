@@ -504,7 +504,7 @@ def run(*, release: bool = False) -> dict[str, Any]:
     errors = sum(item.severity == "error" for item in findings)
     warnings = sum(item.severity == "warning" for item in findings)
     return {
-        "status": "passed" if errors == 0 else "failed",
+        "status": ("failed" if errors else ("blocked" if release else "passed_with_external_gaps")),
         "mode": "release" if release else "structural",
         "errors": errors,
         "warnings": warnings,
@@ -528,7 +528,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
-    raise SystemExit(0 if report["status"] == "passed" else 1)
+    raise SystemExit(0 if report["status"] == "passed_with_external_gaps" else 1)
 
 
 if __name__ == "__main__":

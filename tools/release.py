@@ -15,6 +15,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
+from tools.source_identity import source_identity as canonical_source_identity
+
 ROOT = Path(__file__).resolve().parents[1]
 RELEASE_ROOT = ROOT / "build" / "release"
 FIXED_ZIP_TIME = (1980, 1, 1, 0, 0, 0)
@@ -341,7 +343,7 @@ def _report_blockers() -> list[Blocker]:
             blockers.append(Blocker("RELEASE_REPORT_MISSING", f"required {name} report is missing or invalid", path.relative_to(ROOT).as_posix()))
             continue
         status = report.get("status")
-        if status not in {"passed", None} or (name == "infrastructure" and int(report.get("errors", 1)) != 0):
+        if status not in {"passed_complete", None} or (name == "infrastructure" and int(report.get("errors", 1)) != 0):
             blockers.append(Blocker("RELEASE_REPORT_FAILED", f"required {name} report is not passing", path.relative_to(ROOT).as_posix()))
         external = report.get("external_validation_required")
         if isinstance(external, list) and external:
@@ -355,7 +357,7 @@ def _report_blockers() -> list[Blocker]:
     for name in ("foundation", "hybrid", "construction", "liveforever"):
         path = ROOT / f"build/evidence/demos/{name}.json"
         report = _load_json(path)
-        if report is None or report.get("status") != "passed":
+        if report is None or report.get("status") not in {"passed", "passed_complete", "passed_with_external_gaps"}:
             blockers.append(Blocker("RELEASE_DEMO_MISSING", f"retained {name} demonstration is missing or not passing", path.relative_to(ROOT).as_posix()))
     return blockers
 
@@ -456,7 +458,8 @@ def build(*, mode: str) -> dict[str, object]:
     source_files = _source_files()
     evidence_files = _evidence_files()
     source_records = _file_records(source_files)
-    source_root = _sha256_bytes(_canonical_json([asdict(item) for item in source_records]))
+    canonical_identity = canonical_source_identity(ROOT)
+    source_root = str(canonical_identity["source_tree_root_sha256"])
     candidate_id = f"sip-v{version}-{commit[:12]}-{source_root[:12]}"
     output = RELEASE_ROOT / candidate_id
     output.mkdir(parents=True, exist_ok=True)
@@ -469,6 +472,9 @@ def build(*, mode: str) -> dict[str, object]:
         "working_tree_clean": tree_clean,
         "generated_at": generated_at,
         "source_root_sha256": source_root,
+        "source_root_policy_path": canonical_identity["policy_path"],
+        "source_root_policy_sha256": canonical_identity["policy_sha256"],
+        "source_root_file_count": canonical_identity["file_count"],
         "file_count": len(source_records),
         "total_bytes": sum(item.bytes for item in source_records),
         "files": [asdict(item) for item in source_records],
@@ -534,6 +540,7 @@ def build(*, mode: str) -> dict[str, object]:
             "expected_sha256": EXPECTED_SPEC_SHA256,
         },
         "source_root_sha256": source_root,
+        "source_root_policy_sha256": canonical_identity["policy_sha256"],
         "artifacts": artifact_records,
         "reports": reports,
         "demonstrations": demos,
@@ -577,7 +584,11 @@ def build(*, mode: str) -> dict[str, object]:
     result = {
         "schema": "sip.release-build/v1",
         "mode": mode,
-        "status": "passed" if mode == "candidate" or not blockers else "failed",
+        "status": (
+            "passed_complete" if not blockers
+            else "passed_with_external_gaps" if mode == "candidate"
+            else "blocked"
+        ),
         "readiness": readiness["status"],
         "candidate_id": candidate_id,
         "output": output.relative_to(ROOT).as_posix(),
@@ -595,7 +606,7 @@ def main() -> None:
     args = parser.parse_args()
     result = build(mode=args.mode)
     print(json.dumps(result, indent=2, sort_keys=True))
-    if result["status"] != "passed":
+    if result["status"] not in {"passed_complete", "passed_with_external_gaps"}:
         raise SystemExit(1)
 
 

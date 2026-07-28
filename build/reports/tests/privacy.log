@@ -1,5 +1,0 @@
-SIP sharded pytest suite: privacy
-
-=== tests/privacy/test_policy_propagation.py status=passed exit_code=0 elapsed=3.783996s ===
-.                                                                        [100%]
-1 passed in 2.39s

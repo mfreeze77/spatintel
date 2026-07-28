@@ -57,5 +57,17 @@ export-demo:
 restore-demo:
     make restore-demo
 
+web-acceptance:
+    make web-acceptance
+
+checkpoint-verify checkpoint_zip:
+    CHECKPOINT_ZIP={{checkpoint_zip}} make checkpoint-verify
+
 release:
     make release
+
+traceability-evidence:
+    make traceability-evidence
+
+release-mode:
+    make release-mode

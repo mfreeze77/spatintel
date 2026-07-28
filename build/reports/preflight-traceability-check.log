@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/mnt/data/sip-hybrid-work/tools/build_traceability_map.py", line 462, in <module>
-    main()
-    ~~~~^^
-  File "/mnt/data/sip-hybrid-work/tools/build_traceability_map.py", line 450, in main
-    payload = build()
-  File "/mnt/data/sip-hybrid-work/tools/build_traceability_map.py", line 413, in build
-    raise ValueError(f"no implementation files configured for {requirement_id}")
-ValueError: no implementation files configured for ARCHHYB-001

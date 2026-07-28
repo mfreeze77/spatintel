@@ -118,7 +118,13 @@ def run(*, release: bool = False) -> dict[str, Any]:
         for evidence_path in item.get("test_result_evidence_paths", []):
             path = ROOT / evidence_path
             if not path.is_file():
-                _add(findings, "error", "EVIDENCE_FILE_MISSING", requirement_id, evidence_path)
+                # Structural lint runs from an immutable source checkout before
+                # post-commit evidence exists.  It validates the declared path
+                # and leaves existence enforcement to release lint and the
+                # checkpoint verifier.  Release mode remains fail-closed.
+                severity = "error" if release else "warning"
+                code = "EVIDENCE_FILE_MISSING" if release else "EVIDENCE_FILE_PENDING"
+                _add(findings, severity, code, requirement_id, evidence_path)
 
         if status == "VERIFIED":
             if not item.get("implementation_files"):

@@ -8,7 +8,7 @@ REPORT_DIR := build/reports
 
 .PHONY: help bootstrap doctor dev test test-all lint typecheck security license-check spec-check benchmark \
         demo-foundation demo-hybrid demo-construction demo-liveforever export-demo restore-demo \
-        contracts infrastructure migrations swift-test web-test fixtures release clean
+        contracts infrastructure migrations swift-test web-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
 
 help:
 	@printf '%s\n' \
@@ -29,7 +29,11 @@ help:
 	  '  make demo-liveforever   Run retained synthetic LiveForever demonstration' \
 	  '  make export-demo        Run preservation export demonstration' \
 	  '  make restore-demo       Run clean preservation restore demonstration' \
-	  '  make release            Build a hashed release candidate (release gates remain fail-closed)'
+	  '  make release            Build a hashed release candidate (release gates remain fail-closed)' \
+	  '  make web-acceptance     Run or explicitly block the Node 24.18.0/pnpm 10.28.2 frozen web profile' \
+	  '  make traceability-evidence  Verify post-commit evidence against the committed traceability map' \
+	  '  make release-mode       Execute fail-closed production release admission' \
+	  '  make checkpoint-verify  Verify CHECKPOINT_ZIP with the independent checkpoint verifier'
 
 bootstrap:
 	@mkdir -p runtime build/evidence build/reports build/manifests build/release
@@ -57,6 +61,9 @@ web-test:
 	@mkdir -p build/evidence build/reports
 	npm --workspace apps/web run verify-runtime 2>&1 | tee build/evidence/web-runtime-test.log
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/record_test_evidence.py
+
+web-acceptance:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/web_acceptance.py
 
 swift-test:
 	@mkdir -p build/evidence build/reports
@@ -92,12 +99,17 @@ security:
 
 license-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_third_party_lock.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/check_governance.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/license_check.py
 
 spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_traceability_map.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.cli spec-check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
+
+traceability-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_traceability_map.py --check-evidence
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py
@@ -122,6 +134,13 @@ restore-demo:
 
 release:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/release.py
+
+release-mode:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/release.py --mode release
+
+checkpoint-verify:
+	@test -n "$${CHECKPOINT_ZIP:-}" || { echo 'CHECKPOINT_ZIP is required'; exit 2; }
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/verify_checkpoint.py "$${CHECKPOINT_ZIP}"
 
 clean:
 	rm -rf build/generated build/reports/tests build/release runtime/demo

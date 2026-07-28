@@ -7,7 +7,6 @@ import json
 import os
 import platform
 import statistics
-import subprocess
 import sys
 import tempfile
 import time
@@ -19,18 +18,13 @@ import numpy as np
 from sip.canonical import sha256_file
 from sip.capture import CapturePackage, create_synthetic_room_capture
 from sip.geometry import interaction_proxy, mesh_to_splats, ransac_similarity
+from tools.evidence_binding import current_source_binding
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def _git_state() -> dict[str, Any]:
-    def command(*args: str) -> str | None:
-        completed = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=False)
-        return completed.stdout.strip() if completed.returncode == 0 else None
-
-    commit = command("rev-parse", "HEAD")
-    status = command("status", "--porcelain")
-    return {"commit": commit, "working_tree_clean": status == "", "dirty_paths": len(status.splitlines()) if status else 0}
+    return current_source_binding(ROOT)
 
 
 def _measure(call: Callable[[], Any], samples: int) -> tuple[dict[str, float | int], Any]:

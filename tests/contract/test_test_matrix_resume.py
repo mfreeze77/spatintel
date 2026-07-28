@@ -268,6 +268,10 @@ def test_source_tree_hash_prunes_generated_trees_and_changes_only_for_relevant_s
     """REQ: TSTSTRAT-002 source-bound evidence hashes executable inputs without traversing generated trees."""
     module = _module()
     root = tmp_path / "repo"
+    (root / "governance").mkdir(parents=True)
+    (root / "governance" / "source-root-policy.json").write_bytes(
+        (ROOT / "governance" / "source-root-policy.json").read_bytes()
+    )
     (root / "src").mkdir(parents=True)
     (root / "build" / "reports").mkdir(parents=True)
     (root / ".git" / "objects").mkdir(parents=True)

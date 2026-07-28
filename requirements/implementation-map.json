@@ -1,6 +1,6 @@
 {
   "epics": {},
-  "notes": "Generated conservatively from explicit REQ-tagged tests. Only IDs in the reviewed VERIFIED policy are promoted; all other tested IDs remain incomplete, unverified, or external.",
+  "notes": "Generated conservatively from explicit REQ-tagged tests. The committed overlay declares the exact tests and evidence paths that a post-commit evidence run must satisfy. VERIFIED remains authoritative only when tools/build_traceability_map.py --check-evidence passes for the same commit and source root.",
   "requirements": {
     "APPFAIL-001": {
       "implementation_files": [
@@ -3335,6 +3335,7 @@
         "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
       ],
       "test_result_evidence_paths": [
+        "apps/web/src",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",
@@ -3355,6 +3356,7 @@
         "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
       ],
       "test_result_evidence_paths": [
+        "apps/web/src",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",
@@ -4900,6 +4902,7 @@
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/migration.xml",
+        "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
         "src/sip/scene.py"
@@ -4923,6 +4926,7 @@
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/migration.xml",
+        "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
         "src/sip/scene.py"
@@ -5063,6 +5067,7 @@
         "tests/contract/test_test_matrix_resume.py::test_suite_sidecar_rejects_changed_source_or_tampered_outputs",
         "tests/contract/test_test_matrix_resume.py::test_suite_writer_lease_serializes_independent_processes",
         "tests/contract/test_test_matrix_resume.py::test_traceability_shard_resume_is_invalidated_by_generated_input_change_without_matrix_bootstrap",
+        "tests/contract/test_traceability_evidence.py::test_post_commit_traceability_gate_requires_every_declared_artifact",
         "tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit",
         "tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report"
       ],

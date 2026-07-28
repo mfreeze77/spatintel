@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.375" timestamp="2026-07-28T00:01:02.660662+00:00" hostname="8af374932250"><testcase classname="tests.contract.test_delivery_tools" name="test_demo_output_lock_serializes_destructive_setup" time="0.337" /></testsuite></testsuites>

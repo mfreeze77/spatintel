@@ -22,6 +22,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Sequence
 
+from tools.source_identity import source_tree_root as canonical_source_tree_root
+
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_ROOT = ROOT / "build" / "reports" / "tests"
 MATRIX_PATH = ROOT / "build" / "reports" / "test-matrix.json"
@@ -187,26 +189,7 @@ def _source_path_is_relevant(relative: str) -> bool:
 
 
 def _source_tree_root() -> str:
-    excluded = {".git", "build", "runtime", ".pytest_cache", "__pycache__", "node_modules", ".swiftpm", ".build"}
-    names = {"Dockerfile", "Makefile", "justfile", "package.json", "pnpm-workspace.yaml", "pytest.ini", "pyproject.toml"}
-    suffixes = {".py", ".json", ".yaml", ".yml", ".toml", ".md", ".swift", ".ts", ".tsx", ".js", ".mjs", ".proto", ".sql"}
-    records: list[bytes] = []
-    # Prune generated and dependency trees before traversal. Path.rglob still walks
-    # excluded directories before filtering their children, which made evidence
-    # hashing vulnerable to large build trees and interrupted test controllers.
-    for current_root, directories, filenames in os.walk(ROOT, topdown=True):
-        directories[:] = sorted(directory for directory in directories if directory not in excluded)
-        directory_path = Path(current_root)
-        for filename in sorted(filenames):
-            path = directory_path / filename
-            relative = path.relative_to(ROOT).as_posix()
-            if not _source_path_is_relevant(relative):
-                continue
-            if path.name not in names and path.suffix.lower() not in suffixes:
-                continue
-            records.append(relative.encode("utf-8") + b"\0" + hashlib.sha256(path.read_bytes()).digest())
-    records.sort()
-    return _sha256_bytes(b"\n".join(records))
+    return canonical_source_tree_root(ROOT)
 
 
 def _git_value(*args: str) -> str:

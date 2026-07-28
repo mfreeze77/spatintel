@@ -19,6 +19,7 @@ automated_test_ids:
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/migration.xml
+- migrations
 - src/sip/assets.py
 - src/sip/database.py
 - src/sip/scene.py

@@ -1,5 +1,0 @@
-SIP sharded pytest suite: property
-
-=== tests/property/test_geometry_properties.py status=passed exit_code=0 elapsed=3.722749s ===
-.                                                                        [100%]
-1 passed in 0.24s

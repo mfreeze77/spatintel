@@ -1,5 +1,0 @@
-SIP sharded pytest suite: acceptance
-
-=== tests/acceptance/test_vertical_demonstrations.py status=passed exit_code=0 elapsed=6.848413s ===
-..                                                                       [100%]
-2 passed in 5.34s

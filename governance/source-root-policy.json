@@ -1,0 +1,38 @@
+{
+  "schema": "sip.source-root-policy/v1",
+  "algorithm": "sha256(canonical-json(sorted file records: path, mode, bytes, sha256))",
+  "description": "Canonical executable/source identity. Generated evidence, checkpoint packaging metadata, dependency caches, and runtime outputs are excluded; Git tree identity binds the complete committed tree.",
+  "excluded_directory_names": [
+    ".git",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".swiftpm",
+    ".build",
+    ".next",
+    "DerivedData",
+    "__pycache__",
+    "node_modules",
+    "runtime"
+  ],
+  "excluded_path_prefixes": [
+    "build/",
+    "tests/spec/requirements/"
+  ],
+  "excluded_paths": [
+    "CHECKPOINT_CONTENT_MANIFEST.json",
+    "SOURCE_COMMIT.json",
+    "MILESTONE_SCOPE_PROGRESS_04.json",
+    "REMEDIATION_REPORT.md",
+    "IMPLEMENTATION_STATUS.md",
+    "RESUME_IMPLEMENTATION.md",
+    "requirements/coverage-report.md",
+    "requirements/external-validation.md",
+    "requirements/blockers.md",
+    "requirements/waivers.md",
+    "requirements/implementation-map.json",
+    "requirements/requirements-ledger.csv",
+    "requirements/requirements-ledger.json",
+    "requirements/requirements-ledger.sqlite"
+  ]
+}

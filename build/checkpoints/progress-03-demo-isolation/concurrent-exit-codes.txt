@@ -1,2 +1,0 @@
-concurrent_demo_a=0
-concurrent_demo_b=0

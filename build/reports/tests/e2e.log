@@ -1,5 +1,0 @@
-SIP sharded pytest suite: e2e
-
-=== tests/e2e/test_platform_demonstrations.py status=passed exit_code=0 elapsed=9.080932s ===
-.....                                                                    [100%]
-5 passed in 7.57s

@@ -20,7 +20,7 @@ def _validator():
 def test_infrastructure_structural_policy_gate() -> None:
     """REQ: ARCDEP-002 generated infrastructure must satisfy static policy gates."""
     report = _validator().run(release=False)
-    assert report["status"] == "passed", report["findings"]
+    assert report["status"] == "passed_with_external_gaps", report["findings"]
     assert report["errors"] == 0
     assert report["counts"]["kubernetes"]["workloads"] >= 20
     assert report["counts"]["compose"]["services"] >= 20
@@ -30,7 +30,7 @@ def test_infrastructure_structural_policy_gate() -> None:
 def test_release_gate_fails_closed_before_images_and_outputs_exist() -> None:
     """REQ: ARCDEP-002, OPSCICD-003 release must fail closed until CI replaces digests and Terraform outputs."""
     report = _validator().run(release=True)
-    assert report["status"] == "failed"
+    assert report["status"] in {"blocked", "failed"}
     codes = {finding["code"] for finding in report["findings"] if finding["severity"] == "error"}
     assert "K8S_IMAGE_SENTINEL" in codes
     assert "K8S_AWS_OUTPUT_PLACEHOLDER" in codes

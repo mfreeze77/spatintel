@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-28T00:36:35.817729+00:00",
+  "generated_at": "2026-07-28T02:38:28.803698+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -60867,6 +60867,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/LIFHYB-007.yaml",
       "test_result_evidence_paths": [
+        "apps/web/src",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",
@@ -61056,6 +61057,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/LIFHYB-011.yaml",
       "test_result_evidence_paths": [
+        "apps/web/src",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",
@@ -66109,6 +66111,7 @@
         "tests/contract/test_test_matrix_resume.py::test_suite_sidecar_rejects_changed_source_or_tampered_outputs",
         "tests/contract/test_test_matrix_resume.py::test_suite_writer_lease_serializes_independent_processes",
         "tests/contract/test_test_matrix_resume.py::test_traceability_shard_resume_is_invalidated_by_generated_input_change_without_matrix_bootstrap",
+        "tests/contract/test_traceability_evidence.py::test_post_commit_traceability_gate_requires_every_declared_artifact",
         "tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit",
         "tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report"
       ],
@@ -70953,6 +70956,7 @@
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/migration.xml",
+        "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
         "src/sip/scene.py"
@@ -71230,6 +71234,7 @@
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/migration.xml",
+        "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
         "src/sip/scene.py"

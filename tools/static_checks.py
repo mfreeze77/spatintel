@@ -28,13 +28,13 @@ def _run(name: str, command: list[str], *, env: dict[str, str] | None = None) ->
     completed = subprocess.run(
         command,
         cwd=ROOT,
-        env={**os.environ, "PYTHONPATH": str(ROOT / "src"), **(env or {})},
+        env={**os.environ, "PYTHONPATH": f"{ROOT / 'src'}:{ROOT}", **(env or {})},
         capture_output=True,
         text=True,
         check=False,
     )
     detail = ((completed.stdout or "") + (completed.stderr or "")).strip()[-4000:]
-    return Check(name, "passed" if completed.returncode == 0 else "failed", detail)
+    return Check(name, "passed_complete" if completed.returncode == 0 else "failed", detail)
 
 
 def _production_python_files() -> Iterable[Path]:
@@ -97,7 +97,7 @@ def _source_policy() -> Check:
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in {"eval", "exec"}:
                 findings.append(f"{relative}:{node.lineno}: dynamic {node.func.id} is forbidden")
     detail = "\n".join(findings[:100]) if findings else "no production placeholders, empty function bodies, or dynamic eval/exec"
-    return Check("source-policy", "failed" if findings else "passed", detail)
+    return Check("source-policy", "failed" if findings else "passed_complete", detail)
 
 
 def run() -> dict[str, object]:
@@ -113,7 +113,7 @@ def run() -> dict[str, object]:
     ]
     return {
         "schema": "sip.static-checks/v1",
-        "status": "passed" if all(item.status == "passed" for item in checks) else "failed",
+        "status": "passed_complete" if all(item.status == "passed_complete" for item in checks) else "failed",
         "checks": [asdict(item) for item in checks],
     }
 
@@ -126,7 +126,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
-    raise SystemExit(0 if report["status"] == "passed" else 1)
+    raise SystemExit(0 if report["status"] == "passed_complete" else 1)
 
 
 if __name__ == "__main__":

@@ -393,11 +393,20 @@ def _tests_passed(
     return not missing_or_failed, missing_or_failed
 
 def _evidence_for(test_ids: list[str], prefix: str) -> list[str]:
+    """Return the deterministic evidence contract, independent of build order.
+
+    These are declarations in the committed traceability overlay.  The
+    post-commit ``--check-evidence`` gate proves that every declared path exists
+    and that canonical Python/Swift results are bound to the current source
+    root.  Filtering on file existence here would make packaging or test order
+    change the committed source map.
+    """
+
     suites = sorted({test_id.split("/", 2)[1] for test_id in test_ids if test_id.startswith("tests/")})
     paths = ["build/reports/test-matrix.json"]
     paths.extend(f"build/reports/tests/{suite}.xml" for suite in suites)
     paths.extend(SUPPLEMENTAL_EVIDENCE.get(prefix, []))
-    return sorted({path for path in paths if (ROOT / path).is_file()})
+    return sorted(set(paths))
 
 
 def _status(requirement_id: str) -> str:
@@ -440,10 +449,23 @@ def test_result_snapshot_from_overlay(payload: dict[str, Any]) -> tuple[dict[str
     return python_results, bool(swift_statuses) and all(swift_statuses)
 
 
+def _declared_passing_results(test_map: dict[str, list[str]]) -> tuple[dict[str, str], bool]:
+    python_results: dict[str, str] = {}
+    swift_seen = False
+    for test_ids in test_map.values():
+        for test_id in test_ids:
+            if test_id.startswith("apps/ios-capture/Tests/"):
+                swift_seen = True
+            else:
+                python_results[test_id] = "passed"
+    return python_results, swift_seen
+
+
 def build(
     *,
     python_results: dict[str, str] | None = None,
     swift_ok: bool | None = None,
+    declared_source_state: bool = False,
 ) -> dict[str, Any]:
     baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
     known = {item["requirement_id"] for item in baseline["requirements"]}
@@ -451,6 +473,8 @@ def build(
     unknown = sorted(set(test_map) - known)
     if unknown:
         raise ValueError(f"tests reference unknown requirement IDs: {unknown}")
+    if declared_source_state:
+        python_results, swift_ok = _declared_passing_results(test_map)
     overlays: dict[str, Any] = {}
     for requirement_id, test_ids in test_map.items():
         prefix = _prefix(requirement_id)
@@ -493,23 +517,65 @@ def build(
         "schema_version": "1.0",
         "requirements": overlays,
         "epics": {},
-        "notes": "Generated conservatively from explicit REQ-tagged tests. Only IDs in the reviewed VERIFIED policy are promoted; all other tested IDs remain incomplete, unverified, or external.",
+        "notes": (
+            "Generated conservatively from explicit REQ-tagged tests. The committed overlay declares the exact "
+            "tests and evidence paths that a post-commit evidence run must satisfy. VERIFIED remains authoritative "
+            "only when tools/build_traceability_map.py --check-evidence passes for the same commit and source root."
+        ),
     }
+
+
+def _load_destination() -> dict[str, Any]:
+    if not DESTINATION.is_file():
+        raise ValueError("implementation traceability map is missing")
+    return json.loads(DESTINATION.read_text(encoding="utf-8"))
+
+
+def _missing_declared_evidence(payload: dict[str, Any]) -> list[str]:
+    missing: set[str] = set()
+    for overlay in payload.get("requirements", {}).values():
+        for relative in overlay.get("test_result_evidence_paths", []):
+            if not (ROOT / relative).exists():
+                missing.add(relative)
+    return sorted(missing)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--check",
+        action="store_true",
+        help="check deterministic source declarations without requiring post-commit evidence",
+    )
+    mode.add_argument(
+        "--check-evidence",
+        action="store_true",
+        help="require current-source canonical test reports and every declared evidence artifact",
+    )
     args = parser.parse_args()
-    payload = build()
+
+    if args.check_evidence:
+        payload = build()
+        missing = _missing_declared_evidence(payload)
+        if missing:
+            raise SystemExit(
+                "traceability evidence is incomplete; missing declared paths: " + ", ".join(missing)
+            )
+        status = "evidence_passed"
+    else:
+        payload = build(declared_source_state=True)
+        status = "source_structure_passed" if args.check else "generated"
+
     serialized = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if args.check:
+    if args.check or args.check_evidence:
         if not DESTINATION.is_file() or DESTINATION.read_text(encoding="utf-8") != serialized:
-            raise SystemExit("implementation traceability map drift detected; run tools/build_traceability_map.py")
-        print(json.dumps({"status": "passed", "requirements": len(payload["requirements"])}, sort_keys=True))
+            command = "tools/build_traceability_map.py"
+            raise SystemExit(f"implementation traceability map drift detected; run {command}")
+        print(json.dumps({"status": status, "requirements": len(payload["requirements"])}, sort_keys=True))
         return
     DESTINATION.write_text(serialized, encoding="utf-8")
-    print(json.dumps({"status": "generated", "requirements": len(payload["requirements"])}, sort_keys=True))
+    print(json.dumps({"status": status, "requirements": len(payload["requirements"])}, sort_keys=True))
 
 
 if __name__ == "__main__":

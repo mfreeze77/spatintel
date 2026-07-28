@@ -295,5 +295,5 @@ def test_license_gate_runs_directly_without_repository_root_pythonpath() -> None
     )
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads((ROOT / "build/reports/license-gate-direct.json").read_text(encoding="utf-8"))
-    assert report["status"] == "passed"
+    assert report["status"] == "passed_complete"
     assert not report["errors"]

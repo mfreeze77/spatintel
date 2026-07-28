@@ -15,6 +15,7 @@ implementation_files:
 automated_test_ids:
 - tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit
 retained_evidence:
+- apps/web/src
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 - src/sip/liveforever.py

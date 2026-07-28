@@ -26,7 +26,7 @@ def _run(name: str, command: list[str], *, cwd: Path = ROOT, required: bool = Tr
     )
     return {
         "name": name,
-        "status": "passed" if completed.returncode == 0 else ("failed" if required else "external_validation_required"),
+        "status": "passed_complete" if completed.returncode == 0 else ("failed" if required else "blocked"),
         "required": required,
         "command": command,
         "exit_code": completed.returncode,
@@ -38,7 +38,7 @@ def _run(name: str, command: list[str], *, cwd: Path = ROOT, required: bool = Tr
 def _unavailable(name: str, tool: str, command: list[str]) -> dict[str, object]:
     return {
         "name": name,
-        "status": "external_validation_required",
+        "status": "blocked",
         "required": False,
         "command": command,
         "exit_code": None,
@@ -65,12 +65,14 @@ def run(*, release: bool = False) -> dict[str, object]:
     else:
         checks.append(_unavailable("typescript", "installed JavaScript dependency tree", ["npm", "--workspace", "apps/web", "run", "typecheck"]))
     failures = [item for item in checks if item["status"] == "failed"]
+    blocked = [item for item in checks if item["status"] == "blocked"]
+    aggregate = "failed" if failures else ("blocked" if release and blocked else ("passed_with_external_gaps" if blocked else "passed_complete"))
     return {
         "schema": "sip.typecheck-report/v1",
         "mode": "release" if release else "development",
-        "status": "passed" if not failures else "failed",
+        "status": aggregate,
         "checks": checks,
-        "external_validation_required": [item["name"] for item in checks if item["status"] == "external_validation_required"],
+        "external_validation_required": [item["name"] for item in checks if item["status"] == "blocked"],
     }
 
 
@@ -83,7 +85,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
-    raise SystemExit(0 if report["status"] == "passed" else 1)
+    raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)
 
 
 if __name__ == "__main__":
