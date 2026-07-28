@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently verify a SIP Progress 05 checkpoint ZIP and its source/evidence provenance."""
+"""Independently verify a SIP Progress 05-R1 checkpoint ZIP and its source/evidence provenance."""
 from __future__ import annotations
 
 import argparse
@@ -40,6 +40,9 @@ EXPECTED_PREDECESSOR_ZIP_SHA256 = "892f5b9d1995b2016eb80a524989af4813bfa408788e4
 EXPECTED_IMPORT_COMMIT = "36e9c44d21a9c47d85971ee945daec8fc98e26d6"
 EXPECTED_ACCEPTED_P04_COMMIT = "8fe87d030c68157c50b477de8d2480065ca0b6a8"
 EXPECTED_ACCEPTED_P04_ZIP_SHA256 = "0d5a2584b412d05d8cff933d8170d6faa411a7cc6be095356995442517254079"
+EXPECTED_ACCEPTED_P05_COMMIT = "a5c866999df88b32e53ecc87d6917320f2ffe5c8"
+EXPECTED_ACCEPTED_P05_ZIP_SHA256 = "87b7760b255da3c30d94e27673063dc540724b01ccafbccd552dae708d513f0e"
+EXPECTED_ACCEPTED_P05_OUTER_SHA256 = "592bc4c1490a3b647a783b65d314f48cbcb17f08b0ec602450d1b030dcb19f80"
 
 
 def _verify_bound_runtime_report(
@@ -78,11 +81,15 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
     predecessor = record.get("predecessor") if isinstance(record.get("predecessor"), dict) else {}
     mapping = record.get("import_mapping") if isinstance(record.get("import_mapping"), dict) else {}
     accepted = record.get("accepted_checkpoint") if isinstance(record.get("accepted_checkpoint"), dict) else {}
+    accepted_p05 = record.get("accepted_progress_05_checkpoint") if isinstance(record.get("accepted_progress_05_checkpoint"), dict) else {}
     checks = [
         (predecessor.get("zip_sha256"), EXPECTED_PREDECESSOR_ZIP_SHA256, "predecessor ZIP hash"),
         (mapping.get("commit"), EXPECTED_IMPORT_COMMIT, "import commit"),
         (accepted.get("commit"), EXPECTED_ACCEPTED_P04_COMMIT, "accepted Progress 04-R1 commit"),
         (accepted.get("project_zip_sha256"), EXPECTED_ACCEPTED_P04_ZIP_SHA256, "accepted Progress 04-R1 ZIP hash"),
+        (accepted_p05.get("commit"), EXPECTED_ACCEPTED_P05_COMMIT, "accepted Progress 05 commit"),
+        (accepted_p05.get("project_zip_sha256"), EXPECTED_ACCEPTED_P05_ZIP_SHA256, "accepted Progress 05 ZIP hash"),
+        (accepted_p05.get("outer_delivery_zip_sha256"), EXPECTED_ACCEPTED_P05_OUTER_SHA256, "accepted Progress 05 outer ZIP hash"),
     ]
     for actual, expected, label in checks:
         if actual != expected:
@@ -90,7 +97,7 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
 
 
 def _verify_status_and_evidence(root: Path, verification: Verification, source_record: dict[str, Any] | None) -> None:
-    checkpoint_relative = "build/checkpoints/progress-05.json"
+    checkpoint_relative = "build/checkpoints/progress-05-r1.json"
     checkpoint = _read_json(root / checkpoint_relative, verification, code="CHECKPOINT_RECORD_INVALID")
     if checkpoint is None:
         return
@@ -107,16 +114,16 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
     if facts.get("checkpoint_id") != CHECKPOINT_ID:
         verification.fail("CHECKPOINT_ID", f"expected {CHECKPOINT_ID}, got {facts.get('checkpoint_id')}", checkpoint_relative)
     if checkpoint.get("milestone_wording") != MILESTONE_WORDING:
-        verification.fail("CHECKPOINT_WORDING", "checkpoint wording differs from the authorized Progress 05 scope", checkpoint_relative)
+        verification.fail("CHECKPOINT_WORDING", "checkpoint wording differs from the authorized Progress 05-R1 remediation scope", checkpoint_relative)
     if checkpoint.get("release_posture") != "blocked" or facts.get("production_authorized") is not False:
         verification.fail("CHECKPOINT_RELEASE_POSTURE", "production release must remain blocked", checkpoint_relative)
     if facts.get("working_tree_clean") is not True or facts.get("tested_detached_worktree") is not True:
         verification.fail("CHECKPOINT_WORKTREE", "checkpoint was not tested from a clean detached worktree", checkpoint_relative)
     if int(facts.get("requirements_total", -1)) != 1028:
         verification.fail("CHECKPOINT_REQUIREMENT_COUNT", "checkpoint must retain all 1,028 requirements", checkpoint_relative)
-    if int(facts.get("python_tests_passed", -1)) < 220:
+    if int(facts.get("python_tests_passed", -1)) < 230:
         verification.fail("CHECKPOINT_TEST_BASELINE", "Progress 05 Python matrix is below the authorized baseline", checkpoint_relative)
-    if int(facts.get("swift_tests_passed", -1)) < 13 or int(facts.get("web_runtime_tests_passed", -1)) < 12 or int(facts.get("web_source_checks_passed", -1)) < 26 or int(facts.get("desktop_tests_passed", -1)) < 15:
+    if int(facts.get("swift_tests_passed", -1)) < 13 or int(facts.get("web_runtime_tests_passed", -1)) < 13 or int(facts.get("web_source_checks_passed", -1)) < 32 or int(facts.get("desktop_tests_passed", -1)) < 17:
         verification.fail("CHECKPOINT_RUNTIME_BASELINE", "one or more runtime profiles are below the Progress 05 minimum", checkpoint_relative)
     if source_record:
         for key in ("commit", "parent", "tree", "branch", "source_tree_root_sha256"):
@@ -132,7 +139,7 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
         if latest.get("readiness") != "blocked" or latest.get("production_authorized") is not False:
             verification.fail("LATEST_RELEASE_POSTURE", "latest pointer must remain production blocked", latest_relative)
 
-    milestone_relative = "MILESTONE_SCOPE_PROGRESS_05.json"
+    milestone_relative = "MILESTONE_SCOPE_PROGRESS_05_R1.json"
     milestone = _read_json(root / milestone_relative, verification, code="MILESTONE_SCOPE_INVALID")
     if milestone:
         for key in ("checkpoint_id", "source_commit", "source_tree_root_sha256"):
@@ -215,18 +222,111 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
                     verification.fail("EVIDENCE_BINDING_MISMATCH", f"{category} wrapper differs from current source", relative)
                 _verify_evidence_wrapper(root=root, category=category, relative=relative, facts=facts, verification=verification)
 
-    _verify_bound_runtime_report(root, verification, relative="build/reports/swift-test-report.json", facts=facts, minimum_tests=13)
-    _verify_bound_runtime_report(root, verification, relative="build/reports/web-runtime-test-report.json", facts=facts, minimum_tests=12, minimum_source_checks=26)
-    _verify_bound_runtime_report(root, verification, relative="build/reports/desktop-review-test-report.json", facts=facts, minimum_tests=15)
+    audit_relative = "source/requirements/progress-05-traceability-audit.json"
+    audit = _read_json(root / audit_relative, verification, code="P05_TRACEABILITY_AUDIT_INVALID")
+    if audit:
+        if audit.get("status") != "passed_complete" or int(audit.get("finding_count", -1)) != 0 or int(audit.get("scope_requirement_count", -1)) != 30:
+            verification.fail("P05_TRACEABILITY_AUDIT_FAILED", "Progress 05 semantic traceability audit is incomplete", audit_relative)
+        audited = {
+            str(item.get("requirement_id")): item
+            for item in audit.get("audited_requirements", [])
+            if isinstance(item, dict)
+        }
+        pltview = audited.get("PLTVIEW-007")
+        direct_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
+        if not isinstance(pltview, dict) or pltview.get("coverage_classification") != "direct":
+            verification.fail("PLTVIEW_007_NOT_DIRECT", "PLTVIEW-007 is not supported by direct renderer evidence", audit_relative)
+        elif direct_test not in {str(item.get("test_id")) for item in pltview.get("linked_tests", []) if isinstance(item, dict)}:
+            verification.fail("PLTVIEW_007_TEST_MISSING", "direct renderer-control test is not linked", audit_relative)
+        if any(item.get("all_linked_tests_declare_requirement_id") is not True for item in audited.values()):
+            verification.fail("P05_TEST_DECLARATION_MISMATCH", "one or more linked tests do not declare the mapped requirement", audit_relative)
 
-    readiness_relative = "build/reports/release-readiness-progress-05.json"
+    implementation = _read_json(root / "source/requirements/implementation-map.json", verification, code="SOURCE_IMPLEMENTATION_MAP_INVALID")
+    if implementation:
+        pltview = implementation.get("requirements", {}).get("PLTVIEW-007", {})
+        direct_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
+        if pltview.get("implementation_status") != "VERIFIED" or direct_test not in pltview.get("test_ids", []):
+            verification.fail("PLTVIEW_007_TRACEABILITY", "PLTVIEW-007 verified status is not bound to the direct renderer test", "source/requirements/implementation-map.json")
+
+    viewer = root / "source/apps/web/components/HybridViewer.tsx"
+    canvas = root / "source/apps/web/components/HybridCanvas.tsx"
+    runtime = root / "source/apps/web/lib/spatial-runtime.ts"
+    if not viewer.is_file() or "layers={layers}" not in viewer.read_text(encoding="utf-8"):
+        verification.fail("LAYER_STATE_NOT_CONNECTED", "canonical layer state is not passed to HybridCanvas", "source/apps/web/components/HybridViewer.tsx")
+    canvas_text = canvas.read_text(encoding="utf-8") if canvas.is_file() else ""
+    runtime_text = runtime.read_text(encoding="utf-8") if runtime.is_file() else ""
+    for fragment in ("evidenceDirective", "interactionDirective.pickable", "resizeObserver?.disconnect()", "removeEventListener"):
+        if fragment not in canvas_text:
+            verification.fail("HYBRID_CANVAS_R1_CONTROL", f"missing renderer remediation control: {fragment}", "source/apps/web/components/HybridCanvas.tsx")
+    if "buildLayerRenderDirectives" not in runtime_text or "evidence" not in runtime_text:
+        verification.fail("HYBRID_RUNTIME_R1_CONTROL", "renderer directives do not include the evidence role", "source/apps/web/lib/spatial-runtime.ts")
+
+    migration = root / "source/migrations/versions/0013_scene_change_application_atomicity.py"
+    if not migration.is_file() or "uq_scene_commit_workflow_event" not in migration.read_text(encoding="utf-8"):
+        verification.fail("ATOMIC_MIGRATION_MISSING", "atomic/idempotent change-application migration is absent", "source/migrations/versions/0013_scene_change_application_atomicity.py")
+
+    acceptance_relative = "build/reports/checkpoint-acceptance-gates.json"
+    acceptance = _read_json(root / acceptance_relative, verification, code="ACCEPTANCE_REPORT_INVALID")
+    if acceptance:
+        for item in acceptance.get("results", []):
+            if not isinstance(item, dict):
+                verification.fail("ACCEPTANCE_RESULT_INVALID", "acceptance result must be an object", acceptance_relative)
+                continue
+            if item.get("execution_status") not in {"completed_successfully", "completed_with_error"}:
+                verification.fail("ACCEPTANCE_EXECUTION_STATUS", "command execution status is missing", acceptance_relative)
+            if item.get("control_status") not in {"passed_complete", "passed_with_external_gaps", "blocked", "failed"}:
+                verification.fail("ACCEPTANCE_CONTROL_STATUS", "child control status is missing", acceptance_relative)
+            if item.get("status") != item.get("control_status"):
+                verification.fail("ACCEPTANCE_STATUS_COLLAPSED", "legacy status does not mirror child control completeness", acceptance_relative)
+            child_path = item.get("child_report_path")
+            child_hash = item.get("child_report_sha256")
+            if child_path is not None or child_hash is not None:
+                if not isinstance(child_path, str) or not isinstance(child_hash, str):
+                    verification.fail("ACCEPTANCE_CHILD_EVIDENCE", "child report path and hash must be retained together", acceptance_relative)
+                else:
+                    try:
+                        validate_relative_path(child_path)
+                    except ValueError as exc:
+                        verification.fail("ACCEPTANCE_CHILD_PATH", str(exc), acceptance_relative)
+                    else:
+                        child = root / child_path
+                        if not child.is_file():
+                            verification.fail("ACCEPTANCE_CHILD_MISSING", f"child control report is absent: {child_path}", acceptance_relative)
+                        elif sha256_file(child) != child_hash:
+                            verification.fail("ACCEPTANCE_CHILD_HASH", f"child control report hash differs: {child_path}", acceptance_relative)
+                        else:
+                            child_record = _read_json(child, verification, code="ACCEPTANCE_CHILD_INVALID")
+                            if child_record is not None:
+                                declared = child_record.get("control_status", child_record.get("status"))
+                                normalized = "passed_complete" if declared in {"passed", "ready", "healthy"} else declared
+                                if item.get("execution_status") == "completed_successfully" and normalized in {
+                                    "passed_complete", "passed_with_external_gaps", "blocked", "failed"
+                                } and item.get("control_status") != normalized:
+                                    verification.fail(
+                                        "ACCEPTANCE_CHILD_STATUS_MISMATCH",
+                                        f"acceptance status differs from retained child report: {child_path}",
+                                        acceptance_relative,
+                                    )
+
+    _verify_bound_runtime_report(root, verification, relative="build/reports/swift-test-report.json", facts=facts, minimum_tests=13)
+    _verify_bound_runtime_report(root, verification, relative="build/reports/web-runtime-test-report.json", facts=facts, minimum_tests=13, minimum_source_checks=32)
+    _verify_bound_runtime_report(root, verification, relative="build/reports/desktop-review-test-report.json", facts=facts, minimum_tests=17)
+
+    readiness_relative = "build/reports/release-readiness-progress-05-r1.json"
     readiness = _read_json(root / readiness_relative, verification, code="RELEASE_READINESS_INVALID")
     if readiness:
         source = readiness.get("source") if isinstance(readiness.get("source"), dict) else {}
         if readiness.get("checkpoint_id") != CHECKPOINT_ID or readiness.get("status") != "blocked" or readiness.get("production_authorized") is not False:
-            verification.fail("RELEASE_READINESS_POSTURE", "Progress 05 release readiness must remain blocked", readiness_relative)
+            verification.fail("RELEASE_READINESS_POSTURE", "Progress 05-R1 release readiness must remain blocked", readiness_relative)
         if source.get("commit") != facts.get("commit") or source.get("source_tree_root_sha256") != facts.get("source_tree_root_sha256"):
             verification.fail("RELEASE_READINESS_BINDING", "release readiness is bound to another source", readiness_relative)
+        next_action = str(readiness.get("next_action", ""))
+        if "Submit" not in next_action or "Build and independently verify" in next_action:
+            verification.fail("RELEASE_READINESS_STALE", "release-readiness next action is stale after package construction", readiness_relative)
+
+    remediation = root / "PROGRESS_05_R1_REMEDIATION_REPORT.md"
+    if not remediation.is_file():
+        verification.fail("R1_REMEDIATION_REPORT_MISSING", "Progress 05-R1 remediation report is absent", "PROGRESS_05_R1_REMEDIATION_REPORT.md")
 
     for markdown in ("IMPLEMENTATION_STATUS.md", "RESUME_IMPLEMENTATION.md", "requirements/coverage-report.md", "FINAL_IMPLEMENTATION_REPORT.md"):
         path = root / markdown
@@ -257,7 +357,7 @@ def verify_archive(archive_path: Path) -> dict[str, Any]:
         return _report(verification)
     verification.facts["archive_sha256"] = sha256_file(archive_path)
     verification.facts["archive_size"] = archive_path.stat().st_size
-    with tempfile.TemporaryDirectory(prefix="sip-progress05-verify-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="sip-progress05-r1-verify-") as temporary:
         extract_root = Path(temporary) / "extract"
         extract_root.mkdir()
         try:

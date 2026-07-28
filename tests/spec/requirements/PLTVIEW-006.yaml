@@ -18,7 +18,7 @@ implementation_files:
 - migrations/versions/0012_scene_runtime_review.py
 - tools/run_demo.py
 automated_test_ids:
-- tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants
+- tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities
 retained_evidence:
 - build/evidence/demos/hybrid.json
 - build/evidence/demos/scene-runtime.json

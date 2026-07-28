@@ -61,7 +61,7 @@ def test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_repor
 
 @pytest.mark.e2e
 def test_hybrid_representation_demonstration(tmp_path: Path) -> None:
-    """REQ: PLTVIEW-007, HYBRUN-003, RECHYB-002, RECHYB-005, RECMESH-010 hybrid authority survives proxy replacement."""
+    """REQ: HYBRUN-003, RECHYB-002, RECHYB-005, RECMESH-010 hybrid authority survives proxy replacement."""
     report = _demo_module().hybrid(tmp_path / "hybrid")
     assert report["direct_proxy_measurement_blocked"] is True
     assert report["acceptance"]["proxy_hit_re_resolved"] is True

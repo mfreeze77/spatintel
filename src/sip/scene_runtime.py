@@ -905,36 +905,86 @@ class SceneRuntimeService:
         message: str,
         actor_id: str,
     ) -> dict[str, Any]:
+        """Atomically and idempotently apply independently accepted change events.
+
+        The temporal-comparison row, semantic events, branch head, scene commit, outbox
+        events, and audit records share one database transaction. The workflow event ID
+        is a project-scoped idempotency key protected by a unique database constraint.
+        """
+        workflow_event_id = f"temporal-comparison:{comparison_id}"
+        result: dict[str, Any]
         with self.database.session() as session:
-            comparison = self._scoped_comparison(session, comparison_id, tenant_id, project_id)
-            pending = list(
+            comparison = session.scalar(
+                select(TemporalComparisonRow)
+                .where(
+                    TemporalComparisonRow.comparison_id == comparison_id,
+                    TemporalComparisonRow.tenant_id == tenant_id,
+                    TemporalComparisonRow.project_id == project_id,
+                )
+                .with_for_update()
+            )
+            if comparison is None:
+                raise NotFoundError("temporal_comparison", comparison_id)
+
+            events = list(
                 session.scalars(
-                    select(SemanticChangeEventRow).where(
+                    select(SemanticChangeEventRow)
+                    .where(
                         SemanticChangeEventRow.comparison_id == comparison_id,
-                        SemanticChangeEventRow.applied_commit_id.is_(None),
+                        SemanticChangeEventRow.tenant_id == tenant_id,
+                        SemanticChangeEventRow.project_id == project_id,
                     )
+                    .with_for_update()
                 )
             )
-            already_applied = list(
-                session.scalars(
-                    select(SemanticChangeEventRow).where(
-                        SemanticChangeEventRow.comparison_id == comparison_id,
-                        SemanticChangeEventRow.applied_commit_id.is_not(None),
-                    )
+            pending = [event for event in events if event.applied_commit_id is None]
+            already_applied = [event for event in events if event.applied_commit_id is not None]
+            existing_commit = session.scalar(
+                select(SceneCommitRow).where(
+                    SceneCommitRow.tenant_id == tenant_id,
+                    SceneCommitRow.project_id == project_id,
+                    SceneCommitRow.workflow_event_id == workflow_event_id,
                 )
             )
+
             if not pending:
                 if already_applied:
-                    commit_ids = {event.applied_commit_id for event in already_applied}
-                    return {
+                    commit_ids = {str(event.applied_commit_id) for event in already_applied}
+                    if len(commit_ids) != 1:
+                        raise ConflictError(
+                            "CHANGE_APPLICATION_INTEGRITY_GAP",
+                            "semantic change events are linked to multiple scene commits",
+                        )
+                    commit_id = next(iter(commit_ids))
+                    if existing_commit is None or existing_commit.commit_id != commit_id:
+                        raise ConflictError(
+                            "CHANGE_APPLICATION_INTEGRITY_GAP",
+                            "semantic event links do not match the idempotent workflow commit",
+                        )
+                    result = {
                         "comparison_id": comparison_id,
-                        "commit_id": next(iter(commit_ids)) if len(commit_ids) == 1 else None,
+                        "commit_id": commit_id,
                         "semantic_event_ids": sorted(event.semantic_event_id for event in already_applied),
                         "idempotent_replay": True,
                     }
+                    return result
                 raise ConflictError(
                     "CHANGE_NO_ACCEPTED_EVENTS",
                     "comparison has no accepted semantic change events eligible for a scene commit",
+                )
+
+            if existing_commit is not None:
+                # A commit with pending unlinked events can only originate from legacy
+                # non-atomic behavior or manual corruption. Do not silently complete it.
+                raise ConflictError(
+                    "CHANGE_APPLICATION_INTEGRITY_GAP",
+                    "workflow commit exists while semantic events remain unapplied",
+                    {"commit_id": existing_commit.commit_id},
+                )
+            if already_applied:
+                raise ConflictError(
+                    "CHANGE_APPLICATION_INTEGRITY_GAP",
+                    "comparison contains a partial semantic-event application",
                 )
             if comparison.state not in {"reviewed", "partially_applied"}:
                 raise ConflictError(
@@ -942,44 +992,31 @@ class SceneRuntimeService:
                     "all active change candidates must be reviewed before a scene commit",
                     {"state": comparison.state},
                 )
-            evidence_ids = sorted({item for event in pending for item in event.evidence_ids_json})
-            scene_id = comparison.scene_id
-            semantic_event_ids = sorted(event.semantic_event_id for event in pending)
 
-        commit = self.scene.commit(
-            tenant_id=tenant_id,
-            project_id=project_id,
-            scene_id=scene_id,
-            branch=branch,
-            expected_head=expected_head,
-            message=message,
-            actor_id=actor_id,
-            workflow_event_id=f"temporal-comparison:{comparison_id}",
-            change_evidence_ids=evidence_ids,
-            policy_checks={
-                "temporal_comparison_reviewed": "passed",
-                "comparison_id": comparison_id,
-                "semantic_event_ids": semantic_event_ids,
-            },
-            review_state="accepted_change_commit",
-        )
-        commit_id = str(commit["commit_id"])
-        with self.database.session() as session:
-            comparison = self._scoped_comparison(session, comparison_id, tenant_id, project_id)
-            events = list(
-                session.scalars(
-                    select(SemanticChangeEventRow).where(
-                        SemanticChangeEventRow.comparison_id == comparison_id,
-                        SemanticChangeEventRow.semantic_event_id.in_(semantic_event_ids),
-                    )
-                )
+            evidence_ids = sorted({item for event in pending for item in event.evidence_ids_json})
+            semantic_event_ids = sorted(event.semantic_event_id for event in pending)
+            commit = self.scene.commit_in_session(
+                session=session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                scene_id=comparison.scene_id,
+                branch=branch,
+                expected_head=expected_head,
+                message=message,
+                actor_id=actor_id,
+                workflow_event_id=workflow_event_id,
+                change_evidence_ids=evidence_ids,
+                policy_checks={
+                    "temporal_comparison_reviewed": "passed",
+                    "comparison_id": comparison_id,
+                    "semantic_event_ids": semantic_event_ids,
+                    "atomic_application": "passed",
+                    "idempotency_key": workflow_event_id,
+                },
+                review_state="accepted_change_commit",
             )
-            for event in events:
-                if event.applied_commit_id is not None and event.applied_commit_id != commit_id:
-                    raise ConflictError(
-                        "CHANGE_EVENT_ALREADY_APPLIED",
-                        "semantic change event is already linked to another scene commit",
-                    )
+            commit_id = str(commit["commit_id"])
+            for event in pending:
                 event.applied_commit_id = commit_id
             comparison.state = "applied"
             session.add(
@@ -994,12 +1031,15 @@ class SceneRuntimeService:
                     payload={
                         "comparison_id": comparison_id,
                         "commit_id": commit_id,
-                        "semantic_event_count": len(events),
+                        "semantic_event_count": len(pending),
                         "branch": branch,
+                        "atomic": True,
+                        "idempotency_key": workflow_event_id,
                     },
                     producer="scene-service",
                     actor_id=actor_id,
                     workload_identity=None,
+                    causation_id=workflow_event_id,
                 )
             )
             self.audit.append(
@@ -1010,15 +1050,22 @@ class SceneRuntimeService:
                 resource_type="scene_commit",
                 resource_id=commit_id,
                 outcome="allowed",
-                details={"comparison_id": comparison_id, "semantic_event_ids": semantic_event_ids},
+                details={
+                    "comparison_id": comparison_id,
+                    "semantic_event_ids": semantic_event_ids,
+                    "atomic": True,
+                    "idempotency_key": workflow_event_id,
+                },
                 session=session,
             )
-        return {
-            "comparison_id": comparison_id,
-            "commit_id": commit_id,
-            "semantic_event_ids": semantic_event_ids,
-            "idempotent_replay": False,
-        }
+            session.flush()
+            result = {
+                "comparison_id": comparison_id,
+                "commit_id": commit_id,
+                "semantic_event_ids": semantic_event_ids,
+                "idempotent_replay": False,
+            }
+        return result
 
     def record_change_benchmark(
         self,

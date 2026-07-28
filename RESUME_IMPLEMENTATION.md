@@ -1,27 +1,20 @@
-# Resume implementation
+# Automatic resume — SIP v1.1.0 Progress 05-R1
 
-Progress 05 scene-runtime implementation is present in this source tree and is awaiting the source-bound checkpoint sequence. This committed document deliberately contains no predicted commit, tree, source root, test count, or package hash; those facts are generated only after the exact source bytes are committed and retested from a clean detached worktree.
+This branch is limited to the True North Progress 05-R1 remediation. No user approval is required to continue any interrupted checkpoint-control step, and Progress 06 must not begin from this record.
 
-The implemented Progress 05 scope includes:
+The required continuous sequence is:
 
-1. durable, policy-bound viewer sessions;
-2. governed temporal comparison and independent change review;
-3. append-only migration `0012_scene_runtime_review`;
-4. generated contracts, authenticated APIs, and event schemas;
-5. browser-independent hybrid-viewer runtime and accessibility controls;
-6. native Three.js metric-mesh and point-splat renderer reference;
-7. local-first desktop review with immutable inputs, provenance, offline merge, and proposal-only export;
-8. checkpoint and consolidated-envelope builders and independent verifiers.
+1. regenerate controlled contracts, requirements ledgers, and the 30-requirement Progress 05 semantic traceability audit;
+2. run focused remediation tests and source-drift checks;
+3. commit the exact source bytes to `progress-05-r1-remediation`;
+4. create a clean detached worktree at that commit;
+5. create a source attestation and run the complete locally executable acceptance sequence against that exact commit;
+6. repair any local failure in source, recommit, recreate the detached worktree, and rerun the complete affected acceptance sequence;
+7. build the inner `Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip` only from the clean accepted commit;
+8. independently verify the inner checkpoint;
+9. build the consolidated outer delivery envelope with the inner ZIP, Git bundle, exact source archive, hashes, manifests, provenance, milestone scope, evidence, and acceptance reports;
+10. independently verify the outer envelope and publish both packages for True North review.
 
-The next executable sequence is mandatory and continuous:
+An interruption handler must inspect the machine-readable resume state at `/mnt/data/sip-progress-05-r1-auto-resume.json`, resume the first incomplete stage automatically, and never ask the user to type “continue.”
 
-1. regenerate requirements and traceability records;
-2. commit the exact Progress 05 source bytes;
-3. create a clean detached worktree at that commit;
-4. rerun the complete Python matrix and every locally available acceptance gate;
-5. establish an evidence fixed point bound to that commit and canonical source root;
-6. build and independently verify the Progress 05 inner checkpoint;
-7. build and independently verify the consolidated outer delivery envelope;
-8. submit the scoped checkpoint for True North review.
-
-Production deployment and release remain **NO-GO**. Linux Swift fixtures are not physical iOS/LiDAR acceptance; dependency-free web tests are not a complete Next.js production build; structural infrastructure checks are not deployment validation; and unavailable security, browser, GPU, device, cloud, privacy, accessibility, penetration, and legal reviews remain explicit external gaps.
+Production remains **NO-GO**. Progress 06 remains unauthorized until True North accepts Progress 05-R1.

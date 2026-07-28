@@ -18,7 +18,10 @@ const checks = [
   ["lib/spatial-runtime.ts", "pointPassesClipping"], ["lib/spatial-runtime.ts", "synchronizedComparison"], ["lib/spatial-runtime.ts", "interactionDiagnostics"],
   ["lib/spatial-runtime.ts", "semanticFallback"], ["lib/spatial-runtime.ts", "navigationFromKey"], ["lib/hybrid-renderer.ts", "loadGaussianSplat"],
   ["lib/hybrid-renderer.ts", "role === \"interaction\""], ["components/HybridCanvas.tsx", "THREE.Points"], ["components/HybridCanvas.tsx", "Raycaster"],
-  ["components/HybridCanvas.tsx", "ResizeObserver"], ["components/HybridCanvas.tsx", "re-resolved against metric evidence"], ["components/HybridViewer.tsx", "Reduced motion"],
+  ["components/HybridCanvas.tsx", "ResizeObserver"], ["components/HybridCanvas.tsx", "observer?.disconnect()"],
+  ["components/HybridCanvas.tsx", "removeEventListener(\"pointerdown\""], ["components/HybridCanvas.tsx", "buildLayerRenderDirectives(layers, comparisonSplit)"],
+  ["components/HybridCanvas.tsx", "interactionDirective.pickable"], ["components/HybridCanvas.tsx", "evidence:asset-depth-001"],
+  ["components/HybridCanvas.tsx", "re-resolved against metric evidence"], ["components/HybridViewer.tsx", "layers={layers}"], ["components/HybridViewer.tsx", "Reduced motion"],
   ["components/HybridViewer.tsx", "High contrast"], ["components/HybridViewer.tsx", "Captions and semantic alternatives enabled"], ["app/liveforever/page.tsx", "GENERATED RECONSTRUCTION"],
   ["app/construction/page.tsx", "not survey-grade"], ["app/construction/page.tsx", "Verification date"]
 ];

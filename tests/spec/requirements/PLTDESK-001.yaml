@@ -16,6 +16,8 @@ implementation_files:
 automated_test_ids:
 - tests/integration/test_desktop_review.py::test_desktop_observations_synchronize_rgb_depth_trajectory_and_geometry
 - tests/integration/test_desktop_review.py::test_desktop_project_is_local_first_and_content_addressed
+- tests/integration/test_desktop_review.py::test_desktop_supports_all_correspondence_types
+- tests/integration/test_desktop_review.py::test_desktop_undo_and_redo_append_history_instead_of_rewriting
 retained_evidence:
 - build/reports/desktop-review-test-report.json
 - build/reports/test-matrix.json

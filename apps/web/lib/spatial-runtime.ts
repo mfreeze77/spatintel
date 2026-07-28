@@ -6,6 +6,7 @@ export interface LayerState {
   readonly kind: RepresentationKind;
   readonly visible: boolean;
   readonly opacity: number;
+  readonly authorized: boolean;
   readonly authority: AuthorityClass;
   readonly warning: string | null;
 }
@@ -70,6 +71,7 @@ export function defaultLayers(): readonly LayerState[] {
     kind,
     visible: kind !== "design",
     opacity: kind === "visual" ? 0.82 : 1,
+    authorized: true,
     authority: authority[kind],
     warning: warnings[kind]
   }));
@@ -83,7 +85,71 @@ export function updateLayer(
   if (patch.opacity !== undefined && (!Number.isFinite(patch.opacity) || patch.opacity < 0 || patch.opacity > 1)) {
     throw new RangeError("opacity must be between zero and one");
   }
+  const current = layers.find((layer) => layer.kind === kind);
+  if (!current) throw new Error(`unknown representation layer: ${kind}`);
+  if (patch.visible === true && current.authorized !== true) {
+    throw new Error(`LAYER_AUTHORIZATION_DENIED:${kind}`);
+  }
   return layers.map((layer) => (layer.kind === kind ? { ...layer, ...patch } : layer));
+}
+
+export interface RenderLayerDirective {
+  readonly role: RepresentationKind;
+  readonly visible: boolean;
+  readonly opacity: number;
+  readonly pickable: boolean;
+  readonly authority: AuthorityClass;
+  readonly authorityLabel: string;
+}
+
+const BASE_RENDER_OPACITY: Readonly<Record<RepresentationKind, number>> = {
+  metric: 0.42,
+  visual: 0.58,
+  design: 0.85,
+  interaction: 0.03,
+  evidence: 0.95
+};
+
+const ROLE_LABELS: Readonly<Record<RepresentationKind, string>> = {
+  metric: "metric / observed evidence",
+  visual: "visual / generated reconstruction",
+  design: "design / intent only",
+  interaction: "interaction / disposable non-authoritative proxy",
+  evidence: "evidence / immutable source record"
+};
+
+export function buildLayerRenderDirectives(
+  layers: readonly LayerState[],
+  comparisonSplit = 1
+): readonly RenderLayerDirective[] {
+  if (!Number.isFinite(comparisonSplit) || comparisonSplit < 0 || comparisonSplit > 1) {
+    throw new RangeError("comparison split must be between zero and one");
+  }
+  const byRole = new Map(layers.map((layer) => [layer.kind, layer] as const));
+  return REPRESENTATION_KINDS.map((role) => {
+    const layer = byRole.get(role);
+    if (!layer) throw new Error(`missing representation layer: ${role}`);
+    const comparisonOpacity = role === "visual" ? comparisonSplit : 1;
+    const opacity = BASE_RENDER_OPACITY[role] * layer.opacity * comparisonOpacity;
+    const visible = layer.authorized === true && layer.visible === true && opacity > 0;
+    return {
+      role,
+      visible,
+      opacity,
+      pickable: role === "interaction" && visible,
+      authority: layer.authority,
+      authorityLabel: ROLE_LABELS[role]
+    };
+  });
+}
+
+export function layerDirective(
+  directives: readonly RenderLayerDirective[],
+  role: RepresentationKind
+): RenderLayerDirective {
+  const directive = directives.find((item) => item.role === role);
+  if (!directive) throw new Error(`missing render directive: ${role}`);
+  return directive;
 }
 
 function distance(a: readonly number[], b: readonly number[]): number {

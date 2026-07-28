@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildHybridRenderPlan, defaultLayers, directProxyMeasurement, interactionDiagnostics, navigationFromKey, pickInteractionOnly, planResourceAdmission, pointPassesClipping, reprojectAnchors, resolveProxyHit, selectDeterministicLod, semanticFallback, serializeViewerSnapshot, synchronizedComparison, updateLayer, validateViewerSessionState } from "../lib/spatial-runtime.mjs";
+import { buildHybridRenderPlan, buildLayerRenderDirectives, defaultLayers, directProxyMeasurement, interactionDiagnostics, layerDirective, navigationFromKey, pickInteractionOnly, planResourceAdmission, pointPassesClipping, reprojectAnchors, resolveProxyHit, selectDeterministicLod, semanticFallback, serializeViewerSnapshot, synchronizedComparison, updateLayer, validateViewerSessionState } from "../lib/spatial-runtime.mjs";
 
 test("representation layers remain distinct and bounded", () => {
   const layers = defaultLayers();
@@ -8,6 +8,36 @@ test("representation layers remain distinct and bounded", () => {
   assert.equal(layers.find((layer) => layer.kind === "interaction").authority, "derived_non_authoritative");
   assert.equal(updateLayer(layers, "visual", { opacity: 0.4 }).find((layer) => layer.kind === "visual").opacity, 0.4);
   assert.throws(() => updateLayer(layers, "visual", { opacity: 2 }), /opacity/);
+});
+
+
+
+test("PLTVIEW-007 layer controls drive renderer visibility opacity labels and pickability", () => {
+  let layers = defaultLayers();
+  let directives = buildLayerRenderDirectives(layers, 0.72);
+  assert.equal(layerDirective(directives, "metric").visible, true);
+  assert.equal(layerDirective(directives, "design").visible, false);
+  assert.equal(layerDirective(directives, "evidence").visible, true);
+  assert.equal(layerDirective(directives, "interaction").pickable, true);
+  assert.match(layerDirective(directives, "visual").authorityLabel, /generated reconstruction/);
+  assert.match(layerDirective(directives, "evidence").authorityLabel, /immutable source record/);
+
+  layers = updateLayer(layers, "metric", { visible: false });
+  layers = updateLayer(layers, "visual", { opacity: 0.4 });
+  layers = updateLayer(layers, "interaction", { visible: false });
+  layers = updateLayer(layers, "design", { visible: true, opacity: 0.5 });
+  layers = updateLayer(layers, "evidence", { visible: false });
+  directives = buildLayerRenderDirectives(layers, 0.72);
+  assert.equal(layerDirective(directives, "metric").visible, false);
+  assert.equal(layerDirective(directives, "visual").opacity, 0.58 * 0.4 * 0.72);
+  assert.equal(layerDirective(directives, "interaction").pickable, false);
+  assert.equal(layerDirective(directives, "design").visible, true);
+  assert.equal(layerDirective(directives, "design").opacity, 0.85 * 0.5);
+  assert.equal(layerDirective(directives, "evidence").visible, false);
+
+  const unauthorized = defaultLayers().map((layer) => layer.kind === "interaction" ? { ...layer, authorized: false, visible: true } : layer);
+  assert.equal(layerDirective(buildLayerRenderDirectives(unauthorized), "interaction").pickable, false);
+  assert.throws(() => updateLayer(unauthorized, "interaction", { visible: true }), /LAYER_AUTHORIZATION_DENIED/);
 });
 
 test("proxy hits must resolve against metric evidence", () => {

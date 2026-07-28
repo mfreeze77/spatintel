@@ -20,7 +20,7 @@ def _headers(tenant: str, project: str, subject: str, roles: str = "tenant_admin
 
 
 def test_scene_runtime_openapi_and_authenticated_viewer_session_contract(tmp_path: Path) -> None:
-    """REQ: PLTVIEW-001, PLTVIEW-005, RECCHANG-001 generated APIs expose policy-bound viewer and temporal review contracts."""
+    """REQ: PLTVIEW-001, RECCHANG-001 generated APIs expose policy-bound viewer and temporal review contracts."""
     context = PlatformContext.create(temporary_settings(tmp_path / "runtime"))
     tenant = context.tenancy.create_tenant("Runtime API", tenant_id="runtime-api-tenant", actor_id="bootstrap")
     project = context.tenancy.create_project(tenant, "Runtime API", vertical="platform", classification="internal", project_id="runtime-api-project", actor_id="bootstrap")

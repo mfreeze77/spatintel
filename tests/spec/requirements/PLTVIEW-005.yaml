@@ -18,14 +18,12 @@ implementation_files:
 - migrations/versions/0012_scene_runtime_review.py
 - tools/run_demo.py
 automated_test_ids:
-- tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract
-- tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities
+- tests/contract/test_web_viewer_runtime.py::test_pltview_005_accessibility_controls_and_semantic_fallback_are_executable
 retained_evidence:
 - build/evidence/demos/hybrid.json
 - build/evidence/demos/scene-runtime.json
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
-- build/reports/tests/integration.xml
 - build/reports/web-runtime-test-report.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

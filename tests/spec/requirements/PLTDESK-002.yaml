@@ -13,8 +13,8 @@ implementation_files:
 - src/sip/desktop_review.py
 - tests/integration/test_desktop_review.py
 automated_test_ids:
-- tests/integration/test_desktop_review.py::test_desktop_supports_all_correspondence_types
-- tests/integration/test_desktop_review.py::test_desktop_undo_and_redo_append_history_instead_of_rewriting
+- tests/integration/test_desktop_review.py::test_desktop_records_factor_residuals_and_loop_constraints
+- tests/integration/test_desktop_review.py::test_desktop_records_source_weights_and_regional_uncertainty
 retained_evidence:
 - build/reports/desktop-review-test-report.json
 - build/reports/test-matrix.json

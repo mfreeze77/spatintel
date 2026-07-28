@@ -12,14 +12,14 @@ export function LayerControls({ layers, onToggle, onOpacity }: {
       {layers.map((layer) => (
         <div className="layer-control" key={layer.kind}>
           <label>
-            <input type="checkbox" checked={layer.visible} onChange={(event) => onToggle(layer.kind, event.currentTarget.checked)} />
-            <span>{layer.kind}</span>
+            <input type="checkbox" checked={layer.visible} disabled={!layer.authorized} aria-label={`${layer.kind} representation visibility`} onChange={(event) => onToggle(layer.kind, event.currentTarget.checked)} />
+            <span>{layer.kind}</span> <small>{layer.authority}</small>
           </label>
           <label className="opacity-label">
             <span className="sr-only">{layer.kind} opacity</span>
-            <input type="range" min="0" max="1" step="0.05" value={layer.opacity} disabled={!layer.visible} onChange={(event) => onOpacity(layer.kind, Number(event.currentTarget.value))} />
+            <input type="range" min="0" max="1" step="0.05" value={layer.opacity} disabled={!layer.visible || !layer.authorized} onChange={(event) => onOpacity(layer.kind, Number(event.currentTarget.value))} />
           </label>
-          {layer.warning ? <p className="layer-warning">{layer.warning}</p> : null}
+          {!layer.authorized ? <p className="layer-warning">This representation is not authorized for the current view.</p> : layer.warning ? <p className="layer-warning">{layer.warning}</p> : null}
         </div>
       ))}
     </fieldset>

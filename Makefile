@@ -112,11 +112,13 @@ license-check:
 spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_traceability_map.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress05_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
 
 traceability-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_traceability_map.py --check-evidence
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress05_traceability.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py

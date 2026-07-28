@@ -60,8 +60,8 @@ def test_progress05_verifier_rejects_manifest_hash_and_root_tamper(tmp_path: Pat
 
 def test_outer_delivery_verifier_rejects_unexpected_and_unindexed_payload(tmp_path: Path) -> None:
     """CONTROL: the consolidated envelope rejects unexpected files and an incomplete payload index."""
-    top = "Spatial-Intelligence-Platform-v1.1.0-progress-05-delivery"
-    project_name = "Spatial-Intelligence-Platform-v1.1.0-progress-05.zip"
+    top = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-delivery"
+    project_name = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip"
     project = b"not-a-real-checkpoint"
     checksum_name = project_name + ".sha256"
     verification_name = project_name + ".verification.json"
@@ -74,7 +74,7 @@ def test_outer_delivery_verifier_rejects_unexpected_and_unindexed_payload(tmp_pa
     }
     index = {
         "schema": "sip.delivery-envelope-index/v1",
-        "delivery_id": "sip-v1.1.0-progress-05-delivery",
+        "delivery_id": "sip-v1.1.0-progress-05-r1-delivery",
         "top_level": top,
         "self_exclusion": {
             "path": "DELIVERY_INDEX.json",
@@ -118,8 +118,8 @@ def test_progress05_acceptance_sequence_contains_new_runtime_gates() -> None:
     assert "desktop-test" in module.REQUIRED_TARGETS
     assert "demo-scene-runtime" in module.REQUIRED_TARGETS
     source = path.read_text(encoding="utf-8")
-    assert "sip-v1.1.0-progress-05" in source
-    assert "release-readiness-progress-05.json" in source
+    assert "sip-v1.1.0-progress-05-r1" in source
+    assert "release-readiness-progress-05-r1.json" in source
 
 
 def test_progress05_generated_coverage_states_production_no_go() -> None:

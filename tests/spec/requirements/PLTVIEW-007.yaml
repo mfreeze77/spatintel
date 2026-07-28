@@ -18,12 +18,12 @@ implementation_files:
 - migrations/versions/0012_scene_runtime_review.py
 - tools/run_demo.py
 automated_test_ids:
-- tests/e2e/test_platform_demonstrations.py::test_hybrid_representation_demonstration
+- tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives
 retained_evidence:
 - build/evidence/demos/hybrid.json
 - build/evidence/demos/scene-runtime.json
 - build/reports/test-matrix.json
-- build/reports/tests/e2e.xml
+- build/reports/tests/contract.xml
 - build/reports/web-runtime-test-report.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

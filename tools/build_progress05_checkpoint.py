@@ -31,14 +31,16 @@ from tools.build_checkpoint import (
 from tools.checkpoint_common import build_content_manifest, content_root, sha256_file, stage_records, write_deterministic_zip
 from tools.source_identity import source_identity
 
-CHECKPOINT_ID = "sip-v1.1.0-progress-05"
-TOP_LEVEL = "Spatial-Intelligence-Platform-v1.1.0-progress-05"
+CHECKPOINT_ID = "sip-v1.1.0-progress-05-r1"
+TOP_LEVEL = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1"
 EXPECTED_SPEC_SHA256 = "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8"
 MILESTONE_WORDING = (
-    "Checkpoint 05 implements and locally verifies the scene-runtime review kernel: durable policy-bound viewer "
-    "sessions, governed temporal comparison, a native hybrid-renderer reference, and a local-first desktop review "
-    "application. Browser/GPU/device/deployment validation and production approval remain incomplete."
+    "Checkpoint 05-R1 narrowly remediates the accepted Progress 05 development snapshot by connecting canonical "
+    "metric, visual, interaction, design, and evidence layer controls to the renderer; correcting Progress 05 "
+    "traceability; enforcing authorization-before-response in the local desktop server; and making accepted-change "
+    "application atomic and idempotent. Production approval and all previously declared external validation remain incomplete."
 )
+
 EXTERNAL_GAPS = [
     "Ruff was unavailable; the deterministic source-policy checker ran instead.",
     "mypy was unavailable; Python compilation ran, but a full mypy result is blocked.",
@@ -51,10 +53,10 @@ EXTERNAL_GAPS = [
     "Independent penetration testing, privacy review, browser accessibility audit, operator usability study, and legal approval remain incomplete.",
 ]
 NEXT_CLUSTER = (
-    "Continue dependency-ordered implementation of incomplete Phase 5 search/document/agent/runtime requirements, "
-    "then Construction and LiveForever vertical completeness, production observability/recovery, external-platform "
-    "validation plans, and remaining P0/P1 requirements. Production promotion remains fail-closed."
+    "Submit the independently verified Progress 05-R1 inner checkpoint and consolidated outer envelope for True North "
+    "milestone-closure review. Do not begin Progress 06 or production promotion without explicit authorization; production remains NO-GO."
 )
+
 P05_SCOPE_IDS = {
     *(f"RECCHANG-{index:03d}" for index in range(1, 7)),
     *(f"PLTVIEW-{index:03d}" for index in range(1, 13)),
@@ -136,7 +138,7 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
         "checkpoint_id": facts["checkpoint_id"],
         "source_commit": facts["commit"],
         "source_tree_root_sha256": facts["source_tree_root_sha256"],
-        "milestone": "Progress 05 scene-runtime review kernel",
+        "milestone": "Progress 05-R1 narrow remediation checkpoint",
         "authoritative_wording": MILESTONE_WORDING,
         "scope_requirement_ids": sorted(P05_SCOPE_IDS),
         "included_requirements": included,
@@ -154,7 +156,7 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
             "Native metric, visual, design, interaction, and evidence roles remain distinct in the renderer reference.",
             "Proxy hits cannot directly create authoritative measurements.",
             "Desktop review is local-first, crash-safe at the deterministic storage layer, conflict-preserving, and export-gated.",
-            "Migration 0012 is append-only and rollback/recovery tested in the local reference profile.",
+            "Migrations 0012 and 0013 are append-only and rollback/recovery tested in the local reference profile.",
             "The complete source-bound acceptance matrix and all available local gates pass from one clean detached commit.",
             "External browser, GPU, device, deployment, security, privacy, accessibility, and legal gaps remain explicit.",
         ],
@@ -164,7 +166,7 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
 
 def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
     lines = [
-        "# SIP v1.1.0 Implementation Status — Progress 05",
+        "# SIP v1.1.0 Implementation Status — Progress 05-R1",
         "",
         MILESTONE_WORDING,
         "",
@@ -191,7 +193,7 @@ def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
         "",
         "## Release posture",
         "",
-        "Progress 05 is a source-bound development checkpoint. Production deployment and release remain NO-GO.",
+        "Progress 05-R1 is a source-bound narrow remediation checkpoint. Production deployment and release remain NO-GO.",
         "",
         "## External validation gaps",
         "",
@@ -202,9 +204,9 @@ def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
 
 def _render_resume(facts: dict[str, Any]) -> str:
     return "\n".join([
-        "# Resume Implementation — SIP v1.1.0 Progress 05",
+        "# Resume Implementation — SIP v1.1.0 Progress 05-R1",
         "",
-        "This continuation record is generated from `build/checkpoints/progress-05.json`.",
+        "This continuation record is generated from `build/checkpoints/progress-05-r1.json`.",
         "",
         f"- Branch: `{facts['branch']}`",
         f"- Commit: `{facts['commit']}`",
@@ -243,7 +245,7 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
         priorities.setdefault(str(item["priority"]), Counter())[str(item["implementation_status"])] += 1
     statuses = sorted({status for counter in priorities.values() for status in counter})
     lines = [
-        "# Requirements coverage report — Progress 05",
+        "# Requirements coverage report — Progress 05-R1",
         "",
         f"Checkpoint: `{facts['checkpoint_id']}`",
         f"Commit: `{facts['commit']}`",
@@ -270,7 +272,7 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
 def _require_acceptance(report: dict[str, Any], *, commit: str, source_root: str) -> None:
     source = report.get("source") if isinstance(report.get("source"), dict) else {}
     if report.get("checkpoint_id") != CHECKPOINT_ID or source.get("commit") != commit or source.get("source_tree_root_sha256") != source_root:
-        raise RuntimeError("checkpoint acceptance report is not bound to Progress 05 source")
+        raise RuntimeError("checkpoint acceptance report is not bound to Progress 05-R1 source")
     if report.get("status") not in {"passed_complete", "passed_with_external_gaps"}:
         raise RuntimeError("checkpoint acceptance gates did not pass")
     if int(report.get("required_failure_count", -1)) != 0:
@@ -306,20 +308,20 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
     if matrix.get("status") not in {"passed", "passed_complete"}:
         raise RuntimeError("Python matrix did not pass")
     python_tests = int(totals.get("tests", 0))
-    if python_tests < 220 or any(int(totals.get(key, 0)) for key in ("failures", "errors", "skipped")):
+    if python_tests < 230 or any(int(totals.get(key, 0)) for key in ("failures", "errors", "skipped")):
         raise RuntimeError("Python matrix does not satisfy the Progress 05 baseline")
     swift = _read_bound_report(evidence_root / "build/reports/swift-test-report.json", commit=commit, source_root=source_root, minimum_tests=13)
-    web = _read_bound_report(evidence_root / "build/reports/web-runtime-test-report.json", commit=commit, source_root=source_root, minimum_tests=12)
-    desktop = _read_bound_report(evidence_root / "build/reports/desktop-review-test-report.json", commit=commit, source_root=source_root, minimum_tests=15)
-    if int(web.get("source_invariant_checks", 0)) < 26:
+    web = _read_bound_report(evidence_root / "build/reports/web-runtime-test-report.json", commit=commit, source_root=source_root, minimum_tests=13)
+    desktop = _read_bound_report(evidence_root / "build/reports/desktop-review-test-report.json", commit=commit, source_root=source_root, minimum_tests=17)
+    if int(web.get("source_invariant_checks", 0)) < 32:
         raise RuntimeError("web source-invariant profile is incomplete")
     acceptance = _load_json(evidence_root / "build/reports/checkpoint-acceptance-gates.json")
     _require_acceptance(acceptance, commit=commit, source_root=source_root)
-    readiness = _load_json(evidence_root / "build/reports/release-readiness-progress-05.json")
+    readiness = _load_json(evidence_root / "build/reports/release-readiness-progress-05-r1.json")
     if readiness.get("status") != "blocked" or readiness.get("production_authorized") is not False:
         raise RuntimeError("production release posture is not fail-closed")
 
-    with tempfile.TemporaryDirectory(prefix="sip-progress-05-build-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="sip-progress-05-r1-build-") as temporary:
         stage = Path(temporary) / TOP_LEVEL
         stage.mkdir(parents=True)
         source_dir = stage / "source"
@@ -336,7 +338,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         artifacts_dir = stage / "artifacts"
         source_archive = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-{commit}.tar.gz"
         _gzip_git_archive(source_archive, prefix="Spatial-Intelligence-Platform-v1.1.0")
-        bundle = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-progress-05-{commit}.bundle"
+        bundle = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-{commit}.bundle"
         bundle.parent.mkdir(parents=True, exist_ok=True)
         _run("git", "bundle", "create", str(bundle), branch)
         complete_source_records = stage_records(source_dir, excluded=())
@@ -415,9 +417,9 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "authoritative_evidence_index": "build/evidence/AUTHORITATIVE_EVIDENCE_INDEX.json",
             "release_posture": "blocked",
         }
-        _write(stage / "build/checkpoints/progress-05.json", checkpoint_record)
+        _write(stage / "build/checkpoints/progress-05-r1.json", checkpoint_record)
         milestone = _milestone_scope(ledger=ledger, facts=facts)
-        _write(stage / "MILESTONE_SCOPE_PROGRESS_05.json", milestone)
+        _write(stage / "MILESTONE_SCOPE_PROGRESS_05_R1.json", milestone)
         (stage / "IMPLEMENTATION_STATUS.md").write_text(_render_status(facts, requirement_counts), encoding="utf-8")
         (stage / "RESUME_IMPLEMENTATION.md").write_text(_render_resume(facts), encoding="utf-8")
         coverage = stage / "requirements/coverage-report.md"
@@ -431,7 +433,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "branch": branch,
             "source_tree_root_sha256": source_root,
             "readiness": "blocked",
-            "checkpoint_record": "build/checkpoints/progress-05.json",
+            "checkpoint_record": "build/checkpoints/progress-05-r1.json",
             "production_authorized": False,
         }
         _write(stage / "build/release/latest.json", latest)
@@ -444,11 +446,11 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "web_tests": ["build/reports/web-runtime-test-report.json", "build/evidence/web-runtime-test.log", "build/reports/web-full-acceptance.json", "build/evidence/web-full-acceptance.log"],
             "desktop_tests": ["build/reports/desktop-review-test-report.json", "build/evidence/desktop-review-test.log"],
             "contracts": ["build/reports/tests/contract.xml", "build/reports/tests/contract.log", "build/evidence/gates/contracts.log"],
-            "migrations": ["build/reports/tests/migration.xml", "build/reports/tests/migration-direct.xml", "build/evidence/gates/migrations.log", "source/migrations/versions/0012_scene_runtime_review.py"],
+            "migrations": ["build/reports/tests/migration.xml", "build/reports/tests/migration-direct.xml", "build/evidence/gates/migrations.log", "source/migrations/versions/0012_scene_runtime_review.py", "source/migrations/versions/0013_scene_change_application_atomicity.py"],
             "infrastructure": ["build/reports/infrastructure-validation.json", "build/evidence/gates/infrastructure.log"],
             "security": ["build/reports/security-report.json", "build/reports/tests/security-direct.xml", "build/evidence/gates/security.log"],
             "licensing": ["build/reports/license-gate.json", "build/evidence/gates/license-check.log"],
-            "requirements": ["source/requirements/requirements-ledger.json", "source/requirements/implementation-map.json", "build/reports/spec-lint.json", "build/evidence/gates/traceability-evidence.log"],
+            "requirements": ["source/requirements/requirements-ledger.json", "source/requirements/implementation-map.json", "source/requirements/progress-05-traceability-audit.json", "build/reports/spec-lint.json", "build/evidence/gates/traceability-evidence.log"],
             "benchmarks": ["build/reports/benchmark-report.json", "build/evidence/gates/benchmark.log"],
             "demonstrations": [
                 "build/evidence/demos/foundation.json", "build/evidence/demos/hybrid.json", "build/evidence/demos/scene-runtime.json",
@@ -458,7 +460,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             ],
             "preservation_export": ["build/evidence/demos/export.json", "build/evidence/gates/export-demo.log"],
             "independent_restore": ["build/evidence/demos/restore.json", "build/evidence/gates/restore-demo.log"],
-            "release_readiness": ["build/reports/release-readiness-progress-05.json", "build/reports/checkpoint-acceptance-gates.json", "build/reports/release-report.json", "build/evidence/gates/web-acceptance.log", "build/evidence/gates/release.log", "build/evidence/gates/release-mode.log"],
+            "release_readiness": ["build/reports/release-readiness-progress-05-r1.json", "build/reports/checkpoint-acceptance-gates.json", "build/reports/release-report.json", "build/evidence/gates/web-acceptance.log", "build/evidence/gates/release.log", "build/evidence/gates/release-mode.log"],
         }
         statuses = {
             "python_matrix": "passed_complete",
@@ -519,7 +521,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         _write(stage / "build/evidence/AUTHORITATIVE_EVIDENCE_INDEX.json", index)
 
         report = "\n".join([
-            "# Progress 05 Implementation Report",
+            "# Progress 05-R1 Implementation Report",
             "",
             f"Checkpoint: `{CHECKPOINT_ID}`",
             f"Commit: `{commit}`",
@@ -528,7 +530,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "",
             MILESTONE_WORDING,
             "",
-            "The implementation includes durable viewer-session and temporal-comparison control planes, append-only migration 0012, authenticated APIs and events, a native hybrid renderer reference, a local-first desktop review application, and expanded security/privacy/property/accessibility controls.",
+            "The implementation includes durable viewer-session and temporal-comparison control planes, append-only migrations 0012 and 0013, authenticated APIs and events, a native hybrid renderer reference, a local-first desktop review application, and expanded security/privacy/property/accessibility controls.",
             "",
             f"Python matrix: {python_tests} passed, 0 failed, 0 errors, 0 skipped.",
             f"Swift Linux fixture profile: {facts['swift_tests_passed']} passed; physical Apple-platform acceptance remains external.",
@@ -538,21 +540,45 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "Production release remains blocked.",
         ]) + "\n"
         (stage / "FINAL_IMPLEMENTATION_REPORT.md").write_text(report, encoding="utf-8")
+        remediation = "\n".join([
+            "# Progress 05-R1 Remediation Report",
+            "",
+            f"Checkpoint: `{CHECKPOINT_ID}`",
+            f"Commit: `{commit}`",
+            f"Source root: `{source_root}`",
+            "",
+            "This narrow checkpoint closes the True North Progress 05 stop-line findings without beginning Progress 06.",
+            "",
+            "- Canonical layer state now drives metric, visual, interaction, design, and evidence visibility and opacity in the actual renderer.",
+            "- Hidden or unauthorized interaction geometry is not pickable; proxy-originated measurements still require metric re-resolution.",
+            "- PLTVIEW-007 is linked to a direct renderer-control integration test rather than the unrelated hybrid demonstration.",
+            "- All 30 Progress 05 milestone requirements have a deterministic semantic traceability audit; every linked Python test declares its mapped requirement ID.",
+            "- Desktop HTTP authorization occurs before exactly one response status; live socket tests prove denied requests never begin with 200.",
+            "- Accepted semantic changes update branch head, scene commit, event links, outbox, and audit in one transaction with a project-scoped idempotency guard.",
+            "- Three.js observers and pointer listeners are released by the React effect cleanup.",
+            "- Acceptance evidence separates command execution status from child control completeness and preserves external-gap semantics.",
+            "- Release-readiness and continuation records point to True North R1 review; production remains NO-GO.",
+            "",
+            f"Python matrix: {python_tests} passed, 0 failed, 0 errors, 0 skipped.",
+            "",
+            "Progress 06 remains unauthorized until True North closes Progress 05-R1.",
+        ]) + "\n"
+        (stage / "PROGRESS_05_R1_REMEDIATION_REPORT.md").write_text(remediation, encoding="utf-8")
         checkpoint_readme = "\n".join([
-            "# SIP v1.1.0 Progress 05 checkpoint",
+            "# SIP v1.1.0 Progress 05-R1 checkpoint",
             "",
             "The exact committed project is under `source/`. Post-commit evidence and packaging metadata are outside the canonical source namespace.",
             "",
             "Verify:",
             "",
             "```bash",
-            "python source/tools/verify_progress05_checkpoint.py Spatial-Intelligence-Platform-v1.1.0-progress-05.zip",
+            "python source/tools/verify_progress05_checkpoint.py Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip",
             "```",
             "",
             "Clone the included Git bundle:",
             "",
             "```bash",
-            f"git clone -b {branch} artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-{commit}.bundle <destination>",
+            f"git clone -b {branch} artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-{commit}.bundle <destination>",
             "```",
             "",
             "Production deployment and release remain NO-GO.",
@@ -580,7 +606,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-root", type=Path, required=True)
     parser.add_argument("--attestation", type=Path, required=True)
-    parser.add_argument("--branch", default="progress-05-scene-runtime")
+    parser.add_argument("--branch", default="progress-05-r1-remediation")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()

@@ -6,6 +6,7 @@ import math
 from typing import Any
 
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from .audit import AuditService
 from .canonical import canonical_sha256, new_uuid
@@ -205,157 +206,227 @@ class SceneService:
         valid_from: datetime | None = None,
         valid_to: datetime | None = None,
     ) -> dict[str, Any]:
-        change_evidence_ids = sorted(set(change_evidence_ids or []))
-        if valid_from and valid_to and valid_to <= valid_from:
-            raise ValidationError("SCENE_VALID_TIME_INVALID", "scene commit valid_to must be later than valid_from")
         with self.database.session() as session:
-            for evidence_id in change_evidence_ids:
-                evidence = session.get(EvidenceRecordRow, evidence_id)
-                if not evidence or evidence.tenant_id != tenant_id or evidence.project_id != project_id:
-                    raise NotFoundError("evidence", evidence_id)
-            branch_row = session.scalar(
-                select(SceneBranchRow).where(
-                    SceneBranchRow.tenant_id == tenant_id,
-                    SceneBranchRow.project_id == project_id,
-                    SceneBranchRow.scene_id == scene_id,
-                    SceneBranchRow.name == branch,
-                )
-            )
-            if not branch_row:
-                raise NotFoundError("scene_branch", branch)
-            if branch_row.head_commit_id != expected_head:
-                raise ConflictError(
-                    "SCENE_HEAD_CHANGED",
-                    "scene branch changed since the client read it",
-                    {"expected": expected_head, "actual": branch_row.head_commit_id},
-                )
-            entities = list(
-                session.scalars(
-                    select(SceneEntityRow).where(
-                        SceneEntityRow.tenant_id == tenant_id,
-                        SceneEntityRow.project_id == project_id,
-                        SceneEntityRow.scene_id == scene_id,
-                        SceneEntityRow.superseded_at.is_(None),
-                    )
-                )
-            )
-            bindings = list(
-                session.scalars(
-                    select(RepresentationBindingRow).where(
-                        RepresentationBindingRow.tenant_id == tenant_id,
-                        RepresentationBindingRow.project_id == project_id,
-                        RepresentationBindingRow.scene_id == scene_id,
-                        RepresentationBindingRow.superseded_at.is_(None),
-                    )
-                )
-            )
-            snapshot = {
-                "schema_version": "1.0.0",
-                "scene_id": scene_id,
-                "entities": [
-                    {
-                        "entity_id": item.entity_id,
-                        "entity_type": item.entity_type,
-                        "name": item.name,
-                        "attributes": item.attributes_json,
-                        "source_class": item.source_class,
-                        "authority_class": item.authority_class,
-                        "confidence": item.confidence,
-                        "provenance": item.provenance_json,
-                        "policy": item.policy_json,
-                        "stable_support": item.stable_support_json,
-                    }
-                    for item in sorted(entities, key=lambda value: value.entity_id)
-                ],
-                "representations": [
-                    {
-                        "binding_id": item.binding_id,
-                        "representation_id": item.representation_id,
-                        "role": item.role,
-                        "coordinate_frame_id": item.coordinate_frame_id,
-                        "transform": item.transform_json,
-                        "authority_class": item.authority_class,
-                        "authority_ceiling": item.authority_ceiling,
-                        "intended_uses": item.intended_uses_json,
-                        "audience_policy": item.audience_policy_json,
-                    }
-                    for item in sorted(bindings, key=lambda value: value.binding_id)
-                ],
-            }
-            commit_id = new_uuid()
-            snapshot_hash = canonical_sha256(snapshot)
-            row = SceneCommitRow(
-                commit_id=commit_id,
+            return self.commit_in_session(
+                session=session,
                 tenant_id=tenant_id,
                 project_id=project_id,
                 scene_id=scene_id,
                 branch=branch,
-                parent_ids_json=[expected_head],
+                expected_head=expected_head,
                 message=message,
-                semantic_snapshot_json=snapshot,
-                snapshot_hash=snapshot_hash,
-                root_manifest_hash=snapshot_hash,
+                actor_id=actor_id,
                 field_visit_id=field_visit_id,
                 workflow_event_id=workflow_event_id,
-                change_evidence_ids_json=change_evidence_ids,
-                policy_checks_json=policy_checks or {},
-                signatures_json=signatures or [],
+                change_evidence_ids=change_evidence_ids,
+                policy_checks=policy_checks,
+                signatures=signatures,
                 review_state=review_state,
                 valid_from=valid_from,
                 valid_to=valid_to,
-                recorded_at=db_now(),
-                created_by=actor_id,
             )
-            session.add(row)
-            branch_row.head_commit_id = commit_id
-            session.add(
-                self._events.create(
-                    session,
-                    event_type="scene.committed",
-                    schema_version="1.0.0",
-                    tenant_id=tenant_id,
-                    project_id=project_id,
-                    aggregate_type="scene_commit",
-                    aggregate_id=commit_id,
-                    payload={
-                        "scene_id": scene_id,
-                        "branch": branch,
-                        "snapshot_hash": snapshot_hash,
-                        "parent_count": 1,
-                        "review_state": review_state,
-                        "change_evidence_count": len(change_evidence_ids),
-                    },
-                    producer="scene-service",
-                    actor_id=actor_id,
-                    workload_identity=None,
-                    causation_id=workflow_event_id,
+
+    def commit_in_session(
+        self,
+        *,
+        session: Session,
+        tenant_id: str,
+        project_id: str,
+        scene_id: str,
+        branch: str,
+        expected_head: str,
+        message: str,
+        actor_id: str,
+        field_visit_id: str | None = None,
+        workflow_event_id: str | None = None,
+        change_evidence_ids: list[str] | None = None,
+        policy_checks: dict[str, Any] | None = None,
+        signatures: list[dict[str, Any]] | None = None,
+        review_state: str = "unreviewed",
+        valid_from: datetime | None = None,
+        valid_to: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Create a scene commit inside a caller-owned transaction.
+
+        The caller controls the transaction boundary so related workflow state can be
+        committed or rolled back atomically with the scene commit. A workflow event ID
+        is a project-scoped idempotency key and cannot be rebound to another scene.
+        """
+        change_evidence_ids = sorted(set(change_evidence_ids or []))
+        if valid_from and valid_to and valid_to <= valid_from:
+            raise ValidationError("SCENE_VALID_TIME_INVALID", "scene commit valid_to must be later than valid_from")
+
+        if workflow_event_id:
+            existing = session.scalar(
+                select(SceneCommitRow).where(
+                    SceneCommitRow.tenant_id == tenant_id,
+                    SceneCommitRow.project_id == project_id,
+                    SceneCommitRow.workflow_event_id == workflow_event_id,
                 )
             )
-            self.audit.append(
+            if existing is not None:
+                if existing.scene_id != scene_id or existing.branch != branch or existing.review_state != review_state:
+                    raise ConflictError(
+                        "SCENE_WORKFLOW_EVENT_REBOUND",
+                        "workflow event is already bound to a different scene commit scope",
+                    )
+                return self._commit_result(existing, idempotent_replay=True)
+
+        for evidence_id in change_evidence_ids:
+            evidence = session.get(EvidenceRecordRow, evidence_id)
+            if not evidence or evidence.tenant_id != tenant_id or evidence.project_id != project_id:
+                raise NotFoundError("evidence", evidence_id)
+        branch_row = session.scalar(
+            select(SceneBranchRow)
+            .where(
+                SceneBranchRow.tenant_id == tenant_id,
+                SceneBranchRow.project_id == project_id,
+                SceneBranchRow.scene_id == scene_id,
+                SceneBranchRow.name == branch,
+            )
+            .with_for_update()
+        )
+        if not branch_row:
+            raise NotFoundError("scene_branch", branch)
+        if branch_row.head_commit_id != expected_head:
+            raise ConflictError(
+                "SCENE_HEAD_CHANGED",
+                "scene branch changed since the client read it",
+                {"expected": expected_head, "actual": branch_row.head_commit_id},
+            )
+        entities = list(
+            session.scalars(
+                select(SceneEntityRow).where(
+                    SceneEntityRow.tenant_id == tenant_id,
+                    SceneEntityRow.project_id == project_id,
+                    SceneEntityRow.scene_id == scene_id,
+                    SceneEntityRow.superseded_at.is_(None),
+                )
+            )
+        )
+        bindings = list(
+            session.scalars(
+                select(RepresentationBindingRow).where(
+                    RepresentationBindingRow.tenant_id == tenant_id,
+                    RepresentationBindingRow.project_id == project_id,
+                    RepresentationBindingRow.scene_id == scene_id,
+                    RepresentationBindingRow.superseded_at.is_(None),
+                )
+            )
+        )
+        snapshot = {
+            "schema_version": "1.0.0",
+            "scene_id": scene_id,
+            "entities": [
+                {
+                    "entity_id": item.entity_id,
+                    "entity_type": item.entity_type,
+                    "name": item.name,
+                    "attributes": item.attributes_json,
+                    "source_class": item.source_class,
+                    "authority_class": item.authority_class,
+                    "confidence": item.confidence,
+                    "provenance": item.provenance_json,
+                    "policy": item.policy_json,
+                    "stable_support": item.stable_support_json,
+                }
+                for item in sorted(entities, key=lambda value: value.entity_id)
+            ],
+            "representations": [
+                {
+                    "binding_id": item.binding_id,
+                    "representation_id": item.representation_id,
+                    "role": item.role,
+                    "coordinate_frame_id": item.coordinate_frame_id,
+                    "transform": item.transform_json,
+                    "authority_class": item.authority_class,
+                    "authority_ceiling": item.authority_ceiling,
+                    "intended_uses": item.intended_uses_json,
+                    "audience_policy": item.audience_policy_json,
+                }
+                for item in sorted(bindings, key=lambda value: value.binding_id)
+            ],
+        }
+        commit_id = new_uuid()
+        snapshot_hash = canonical_sha256(snapshot)
+        row = SceneCommitRow(
+            commit_id=commit_id,
+            tenant_id=tenant_id,
+            project_id=project_id,
+            scene_id=scene_id,
+            branch=branch,
+            parent_ids_json=[expected_head],
+            message=message,
+            semantic_snapshot_json=snapshot,
+            snapshot_hash=snapshot_hash,
+            root_manifest_hash=snapshot_hash,
+            field_visit_id=field_visit_id,
+            workflow_event_id=workflow_event_id,
+            change_evidence_ids_json=change_evidence_ids,
+            policy_checks_json=policy_checks or {},
+            signatures_json=signatures or [],
+            review_state=review_state,
+            valid_from=valid_from,
+            valid_to=valid_to,
+            recorded_at=db_now(),
+            created_by=actor_id,
+        )
+        session.add(row)
+        branch_row.head_commit_id = commit_id
+        session.add(
+            self._events.create(
+                session,
+                event_type="scene.committed",
+                schema_version="1.0.0",
                 tenant_id=tenant_id,
                 project_id=project_id,
+                aggregate_type="scene_commit",
+                aggregate_id=commit_id,
+                payload={
+                    "scene_id": scene_id,
+                    "branch": branch,
+                    "snapshot_hash": snapshot_hash,
+                    "parent_count": 1,
+                    "review_state": review_state,
+                    "change_evidence_count": len(change_evidence_ids),
+                },
+                producer="scene-service",
                 actor_id=actor_id,
-                action="scene:commit",
-                resource_type="scene_commit",
-                resource_id=commit_id,
-                outcome="allowed",
-                details={"scene_id": scene_id, "branch": branch, "parent": expected_head, "snapshot_hash": row.snapshot_hash},
-                session=session,
+                workload_identity=None,
+                causation_id=workflow_event_id,
             )
-            return {
-                "commit_id": commit_id,
-                "snapshot_hash": row.snapshot_hash,
-                "root_manifest_hash": row.root_manifest_hash,
-                "parent_ids": [expected_head],
-                "branch": branch,
-                "field_visit_id": field_visit_id,
-                "workflow_event_id": workflow_event_id,
-                "change_evidence_ids": change_evidence_ids,
-                "review_state": review_state,
-                "valid_from": valid_from,
-                "valid_to": valid_to,
-                "recorded_at": row.recorded_at,
-            }
+        )
+        self.audit.append(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            actor_id=actor_id,
+            action="scene:commit",
+            resource_type="scene_commit",
+            resource_id=commit_id,
+            outcome="allowed",
+            details={"scene_id": scene_id, "branch": branch, "parent": expected_head, "snapshot_hash": row.snapshot_hash},
+            session=session,
+        )
+        session.flush()
+        return self._commit_result(row, idempotent_replay=False)
+
+    @staticmethod
+    def _commit_result(row: SceneCommitRow, *, idempotent_replay: bool) -> dict[str, Any]:
+        return {
+            "commit_id": row.commit_id,
+            "snapshot_hash": row.snapshot_hash,
+            "root_manifest_hash": row.root_manifest_hash,
+            "parent_ids": list(row.parent_ids_json),
+            "branch": row.branch,
+            "field_visit_id": row.field_visit_id,
+            "workflow_event_id": row.workflow_event_id,
+            "change_evidence_ids": list(row.change_evidence_ids_json),
+            "review_state": row.review_state,
+            "valid_from": row.valid_from,
+            "valid_to": row.valid_to,
+            "recorded_at": row.recorded_at,
+            "idempotent_replay": idempotent_replay,
+        }
 
     def create_branch(
         self,

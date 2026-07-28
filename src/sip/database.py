@@ -453,6 +453,15 @@ class SceneCommitRow(Base):
     created_by: Mapped[str] = mapped_column(String(128))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
     supersedes_commit_id: Mapped[str | None] = mapped_column(String(64))
+    __table_args__ = (
+        Index(
+            "uq_scene_commit_workflow_event",
+            "tenant_id",
+            "project_id",
+            "workflow_event_id",
+            unique=True,
+        ),
+    )
 
 
 class SceneBranchRow(Base):

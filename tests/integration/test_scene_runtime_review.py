@@ -6,10 +6,14 @@ import pytest
 from sqlalchemy import select
 
 from sip.database import (
+    AuditEventRow,
     ChangeCandidateRow,
     ChangeReviewRow,
     OutboxEventRow,
+    SceneBranchRow,
+    SceneCommitRow,
     SemanticChangeEventRow,
+    TemporalComparisonRow,
     ViewerSessionReplayRow,
 )
 from sip.errors import AuthorizationError, ConflictError, NotFoundError, ValidationError
@@ -129,7 +133,7 @@ def _session(context, principal: SignedPrincipal, project_id: str, scene_id: str
 
 @pytest.mark.integration
 def test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities(bootstrapped) -> None:
-    """REQ: PLTVIEW-001, PLTVIEW-003, PLTVIEW-005 saved viewer state is policy-bound and capability-free."""
+    """REQ: PLTVIEW-001, PLTVIEW-003, PLTVIEW-006 saved viewer state is reproducible, policy-bound, and capability-free."""
     context, tenant_id, project_id, actor = bootstrapped
     scene_id, first, second, entity_id = _scene_state(context, tenant_id, project_id, actor)
     principal = _principal(tenant_id, project_id, actor, ["tenant_admin"])
@@ -138,9 +142,27 @@ def test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_
     repeated = _session(context, principal, project_id, scene_id, [first, second], entity_id)
     assert repeated["session_id"] == created["session_id"]
     assert created["immutable"] is True
+    assert created["scene_commit_ids"] == [first, second]
+    assert created["camera"] == {"position": [1.0, 1.6, 2.0], "target": [0.0, 1.0, 0.0]}
+    assert created["navigation_mode"] == "walk"
+    assert [layer["role"] for layer in created["layers"]] == ["metric", "interaction"]
+    assert created["clipping_planes"] == [{"normal": [1.0, 0.0, 0.0], "constant": 0.0}]
+    assert created["section_box"] == {"min": [-5.0, 0.0, -5.0], "max": [5.0, 4.0, 5.0]}
+    assert created["selected_entity_ids"] == [entity_id]
+    assert created["timeline"] == {"position": "candidate"}
+    assert created["filters"] == {"systems": ["fire_alarm"]}
     assert created["redaction"]["server_enforced"] is True
     assert created["accessibility"] == {"reduced_motion": True, "high_contrast": True, "captions": True}
     assert "token" not in repr(created).lower()
+    fetched = context.scene_runtime.get_viewer_session(
+        tenant_id=tenant_id, project_id=project_id, session_id=created["session_id"]
+    )
+    for key in (
+        "scene_commit_ids", "camera", "navigation_mode", "layers", "clipping_planes",
+        "section_box", "selected_entity_ids", "timeline", "filters", "redaction", "accessibility",
+    ):
+        assert fetched[key] == created[key]
+    assert fetched["session_hash"] == created["session_hash"]
 
     replay = context.scene_runtime.replay_viewer_session(
         principal=principal,
@@ -189,7 +211,7 @@ def test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_
 
 @pytest.mark.integration
 def test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review(bootstrapped) -> None:
-    """REQ: RECCHANG-001, RECCHANG-002, RECCHANG-003, RECCHANG-004, DATGIT-004 comparisons preserve truth and require review."""
+    """REQ: RECCHANG-001, RECCHANG-002, RECCHANG-003, RECCHANG-004, RECCHANG-005, RECCHANG-006 comparisons preserve truth, review, controlled commits, and per-class metrics."""
     context, tenant_id, project_id, actor = bootstrapped
     scene_id, baseline, candidate_commit, entity_id = _scene_state(context, tenant_id, project_id, actor)
     evidence_id = _evidence(context, tenant_id, project_id, actor)
@@ -362,7 +384,7 @@ def test_temporal_change_review_suppresses_unobserved_removal_and_requires_indep
 @pytest.mark.security
 @pytest.mark.integration
 def test_scene_runtime_scope_is_fail_closed_across_tenants(context) -> None:
-    """REQ: TSTSEC-001, PLTVIEW-006 viewer and comparison records do not disclose cross-tenant existence."""
+    """REQ: TSTSEC-001 viewer and comparison records do not disclose cross-tenant existence."""
     tenant_one = context.tenancy.create_tenant("One", tenant_id="scene-runtime-one")
     tenant_two = context.tenancy.create_tenant("Two", tenant_id="scene-runtime-two")
     project_one = context.tenancy.create_project(tenant_one, "One", vertical="platform", classification="internal", project_id="scene-runtime-project-one", actor_id="admin")
@@ -375,3 +397,139 @@ def test_scene_runtime_scope_is_fail_closed_across_tenants(context) -> None:
             project_id=project_two,
             session_id=created["session_id"],
         )
+
+
+def _accepted_change_fixture(context, tenant_id: str, project_id: str, actor: str):
+    scene_id, baseline, candidate_commit, entity_id = _scene_state(context, tenant_id, project_id, actor)
+    evidence_id = _evidence(context, tenant_id, project_id, actor)
+    principal = _principal(tenant_id, project_id, actor, ["tenant_admin"])
+    viewer = _session(context, principal, project_id, scene_id, [baseline, candidate_commit], entity_id)
+    comparison = context.scene_runtime.create_temporal_comparison(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        scene_id=scene_id,
+        baseline_commit_id=baseline,
+        candidate_commit_id=candidate_commit,
+        viewer_session_id=viewer["session_id"],
+        comparable_region={"region_id": "room-101"},
+        registration_quality={"accepted": True, "overlap_fraction": 0.95, "rmse_m": 0.01},
+        thresholds={"distance_m": 0.05, "confidence": 0.8},
+        evidence_ids=[evidence_id],
+        algorithm_id="sip.synthetic.atomic-change",
+        algorithm_version="1.0.0",
+        executable_hash="1" * 64,
+        parameters_hash="2" * 64,
+        observed_coverage={"room-101": 0.95},
+        candidates=[{
+            "change_class": "moved",
+            "entity_id": entity_id,
+            "region": {"region_id": "room-101"},
+            "metrics": {"distance_m": 0.12, "confidence": 0.94},
+            "evidence_ids": [evidence_id],
+            "coverage_status": "observed",
+            "difference_causes": ["geometry"],
+        }],
+        idempotency_key="atomic-change-fixture",
+        actor_id=actor,
+    )
+    candidate = next(item for item in comparison["candidates"] if item["state"] == "active")
+    context.scene_runtime.review_change_candidate(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=comparison["comparison_id"],
+        candidate_id=candidate["candidate_id"],
+        reviewer_id="independent-atomic-reviewer",
+        outcome="accepted",
+        rationale="deterministic accepted change for atomicity verification",
+        evidence_ids=[evidence_id],
+        policy_snapshot_hash="3" * 64,
+        idempotency_key="atomic-change-review",
+    )
+    return comparison, candidate_commit
+
+
+@pytest.mark.integration
+def test_semantic_change_application_is_atomic_and_retry_is_idempotent(bootstrapped, monkeypatch) -> None:
+    """REQ: RECCHANG-005 accepted changes commit, link, audit, and publish atomically and idempotently."""
+    context, tenant_id, project_id, actor = bootstrapped
+    comparison, candidate_commit = _accepted_change_fixture(context, tenant_id, project_id, actor)
+    comparison_id = comparison["comparison_id"]
+    workflow_event_id = f"temporal-comparison:{comparison_id}"
+    original_create = context.scene_runtime._events.create
+
+    def fail_after_scene_commit(session, **kwargs):
+        if kwargs.get("event_type") == "scene.change.applied":
+            raise RuntimeError("injected failure after scene commit creation")
+        return original_create(session, **kwargs)
+
+    monkeypatch.setattr(context.scene_runtime._events, "create", fail_after_scene_commit)
+    with pytest.raises(RuntimeError, match="injected failure"):
+        context.scene_runtime.apply_accepted_changes(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            branch="main",
+            expected_head=candidate_commit,
+            message="Atomic application must roll back on failure",
+            actor_id="publisher",
+        )
+
+    with context.database.session() as db:
+        branch = db.scalar(
+            select(SceneBranchRow).where(
+                SceneBranchRow.tenant_id == tenant_id,
+                SceneBranchRow.project_id == project_id,
+                SceneBranchRow.scene_id == comparison["scene_id"],
+                SceneBranchRow.name == "main",
+            )
+        )
+        workflow_commit = db.scalar(
+            select(SceneCommitRow).where(
+                SceneCommitRow.tenant_id == tenant_id,
+                SceneCommitRow.project_id == project_id,
+                SceneCommitRow.workflow_event_id == workflow_event_id,
+            )
+        )
+        events = list(db.scalars(select(SemanticChangeEventRow).where(SemanticChangeEventRow.comparison_id == comparison_id)))
+        stored_comparison = db.get(TemporalComparisonRow, comparison_id)
+        applied_outbox = list(db.scalars(select(OutboxEventRow).where(OutboxEventRow.event_type == "scene.change.applied", OutboxEventRow.aggregate_id == comparison_id)))
+        applied_audit = list(db.scalars(select(AuditEventRow).where(AuditEventRow.action == "semantic_change:apply", AuditEventRow.project_id == project_id)))
+    assert branch is not None and branch.head_commit_id == candidate_commit
+    assert workflow_commit is None
+    assert events and all(event.applied_commit_id is None for event in events)
+    assert stored_comparison is not None and stored_comparison.state == "reviewed"
+    assert applied_outbox == []
+    assert applied_audit == []
+
+    monkeypatch.setattr(context.scene_runtime._events, "create", original_create)
+    applied = context.scene_runtime.apply_accepted_changes(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=comparison_id,
+        branch="main",
+        expected_head=candidate_commit,
+        message="Atomic application succeeds after retry",
+        actor_id="publisher",
+    )
+    replay = context.scene_runtime.apply_accepted_changes(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=comparison_id,
+        branch="main",
+        expected_head=candidate_commit,
+        message="Replay cannot create another commit",
+        actor_id="publisher",
+    )
+    assert replay["idempotent_replay"] is True
+    assert replay["commit_id"] == applied["commit_id"]
+    with context.database.session() as db:
+        commits = list(
+            db.scalars(
+                select(SceneCommitRow).where(
+                    SceneCommitRow.tenant_id == tenant_id,
+                    SceneCommitRow.project_id == project_id,
+                    SceneCommitRow.workflow_event_id == workflow_event_id,
+                )
+            )
+        )
+    assert len(commits) == 1

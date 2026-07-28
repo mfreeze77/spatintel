@@ -18,5 +18,15 @@
     "tree": "b31a615819f0a31ef820cd6864d229b1e7f3760d",
     "project_zip_sha256": "0d5a2584b412d05d8cff933d8170d6faa411a7cc6be095356995442517254079",
     "source_root_sha256": "248f762a3b9eef52503f69c0b19fb7067d77e5d447bc28787bef20e988655e28"
+  },
+  "accepted_progress_05_checkpoint": {
+    "checkpoint_id": "sip-v1.1.0-progress-05",
+    "branch": "progress-05-scene-runtime",
+    "commit": "a5c866999df88b32e53ecc87d6917320f2ffe5c8",
+    "tree": "35bf9f115514dc586d239d16a70fbe77171e6df4",
+    "project_zip_sha256": "87b7760b255da3c30d94e27673063dc540724b01ccafbccd552dae708d513f0e",
+    "outer_delivery_zip_sha256": "592bc4c1490a3b647a783b65d314f48cbcb17f08b0ec602450d1b030dcb19f80",
+    "source_root_sha256": "020673fa988c6d3f1a099d3a4fbb1c0d81cd4780362f666e6177f5d6ebda7531",
+    "relationship": "Progress 05-R1 is a narrow remediation descendant of this independently accepted Progress 05 development snapshot."
   }
 }

@@ -8,11 +8,39 @@ const warnings = {
 };
 const authority = { metric: "observed", visual: "generated", design: "derived_non_authoritative", interaction: "derived_non_authoritative", evidence: "authoritative" };
 export function defaultLayers() {
-  return REPRESENTATION_KINDS.map((kind) => ({ kind, visible: kind !== "design", opacity: kind === "visual" ? 0.82 : 1, authority: authority[kind], warning: warnings[kind] }));
+  return REPRESENTATION_KINDS.map((kind) => ({ kind, visible: kind !== "design", opacity: kind === "visual" ? 0.82 : 1, authorized: true, authority: authority[kind], warning: warnings[kind] }));
 }
 export function updateLayer(layers, kind, patch) {
   if (patch.opacity !== undefined && (!Number.isFinite(patch.opacity) || patch.opacity < 0 || patch.opacity > 1)) throw new RangeError("opacity must be between zero and one");
+  const current = layers.find((layer) => layer.kind === kind);
+  if (!current) throw new Error(`unknown representation layer: ${kind}`);
+  if (patch.visible === true && current.authorized !== true) throw new Error(`LAYER_AUTHORIZATION_DENIED:${kind}`);
   return layers.map((layer) => layer.kind === kind ? { ...layer, ...patch } : layer);
+}
+const BASE_RENDER_OPACITY = { metric: 0.42, visual: 0.58, design: 0.85, interaction: 0.03, evidence: 0.95 };
+const ROLE_LABELS = {
+  metric: "metric / observed evidence",
+  visual: "visual / generated reconstruction",
+  design: "design / intent only",
+  interaction: "interaction / disposable non-authoritative proxy",
+  evidence: "evidence / immutable source record"
+};
+export function buildLayerRenderDirectives(layers, comparisonSplit = 1) {
+  if (!Number.isFinite(comparisonSplit) || comparisonSplit < 0 || comparisonSplit > 1) throw new RangeError("comparison split must be between zero and one");
+  const byRole = new Map(layers.map((layer) => [layer.kind, layer]));
+  return REPRESENTATION_KINDS.map((role) => {
+    const layer = byRole.get(role);
+    if (!layer) throw new Error(`missing representation layer: ${role}`);
+    const comparisonOpacity = role === "visual" ? comparisonSplit : 1;
+    const opacity = BASE_RENDER_OPACITY[role] * layer.opacity * comparisonOpacity;
+    const visible = layer.authorized === true && layer.visible === true && opacity > 0;
+    return { role, visible, opacity, pickable: role === "interaction" && visible, authority: layer.authority, authorityLabel: ROLE_LABELS[role] };
+  });
+}
+export function layerDirective(directives, role) {
+  const directive = directives.find((item) => item.role === role);
+  if (!directive) throw new Error(`missing render directive: ${role}`);
+  return directive;
 }
 function distance(a, b) { return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]); }
 export function resolveProxyHit(hit, surfaces) {

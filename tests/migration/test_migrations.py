@@ -106,7 +106,7 @@ def test_clean_install_reaches_head_and_matches_canonical_tables(tmp_path: Path)
     expected = set(Base.metadata.tables)
     assert expected <= actual
     assert actual - expected == {"alembic_version"}
-    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0012_scene_runtime_review"
+    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0013_scene_change_application_atomicity"
 
 
 @pytest.mark.migration
@@ -184,8 +184,8 @@ def test_upgrade_reclassifies_legacy_interaction_representations_without_promoti
 @pytest.mark.migration
 def test_destructive_downgrade_is_denied_without_evidence_and_exactly_restores_prior_schema(tmp_path: Path) -> None:
     """REQ: DATDB-004 destructive rollback requires retained evidence and exactly restores the prior schema."""
-    expected_database = tmp_path / "expected-0011.sqlite3"
-    assert _alembic(expected_database, "upgrade", "0011_governed_hybrid_representation").returncode == 0
+    expected_database = tmp_path / "expected-0012.sqlite3"
+    assert _alembic(expected_database, "upgrade", "0012_scene_runtime_review").returncode == 0
     expected_schema = _sqlite_schema_snapshot(expected_database)
 
     database = tmp_path / "downgrade.sqlite3"
@@ -197,7 +197,7 @@ def test_destructive_downgrade_is_denied_without_evidence_and_exactly_restores_p
     missing_evidence = _alembic(
         database,
         "downgrade",
-        "0011_governed_hybrid_representation",
+        "0012_scene_runtime_review",
         extra_env={"SIP_ALLOW_DESTRUCTIVE_DOWNGRADE": "1"},
     )
     assert missing_evidence.returncode != 0
@@ -208,22 +208,22 @@ def test_destructive_downgrade_is_denied_without_evidence_and_exactly_restores_p
         "SIP_VERIFIED_BACKUP_REFERENCE": "sha256:" + "1" * 64,
         "SIP_DOWNGRADE_DRY_RUN_REFERENCE": "sha256:" + "2" * 64,
         "SIP_DOWNGRADE_AUDIT_REFERENCE": "sha256:" + "3" * 64,
-        "SIP_DOWNGRADE_REHEARSAL_ID": "rehearsal:0012-to-0011",
+        "SIP_DOWNGRADE_REHEARSAL_ID": "rehearsal:0013-to-0012",
     }
     rehearsed = _alembic(
         database,
         "downgrade",
-        "0011_governed_hybrid_representation",
+        "0012_scene_runtime_review",
         extra_env=evidence,
     )
     assert rehearsed.returncode == 0, rehearsed.stdout + rehearsed.stderr
     connection = sqlite3.connect(database)
-    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0011_governed_hybrid_representation"
+    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0012_scene_runtime_review"
     connection.close()
     assert _sqlite_schema_snapshot(database) == expected_schema
 
     # Earlier migrations remain reversible only in this same explicitly evidenced,
-    # isolated rehearsal; this confirms the 0012, 0011, and 0010 gates do not corrupt the chain.
+    # isolated rehearsal; this confirms the 0013 through 0010 gates do not corrupt the chain.
     to_base = _alembic(database, "downgrade", "base", extra_env=evidence)
     assert to_base.returncode == 0, to_base.stdout + to_base.stderr
 
@@ -240,4 +240,4 @@ def test_append_only_migration_manifest_matches_bytes() -> None:
         assert len(payload) == item["byte_count"]
         assert hashlib.sha256(payload).hexdigest() == item["sha256"]
         revisions.append(path.stem.split("_", 1)[0])
-    assert revisions == ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010", "0011", "0012"]
+    assert revisions == ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010", "0011", "0012", "0013"]

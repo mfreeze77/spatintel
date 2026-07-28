@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 from pathlib import Path
+import socket
+import threading
 
 import pytest
 
@@ -15,7 +18,7 @@ def _project(tmp_path: Path, name: str = "review") -> ReviewProject:
 
 
 def test_desktop_project_is_local_first_and_content_addressed(tmp_path: Path) -> None:
-    """REQ: PLTDESK-001 local review opens immutable content-addressed inputs without cloud authentication."""
+    """REQ: PLTDESK-001 local review opens immutable content-addressed inputs with stable provenance."""
     project = _project(tmp_path)
     assert project.manifest["author_id"] == "reviewer-a"
     assert project.manifest["base_commit_id"] == "commit-base"
@@ -33,7 +36,7 @@ def test_desktop_observations_synchronize_rgb_depth_trajectory_and_geometry(tmp_
 
 
 def test_desktop_supports_all_correspondence_types(tmp_path: Path) -> None:
-    """REQ: PLTDESK-002 point, line, plane, semantic, and image-to-scene correspondence tools are durable."""
+    """REQ: PLTDESK-001 point, line, plane, semantic, and image-to-scene correspondence tools are durable."""
     project = _project(tmp_path)
     for kind in ("point", "line", "plane", "semantic", "image_to_scene"):
         project.add_correspondence(correspondence_type=kind, source={"id": f"source-{kind}"}, target={"id": f"target-{kind}"}, uncertainty={"sigma_m": 0.01}, author_id="reviewer-a")
@@ -42,7 +45,7 @@ def test_desktop_supports_all_correspondence_types(tmp_path: Path) -> None:
 
 
 def test_desktop_undo_and_redo_append_history_instead_of_rewriting(tmp_path: Path) -> None:
-    """REQ: PLTDESK-002 undo/redo retain provenance and do not delete prior actions."""
+    """REQ: PLTDESK-001 undo/redo retain provenance and do not delete prior actions."""
     project = _project(tmp_path)
     action = project.add_correspondence(correspondence_type="point", source={"p": [0, 0]}, target={"p": [0, 0, 0]}, uncertainty={"sigma_m": 0.01}, author_id="a")
     project.undo(action["action_hash"], author_id="a", reason="controlled correction")
@@ -60,7 +63,7 @@ def test_desktop_branch_history_preserves_base_commit_identity(tmp_path: Path) -
 
 
 def test_desktop_records_factor_residuals_and_loop_constraints(tmp_path: Path) -> None:
-    """REQ: PLTDESK-004 review exposes factor residuals and robust loop constraints."""
+    """REQ: PLTDESK-002 review exposes factor residuals and robust loop constraints."""
     project = _project(tmp_path)
     residual = project.record_factor_residual(factor_id="factor-1", residual=0.02, units="meter", threshold=0.05, author_id="a")
     loop = project.record_loop_constraint(from_frame="f1", to_frame="f2", transform=[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]], switch_weight=0.8, author_id="a")
@@ -69,12 +72,30 @@ def test_desktop_records_factor_residuals_and_loop_constraints(tmp_path: Path) -
 
 
 def test_desktop_records_source_weights_and_regional_uncertainty(tmp_path: Path) -> None:
-    """REQ: PLTDESK-004 review exposes source weights and region uncertainty without hiding limitations."""
+    """REQ: PLTDESK-002 review exposes source weights and region uncertainty without hiding limitations."""
     project = _project(tmp_path)
     project.record_source_weight(source_id="lidar", weight=0.9, rationale="field observation", author_id="a")
     project.record_regional_uncertainty(region={"room_id": "101"}, sigma_m=0.04, basis="depth confidence", author_id="a")
     diagnostics = json.loads((project.root / "snapshot.json").read_text())["state"]["diagnostics"]
     assert {item["type"] for item in diagnostics} == {"source_weight.recorded", "regional_uncertainty.recorded"}
+
+
+def test_desktop_authorized_local_project_requires_no_cloud_login(tmp_path: Path) -> None:
+    """REQ: PLTDESK-004 authorized local-only projects open and operate without a cloud identity or login token."""
+    project = _project(tmp_path)
+    assert "cloud" not in project.manifest
+    assert "token" not in repr(project.manifest).lower()
+    reopened = ReviewProject.open(project.root)
+    action = reopened.add_observation(
+        stream="rgb",
+        timestamp_ns=42,
+        asset_sha256="f" * 64,
+        coordinate_frame_id="local-frame",
+        metadata={"mode": "offline"},
+        author_id="local-reviewer",
+    )
+    assert action["author_id"] == "local-reviewer"
+    assert reopened.verify_integrity()["status"] == "passed"
 
 
 def test_desktop_atomic_bundle_detects_input_tampering(tmp_path: Path) -> None:
@@ -154,3 +175,58 @@ def test_desktop_reopen_is_deterministic_and_crash_safe(tmp_path: Path) -> None:
     before = project.verify_integrity(); reopened = ReviewProject.open(project.root); after = reopened.verify_integrity()
     assert before == after
     assert reopened.manifest["manifest_hash"] == project.manifest["manifest_hash"]
+
+
+def _load_desktop_server_module():
+    path = Path(__file__).resolve().parents[2] / "apps" / "desktop-review" / "server.py"
+    spec = importlib.util.spec_from_file_location("sip_desktop_review_server", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _raw_http_response(host: str, port: int, request: bytes) -> bytes:
+    with socket.create_connection((host, port), timeout=5) as connection:
+        connection.sendall(request)
+        connection.shutdown(socket.SHUT_WR)
+        chunks: list[bytes] = []
+        while True:
+            chunk = connection.recv(65536)
+            if not chunk:
+                return b"".join(chunks)
+            chunks.append(chunk)
+
+
+def test_desktop_live_http_authorizes_before_emitting_exactly_one_status(tmp_path: Path) -> None:
+    """REQ: TSTSEC-001 live desktop HTTP denial emits one 403 and never begins a 200 response."""
+    module = _load_desktop_server_module()
+    server = module.create_server(_project(tmp_path), host="127.0.0.1", port=0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        host, port = server.server_address[:2]
+        denied = _raw_http_response(
+            str(host),
+            int(port),
+            b"GET /api/project HTTP/1.1\r\nHost: evil.example\r\nConnection: close\r\n\r\n",
+        )
+        status_lines = [line for line in denied.split(b"\r\n") if line.startswith(b"HTTP/")]
+        assert len(status_lines) == 1
+        assert b" 403 " in status_lines[0]
+        assert b" 200 " not in denied
+        assert b"DESKTOP_HOST_DENIED" in denied
+
+        allowed = _raw_http_response(
+            str(host),
+            int(port),
+            f"GET /api/project HTTP/1.1\r\nHost: {host}:{port}\r\nConnection: close\r\n\r\n".encode("ascii"),
+        )
+        allowed_status_lines = [line for line in allowed.split(b"\r\n") if line.startswith(b"HTTP/")]
+        assert len(allowed_status_lines) == 1
+        assert b" 200 " in allowed_status_lines[0]
+        assert b'"status":"passed"' in allowed
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)

@@ -1,0 +1,798 @@
+{
+  "audited_requirements": [
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATDB-004",
+            "DELDOD-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATDB-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/migration/test_migrations.py::test_destructive_downgrade_is_denied_without_evidence_and_exactly_restores_prior_schema"
+        }
+      ],
+      "requirement_id": "DATDB-004",
+      "semantic_rationale": "clean install and exact rollback rehearsal are local; production-sized rehearsal remains external",
+      "status": "EXTERNAL_VALIDATION_REQUIRED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATANCH-001",
+            "DATANCH-002",
+            "DATEVID-001",
+            "DATFRAME-001",
+            "DATGEOM-001",
+            "DATGIT-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_spatial_truth_api.py::test_spatial_truth_and_twin_contracts_are_authenticated_and_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATGIT-001",
+            "DATGIT-003",
+            "DATGIT-004",
+            "DATTWIN-001",
+            "DATTWIN-002",
+            "DATTWIN-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge"
+        }
+      ],
+      "requirement_id": "DATGIT-003",
+      "semantic_rationale": "protected merge tests reject automatic merge of authoritative conflict classes",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATGIT-001",
+            "DATGIT-003",
+            "DATGIT-004",
+            "DATTWIN-001",
+            "DATTWIN-002",
+            "DATTWIN-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge"
+        }
+      ],
+      "requirement_id": "DATGIT-004",
+      "semantic_rationale": "spatial Git tests exercise immutable tags and temporal milestone identity",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATDB-004",
+            "DELDOD-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+        }
+      ],
+      "requirement_id": "DELDOD-002",
+      "semantic_rationale": "migration compatibility and local rollback are tested; every generated-client/deployment profile is broader",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 4,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_observations_synchronize_rgb_depth_trajectory_and_geometry"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_project_is_local_first_and_content_addressed"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_supports_all_correspondence_types"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_undo_and_redo_append_history_instead_of_rewriting"
+        }
+      ],
+      "requirement_id": "PLTDESK-001",
+      "semantic_rationale": "local project tests exercise synchronized observations, all correspondence types, undo, and provenance",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_records_factor_residuals_and_loop_constraints"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_records_source_weights_and_regional_uncertainty"
+        }
+      ],
+      "requirement_id": "PLTDESK-002",
+      "semantic_rationale": "tests exercise factor residuals, loop constraints, source weights, and regional uncertainty",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_branch_history_preserves_base_commit_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_offline_merge_preserves_conflicts"
+        }
+      ],
+      "requirement_id": "PLTDESK-003",
+      "semantic_rationale": "branch and merge tests preserve local author, base commit, and conflicts",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_authorized_local_project_requires_no_cloud_login"
+        }
+      ],
+      "requirement_id": "PLTDESK-004",
+      "semantic_rationale": "authorized project opens and mutates locally without cloud identity or login token",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 4,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_action_chain_detects_tampering"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_atomic_bundle_detects_input_tampering"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_lock_has_explicit_owner"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_reopen_is_deterministic_and_crash_safe"
+        }
+      ],
+      "requirement_id": "PLTDESK-005",
+      "semantic_rationale": "atomic bundle, tamper, lock, and reopen tests cover deterministic crash safety; actual GPU-process crash validation remains external",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_export_denies_authoritative_publish_and_bad_license"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTDESK-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_export_is_proposal_only_and_policy_gated"
+        }
+      ],
+      "requirement_id": "PLTDESK-006",
+      "semantic_rationale": "proposal export tests enforce policy, license, and non-authoritative publication gates",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "RECCHANG-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "PLTVIEW-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+        }
+      ],
+      "requirement_id": "PLTVIEW-001",
+      "semantic_rationale": "saved viewer state covers navigation and comparison controls; full browser/device navigation acceptance remains external",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-002",
+      "semantic_rationale": "bounded production streaming and device frame budgets are not implemented in this checkpoint",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "PLTVIEW-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+        }
+      ],
+      "requirement_id": "PLTVIEW-003",
+      "semantic_rationale": "selection and policy-bound session state are covered; every related panel is not browser-acceptance verified",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-004",
+      "semantic_rationale": "persistent label and evidence-view requirement remains NOT_STARTED in the ledger",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_web_viewer_runtime.py::test_pltview_005_accessibility_controls_and_semantic_fallback_are_executable"
+        }
+      ],
+      "requirement_id": "PLTVIEW-005",
+      "semantic_rationale": "browser-independent runtime and source tests execute keyboard, semantic fallback, captions, reduced motion, and contrast controls",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "PLTVIEW-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_policy_bound_viewer_session_is_immutable_replayable_and_never_persists_capabilities"
+        }
+      ],
+      "requirement_id": "PLTVIEW-006",
+      "semantic_rationale": "round-trip session test compares saved commit, camera, layers, filters, redaction, and accessibility state",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-007"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
+        }
+      ],
+      "requirement_id": "PLTVIEW-007",
+      "semantic_rationale": "control-driven renderer directives prove independent visibility, opacity, labeling, evidence role, and proxy pickability",
+      "status": "VERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-008",
+      "semantic_rationale": "stable semantic proxy picking remains outside the included verified scope",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-009",
+      "semantic_rationale": "proxy-started measurement UI acceptance remains outside the included verified scope",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-010",
+      "semantic_rationale": "independent diagnostic tooling remains outside this checkpoint",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-011",
+      "semantic_rationale": "supported-device graceful-degradation budgets remain outside this checkpoint",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "PLTVIEW-012",
+      "semantic_rationale": "complete non-splat fallback acceptance remains outside this checkpoint",
+      "status": "NOT_STARTED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "RECCHANG-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_scene_runtime_api.py::test_scene_runtime_openapi_and_authenticated_viewer_session_contract"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-001",
+      "semantic_rationale": "comparison tests assert commits, region, registration, thresholds, evidence, and algorithm identity",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-002",
+      "semantic_rationale": "comparison tests assert nuisance-cause suppression",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-003",
+      "semantic_rationale": "comparison tests prove unobserved removal is suppressed",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-001",
+            "PLTVIEW-003",
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_scene_runtime_review_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-004",
+      "semantic_rationale": "review tests bind synchronized viewer state and source evidence, but independent browser usability remains external",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_semantic_change_application_is_atomic_and_retry_is_idempotent"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-005",
+      "semantic_rationale": "failure injection proves semantic event application and controlled scene commit are atomic and idempotent",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-001",
+            "RECCHANG-002",
+            "RECCHANG-003",
+            "RECCHANG-004",
+            "RECCHANG-005",
+            "RECCHANG-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review"
+        }
+      ],
+      "requirement_id": "RECCHANG-006",
+      "semantic_rationale": "benchmark tests retain precision, recall, localization error, and false-action rate by class",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 7,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwritten"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-002",
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_audit_artifact_has_no_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements"
+        }
+      ],
+      "requirement_id": "TSTGATE-003",
+      "semantic_rationale": "release admission and control-status propagation fail closed while many production gates remain open",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        }
+      ],
+      "requirement_id": "TSTSEC-001",
+      "semantic_rationale": "cross-tenant and live local-HTTP discovery denials are tested; the normative attack surface is broader",
+      "status": "IMPLEMENTED_UNVERIFIED"
+    }
+  ],
+  "finding_count": 0,
+  "findings": [],
+  "milestone": "Progress 05-R1",
+  "production_authorized": false,
+  "schema": "sip.progress-05-traceability-audit/v1",
+  "scope_requirement_count": 30,
+  "status": "passed_complete"
+}

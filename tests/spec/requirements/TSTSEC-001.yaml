@@ -16,6 +16,7 @@ implementation_files:
 - tests/fixtures
 automated_test_ids:
 - tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe
+- tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status
 - tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants
 retained_evidence:
 - build/reports/test-matrix.json

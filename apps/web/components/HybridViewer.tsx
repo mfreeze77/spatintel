@@ -51,7 +51,7 @@ export function HybridViewer(): React.ReactNode {
       <div className="viewer-grid">
         <LayerControls layers={layers} onToggle={(kind, visible) => patchLayer(kind, { visible })} onOpacity={(kind, opacity) => patchLayer(kind, { opacity })} />
         <div className="viewport" tabIndex={0} role="application" aria-label="Hybrid spatial scene. Arrow keys or W A S D navigate; Home restores the saved view; the semantic scene tree remains available.">
-          <HybridCanvas reducedMotion={reducedMotion} highContrast={highContrast} clippingEnabled={clippingEnabled} comparisonSplit={0.72} onSemanticPick={(entityId) => { inspectProxy(); setMessage(`Interaction proxy selected ${entityId}. Metric re-resolution is required before measurement.`); }} />
+          <HybridCanvas layers={layers} reducedMotion={reducedMotion} highContrast={highContrast} clippingEnabled={clippingEnabled} comparisonSplit={0.72} onSemanticPick={(entityId) => { inspectProxy(); setMessage(`Interaction proxy selected ${entityId}. Metric re-resolution is required before measurement.`); }} />
           <div className="truth-overlay" aria-label="Persistent truth labels">
             <AuthorityBadge authority="observed" confidence={0.91} />
             <AuthorityBadge authority="generated" />

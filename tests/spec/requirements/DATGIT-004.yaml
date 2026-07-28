@@ -15,7 +15,6 @@ implementation_files:
 - src/sip/database.py
 - migrations/versions/0010_spatial_truth_and_twin_controls.py
 automated_test_ids:
-- tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review
 - tests/integration/test_spatial_truth_twin.py::test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge
 retained_evidence:
 - build/reports/test-matrix.json
