@@ -120,3 +120,29 @@ def test_generated_post_commit_evidence_does_not_dirty_source_worktree(tmp_path:
         text=True,
     )
     assert "src/example.py" in dirty.stdout
+
+
+def test_canonical_source_identity_matches_git_archive_mode_semantics(tmp_path: Path) -> None:
+    """CONTROL: linked-worktree metadata and host ACL bits cannot alter portable source identity."""
+    import os
+
+    project = tmp_path / "project"
+    (project / "governance").mkdir(parents=True)
+    shutil.copy2(ROOT / "governance/source-root-policy.json", project / "governance/source-root-policy.json")
+    (project / "src").mkdir()
+    source = project / "src/example.py"
+    source.write_text("VALUE = 1\n", encoding="utf-8")
+    os.chmod(source, 0o644)
+    baseline = source_tree_root(project)
+
+    # A linked Git worktree stores its administrative pointer as a .git file.
+    (project / ".git").write_text("gitdir: /outside/worktree\n", encoding="utf-8")
+    assert source_tree_root(project) == baseline
+
+    # Shared-volume ACLs may add group-write without changing Git's file mode.
+    os.chmod(source, 0o664)
+    assert source_tree_root(project) == baseline
+
+    # Git's executable bit remains source-significant.
+    os.chmod(source, 0o775)
+    assert source_tree_root(project) != baseline

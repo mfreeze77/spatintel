@@ -52,8 +52,13 @@ def load_policy(root: Path, policy_path: Path | None = None) -> dict[str, object
 
 
 def is_source_path(relative: str, *, policy: Mapping[str, object]) -> bool:
-    normalized = relative.replace("\\", "/").lstrip("./")
+    normalized = relative.replace("\\", "/")
+    while normalized.startswith("./"):
+        normalized = normalized[2:]
     if not normalized or normalized.startswith("/"):
+        return False
+    parts = Path(normalized).parts
+    if any(part in {"", ".", ".."} for part in parts):
         return False
     excluded_paths = set(str(item) for item in policy["excluded_paths"])
     if normalized in excluded_paths:
@@ -62,7 +67,6 @@ def is_source_path(relative: str, *, policy: Mapping[str, object]) -> bool:
     if any(normalized == prefix.rstrip("/") or normalized.startswith(prefix) for prefix in prefixes):
         return False
     excluded_names = set(str(item) for item in policy["excluded_directory_names"])
-    parts = Path(normalized).parts
     return not any(part in excluded_names for part in parts)
 
 
@@ -87,11 +91,14 @@ def source_file_records(root: Path, *, policy: Mapping[str, object] | None = Non
     loaded = dict(policy or load_policy(root))
     records: list[SourceFileRecord] = []
     for path in iter_source_files(root, policy=loaded):
-        mode = stat.S_IMODE(path.stat().st_mode)
+        filesystem_mode = stat.S_IMODE(path.stat().st_mode)
+        # Canonicalize to Git's portable regular-file modes. Host umasks, default
+        # ACLs, and shared-volume group-write bits must not change source identity.
+        mode = "0755" if filesystem_mode & 0o111 else "0644"
         records.append(
             SourceFileRecord(
                 path=path.relative_to(root).as_posix(),
-                mode=f"{mode:04o}",
+                mode=mode,
                 bytes=path.stat().st_size,
                 sha256=sha256_file(path),
             )

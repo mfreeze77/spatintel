@@ -1,6 +1,6 @@
 {
   "schema": "sip.source-root-policy/v1",
-  "algorithm": "sha256(canonical-json(sorted file records: path, mode, bytes, sha256))",
+  "algorithm": "sha256(canonical-json(sorted file records: path, normalized-git-mode, bytes, sha256))",
   "description": "Canonical executable/source identity. Generated evidence, checkpoint packaging metadata, dependency caches, and runtime outputs are excluded; Git tree identity binds the complete committed tree.",
   "excluded_directory_names": [
     ".git",
