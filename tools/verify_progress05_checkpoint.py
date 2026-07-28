@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import tempfile
 import sys
 import zipfile
@@ -94,6 +95,45 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
     for actual, expected, label in checks:
         if actual != expected:
             verification.fail("PREDECESSOR_MAPPING_MISMATCH", f"{label} differs", relative)
+
+
+def _verify_renderer_remediation(root: Path, verification: Verification) -> None:
+    """Verify renderer controls by behavior-bearing expressions, not local variable names."""
+
+    viewer_relative = "source/apps/web/components/HybridViewer.tsx"
+    canvas_relative = "source/apps/web/components/HybridCanvas.tsx"
+    runtime_relative = "source/apps/web/lib/spatial-runtime.ts"
+    viewer = root / viewer_relative
+    canvas = root / canvas_relative
+    runtime = root / runtime_relative
+    viewer_text = viewer.read_text(encoding="utf-8") if viewer.is_file() else ""
+    canvas_text = canvas.read_text(encoding="utf-8") if canvas.is_file() else ""
+    runtime_text = runtime.read_text(encoding="utf-8") if runtime.is_file() else ""
+
+    if "layers={layers}" not in viewer_text:
+        verification.fail("LAYER_STATE_NOT_CONNECTED", "canonical layer state is not passed to HybridCanvas", viewer_relative)
+
+    for role in ("metric", "visual", "interaction", "design", "evidence"):
+        if f'layerDirective(directives, "{role}")' not in canvas_text:
+            verification.fail(
+                "HYBRID_CANVAS_ROLE_CONTROL",
+                f"actual renderer does not consume the canonical {role} layer directive",
+                canvas_relative,
+            )
+    if 'role: "evidence"' not in canvas_text or "applyDirective(evidence" not in canvas_text:
+        verification.fail("HYBRID_CANVAS_EVIDENCE_CONTROL", "evidence geometry is not governed by a layer directive", canvas_relative)
+    if "interactionDirective.pickable" not in canvas_text or "interaction.visible !== true" not in canvas_text:
+        verification.fail("HYBRID_CANVAS_PICK_CONTROL", "hidden or non-pickable interaction geometry is not rejected", canvas_relative)
+    if re.search(r"\b[A-Za-z_$][A-Za-z0-9_$]*\?\.disconnect\(\)", canvas_text) is None:
+        verification.fail("HYBRID_CANVAS_CLEANUP", "ResizeObserver cleanup is missing", canvas_relative)
+    if 'removeEventListener("pointerdown"' not in canvas_text:
+        verification.fail("HYBRID_CANVAS_CLEANUP", "pointer listener cleanup is missing", canvas_relative)
+    if (
+        "buildLayerRenderDirectives" not in runtime_text
+        or '"metric", "visual", "design", "interaction", "evidence"' not in runtime_text
+        or 'evidence: "evidence / immutable source record"' not in runtime_text
+    ):
+        verification.fail("HYBRID_RUNTIME_R1_CONTROL", "renderer directives do not include the evidence role", runtime_relative)
 
 
 def _verify_status_and_evidence(root: Path, verification: Verification, source_record: dict[str, Any] | None) -> None:
@@ -248,18 +288,7 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
         if pltview.get("implementation_status") != "VERIFIED" or direct_test not in pltview.get("test_ids", []):
             verification.fail("PLTVIEW_007_TRACEABILITY", "PLTVIEW-007 verified status is not bound to the direct renderer test", "source/requirements/implementation-map.json")
 
-    viewer = root / "source/apps/web/components/HybridViewer.tsx"
-    canvas = root / "source/apps/web/components/HybridCanvas.tsx"
-    runtime = root / "source/apps/web/lib/spatial-runtime.ts"
-    if not viewer.is_file() or "layers={layers}" not in viewer.read_text(encoding="utf-8"):
-        verification.fail("LAYER_STATE_NOT_CONNECTED", "canonical layer state is not passed to HybridCanvas", "source/apps/web/components/HybridViewer.tsx")
-    canvas_text = canvas.read_text(encoding="utf-8") if canvas.is_file() else ""
-    runtime_text = runtime.read_text(encoding="utf-8") if runtime.is_file() else ""
-    for fragment in ("evidenceDirective", "interactionDirective.pickable", "resizeObserver?.disconnect()", "removeEventListener"):
-        if fragment not in canvas_text:
-            verification.fail("HYBRID_CANVAS_R1_CONTROL", f"missing renderer remediation control: {fragment}", "source/apps/web/components/HybridCanvas.tsx")
-    if "buildLayerRenderDirectives" not in runtime_text or "evidence" not in runtime_text:
-        verification.fail("HYBRID_RUNTIME_R1_CONTROL", "renderer directives do not include the evidence role", "source/apps/web/lib/spatial-runtime.ts")
+    _verify_renderer_remediation(root, verification)
 
     migration = root / "source/migrations/versions/0013_scene_change_application_atomicity.py"
     if not migration.is_file() or "uq_scene_commit_workflow_event" not in migration.read_text(encoding="utf-8"):

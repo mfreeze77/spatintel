@@ -10,7 +10,8 @@ from pathlib import Path
 from tools.build_progress05_checkpoint import CHECKPOINT_ID, TOP_LEVEL, _render_coverage
 from tools.checkpoint_common import FIXED_ZIP_TIME
 from tools.verify_delivery_envelope import verify as verify_delivery
-from tools.verify_progress05_checkpoint import verify_archive
+from tools.verify_checkpoint import Verification
+from tools.verify_progress05_checkpoint import _verify_renderer_remediation, verify_archive
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -140,3 +141,33 @@ def test_progress05_generated_coverage_states_production_no_go() -> None:
     )
     assert "Production" in rendered
     assert "NO-GO" in rendered
+
+
+def test_progress05_renderer_verifier_accepts_behavior_and_rejects_evidence_or_cleanup_tamper(tmp_path: Path) -> None:
+    """CONTROL: the R1 verifier checks renderer behavior without depending on local variable names."""
+    for relative in (
+        "apps/web/components/HybridViewer.tsx",
+        "apps/web/components/HybridCanvas.tsx",
+        "apps/web/lib/spatial-runtime.ts",
+    ):
+        source = ROOT / relative
+        destination = tmp_path / "source" / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(source.read_bytes())
+
+    valid = Verification(tmp_path / "valid.zip")
+    _verify_renderer_remediation(tmp_path, valid)
+    assert valid.findings == []
+
+    canvas = tmp_path / "source/apps/web/components/HybridCanvas.tsx"
+    original = canvas.read_text(encoding="utf-8")
+    canvas.write_text(
+        original.replace('layerDirective(directives, "evidence")', 'layerDirective(directives, "design")')
+        .replace("observer?.disconnect();", "// observer cleanup removed"),
+        encoding="utf-8",
+    )
+    tampered = Verification(tmp_path / "tampered.zip")
+    _verify_renderer_remediation(tmp_path, tampered)
+    codes = {finding.code for finding in tampered.findings}
+    assert "HYBRID_CANVAS_ROLE_CONTROL" in codes
+    assert "HYBRID_CANVAS_CLEANUP" in codes
