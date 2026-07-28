@@ -107,7 +107,21 @@ def _json_from_transcript(transcript: str) -> dict[str, Any] | None:
     try:
         value = json.loads(stripped)
     except json.JSONDecodeError:
-        return None
+        # Make echoes its command before the command's JSON payload. Decode the
+        # final complete JSON object without treating arbitrary braces in earlier
+        # log lines as trusted control evidence.
+        decoder = json.JSONDecoder()
+        candidates: list[dict[str, Any]] = []
+        for index, character in enumerate(stripped):
+            if character != "{":
+                continue
+            try:
+                candidate, end = decoder.raw_decode(stripped[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(candidate, dict) and not stripped[index + end :].strip():
+                candidates.append(candidate)
+        return candidates[-1] if candidates else None
     return value if isinstance(value, dict) else None
 
 
@@ -157,7 +171,13 @@ def _control_evidence(target: str, *, transcript: str, exit_code: int) -> dict[s
     return result
 
 
-def _snapshot_child_report(target: str, evidence: dict[str, Any], *, log_root: Path) -> dict[str, Any]:
+def _snapshot_child_report(
+    target: str,
+    evidence: dict[str, Any],
+    *,
+    log_root: Path,
+    transcript: str,
+) -> dict[str, Any]:
     """Freeze the exact child report used for this command's control decision.
 
     Some targets intentionally write the same conventional report path (notably
@@ -167,17 +187,27 @@ def _snapshot_child_report(target: str, evidence: dict[str, Any], *, log_root: P
     """
 
     relative = evidence.get("child_report_path")
-    if not isinstance(relative, str):
-        return evidence
-    source = ROOT / relative
-    if not source.is_file():
-        return evidence
-    payload = source.read_bytes()
+    payload: bytes | None = None
+    source_path: str | None = None
+    if isinstance(relative, str):
+        source = ROOT / relative
+        if source.is_file():
+            payload = source.read_bytes()
+            source_path = relative
+    if payload is None:
+        child = _json_from_transcript(transcript)
+        if child is None or evidence.get("child_declared_status") is None:
+            return evidence
+        retained = dict(child)
+        retained["control_status"] = evidence["control_status"]
+        retained["acceptance_target"] = target
+        payload = (json.dumps(retained, indent=2, sort_keys=True) + "\n").encode("utf-8")
     snapshot = log_root / f"{target}.control.json"
     snapshot.parent.mkdir(parents=True, exist_ok=True)
     snapshot.write_bytes(payload)
     updated = dict(evidence)
-    updated["child_report_source_path"] = relative
+    if source_path is not None:
+        updated["child_report_source_path"] = source_path
     updated["child_report_path"] = snapshot.relative_to(ROOT).as_posix()
     updated["child_report_sha256"] = hashlib.sha256(payload).hexdigest()
     return updated
@@ -200,6 +230,7 @@ def _run_target(target: str, *, env: dict[str, str], log_root: Path) -> dict[str
         target,
         _control_evidence(target, transcript=transcript, exit_code=completed.returncode),
         log_root=log_root,
+        transcript=transcript,
     )
     return {
         "target": target,

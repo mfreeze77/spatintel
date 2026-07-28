@@ -5352,6 +5352,7 @@
       "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness",

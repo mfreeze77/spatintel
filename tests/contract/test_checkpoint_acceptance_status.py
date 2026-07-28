@@ -15,6 +15,27 @@ def test_acceptance_relative_output_is_rooted_in_repository(tmp_path, monkeypatc
     assert resolved.relative_to(tmp_path).as_posix() == "build/reports/checkpoint-acceptance-gates.json"
 
 
+def test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot(tmp_path, monkeypatch) -> None:
+    """REQ: TSTGATE-003 Make command echoing cannot erase environment-doctor external gaps."""
+    monkeypatch.setattr(acceptance, "ROOT", tmp_path)
+    transcript = (
+        "PYTHONPATH=/repo/src python -m sip.cli doctor\n"
+        '{"profiles":{"python":true,"node":false},"gpu":{"status":"unavailable"}}\n'
+    )
+    evidence = acceptance._control_evidence("doctor", transcript=transcript, exit_code=0)
+    assert evidence["execution_status"] == "completed_successfully"
+    assert evidence["control_status"] == "passed_with_external_gaps"
+    retained = acceptance._snapshot_child_report(
+        "doctor",
+        evidence,
+        log_root=tmp_path / "build/evidence/gates",
+        transcript=transcript,
+    )
+    payload = json.loads((tmp_path / retained["child_report_path"]).read_text())
+    assert payload["control_status"] == "passed_with_external_gaps"
+    assert payload["profiles"]["node"] is False
+
+
 def test_acceptance_separates_command_execution_from_child_control_completeness(tmp_path, monkeypatch) -> None:
     """REQ: TSTGATE-003 successful command execution cannot erase declared external control gaps."""
     monkeypatch.setattr(acceptance, "ROOT", tmp_path)
@@ -65,6 +86,7 @@ def test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwrit
         "release",
         acceptance._control_evidence("release", transcript="", exit_code=0),
         log_root=log_root,
+        transcript="",
     )
 
     second_payload = b'{"status":"blocked","target":"release-mode"}\n'
@@ -73,6 +95,7 @@ def test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwrit
         "release-mode",
         acceptance._control_evidence("release-mode", transcript="", exit_code=0),
         log_root=log_root,
+        transcript="",
     )
 
     first_path = tmp_path / first["child_report_path"]

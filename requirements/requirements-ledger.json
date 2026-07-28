@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-28T19:55:14.138229+00:00",
+  "generated_at": "2026-07-28T20:02:00.548501+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -67929,6 +67929,7 @@
       "source_title": "Release Gates and Promotion Evidence",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness",

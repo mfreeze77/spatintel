@@ -689,8 +689,16 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "partial",
-      "linked_test_count": 8,
+      "linked_test_count": 9,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot"
+        },
         {
           "declared_requirement_ids": [
             "TSTGATE-003"

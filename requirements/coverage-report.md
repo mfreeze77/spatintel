@@ -1,6 +1,6 @@
 # Requirements coverage report
 
-Generated: `2026-07-28T19:55:14.138229+00:00`
+Generated: `2026-07-28T20:02:00.548501+00:00`
 
 Total normative requirements: **1,028**
 
