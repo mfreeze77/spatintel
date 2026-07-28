@@ -28,12 +28,10 @@ build/reports/tests/.*.next.*
 build/locks/
 # Generated checkpoint evidence is post-commit and never authoritative source.
 build/checkpoints/
-build/evidence/
-build/reports/
+build/evidence/*
+build/reports/*
 build/release/
-# Keep the documented post-commit evidence namespace present in clean source archives.
-!build/evidence/
-!build/evidence/.gitkeep
 build/generated/
-!build/reports/
+# Keep only the documented empty evidence namespaces in clean source archives.
+!build/evidence/.gitkeep
 !build/reports/.gitkeep

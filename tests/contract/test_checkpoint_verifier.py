@@ -79,3 +79,44 @@ def test_checkpoint_verifier_rejects_content_manifest_tamper(tmp_path: Path) -> 
     codes = {item["code"] for item in report["findings"]}
     assert "MANIFEST_HASH_MISMATCH" in codes
     assert "CONTENT_ROOT_MISMATCH" in codes
+
+
+def test_generated_post_commit_evidence_does_not_dirty_source_worktree(tmp_path: Path) -> None:
+    """CONTROL: retained evidence is ignored while actual source edits remain visible to Git."""
+    import subprocess
+
+    project = tmp_path / "project"
+    project.mkdir()
+    subprocess.run(["git", "init", "-q", "-b", "main"], cwd=project, check=True)
+    subprocess.run(["git", "config", "user.email", "sip-tests@example.invalid"], cwd=project, check=True)
+    subprocess.run(["git", "config", "user.name", "SIP Test"], cwd=project, check=True)
+    shutil.copy2(ROOT / ".gitignore", project / ".gitignore")
+    (project / "build/evidence").mkdir(parents=True)
+    (project / "build/reports").mkdir(parents=True)
+    (project / "build/evidence/.gitkeep").write_text("", encoding="utf-8")
+    (project / "build/reports/.gitkeep").write_text("", encoding="utf-8")
+    (project / "src").mkdir()
+    (project / "src/example.py").write_text("VALUE = 1\n", encoding="utf-8")
+    subprocess.run(["git", "add", "."], cwd=project, check=True)
+    subprocess.run(["git", "commit", "-qm", "baseline"], cwd=project, check=True)
+
+    (project / "build/evidence/source-test-attestation.json").write_text("{}\n", encoding="utf-8")
+    (project / "build/reports/test-matrix.json").write_text("{}\n", encoding="utf-8")
+    clean = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=project,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert clean.stdout == ""
+
+    (project / "src/example.py").write_text("VALUE = 2\n", encoding="utf-8")
+    dirty = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=project,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert "src/example.py" in dirty.stdout
