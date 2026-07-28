@@ -1,0 +1,68 @@
+{
+  "checkpoint": "progress-04",
+  "created_at": "2026-07-28T00:42:13.904782+00:00",
+  "external_validation_remaining": [
+    "Xcode/iOS simulator and physical LiDAR-device acceptance",
+    "approved LingBot-Map checkpoint and GPU execution",
+    "Docker/Kubernetes/Terraform executable deployment in an environment where those tools exist",
+    "credentialed cloud backup/PITR/disaster-recovery rehearsal",
+    "independent penetration, privacy, legal, and accessibility reviews"
+  ],
+  "note": "This is a verified progress checkpoint, not a production release or full-spec completion claim.",
+  "platform_gates": [
+    "doctor",
+    "contracts",
+    "spec-check",
+    "lint",
+    "typecheck",
+    "security",
+    "license-check",
+    "infrastructure",
+    "swift-test",
+    "web-test",
+    "benchmark",
+    "demo-foundation",
+    "demo-hybrid",
+    "demo-construction",
+    "demo-liveforever",
+    "export-demo",
+    "restore-demo"
+  ],
+  "python_test_matrix": {
+    "status": "passed",
+    "suite_source_roots": [
+      "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346"
+    ],
+    "totals": {
+      "elapsed_seconds": 135.720437,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 197
+    }
+  },
+  "release_complete": false,
+  "repository": {
+    "base_commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+    "branch": "sip-authoritative",
+    "dirty": true,
+    "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346"
+  },
+  "requirements": {
+    "mapped": 226,
+    "status_counts": {
+      "EXTERNAL_VALIDATION_REQUIRED": 3,
+      "IMPLEMENTED_UNVERIFIED": 110,
+      "IN_PROGRESS": 22,
+      "NOT_STARTED": 802,
+      "VERIFIED": 91
+    }
+  },
+  "schema": "sip.progress-checkpoint/v1",
+  "specification": {
+    "archive": "spec/source/Spatial-Intelligence-Platform-Spec-v1.1.zip",
+    "markdown_files": 164,
+    "requirements": 1028,
+    "sha256": "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8"
+  }
+}

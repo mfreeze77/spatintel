@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIP Portable Evidence Viewer</title>
+<style>
+body{font:16px system-ui;margin:0;background:#101318;color:#eef2f7}header,main{padding:1rem}fieldset{border:1px solid #596273;margin:.75rem 0}button,label{margin:.35rem}pre{white-space:pre-wrap;background:#171c24;padding:1rem;border-radius:.4rem}.warning{background:#4b2f00;padding:.75rem;border-left:4px solid #ffb347}canvas{width:100%;height:320px;background:#080a0d;border:1px solid #596273}
+</style>
+<header><h1>Spatial Intelligence Platform — Portable Viewer</h1><p class="warning">Visual and interaction layers are not authoritative measurements. Verify against eligible metric evidence.</p></header>
+<main><fieldset><legend>Representation layers</legend><div id="layers"></div></fieldset><canvas id="canvas" width="960" height="320" aria-label="Synthetic spatial layer overview"></canvas><h2>Evidence and authority</h2><pre id="evidence"></pre></main>
+<script type="application/json" id="session">{&quot;commit_id&quot;: &quot;d571220d-8ff0-4281-a269-9ce7322dbf94&quot;, &quot;evidence&quot;: {&quot;capture_asset_id&quot;: &quot;a0d52409-b291-4ec4-87e3-6f9fdf6b7b19&quot;, &quot;capture_root_hash&quot;: &quot;3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119&quot;, &quot;entity_id&quot;: &quot;aebeae59-23a9-4521-903b-60d8317003b0&quot;, &quot;warning&quot;: &quot;Synthetic reference data; not survey-grade.&quot;}, &quot;layers&quot;: [{&quot;asset_id&quot;: &quot;0ce5f186-f3c3-44a1-9825-78893a481f38&quot;, &quot;authority&quot;: &quot;metric&quot;, &quot;kind&quot;: &quot;metric&quot;, &quot;role&quot;: &quot;measurement&quot;, &quot;visible&quot;: true}], &quot;scene_id&quot;: &quot;44defbf8-7835-4b8b-8446-0ea567dc3460&quot;, &quot;schema&quot;: &quot;sip.portable-viewer-session/v1&quot;}</script>
+<script>
+const data=JSON.parse(document.getElementById('session').textContent);const layers=document.getElementById('layers');const evidence=document.getElementById('evidence');const canvas=document.getElementById('canvas');const ctx=canvas.getContext('2d');
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);let i=0;for(const layer of data.layers||[]){const box=document.getElementById('layer-'+i);if(box&&box.checked){ctx.strokeStyle=['#7dd3fc','#f9a8d4','#fde68a','#86efac','#c4b5fd'][i%5];ctx.lineWidth=3;ctx.strokeRect(70+i*95,50+i*18,520-i*40,200-i*22);ctx.fillStyle=ctx.strokeStyle;ctx.fillText(layer.kind+' / '+layer.authority,80+i*95,75+i*18);}i++;}}
+(data.layers||[]).forEach((layer,i)=>{const label=document.createElement('label');const box=document.createElement('input');box.type='checkbox';box.checked=true;box.id='layer-'+i;box.addEventListener('change',draw);label.append(box,document.createTextNode(' '+layer.kind+' — '+layer.role+' — '+layer.authority));layers.append(label,document.createElement('br'));});evidence.textContent=JSON.stringify(data.evidence||{},null,2);draw();
+</script>
+</html>

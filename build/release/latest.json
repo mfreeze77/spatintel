@@ -1,0 +1,7 @@
+{
+  "candidate_id": "sip-v1.1.0-8af0aafa0425-819809c5401d",
+  "path": "build/release/sip-v1.1.0-8af0aafa0425-819809c5401d",
+  "readiness": "blocked",
+  "record_sha256": "efdb6740c72fc7711ae38f47e036c560bbb96a03639c168b3a07166d177f0143",
+  "schema": "sip.release-latest/v1"
+}

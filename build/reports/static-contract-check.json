@@ -1,0 +1,22 @@
+{
+  "failures": [],
+  "openapi_paths": 40,
+  "python": "3.13.5",
+  "service_boundaries": [
+    "audit-service",
+    "capture-service",
+    "control-api",
+    "evidence-service",
+    "export-service",
+    "identity-policy",
+    "notification-service",
+    "provider-registry",
+    "representation-api",
+    "representation-publisher",
+    "scene-service",
+    "search-service",
+    "workflow-service"
+  ],
+  "status": "passed",
+  "typescript": "passed"
+}

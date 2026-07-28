@@ -1,0 +1,25 @@
+schema_version: '1.0'
+requirement_id: CONHYB-015
+priority: P1
+source:
+  document: 70-construction/714_hybrid_representation_construction.md
+  line: 195
+  section: 14. Normative requirements
+requirement: A proxy alignment failure beyond the purpose threshold shall disable affected selection, collision, navigation,
+  or metric snapping and create a review task.
+verification_method: Fault-injection test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-CONHYB-015
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

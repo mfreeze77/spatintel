@@ -1,0 +1,8 @@
+* @sip-maintainers
+/spec/ @sip-governance
+/requirements/ @sip-governance
+/apps/ios-capture/ @sip-mobile
+/src/sip/security.py @sip-security
+/src/sip/policy.py @sip-security
+/src/sip/liveforever.py @sip-privacy
+/infrastructure/ @sip-platform

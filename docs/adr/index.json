@@ -1,0 +1,113 @@
+{
+  "adrs": [
+    {
+      "id": "ADR-0001",
+      "path": "docs/adr/ADR-0001-authority-separated-representations.md",
+      "requirement_ids": [
+        "ARCHHYB-001",
+        "ARCHHYB-006",
+        "ARCHHYB-014",
+        "DATHYB-004",
+        "RECHYB-002",
+        "CONMEAS-001"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0001: Separate metric, visual, interaction, design, and evidence authority"
+    },
+    {
+      "id": "ADR-0002",
+      "path": "docs/adr/ADR-0002-signed-worker-leases-and-candidate-publication.md",
+      "requirement_ids": [
+        "PLTGRPC-001",
+        "PLTGRPC-004",
+        "PLTSDK-003",
+        "HYBAPI-003",
+        "HYBAPI-004",
+        "REPOHYB-001",
+        "REPOHYB-003"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0002: Signed worker leases and candidate-only completion"
+    },
+    {
+      "id": "ADR-0003",
+      "path": "docs/adr/ADR-0003-provider-and-model-deny-by-default.md",
+      "requirement_ids": [
+        "GOVLIC-001",
+        "GOVLIC-004",
+        "GOVLIC-008",
+        "PLTMODEL-002",
+        "RECLING-004",
+        "REPOHYB-006"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0003: Deny providers and models by default"
+    },
+    {
+      "id": "ADR-0004",
+      "path": "docs/adr/ADR-0004-local-object-store-and-cache.md",
+      "requirement_ids": [
+        "ARCDEP-001",
+        "ARCDEP-004",
+        "DATOBJ-001",
+        "GOVLIC-008",
+        "ARCADR-002"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0004: Local object-store fixture and queue/cache selection"
+    },
+    {
+      "id": "ADR-0005",
+      "path": "docs/adr/ADR-0005-open-preservation-and-independent-restore.md",
+      "requirement_ids": [
+        "DATEXP-001",
+        "DATEXP-004",
+        "OPSBKP-004",
+        "ARCADR-002",
+        "GOVPRIN-005"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0005: Open preservation export and independent restore"
+    },
+    {
+      "id": "ADR-0006",
+      "path": "docs/adr/ADR-0006-transactional-outbox-event-envelope.md",
+      "requirement_ids": [
+        "ARCEVT-001",
+        "ARCEVT-002",
+        "ARCEVT-003",
+        "ARCEVT-005",
+        "HYBAPI-005",
+        "HYBAPI-007"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0006: Transactional outbox and complete event envelopes"
+    },
+    {
+      "id": "ADR-0007",
+      "path": "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md",
+      "requirement_ids": [
+        "APPFAIL-001",
+        "APPFAIL-002",
+        "APPFAIL-003",
+        "APPFAIL-004",
+        "APPFAIL-005",
+        "APPFAIL-006",
+        "APPFAIL-007",
+        "APPFAIL-008",
+        "APPFAIL-009",
+        "APPFAIL-010"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0007: Versioned failure catalog and new-lineage recovery"
+    }
+  ],
+  "required_sections": [
+    "Context",
+    "Decision",
+    "Consequences",
+    "Traceability"
+  ],
+  "schema": "sip.adr-index/v1",
+  "version": "1.1.0"
+}

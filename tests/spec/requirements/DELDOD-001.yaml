@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: DELDOD-001
+priority: P0
+source:
+  document: 95-testing-delivery/960_definition_of_done.md
+  line: 36
+  section: 4. Normative requirements
+requirement: A completed feature shall satisfy linked requirements and acceptance tests, include typed contracts, errors,
+  audit, metrics, authorization, retention, and user documentation.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- docs/developer
+- docs/operator
+- docs/user
+- docs/release
+- src/sip/errors.py
+- src/sip/audit.py
+automated_test_ids:
+- tests/contract/test_documentation.py::test_required_documentation_and_readme_links_exist
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

@@ -1,0 +1,5 @@
+SIP sharded pytest suite: spec
+
+=== tests/spec/test_requirements_controls.py status=passed exit_code=0 elapsed=1.635005s ===
+.                                                                        [100%]
+1 passed in 0.05s

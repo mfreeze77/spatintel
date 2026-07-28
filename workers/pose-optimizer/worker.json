@@ -1,0 +1,22 @@
+{
+  "audited": true,
+  "cancellable": true,
+  "capabilities": [
+    "pose.optimize",
+    "pose.anomaly.detect"
+  ],
+  "checkpointed": true,
+  "durable": true,
+  "entrypoint": "workers/pose-optimizer/main.py",
+  "execution_manifest": "workers/pose-optimizer/worker-manifest.json",
+  "governance": "local_approved_reference",
+  "idempotent": true,
+  "input_contract": "operation.input@v1",
+  "least_privilege": true,
+  "manifest_sha256": "bdecca304b8eccc663ad4db2159f8d2259860f41f608ef35015661916d081738",
+  "name": "pose-optimizer",
+  "output_contract": "operation.output@v1",
+  "production_placeholders": false,
+  "schema": "sip.worker-manifest/v1",
+  "version": "1.1.0"
+}

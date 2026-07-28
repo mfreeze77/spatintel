@@ -1,0 +1,10 @@
+{
+  "findings": [],
+  "limitations": [
+    "Static source scan only; production release also requires dependency vulnerability and container-image scanning in CI.",
+    "No external vulnerability database was reachable in this execution environment."
+  ],
+  "permission_findings": [],
+  "scanned_root": "/mnt/data/spatial-intelligence-platform-v1.1.0",
+  "status": "passed"
+}

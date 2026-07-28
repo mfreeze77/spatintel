@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: DELDOD-002
+priority: P0
+source:
+  document: 95-testing-delivery/960_definition_of_done.md
+  line: 37
+  section: 4. Normative requirements
+requirement: A completed schema change shall include compatibility, migration, rollback/recovery, fixtures, and generated
+  clients.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- docs/developer
+- docs/operator
+- docs/user
+- docs/release
+- src/sip/errors.py
+- src/sip/audit.py
+automated_test_ids:
+- tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/migration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

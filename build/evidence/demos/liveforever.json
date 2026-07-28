@@ -1,0 +1,428 @@
+{
+  "artifacts": [
+    {
+      "bytes": 672,
+      "path": "editions/after-revocation.json",
+      "sha256": "9fe116c3a90b2581037d8c492ee6747034dbd21d0e45837586cebdba9e10d610"
+    },
+    {
+      "bytes": 4310,
+      "path": "editions/family-before.json",
+      "sha256": "154c2b712b52bf5dbb5f10d423d893243be7654012652e7aa21b9c724a3dfa9e"
+    },
+    {
+      "bytes": 4994,
+      "path": "editions/private-before.json",
+      "sha256": "04a4da77c4cc6779cc16fce4a212469e162a77aa83f721936e3dd503655587f9"
+    },
+    {
+      "bytes": 648,
+      "path": "editions/public-before.json",
+      "sha256": "9507f6ec3ebe10a6c4cd23941d5c9f78e423feef4d3725dee8174438876fefdb"
+    },
+    {
+      "bytes": 11103,
+      "path": "preservation.sip-preservation.zip",
+      "sha256": "317fd85b7770bc63d76711e9e242f84ca41c5a954231908b2e0436e1bb60bf63"
+    },
+    {
+      "bytes": 64,
+      "path": "restore-runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.enc",
+      "sha256": "c936036cf2fcc1462836a7bd2e0c9a726e132dc40eae2fc896da14d51523eec8"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.meta.json",
+      "sha256": "258070239758572111835308bb22c2d97103f165d27ec5475dcc2312f10cf8af"
+    },
+    {
+      "bytes": 11119,
+      "path": "restore-runtime/objects/31/7f/317fd85b7770bc63d76711e9e242f84ca41c5a954231908b2e0436e1bb60bf63.enc",
+      "sha256": "c59b9c71b5c0a27c5d7df2adc3b6be522f5c29c9d8dadd77f1c2018cfd66b575"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/31/7f/317fd85b7770bc63d76711e9e242f84ca41c5a954231908b2e0436e1bb60bf63.meta.json",
+      "sha256": "67226cb302f086c177bbdca7643ad8c795fc5deed4509edb7d29aec80a213356"
+    },
+    {
+      "bytes": 61,
+      "path": "restore-runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.enc",
+      "sha256": "a35f8e7726bfc527cce502881825b633f922480bd6f1b884f1c7addaa2ae89bc"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.meta.json",
+      "sha256": "9b9bd4436a2f822adad4ee8ffd2c9b26726ed3ed54a972693507df32fa09bbda"
+    },
+    {
+      "bytes": 76,
+      "path": "restore-runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.enc",
+      "sha256": "6bafa4a2a154eb9b6f26a81e91bba0960fe7332142d33d0c281b43a33951aacd"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.meta.json",
+      "sha256": "dfd763ac6908dc7e964494da9f804dda42e3f92b3c1449c18aaabc892bbebdaa"
+    },
+    {
+      "bytes": 43,
+      "path": "restore-runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.enc",
+      "sha256": "ddff77deab1b346cf9731ad4faacaffcdc0cccc9023aafdc77ecf43544681389"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.meta.json",
+      "sha256": "458b6e60d9547c3b5b92d3ef25ea2d0bf84e46a1ad6df7ec92bed9239e850de6"
+    },
+    {
+      "bytes": 63,
+      "path": "restore-runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.enc",
+      "sha256": "2ca6f1063dd274d77a5864cc6ee987b0d5ef5d1681e798f3af1089e488d6a553"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.meta.json",
+      "sha256": "b472f1a238981a9beac74ccefce063f5bf395e55af10fdb6504f213f85168a63"
+    },
+    {
+      "bytes": 57,
+      "path": "restore-runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.enc",
+      "sha256": "80554b07e7a0cc6c2972e0dcfe4ed74fb121c27cb4861f8836dfa1ecbe3ac09a"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.meta.json",
+      "sha256": "18e3552ddcbf257124046bb711008a62746666f429de3d6d8b94eb36aad49067"
+    },
+    {
+      "bytes": 51,
+      "path": "restore-runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.enc",
+      "sha256": "a695e1036a1c8c4e1e1a1c34d8ea54a470a628ae7c26f5ebbbe21150c24c7423"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.meta.json",
+      "sha256": "15a59921cc77f21eff0cd111f287f573d6ce437d1b226548158c841c5a171158"
+    },
+    {
+      "bytes": 1634304,
+      "path": "restore-runtime/sip.sqlite3",
+      "sha256": "9129a6de7c88e554002b3f87f46a075de330c6278a75ac4bcb84475b1eae9c04"
+    },
+    {
+      "bytes": 64,
+      "path": "runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.enc",
+      "sha256": "ae12f138360e5cdd12245017be148edbe5c698d9ce3fd09a692b5fe5713a0e30"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.meta.json",
+      "sha256": "22d76729f2c3f5bc117b3a9b4ffb84fc3b05e074c04f5dd9e2b239c04a288074"
+    },
+    {
+      "bytes": 61,
+      "path": "runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.enc",
+      "sha256": "1859458e5a2ed93814cd700f111df524355c789435ecb9e4dc6939c1ceb090bf"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.meta.json",
+      "sha256": "e8b67abc5bd17cb4aa80ebb2d808673000da0908770988e83dae4e6c713ed12e"
+    },
+    {
+      "bytes": 76,
+      "path": "runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.enc",
+      "sha256": "ebdf9d13ab1999f12a54a000e2da9c530a207dd7a74cdc3380c533ffa94646ed"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.meta.json",
+      "sha256": "79013fb0855d508e3ea863edbdda0e5b209aae194f8dc7cfbb8554073631057e"
+    },
+    {
+      "bytes": 43,
+      "path": "runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.enc",
+      "sha256": "de39f4543c1421a9bd12b45f35a72351b27fcb467426f97db9848484999d8e43"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.meta.json",
+      "sha256": "7a8a81ba1641ac2678aeaac60b9c48517ddb374c29563af12eeb2cf63246d9d4"
+    },
+    {
+      "bytes": 63,
+      "path": "runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.enc",
+      "sha256": "fb63d62bbbe2c50da995593522c85cf5cfc4bde9f4a94f8cc33ae5a0cc57078b"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.meta.json",
+      "sha256": "98079edbd4d91c74a919cc800e15bd19a74a96e323361873160f47f73bdcd07f"
+    },
+    {
+      "bytes": 57,
+      "path": "runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.enc",
+      "sha256": "a657b7fddf11cf43d5980049a90e2429c2c737fad68698e852dcf8ea531023d9"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.meta.json",
+      "sha256": "5199067cf3f9ca80d6335c827e198500259bc8122558560747d4d723510cb61c"
+    },
+    {
+      "bytes": 51,
+      "path": "runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.enc",
+      "sha256": "5268e05ff082bdfe79aecc7e2b45ed623a3ac7e51aabc2a2f16a465ef27a251e"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.meta.json",
+      "sha256": "07698a7c6fecf60469cd999402a0ddf793126bdfd385c190d1805c56f17eab63"
+    },
+    {
+      "bytes": 1638400,
+      "path": "runtime/sip.sqlite3",
+      "sha256": "e281a9953a9d4af4b62c41f77132b73fb24f0f9f77ad8e3849709b2b902bdade"
+    }
+  ],
+  "canonical_scenario": "liveforever",
+  "claims": "Synthetic acceptance evidence only; this is not a customer pilot, physical-device validation, survey, legal approval, or production-load result.",
+  "demonstration": "liveforever",
+  "environment": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "dirty_paths": 348,
+      "working_tree_clean": false
+    },
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "error": null,
+  "evidence_hash": "6b7f264f70fffafe65b450cbb27b07037ccae458f5d52f94a7d684c0ca4757dc",
+  "finished_at": "2026-07-28T00:40:39.263636+00:00",
+  "result": {
+    "acceptance": {
+      "audiences_separated": true,
+      "conflicts_preserved": true,
+      "generated_content_labeled": true,
+      "open_restore": true,
+      "quiet_mode": true,
+      "revocation_propagated": true,
+      "safe_exit": true
+    },
+    "audience_counts_before": {
+      "family": 6,
+      "private": 7,
+      "public": 1
+    },
+    "consent": {
+      "derivative_access_after": {
+        "family": 0,
+        "private": 0,
+        "public": 0
+      },
+      "grant_id": "8b351cb2-0f8e-42e3-8d04-3817afe24742",
+      "revocation": {
+        "affected_records": 7,
+        "grant_id": "8b351cb2-0f8e-42e3-8d04-3817afe24742",
+        "state": "revoked"
+      }
+    },
+    "evidence_assets": {
+      "family-photo.jpg": "63e10464-e561-4620-a5e4-69a4111a05bd",
+      "generated-kitchen.png": "e7cb130b-03f7-4bc3-ad37-16aa0bea6626",
+      "interview-a.txt": "2a32d243-6890-46d7-8a6f-60ee217ec0c6",
+      "interview-b.txt": "c8d6421d-3110-486f-bcd4-bce32298e514",
+      "letter.txt": "eb5bb01e-2e22-4b60-af9f-6ef5c8d8777d",
+      "recording.wav": "a46809b5-4774-43de-8160-e325fa27c67c",
+      "transcript.vtt": "77f78b97-ca2b-4923-9386-fb76f2f1207c"
+    },
+    "experience": {
+      "captions_required": true,
+      "features": {
+        "autonomous_persona": false,
+        "first_person_dialogue": false,
+        "free_locomotion": false,
+        "likeness_simulation": false,
+        "pause": true,
+        "quiet_mode": true,
+        "reset": true,
+        "safe_exit": true,
+        "voice_simulation": false
+      },
+      "generated_presence_label": null,
+      "reduced_motion_supported": true,
+      "safe_exit_persistent": true,
+      "subject_id": "person-alex-synthetic"
+    },
+    "generated_label": "AI-GENERATED RECONSTRUCTION \u2014 NOT A HISTORICAL FACT",
+    "presence_simulation_blocked": true,
+    "preservation": {
+      "independent_runtime": "/mnt/data/sip-authoritative-work/runtime/demo/liveforever/restore-runtime",
+      "matching_root_hash": true,
+      "operational_replay": {
+        "counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 1,
+          "construction_records": 0,
+          "coordinate_frames": 0,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 7,
+          "representation_bindings": 0,
+          "representations": 0,
+          "retention_rules": 0,
+          "scene_branches": 0,
+          "scene_commits": 0,
+          "scene_entities": 0,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "matches_package": true,
+        "vertical_validation": {
+          "domain_service_query_passed": true,
+          "family_edition_records_after_revocation": 0,
+          "memory_records_present": 7,
+          "revoked_consent_enforced": true
+        }
+      },
+      "package_path": "/mnt/data/sip-authoritative-work/runtime/demo/liveforever/preservation.sip-preservation.zip",
+      "package_sha256": "317fd85b7770bc63d76711e9e242f84ca41c5a954231908b2e0436e1bb60bf63",
+      "restored": {
+        "commit_id": null,
+        "domain_schema_version": "1.1.0",
+        "id_maps": {
+          "anchor_remap": {},
+          "annotation": {},
+          "assertion": {},
+          "asset": {
+            "2a32d243-6890-46d7-8a6f-60ee217ec0c6": "2a32d243-6890-46d7-8a6f-60ee217ec0c6",
+            "63e10464-e561-4620-a5e4-69a4111a05bd": "63e10464-e561-4620-a5e4-69a4111a05bd",
+            "77f78b97-ca2b-4923-9386-fb76f2f1207c": "77f78b97-ca2b-4923-9386-fb76f2f1207c",
+            "a46809b5-4774-43de-8160-e325fa27c67c": "a46809b5-4774-43de-8160-e325fa27c67c",
+            "c8d6421d-3110-486f-bcd4-bce32298e514": "c8d6421d-3110-486f-bcd4-bce32298e514",
+            "e7cb130b-03f7-4bc3-ad37-16aa0bea6626": "e7cb130b-03f7-4bc3-ad37-16aa0bea6626",
+            "eb5bb01e-2e22-4b60-af9f-6ef5c8d8777d": "eb5bb01e-2e22-4b60-af9f-6ef5c8d8777d"
+          },
+          "branch": {},
+          "comment": {},
+          "commit": {},
+          "consent": {
+            "8b351cb2-0f8e-42e3-8d04-3817afe24742": "8b351cb2-0f8e-42e3-8d04-3817afe24742"
+          },
+          "construction": {},
+          "derivation": {},
+          "entity": {},
+          "evidence": {},
+          "frame": {},
+          "geometry_manifest": {},
+          "legal_hold": {},
+          "measurement": {},
+          "memory": {
+            "21d6971c-cb5f-4253-a078-f9838bef6c60": "21d6971c-cb5f-4253-a078-f9838bef6c60",
+            "3ea2cb46-c32f-4335-b48c-a5e86f5ebc09": "3ea2cb46-c32f-4335-b48c-a5e86f5ebc09",
+            "7424c905-5da8-4626-bcd3-ac2e30a8548d": "7424c905-5da8-4626-bcd3-ac2e30a8548d",
+            "bfe877ce-0a41-40bc-b224-cb034399fed7": "bfe877ce-0a41-40bc-b224-cb034399fed7",
+            "dcd9dad1-a856-4008-90d2-d6834fb85614": "dcd9dad1-a856-4008-90d2-d6834fb85614",
+            "ea6b1007-3dbc-481d-8d4e-4df6db045af4": "ea6b1007-3dbc-481d-8d4e-4df6db045af4",
+            "f0e79163-2eaf-4fa7-8295-265705c02e3d": "f0e79163-2eaf-4fa7-8295-265705c02e3d"
+          },
+          "representation": {},
+          "representation_binding": {},
+          "retention_rule": {},
+          "scene": {},
+          "scene_tag": {},
+          "spatial_transform": {},
+          "task": {}
+        },
+        "native_replay": true,
+        "non_activated_evidence": {
+          "archived_tables": [
+            "agent_proposals",
+            "audit_events",
+            "deletion_evidence",
+            "deletion_requests",
+            "exports",
+            "notifications",
+            "operations",
+            "outbox_events",
+            "quota_policies",
+            "role_bindings",
+            "saved_queries",
+            "search_documents",
+            "usage_ledger"
+          ],
+          "governance_tables": [
+            "model_manifests",
+            "provider_manifests"
+          ],
+          "provider_model_reapproval_required": true,
+          "search_reindex_required": true,
+          "security_bindings_replayed": false
+        },
+        "preservation_package_asset_id": "588d695a-e9be-4fb0-be28-c2e1dc798447",
+        "preservation_package_sha256": "317fd85b7770bc63d76711e9e242f84ca41c5a954231908b2e0436e1bb60bf63",
+        "project_id": "project-restored-liveforever",
+        "replayed_counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 1,
+          "construction_records": 0,
+          "coordinate_frames": 0,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 7,
+          "representation_bindings": 0,
+          "representations": 0,
+          "retention_rules": 0,
+          "scene_branches": 0,
+          "scene_commits": 0,
+          "scene_entities": 0,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "restored_assets": {
+          "count": 7,
+          "remapped_ids": 0,
+          "unique_objects": 7
+        },
+        "scene_id": null,
+        "semantic_snapshot_hash": null,
+        "source_root_hash": "3256245c7f26cc3d518ceab779ee3dff7337859a2bc7a70b4b94e1b405675d9e",
+        "tenant_id": "tenant-restored-liveforever",
+        "unresolved_references": []
+      },
+      "restored_assets": 8,
+      "root_hash": "3256245c7f26cc3d518ceab779ee3dff7337859a2bc7a70b4b94e1b405675d9e",
+      "verified_files": 10
+    },
+    "records": {
+      "conflicting_recollections": [
+        "f0e79163-2eaf-4fa7-8295-265705c02e3d",
+        "dcd9dad1-a856-4008-90d2-d6834fb85614"
+      ],
+      "event": "7424c905-5da8-4626-bcd3-ac2e30a8548d",
+      "generated_reconstruction": "bfe877ce-0a41-40bc-b224-cb034399fed7",
+      "person": "ea6b1007-3dbc-481d-8d4e-4df6db045af4",
+      "place": "3ea2cb46-c32f-4335-b48c-a5e86f5ebc09",
+      "private_interview": "21d6971c-cb5f-4253-a078-f9838bef6c60"
+    }
+  },
+  "schema": "sip.demo-evidence/v1",
+  "started_at": "2026-07-28T00:40:36.783742+00:00",
+  "status": "passed"
+}

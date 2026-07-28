@@ -1,0 +1,215 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/coordinate-frame.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "axis_convention": {
+      "default": "right_handed_y_up",
+      "title": "Axis Convention",
+      "type": "string"
+    },
+    "axis_directions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 3,
+      "title": "Axis Directions",
+      "type": "object"
+    },
+    "convention": {
+      "enum": [
+        "right_handed_y_up_meters",
+        "right_handed_z_up_meters",
+        "source_native"
+      ],
+      "title": "Convention",
+      "type": "string"
+    },
+    "crs_identifier": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crs Identifier"
+    },
+    "frame_id": {
+      "title": "Frame Id",
+      "type": "string"
+    },
+    "geodetic": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Geodetic"
+    },
+    "gravity_alignment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gravity Alignment"
+    },
+    "handedness": {
+      "default": "right",
+      "enum": [
+        "right",
+        "left"
+      ],
+      "title": "Handedness",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "origin_description": {
+      "default": "capture_session_origin",
+      "title": "Origin Description",
+      "type": "string"
+    },
+    "original_unit_scale_to_meters": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Original Unit Scale To Meters"
+    },
+    "original_units": {
+      "default": "meter",
+      "title": "Original Units",
+      "type": "string"
+    },
+    "parent_frame_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Frame Id"
+    },
+    "semantic_type": {
+      "default": "local_cartesian",
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Semantic Type",
+      "type": "string"
+    },
+    "source": {
+      "default": "platform",
+      "title": "Source",
+      "type": "string"
+    },
+    "supersedes_frame_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Frame Id"
+    },
+    "transform_to_parent": {
+      "anyOf": [
+        {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform To Parent"
+    },
+    "uncertainty_m": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Uncertainty M"
+    },
+    "unit_scale_to_meters": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit Scale To Meters"
+    },
+    "units": {
+      "default": "meter",
+      "enum": [
+        "meter",
+        "millimeter"
+      ],
+      "title": "Units",
+      "type": "string"
+    },
+    "vertical_datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vertical Datum"
+    }
+  },
+  "required": [
+    "frame_id",
+    "convention",
+    "axis_directions"
+  ],
+  "title": "CoordinateFrameContract",
+  "type": "object"
+}

@@ -1,0 +1,199 @@
+{
+  "artifacts": {
+    "release-readiness.json": {
+      "bytes": 1857,
+      "sha256": "196f3f8dd8f0580e7701bb102c5f1a72361d83acdf7aeae6f867648aaa553669"
+    },
+    "sbom.cdx.json": {
+      "bytes": 35210,
+      "sha256": "29c2d6159ab46fd6fe9e760151bec273a302ba1fcf171b2a241217ae7889a98d"
+    },
+    "source-manifest.json": {
+      "bytes": 363518,
+      "sha256": "77802238a1df83740d130e291e595f85c7ac2fdf1004d17268b17ec13d1b6a18"
+    },
+    "spatial-intelligence-platform-1.1.0-evidence.zip": {
+      "bytes": 1874429,
+      "sha256": "40fe3dded7e7bafbdeec231e4baa2ff62b49cc67fac92ea4ac3c41834a522b69"
+    },
+    "spatial-intelligence-platform-1.1.0-source.zip": {
+      "bytes": 4133977,
+      "sha256": "63518331f37a99e480dfd6d88a3c797a9aeb025f624606e386b7e60a89a0a020"
+    }
+  },
+  "candidate_id": "sip-v1.1.0-8af0aafa0425-819809c5401d",
+  "demonstrations": {
+    "construction": {
+      "bytes": 21928,
+      "sha256": "267ae3e564c3ac2b4870f34b5c3168f719fe5537402a569fbe6f6a51c5eb2561"
+    },
+    "export": {
+      "bytes": 79783,
+      "sha256": "1a9f9ca2d2de05b747220bc24c8065e901c553040f3dd3df8f50abb1fa574b03"
+    },
+    "foundation": {
+      "bytes": 79807,
+      "sha256": "aed370adfe1554262b549077fac290dd209cf12830f776883525ca5f49d3fad0"
+    },
+    "hybrid": {
+      "bytes": 8028,
+      "sha256": "6f19748e0367f7e3a5a5253cca2f5d9dc17393dd0ed2f3f9116ebcbdb6bc0621"
+    },
+    "liveforever": {
+      "bytes": 17057,
+      "sha256": "f11d081d45c94bdbd4be6dbe97d773d40a0a7927eeabab6191f08e960c1e50b5"
+    },
+    "restore": {
+      "bytes": 79789,
+      "sha256": "ca512cc3bd2201b467f6cca34ed1acb5b81a4cfcbccd741259bc9615c4d795ff"
+    }
+  },
+  "generated_at": "2026-07-27T22:29:02Z",
+  "git": {
+    "branch": "sip-authoritative",
+    "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+    "exact_tag": null,
+    "working_tree_clean": false
+  },
+  "product": "Spatial Intelligence Platform",
+  "readiness": {
+    "blocker_count": 9,
+    "status": "blocked"
+  },
+  "reports": {
+    "authoritative-final-matrix-assembled.json": {
+      "bytes": 25979,
+      "sha256": "de369773ffdc5340b866346a0140da36ff1e24d5705d075deb5b3168808342f6"
+    },
+    "authoritative-fixedpoint-assemble.json": {
+      "bytes": 26423,
+      "sha256": "f02722bba9f3af34dc30ce66f24515f4fb1cefd6113830d0d2f3b1b2ae97a29c"
+    },
+    "authoritative-fixedpoint-matrix.json": {
+      "bytes": 26290,
+      "sha256": "b1a802fff3e48d7b30edfe6f8a85b5f389e4fdaa861bf07d28df768e0db33614"
+    },
+    "authoritative-spec-check.json": {
+      "bytes": 325,
+      "sha256": "959578a247ae381e335e6a37012cdbde39c48e1d8c3c463ea41e03da3f9d41dc"
+    },
+    "benchmark-report.json": {
+      "bytes": 3341,
+      "sha256": "e015c2b0d56e3de87df813254517e8e4823327c4c45e66a08cb83214c14df9dd"
+    },
+    "checkpoint04-matrix-assembled.json": {
+      "bytes": 27270,
+      "sha256": "d24c9d0eaf03f80fe40917a7e482f9e1a7fe96a1366cbb0cf5a619ac1c861271"
+    },
+    "doctor-report.json": {
+      "bytes": 1362,
+      "sha256": "3e291b9e6e7aeb8a0b283d89b9c4e40b87cc70f02d361c0ec84fe2833949f62f"
+    },
+    "final-matrix-assemble.json": {
+      "bytes": 27414,
+      "sha256": "6d5adf3cfc341311c6787edfa889ccc1ca5db6d585f131461890f7196103a9b5"
+    },
+    "fixedpoint-guard-final-assembled.json": {
+      "bytes": 26290,
+      "sha256": "fd7e51943b4174c0a04b265cfafe7d15f6fa8211d8b306c0b750b0cb7b2bc824"
+    },
+    "fixedpoint-guard-matrix-assembled.json": {
+      "bytes": 26290,
+      "sha256": "acf79cca1a87a13a121eefa02133e83eb3785f14c164a22f5b53c8543a999306"
+    },
+    "governance-check.json": {
+      "bytes": 632,
+      "sha256": "7abc9dd30e443279a592e0a5dc3f433b7fe18201ce630802a5f161d0cff288c2"
+    },
+    "infrastructure-static-validation.json": {
+      "bytes": 9002,
+      "sha256": "d71187f5d35a3828c4d42e549c5189a67c2fa6d1e449fcd9c0adf33718aff91f"
+    },
+    "infrastructure-validation.json": {
+      "bytes": 9002,
+      "sha256": "d71187f5d35a3828c4d42e549c5189a67c2fa6d1e449fcd9c0adf33718aff91f"
+    },
+    "license-gate-direct.json": {
+      "bytes": 102525,
+      "sha256": "3ccebf8346c9e501643bd768fe3b70abff6919d467ecc6ad0a93340394b8bb25"
+    },
+    "license-gate.json": {
+      "bytes": 102525,
+      "sha256": "3ccebf8346c9e501643bd768fe3b70abff6919d467ecc6ad0a93340394b8bb25"
+    },
+    "post-traceability-assemble.json": {
+      "bytes": 26112,
+      "sha256": "2199170ceffaf0e1b106e249d8d2f55de5821fa83f6953433cc80c75c2e5f318"
+    },
+    "pytest-continuation-summary.json": {
+      "bytes": 254,
+      "sha256": "d45fb66c230780fc2b6fc3d829798edf4810ca633c81d0f2f5c0160b417db4f4"
+    },
+    "pytest-full-summary.json": {
+      "bytes": 373,
+      "sha256": "9e87906c0de71cc917fee8b9f0cdfe6b349665efaf90e340ca6e1b848ccc10fd"
+    },
+    "python-test-report.json": {
+      "bytes": 4486,
+      "sha256": "a6a6b1b52f1e3c38c51ae95b65bccb6df371d16920c2a04f40b61fe600adeda8"
+    },
+    "release-report.json": {
+      "bytes": 1894,
+      "sha256": "c20c7b4df7cf1d8e11b4da4f7579e01852add6adecaf594a6652ec1974e4e07a"
+    },
+    "security-report.json": {
+      "bytes": 1270,
+      "sha256": "d135dc5fcd26da5baeca0ff1277b2a107089a92ecb49193bece361521200e0a4"
+    },
+    "security-static-scan.json": {
+      "bytes": 376,
+      "sha256": "782f88db06f858d8a5cd9b2e677aa4df3146daa5a6521c2b69909a528f86b6f4"
+    },
+    "spec-check.json": {
+      "bytes": 324,
+      "sha256": "d3615dcdfddb2661746f8acb909bd840ca8a450ef25b1186a3ebb6ed13dbae1a"
+    },
+    "spec-lint.json": {
+      "bytes": 323,
+      "sha256": "b862fe63b31446a59f245fc0573a3ab8ab41b4b5b5f001250f1fdd3a0fbd0970"
+    },
+    "static-checks.json": {
+      "bytes": 5519,
+      "sha256": "0abc09f5d373a5effaa617cef87a9a0a9ed14e8ed3e501d1f2bfb62652bb2e69"
+    },
+    "static-contract-check.json": {
+      "bytes": 454,
+      "sha256": "a09582c3df31afa11a2c7cb1edfe14537101efac0f219fc278471902c407cf78"
+    },
+    "swift-test-report.json": {
+      "bytes": 627,
+      "sha256": "4b39c04d0e11924328eff2ac37b616f9db7519fb831a4280ec6d9db5dbf58824"
+    },
+    "test-matrix.json": {
+      "bytes": 26290,
+      "sha256": "b1a802fff3e48d7b30edfe6f8a85b5f389e4fdaa861bf07d28df768e0db33614"
+    },
+    "typecheck-report.json": {
+      "bytes": 2308,
+      "sha256": "ab8b59facf54660ae50b57298589bfa89b83223663d59dc0c4c97274228c8626"
+    },
+    "web-runtime-test-report.json": {
+      "bytes": 695,
+      "sha256": "34f5a8a15ce2ef0b26739add8c49cde82ea43c5940d5679c81b3916a32b56081"
+    }
+  },
+  "requirements_ledger_sha256": "18260ba21cbe1a4106539637837f66307933d75e8b86c7074d5022b86a6d014b",
+  "schema": "sip.release-record/v1",
+  "signature": {
+    "algorithm": "Ed25519",
+    "present": false
+  },
+  "source_root_sha256": "819809c5401dac3738e27c2c4a0a10e5b783dfb982f34fd0adbd465b935b151a",
+  "specification": {
+    "expected_sha256": "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8",
+    "path": "spec/source/Spatial-Intelligence-Platform-Spec-v1.1.zip",
+    "sha256": "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8"
+  },
+  "version": "1.1.0",
+  "worker_manifest_root_sha256": "ca1fb9809da501ffee9fbd8967ccb3ee7904fa2a39ed1652cb7a9a3813f6a8fe"
+}

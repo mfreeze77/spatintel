@@ -1,0 +1,12 @@
+{
+  "expected_behavior": "unresolved_non_authoritative_hit",
+  "metric_candidates": [],
+  "proxy_hit": {
+    "position": [
+      1.0,
+      0.8,
+      2.0
+    ],
+    "primitive_id": 12
+  }
+}

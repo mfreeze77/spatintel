@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/assertion.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asserted_at": {
+      "format": "date-time",
+      "title": "Asserted At",
+      "type": "string"
+    },
+    "assertion_id": {
+      "title": "Assertion Id",
+      "type": "string"
+    },
+    "author_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Author Id"
+    },
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "conflicts_with_assertion_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conflicts With Assertion Ids",
+      "type": "array"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "object_value": {
+      "title": "Object Value"
+    },
+    "predicate": {
+      "title": "Predicate",
+      "type": "string"
+    },
+    "producer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Producer Id"
+    },
+    "source_class": {
+      "$ref": "#/$defs/SourceClass"
+    },
+    "state": {
+      "default": "active",
+      "enum": [
+        "active",
+        "disputed",
+        "superseded",
+        "withdrawn"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "supersedes_assertion_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Assertion Id"
+    },
+    "valid_from": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid From"
+    },
+    "valid_to": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid To"
+    }
+  },
+  "required": [
+    "assertion_id",
+    "subject_id",
+    "predicate",
+    "object_value",
+    "source_class",
+    "authority_class",
+    "confidence",
+    "evidence_ids",
+    "asserted_at"
+  ],
+  "title": "AssertionContract",
+  "type": "object"
+}

@@ -1,0 +1,4622 @@
+{
+  "components": {
+    "schemas": {
+      "AnnotationCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "authored_from_representation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authored From Representation Id"
+          },
+          "authority_class": {
+            "$ref": "#/components/schemas/AuthorityClass"
+          },
+          "coordinate_frame_id": {
+            "title": "Coordinate Frame Id",
+            "type": "string"
+          },
+          "entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Id"
+          },
+          "normal": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Normal"
+          },
+          "orientation": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orientation"
+          },
+          "policy": {
+            "additionalProperties": true,
+            "title": "Policy",
+            "type": "object"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "support": {
+            "additionalProperties": true,
+            "title": "Support",
+            "type": "object"
+          },
+          "support_type": {
+            "enum": [
+              "world_point",
+              "semantic_entity",
+              "surface_coordinate",
+              "plane",
+              "line",
+              "volume",
+              "document_region"
+            ],
+            "title": "Support Type",
+            "type": "string"
+          },
+          "uncertainty_m": {
+            "minimum": 0.0,
+            "title": "Uncertainty M",
+            "type": "number"
+          }
+        },
+        "required": [
+          "coordinate_frame_id",
+          "support_type",
+          "support",
+          "uncertainty_m",
+          "source_class",
+          "authority_class"
+        ],
+        "title": "AnnotationCreate",
+        "type": "object"
+      },
+      "AnnotationRemap": {
+        "additionalProperties": false,
+        "properties": {
+          "max_residual_m": {
+            "default": 0.05,
+            "minimum": 0.0,
+            "title": "Max Residual M",
+            "type": "number"
+          },
+          "min_confidence": {
+            "default": 0.8,
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Min Confidence",
+            "type": "number"
+          },
+          "source_representation_id": {
+            "title": "Source Representation Id",
+            "type": "string"
+          },
+          "target_representation_id": {
+            "title": "Target Representation Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_representation_id",
+          "target_representation_id"
+        ],
+        "title": "AnnotationRemap",
+        "type": "object"
+      },
+      "AuthorityClass": {
+        "enum": [
+          "none",
+          "evidence",
+          "metric",
+          "design",
+          "visual",
+          "derived_non_authoritative",
+          "field_verified",
+          "historical_assertion"
+        ],
+        "title": "AuthorityClass",
+        "type": "string"
+      },
+      "BranchCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "from_commit_id": {
+            "title": "From Commit Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "protected": {
+            "default": false,
+            "title": "Protected",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "from_commit_id"
+        ],
+        "title": "BranchCreate",
+        "type": "object"
+      },
+      "CommitCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "branch": {
+            "default": "main",
+            "title": "Branch",
+            "type": "string"
+          },
+          "change_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Change Evidence Ids",
+            "type": "array"
+          },
+          "expected_head": {
+            "title": "Expected Head",
+            "type": "string"
+          },
+          "field_visit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Visit Id"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "policy_checks": {
+            "additionalProperties": true,
+            "title": "Policy Checks",
+            "type": "object"
+          },
+          "review_state": {
+            "default": "unreviewed",
+            "title": "Review State",
+            "type": "string"
+          },
+          "signatures": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Signatures",
+            "type": "array"
+          },
+          "valid_from": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid From"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid To"
+          },
+          "workflow_event_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Workflow Event Id"
+          }
+        },
+        "required": [
+          "expected_head",
+          "message"
+        ],
+        "title": "CommitCreate",
+        "type": "object"
+      },
+      "CoordinateFrameCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "axis_convention": {
+            "default": "right_handed_y_up",
+            "title": "Axis Convention",
+            "type": "string"
+          },
+          "axis_directions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 3,
+            "title": "Axis Directions",
+            "type": "object"
+          },
+          "convention": {
+            "enum": [
+              "right_handed_y_up_meters",
+              "right_handed_z_up_meters",
+              "source_native"
+            ],
+            "title": "Convention",
+            "type": "string"
+          },
+          "crs_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crs Identifier"
+          },
+          "frame_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Frame Id"
+          },
+          "geodetic": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geodetic"
+          },
+          "gravity_alignment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gravity Alignment"
+          },
+          "handedness": {
+            "default": "right",
+            "enum": [
+              "right",
+              "left"
+            ],
+            "title": "Handedness",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "title": "Metadata",
+            "type": "object"
+          },
+          "name": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "origin_description": {
+            "default": "capture_session_origin",
+            "title": "Origin Description",
+            "type": "string"
+          },
+          "original_unit_scale_to_meters": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Original Unit Scale To Meters"
+          },
+          "original_units": {
+            "default": "meter",
+            "title": "Original Units",
+            "type": "string"
+          },
+          "parent_frame_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Frame Id"
+          },
+          "semantic_type": {
+            "default": "local_cartesian",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Semantic Type",
+            "type": "string"
+          },
+          "source": {
+            "default": "platform",
+            "title": "Source",
+            "type": "string"
+          },
+          "supersedes_frame_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Frame Id"
+          },
+          "transform_to_parent": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transform To Parent"
+          },
+          "uncertainty_m": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uncertainty M"
+          },
+          "unit_scale_to_meters": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Scale To Meters"
+          },
+          "units": {
+            "default": "meter",
+            "enum": [
+              "meter",
+              "millimeter"
+            ],
+            "title": "Units",
+            "type": "string"
+          },
+          "vertical_datum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vertical Datum"
+          }
+        },
+        "required": [
+          "name",
+          "convention",
+          "axis_directions"
+        ],
+        "title": "CoordinateFrameCreate",
+        "type": "object"
+      },
+      "CoordinateUnitConversion": {
+        "additionalProperties": false,
+        "properties": {
+          "from_scale_to_meters": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From Scale To Meters"
+          },
+          "from_units": {
+            "title": "From Units",
+            "type": "string"
+          },
+          "to_scale_to_meters": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Scale To Meters"
+          },
+          "to_units": {
+            "default": "meter",
+            "title": "To Units",
+            "type": "string"
+          },
+          "values": {
+            "items": {
+              "type": "number"
+            },
+            "minItems": 1,
+            "title": "Values",
+            "type": "array"
+          }
+        },
+        "required": [
+          "values",
+          "from_units"
+        ],
+        "title": "CoordinateUnitConversion",
+        "type": "object"
+      },
+      "EntityCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "additionalProperties": true,
+            "default": {},
+            "title": "Attributes",
+            "type": "object"
+          },
+          "authority_class": {
+            "$ref": "#/components/schemas/AuthorityClass"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Id"
+          },
+          "entity_type": {
+            "title": "Entity Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "policy": {
+            "additionalProperties": true,
+            "default": {},
+            "title": "Policy",
+            "type": "object"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/ProvenanceRef"
+          },
+          "source_class": {
+            "$ref": "#/components/schemas/SourceClass"
+          },
+          "stable_support": {
+            "additionalProperties": true,
+            "default": {},
+            "title": "Stable Support",
+            "type": "object"
+          }
+        },
+        "required": [
+          "entity_type",
+          "name",
+          "source_class",
+          "authority_class",
+          "confidence",
+          "provenance"
+        ],
+        "title": "EntityCreate",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "MeasurementCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "calibration": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Calibration",
+            "type": "object"
+          },
+          "coordinate_frame_id": {
+            "title": "Coordinate Frame Id",
+            "type": "string"
+          },
+          "entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Id"
+          },
+          "geometry": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Geometry",
+            "type": "object"
+          },
+          "interaction_hit": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interaction Hit"
+          },
+          "measured_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measured At"
+          },
+          "measurement_type": {
+            "default": "scalar",
+            "title": "Measurement Type",
+            "type": "string"
+          },
+          "originating_representation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Originating Representation Id"
+          },
+          "permitted_uses": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Permitted Uses",
+            "type": "array"
+          },
+          "proxy_tolerance_m": {
+            "default": 0.03,
+            "exclusiveMinimum": 0.0,
+            "maximum": 5.0,
+            "title": "Proxy Tolerance M",
+            "type": "number"
+          },
+          "source_asset_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Asset Ids",
+            "type": "array"
+          },
+          "source_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Commit Id"
+          },
+          "source_method": {
+            "default": "direct",
+            "title": "Source Method",
+            "type": "string"
+          },
+          "state": {
+            "default": "measured",
+            "enum": [
+              "observed",
+              "measured",
+              "disputed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "supersedes_measurement_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Measurement Id"
+          },
+          "uncertainty": {
+            "minimum": 0.0,
+            "title": "Uncertainty",
+            "type": "number"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "verified": {
+            "default": false,
+            "title": "Verified",
+            "type": "boolean"
+          },
+          "verifier_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verifier Id"
+          }
+        },
+        "required": [
+          "value",
+          "unit",
+          "uncertainty",
+          "source_asset_ids",
+          "calibration",
+          "geometry",
+          "coordinate_frame_id"
+        ],
+        "title": "MeasurementCreate",
+        "type": "object"
+      },
+      "ProvenanceRef": {
+        "additionalProperties": false,
+        "properties": {
+          "code_commit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Commit"
+          },
+          "container_digest": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Container Digest"
+          },
+          "environment_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Environment Hash"
+          },
+          "model_checkpoint_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Checkpoint Hash"
+          },
+          "model_manifest_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Manifest Id"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "output_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Hash"
+          },
+          "parameters_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parameters Hash"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Ids",
+            "type": "array"
+          },
+          "validation_result_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Result Id"
+          }
+        },
+        "required": [
+          "source_ids"
+        ],
+        "title": "ProvenanceRef",
+        "type": "object"
+      },
+      "ProxyResolve": {
+        "additionalProperties": false,
+        "properties": {
+          "point": {
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Point",
+            "type": "array"
+          },
+          "representation_id": {
+            "title": "Representation Id",
+            "type": "string"
+          },
+          "semantic_entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Semantic Entity Id"
+          },
+          "tolerance_m": {
+            "default": 0.05,
+            "exclusiveMinimum": 0.0,
+            "maximum": 5.0,
+            "title": "Tolerance M",
+            "type": "number"
+          }
+        },
+        "required": [
+          "representation_id",
+          "point"
+        ],
+        "title": "ProxyResolve",
+        "type": "object"
+      },
+      "RollbackRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "target_commit_id": {
+            "title": "Target Commit Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "target_commit_id"
+        ],
+        "title": "RollbackRequest",
+        "type": "object"
+      },
+      "SceneCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "SceneCreate",
+        "type": "object"
+      },
+      "SceneMerge": {
+        "additionalProperties": false,
+        "properties": {
+          "approved_review_categories": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Approved Review Categories",
+            "type": "array"
+          },
+          "base_commit_id": {
+            "title": "Base Commit Id",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "source_branch": {
+            "title": "Source Branch",
+            "type": "string"
+          },
+          "target_branch": {
+            "title": "Target Branch",
+            "type": "string"
+          }
+        },
+        "required": [
+          "target_branch",
+          "source_branch",
+          "base_commit_id",
+          "message"
+        ],
+        "title": "SceneMerge",
+        "type": "object"
+      },
+      "SceneTagCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "commit_id": {
+            "title": "Commit Id",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "title": "Metadata",
+            "type": "object"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "commit_id",
+          "name"
+        ],
+        "title": "SceneTagCreate",
+        "type": "object"
+      },
+      "SourceClass": {
+        "enum": [
+          "direct_capture",
+          "observed",
+          "measured",
+          "verified",
+          "design",
+          "proposed",
+          "inferred",
+          "generated",
+          "recalled",
+          "corroborated",
+          "disputed",
+          "superseded"
+        ],
+        "title": "SourceClass",
+        "type": "string"
+      },
+      "SpatialTransformCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "authority_class": {
+            "$ref": "#/components/schemas/AuthorityClass"
+          },
+          "calibration_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration Id"
+          },
+          "covariance": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Covariance"
+          },
+          "crs_pipeline": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crs Pipeline"
+          },
+          "direction": {
+            "default": "source_to_target",
+            "enum": [
+              "source_to_target",
+              "target_to_source"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "grid_resources": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Grid Resources",
+            "type": "array"
+          },
+          "matrix": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "title": "Matrix",
+            "type": "array"
+          },
+          "matrix_layout": {
+            "default": "row_major",
+            "enum": [
+              "row_major",
+              "column_major"
+            ],
+            "title": "Matrix Layout",
+            "type": "string"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "title": "Metadata",
+            "type": "object"
+          },
+          "multiplication_convention": {
+            "default": "column_vector_pre_multiply",
+            "enum": [
+              "column_vector_pre_multiply",
+              "row_vector_post_multiply"
+            ],
+            "title": "Multiplication Convention",
+            "type": "string"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          },
+          "residual_summary": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Residual Summary",
+            "type": "object"
+          },
+          "scale": {
+            "default": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Scale",
+            "type": "number"
+          },
+          "solver_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Solver Run Id"
+          },
+          "source_frame_id": {
+            "title": "Source Frame Id",
+            "type": "string"
+          },
+          "source_type": {
+            "enum": [
+              "calibration",
+              "registration",
+              "control",
+              "manual",
+              "geodetic",
+              "import"
+            ],
+            "title": "Source Type",
+            "type": "string"
+          },
+          "supersedes_transform_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Transform Id"
+          },
+          "target_frame_id": {
+            "title": "Target Frame Id",
+            "type": "string"
+          },
+          "transform_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transform Id"
+          },
+          "transform_type": {
+            "enum": [
+              "SE3",
+              "SIM3"
+            ],
+            "title": "Transform Type",
+            "type": "string"
+          },
+          "translation_units": {
+            "default": "meter",
+            "enum": [
+              "meter",
+              "millimeter"
+            ],
+            "title": "Translation Units",
+            "type": "string"
+          },
+          "uncertainty": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Uncertainty",
+            "type": "object"
+          },
+          "valid_from": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid From"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid To"
+          }
+        },
+        "required": [
+          "source_frame_id",
+          "target_frame_id",
+          "transform_type",
+          "matrix",
+          "uncertainty",
+          "source_type",
+          "authority_class"
+        ],
+        "title": "SpatialTransformCreate",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Spatial Intelligence Platform \u2014 scene-service",
+    "version": "1.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/health/live": {
+      "get": {
+        "operationId": "health_live",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Live",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health Live"
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "health_ready",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Ready",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health Ready"
+      }
+    },
+    "/v1/projects/{project_id}/coordinate-frames": {
+      "post": {
+        "operationId": "register_coordinate_frame",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CoordinateFrameCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Coordinate Frame",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Coordinate Frame",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/coordinate-frames/{frame_id}:convert-units": {
+      "post": {
+        "operationId": "convert_coordinate_units",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "frame_id",
+            "required": true,
+            "schema": {
+              "title": "Frame Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CoordinateUnitConversion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Convert Coordinate Units",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Convert Coordinate Units",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/proxy-hits/resolve": {
+      "post": {
+        "operationId": "resolve_proxy_hit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProxyResolve"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Resolve Proxy Hit",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Resolve Proxy Hit",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes": {
+      "post": {
+        "operationId": "create_scene",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Scene",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Scene",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/annotation-remaps": {
+      "post": {
+        "operationId": "remap_spatial_annotations",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationRemap"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Remap Spatial Annotations",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remap Spatial Annotations",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/annotations": {
+      "post": {
+        "operationId": "create_spatial_annotation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Spatial Annotation",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Spatial Annotation",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/as-of": {
+      "get": {
+        "operationId": "get_scene_as_of",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "commit_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Commit Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tag"
+            }
+          },
+          {
+            "in": "query",
+            "name": "recorded_at",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recorded At"
+            }
+          },
+          {
+            "in": "query",
+            "name": "valid_at",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Valid At"
+            }
+          },
+          {
+            "in": "query",
+            "name": "field_visit_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Field Visit Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "branch",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Branch"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Scene As Of",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Scene As Of",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/branches": {
+      "post": {
+        "operationId": "create_scene_branch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BranchCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Scene Branch",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Branch",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/branches/{branch}/rollback": {
+      "post": {
+        "operationId": "rollback_scene_branch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "branch",
+            "required": true,
+            "schema": {
+              "title": "Branch",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Rollback Scene Branch",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Rollback",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/commits": {
+      "post": {
+        "operationId": "commit_scene",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommitCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Commit Scene",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Commit Scene",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/entities": {
+      "post": {
+        "operationId": "create_scene_entity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntityCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Scene Entity",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Entity",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/measurements": {
+      "post": {
+        "operationId": "create_measurement",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Measurement",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Measurement",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/measurements/{measurement_id}": {
+      "get": {
+        "operationId": "get_measurement",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "measurement_id",
+            "required": true,
+            "schema": {
+              "title": "Measurement Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Measurement",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Measurement",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/merges": {
+      "post": {
+        "operationId": "merge_scene_branches",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneMerge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Merge Scene Branches",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Merge Scene Branches",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/scenes/{scene_id}/tags": {
+      "post": {
+        "operationId": "tag_scene_commit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "scene_id",
+            "required": true,
+            "schema": {
+              "title": "Scene Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneTagCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Tag Scene Commit",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Tag Scene Commit",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/spatial-transforms": {
+      "post": {
+        "operationId": "register_spatial_transform",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpatialTransformCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Spatial Transform",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Spatial Transform",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/spatial-transforms/resolve": {
+      "get": {
+        "operationId": "resolve_spatial_transform",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "source_frame_id",
+            "required": true,
+            "schema": {
+              "title": "Source Frame Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_frame_id",
+            "required": true,
+            "schema": {
+              "title": "Target Frame Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "at_time",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "At Time"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Resolve Spatial Transform",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Resolve Spatial Transform",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    "/v1/scene-diffs": {
+      "get": {
+        "operationId": "diff_scene_commits",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "left",
+            "required": true,
+            "schema": {
+              "title": "Left",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "right",
+            "required": true,
+            "schema": {
+              "title": "Right",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Diff Scene Commits",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Diff Scene",
+        "tags": [
+          "scene"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_assertions",
+      "path": "/v1/projects/{project_id}/assertions"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_assertion",
+      "path": "/v1/projects/{project_id}/assertions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_assertion",
+      "path": "/v1/projects/{project_id}/assertions/{assertion_id}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_assertion_evidence",
+      "path": "/v1/projects/{project_id}/assertions/{assertion_id}/evidence"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_derivation",
+      "path": "/v1/projects/{project_id}/derivations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_evidence",
+      "path": "/v1/projects/{project_id}/evidence"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_evidence",
+      "path": "/v1/projects/{project_id}/evidence/{evidence_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_geometry_manifest",
+      "path": "/v1/projects/{project_id}/geometry-manifests"
+    },
+    {
+      "method": "GET",
+      "operation_id": "verify_audit_chain",
+      "path": "/v1/tenants/{tenant_id}/audit/verify"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true
+  },
+  "service_name": "evidence-service"
+}

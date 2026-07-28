@@ -1,0 +1,45 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+  external_labels:
+    platform: spatial-intelligence-platform
+rule_files:
+  - /etc/prometheus/prometheus-rules.yaml
+scrape_configs:
+  - job_name: sip-api
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - control-api:8080
+          - identity-policy:8080
+          - capture-service:8080
+          - workflow-service:8080
+          - scene-service:8080
+          - evidence-service:8080
+          - search-service:8080
+          - export-service:8080
+          - notification-service:8080
+          - audit-service:8080
+          - representation-api:8080
+          - provider-registry:8080
+          - representation-publisher:8080
+  - job_name: sip-worker
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - worker-capture-normalizer:9100
+          - worker-change-detection:9100
+          - worker-collision-navigation:9100
+          - worker-depth-normalizer:9100
+          - worker-document-media:9100
+          - worker-fusion-tsdf:9100
+          - worker-geometry-cleanup:9100
+          - worker-lingbot-adapter:9100
+          - worker-mesh-lod:9100
+          - worker-pose-optimizer:9100
+          - worker-report-export:9100
+          - worker-representation-quality:9100
+          - worker-semantics:9100
+          - worker-splat:9100
+          - worker-splat-normalizer:9100
+          - worker-splat-surface:9100

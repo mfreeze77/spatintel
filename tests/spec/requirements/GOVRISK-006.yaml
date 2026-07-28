@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: GOVRISK-006
+priority: P0
+source:
+  document: 00-governance/007_risk_register.md
+  line: 135
+  section: 15. Version 1.1 hybrid-representation risks
+requirement: The risk register shall track proxy-authority confusion, provider data egress, protected-geometry loss, anchor
+  drift, immersive safety, derivative redaction, and provider lock-in.
+verification_method: Risk review
+implementation_status: VERIFIED
+implementation_files:
+- governance/risk-register.json
+- governance/service-catalog.json
+- tools/check_governance.py
+- docs/runbooks/OPERATIONS_INCIDENTS.md
+automated_test_ids:
+- tests/contract/test_governance_registers.py::test_risk_register_covers_critical_hybrid_risks_and_one_day_review_policy
+retained_evidence:
+- build/reports/governance-check.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- governance/risk-register.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

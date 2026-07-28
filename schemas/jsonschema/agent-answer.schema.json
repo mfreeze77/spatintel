@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "GroundedClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_type": {
+          "enum": [
+            "fact",
+            "inference",
+            "proposal",
+            "unknown"
+          ],
+          "title": "Claim Type",
+          "type": "string"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "entity_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entity Ids",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "source_class": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceClass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "text": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "claim_type"
+      ],
+      "title": "GroundedClaim",
+      "type": "object"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/agent-answer.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/GroundedClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "generated_content": {
+      "const": true,
+      "default": true,
+      "title": "Generated Content",
+      "type": "boolean"
+    },
+    "persistent_label": {
+      "const": "AI-generated; verify against cited evidence",
+      "default": "AI-generated; verify against cited evidence",
+      "title": "Persistent Label",
+      "type": "string"
+    },
+    "refusal_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Refusal Code"
+    },
+    "refused": {
+      "default": false,
+      "title": "Refused",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "sip.agent-answer/v1",
+      "default": "sip.agent-answer/v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claims"
+  ],
+  "title": "AgentAnswer",
+  "type": "object"
+}

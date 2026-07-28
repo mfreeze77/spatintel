@@ -1,0 +1,11 @@
+{
+  "schema": "sip.dataset-manifest/v1",
+  "dataset_id": "sip-deterministic-synthetic-fixtures",
+  "version": "1.1.0",
+  "origin": "generated_in_repository",
+  "contains_personal_data": false,
+  "contains_customer_data": false,
+  "license": "Apache-2.0",
+  "approval_state": "approved",
+  "allowed_purposes": ["unit_test", "integration_test", "acceptance_demo", "benchmark"]
+}

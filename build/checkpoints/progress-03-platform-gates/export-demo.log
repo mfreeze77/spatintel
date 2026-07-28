@@ -1,0 +1,2556 @@
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/run_demo.py export
+{
+  "artifacts": [
+    {
+      "bytes": 25390,
+      "path": "input/synthetic-room.sipcapture",
+      "sha256": "1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f"
+    },
+    {
+      "bytes": 31681,
+      "path": "preservation.sip-preservation.zip",
+      "sha256": "2e5ee8d926aa90a62f0473b5d97aa6d86704a47b8df95912d1c35089b74dc60b"
+    },
+    {
+      "bytes": 25406,
+      "path": "restore-runtime/objects/1c/15/1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f.enc",
+      "sha256": "2311ef05142c99f9efeb9e207adad72f3e0fcf167a2199d492db1e75aba40d52"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/1c/15/1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f.meta.json",
+      "sha256": "77f27e631fe79e97f8b3d4fe23923edcfca9e2fd8ee36d359d401823f2ee63f9"
+    },
+    {
+      "bytes": 31697,
+      "path": "restore-runtime/objects/2e/5e/2e5ee8d926aa90a62f0473b5d97aa6d86704a47b8df95912d1c35089b74dc60b.enc",
+      "sha256": "9a5a1f163ad25d9664f24afb990034c46dd169a9d8bed18914e470ed65e968ee"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/2e/5e/2e5ee8d926aa90a62f0473b5d97aa6d86704a47b8df95912d1c35089b74dc60b.meta.json",
+      "sha256": "736bfb0fb411c27a01c01070087d46195f38ec27583c35d6c8fd8ee96df14569"
+    },
+    {
+      "bytes": 292,
+      "path": "restore-runtime/objects/79/c5/79c5868bf296b76192cab048c244d012e3bb73704c35d662592c7ec3f0f90a8f.enc",
+      "sha256": "a326cd1c5c56c2560920fcf18791dbcafc8d1959c35f72f782fe036e7b25a861"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/79/c5/79c5868bf296b76192cab048c244d012e3bb73704c35d662592c7ec3f0f90a8f.meta.json",
+      "sha256": "47d67e309ebdc1bae3694bffbf9fdc8208805a4eacb0c6aedb3d4e47ac23b0e0"
+    },
+    {
+      "bytes": 1609728,
+      "path": "restore-runtime/sip.sqlite3",
+      "sha256": "4a4cb7af016544cfe93a2b554b021f517707201ebba8b9a25f4340fa8feedb2e"
+    },
+    {
+      "bytes": 25406,
+      "path": "runtime/objects/1c/15/1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f.enc",
+      "sha256": "c8392419857c4299199b1fe9890ec6961b14f08ceb6bdedb79150256e3ac1051"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/1c/15/1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f.meta.json",
+      "sha256": "7bd999307e47860857479fbac5986762869e5c9eb69a964f4cfe94770a7c1e4d"
+    },
+    {
+      "bytes": 292,
+      "path": "runtime/objects/79/c5/79c5868bf296b76192cab048c244d012e3bb73704c35d662592c7ec3f0f90a8f.enc",
+      "sha256": "ea16b39017e93c8da8c2bafe2ac7a656247ed828bdc2da756dc1c8a21e9daf0b"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/79/c5/79c5868bf296b76192cab048c244d012e3bb73704c35d662592c7ec3f0f90a8f.meta.json",
+      "sha256": "83333de5feb705b16acc142e5bc9203e8cf38160ddeb9ad102658457c75a1a24"
+    },
+    {
+      "bytes": 1630208,
+      "path": "runtime/sip.sqlite3",
+      "sha256": "9e7ff2af8616a1b85e58c2d0080bc6f14fddd8fbf0e69210fa70b404d89ef376"
+    },
+    {
+      "bytes": 647,
+      "path": "viewer-session.json",
+      "sha256": "35879b0128866ce7443e87ee1766aa83af03d855424090861a66869c18e18953"
+    },
+    {
+      "bytes": 3041,
+      "path": "viewer.html",
+      "sha256": "437fceca4d8f81f7abd958e3ca002f2fec292c4009875142a4c5906fc306633d"
+    }
+  ],
+  "canonical_scenario": "foundation",
+  "claims": "Synthetic acceptance evidence only; this is not a customer pilot, physical-device validation, survey, legal approval, or production-load result.",
+  "demonstration": "export",
+  "environment": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "dirty_paths": 265,
+      "working_tree_clean": false
+    },
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "error": null,
+  "evidence_hash": "69a8648288a91fbccbd0600ba22377e6cb3986e9ac9c0143d546721762d259de",
+  "finished_at": "2026-07-27T23:58:18.311580+00:00",
+  "result": {
+    "acceptance": {
+      "cancel_proved": true,
+      "matching_capture_hash": true,
+      "matching_restore_root": true,
+      "retry_resume_proved": true
+    },
+    "cancellation": {
+      "operation_id": "259ce4af-9027-41ab-8466-c4dbb0481b76",
+      "state": "cancelled"
+    },
+    "capture": {
+      "archive_sha256": "1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f",
+      "asset_count": 48,
+      "capture_id": "synthetic-room-42-16",
+      "checks": [
+        {
+          "byte_count": 192,
+          "path": "frames/000000/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000000/depth.f32",
+          "sha256": "d8bded6f21ef777865b3d948f0eaad9dd1635d1764ec018fe68299e22af5a783",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000000/rgb.bin",
+          "sha256": "9c1d2a9d201c927c8fe10d88accce0bf772cf476b8e329bf28af1256ff5835a8",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000001/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000001/depth.f32",
+          "sha256": "d39b03409e3a105065cb85149965b80e0fbc3a7c9bd8ed07e2b3eb60de29bafd",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000001/rgb.bin",
+          "sha256": "6ca3ba9dc7d473985667004c632ae79458dcd791c7413758e5b5a49a157659aa",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000002/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000002/depth.f32",
+          "sha256": "154f78cf2f70a72cbb800ba82e8c6f2a2dcd93ac0c4443997895a58113a628db",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000002/rgb.bin",
+          "sha256": "2a7def0d95a8038e4e1c6ed4cbc495d24bcc450241811f3170226bacbe4ef218",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000003/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000003/depth.f32",
+          "sha256": "5726338787fffd2d4c3597702c9aabda680f882d0b102e53b07633bf4833f0e8",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000003/rgb.bin",
+          "sha256": "6f3980e5fc9853ca5b808eee7daa0a686366196a2fc486ccfb8ec167b9322ffa",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000004/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000004/depth.f32",
+          "sha256": "55c6ef6b449fade8f72a941003c128ae9f33816907ecefea83b8e3b96af31bc5",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000004/rgb.bin",
+          "sha256": "3d3787525168b1d378eef538a271b45279e396c710801321af60d861124b9f86",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000005/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000005/depth.f32",
+          "sha256": "cbdfb902dfc6e2c76eb19bcccf6458c769849095454adb40a84ce559873cefe3",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000005/rgb.bin",
+          "sha256": "4ff04a01c9b3dbcb6ae7b86f560c32a29fa20833c713df2ef3efd6db9adfde2e",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000006/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000006/depth.f32",
+          "sha256": "9892f4ca936db6763ec567b988f9b7616a89f994c43ff36f1d2f536ab86f05ac",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000006/rgb.bin",
+          "sha256": "58697836b3d2fdacb752f71da97cceda512c5b9bf13ab5ae566991c276fd676f",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000007/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000007/depth.f32",
+          "sha256": "08178aabd942e6672873783027fa55589e25a5cb7db5bfbc175f9f8f49184897",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000007/rgb.bin",
+          "sha256": "e96bd6f83e16c798395d3d49d4bc31b0e9cd274d51630cea7e533de85c170aad",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000008/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000008/depth.f32",
+          "sha256": "45445746aafbda7be3cd0bb6dbfa9783e4a229e36cf581f95a7c4a106702e64f",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000008/rgb.bin",
+          "sha256": "320cac0a91e71109d769e2a640e073816cb32dcdef359a377347ebad7a1b8492",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000009/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000009/depth.f32",
+          "sha256": "00d708c43f29a1e787aeb64ea3c25bbdbb41debe93c09d58867148d254e2d33d",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000009/rgb.bin",
+          "sha256": "61e64cec2a475f6379e95b2d4fef906f48f0c5ab9c0c5331cefeb8c817a7b74d",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000010/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000010/depth.f32",
+          "sha256": "daeeba8de88a70a7d516e1ee92ed607cd60755b9ca87ee7d8e7c05c7a5622a81",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000010/rgb.bin",
+          "sha256": "c8cefa05e3be06878ffb9f466bf0e605fde6f1544fd6a5e89d89c9564abd2b58",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000011/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000011/depth.f32",
+          "sha256": "51527f8aaf11c2e86369654149abec087dceb9d477863899a008bab7d9f5a145",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000011/rgb.bin",
+          "sha256": "6c0ba0b222bdeda124e4c5397882b04924d0046cec733bb3e5e92633704baa51",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000012/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000012/depth.f32",
+          "sha256": "b00279f286238da8846ba26b9d35614c43e67b64af9a8312d96481afdb675c04",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000012/rgb.bin",
+          "sha256": "4810c6b18eac9252303ec0e837cf9413273a627eeb70cee5d00ecf64df2445c8",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000013/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000013/depth.f32",
+          "sha256": "854f3dd706be34881e0ba44ca4ce6c33423959f2cc0359c1770eb4b77a81c3a3",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000013/rgb.bin",
+          "sha256": "492ca4ffac1f422d66e154622f0da2dac3d37d5ab9e6ca006c7924c8868b475f",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000014/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000014/depth.f32",
+          "sha256": "bb3544097785b5a0da2330b675fe15d53b512c2692f1d2bed7a10547847e33cb",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000014/rgb.bin",
+          "sha256": "046e7016bd5e1de3ed6241d4fa56b3b1f320a4d2e32b033b00020319013eefe6",
+          "valid": true
+        },
+        {
+          "byte_count": 192,
+          "path": "frames/000015/confidence.u8",
+          "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+          "valid": true
+        },
+        {
+          "byte_count": 768,
+          "path": "frames/000015/depth.f32",
+          "sha256": "3706a7cb786abd0d081ad19d84d586a24631402f796c504637fea28fc1e8c9fd",
+          "valid": true
+        },
+        {
+          "byte_count": 576,
+          "path": "frames/000015/rgb.bin",
+          "sha256": "f1fa1d9635928a59d19171fdc2fd995a36374cc6aa25d5db565df7c167aabe26",
+          "valid": true
+        }
+      ],
+      "frame_count": 16,
+      "manifest": {
+        "asset_merkle_root": "f4ccae0e7e4f4c6c01058bac9c436e4976113aeba6cc63eb7b88018e83730c50",
+        "assets": [
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000000/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000000/depth.f32",
+            "sha256": "d8bded6f21ef777865b3d948f0eaad9dd1635d1764ec018fe68299e22af5a783"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000000/rgb.bin",
+            "sha256": "9c1d2a9d201c927c8fe10d88accce0bf772cf476b8e329bf28af1256ff5835a8"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000001/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000001/depth.f32",
+            "sha256": "d39b03409e3a105065cb85149965b80e0fbc3a7c9bd8ed07e2b3eb60de29bafd"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000001/rgb.bin",
+            "sha256": "6ca3ba9dc7d473985667004c632ae79458dcd791c7413758e5b5a49a157659aa"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000002/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000002/depth.f32",
+            "sha256": "154f78cf2f70a72cbb800ba82e8c6f2a2dcd93ac0c4443997895a58113a628db"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000002/rgb.bin",
+            "sha256": "2a7def0d95a8038e4e1c6ed4cbc495d24bcc450241811f3170226bacbe4ef218"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000003/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000003/depth.f32",
+            "sha256": "5726338787fffd2d4c3597702c9aabda680f882d0b102e53b07633bf4833f0e8"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000003/rgb.bin",
+            "sha256": "6f3980e5fc9853ca5b808eee7daa0a686366196a2fc486ccfb8ec167b9322ffa"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000004/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000004/depth.f32",
+            "sha256": "55c6ef6b449fade8f72a941003c128ae9f33816907ecefea83b8e3b96af31bc5"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000004/rgb.bin",
+            "sha256": "3d3787525168b1d378eef538a271b45279e396c710801321af60d861124b9f86"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000005/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000005/depth.f32",
+            "sha256": "cbdfb902dfc6e2c76eb19bcccf6458c769849095454adb40a84ce559873cefe3"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000005/rgb.bin",
+            "sha256": "4ff04a01c9b3dbcb6ae7b86f560c32a29fa20833c713df2ef3efd6db9adfde2e"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000006/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000006/depth.f32",
+            "sha256": "9892f4ca936db6763ec567b988f9b7616a89f994c43ff36f1d2f536ab86f05ac"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000006/rgb.bin",
+            "sha256": "58697836b3d2fdacb752f71da97cceda512c5b9bf13ab5ae566991c276fd676f"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000007/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000007/depth.f32",
+            "sha256": "08178aabd942e6672873783027fa55589e25a5cb7db5bfbc175f9f8f49184897"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000007/rgb.bin",
+            "sha256": "e96bd6f83e16c798395d3d49d4bc31b0e9cd274d51630cea7e533de85c170aad"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000008/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000008/depth.f32",
+            "sha256": "45445746aafbda7be3cd0bb6dbfa9783e4a229e36cf581f95a7c4a106702e64f"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000008/rgb.bin",
+            "sha256": "320cac0a91e71109d769e2a640e073816cb32dcdef359a377347ebad7a1b8492"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000009/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000009/depth.f32",
+            "sha256": "00d708c43f29a1e787aeb64ea3c25bbdbb41debe93c09d58867148d254e2d33d"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000009/rgb.bin",
+            "sha256": "61e64cec2a475f6379e95b2d4fef906f48f0c5ab9c0c5331cefeb8c817a7b74d"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000010/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000010/depth.f32",
+            "sha256": "daeeba8de88a70a7d516e1ee92ed607cd60755b9ca87ee7d8e7c05c7a5622a81"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000010/rgb.bin",
+            "sha256": "c8cefa05e3be06878ffb9f466bf0e605fde6f1544fd6a5e89d89c9564abd2b58"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000011/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000011/depth.f32",
+            "sha256": "51527f8aaf11c2e86369654149abec087dceb9d477863899a008bab7d9f5a145"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000011/rgb.bin",
+            "sha256": "6c0ba0b222bdeda124e4c5397882b04924d0046cec733bb3e5e92633704baa51"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000012/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000012/depth.f32",
+            "sha256": "b00279f286238da8846ba26b9d35614c43e67b64af9a8312d96481afdb675c04"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000012/rgb.bin",
+            "sha256": "4810c6b18eac9252303ec0e837cf9413273a627eeb70cee5d00ecf64df2445c8"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000013/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000013/depth.f32",
+            "sha256": "854f3dd706be34881e0ba44ca4ce6c33423959f2cc0359c1770eb4b77a81c3a3"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000013/rgb.bin",
+            "sha256": "492ca4ffac1f422d66e154622f0da2dac3d37d5ab9e6ca006c7924c8868b475f"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000014/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000014/depth.f32",
+            "sha256": "bb3544097785b5a0da2330b675fe15d53b512c2692f1d2bed7a10547847e33cb"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000014/rgb.bin",
+            "sha256": "046e7016bd5e1de3ed6241d4fa56b3b1f320a4d2e32b033b00020319013eefe6"
+          },
+          {
+            "byte_count": 192,
+            "media_type": "application/vnd.sip.confidence-u8",
+            "path": "frames/000015/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141"
+          },
+          {
+            "byte_count": 768,
+            "media_type": "application/vnd.sip.depth-f32",
+            "path": "frames/000015/depth.f32",
+            "sha256": "3706a7cb786abd0d081ad19d84d586a24631402f796c504637fea28fc1e8c9fd"
+          },
+          {
+            "byte_count": 576,
+            "media_type": "application/octet-stream",
+            "path": "frames/000015/rgb.bin",
+            "sha256": "f1fa1d9635928a59d19171fdc2fd995a36374cc6aa25d5db565df7c167aabe26"
+          }
+        ],
+        "calibration": {
+          "known_scale": true,
+          "scale_source": "fixture_definition",
+          "uncertainty_m": 0.001
+        },
+        "capture_id": "synthetic-room-42-16",
+        "capture_source": "deterministic_synthetic_fixture",
+        "coordinate_frames": [
+          {
+            "convention": "right_handed_y_up_meters",
+            "frame_id": "world",
+            "name": "fixture world",
+            "units": "meter"
+          }
+        ],
+        "created_at": "2026-01-01T00:00:00+00:00",
+        "frames": [
+          {
+            "camera_to_world": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.0,
+                0.0,
+                1.0,
+                1.2
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000000/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000000/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000000",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.0
+            },
+            "rgb_asset": "frames/000000/rgb.bin",
+            "timestamp_ns": 1000000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.9238795325112867,
+                0.0,
+                0.3826834323650898,
+                0.4592201188381077
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.3826834323650898,
+                0.0,
+                0.9238795325112867,
+                1.1086554390135441
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000001/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000001/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000001",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.0625
+            },
+            "rgb_asset": "frames/000001/rgb.bin",
+            "timestamp_ns": 1100000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.7071067811865476,
+                0.0,
+                0.7071067811865475,
+                0.8485281374238569
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.7071067811865475,
+                0.0,
+                0.7071067811865476,
+                0.848528137423857
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000002/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000002/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000002",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.125
+            },
+            "rgb_asset": "frames/000002/rgb.bin",
+            "timestamp_ns": 1200000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.38268343236508984,
+                0.0,
+                0.9238795325112867,
+                1.1086554390135441
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.9238795325112867,
+                0.0,
+                0.38268343236508984,
+                0.45922011883810776
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000003/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000003/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000003",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.1875
+            },
+            "rgb_asset": "frames/000003/rgb.bin",
+            "timestamp_ns": 1300000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                6.123233995736766e-17,
+                0.0,
+                1.0,
+                1.2
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -1.0,
+                0.0,
+                6.123233995736766e-17,
+                7.347880794884119e-17
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000004/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000004/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000004",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.25
+            },
+            "rgb_asset": "frames/000004/rgb.bin",
+            "timestamp_ns": 1400000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.3826834323650897,
+                0.0,
+                0.9238795325112867,
+                1.1086554390135441
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.9238795325112867,
+                0.0,
+                -0.3826834323650897,
+                -0.45922011883810765
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000005/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000005/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000005",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.3125
+            },
+            "rgb_asset": "frames/000005/rgb.bin",
+            "timestamp_ns": 1500000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.7071067811865475,
+                0.0,
+                0.7071067811865476,
+                0.848528137423857
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.7071067811865476,
+                0.0,
+                -0.7071067811865475,
+                -0.8485281374238569
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000006/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000006/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000006",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.375
+            },
+            "rgb_asset": "frames/000006/rgb.bin",
+            "timestamp_ns": 1600000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.9238795325112867,
+                0.0,
+                0.3826834323650899,
+                0.45922011883810787
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -0.3826834323650899,
+                0.0,
+                -0.9238795325112867,
+                -1.1086554390135441
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000007/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000007/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000007",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.4375
+            },
+            "rgb_asset": "frames/000007/rgb.bin",
+            "timestamp_ns": 1700000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -1.0,
+                0.0,
+                1.2246467991473532e-16,
+                1.4695761589768238e-16
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                -1.2246467991473532e-16,
+                0.0,
+                -1.0,
+                -1.2
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000008/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000008/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000008",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.5
+            },
+            "rgb_asset": "frames/000008/rgb.bin",
+            "timestamp_ns": 1800000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.9238795325112868,
+                0.0,
+                -0.38268343236508967,
+                -0.4592201188381076
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.38268343236508967,
+                0.0,
+                -0.9238795325112868,
+                -1.1086554390135441
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000009/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000009/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000009",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.5625
+            },
+            "rgb_asset": "frames/000009/rgb.bin",
+            "timestamp_ns": 1900000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.7071067811865477,
+                0.0,
+                -0.7071067811865475,
+                -0.8485281374238569
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.7071067811865475,
+                0.0,
+                -0.7071067811865477,
+                -0.8485281374238572
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000010/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000010/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000010",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.625
+            },
+            "rgb_asset": "frames/000010/rgb.bin",
+            "timestamp_ns": 2000000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -0.38268343236509034,
+                0.0,
+                -0.9238795325112865,
+                -1.1086554390135437
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.9238795325112865,
+                0.0,
+                -0.38268343236509034,
+                -0.45922011883810837
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000011/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000011/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000011",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.6875
+            },
+            "rgb_asset": "frames/000011/rgb.bin",
+            "timestamp_ns": 2100000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                -1.8369701987210297e-16,
+                0.0,
+                -1.0,
+                -1.2
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                1.0,
+                0.0,
+                -1.8369701987210297e-16,
+                -2.2043642384652356e-16
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000012/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000012/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000012",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.75
+            },
+            "rgb_asset": "frames/000012/rgb.bin",
+            "timestamp_ns": 2200000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.38268343236509,
+                0.0,
+                -0.9238795325112866,
+                -1.108655439013544
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.9238795325112866,
+                0.0,
+                0.38268343236509,
+                0.459220118838108
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000013/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000013/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000013",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.8125
+            },
+            "rgb_asset": "frames/000013/rgb.bin",
+            "timestamp_ns": 2300000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.7071067811865474,
+                0.0,
+                -0.7071067811865477,
+                -0.8485281374238572
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.7071067811865477,
+                0.0,
+                0.7071067811865474,
+                0.8485281374238568
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000014/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000014/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000014",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.875
+            },
+            "rgb_asset": "frames/000014/rgb.bin",
+            "timestamp_ns": 2400000000,
+            "tracking_state": "normal"
+          },
+          {
+            "camera_to_world": [
+              [
+                0.9238795325112865,
+                0.0,
+                -0.3826834323650904,
+                -0.4592201188381084
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                1.5
+              ],
+              [
+                0.3826834323650904,
+                0.0,
+                0.9238795325112865,
+                1.1086554390135437
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "confidence_asset": "frames/000015/confidence.u8",
+            "confidence_encoding": "arkit_0_low_1_medium_2_high",
+            "depth_asset": "frames/000015/depth.f32",
+            "depth_encoding": "float32_little_endian_meters",
+            "depth_size": [
+              16,
+              12
+            ],
+            "exposure": {
+              "duration_s": 0.008333333333333333,
+              "iso": 100
+            },
+            "frame_id": "frame-000015",
+            "image_size": [
+              16,
+              12
+            ],
+            "intrinsics": [
+              [
+                14.0,
+                0.0,
+                8.0
+              ],
+              [
+                0.0,
+                14.0,
+                6.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "motion": {
+              "acceleration_m_s2": [
+                0.0,
+                9.80665,
+                0.0
+              ],
+              "angular_velocity_rad_s": [
+                0.0,
+                0.1,
+                0.0
+              ]
+            },
+            "pose_stream": "synthetic_metric",
+            "quality": {
+              "blur_score": 0.02,
+              "coverage_hint": 0.9375
+            },
+            "rgb_asset": "frames/000015/rgb.bin",
+            "timestamp_ns": 2500000000,
+            "tracking_state": "normal"
+          }
+        ],
+        "mesh_anchors": [],
+        "motion_samples": [],
+        "privacy": {
+          "contains_people": false,
+          "redactions": []
+        },
+        "provenance": {
+          "generator": "sip.capture.create_synthetic_room_capture",
+          "seed": 42
+        },
+        "restricted_regions": [],
+        "root_hash": "3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119",
+        "schema_version": "1.0.0",
+        "semantic_hash": "91fd532f43b9df0258f877311fcc96c5c4ee5f9490aa67ec2b461aae855c46f4"
+      },
+      "path": "/mnt/data/sip-hybrid-work/runtime/demo/export/input/synthetic-room.sipcapture",
+      "root_hash": "3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119",
+      "schema_version": "1.0.0",
+      "valid": true,
+      "validation": {
+        "archive_sha256": "1c155513ace9f60a16b2db7db602bf97c5c743ccccf98af47658e68f67af942f",
+        "asset_count": 48,
+        "capture_id": "synthetic-room-42-16",
+        "checks": [
+          {
+            "byte_count": 192,
+            "path": "frames/000000/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000000/depth.f32",
+            "sha256": "d8bded6f21ef777865b3d948f0eaad9dd1635d1764ec018fe68299e22af5a783",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000000/rgb.bin",
+            "sha256": "9c1d2a9d201c927c8fe10d88accce0bf772cf476b8e329bf28af1256ff5835a8",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000001/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000001/depth.f32",
+            "sha256": "d39b03409e3a105065cb85149965b80e0fbc3a7c9bd8ed07e2b3eb60de29bafd",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000001/rgb.bin",
+            "sha256": "6ca3ba9dc7d473985667004c632ae79458dcd791c7413758e5b5a49a157659aa",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000002/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000002/depth.f32",
+            "sha256": "154f78cf2f70a72cbb800ba82e8c6f2a2dcd93ac0c4443997895a58113a628db",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000002/rgb.bin",
+            "sha256": "2a7def0d95a8038e4e1c6ed4cbc495d24bcc450241811f3170226bacbe4ef218",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000003/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000003/depth.f32",
+            "sha256": "5726338787fffd2d4c3597702c9aabda680f882d0b102e53b07633bf4833f0e8",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000003/rgb.bin",
+            "sha256": "6f3980e5fc9853ca5b808eee7daa0a686366196a2fc486ccfb8ec167b9322ffa",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000004/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000004/depth.f32",
+            "sha256": "55c6ef6b449fade8f72a941003c128ae9f33816907ecefea83b8e3b96af31bc5",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000004/rgb.bin",
+            "sha256": "3d3787525168b1d378eef538a271b45279e396c710801321af60d861124b9f86",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000005/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000005/depth.f32",
+            "sha256": "cbdfb902dfc6e2c76eb19bcccf6458c769849095454adb40a84ce559873cefe3",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000005/rgb.bin",
+            "sha256": "4ff04a01c9b3dbcb6ae7b86f560c32a29fa20833c713df2ef3efd6db9adfde2e",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000006/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000006/depth.f32",
+            "sha256": "9892f4ca936db6763ec567b988f9b7616a89f994c43ff36f1d2f536ab86f05ac",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000006/rgb.bin",
+            "sha256": "58697836b3d2fdacb752f71da97cceda512c5b9bf13ab5ae566991c276fd676f",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000007/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000007/depth.f32",
+            "sha256": "08178aabd942e6672873783027fa55589e25a5cb7db5bfbc175f9f8f49184897",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000007/rgb.bin",
+            "sha256": "e96bd6f83e16c798395d3d49d4bc31b0e9cd274d51630cea7e533de85c170aad",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000008/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000008/depth.f32",
+            "sha256": "45445746aafbda7be3cd0bb6dbfa9783e4a229e36cf581f95a7c4a106702e64f",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000008/rgb.bin",
+            "sha256": "320cac0a91e71109d769e2a640e073816cb32dcdef359a377347ebad7a1b8492",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000009/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000009/depth.f32",
+            "sha256": "00d708c43f29a1e787aeb64ea3c25bbdbb41debe93c09d58867148d254e2d33d",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000009/rgb.bin",
+            "sha256": "61e64cec2a475f6379e95b2d4fef906f48f0c5ab9c0c5331cefeb8c817a7b74d",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000010/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000010/depth.f32",
+            "sha256": "daeeba8de88a70a7d516e1ee92ed607cd60755b9ca87ee7d8e7c05c7a5622a81",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000010/rgb.bin",
+            "sha256": "c8cefa05e3be06878ffb9f466bf0e605fde6f1544fd6a5e89d89c9564abd2b58",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000011/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000011/depth.f32",
+            "sha256": "51527f8aaf11c2e86369654149abec087dceb9d477863899a008bab7d9f5a145",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000011/rgb.bin",
+            "sha256": "6c0ba0b222bdeda124e4c5397882b04924d0046cec733bb3e5e92633704baa51",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000012/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000012/depth.f32",
+            "sha256": "b00279f286238da8846ba26b9d35614c43e67b64af9a8312d96481afdb675c04",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000012/rgb.bin",
+            "sha256": "4810c6b18eac9252303ec0e837cf9413273a627eeb70cee5d00ecf64df2445c8",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000013/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000013/depth.f32",
+            "sha256": "854f3dd706be34881e0ba44ca4ce6c33423959f2cc0359c1770eb4b77a81c3a3",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000013/rgb.bin",
+            "sha256": "492ca4ffac1f422d66e154622f0da2dac3d37d5ab9e6ca006c7924c8868b475f",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000014/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000014/depth.f32",
+            "sha256": "bb3544097785b5a0da2330b675fe15d53b512c2692f1d2bed7a10547847e33cb",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000014/rgb.bin",
+            "sha256": "046e7016bd5e1de3ed6241d4fa56b3b1f320a4d2e32b033b00020319013eefe6",
+            "valid": true
+          },
+          {
+            "byte_count": 192,
+            "path": "frames/000015/confidence.u8",
+            "sha256": "90b88ae002ea844ed07d6f59bb868b0b9eb89a32dd2d6eea551437ccaa2fc141",
+            "valid": true
+          },
+          {
+            "byte_count": 768,
+            "path": "frames/000015/depth.f32",
+            "sha256": "3706a7cb786abd0d081ad19d84d586a24631402f796c504637fea28fc1e8c9fd",
+            "valid": true
+          },
+          {
+            "byte_count": 576,
+            "path": "frames/000015/rgb.bin",
+            "sha256": "f1fa1d9635928a59d19171fdc2fd995a36374cc6aa25d5db565df7c167aabe26",
+            "valid": true
+          }
+        ],
+        "frame_count": 16,
+        "root_hash": "3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119",
+        "schema_version": "1.0.0",
+        "valid": true
+      }
+    },
+    "durable_operation": {
+      "attempts": 2,
+      "checkpoints": [
+        {
+          "root_hash": "3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119",
+          "safe_to_resume": true,
+          "sequence": 1,
+          "stage": "validated-input"
+        },
+        {
+          "safe_to_resume": true,
+          "sequence": 2,
+          "source_checkpoint": {
+            "root_hash": "3801ced4a8aa3708e16807a72334543849a9c73a9ebd3d4977ec35d306ed8119",
+            "safe_to_resume": true,
+            "sequence": 1,
+            "stage": "validated-input"
+          },
+          "stage": "normalized"
+        }
+      ],
+      "final_state": "succeeded",
+      "operation_id": "b9038413-ae8c-48b3-b516-f7ad6c6bbbf6",
+      "output_hash": "80dd1d94bd288c8311d1415825d651d241afa8c743754c07d0babe1c35adf0b2"
+    },
+    "ingest": {
+      "capture_asset_id": "6c6c6dab-604f-4a8b-bd1d-85476d2be421"
+    },
+    "preservation": {
+      "independent_runtime": "/mnt/data/sip-hybrid-work/runtime/demo/export/restore-runtime",
+      "matching_root_hash": true,
+      "operational_replay": {
+        "counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 0,
+          "construction_records": 0,
+          "coordinate_frames": 1,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 0,
+          "representation_bindings": 1,
+          "representations": 1,
+          "retention_rules": 0,
+          "scene_branches": 1,
+          "scene_commits": 2,
+          "scene_entities": 1,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "matches_package": true,
+        "vertical_validation": {}
+      },
+      "package_path": "/mnt/data/sip-hybrid-work/runtime/demo/export/preservation.sip-preservation.zip",
+      "package_sha256": "2e5ee8d926aa90a62f0473b5d97aa6d86704a47b8df95912d1c35089b74dc60b",
+      "restored": {
+        "commit_id": "a4ad3cd9-69fd-4985-8c6e-1b9493e9d77a",
+        "domain_schema_version": "1.1.0",
+        "id_maps": {
+          "anchor_remap": {},
+          "annotation": {},
+          "assertion": {},
+          "asset": {
+            "20a0f236-e517-4f96-b7ad-5388c26d7efe": "20a0f236-e517-4f96-b7ad-5388c26d7efe",
+            "6c6c6dab-604f-4a8b-bd1d-85476d2be421": "6c6c6dab-604f-4a8b-bd1d-85476d2be421"
+          },
+          "branch": {
+            "fa0071de-c258-4c98-965f-0dd800ad83ca": "fa0071de-c258-4c98-965f-0dd800ad83ca"
+          },
+          "comment": {},
+          "commit": {
+            "a4ad3cd9-69fd-4985-8c6e-1b9493e9d77a": "a4ad3cd9-69fd-4985-8c6e-1b9493e9d77a",
+            "b8ffd1af-bb6e-4150-9058-9ce1e2238991": "b8ffd1af-bb6e-4150-9058-9ce1e2238991"
+          },
+          "consent": {},
+          "construction": {},
+          "derivation": {},
+          "entity": {
+            "77d50444-9d9f-4ec9-9c8e-2164a2ba567d": "77d50444-9d9f-4ec9-9c8e-2164a2ba567d"
+          },
+          "evidence": {},
+          "frame": {
+            "world": "world"
+          },
+          "geometry_manifest": {},
+          "legal_hold": {},
+          "measurement": {},
+          "memory": {},
+          "representation": {
+            "0bd33b17-108a-4245-a882-2b3bf434adc1": "0bd33b17-108a-4245-a882-2b3bf434adc1"
+          },
+          "representation_binding": {
+            "eed6209b-2eaf-46b2-9e7a-223b48733bbf": "eed6209b-2eaf-46b2-9e7a-223b48733bbf"
+          },
+          "retention_rule": {},
+          "scene": {
+            "584c8b92-68b7-4769-aa6f-d95609122a95": "584c8b92-68b7-4769-aa6f-d95609122a95"
+          },
+          "scene_tag": {},
+          "spatial_transform": {},
+          "task": {}
+        },
+        "native_replay": true,
+        "non_activated_evidence": {
+          "archived_tables": [
+            "agent_proposals",
+            "audit_events",
+            "deletion_evidence",
+            "deletion_requests",
+            "exports",
+            "notifications",
+            "operations",
+            "outbox_events",
+            "quota_policies",
+            "role_bindings",
+            "saved_queries",
+            "search_documents",
+            "usage_ledger"
+          ],
+          "governance_tables": [
+            "model_manifests",
+            "provider_manifests"
+          ],
+          "provider_model_reapproval_required": true,
+          "search_reindex_required": true,
+          "security_bindings_replayed": false
+        },
+        "preservation_package_asset_id": "4b387525-6d44-4c31-ad09-a089ce4240c2",
+        "preservation_package_sha256": "2e5ee8d926aa90a62f0473b5d97aa6d86704a47b8df95912d1c35089b74dc60b",
+        "project_id": "project-restored-foundation",
+        "replayed_counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 0,
+          "construction_records": 0,
+          "coordinate_frames": 1,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 0,
+          "representation_bindings": 1,
+          "representations": 1,
+          "retention_rules": 0,
+          "scene_branches": 1,
+          "scene_commits": 2,
+          "scene_entities": 1,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "restored_assets": {
+          "count": 2,
+          "remapped_ids": 0,
+          "unique_objects": 2
+        },
+        "scene_id": "584c8b92-68b7-4769-aa6f-d95609122a95",
+        "semantic_snapshot_hash": "67e854ceb9c9029560f54f8733fc117decfccd0624eb3aeda17bca6712f81d4c",
+        "source_root_hash": "52e0a4990882a74d607a3877303588d7fea0da27a5fd3bcf10abbbad34dcedc3",
+        "tenant_id": "tenant-restored-foundation",
+        "unresolved_references": []
+      },
+      "restored_assets": 3,
+      "root_hash": "52e0a4990882a74d607a3877303588d7fea0da27a5fd3bcf10abbbad34dcedc3",
+      "verified_files": 5
+    },
+    "scene": {
+      "entity_id": "77d50444-9d9f-4ec9-9c8e-2164a2ba567d",
+      "initial_commit": "b8ffd1af-bb6e-4150-9058-9ce1e2238991",
+      "metric_commit": {
+        "branch": "main",
+        "change_evidence_ids": [],
+        "commit_id": "a4ad3cd9-69fd-4985-8c6e-1b9493e9d77a",
+        "field_visit_id": null,
+        "parent_ids": [
+          "b8ffd1af-bb6e-4150-9058-9ce1e2238991"
+        ],
+        "recorded_at": "2026-07-27T23:58:17.417350+00:00",
+        "review_state": "unreviewed",
+        "root_manifest_hash": "67e854ceb9c9029560f54f8733fc117decfccd0624eb3aeda17bca6712f81d4c",
+        "snapshot_hash": "67e854ceb9c9029560f54f8733fc117decfccd0624eb3aeda17bca6712f81d4c",
+        "valid_from": null,
+        "valid_to": null,
+        "workflow_event_id": null
+      },
+      "metric_representation_id": "0bd33b17-108a-4245-a882-2b3bf434adc1",
+      "scene_id": "584c8b92-68b7-4769-aa6f-d95609122a95"
+    },
+    "viewer": {
+      "external_dependencies": [],
+      "portable": true,
+      "session": "/mnt/data/sip-hybrid-work/runtime/demo/export/viewer-session.json",
+      "session_sha256": "35879b0128866ce7443e87ee1766aa83af03d855424090861a66869c18e18953",
+      "viewer": "/mnt/data/sip-hybrid-work/runtime/demo/export/viewer.html",
+      "viewer_sha256": "437fceca4d8f81f7abd958e3ca002f2fec292c4009875142a4c5906fc306633d"
+    }
+  },
+  "schema": "sip.demo-evidence/v1",
+  "started_at": "2026-07-27T23:58:16.323930+00:00",
+  "status": "passed"
+}

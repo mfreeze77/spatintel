@@ -1,0 +1,234 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sip-local-dependency
+  namespace: sip-system
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: sip-system
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/component: database
+    spec:
+      serviceAccountName: sip-local-dependency
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: postgres
+        image: postgis/postgis:18-3.6@sha256:f248a10d133f63d01aefab324f3462d7e1002e9cc1b65c6585626f6cb7a3d85c
+        ports:
+        - name: postgres
+          containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: sip
+        - name: POSTGRES_USER
+          value: sip
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sip-runtime-secrets
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_INITDB_ARGS
+          value: --data-checksums --auth-host=scram-sha-256 --auth-local=peer
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: '2'
+            memory: 4Gi
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - sip
+            - -d
+            - sip
+          periodSeconds: 5
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 20Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: sip-system
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: postgres
+  ports:
+  - name: postgres
+    port: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey
+  namespace: sip-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: valkey
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: valkey
+        app.kubernetes.io/component: cache
+    spec:
+      serviceAccountName: sip-local-dependency
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+      - name: configure
+        image: valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
+        command:
+        - /bin/sh
+        - -ec
+        - umask 077; printf '%s\n' 'bind 0.0.0.0' 'protected-mode yes' 'appendonly
+          yes' 'appendfsync everysec' 'save 900 1' > /generated/valkey.conf; printf
+          'requirepass %s\n' "$(cat /run/secrets/VALKEY_PASSWORD)" >> /generated/valkey.conf;
+          chown 999:999 /generated/valkey.conf; chmod 0600 /generated/valkey.conf
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: &id001
+            drop:
+            - ALL
+          seccompProfile: &id002
+            type: RuntimeDefault
+          runAsUser: 0
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        volumeMounts:
+        - name: config
+          mountPath: /generated
+        - name: runtime-secrets
+          mountPath: /run/secrets
+          readOnly: true
+      containers:
+      - name: valkey
+        image: valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
+        args:
+        - valkey-server
+        - /usr/local/etc/valkey/valkey.conf
+        ports:
+        - name: valkey
+          containerPort: 6379
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: *id001
+          seccompProfile: *id002
+          runAsNonRoot: true
+          runAsUser: 999
+          runAsGroup: 999
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: config
+          mountPath: /usr/local/etc/valkey
+          readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+      volumes:
+      - name: data
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: config
+        emptyDir:
+          sizeLimit: 1Mi
+      - name: runtime-secrets
+        secret:
+          secretName: sip-runtime-secrets
+          items:
+          - key: VALKEY_PASSWORD
+            path: VALKEY_PASSWORD
+          defaultMode: 256
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey
+  namespace: sip-system
+spec:
+  selector:
+    app.kubernetes.io/name: valkey
+  ports:
+  - name: valkey
+    port: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: local-dependency-ingress
+  namespace: sip-system
+spec:
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+      - database
+      - cache
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/component
+          operator: In
+          values:
+          - api
+          - worker
+          - migration
+    ports:
+    - protocol: TCP
+      port: 5432
+    - protocol: TCP
+      port: 6379

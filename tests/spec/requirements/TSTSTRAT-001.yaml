@@ -1,0 +1,32 @@
+schema_version: '1.0'
+requirement_id: TSTSTRAT-001
+priority: P0
+source:
+  document: 95-testing-delivery/950_test_strategy.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Every P0 requirement shall map to an automated test, controlled field procedure, review artifact, or continuously
+  monitored control.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- tools/run_test_matrix.py
+- tools/update_requirements.py
+- src/sip/spec_lint.py
+- requirements/requirements-ledger.json
+automated_test_ids:
+- tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

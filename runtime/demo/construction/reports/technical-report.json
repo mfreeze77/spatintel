@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-28T00:40:33.620205+00:00",
+  "measurements": [
+    {
+      "authority_class": "field_verified",
+      "calibration": {
+        "asset_id": "fc9a7293-69f5-48dd-b24d-b0e5505648a8",
+        "certificate": "SYN-CAL-001",
+        "instrument": "traceable laser"
+      },
+      "measurement_id": "719afcb0-f20f-4061-8107-2e777294e564",
+      "source_asset_ids": [
+        "11816bd6-cf5d-43af-91ba-4d6a29ee2d4f",
+        "fc9a7293-69f5-48dd-b24d-b0e5505648a8"
+      ],
+      "uncertainty": 0.003,
+      "unit": "m",
+      "value": 1.52,
+      "verified_at": "2026-07-28T00:40:33.610406",
+      "verifier_id": "demo-field-verifier"
+    }
+  ],
+  "project_id": "project-demo-construction",
+  "record_counts": {
+    "access_opening": 1,
+    "access_reader": 1,
+    "bas_equipment": 1,
+    "bas_point": 1,
+    "building": 1,
+    "deficiency": 1,
+    "drawing": 1,
+    "electrical_equipment": 1,
+    "fire_alarm_device": 1,
+    "fire_alarm_panel": 1,
+    "level": 1,
+    "mechanical_equipment": 1,
+    "note": 1,
+    "photo": 1,
+    "rfi": 1,
+    "room": 1,
+    "site": 1
+  },
+  "report_hash": "93533d3980c6ab4d905a9f619f3d504b3b9a2f64e4f406d5457a99d45ace85e3",
+  "report_type": "construction_technical",
+  "state_counts": {
+    "closed": 1,
+    "observed": 16
+  },
+  "tenant_id": "tenant-demo-construction",
+  "warnings": [
+    "Phone-derived geometry is not survey-grade, fabrication-ready, contract-authoritative, code-compliant, or verified as-built without independent verification."
+  ]
+}

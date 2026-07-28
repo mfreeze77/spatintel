@@ -1,0 +1,11 @@
+\n$ env PYTHONPATH=src python tools/schema_codegen/generate.py --root . --check
+{"check": true, "generated": 117}
+\n$ python -m compileall -q src tools
+\n$ env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src pytest -q tests/integration/test_governed_hybrid.py -p no:ddtrace -p no:cov -p no:json-report
+............                                                             [100%]
+12 passed in 10.87s
+\n$ env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src pytest -q tests/contract/test_governed_hybrid_api.py -p no:ddtrace -p no:cov -p no:json-report
+..                                                                       [100%]
+2 passed in 3.81s
+\n$ env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src pytest -q tests/contract/test_service_boundaries.py -p no:ddtrace -p no:cov -p no:json-report
+.

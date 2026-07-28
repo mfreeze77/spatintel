@@ -1,0 +1,24 @@
+{
+  "audience": "public",
+  "edition_hash": "7963d26029d9e7177ffcffe2f64f0db3dd01497c73c1a1b7a2e04d67c338a004",
+  "generated_labels_preserved": true,
+  "purpose": "preservation",
+  "records": [
+    {
+      "audience": "public",
+      "confidence": 1.0,
+      "data": {
+        "access_state": "active",
+        "name": "Alex Synthetic"
+      },
+      "evidence_asset_ids": [
+        "eb5bb01e-2e22-4b60-af9f-6ef5c8d8777d"
+      ],
+      "generated_lineage": null,
+      "record_id": "ea6b1007-3dbc-481d-8d4e-4df6db045af4",
+      "record_type": "person",
+      "source_class": "corroborated",
+      "subject_id": "person-alex-synthetic"
+    }
+  ]
+}

@@ -1,0 +1,690 @@
+name: ${SIP_COMPOSE_PROJECT_NAME:-sip}
+
+x-common-environment: &common-environment
+  SIP_ENV: development
+  SIP_ALLOW_DEVELOPMENT_AUTH: "true"
+  SIP_POSTGRES_HOST: postgres
+  SIP_POSTGRES_PORT: "5432"
+  SIP_POSTGRES_DB: sip
+  SIP_POSTGRES_USER: sip
+  SIP_OBJECT_STORE_BACKEND: ${SIP_OBJECT_STORE_BACKEND:-local}
+  SIP_OBJECT_STORE_ROOT: /var/lib/sip/objects
+  SIP_MULTIPART_ROOT: /var/lib/sip/runtime/multipart
+  SIP_MASTER_KEY_ID: compose-development-v1
+  SIP_S3_ENDPOINT_URL: http://minio:9000
+  SIP_S3_BUCKET: sip-local
+  SIP_S3_REGION: us-east-1
+  SIP_LOG_LEVEL: ${SIP_LOG_LEVEL:-info}
+  OTEL_EXPORTER_OTLP_ENDPOINT: ${SIP_OTEL_EXPORTER_OTLP_ENDPOINT:-}
+
+x-common-secrets: &common-secrets
+  - sip_postgres_password
+  - sip_master_key_b64
+  - sip_signing_key_b64
+  - sip_valkey_password
+
+x-python-service: &python-service
+  image: sip/python:1.1.0-local
+  build:
+    context: ../..
+    dockerfile: infrastructure/containers/Dockerfile.python
+    args:
+      SIP_BUILD_VERSION: 1.1.0
+      SIP_BUILD_REVISION: ${SIP_BUILD_REVISION:-uncommitted}
+  restart: unless-stopped
+  init: true
+  read_only: true
+  user: "10001:10001"
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  pids_limit: 256
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,size=256m,mode=1777
+  volumes:
+    - sip_objects:/var/lib/sip/objects
+    - sip_runtime:/var/lib/sip/runtime
+  environment: *common-environment
+  secrets: *common-secrets
+  networks: [backend]
+  depends_on:
+    migrate:
+      condition: service_completed_successfully
+  healthcheck:
+    test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health/live', timeout=2)"]
+    interval: 10s
+    timeout: 3s
+    retries: 10
+    start_period: 20s
+
+services:
+  postgres:
+    image: postgis/postgis:18-3.6@sha256:f248a10d133f63d01aefab324f3462d7e1002e9cc1b65c6585626f6cb7a3d85c
+    restart: unless-stopped
+    shm_size: 256mb
+    environment:
+      POSTGRES_DB: sip
+      POSTGRES_USER: sip
+      POSTGRES_PASSWORD_FILE: /run/secrets/sip_postgres_password
+      POSTGRES_INITDB_ARGS: --data-checksums --auth-host=scram-sha-256 --auth-local=peer
+    secrets: [sip_postgres_password]
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks: [backend]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U sip -d sip"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 512
+
+  valkey-config:
+    image: valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
+    restart: "no"
+    user: "0:0"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    secrets: [sip_valkey_password]
+    volumes:
+      - ./config/valkey.conf:/source/valkey.conf:ro
+      - valkey_config:/generated
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        umask 077
+        cp /source/valkey.conf /generated/valkey.conf
+        printf '\nrequirepass %s\n' "$$(cat /run/secrets/sip_valkey_password)" >> /generated/valkey.conf
+        chown 999:999 /generated/valkey.conf
+        chmod 0600 /generated/valkey.conf
+    networks: [backend]
+
+  valkey:
+    image: valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
+    restart: unless-stopped
+    user: "999:999"
+    read_only: true
+    init: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m,mode=1777
+    volumes:
+      - valkey_data:/data
+      - valkey_config:/usr/local/etc/valkey:ro
+    command: [valkey-server, /usr/local/etc/valkey/valkey.conf]
+    secrets: [sip_valkey_password]
+    networks: [backend]
+    depends_on:
+      valkey-config:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD-SHELL, "VALKEYCLI_AUTH=$$(cat /run/secrets/sip_valkey_password) valkey-cli ping | grep -q PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  # The upstream image is archived. This service is intentionally local-only,
+  # never used by production profiles, and guarded by the provider/license gate.
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
+    profiles: [local-object-store]
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER_FILE: /run/secrets/sip_minio_root_user
+      MINIO_ROOT_PASSWORD_FILE: /run/secrets/sip_minio_root_password
+      MINIO_BROWSER_REDIRECT_URL: http://127.0.0.1:${SIP_MINIO_CONSOLE_PORT:-9001}
+    secrets: [sip_minio_root_user, sip_minio_root_password]
+    volumes:
+      - minio_data:/data
+    ports:
+      - 127.0.0.1:${SIP_MINIO_API_PORT:-9000}:9000
+      - 127.0.0.1:${SIP_MINIO_CONSOLE_PORT:-9001}:9001
+    networks: [backend]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 512
+    healthcheck:
+      test: [CMD-SHELL, "curl -fsS http://127.0.0.1:9000/minio/health/live >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  migrate:
+    <<: *python-service
+    restart: "no"
+    read_only: true
+    command: [alembic, upgrade, head]
+    healthcheck: {disable: true}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  control-api:
+    <<: *python-service
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: control-api
+    ports:
+      - ${SIP_API_BIND:-127.0.0.1}:${SIP_API_PORT:-8080}:8080
+    networks: [edge, backend]
+
+  identity-policy:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: identity-policy}
+  capture-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: capture-service}
+  workflow-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: workflow-service}
+  scene-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: scene-service}
+  evidence-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: evidence-service}
+  search-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: search-service}
+  export-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: export-service}
+  notification-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: notification-service}
+  audit-service:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: audit-service}
+  representation-api:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-api}
+  provider-registry:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: provider-registry}
+  representation-publisher:
+    <<: *python-service
+    environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-publisher}
+
+  worker-capture-normalizer:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/capture-normalizer/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-capture-normalizer
+      SIP_WORKLOAD_IDENTITY: sip-worker:capture-normalizer
+      SIP_WORKER_MANIFEST_SHA256: a1ebfd05d69f8c4254028aa69f87571bbda96cfacb5dbe931e58779c873228ca
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-capture-normalizer-runtime:/var/lib/sip/runtime
+
+  worker-change-detection:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/change-detection/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-change-detection
+      SIP_WORKLOAD_IDENTITY: sip-worker:change-detection
+      SIP_WORKER_MANIFEST_SHA256: afcefeafe9d8981dd85fa6b1b792fccaf239211cdeb6de65481badbcd7f57b10
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-change-detection-runtime:/var/lib/sip/runtime
+
+  worker-collision-navigation:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/collision-navigation/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-collision-navigation
+      SIP_WORKLOAD_IDENTITY: sip-worker:collision-navigation
+      SIP_WORKER_MANIFEST_SHA256: a7c9c74b5335d6686fbf227ff737f4a10534ecdb3e2d82ea5ee668a47fd7cfcf
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-collision-navigation-runtime:/var/lib/sip/runtime
+
+  worker-depth-normalizer:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/depth-normalizer/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-depth-normalizer
+      SIP_WORKLOAD_IDENTITY: sip-worker:depth-normalizer
+      SIP_WORKER_MANIFEST_SHA256: a07ff6d35cd0e0ebb4191ca3d671b8eaafa356b2554d45fef30a00218af304d3
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-depth-normalizer-runtime:/var/lib/sip/runtime
+
+  worker-document-media:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/document-media/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-document-media
+      SIP_WORKLOAD_IDENTITY: sip-worker:document-media
+      SIP_WORKER_MANIFEST_SHA256: 5dfdc6566111b6a84b60ce2055733e479a64507dc9620ebb7c5611febb0961b7
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-document-media-runtime:/var/lib/sip/runtime
+
+  worker-fusion-tsdf:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/fusion-tsdf/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-fusion-tsdf
+      SIP_WORKLOAD_IDENTITY: sip-worker:fusion-tsdf
+      SIP_WORKER_MANIFEST_SHA256: 42eb39fa492a2ad7d907a614ca215d610da46da3eba9f98c938443d41d9be76c
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "4.0"
+    mem_limit: 8g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-fusion-tsdf-runtime:/var/lib/sip/runtime
+
+  worker-geometry-cleanup:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/geometry-cleanup/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-geometry-cleanup
+      SIP_WORKLOAD_IDENTITY: sip-worker:geometry-cleanup
+      SIP_WORKER_MANIFEST_SHA256: 219818fc3fa16f6e5c4a99d9cdeace1ef80a4d0d5edafb30a430f6012b6afb2e
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-geometry-cleanup-runtime:/var/lib/sip/runtime
+
+  worker-lingbot-adapter:
+    <<: *python-service
+    healthcheck: {disable: true}
+    profiles: [governed-models]
+    command: [python, workers/lingbot-adapter/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-lingbot-adapter
+      SIP_WORKLOAD_IDENTITY: sip-worker:lingbot-adapter
+      SIP_WORKER_MANIFEST_SHA256: bdb62299af737b8f576e38eb52e5fd82b89680cbf4b4fe56e43d752166429704
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "8.0"
+    mem_limit: 32g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-lingbot-adapter-runtime:/var/lib/sip/runtime
+
+  worker-mesh-lod:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/mesh-lod/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-mesh-lod
+      SIP_WORKLOAD_IDENTITY: sip-worker:mesh-lod
+      SIP_WORKER_MANIFEST_SHA256: 779f04d24ff2099c8654922b62ee4133bba341e81e1493b260579d891f738c53
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-mesh-lod-runtime:/var/lib/sip/runtime
+
+  worker-pose-optimizer:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/pose-optimizer/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-pose-optimizer
+      SIP_WORKLOAD_IDENTITY: sip-worker:pose-optimizer
+      SIP_WORKER_MANIFEST_SHA256: bdecca304b8eccc663ad4db2159f8d2259860f41f608ef35015661916d081738
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-pose-optimizer-runtime:/var/lib/sip/runtime
+
+  worker-report-export:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/report-export/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-report-export
+      SIP_WORKLOAD_IDENTITY: sip-worker:report-export
+      SIP_WORKER_MANIFEST_SHA256: ce79644efaf101db6a910f6a8c1b69ed56b0136d24568837ddc6c6d49bf3d42e
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-report-export-runtime:/var/lib/sip/runtime
+
+  worker-representation-quality:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/representation-quality/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-representation-quality
+      SIP_WORKLOAD_IDENTITY: sip-worker:representation-quality
+      SIP_WORKER_MANIFEST_SHA256: 0f49de5015f462e10b4f88055af981bdeaa2889b300ca3abaa0e24ef9e17855f
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-representation-quality-runtime:/var/lib/sip/runtime
+
+  worker-semantics:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/semantics/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-semantics
+      SIP_WORKLOAD_IDENTITY: sip-worker:semantics
+      SIP_WORKER_MANIFEST_SHA256: 73d5d209ae7ca874f8c2d6cf74df8e32e152077c3ddaada16246119f9711c3f3
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-semantics-runtime:/var/lib/sip/runtime
+
+  worker-splat:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/splat/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-splat
+      SIP_WORKLOAD_IDENTITY: sip-worker:splat
+      SIP_WORKER_MANIFEST_SHA256: f7c19dfc70636ba095fa1f9645d2bf74bfcb4ae1f762e8382d0da726a6cb16e0
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "4.0"
+    mem_limit: 8g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-splat-runtime:/var/lib/sip/runtime
+
+  worker-splat-normalizer:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/splat-normalizer/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-splat-normalizer
+      SIP_WORKLOAD_IDENTITY: sip-worker:splat-normalizer
+      SIP_WORKER_MANIFEST_SHA256: 8ddfdaab4633a1a5e6ba6fba0c50722dcbe682ed3c660cf3aca89cde5f145bbd
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-splat-normalizer-runtime:/var/lib/sip/runtime
+
+  worker-splat-surface:
+    <<: *python-service
+    healthcheck: {disable: true}
+    command: [python, workers/splat-surface/main.py]
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: worker-splat-surface
+      SIP_WORKLOAD_IDENTITY: sip-worker:splat-surface
+      SIP_WORKER_MANIFEST_SHA256: 3ee12b8c5ab5dfea0ba29411d1f40dec414321c94cf8f55381aff9d0042a783b
+      SIP_WORKER_PUBLICATION_PERMISSION: "false"
+      SIP_WORKER_COMPUTE_NETWORK_ACCESS: denied
+      SIP_WORKER_METRICS_PORT: "9100"
+    cpus: "2.0"
+    mem_limit: 2g
+    stop_grace_period: 30s
+    expose:
+      - "9100"
+    volumes:
+      - sip_objects:/var/lib/sip/objects:ro
+      - worker-splat-surface-runtime:/var/lib/sip/runtime
+
+  otel-collector:
+    image: otel/opentelemetry-collector:0.140.1@sha256:e448b3c73de52e379d85875c3441faf499e470ef91e775439e7937bca67e9c4f
+    profiles: [observability]
+    restart: unless-stopped
+    user: "10001:10001"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ../observability/otel-collector.local.yaml:/etc/otelcol/config.yaml:ro
+    expose: ["4317", "4318", "13133"]
+    networks: [backend]
+
+  prometheus:
+    image: prom/prometheus:v3.5.3@sha256:ddc2493835a1509976d5e4e0c94199c4f843ce1f42dd6bcfc8231ba734a93ff7
+    profiles: [observability]
+    restart: unless-stopped
+    user: "65534:65534"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=${SIP_PROMETHEUS_RETENTION:-15d}
+      - --web.enable-lifecycle=false
+    volumes:
+      - ../observability/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
+      - ../observability/prometheus-rules.yaml:/etc/prometheus/prometheus-rules.yaml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - 127.0.0.1:${SIP_PROMETHEUS_PORT:-9090}:9090
+    networks: [backend]
+    depends_on:
+      - otel-collector
+
+  grafana:
+    image: grafana/grafana:12.1.0@sha256:6ac590e7cabc2fbe8d7b8fc1ce9c9f0582177b334e0df9c927ebd9670469440f
+    profiles: [observability]
+    restart: unless-stopped
+    user: "472:472"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    environment:
+      GF_SECURITY_ADMIN_USER: ${SIP_GRAFANA_ADMIN_USER:-sip-admin}
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/sip_grafana_admin_password
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_SERVER_ENFORCE_DOMAIN: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    secrets: [sip_grafana_admin_password]
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m,mode=1777
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ../observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../observability/grafana/sip-overview.json:/var/lib/grafana/dashboards/sip-overview.json:ro
+    ports:
+      - 127.0.0.1:${SIP_GRAFANA_PORT:-3001}:3000
+    networks: [backend]
+    depends_on:
+      - prometheus
+
+  web:
+    image: sip/web:1.1.0-local
+    build:
+      context: ../..
+      dockerfile: infrastructure/containers/Dockerfile.web
+    restart: unless-stopped
+    init: true
+    user: "10001:10001"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m,mode=1777
+    environment:
+      NEXT_PUBLIC_SIP_API_BASE: http://127.0.0.1:${SIP_API_PORT:-8080}
+      SIP_INTERNAL_API_BASE: http://control-api:8080
+    ports:
+      - 127.0.0.1:${SIP_WEB_PORT:-3000}:3000
+    networks: [edge]
+    depends_on:
+      control-api:
+        condition: service_healthy
+
+secrets:
+  sip_postgres_password:
+    file: ./secrets/postgres_password.txt
+  sip_minio_root_user:
+    file: ./secrets/minio_root_user.txt
+  sip_minio_root_password:
+    file: ./secrets/minio_root_password.txt
+  sip_valkey_password:
+    file: ./secrets/valkey_password.txt
+  sip_master_key_b64:
+    file: ./secrets/master_key_b64.txt
+  sip_signing_key_b64:
+    file: ./secrets/signing_key_b64.txt
+  sip_grafana_admin_password:
+    file: ./secrets/grafana_admin_password.txt
+
+volumes:
+  postgres_data: {}
+  valkey_data: {}
+  valkey_config: {}
+  minio_data: {}
+  sip_objects: {}
+  sip_runtime: {}
+  worker-capture-normalizer-runtime: {}
+  worker-change-detection-runtime: {}
+  worker-collision-navigation-runtime: {}
+  worker-depth-normalizer-runtime: {}
+  worker-document-media-runtime: {}
+  worker-fusion-tsdf-runtime: {}
+  worker-geometry-cleanup-runtime: {}
+  worker-lingbot-adapter-runtime: {}
+  worker-mesh-lod-runtime: {}
+  worker-pose-optimizer-runtime: {}
+  worker-report-export-runtime: {}
+  worker-representation-quality-runtime: {}
+  worker-semantics-runtime: {}
+  worker-splat-runtime: {}
+  worker-splat-normalizer-runtime: {}
+  worker-splat-surface-runtime: {}
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  edge: {}
+  backend:
+    internal: true

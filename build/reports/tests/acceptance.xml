@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest-acceptance" tests="2" failures="0" errors="0" skipped="0" time="5.341000" timestamp="2026-07-28T00:35:20.944806+00:00" hostname="8af374932250">
+    <testcase classname="tests.acceptance.test_vertical_demonstrations" name="test_construction_synthetic_acceptance_demonstration" time="3.092" />
+    <testcase classname="tests.acceptance.test_vertical_demonstrations" name="test_liveforever_synthetic_acceptance_demonstration" time="2.235" />
+  </testsuite>
+</testsuites>

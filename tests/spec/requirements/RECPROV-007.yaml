@@ -1,0 +1,39 @@
+schema_version: '1.0'
+requirement_id: RECPROV-007
+priority: P0
+source:
+  document: 40-reconstruction/416_splat_surface_provider_contract.md
+  line: 285
+  section: 12. Normative requirements
+requirement: Publication shall be atomic and separate from execution so retries and worker failures cannot create competing
+  accepted outputs.
+verification_method: Fault-injection and transaction test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/contracts.py
+- src/sip/worker_runtime.py
+- src/sip/representations.py
+- src/sip/database.py
+- schemas/jsonschema/provider-capability.schema.json
+- migrations/versions/0011_governed_hybrid_representation.py
+automated_test_ids:
+- tests/integration/test_governed_hybrid.py::test_provider_or_validation_snapshot_changes_block_publication
+- tests/integration/test_governed_hybrid.py::test_quarantine_independent_validation_atomic_publication_and_view_reauthorization
+- tests/integration/test_worker_runtime.py::test_candidate_staging_is_idempotent_when_completion_fails_then_retries
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- schemas/events/event-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

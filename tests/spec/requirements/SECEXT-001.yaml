@@ -1,0 +1,39 @@
+schema_version: '1.0'
+requirement_id: SECEXT-001
+priority: P0
+source:
+  document: 90-security-ops/913_external_spatial_provider_governance.md
+  line: 191
+  section: 14. Normative requirements
+requirement: An external or unknown provider shall not access source or derived scene bytes before an approved provider dossier
+  and matching data/purpose policy exist.
+verification_method: Egress and admission test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/contracts.py
+- src/sip/model_governance.py
+- src/sip/security.py
+- src/sip/audit.py
+- docs/security/THREAT_MODEL.md
+- migrations/versions/0011_governed_hybrid_representation.py
+automated_test_ids:
+- tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence
+- tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed
+- tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization
+retained_evidence:
+- build/reports/license-gate.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

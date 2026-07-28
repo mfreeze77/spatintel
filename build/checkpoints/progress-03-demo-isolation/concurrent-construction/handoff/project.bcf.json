@@ -1,0 +1,20 @@
+{
+  "bcf_version": "3.0",
+  "project_id": "project-demo-construction",
+  "topics": [
+    {
+      "guid": "2059f04d-015e-4354-86c2-f06b8ceea4c1",
+      "labels": [
+        "SIP",
+        "synthetic-compatible-open-handoff"
+      ],
+      "priority": "medium",
+      "reference_links": [
+        "a5e778ee-7dfd-48ee-b757-1d82af7296f1",
+        "ad6eac1b-9066-45dd-bfb6-5085369e9092"
+      ],
+      "title": "Missing circuit label",
+      "topic_status": "closed"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "$defs": {
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "critical_infrastructure",
+        "biometric",
+        "minor"
+      ],
+      "title": "Classification",
+      "type": "string"
+    },
+    "LicenseDocumentContract": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "enum": [
+            "code",
+            "dependencies",
+            "weights",
+            "dataset",
+            "hosted_service",
+            "output"
+          ],
+          "title": "Component",
+          "type": "string"
+        },
+        "document_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Sha256"
+        },
+        "license_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "License Id",
+          "type": "string"
+        },
+        "review_state": {
+          "enum": [
+            "verified",
+            "missing",
+            "pending",
+            "incompatible"
+          ],
+          "title": "Review State",
+          "type": "string"
+        },
+        "source_url": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Source Url",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "title",
+        "license_id",
+        "source_url",
+        "review_state"
+      ],
+      "title": "LicenseDocumentContract",
+      "type": "object"
+    },
+    "ManifestRestrictionContract": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "unrestricted",
+            "allowlist",
+            "denylist"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "ManifestRestrictionContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/model-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_classifications": {
+      "items": {
+        "$ref": "#/$defs/Classification"
+      },
+      "minItems": 1,
+      "title": "Allowed Classifications",
+      "type": "array"
+    },
+    "allowed_deployments": {
+      "items": {
+        "enum": [
+          "development",
+          "test",
+          "staging",
+          "production"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Deployments",
+      "type": "array"
+    },
+    "approval_state": {
+      "enum": [
+        "approved",
+        "denied",
+        "expired",
+        "revoked",
+        "research_only",
+        "pending"
+      ],
+      "title": "Approval State",
+      "type": "string"
+    },
+    "approved_by": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Approved By",
+      "type": "string"
+    },
+    "checkpoint_hash": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Checkpoint Hash",
+      "type": "string"
+    },
+    "code_license": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Code License",
+      "type": "string"
+    },
+    "code_revision": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Code Revision",
+      "type": "string"
+    },
+    "commercial_use": {
+      "title": "Commercial Use",
+      "type": "boolean"
+    },
+    "customer_restrictions": {
+      "$ref": "#/$defs/ManifestRestrictionContract"
+    },
+    "dataset_terms": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Dataset Terms",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "geographic_restrictions": {
+      "$ref": "#/$defs/ManifestRestrictionContract"
+    },
+    "license_documents": {
+      "items": {
+        "$ref": "#/$defs/LicenseDocumentContract"
+      },
+      "minItems": 1,
+      "title": "License Documents",
+      "type": "array"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "manifest_signature": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Signature",
+      "type": "string"
+    },
+    "model_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_name": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Model Name",
+      "type": "string"
+    },
+    "output_terms": {
+      "minLength": 1,
+      "title": "Output Terms",
+      "type": "string"
+    },
+    "permitted_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Permitted Uses",
+      "type": "array"
+    },
+    "prohibited_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Prohibited Uses",
+      "type": "array"
+    },
+    "provider": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Provider",
+      "type": "string"
+    },
+    "review_due_at": {
+      "format": "date-time",
+      "title": "Review Due At",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "revision": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Revision",
+      "type": "string"
+    },
+    "revoked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Revoked At"
+    },
+    "schema": {
+      "const": "sip.model-manifest/v1.1",
+      "default": "sip.model-manifest/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "signed_by": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Signed By",
+      "type": "string"
+    },
+    "source_urls": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Urls",
+      "type": "array"
+    },
+    "version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    },
+    "weights_license": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Weights License",
+      "type": "string"
+    }
+  },
+  "required": [
+    "model_id",
+    "provider",
+    "model_name",
+    "version",
+    "revision",
+    "checkpoint_hash",
+    "source_urls",
+    "license_documents",
+    "code_revision",
+    "code_license",
+    "weights_license",
+    "dataset_terms",
+    "output_terms",
+    "approval_state",
+    "commercial_use",
+    "allowed_classifications",
+    "permitted_uses",
+    "prohibited_uses",
+    "geographic_restrictions",
+    "customer_restrictions",
+    "allowed_deployments",
+    "approved_by",
+    "reviewed_at",
+    "review_due_at",
+    "manifest_hash",
+    "manifest_signature",
+    "signed_by"
+  ],
+  "title": "ModelManifestContract",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "bootstrap_excluded_inputs": [],
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+    "-q",
+    "tests/contract/test_delivery_tools.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/contract/shards/tests__contract__test_delivery_tools.xml"
+  ],
+  "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "declared_generated_inputs": [],
+  "elapsed_seconds": 3.03827,
+  "exit_code": 0,
+  "input_sha256": "5df6c5bbc37300a172d5e5d9fdb37d193d6645e9cc700eb83281fd9cfccb28b6",
+  "junit_path": "build/reports/tests/contract-shards/tests__contract__test_delivery_tools.xml",
+  "junit_sha256": "e9acd9cdc519f1db3f0e8eafbe7c0cc4fed77f6121e425d998c772af85e251d3",
+  "log_path": "build/reports/tests/contract-shards/tests__contract__test_delivery_tools.log",
+  "log_sha256": "73b6054455823edd85132fc6bdce2fa919ccce33c140bf20cfdb693c85faf83e",
+  "name": "tests__contract__test_delivery_tools",
+  "path": "tests/contract/test_delivery_tools.py",
+  "portable_command": [
+    "python",
+    "tools/run_pytest_isolated.py",
+    "-q",
+    "tests/contract/test_delivery_tools.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=build/reports/tests/contract-shards/tests__contract__test_delivery_tools.xml"
+  ],
+  "schema": "sip.pytest-shard-result/v2",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed"
+}

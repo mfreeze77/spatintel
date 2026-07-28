@@ -1,0 +1,52 @@
+{
+  "result": {
+    "captured_at": "2026-07-28T00:35:11.597770+00:00",
+    "command": [
+      "/opt/pyvenv/bin/python",
+      "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+      "-q",
+      "tests/security",
+      "-p",
+      "no:cacheprovider",
+      "--sharded-by-test-file"
+    ],
+    "elapsed_seconds": 5.026764,
+    "errors": 0,
+    "exit_code": 0,
+    "failures": 0,
+    "input_root_sha256": "5128af900dcc7907f9b0c7d6362e55f28756c3bd80d898b73b75b8ff5e0d70f0",
+    "junit_path": "build/reports/tests/security.xml",
+    "junit_sha256": "e9048212dbbd611a4cd3dd1fbc58dbe858a6dcf1c64c47c8a0fd20238dd36c18",
+    "log_path": "build/reports/tests/security.log",
+    "log_sha256": "c03e7ba03597c23a35ff5792fbdde49216e5078a8d597ea03ae073e11624d5cf",
+    "name": "security",
+    "shard_commands": [
+      [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_tenant_isolation.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/security-shards/tests__security__test_tenant_isolation.xml"
+      ],
+      [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_worker_sandbox.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/security-shards/tests__security__test_worker_sandbox.xml"
+      ]
+    ],
+    "shard_count": 2,
+    "shard_manifest_path": "build/reports/tests/security-shards/manifest.json",
+    "shard_manifest_sha256": "06d3bfcdbb50c03b33a1f5c862ff5ac316f2f2ef2c62fa52cab0e5a89b44100d",
+    "skipped": 0,
+    "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+    "status": "passed",
+    "tests": 3
+  },
+  "schema": "sip.test-suite-evidence/v1"
+}

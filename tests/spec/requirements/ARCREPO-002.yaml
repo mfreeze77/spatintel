@@ -1,0 +1,24 @@
+schema_version: '1.0'
+requirement_id: ARCREPO-002
+priority: P0
+source:
+  document: 20-architecture/203_repository_architecture.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Generated code shall be reproducible and CI shall reject uncommitted generated diffs.
+verification_method: Automated test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-ARCREPO-002
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

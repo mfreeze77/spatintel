@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "Audience": {
+      "enum": [
+        "private",
+        "family",
+        "project",
+        "owner",
+        "public"
+      ],
+      "title": "Audience",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/consent-grant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audiences": {
+      "items": {
+        "$ref": "#/$defs/Audience"
+      },
+      "title": "Audiences",
+      "type": "array"
+    },
+    "derivative_policy": {
+      "additionalProperties": true,
+      "title": "Derivative Policy",
+      "type": "object"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Expires At"
+    },
+    "grant_id": {
+      "title": "Grant Id",
+      "type": "string"
+    },
+    "granted_by": {
+      "title": "Granted By",
+      "type": "string"
+    },
+    "purposes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Purposes",
+      "type": "array"
+    },
+    "revocation_propagation_required": {
+      "default": true,
+      "title": "Revocation Propagation Required",
+      "type": "boolean"
+    },
+    "scopes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scopes",
+      "type": "array"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "revoked",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "grant_id",
+    "subject_id",
+    "granted_by",
+    "purposes",
+    "audiences",
+    "scopes",
+    "derivative_policy",
+    "expires_at",
+    "state"
+  ],
+  "title": "ConsentGrantContract",
+  "type": "object"
+}

@@ -1,0 +1,23 @@
+{
+  "family": {
+    "audience": "family",
+    "edition_hash": "7f7088241429845ba5afac1dba0bac5507ded74206ac4c4611589a0c371fd3ac",
+    "generated_labels_preserved": true,
+    "purpose": "family_review",
+    "records": []
+  },
+  "private": {
+    "audience": "private",
+    "edition_hash": "4ece50d1358f762f9cf88403df870e1259c1cb26c10c237fe05bea2910097136",
+    "generated_labels_preserved": true,
+    "purpose": "preservation",
+    "records": []
+  },
+  "public": {
+    "audience": "public",
+    "edition_hash": "e3b5166744427fbfe22d24098bb4eac91ee8a605611b0d39018c8b86b905c002",
+    "generated_labels_preserved": true,
+    "purpose": "preservation",
+    "records": []
+  }
+}

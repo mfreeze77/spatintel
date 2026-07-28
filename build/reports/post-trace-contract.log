@@ -1,0 +1,227 @@
+[test-matrix] starting contract: files=20 shard_jobs=2
+[test-matrix] contract: passed; files=20; tests=101; failures=0; errors=0; skipped=0; elapsed=50.88s
+{
+  "results": [
+    {
+      "captured_at": "2026-07-28T00:34:31.132663+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/contract",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 50.883855,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "1e2643bd64d583af30bdc42ea71e0ef6adbce751ca56cda0819b0c61b8b11831",
+      "junit_path": "build/reports/tests/contract.xml",
+      "junit_sha256": "43e691f44631ed2f8cfac73dc6395c95c1a3338da9748fc779b4e9c7de73402f",
+      "log_path": "build/reports/tests/contract.log",
+      "log_sha256": "a71531b01d7de16c79f08313a19fd080bcce95eed162bb48a602c3cca2f4094c",
+      "name": "contract",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_api_contract.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_api_contract.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_delivery_tools.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_delivery_tools.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_documentation.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_documentation.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_event_architecture.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_event_architecture.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_generated_contracts.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_generated_contracts.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governance.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governance.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governance_registers.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governance_registers.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governed_hybrid_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governed_hybrid_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_infrastructure.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_infrastructure.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_observability.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_observability.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_observability_infrastructure.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_observability_infrastructure.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_repository_boundaries.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_repository_boundaries.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_search_agent_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_search_agent_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_service_boundaries.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_service_boundaries.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_spatial_truth_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_spatial_truth_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_spec_lint.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_spec_lint.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_test_matrix_resume.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_test_matrix_resume.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_traceability_evidence.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_traceability_evidence.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_worker_manifests.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_worker_manifests.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_worker_protocol.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_worker_protocol.xml"
+        ]
+      ],
+      "shard_count": 20,
+      "shard_manifest_path": "build/reports/tests/contract-shards/manifest.json",
+      "shard_manifest_sha256": "d6acfbc847ea299d95f7f1d46e6f9a35066a26be0e21a71fd5857812913ff440",
+      "skipped": 0,
+      "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+      "status": "passed",
+      "tests": 101
+    }
+  ],
+  "schema": "sip.test-suite-run/v1",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed",
+  "totals": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 101
+  }
+}
+[3JTERM environment variable not set.

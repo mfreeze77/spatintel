@@ -1,0 +1,166 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/derivation-event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activity_type": {
+      "minLength": 1,
+      "title": "Activity Type",
+      "type": "string"
+    },
+    "actor_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actor Id"
+    },
+    "algorithm_id": {
+      "title": "Algorithm Id",
+      "type": "string"
+    },
+    "algorithm_version": {
+      "title": "Algorithm Version",
+      "type": "string"
+    },
+    "code_commit": {
+      "title": "Code Commit",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "container_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Digest"
+    },
+    "derivation_id": {
+      "title": "Derivation Id",
+      "type": "string"
+    },
+    "environment_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Hash",
+      "type": "string"
+    },
+    "input_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Input Hashes",
+      "type": "array"
+    },
+    "input_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Input Ids",
+      "type": "array"
+    },
+    "model_manifest_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Manifest Id"
+    },
+    "output_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Hashes",
+      "type": "array"
+    },
+    "output_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Ids",
+      "type": "array"
+    },
+    "parameters_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Parameters Hash",
+      "type": "string"
+    },
+    "quality": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Quality",
+      "type": "object"
+    },
+    "software": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Software",
+      "type": "object"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "validation": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Validation",
+      "type": "object"
+    },
+    "workload_identity": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workload Identity"
+    }
+  },
+  "required": [
+    "derivation_id",
+    "activity_type",
+    "input_ids",
+    "input_hashes",
+    "algorithm_id",
+    "algorithm_version",
+    "parameters_hash",
+    "environment_hash",
+    "code_commit",
+    "output_ids",
+    "output_hashes",
+    "software",
+    "quality",
+    "validation",
+    "started_at",
+    "completed_at"
+  ],
+  "title": "DerivationEventContract",
+  "type": "object"
+}

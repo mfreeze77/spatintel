@@ -1,0 +1,2077 @@
+{
+  "components": {
+    "schemas": {
+      "Classification": {
+        "enum": [
+          "public",
+          "internal",
+          "confidential",
+          "restricted",
+          "critical_infrastructure",
+          "biometric",
+          "minor"
+        ],
+        "title": "Classification",
+        "type": "string"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "LicenseDocumentContract": {
+        "additionalProperties": false,
+        "properties": {
+          "component": {
+            "enum": [
+              "code",
+              "dependencies",
+              "weights",
+              "dataset",
+              "hosted_service",
+              "output"
+            ],
+            "title": "Component",
+            "type": "string"
+          },
+          "document_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Sha256"
+          },
+          "license_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "License Id",
+            "type": "string"
+          },
+          "review_state": {
+            "enum": [
+              "verified",
+              "missing",
+              "pending",
+              "incompatible"
+            ],
+            "title": "Review State",
+            "type": "string"
+          },
+          "source_url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Source Url",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "component",
+          "title",
+          "license_id",
+          "source_url",
+          "review_state"
+        ],
+        "title": "LicenseDocumentContract",
+        "type": "object"
+      },
+      "ModelAuthorize": {
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint_hash": {
+            "title": "Checkpoint Hash",
+            "type": "string"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/Classification"
+          },
+          "commercial": {
+            "title": "Commercial",
+            "type": "boolean"
+          },
+          "purpose": {
+            "title": "Purpose",
+            "type": "string"
+          },
+          "region": {
+            "default": "local",
+            "title": "Region",
+            "type": "string"
+          }
+        },
+        "required": [
+          "checkpoint_hash",
+          "purpose",
+          "commercial",
+          "classification"
+        ],
+        "title": "ModelAuthorize",
+        "type": "object"
+      },
+      "ModelRegister": {
+        "additionalProperties": false,
+        "properties": {
+          "manifest": {
+            "additionalProperties": true,
+            "title": "Manifest",
+            "type": "object"
+          }
+        },
+        "required": [
+          "manifest"
+        ],
+        "title": "ModelRegister",
+        "type": "object"
+      },
+      "ProviderAuthorize": {
+        "additionalProperties": false,
+        "properties": {
+          "classification": {
+            "$ref": "#/components/schemas/Classification"
+          },
+          "external": {
+            "default": false,
+            "title": "External",
+            "type": "boolean"
+          },
+          "purpose": {
+            "title": "Purpose",
+            "type": "string"
+          },
+          "region": {
+            "title": "Region",
+            "type": "string"
+          }
+        },
+        "required": [
+          "classification",
+          "purpose",
+          "region"
+        ],
+        "title": "ProviderAuthorize",
+        "type": "object"
+      },
+      "ProviderCapabilityCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "allowed_classifications": {
+            "items": {
+              "$ref": "#/components/schemas/Classification"
+            },
+            "minItems": 1,
+            "title": "Allowed Classifications",
+            "type": "array"
+          },
+          "allowed_purposes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Allowed Purposes",
+            "type": "array"
+          },
+          "allowed_regions": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Allowed Regions",
+            "type": "array"
+          },
+          "approval_state": {
+            "enum": [
+              "approved",
+              "denied",
+              "expired",
+              "revoked",
+              "research_only",
+              "pending"
+            ],
+            "title": "Approval State",
+            "type": "string"
+          },
+          "benchmark_profile_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Benchmark Profile Ids",
+            "type": "array"
+          },
+          "capabilities": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Capabilities",
+            "type": "array"
+          },
+          "coordinate_contract": {
+            "$ref": "#/components/schemas/ProviderCoordinateContract"
+          },
+          "data_governance": {
+            "$ref": "#/components/schemas/ProviderDataGovernanceContract"
+          },
+          "dependency_inventory": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Dependency Inventory",
+            "type": "array"
+          },
+          "deployment_modes": {
+            "items": {
+              "enum": [
+                "local_only",
+                "hybrid",
+                "managed_cloud",
+                "manual_external"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Deployment Modes",
+            "type": "array"
+          },
+          "executable_digest": {
+            "pattern": "^(sha256:)?[a-f0-9]{64}$",
+            "title": "Executable Digest",
+            "type": "string"
+          },
+          "execution_modes": {
+            "items": {
+              "enum": [
+                "local_process",
+                "isolated_container",
+                "private_managed",
+                "external_api",
+                "manual_external"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Execution Modes",
+            "type": "array"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "input_roles": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Input Roles",
+            "type": "array"
+          },
+          "license_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/LicenseDocumentContract"
+            },
+            "minItems": 1,
+            "title": "License Evidence",
+            "type": "array"
+          },
+          "license_manifest_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "License Manifest Id",
+            "type": "string"
+          },
+          "manifest_hash": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manifest Hash"
+          },
+          "manifest_signature": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manifest Signature"
+          },
+          "model_manifest_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Model Manifest Ids",
+            "type": "array"
+          },
+          "output_rights": {
+            "minLength": 1,
+            "title": "Output Rights",
+            "type": "string"
+          },
+          "output_roles": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Output Roles",
+            "type": "array"
+          },
+          "prohibited_purposes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Prohibited Purposes",
+            "type": "array"
+          },
+          "provider_class": {
+            "enum": [
+              "local_open_source",
+              "private_managed",
+              "external_api",
+              "manual_external",
+              "research_shadow"
+            ],
+            "title": "Provider Class",
+            "type": "string"
+          },
+          "provider_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Provider Id",
+            "type": "string"
+          },
+          "provider_version": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Provider Version",
+            "type": "string"
+          },
+          "recovery": {
+            "$ref": "#/components/schemas/ProviderRecoveryContract"
+          },
+          "reproducibility": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Reproducibility",
+            "type": "object"
+          },
+          "retention_days": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retention Days"
+          },
+          "review_due_at": {
+            "format": "date-time",
+            "title": "Review Due At",
+            "type": "string"
+          },
+          "reviewed_at": {
+            "format": "date-time",
+            "title": "Reviewed At",
+            "type": "string"
+          },
+          "schema": {
+            "const": "sip.provider-capability/v1.1",
+            "default": "sip.provider-capability/v1.1",
+            "title": "Schema",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.1.0",
+            "default": "1.1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "security": {
+            "$ref": "#/components/schemas/ProviderSecurityContract"
+          },
+          "signed_by": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Signed By",
+            "type": "string"
+          },
+          "source_revision": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Source Revision",
+            "type": "string"
+          },
+          "source_url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Source Url",
+            "type": "string"
+          },
+          "supported_formats": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": "Supported Formats",
+            "type": "object"
+          }
+        },
+        "required": [
+          "provider_id",
+          "provider_version",
+          "provider_class",
+          "source_url",
+          "source_revision",
+          "executable_digest",
+          "execution_modes",
+          "deployment_modes",
+          "input_roles",
+          "output_roles",
+          "capabilities",
+          "supported_formats",
+          "coordinate_contract",
+          "reproducibility",
+          "security",
+          "recovery",
+          "data_governance",
+          "license_manifest_id",
+          "license_evidence",
+          "dependency_inventory",
+          "benchmark_profile_ids",
+          "allowed_classifications",
+          "allowed_purposes",
+          "allowed_regions",
+          "output_rights",
+          "approval_state",
+          "reviewed_at",
+          "review_due_at",
+          "signed_by"
+        ],
+        "title": "ProviderCapabilityCreate",
+        "type": "object"
+      },
+      "ProviderCoordinateContract": {
+        "additionalProperties": false,
+        "properties": {
+          "handedness": {
+            "enum": [
+              "right",
+              "left"
+            ],
+            "title": "Handedness",
+            "type": "string"
+          },
+          "preserves_input_frame": {
+            "title": "Preserves Input Frame",
+            "type": "boolean"
+          },
+          "requires_explicit_inverse_for_normalization": {
+            "default": true,
+            "title": "Requires Explicit Inverse For Normalization",
+            "type": "boolean"
+          },
+          "scale_behavior": {
+            "enum": [
+              "preserve",
+              "explicit_transform",
+              "estimated_with_uncertainty",
+              "unresolved_visual_only"
+            ],
+            "title": "Scale Behavior",
+            "type": "string"
+          },
+          "units": {
+            "enum": [
+              "meter",
+              "millimeter",
+              "source_native"
+            ],
+            "title": "Units",
+            "type": "string"
+          },
+          "up_axes": {
+            "items": {
+              "enum": [
+                "x",
+                "y",
+                "z"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Up Axes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "units",
+          "handedness",
+          "up_axes",
+          "preserves_input_frame",
+          "scale_behavior"
+        ],
+        "title": "ProviderCoordinateContract",
+        "type": "object"
+      },
+      "ProviderDataGovernanceContract": {
+        "additionalProperties": false,
+        "properties": {
+          "data_use_terms_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Data Use Terms Sha256",
+            "type": "string"
+          },
+          "deletion_verification": {
+            "enum": [
+              "platform_verified",
+              "provider_receipt",
+              "not_applicable"
+            ],
+            "title": "Deletion Verification",
+            "type": "string"
+          },
+          "processing_regions": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Processing Regions",
+            "type": "array"
+          },
+          "public_demonstration": {
+            "enum": [
+              "prohibited",
+              "separate_authorization_required"
+            ],
+            "title": "Public Demonstration",
+            "type": "string"
+          },
+          "source_data_use": {
+            "const": "requested_operation_only",
+            "default": "requested_operation_only",
+            "title": "Source Data Use",
+            "type": "string"
+          },
+          "subprocessor_disclosure_complete": {
+            "title": "Subprocessor Disclosure Complete",
+            "type": "boolean"
+          },
+          "training_use": {
+            "enum": [
+              "prohibited",
+              "separate_authorization_required"
+            ],
+            "title": "Training Use",
+            "type": "string"
+          },
+          "unrelated_retention": {
+            "enum": [
+              "prohibited",
+              "separate_authorization_required"
+            ],
+            "title": "Unrelated Retention",
+            "type": "string"
+          }
+        },
+        "required": [
+          "training_use",
+          "public_demonstration",
+          "unrelated_retention",
+          "processing_regions",
+          "subprocessor_disclosure_complete",
+          "deletion_verification",
+          "data_use_terms_sha256"
+        ],
+        "title": "ProviderDataGovernanceContract",
+        "type": "object"
+      },
+      "ProviderPromotionCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "benchmark_evidence_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Benchmark Evidence Hash",
+            "type": "string"
+          },
+          "data_classifications": {
+            "items": {
+              "$ref": "#/components/schemas/Classification"
+            },
+            "minItems": 1,
+            "title": "Data Classifications",
+            "type": "array"
+          },
+          "execution_zones": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Execution Zones",
+            "type": "array"
+          },
+          "hardware_profiles": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Hardware Profiles",
+            "type": "array"
+          },
+          "intended_uses": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Intended Uses",
+            "type": "array"
+          },
+          "output_roles": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Output Roles",
+            "type": "array"
+          },
+          "policy_snapshot_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Policy Snapshot Hash",
+            "type": "string"
+          },
+          "promotion_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promotion Id"
+          },
+          "scene_classes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Scene Classes",
+            "type": "array"
+          },
+          "state": {
+            "enum": [
+              "discovered",
+              "research_isolated",
+              "shadow",
+              "limited",
+              "active",
+              "deprecated",
+              "blocked"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "valid_from": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid From"
+          },
+          "valid_until": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Until"
+          }
+        },
+        "required": [
+          "state",
+          "data_classifications",
+          "scene_classes",
+          "output_roles",
+          "intended_uses",
+          "execution_zones",
+          "hardware_profiles",
+          "benchmark_evidence_hash",
+          "policy_snapshot_hash"
+        ],
+        "title": "ProviderPromotionCreate",
+        "type": "object"
+      },
+      "ProviderRecoveryContract": {
+        "additionalProperties": false,
+        "properties": {
+          "cancellation_bound_seconds": {
+            "maximum": 86400.0,
+            "minimum": 1.0,
+            "title": "Cancellation Bound Seconds",
+            "type": "integer"
+          },
+          "checkpoint_schema_version": {
+            "title": "Checkpoint Schema Version",
+            "type": "string"
+          },
+          "checkpoint_supported": {
+            "title": "Checkpoint Supported",
+            "type": "boolean"
+          },
+          "cleanup_supported": {
+            "title": "Cleanup Supported",
+            "type": "boolean"
+          },
+          "objective_progress_units": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Objective Progress Units",
+            "type": "array"
+          },
+          "resume_supported": {
+            "title": "Resume Supported",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "cancellation_bound_seconds",
+          "checkpoint_supported",
+          "resume_supported",
+          "cleanup_supported",
+          "checkpoint_schema_version",
+          "objective_progress_units"
+        ],
+        "title": "ProviderRecoveryContract",
+        "type": "object"
+      },
+      "ProviderRegister": {
+        "additionalProperties": false,
+        "properties": {
+          "manifest": {
+            "additionalProperties": true,
+            "title": "Manifest",
+            "type": "object"
+          }
+        },
+        "required": [
+          "manifest"
+        ],
+        "title": "ProviderRegister",
+        "type": "object"
+      },
+      "ProviderSecurityContract": {
+        "additionalProperties": false,
+        "properties": {
+          "approved_egress_domains": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Approved Egress Domains",
+            "type": "array"
+          },
+          "external_processing": {
+            "default": false,
+            "title": "External Processing",
+            "type": "boolean"
+          },
+          "network_required": {
+            "title": "Network Required",
+            "type": "boolean"
+          },
+          "supports_read_only_inputs": {
+            "title": "Supports Read Only Inputs",
+            "type": "boolean"
+          },
+          "supports_write_only_staging": {
+            "title": "Supports Write Only Staging",
+            "type": "boolean"
+          },
+          "transient_cleanup": {
+            "enum": [
+              "verified",
+              "declared",
+              "unsupported"
+            ],
+            "title": "Transient Cleanup",
+            "type": "string"
+          },
+          "writes_outside_job_workspace": {
+            "title": "Writes Outside Job Workspace",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "network_required",
+          "writes_outside_job_workspace",
+          "supports_read_only_inputs",
+          "supports_write_only_staging",
+          "transient_cleanup"
+        ],
+        "title": "ProviderSecurityContract",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Spatial Intelligence Platform \u2014 provider-registry",
+    "version": "1.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/health/live": {
+      "get": {
+        "operationId": "health_live",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Live",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health Live"
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "health_ready",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Health Ready",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health Ready"
+      }
+    },
+    "/v1/models": {
+      "post": {
+        "operationId": "register_model",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelRegister"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Model",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Model",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/models/{model_id}/authorize": {
+      "post": {
+        "operationId": "authorize_model",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "model_id",
+            "required": true,
+            "schema": {
+              "title": "Model Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelAuthorize"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Authorize Model",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Authorize Model",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/providers": {
+      "post": {
+        "operationId": "register_provider",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderRegister"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Provider",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Provider",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/providers/capabilities": {
+      "post": {
+        "operationId": "register_provider_capability",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderCapabilityCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Provider Capability",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Provider Capability",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/providers/{provider_id}/authorize": {
+      "post": {
+        "operationId": "authorize_provider",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider_id",
+            "required": true,
+            "schema": {
+              "title": "Provider Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderAuthorize"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Authorize Provider",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Authorize Provider",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/providers/{provider_id}/capability": {
+      "get": {
+        "operationId": "get_provider_capability",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider_id",
+            "required": true,
+            "schema": {
+              "title": "Provider Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Provider Capability",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Provider Capability",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    },
+    "/v1/providers/{provider_id}/promotions": {
+      "post": {
+        "operationId": "promote_provider_capability",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "provider_id",
+            "required": true,
+            "schema": {
+              "title": "Provider Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderPromotionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Promote Provider Capability",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Promote Provider Capability",
+        "tags": [
+          "provider-registry"
+        ]
+      }
+    }
+  }
+}

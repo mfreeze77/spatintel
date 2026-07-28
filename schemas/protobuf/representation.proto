@@ -1,0 +1,33 @@
+syntax = "proto3";
+package sip.v1;
+
+import "common.proto";
+
+service RepresentationWorker {
+  rpc Execute(RepresentationJob) returns (RepresentationCandidate);
+}
+
+message RepresentationJob {
+  string operation_id = 1;
+  string tenant_id = 2;
+  string project_id = 3;
+  string scene_id = 4;
+  string provider_id = 5;
+  string provider_manifest_hash = 6;
+  string intended_use = 7;
+  string input_manifest_json = 8;
+  repeated HashRef input_assets = 9;
+  CoordinateFrame coordinate_frame = 10;
+}
+
+message RepresentationCandidate {
+  string representation_id = 1;
+  string state = 2;
+  string kind = 3;
+  string asset_sha256 = 4;
+  string quality_json = 5;
+  string provenance_json = 6;
+  string support_map_json = 7;
+  bool lossy = 8;
+  bool authoritative = 9;
+}

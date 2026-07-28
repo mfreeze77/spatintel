@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: APPFAIL-002
+priority: P0
+source:
+  document: 99-appendices/995_failure_mode_catalog.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Each failure shall have severity, retryability, safe checkpoint, operator action, customer message, audit requirement,
+  and test reference.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/failures.py
+- governance/failure-catalog.json
+- docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md
+automated_test_ids:
+- tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields
+retained_evidence:
+- build/reports/governance-check.json
+- build/reports/test-matrix.json
+- build/reports/tests/unit.xml
+- governance/failure-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

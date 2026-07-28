@@ -1,0 +1,23 @@
+{
+  "adr_count": 7,
+  "errors": [],
+  "failure_count": 28,
+  "mode": "structural",
+  "model_count": 1,
+  "open_question_count": 6,
+  "provider_count": 6,
+  "risk_count": 7,
+  "schema": "sip.governance-check/v1",
+  "service_component_count": 29,
+  "source_count": 2,
+  "status": "passed",
+  "unmanifested_model_file_count": 0,
+  "unresolved_p0_question_count": 6,
+  "warnings": [
+    {
+      "code": "LINGBOT_BASE_IMAGE_VULNERABILITIES_REQUIRE_RESCAN",
+      "message": "deny-by-default adapter image must be rebuilt on a scan-clean CUDA/PyTorch baseline before approval",
+      "path": "adapters/lingbot-map/Dockerfile"
+    }
+  ]
+}

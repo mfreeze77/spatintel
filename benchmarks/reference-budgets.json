@@ -1,0 +1,11 @@
+{
+  "schema": "sip.benchmark-budgets/v1",
+  "profile": "cpu-reference",
+  "budgets": {
+    "sim3_ransac_500_points_25_outliers": {"p95_ms_max": 350.0, "rmse_max": 0.000001, "minimum_inliers": 475},
+    "interaction_proxy_12_to_8_faces": {"p95_ms_max": 25.0},
+    "mesh_to_splats_12_faces_x8": {"p95_ms_max": 25.0},
+    "cscp_validate_16_frames": {"p95_ms_max": 150.0}
+  },
+  "claims": "Budgets cover only the deterministic single-process CPU reference profile and are not production capacity targets."
+}

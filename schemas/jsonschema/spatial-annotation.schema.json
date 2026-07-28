@@ -1,0 +1,179 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/spatial-annotation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "annotation_id": {
+      "title": "Annotation Id",
+      "type": "string"
+    },
+    "authored_from_representation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authored From Representation Id"
+    },
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entity Id"
+    },
+    "lifecycle_state": {
+      "default": "active",
+      "enum": [
+        "active",
+        "unresolved",
+        "superseded",
+        "deleted"
+      ],
+      "title": "Lifecycle State",
+      "type": "string"
+    },
+    "normal": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normal"
+    },
+    "orientation": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orientation"
+    },
+    "policy": {
+      "additionalProperties": true,
+      "title": "Policy",
+      "type": "object"
+    },
+    "position": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Position"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "source_class": {
+      "$ref": "#/$defs/SourceClass"
+    },
+    "support": {
+      "additionalProperties": true,
+      "title": "Support",
+      "type": "object"
+    },
+    "support_type": {
+      "enum": [
+        "world_point",
+        "semantic_entity",
+        "surface_coordinate",
+        "plane",
+        "line",
+        "volume",
+        "document_region"
+      ],
+      "title": "Support Type",
+      "type": "string"
+    },
+    "uncertainty_m": {
+      "minimum": 0,
+      "title": "Uncertainty M",
+      "type": "number"
+    }
+  },
+  "required": [
+    "annotation_id",
+    "scene_id",
+    "coordinate_frame_id",
+    "support_type",
+    "support",
+    "uncertainty_m",
+    "source_class",
+    "authority_class"
+  ],
+  "title": "SpatialAnnotationContract",
+  "type": "object"
+}

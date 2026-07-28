@@ -1,0 +1,61 @@
+{
+  "audited": true,
+  "cancellable": true,
+  "capabilities": [
+    "capture.normalize",
+    "capture.polyform.normalize",
+    "capture.validate"
+  ],
+  "checkpointed": true,
+  "compatibility": ">=1.1.0,<2.0.0",
+  "durable": true,
+  "entrypoint": "workers/capture-normalizer/main.py",
+  "entrypoint_sha256": "a9761afe5e6e61d23f19a2042b8fb499a2636305b7dc9364759adcb279936d84",
+  "filesystem_read_scopes": [
+    "/var/lib/sip/objects"
+  ],
+  "filesystem_write_scopes": [
+    "/var/lib/sip/runtime/staging"
+  ],
+  "governance": "local_approved_reference",
+  "idempotent": true,
+  "input_contract": "sip.worker-input/v1",
+  "least_privilege": true,
+  "manifest_sha256": "a1ebfd05d69f8c4254028aa69f87571bbda96cfacb5dbe931e58779c873228ca",
+  "name": "capture-normalizer",
+  "network_access": false,
+  "output_contract": "sip.worker-result/v1",
+  "output_mode": "quarantine_candidate",
+  "protocol_module": "src/sip/worker_protocol.py",
+  "protocol_sha256": "a3f8e17b6fc6c7b55c60138bd60381667497c52ee7bea2d36b5a1520dd09332a",
+  "publication_permission": false,
+  "requirement_ids": [
+    "HYBAPI-003",
+    "HYBAPI-004",
+    "HYBAPI-009",
+    "HYBAPI-010",
+    "PLTGRPC-001",
+    "PLTGRPC-002",
+    "PLTGRPC-004",
+    "PLTGRPC-005",
+    "PLTGRPC-006",
+    "PLTSDK-003",
+    "TSTLAY-004"
+  ],
+  "resource_limits": {
+    "gpu_count": 0,
+    "max_cpu_seconds": 900,
+    "max_input_bytes": 1073741824,
+    "max_memory_bytes": 2147483648,
+    "max_output_bytes": 268435456,
+    "max_wall_seconds": 900
+  },
+  "runtime_module": "src/sip/worker_runtime.py",
+  "runtime_sha256": "e16d65095f5a5b34387b659532011a94e7cecff030dfb6cfd8a174f31c93e368",
+  "sandbox_module": "src/sip/worker_sandbox.py",
+  "sandbox_sha256": "70ca3f95f8c75720748902d738bb794db461584d427e68ffab4e31296997e879",
+  "schema": "sip.worker-manifest/v1",
+  "shell_access": false,
+  "version": "1.1.0",
+  "workload_identity": "sip-worker:capture-normalizer"
+}

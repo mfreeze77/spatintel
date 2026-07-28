@@ -1,0 +1,35 @@
+schema_version: '1.0'
+requirement_id: ARCDEP-002
+priority: P0
+source:
+  document: 20-architecture/202_deployment_architecture.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Deployment manifests shall pin service images, infrastructure versions, secrets references, network policies,
+  and resource limits.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- infrastructure/compose/docker-compose.yml
+- infrastructure/kubernetes/base
+- infrastructure/terraform
+- tools/validate_infrastructure.py
+automated_test_ids:
+- tests/contract/test_infrastructure.py::test_infrastructure_structural_policy_gate
+- tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist
+- tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned
+retained_evidence:
+- build/reports/infrastructure-static-validation.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

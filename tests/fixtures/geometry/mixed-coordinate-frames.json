@@ -1,0 +1,17 @@
+{
+  "expected_behavior": "explicit_registered_transform_required",
+  "frames": [
+    {
+      "frame_id": "arkit-y-up",
+      "handedness": "right",
+      "units": "meter",
+      "up": "+Y"
+    },
+    {
+      "frame_id": "bim-z-up",
+      "handedness": "right",
+      "units": "millimeter",
+      "up": "+Z"
+    }
+  ]
+}

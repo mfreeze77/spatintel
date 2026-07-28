@@ -1,0 +1,35 @@
+schema_version: '1.0'
+requirement_id: PLTREST-001
+priority: P0
+source:
+  document: 60-platform/601_rest_api.md
+  line: 36
+  section: 4. Normative requirements
+requirement: The API shall provide create/read/list/update operations for projects, places, captures, entities, assertions,
+  evidence, tasks, and consent where policy permits.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/assets.py
+- src/sip/api.py
+- src/sip/audit.py
+- src/sip/security.py
+automated_test_ids:
+- tests/contract/test_api_contract.py::test_api_asset_operation_scene_round_trip
+- tests/contract/test_spatial_truth_api.py::test_assertion_reads_require_project_authorization_even_without_linked_evidence
+- tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/unit.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

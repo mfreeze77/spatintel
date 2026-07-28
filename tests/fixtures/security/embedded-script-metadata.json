@@ -1,0 +1,9 @@
+{
+  "expected_policy": "reject_or_sanitize_before_indexing_or_rendering",
+  "filename": "drawing.svg",
+  "media_type": "image/svg+xml",
+  "metadata": {
+    "onload": "fetch('https://invalid.example')",
+    "title": "<script>alert('synthetic')</script>"
+  }
+}

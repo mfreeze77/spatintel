@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: hybrid-managed-services-egress
+  namespace: sip-system
+spec:
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values:
+      - api
+      - worker
+      - migration
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - protocol: TCP
+      port: 443
+  - ports:
+    - protocol: TCP
+      port: 5432
+    - protocol: TCP
+      port: 6379

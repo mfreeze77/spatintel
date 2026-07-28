@@ -1,0 +1,30 @@
+schema_version: '1.0'
+requirement_id: DATSCENE-001
+priority: P0
+source:
+  document: 50-data/501_scene_graph.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Every entity shall have a stable UUID, tenant/project scope, type, lifecycle status, and creation provenance.
+verification_method: Controlled verification
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/scene.py
+- src/sip/database.py
+- src/sip/models.py
+automated_test_ids:
+- tests/integration/test_scene_representation.py::test_datgit_datscene_stable_entities_commits_diff_and_rollback
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

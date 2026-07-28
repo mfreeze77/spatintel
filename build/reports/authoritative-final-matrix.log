@@ -1,0 +1,15 @@
+[test-matrix] starting contract: files=19 shard_jobs=2
+[test-matrix] contract: passed; files=19; tests=100; failures=0; errors=0; skipped=0; elapsed=49.83s
+[test-matrix] starting integration: files=9 shard_jobs=2
+[test-matrix] integration: passed; files=9; tests=58; failures=0; errors=0; skipped=0; elapsed=33.76s
+[test-matrix] starting migration: files=1 shard_jobs=1
+[test-matrix] migration: passed; files=1; tests=5; failures=0; errors=0; skipped=0; elapsed=17.93s
+[test-matrix] starting security: files=2 shard_jobs=2
+[test-matrix] security: passed; files=2; tests=3; failures=0; errors=0; skipped=0; elapsed=2.03s
+[test-matrix] starting unit: files=5 shard_jobs=2
+[test-matrix] unit: passed; files=5; tests=20; failures=0; errors=0; skipped=0; elapsed=7.10s
+[test-matrix] starting property: files=1 shard_jobs=1
+[test-matrix] property: passed; files=1; tests=1; failures=0; errors=0; skipped=0; elapsed=1.47s
+[test-matrix] starting privacy: files=1 shard_jobs=1
+[test-matrix] privacy: passed; files=1; tests=1; failures=0; errors=0; skipped=0; elapsed=1.87s
+[test-matrix] starting e2e: files=1 shard_jobs=1

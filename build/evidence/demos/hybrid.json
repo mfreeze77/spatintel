@@ -1,0 +1,220 @@
+{
+  "artifacts": [
+    {
+      "bytes": 269,
+      "path": "runtime/objects/06/83/068331e400cb15f3b2965603ede79b8d9b6e619c2c0d586a4bd600bc7b362eed.enc",
+      "sha256": "64d6614b656f803286af083f663f878023f5fb82f7be99759db337673ea2b4a8"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/06/83/068331e400cb15f3b2965603ede79b8d9b6e619c2c0d586a4bd600bc7b362eed.meta.json",
+      "sha256": "bfa0bb4284ccf4c812ca6e268ee0790a812c0987617314a8fe3f4fb765cb7d20"
+    },
+    {
+      "bytes": 222,
+      "path": "runtime/objects/1b/90/1b909691605f5fb736c8b1e53aa4fd6eccdb12cce0973bbaf7d8a07f56ce1af5.enc",
+      "sha256": "789750bd5ec4e65c5184e6546d8682a80303e71df3d67e96d23bb9b7eef28368"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/1b/90/1b909691605f5fb736c8b1e53aa4fd6eccdb12cce0973bbaf7d8a07f56ce1af5.meta.json",
+      "sha256": "62b09fa4da06e42641efc4452fa21bcb5a9f0347e8d061a1628a984fa52d42bb"
+    },
+    {
+      "bytes": 264,
+      "path": "runtime/objects/cf/71/cf71e692c5b0a39a3a279567d51e67fd72d9be8a4ffca7f3fd517b29717ca2d9.enc",
+      "sha256": "8bef2b9bff3ca87ec037205e88b4106104ebec437a1908a5d1c02294fef09865"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/cf/71/cf71e692c5b0a39a3a279567d51e67fd72d9be8a4ffca7f3fd517b29717ca2d9.meta.json",
+      "sha256": "064b07ed1e99d1aa5ad21ccd62ccf5d84b52895e89088312dfc75e332ab66fd4"
+    },
+    {
+      "bytes": 2713,
+      "path": "runtime/objects/f2/3a/f23a9779d190357c2414af0a406987a0d37066ea8eaa25d52a8a981b6a7915ba.enc",
+      "sha256": "35f35d358eb00861c0e4e66551c8a14b236b3c58c1834616000434a0c3a33667"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/f2/3a/f23a9779d190357c2414af0a406987a0d37066ea8eaa25d52a8a981b6a7915ba.meta.json",
+      "sha256": "b6e6c135305a51458e3a2ca5f63b5c7a984afbac43958ac32c8e29ef9679b77b"
+    },
+    {
+      "bytes": 238,
+      "path": "runtime/objects/f3/2e/f32e78b6b6b5507fc7873d5e41ab12f7ca5f5d481cc55b038e53e6a8b9e07dcc.enc",
+      "sha256": "e616ab99c7d995527799184a53fa49ee301c61563835513bbe7f16a7ae6e17bb"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/f3/2e/f32e78b6b6b5507fc7873d5e41ab12f7ca5f5d481cc55b038e53e6a8b9e07dcc.meta.json",
+      "sha256": "76eaf596df35e3e9c7a97488a0f6a5c4fe1137713363ef1f75685ab192fb56aa"
+    },
+    {
+      "bytes": 1671168,
+      "path": "runtime/sip.sqlite3",
+      "sha256": "ea953a67f07bf6f0dbeaa96b8bc701db57eaaf8608c420fd124adbce250d7a5b"
+    },
+    {
+      "bytes": 2936,
+      "path": "viewer-session.json",
+      "sha256": "748e73ba46059613c80385ccfec22bfb292ae6697e5dac7f1241b2f03a1b4353"
+    },
+    {
+      "bytes": 5426,
+      "path": "viewer.html",
+      "sha256": "81424feb3126ca496fcff33a872d9f0d1865c7ab926d08e234c7470f62bfbc43"
+    }
+  ],
+  "canonical_scenario": "hybrid",
+  "claims": "Synthetic acceptance evidence only; this is not a customer pilot, physical-device validation, survey, legal approval, or production-load result.",
+  "demonstration": "hybrid",
+  "environment": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "dirty_paths": 348,
+      "working_tree_clean": false
+    },
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "error": null,
+  "evidence_hash": "49f648500c8d9af4fb597648fac4f1842e61c5a1bba5577a17e01c86ce15da7e",
+  "finished_at": "2026-07-28T00:40:30.356479+00:00",
+  "result": {
+    "acceptance": {
+      "all_layers_same_frame": true,
+      "direct_proxy_measurement_blocked": true,
+      "prior_commit_preserved": true,
+      "proxy_hit_re_resolved": true,
+      "unresolved_anchor_reported": true
+    },
+    "direct_proxy_measurement_blocked": true,
+    "proxy_pick": {
+      "acceptance_threshold_m": 0.03,
+      "authoritative_measurement_allowed": true,
+      "estimated_residual_m": 0.01,
+      "interaction_hit": {
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+        "representation_kind": "interaction",
+        "support_hint": {},
+        "world_point": [
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "metric_representation_id": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+      "metric_source_asset_ids": [
+        "45edaa4f-ce6b-457a-b0ed-f7c680da2ebe"
+      ],
+      "proxy_representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+      "reason": null,
+      "resolved": true,
+      "resolved_metric_evidence": {
+        "acceptance_threshold_m": 0.03,
+        "coordinate_frame_id": "world",
+        "estimated_residual_m": 0.01,
+        "metric_representation_id": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+        "metric_source_asset_ids": [
+          "45edaa4f-ce6b-457a-b0ed-f7c680da2ebe"
+        ],
+        "resolution_method": "support_map_metric_reprojection"
+      },
+      "world_point": [
+        1.0,
+        1.0,
+        0.0
+      ]
+    },
+    "replacement": {
+      "new_representation_id": "249c45cd-01f2-419b-91f5-c3e206865ac8",
+      "old_representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+      "reprojected": 1,
+      "reprojected_anchor_ids": [
+        "anchor-panel"
+      ],
+      "unresolved": 1,
+      "unresolved_anchors": [
+        {
+          "anchor_id": "anchor-removed",
+          "point": [
+            3.5,
+            1.0,
+            0.0
+          ],
+          "semantic_support_id": "entity-removed"
+        }
+      ]
+    },
+    "representations": {
+      "design": "53ce58a9-e0b4-498d-b85a-b0d03e324a2f",
+      "metric": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+      "proxy_v1": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+      "proxy_v2": "249c45cd-01f2-419b-91f5-c3e206865ac8",
+      "visual": "6e48ae83-8452-43cd-902b-c530487119ac"
+    },
+    "scene": {
+      "after_replacement_commit": {
+        "branch": "main",
+        "change_evidence_ids": [],
+        "commit_id": "75c063ef-60d0-4b25-8b66-8e7e005f69b6",
+        "field_visit_id": null,
+        "parent_ids": [
+          "d98861cf-c0a4-4e9b-ac06-66153a44ed20"
+        ],
+        "recorded_at": "2026-07-28T00:40:30.347703+00:00",
+        "review_state": "unreviewed",
+        "root_manifest_hash": "10b447cd60eec106cc77e0d79b9adbc04d078df270a28a5c7b66e2b3e404ceff",
+        "snapshot_hash": "10b447cd60eec106cc77e0d79b9adbc04d078df270a28a5c7b66e2b3e404ceff",
+        "valid_from": null,
+        "valid_to": null,
+        "workflow_event_id": null
+      },
+      "before_replacement_commit": {
+        "branch": "main",
+        "change_evidence_ids": [],
+        "commit_id": "d98861cf-c0a4-4e9b-ac06-66153a44ed20",
+        "field_visit_id": null,
+        "parent_ids": [
+          "d3b9b806-d040-41de-9404-80b79006d773"
+        ],
+        "recorded_at": "2026-07-28T00:40:30.311209+00:00",
+        "review_state": "unreviewed",
+        "root_manifest_hash": "65f74770f3a14d0245ae0747b6883514656f5ff70f11d99f72db80bf9d231a20",
+        "snapshot_hash": "65f74770f3a14d0245ae0747b6883514656f5ff70f11d99f72db80bf9d231a20",
+        "valid_from": null,
+        "valid_to": null,
+        "workflow_event_id": null
+      },
+      "diff": {
+        "entities": {
+          "added": [],
+          "modified": [],
+          "removed": []
+        },
+        "left": "d98861cf-c0a4-4e9b-ac06-66153a44ed20",
+        "representation_changed": true,
+        "right": "75c063ef-60d0-4b25-8b66-8e7e005f69b6"
+      },
+      "initial_commit": "d3b9b806-d040-41de-9404-80b79006d773",
+      "scene_id": "fbea714e-7992-4e27-b439-cf562c81eecd"
+    },
+    "viewer": {
+      "external_dependencies": [],
+      "portable": true,
+      "session": "/mnt/data/sip-authoritative-work/runtime/demo/hybrid/viewer-session.json",
+      "session_sha256": "748e73ba46059613c80385ccfec22bfb292ae6697e5dac7f1241b2f03a1b4353",
+      "viewer": "/mnt/data/sip-authoritative-work/runtime/demo/hybrid/viewer.html",
+      "viewer_sha256": "81424feb3126ca496fcff33a872d9f0d1865c7ab926d08e234c7470f62bfbc43"
+    }
+  },
+  "schema": "sip.demo-evidence/v1",
+  "started_at": "2026-07-28T00:40:29.278334+00:00",
+  "status": "passed"
+}

@@ -1,0 +1,39 @@
+schema_version: '1.0'
+requirement_id: ARCHHYB-002
+priority: P0
+source:
+  document: 20-architecture/211_hybrid_representation_services.md
+  line: 163
+  section: 9. Normative requirements
+requirement: Only the representation publisher shall attach an accepted derivative to a scene commit, and publication shall
+  be atomic.
+verification_method: Authorization and transaction test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/representations.py
+- src/sip/operations.py
+- src/sip/api.py
+- src/sip/database.py
+- services/provider-registry
+- services/representation-api
+- migrations/versions/0011_governed_hybrid_representation.py
+automated_test_ids:
+- tests/contract/test_governed_hybrid_api.py::test_hybrid_service_manifests_isolate_provider_control_publication_and_runtime_boundaries
+- tests/integration/test_governed_hybrid.py::test_quarantine_independent_validation_atomic_publication_and_view_reauthorization
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- schemas/events/event-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

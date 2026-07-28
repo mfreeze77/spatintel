@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: RECBIDI-003
+priority: P0
+source:
+  document: 40-reconstruction/417_bidirectional_mesh_splat_interop.md
+  line: 173
+  section: 12. Normative requirements
+requirement: Every conversion shall record exact provider, version, model, parameters, environment, source/output hashes,
+  coordinate transforms, and declared information losses.
+verification_method: Provenance-schema test
+implementation_status: IN_PROGRESS
+implementation_files:
+- src/sip/geometry.py
+- src/sip/provider_sdk.py
+- src/sip/representations.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/e2e/test_platform_demonstrations.py::test_mesh_splat_surface_roundtrip_reports_irreversible_loss
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/benchmark-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

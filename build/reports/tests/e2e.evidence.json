@@ -1,0 +1,43 @@
+{
+  "result": {
+    "captured_at": "2026-07-28T00:35:20.686209+00:00",
+    "command": [
+      "/opt/pyvenv/bin/python",
+      "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+      "-q",
+      "tests/e2e",
+      "-p",
+      "no:cacheprovider",
+      "--sharded-by-test-file"
+    ],
+    "elapsed_seconds": 9.085577,
+    "errors": 0,
+    "exit_code": 0,
+    "failures": 0,
+    "input_root_sha256": "2653f5142847ae159ae5fea2b0b5e37697a59cdc0fa844f5ba0797a8d1f127a7",
+    "junit_path": "build/reports/tests/e2e.xml",
+    "junit_sha256": "1d9517533bc7278a89e57a0eeafa08ea53143ce7c5cbbd4223565e068da2678a",
+    "log_path": "build/reports/tests/e2e.log",
+    "log_sha256": "9e1ab04f1beec936db0e17f5f8ad564ec8dfed5b947e2e629e100a32b13da9a1",
+    "name": "e2e",
+    "shard_commands": [
+      [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/e2e/test_platform_demonstrations.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/e2e-shards/tests__e2e__test_platform_demonstrations.xml"
+      ]
+    ],
+    "shard_count": 1,
+    "shard_manifest_path": "build/reports/tests/e2e-shards/manifest.json",
+    "shard_manifest_sha256": "bd6b2d211f98afa65e57b9c4d1bd07cdb2519c87c1786f97d85dd9a829276aa0",
+    "skipped": 0,
+    "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+    "status": "passed",
+    "tests": 5
+  },
+  "schema": "sip.test-suite-evidence/v1"
+}

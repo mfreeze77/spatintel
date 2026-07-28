@@ -1,0 +1,351 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "catalog_version": "1.1.0",
+  "compatibility_policy": "backward-compatible within major version; consumers ignore unknown fields",
+  "delivery_semantics": "at-least-once with event_id and payload_hash deduplication",
+  "events": [
+    {
+      "aggregate": "agent_proposal",
+      "classification": "inherits_project",
+      "owner": "search-service",
+      "type": "agent.proposal_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "anchor_remap",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "anchor.remapped",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "annotation",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "annotation.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "assertion",
+      "classification": "inherits_project",
+      "owner": "evidence-service",
+      "type": "assertion.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "asset",
+      "classification": "inherits_resource",
+      "owner": "capture-service",
+      "type": "asset.ingested",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "asset",
+      "classification": "inherits_resource",
+      "owner": "evidence-service",
+      "type": "asset.tombstoned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "backup_run",
+      "classification": "internal",
+      "owner": "export-service",
+      "type": "backup.rehearsed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "capture",
+      "classification": "inherits_project",
+      "owner": "capture-service",
+      "type": "capture.validated",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "consent_grant",
+      "classification": "restricted",
+      "owner": "identity-policy",
+      "type": "consent.granted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "consent_grant",
+      "classification": "restricted",
+      "owner": "identity-policy",
+      "type": "consent.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "coordinate_frame",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "coordinate_frame.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deletion_request",
+      "classification": "restricted",
+      "owner": "evidence-service",
+      "type": "deletion.executed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "derivation",
+      "classification": "inherits_project",
+      "owner": "evidence-service",
+      "type": "derivation.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "evidence",
+      "classification": "inherits_resource",
+      "owner": "evidence-service",
+      "type": "evidence.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "geometry_manifest",
+      "classification": "inherits_resource",
+      "owner": "evidence-service",
+      "type": "geometry_manifest.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "hybrid_scene_view",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "hybrid_scene_view.issued",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "measurement",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "measurement.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.cancel_requested",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.checkpointed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.failed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "inherits_project",
+      "owner": "workflow-service",
+      "type": "operation.lease_released",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.lease_renewed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.leased",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "inherits_project",
+      "owner": "workflow-service",
+      "type": "operation.quarantined",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
+      "classification": "internal",
+      "owner": "workflow-service",
+      "type": "operation.succeeded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_promotion",
+      "classification": "internal",
+      "owner": "provider-registry",
+      "type": "provider.promotion_changed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_manifest",
+      "classification": "internal",
+      "owner": "provider-registry",
+      "type": "provider.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.candidate_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.cleanup.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.cleanup.failed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.dependency_invalidated",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "manual_provider_transfer",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.manual_exported",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "manual_provider_transfer",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.manual_returned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.operation.admitted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.operation.failed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.operation.rejected",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.operation.requested",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.output.quarantined",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.provider.progressed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation_binding",
+      "classification": "inherits_project",
+      "owner": "representation-publisher",
+      "type": "representation.published",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.quality_reviewed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "representation",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.validation.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_conversion",
+      "classification": "inherits_project",
+      "owner": "representation-api",
+      "type": "representation.worker_lease.renewed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "saved_query",
+      "classification": "inherits_project",
+      "owner": "search-service",
+      "type": "saved_query.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "scene_commit",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "scene.committed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "scene_tag",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "scene.tagged",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "search_document",
+      "classification": "inherits_project",
+      "owner": "search-service",
+      "type": "search.document_indexed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "spatial_transform",
+      "classification": "inherits_project",
+      "owner": "scene-service",
+      "type": "spatial_transform.registered",
+      "version": "1.0.0"
+    }
+  ]
+}

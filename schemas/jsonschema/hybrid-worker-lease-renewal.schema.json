@@ -1,0 +1,36 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/hybrid-worker-lease-renewal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "conversion_id": {
+      "title": "Conversion Id",
+      "type": "string"
+    },
+    "last_durable_checkpoint_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Durable Checkpoint Hash"
+    },
+    "requested_ttl_seconds": {
+      "maximum": 900,
+      "minimum": 30,
+      "title": "Requested Ttl Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "conversion_id",
+    "requested_ttl_seconds"
+  ],
+  "title": "HybridWorkerLeaseRenewalContract",
+  "type": "object"
+}

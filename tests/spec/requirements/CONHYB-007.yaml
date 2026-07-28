@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: CONHYB-007
+priority: P0
+source:
+  document: 70-construction/714_hybrid_representation_construction.md
+  line: 187
+  section: 14. Normative requirements
+requirement: Issue closure and commissioning acceptance shall require the configured evidence, test, retest, and accountable
+  reviewer rather than visual disappearance alone.
+verification_method: Workflow test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/construction.py
+- src/sip/collaboration.py
+- src/sip/scene.py
+automated_test_ids:
+- tests/integration/test_verticals.py::test_construction_complete_record_deficiency_retest_measurement_and_reports
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- src/sip/collaboration.py
+- src/sip/construction.py
+- src/sip/scene.py
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

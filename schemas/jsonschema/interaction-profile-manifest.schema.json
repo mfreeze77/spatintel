@@ -1,0 +1,93 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/interaction-profile-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Actor",
+      "type": "object"
+    },
+    "behavior": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Behavior",
+      "type": "object"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "limits": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Limits",
+      "type": "object"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "manifest_signature": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Signature",
+      "type": "string"
+    },
+    "profile_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "profile_type": {
+      "enum": [
+        "collision",
+        "navigation",
+        "occlusion",
+        "spatial_audio",
+        "picking"
+      ],
+      "title": "Profile Type",
+      "type": "string"
+    },
+    "safety_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Claims",
+      "type": "array"
+    },
+    "validation": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Validation",
+      "type": "object"
+    },
+    "version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "profile_id",
+    "profile_type",
+    "version",
+    "actor",
+    "intended_uses",
+    "limits",
+    "behavior",
+    "validation",
+    "manifest_hash",
+    "manifest_signature"
+  ],
+  "title": "InteractionProfileManifestContract",
+  "type": "object"
+}

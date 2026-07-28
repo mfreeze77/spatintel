@@ -1,0 +1,115 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/hybrid-scene-view.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "title": "Audience",
+      "type": "string"
+    },
+    "bindings": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Bindings",
+      "type": "object"
+    },
+    "device_profile": {
+      "title": "Device Profile",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "interaction_policy": {
+      "additionalProperties": true,
+      "title": "Interaction Policy",
+      "type": "object"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "principal_id": {
+      "title": "Principal Id",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "scene_revision_id": {
+      "title": "Scene Revision Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.hybrid-scene-view/1.1",
+      "default": "sip.hybrid-scene-view/1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "streaming": {
+      "additionalProperties": true,
+      "title": "Streaming",
+      "type": "object"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "time_context": {
+      "additionalProperties": true,
+      "title": "Time Context",
+      "type": "object"
+    },
+    "truth_labels": {
+      "additionalProperties": true,
+      "title": "Truth Labels",
+      "type": "object"
+    },
+    "view_id": {
+      "title": "View Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "view_id",
+    "tenant_id",
+    "project_id",
+    "scene_id",
+    "scene_revision_id",
+    "principal_id",
+    "purpose",
+    "audience",
+    "device_profile",
+    "time_context",
+    "bindings",
+    "interaction_policy",
+    "truth_labels",
+    "streaming",
+    "policy_snapshot_hash",
+    "manifest_hash",
+    "expires_at"
+  ],
+  "title": "HybridSceneViewManifestContract",
+  "type": "object"
+}

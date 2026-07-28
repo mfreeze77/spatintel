@@ -1,0 +1,31 @@
+schema_version: '1.0'
+requirement_id: PLTJOB-001
+priority: P0
+source:
+  document: 60-platform/604_job_orchestration.md
+  line: 36
+  section: 4. Normative requirements
+requirement: A workflow shall persist state, attempts, checkpoints, input/output manifests, costs, warnings, and cancellation.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/operations.py
+- src/sip/database.py
+- migrations/versions/0005_worker_candidate_idempotency.py
+- migrations/versions/0006_operation_trace_context.py
+automated_test_ids:
+- tests/unit/test_operations.py::test_pltjob_001_durable_idempotent_checkpoint_cancel_resume
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/unit.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

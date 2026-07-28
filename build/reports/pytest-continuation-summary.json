@@ -1,0 +1,8 @@
+{
+  "executed_at": "2026-07-27T17:41:46.181642+00:00",
+  "junit": "build/reports/pytest-continuation.xml",
+  "report": "build/reports/pytest-continuation.txt",
+  "schema": "sip.test-report/v1",
+  "suite": "python-full",
+  "summary": "1 error in 1.98s"
+}

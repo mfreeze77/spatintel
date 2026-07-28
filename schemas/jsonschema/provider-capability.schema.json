@@ -1,0 +1,626 @@
+{
+  "$defs": {
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "critical_infrastructure",
+        "biometric",
+        "minor"
+      ],
+      "title": "Classification",
+      "type": "string"
+    },
+    "LicenseDocumentContract": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "enum": [
+            "code",
+            "dependencies",
+            "weights",
+            "dataset",
+            "hosted_service",
+            "output"
+          ],
+          "title": "Component",
+          "type": "string"
+        },
+        "document_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Sha256"
+        },
+        "license_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "License Id",
+          "type": "string"
+        },
+        "review_state": {
+          "enum": [
+            "verified",
+            "missing",
+            "pending",
+            "incompatible"
+          ],
+          "title": "Review State",
+          "type": "string"
+        },
+        "source_url": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Source Url",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "title",
+        "license_id",
+        "source_url",
+        "review_state"
+      ],
+      "title": "LicenseDocumentContract",
+      "type": "object"
+    },
+    "ProviderCoordinateContract": {
+      "additionalProperties": false,
+      "properties": {
+        "handedness": {
+          "enum": [
+            "right",
+            "left"
+          ],
+          "title": "Handedness",
+          "type": "string"
+        },
+        "preserves_input_frame": {
+          "title": "Preserves Input Frame",
+          "type": "boolean"
+        },
+        "requires_explicit_inverse_for_normalization": {
+          "default": true,
+          "title": "Requires Explicit Inverse For Normalization",
+          "type": "boolean"
+        },
+        "scale_behavior": {
+          "enum": [
+            "preserve",
+            "explicit_transform",
+            "estimated_with_uncertainty",
+            "unresolved_visual_only"
+          ],
+          "title": "Scale Behavior",
+          "type": "string"
+        },
+        "units": {
+          "enum": [
+            "meter",
+            "millimeter",
+            "source_native"
+          ],
+          "title": "Units",
+          "type": "string"
+        },
+        "up_axes": {
+          "items": {
+            "enum": [
+              "x",
+              "y",
+              "z"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Up Axes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "units",
+        "handedness",
+        "up_axes",
+        "preserves_input_frame",
+        "scale_behavior"
+      ],
+      "title": "ProviderCoordinateContract",
+      "type": "object"
+    },
+    "ProviderDataGovernanceContract": {
+      "additionalProperties": false,
+      "properties": {
+        "data_use_terms_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Data Use Terms Sha256",
+          "type": "string"
+        },
+        "deletion_verification": {
+          "enum": [
+            "platform_verified",
+            "provider_receipt",
+            "not_applicable"
+          ],
+          "title": "Deletion Verification",
+          "type": "string"
+        },
+        "processing_regions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Processing Regions",
+          "type": "array"
+        },
+        "public_demonstration": {
+          "enum": [
+            "prohibited",
+            "separate_authorization_required"
+          ],
+          "title": "Public Demonstration",
+          "type": "string"
+        },
+        "source_data_use": {
+          "const": "requested_operation_only",
+          "default": "requested_operation_only",
+          "title": "Source Data Use",
+          "type": "string"
+        },
+        "subprocessor_disclosure_complete": {
+          "title": "Subprocessor Disclosure Complete",
+          "type": "boolean"
+        },
+        "training_use": {
+          "enum": [
+            "prohibited",
+            "separate_authorization_required"
+          ],
+          "title": "Training Use",
+          "type": "string"
+        },
+        "unrelated_retention": {
+          "enum": [
+            "prohibited",
+            "separate_authorization_required"
+          ],
+          "title": "Unrelated Retention",
+          "type": "string"
+        }
+      },
+      "required": [
+        "training_use",
+        "public_demonstration",
+        "unrelated_retention",
+        "processing_regions",
+        "subprocessor_disclosure_complete",
+        "deletion_verification",
+        "data_use_terms_sha256"
+      ],
+      "title": "ProviderDataGovernanceContract",
+      "type": "object"
+    },
+    "ProviderRecoveryContract": {
+      "additionalProperties": false,
+      "properties": {
+        "cancellation_bound_seconds": {
+          "maximum": 86400,
+          "minimum": 1,
+          "title": "Cancellation Bound Seconds",
+          "type": "integer"
+        },
+        "checkpoint_schema_version": {
+          "title": "Checkpoint Schema Version",
+          "type": "string"
+        },
+        "checkpoint_supported": {
+          "title": "Checkpoint Supported",
+          "type": "boolean"
+        },
+        "cleanup_supported": {
+          "title": "Cleanup Supported",
+          "type": "boolean"
+        },
+        "objective_progress_units": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Objective Progress Units",
+          "type": "array"
+        },
+        "resume_supported": {
+          "title": "Resume Supported",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "cancellation_bound_seconds",
+        "checkpoint_supported",
+        "resume_supported",
+        "cleanup_supported",
+        "checkpoint_schema_version",
+        "objective_progress_units"
+      ],
+      "title": "ProviderRecoveryContract",
+      "type": "object"
+    },
+    "ProviderSecurityContract": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_egress_domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Approved Egress Domains",
+          "type": "array"
+        },
+        "external_processing": {
+          "default": false,
+          "title": "External Processing",
+          "type": "boolean"
+        },
+        "network_required": {
+          "title": "Network Required",
+          "type": "boolean"
+        },
+        "supports_read_only_inputs": {
+          "title": "Supports Read Only Inputs",
+          "type": "boolean"
+        },
+        "supports_write_only_staging": {
+          "title": "Supports Write Only Staging",
+          "type": "boolean"
+        },
+        "transient_cleanup": {
+          "enum": [
+            "verified",
+            "declared",
+            "unsupported"
+          ],
+          "title": "Transient Cleanup",
+          "type": "string"
+        },
+        "writes_outside_job_workspace": {
+          "title": "Writes Outside Job Workspace",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "network_required",
+        "writes_outside_job_workspace",
+        "supports_read_only_inputs",
+        "supports_write_only_staging",
+        "transient_cleanup"
+      ],
+      "title": "ProviderSecurityContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/provider-capability.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_classifications": {
+      "items": {
+        "$ref": "#/$defs/Classification"
+      },
+      "minItems": 1,
+      "title": "Allowed Classifications",
+      "type": "array"
+    },
+    "allowed_purposes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Purposes",
+      "type": "array"
+    },
+    "allowed_regions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Regions",
+      "type": "array"
+    },
+    "approval_state": {
+      "enum": [
+        "approved",
+        "denied",
+        "expired",
+        "revoked",
+        "research_only",
+        "pending"
+      ],
+      "title": "Approval State",
+      "type": "string"
+    },
+    "benchmark_profile_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Benchmark Profile Ids",
+      "type": "array"
+    },
+    "capabilities": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "coordinate_contract": {
+      "$ref": "#/$defs/ProviderCoordinateContract"
+    },
+    "data_governance": {
+      "$ref": "#/$defs/ProviderDataGovernanceContract"
+    },
+    "dependency_inventory": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "minItems": 1,
+      "title": "Dependency Inventory",
+      "type": "array"
+    },
+    "deployment_modes": {
+      "items": {
+        "enum": [
+          "local_only",
+          "hybrid",
+          "managed_cloud",
+          "manual_external"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Deployment Modes",
+      "type": "array"
+    },
+    "executable_digest": {
+      "pattern": "^(sha256:)?[a-f0-9]{64}$",
+      "title": "Executable Digest",
+      "type": "string"
+    },
+    "execution_modes": {
+      "items": {
+        "enum": [
+          "local_process",
+          "isolated_container",
+          "private_managed",
+          "external_api",
+          "manual_external"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Execution Modes",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "input_roles": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Input Roles",
+      "type": "array"
+    },
+    "license_evidence": {
+      "items": {
+        "$ref": "#/$defs/LicenseDocumentContract"
+      },
+      "minItems": 1,
+      "title": "License Evidence",
+      "type": "array"
+    },
+    "license_manifest_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "License Manifest Id",
+      "type": "string"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "manifest_signature": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Signature",
+      "type": "string"
+    },
+    "model_manifest_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Model Manifest Ids",
+      "type": "array"
+    },
+    "output_rights": {
+      "minLength": 1,
+      "title": "Output Rights",
+      "type": "string"
+    },
+    "output_roles": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Roles",
+      "type": "array"
+    },
+    "prohibited_purposes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prohibited Purposes",
+      "type": "array"
+    },
+    "provider_class": {
+      "enum": [
+        "local_open_source",
+        "private_managed",
+        "external_api",
+        "manual_external",
+        "research_shadow"
+      ],
+      "title": "Provider Class",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "provider_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Provider Version",
+      "type": "string"
+    },
+    "recovery": {
+      "$ref": "#/$defs/ProviderRecoveryContract"
+    },
+    "reproducibility": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Reproducibility",
+      "type": "object"
+    },
+    "retention_days": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retention Days"
+    },
+    "review_due_at": {
+      "format": "date-time",
+      "title": "Review Due At",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.provider-capability/v1.1",
+      "default": "sip.provider-capability/v1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.1.0",
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "security": {
+      "$ref": "#/$defs/ProviderSecurityContract"
+    },
+    "signed_by": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Signed By",
+      "type": "string"
+    },
+    "source_revision": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "source_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Source Url",
+      "type": "string"
+    },
+    "supported_formats": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Supported Formats",
+      "type": "object"
+    }
+  },
+  "required": [
+    "provider_id",
+    "provider_version",
+    "provider_class",
+    "source_url",
+    "source_revision",
+    "executable_digest",
+    "execution_modes",
+    "deployment_modes",
+    "input_roles",
+    "output_roles",
+    "capabilities",
+    "supported_formats",
+    "coordinate_contract",
+    "reproducibility",
+    "security",
+    "recovery",
+    "data_governance",
+    "license_manifest_id",
+    "license_evidence",
+    "dependency_inventory",
+    "benchmark_profile_ids",
+    "allowed_classifications",
+    "allowed_purposes",
+    "allowed_regions",
+    "output_rights",
+    "approval_state",
+    "reviewed_at",
+    "review_due_at",
+    "signed_by",
+    "manifest_hash",
+    "manifest_signature"
+  ],
+  "title": "ProviderCapabilityDescriptorContract",
+  "type": "object"
+}

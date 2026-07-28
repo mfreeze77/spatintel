@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "reports": [
+    "build/reports/python-test-report.json",
+    "build/reports/swift-test-report.json",
+    "build/reports/web-runtime-test-report.json"
+  ]
+}

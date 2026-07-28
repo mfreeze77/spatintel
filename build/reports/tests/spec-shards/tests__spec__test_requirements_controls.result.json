@@ -1,0 +1,35 @@
+{
+  "bootstrap_excluded_inputs": [],
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+    "-q",
+    "tests/spec/test_requirements_controls.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/spec/shards/tests__spec__test_requirements_controls.xml"
+  ],
+  "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "declared_generated_inputs": [],
+  "elapsed_seconds": 1.635005,
+  "exit_code": 0,
+  "input_sha256": "61cef70fd9106488330e90f81afd00653d752730784b962dd798a47c1c7547c2",
+  "junit_path": "build/reports/tests/spec-shards/tests__spec__test_requirements_controls.xml",
+  "junit_sha256": "2fecb9f6865bcfc3d285c2285440f6a919e4d036b0d03fdd328c124edf499ff0",
+  "log_path": "build/reports/tests/spec-shards/tests__spec__test_requirements_controls.log",
+  "log_sha256": "5b19689a97d618d5cdfce632de67285a8efa3c57100a80350a5bb7ca9e05ae34",
+  "name": "tests__spec__test_requirements_controls",
+  "path": "tests/spec/test_requirements_controls.py",
+  "portable_command": [
+    "python",
+    "tools/run_pytest_isolated.py",
+    "-q",
+    "tests/spec/test_requirements_controls.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=build/reports/tests/spec-shards/tests__spec__test_requirements_controls.xml"
+  ],
+  "schema": "sip.pytest-shard-result/v2",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed"
+}

@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: TSTGATE-003
+priority: P0
+source:
+  document: 95-testing-delivery/955_release_gates.md
+  line: 38
+  section: 4. Normative requirements
+requirement: Production release shall pass all P0 requirements, vulnerability/SBOM/license review, benchmark thresholds, consent/truth-label
+  tests, backup restore, migration, load, and acceptance scenarios.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- src/sip/spec_lint.py
+- tools/release.py
+- .github/workflows/release.yml
+automated_test_ids:
+- tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates
+- tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements
+retained_evidence:
+- build/reports/release-report.json
+- build/reports/spec-lint.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

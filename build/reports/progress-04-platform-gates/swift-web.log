@@ -1,0 +1,122 @@
+=== swift-test ===
+cd apps/ios-capture && swift test 2>&1 | tee ../../build/evidence/swift-test-linux.log
+Another instance of SwiftPM (PID: 44288) is already running using '/mnt/data/sip-authoritative-work/apps/ios-capture/.build', waiting until that process has finished execution...[0/1] Planning build
+Building for debugging...
+[0/17] Write sources
+[2/17] Write swift-version--1BA0962812E73E12.txt
+[4/17] Emitting module CaptureTransferTests
+[5/17] Compiling CaptureTransferTests CaptureTransferTests.swift
+[6/18] Wrapping AST for CaptureTransferTests for debugging
+[8/18] Emitting module CaptureCoreTests
+[9/18] Compiling CaptureCoreTests CaptureCoreTests.swift
+[10/19] /mnt/data/sip-authoritative-work/apps/ios-capture/.build/x86_64-unknown-linux-gnu/debug/SIPCapturePackageDiscoveredTests.derived/all-discovered-tests.swift
+[11/19] Write sources
+[12/19] Wrapping AST for CaptureCoreTests for debugging
+[14/23] Compiling SIPCapturePackageDiscoveredTests CaptureTransferTests.swift
+[15/23] Emitting module SIPCapturePackageDiscoveredTests
+[16/23] Compiling SIPCapturePackageDiscoveredTests CaptureCoreTests.swift
+[17/23] Compiling SIPCapturePackageDiscoveredTests all-discovered-tests.swift
+[18/24] /mnt/data/sip-authoritative-work/apps/ios-capture/.build/x86_64-unknown-linux-gnu/debug/SIPCapturePackageTests.derived/runner.swift
+[19/24] Write sources
+[20/24] Wrapping AST for SIPCapturePackageDiscoveredTests for debugging
+[22/26] Compiling SIPCapturePackageTests runner.swift
+[23/26] Emitting module SIPCapturePackageTests
+[24/27] Wrapping AST for SIPCapturePackageTests for debugging
+[25/27] Write Objects.LinkFileList
+[26/27] Linking SIPCapturePackageTests.xctest
+Build complete! (4.63s)
+Test Suite 'All tests' started at 2026-07-28 00:40:18.234
+Test Suite 'debug.xctest' started at 2026-07-28 00:40:18.235
+Test Suite 'debug.xctest' passed at 2026-07-28 00:40:18.235
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'All tests' passed at 2026-07-28 00:40:18.235
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+◇ Test "CAPIOS-006 resumable transfer persists chunk checkpoints and verifies destination receipt" started.
+◇ Test "CAPCSCP-001 through CAPCSCP-005 package hashing is deterministic and validation rejects corruption" started.
+◇ Test "CAPIOS-005 CAPIOS-006 policy disables sensors and purge fails closed" started.
+◇ Test "CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics" started.
+◇ Test "CAPSOP-001 CAPSOP-004 field SOP preflight and closeout fail visibly" started.
+◇ Test "CAPREC-002 CAPREC-005 recovery offers safe actions and explicit repair lineage" started.
+◇ Test "CAPSTRAT-003 CAPSTRAT-004 profiles cannot claim accuracy without validation evidence" started.
+◇ Test "CAPPRIV-002 CAPPRIV-003 CAPPRIV-005 detector suggestions remain reviewable and broad export fails closed" started.
+◇ Test "CAPIOS-003 CAPREC-001 append-only journal recovers and detects tampering" started.
+◇ Test "CAPSENS-003 CAPSENS-005 fixture adapter emits explicit tracking events and bounded drops" started.
+◇ Test "CAPIOS-004 CAPREC-004 resource pressure degrades safely before filesystem exhaustion" started.
+◇ Test "CAPQUAL-001 CAPQUAL-003 quality warnings state cause consequence and corrective action" started.
+◇ Test "CAPIOS-001 state machine covers required persisted states and rejects invalid transitions" started.
+✔ Test "CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics" passed after 0.002 seconds.
+✔ Test "CAPSOP-001 CAPSOP-004 field SOP preflight and closeout fail visibly" passed after 0.002 seconds.
+✔ Test "CAPPRIV-002 CAPPRIV-003 CAPPRIV-005 detector suggestions remain reviewable and broad export fails closed" passed after 0.002 seconds.
+✔ Test "CAPSTRAT-003 CAPSTRAT-004 profiles cannot claim accuracy without validation evidence" passed after 0.002 seconds.
+✔ Test "CAPIOS-005 CAPIOS-006 policy disables sensors and purge fails closed" passed after 0.002 seconds.
+✔ Test "CAPSENS-003 CAPSENS-005 fixture adapter emits explicit tracking events and bounded drops" passed after 0.002 seconds.
+✔ Test "CAPIOS-004 CAPREC-004 resource pressure degrades safely before filesystem exhaustion" passed after 0.002 seconds.
+✔ Test "CAPQUAL-001 CAPQUAL-003 quality warnings state cause consequence and corrective action" passed after 0.002 seconds.
+✔ Test "CAPIOS-001 state machine covers required persisted states and rejects invalid transitions" passed after 0.001 seconds.
+✔ Test "CAPREC-002 CAPREC-005 recovery offers safe actions and explicit repair lineage" passed after 0.006 seconds.
+✔ Test "CAPIOS-003 CAPREC-001 append-only journal recovers and detects tampering" passed after 0.012 seconds.
+✔ Test "CAPIOS-006 resumable transfer persists chunk checkpoints and verifies destination receipt" passed after 0.018 seconds.
+✔ Test "CAPCSCP-001 through CAPCSCP-005 package hashing is deterministic and validation rejects corruption" passed after 0.018 seconds.
+✔ Test run with 13 tests in 0 suites passed after 0.018 seconds.
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/record_test_evidence.py
+{
+  "status": "passed",
+  "reports": [
+    "build/reports/python-test-report.json",
+    "build/reports/swift-test-report.json",
+    "build/reports/web-runtime-test-report.json"
+  ]
+}
+=== web-test ===
+npm --workspace apps/web run verify-runtime 2>&1 | tee build/evidence/web-runtime-test.log
+
+> @sip/web@1.1.0 verify-runtime
+> node --test test/*.test.mjs && node scripts/verify-source.mjs
+
+TAP version 13
+# Subtest: representation layers remain distinct and bounded
+ok 1 - representation layers remain distinct and bounded
+  ---
+  duration_ms: 1.324601
+  type: 'test'
+  ...
+# Subtest: proxy hits must resolve against metric evidence
+ok 2 - proxy hits must resolve against metric evidence
+  ---
+  duration_ms: 0.251053
+  type: 'test'
+  ...
+# Subtest: proxy replacement preserves stable anchors or reports them unresolved
+ok 3 - proxy replacement preserves stable anchors or reports them unresolved
+  ---
+  duration_ms: 0.9742
+  type: 'test'
+  ...
+# Subtest: viewer snapshot serialization is deterministic
+ok 4 - viewer snapshot serialization is deterministic
+  ---
+  duration_ms: 6.01948
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53.248966
+{"status":"passed","checkedFiles":10,"invariantChecks":11}
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/record_test_evidence.py
+{
+  "status": "passed",
+  "reports": [
+    "build/reports/python-test-report.json",
+    "build/reports/swift-test-report.json",
+    "build/reports/web-runtime-test-report.json"
+  ]
+}

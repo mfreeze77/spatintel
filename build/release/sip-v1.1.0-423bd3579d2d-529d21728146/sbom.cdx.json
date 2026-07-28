@@ -1,0 +1,1179 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "pkg:npm/%40types%2Fnode@24.10.1",
+      "name": "@types/node",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/%40types%2Fnode@24.10.1",
+      "type": "library",
+      "version": "24.10.1"
+    },
+    {
+      "bom-ref": "pkg:npm/%40types%2Freact-dom@19.2.3",
+      "name": "@types/react-dom",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/%40types%2Freact-dom@19.2.3",
+      "type": "library",
+      "version": "19.2.3"
+    },
+    {
+      "bom-ref": "pkg:npm/%40types%2Freact@19.2.17",
+      "name": "@types/react",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/%40types%2Freact@19.2.17",
+      "type": "library",
+      "version": "19.2.17"
+    },
+    {
+      "bom-ref": "pkg:npm/%40types%2Fthree@0.185.1",
+      "name": "@types/three",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/%40types%2Fthree@0.185.1",
+      "type": "library",
+      "version": "0.185.1"
+    },
+    {
+      "bom-ref": "pkg:npm/eslint-config-next@16.2.11",
+      "name": "eslint-config-next",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/eslint-config-next@16.2.11",
+      "type": "library",
+      "version": "16.2.11"
+    },
+    {
+      "bom-ref": "pkg:npm/eslint@10.7.0",
+      "name": "eslint",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/eslint@10.7.0",
+      "type": "library",
+      "version": "10.7.0"
+    },
+    {
+      "bom-ref": "pkg:npm/next@16.2.11",
+      "name": "next",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:dependencies"
+        }
+      ],
+      "purl": "pkg:npm/next@16.2.11",
+      "type": "library",
+      "version": "16.2.11"
+    },
+    {
+      "bom-ref": "pkg:npm/react-dom@19.2.8",
+      "name": "react-dom",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:dependencies"
+        }
+      ],
+      "purl": "pkg:npm/react-dom@19.2.8",
+      "type": "library",
+      "version": "19.2.8"
+    },
+    {
+      "bom-ref": "pkg:npm/react@19.2.8",
+      "name": "react",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:dependencies"
+        }
+      ],
+      "purl": "pkg:npm/react@19.2.8",
+      "type": "library",
+      "version": "19.2.8"
+    },
+    {
+      "bom-ref": "pkg:npm/three@0.185.1",
+      "name": "three",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:dependencies"
+        }
+      ],
+      "purl": "pkg:npm/three@0.185.1",
+      "type": "library",
+      "version": "0.185.1"
+    },
+    {
+      "bom-ref": "pkg:npm/typescript@6.0.3",
+      "name": "typescript",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "web:devDependencies"
+        }
+      ],
+      "purl": "pkg:npm/typescript@6.0.3",
+      "type": "library",
+      "version": "6.0.3"
+    },
+    {
+      "bom-ref": "pkg:pypi/alembic@1.18.4",
+      "name": "alembic",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/alembic@1.18.4",
+      "type": "library",
+      "version": "1.18.4"
+    },
+    {
+      "bom-ref": "pkg:pypi/boto3@1.43.18",
+      "name": "boto3",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/boto3@1.43.18",
+      "type": "library",
+      "version": "1.43.18"
+    },
+    {
+      "bom-ref": "pkg:pypi/cryptography@46.0.4",
+      "name": "cryptography",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/cryptography@46.0.4",
+      "type": "library",
+      "version": "46.0.4"
+    },
+    {
+      "bom-ref": "pkg:pypi/fastapi@0.128.2",
+      "name": "fastapi",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/fastapi@0.128.2",
+      "type": "library",
+      "version": "0.128.2"
+    },
+    {
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "name": "httpx",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "type": "library",
+      "version": "0.28.1"
+    },
+    {
+      "bom-ref": "pkg:pypi/jsonschema@4.26.0",
+      "name": "jsonschema",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/jsonschema@4.26.0",
+      "type": "library",
+      "version": "4.26.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/mypy@1.19.1",
+      "name": "mypy",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/mypy@1.19.1",
+      "type": "library",
+      "version": "1.19.1"
+    },
+    {
+      "bom-ref": "pkg:pypi/numpy@2.3.5",
+      "name": "numpy",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/numpy@2.3.5",
+      "type": "library",
+      "version": "2.3.5"
+    },
+    {
+      "bom-ref": "pkg:pypi/opentelemetry-api@1.39.1",
+      "name": "opentelemetry-api",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "telemetry"
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-api@1.39.1",
+      "type": "library",
+      "version": "1.39.1"
+    },
+    {
+      "bom-ref": "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.39.1",
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "telemetry"
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.39.1",
+      "type": "library",
+      "version": "1.39.1"
+    },
+    {
+      "bom-ref": "pkg:pypi/opentelemetry-sdk@1.39.1",
+      "name": "opentelemetry-sdk",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "telemetry"
+        }
+      ],
+      "purl": "pkg:pypi/opentelemetry-sdk@1.39.1",
+      "type": "library",
+      "version": "1.39.1"
+    },
+    {
+      "bom-ref": "pkg:pypi/orjson@3.11.9",
+      "name": "orjson",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/orjson@3.11.9",
+      "type": "library",
+      "version": "3.11.9"
+    },
+    {
+      "bom-ref": "pkg:pypi/prometheus-client@0.25.0",
+      "name": "prometheus-client",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/prometheus-client@0.25.0",
+      "type": "library",
+      "version": "0.25.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/pydantic@2.13.4",
+      "name": "pydantic",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/pydantic@2.13.4",
+      "type": "library",
+      "version": "2.13.4"
+    },
+    {
+      "bom-ref": "pkg:pypi/pytest-asyncio@1.3.0",
+      "name": "pytest-asyncio",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/pytest-asyncio@1.3.0",
+      "type": "library",
+      "version": "1.3.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/pytest-cov@7.0.0",
+      "name": "pytest-cov",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/pytest-cov@7.0.0",
+      "type": "library",
+      "version": "7.0.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/pytest@9.0.2",
+      "name": "pytest",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "type": "library",
+      "version": "9.0.2"
+    },
+    {
+      "bom-ref": "pkg:pypi/redis@7.1.0",
+      "name": "redis",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "redis"
+        }
+      ],
+      "purl": "pkg:pypi/redis@7.1.0",
+      "type": "library",
+      "version": "7.1.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/ruff@0.14.14",
+      "name": "ruff",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/ruff@0.14.14",
+      "type": "library",
+      "version": "0.14.14"
+    },
+    {
+      "bom-ref": "pkg:pypi/scipy@1.17.0",
+      "name": "scipy",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/scipy@1.17.0",
+      "type": "library",
+      "version": "1.17.0"
+    },
+    {
+      "bom-ref": "pkg:pypi/sqlalchemy@2.0.50",
+      "name": "sqlalchemy",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/sqlalchemy@2.0.50",
+      "type": "library",
+      "version": "2.0.50"
+    },
+    {
+      "bom-ref": "pkg:pypi/types-jsonschema@4.26.0.20260130",
+      "name": "types-jsonschema",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "dev"
+        }
+      ],
+      "purl": "pkg:pypi/types-jsonschema@4.26.0.20260130",
+      "type": "library",
+      "version": "4.26.0.20260130"
+    },
+    {
+      "bom-ref": "pkg:pypi/uvicorn@0.48.0",
+      "name": "uvicorn",
+      "properties": [
+        {
+          "name": "sip:dependency-group",
+          "value": "runtime"
+        }
+      ],
+      "purl": "pkg:pypi/uvicorn@0.48.0",
+      "type": "library",
+      "version": "0.48.0"
+    },
+    {
+      "bom-ref": "urn:sip:container:minio-local-only",
+      "name": "minio-local-only",
+      "properties": [
+        {
+          "name": "sip:reference",
+          "value": "minio/minio:RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e"
+        },
+        {
+          "name": "sip:production-allowed",
+          "value": "false"
+        }
+      ],
+      "type": "container",
+      "version": "minio/minio:RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e"
+    },
+    {
+      "bom-ref": "urn:sip:container:node-runtime",
+      "name": "node-runtime",
+      "properties": [
+        {
+          "name": "sip:reference",
+          "value": "node:24.18.0-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d"
+        },
+        {
+          "name": "sip:production-allowed",
+          "value": "false"
+        }
+      ],
+      "type": "container",
+      "version": "node:24.18.0-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d"
+    },
+    {
+      "bom-ref": "urn:sip:container:postgis",
+      "name": "postgis",
+      "properties": [
+        {
+          "name": "sip:reference",
+          "value": "postgis/postgis:18-3.6@sha256:f248a10d133f63d01aefab324f3462d7e1002e9cc1b65c6585626f6cb7a3d85c"
+        },
+        {
+          "name": "sip:production-allowed",
+          "value": "true"
+        }
+      ],
+      "type": "container",
+      "version": "postgis/postgis:18-3.6@sha256:f248a10d133f63d01aefab324f3462d7e1002e9cc1b65c6585626f6cb7a3d85c"
+    },
+    {
+      "bom-ref": "urn:sip:container:python-runtime",
+      "name": "python-runtime",
+      "properties": [
+        {
+          "name": "sip:reference",
+          "value": "python:3.13.14-slim-bookworm@sha256:9d7f287598e1a5a978c015ee176d8216435aaf335ed69ac3c38dd1bbb10e8d64"
+        },
+        {
+          "name": "sip:production-allowed",
+          "value": "true"
+        }
+      ],
+      "type": "container",
+      "version": "python:3.13.14-slim-bookworm@sha256:9d7f287598e1a5a978c015ee176d8216435aaf335ed69ac3c38dd1bbb10e8d64"
+    },
+    {
+      "bom-ref": "urn:sip:container:valkey",
+      "name": "valkey",
+      "properties": [
+        {
+          "name": "sip:reference",
+          "value": "valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328"
+        },
+        {
+          "name": "sip:production-allowed",
+          "value": "true"
+        }
+      ],
+      "type": "container",
+      "version": "valkey/valkey:9.1.1-alpine3.24@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328"
+    },
+    {
+      "bom-ref": "urn:sip:governance:data:synthetic-fixtures:083e7e7d27037027a4c0c3fd438d67e40e445175421cc49fcc17c6789cfafc84",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "083e7e7d27037027a4c0c3fd438d67e40e445175421cc49fcc17c6789cfafc84"
+        }
+      ],
+      "name": "synthetic-fixtures",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/data/synthetic-fixtures.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "data",
+      "version": "1.1.0"
+    },
+    {
+      "bom-ref": "urn:sip:governance:models:lingbot-map-checkpoint:c5086ee12852d49f809d5fa611b960494ac08055345e1b10772b26e09c066e8e",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c5086ee12852d49f809d5fa611b960494ac08055345e1b10772b26e09c066e8e"
+        }
+      ],
+      "name": "lingbot-map-checkpoint",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/models/lingbot-map-checkpoint.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "machine-learning-model",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:mesh2splat:8b1406f9bc5fee4b404b95c779fe8ec5810b2b64fa62d80f029d5138d44b94e0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b1406f9bc5fee4b404b95c779fe8ec5810b2b64fa62d80f029d5138d44b94e0"
+        }
+      ],
+      "name": "mesh2splat",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/mesh2splat.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:playcanvas-splattransform:8315f90ba9f9ff489fe3203487a6565f8fff1075ac185587a3cd84a231ed0326",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8315f90ba9f9ff489fe3203487a6565f8fff1075ac185587a3cd84a231ed0326"
+        }
+      ],
+      "name": "playcanvas-splattransform",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/playcanvas-splattransform.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:research-extractors:f9d2463f7709241850634505d88a8367585c4083d88a80d29a7308be7c7606b6",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f9d2463f7709241850634505d88a8367585c4083d88a80d29a7308be7c7606b6"
+        }
+      ],
+      "name": "research-extractors",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/research-extractors.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:sip-reference-local:2945988b01429675ab2c2a8d26a7940ae213bc0387ec43b4d2f4ea456715c8e2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2945988b01429675ab2c2a8d26a7940ae213bc0387ec43b4d2f4ea456715c8e2"
+        }
+      ],
+      "name": "sip-reference-local",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/sip-reference-local.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "1.1.0"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:spark:03fbf16070ae55222272b8d15f4376158ef32a4336f48b7d840cc0bf51d67915",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "03fbf16070ae55222272b8d15f4376158ef32a4336f48b7d840cc0bf51d67915"
+        }
+      ],
+      "name": "spark",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/spark.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:providers:splatedit:75b440c1d7cb56a6d8aaf2c3d70f69d954de6dc351b269ffb54e00550fc677a6",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "75b440c1d7cb56a6d8aaf2c3d70f69d954de6dc351b269ffb54e00550fc677a6"
+        }
+      ],
+      "name": "splatedit",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/providers/splatedit.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "service",
+      "version": "unapproved"
+    },
+    {
+      "bom-ref": "urn:sip:governance:sources:source-lock:7ab06012c45abc05b5d608d678cfe27b7a077aee14065a1a151a2689ebaf4635",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7ab06012c45abc05b5d608d678cfe27b7a077aee14065a1a151a2689ebaf4635"
+        }
+      ],
+      "name": "source-lock",
+      "properties": [
+        {
+          "name": "sip:manifest",
+          "value": "third_party/sources/source-lock.json"
+        },
+        {
+          "name": "sip:approval-status",
+          "value": "unknown"
+        }
+      ],
+      "type": "data",
+      "version": "7ab06012c45abc05b5d608d678cfe27b7a077aee14065a1a151a2689ebaf4635"
+    },
+    {
+      "bom-ref": "urn:sip:worker:capture-normalizer:f66f8d8e58897153920a0e9e989a3905d2832c7ee0e6b2e6d143590bcb7bf7bd",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f66f8d8e58897153920a0e9e989a3905d2832c7ee0e6b2e6d143590bcb7bf7bd"
+        }
+      ],
+      "name": "capture-normalizer",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/capture-normalizer/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "f66f8d8e58897153920a0e9e989a3905d2832c7ee0e6b2e6d143590bcb7bf7bd"
+    },
+    {
+      "bom-ref": "urn:sip:worker:change-detection:33631d569525898c641820d8b45a46546bf6ec8fa297fb979aebb0da54f71ef5",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33631d569525898c641820d8b45a46546bf6ec8fa297fb979aebb0da54f71ef5"
+        }
+      ],
+      "name": "change-detection",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/change-detection/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "33631d569525898c641820d8b45a46546bf6ec8fa297fb979aebb0da54f71ef5"
+    },
+    {
+      "bom-ref": "urn:sip:worker:collision-navigation:9c35b009183958fe6cbd1ab3142831bde2b201bcd14aae5f7cb9101c5060dd48",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9c35b009183958fe6cbd1ab3142831bde2b201bcd14aae5f7cb9101c5060dd48"
+        }
+      ],
+      "name": "collision-navigation",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/collision-navigation/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "9c35b009183958fe6cbd1ab3142831bde2b201bcd14aae5f7cb9101c5060dd48"
+    },
+    {
+      "bom-ref": "urn:sip:worker:depth-normalizer:a38563162999595f459fcba84dc01cbd56e326e0ba745ead4f13dc1821568c69",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a38563162999595f459fcba84dc01cbd56e326e0ba745ead4f13dc1821568c69"
+        }
+      ],
+      "name": "depth-normalizer",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/depth-normalizer/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "a38563162999595f459fcba84dc01cbd56e326e0ba745ead4f13dc1821568c69"
+    },
+    {
+      "bom-ref": "urn:sip:worker:document-media:1416b89a6d005545735ca5e19b96eed40ead8a8da06ae27c4de283a73e26b8ce",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1416b89a6d005545735ca5e19b96eed40ead8a8da06ae27c4de283a73e26b8ce"
+        }
+      ],
+      "name": "document-media",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/document-media/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "1416b89a6d005545735ca5e19b96eed40ead8a8da06ae27c4de283a73e26b8ce"
+    },
+    {
+      "bom-ref": "urn:sip:worker:fusion-tsdf:e5490e09db53097a79da70988f3fc81f7aa6cda2de9452ea7c95bccfe45f9602",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e5490e09db53097a79da70988f3fc81f7aa6cda2de9452ea7c95bccfe45f9602"
+        }
+      ],
+      "name": "fusion-tsdf",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/fusion-tsdf/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "e5490e09db53097a79da70988f3fc81f7aa6cda2de9452ea7c95bccfe45f9602"
+    },
+    {
+      "bom-ref": "urn:sip:worker:geometry-cleanup:117231eeb9bed16c3f90c58f0a8873aeafec4b1d4609d19867baa14b2adc4e44",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "117231eeb9bed16c3f90c58f0a8873aeafec4b1d4609d19867baa14b2adc4e44"
+        }
+      ],
+      "name": "geometry-cleanup",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/geometry-cleanup/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "117231eeb9bed16c3f90c58f0a8873aeafec4b1d4609d19867baa14b2adc4e44"
+    },
+    {
+      "bom-ref": "urn:sip:worker:lingbot-adapter:2d1b05fa19fc901dff153834a7e44cd2f3b6cb0c6a479c56629c85c2669a69c6",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2d1b05fa19fc901dff153834a7e44cd2f3b6cb0c6a479c56629c85c2669a69c6"
+        }
+      ],
+      "name": "lingbot-adapter",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/lingbot-adapter/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "2d1b05fa19fc901dff153834a7e44cd2f3b6cb0c6a479c56629c85c2669a69c6"
+    },
+    {
+      "bom-ref": "urn:sip:worker:mesh-lod:d5c5ac6f925b4061f65d2668b6293dd152446e134ad25aead8b63ee29bcc4cdc",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d5c5ac6f925b4061f65d2668b6293dd152446e134ad25aead8b63ee29bcc4cdc"
+        }
+      ],
+      "name": "mesh-lod",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/mesh-lod/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "d5c5ac6f925b4061f65d2668b6293dd152446e134ad25aead8b63ee29bcc4cdc"
+    },
+    {
+      "bom-ref": "urn:sip:worker:pose-optimizer:801afad73aba61726bdc74f82099075836a657930f7365a94b09b1ff404e07d1",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "801afad73aba61726bdc74f82099075836a657930f7365a94b09b1ff404e07d1"
+        }
+      ],
+      "name": "pose-optimizer",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/pose-optimizer/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "801afad73aba61726bdc74f82099075836a657930f7365a94b09b1ff404e07d1"
+    },
+    {
+      "bom-ref": "urn:sip:worker:report-export:769c7160e656414a8ea3dd630329d23ba9ee633daa4b9bacba952b64ad045e75",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "769c7160e656414a8ea3dd630329d23ba9ee633daa4b9bacba952b64ad045e75"
+        }
+      ],
+      "name": "report-export",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/report-export/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "769c7160e656414a8ea3dd630329d23ba9ee633daa4b9bacba952b64ad045e75"
+    },
+    {
+      "bom-ref": "urn:sip:worker:representation-quality:f906f445c45197a2b13d748a4e1ab6641b476c29433cff7e2194e7afa63d3a43",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f906f445c45197a2b13d748a4e1ab6641b476c29433cff7e2194e7afa63d3a43"
+        }
+      ],
+      "name": "representation-quality",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/representation-quality/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "f906f445c45197a2b13d748a4e1ab6641b476c29433cff7e2194e7afa63d3a43"
+    },
+    {
+      "bom-ref": "urn:sip:worker:semantics:cdaea229e6d52d36ecfd32618b8c26eab3c3a1d8583fa75a23e293f9fccec7f7",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cdaea229e6d52d36ecfd32618b8c26eab3c3a1d8583fa75a23e293f9fccec7f7"
+        }
+      ],
+      "name": "semantics",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/semantics/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "cdaea229e6d52d36ecfd32618b8c26eab3c3a1d8583fa75a23e293f9fccec7f7"
+    },
+    {
+      "bom-ref": "urn:sip:worker:splat-normalizer:1d09b9c6268ce8b68c78f07960fffcf34a5b5c1af5b88120476ad258f2667b00",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1d09b9c6268ce8b68c78f07960fffcf34a5b5c1af5b88120476ad258f2667b00"
+        }
+      ],
+      "name": "splat-normalizer",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/splat-normalizer/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "1d09b9c6268ce8b68c78f07960fffcf34a5b5c1af5b88120476ad258f2667b00"
+    },
+    {
+      "bom-ref": "urn:sip:worker:splat-surface:a9efa82cf5b7292fd3809cf51145fccbfdef757a43d33ce79d8c0d80bf852ef0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a9efa82cf5b7292fd3809cf51145fccbfdef757a43d33ce79d8c0d80bf852ef0"
+        }
+      ],
+      "name": "splat-surface",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/splat-surface/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "a9efa82cf5b7292fd3809cf51145fccbfdef757a43d33ce79d8c0d80bf852ef0"
+    },
+    {
+      "bom-ref": "urn:sip:worker:splat:61cba155574ff26f9ecd2974729200fc8248e693aefd3d396bcf94469070d918",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "61cba155574ff26f9ecd2974729200fc8248e693aefd3d396bcf94469070d918"
+        }
+      ],
+      "name": "splat",
+      "properties": [
+        {
+          "name": "sip:capability",
+          "value": "unknown"
+        },
+        {
+          "name": "sip:manifest-path",
+          "value": "workers/splat/worker-manifest.json"
+        }
+      ],
+      "type": "application",
+      "version": "61cba155574ff26f9ecd2974729200fc8248e693aefd3d396bcf94469070d918"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "pkg:npm/%40types%2Fnode@24.10.1",
+        "pkg:npm/%40types%2Freact-dom@19.2.3",
+        "pkg:npm/%40types%2Freact@19.2.17",
+        "pkg:npm/%40types%2Fthree@0.185.1",
+        "pkg:npm/eslint-config-next@16.2.11",
+        "pkg:npm/eslint@10.7.0",
+        "pkg:npm/next@16.2.11",
+        "pkg:npm/react-dom@19.2.8",
+        "pkg:npm/react@19.2.8",
+        "pkg:npm/three@0.185.1",
+        "pkg:npm/typescript@6.0.3",
+        "pkg:pypi/alembic@1.18.4",
+        "pkg:pypi/boto3@1.43.18",
+        "pkg:pypi/cryptography@46.0.4",
+        "pkg:pypi/fastapi@0.128.2",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/jsonschema@4.26.0",
+        "pkg:pypi/mypy@1.19.1",
+        "pkg:pypi/numpy@2.3.5",
+        "pkg:pypi/opentelemetry-api@1.39.1",
+        "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.39.1",
+        "pkg:pypi/opentelemetry-sdk@1.39.1",
+        "pkg:pypi/orjson@3.11.9",
+        "pkg:pypi/prometheus-client@0.25.0",
+        "pkg:pypi/pydantic@2.13.4",
+        "pkg:pypi/pytest-asyncio@1.3.0",
+        "pkg:pypi/pytest-cov@7.0.0",
+        "pkg:pypi/pytest@9.0.2",
+        "pkg:pypi/redis@7.1.0",
+        "pkg:pypi/ruff@0.14.14",
+        "pkg:pypi/scipy@1.17.0",
+        "pkg:pypi/sqlalchemy@2.0.50",
+        "pkg:pypi/types-jsonschema@4.26.0.20260130",
+        "pkg:pypi/uvicorn@0.48.0",
+        "urn:sip:container:minio-local-only",
+        "urn:sip:container:node-runtime",
+        "urn:sip:container:postgis",
+        "urn:sip:container:python-runtime",
+        "urn:sip:container:valkey",
+        "urn:sip:governance:data:synthetic-fixtures:083e7e7d27037027a4c0c3fd438d67e40e445175421cc49fcc17c6789cfafc84",
+        "urn:sip:governance:models:lingbot-map-checkpoint:c5086ee12852d49f809d5fa611b960494ac08055345e1b10772b26e09c066e8e",
+        "urn:sip:governance:providers:mesh2splat:8b1406f9bc5fee4b404b95c779fe8ec5810b2b64fa62d80f029d5138d44b94e0",
+        "urn:sip:governance:providers:playcanvas-splattransform:8315f90ba9f9ff489fe3203487a6565f8fff1075ac185587a3cd84a231ed0326",
+        "urn:sip:governance:providers:research-extractors:f9d2463f7709241850634505d88a8367585c4083d88a80d29a7308be7c7606b6",
+        "urn:sip:governance:providers:sip-reference-local:2945988b01429675ab2c2a8d26a7940ae213bc0387ec43b4d2f4ea456715c8e2",
+        "urn:sip:governance:providers:spark:03fbf16070ae55222272b8d15f4376158ef32a4336f48b7d840cc0bf51d67915",
+        "urn:sip:governance:providers:splatedit:75b440c1d7cb56a6d8aaf2c3d70f69d954de6dc351b269ffb54e00550fc677a6",
+        "urn:sip:governance:sources:source-lock:7ab06012c45abc05b5d608d678cfe27b7a077aee14065a1a151a2689ebaf4635",
+        "urn:sip:worker:capture-normalizer:f66f8d8e58897153920a0e9e989a3905d2832c7ee0e6b2e6d143590bcb7bf7bd",
+        "urn:sip:worker:change-detection:33631d569525898c641820d8b45a46546bf6ec8fa297fb979aebb0da54f71ef5",
+        "urn:sip:worker:collision-navigation:9c35b009183958fe6cbd1ab3142831bde2b201bcd14aae5f7cb9101c5060dd48",
+        "urn:sip:worker:depth-normalizer:a38563162999595f459fcba84dc01cbd56e326e0ba745ead4f13dc1821568c69",
+        "urn:sip:worker:document-media:1416b89a6d005545735ca5e19b96eed40ead8a8da06ae27c4de283a73e26b8ce",
+        "urn:sip:worker:fusion-tsdf:e5490e09db53097a79da70988f3fc81f7aa6cda2de9452ea7c95bccfe45f9602",
+        "urn:sip:worker:geometry-cleanup:117231eeb9bed16c3f90c58f0a8873aeafec4b1d4609d19867baa14b2adc4e44",
+        "urn:sip:worker:lingbot-adapter:2d1b05fa19fc901dff153834a7e44cd2f3b6cb0c6a479c56629c85c2669a69c6",
+        "urn:sip:worker:mesh-lod:d5c5ac6f925b4061f65d2668b6293dd152446e134ad25aead8b63ee29bcc4cdc",
+        "urn:sip:worker:pose-optimizer:801afad73aba61726bdc74f82099075836a657930f7365a94b09b1ff404e07d1",
+        "urn:sip:worker:report-export:769c7160e656414a8ea3dd630329d23ba9ee633daa4b9bacba952b64ad045e75",
+        "urn:sip:worker:representation-quality:f906f445c45197a2b13d748a4e1ab6641b476c29433cff7e2194e7afa63d3a43",
+        "urn:sip:worker:semantics:cdaea229e6d52d36ecfd32618b8c26eab3c3a1d8583fa75a23e293f9fccec7f7",
+        "urn:sip:worker:splat-normalizer:1d09b9c6268ce8b68c78f07960fffcf34a5b5c1af5b88120476ad258f2667b00",
+        "urn:sip:worker:splat-surface:a9efa82cf5b7292fd3809cf51145fccbfdef757a43d33ce79d8c0d80bf852ef0",
+        "urn:sip:worker:splat:61cba155574ff26f9ecd2974729200fc8248e693aefd3d396bcf94469070d918"
+      ],
+      "ref": "pkg:generic/spatial-intelligence-platform@1.1.0?commit=423bd3579d2d1de93e5a9402bbc94572a01cd9eb"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "pkg:generic/spatial-intelligence-platform@1.1.0?commit=423bd3579d2d1de93e5a9402bbc94572a01cd9eb",
+      "name": "spatial-intelligence-platform",
+      "properties": [
+        {
+          "name": "sip:git-commit",
+          "value": "423bd3579d2d1de93e5a9402bbc94572a01cd9eb"
+        },
+        {
+          "name": "sip:spec-sha256",
+          "value": "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8"
+        }
+      ],
+      "type": "application",
+      "version": "1.1.0"
+    },
+    "timestamp": "2026-07-27T17:46:09Z",
+    "tools": {
+      "components": [
+        {
+          "name": "tools/release.py",
+          "type": "application",
+          "version": "1"
+        }
+      ]
+    }
+  },
+  "serialNumber": "urn:uuid:0bd1b595f1950ac276900c49466c1b33",
+  "specVersion": "1.6",
+  "version": 1
+}

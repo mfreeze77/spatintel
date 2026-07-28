@@ -1,0 +1,80 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/agent-proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_resource_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Affected Resource Ids",
+      "type": "array"
+    },
+    "authority": {
+      "const": "inferred",
+      "default": "inferred",
+      "title": "Authority",
+      "type": "string"
+    },
+    "auto_committed": {
+      "const": false,
+      "default": false,
+      "title": "Auto Committed",
+      "type": "boolean"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "proposal_id": {
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "proposed_by": {
+      "title": "Proposed By",
+      "type": "string"
+    },
+    "publication_permission": {
+      "const": false,
+      "default": false,
+      "title": "Publication Permission",
+      "type": "boolean"
+    },
+    "rationale": {
+      "title": "Rationale",
+      "type": "string"
+    },
+    "required_reviewer": {
+      "title": "Required Reviewer",
+      "type": "string"
+    },
+    "state": {
+      "const": "review_required",
+      "default": "review_required",
+      "title": "State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "rationale",
+    "affected_resource_ids",
+    "evidence_ids",
+    "confidence",
+    "required_reviewer",
+    "proposed_by"
+  ],
+  "title": "AgentProposalContract",
+  "type": "object"
+}

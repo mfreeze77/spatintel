@@ -1,0 +1,91 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/provider-progress.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "completed_work_units": {
+      "minimum": 0,
+      "title": "Completed Work Units",
+      "type": "number"
+    },
+    "conversion_id": {
+      "title": "Conversion Id",
+      "type": "string"
+    },
+    "estimated_output_bytes": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Output Bytes"
+    },
+    "last_durable_checkpoint_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Durable Checkpoint Hash"
+    },
+    "resource_use": {
+      "additionalProperties": true,
+      "title": "Resource Use",
+      "type": "object"
+    },
+    "sequence": {
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "stage": {
+      "minLength": 1,
+      "title": "Stage",
+      "type": "string"
+    },
+    "total_work_units": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Total Work Units"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "work_unit_name": {
+      "minLength": 1,
+      "title": "Work Unit Name",
+      "type": "string"
+    }
+  },
+  "required": [
+    "conversion_id",
+    "sequence",
+    "stage",
+    "completed_work_units",
+    "work_unit_name"
+  ],
+  "title": "ProviderProgressContract",
+  "type": "object"
+}

@@ -1,0 +1,25 @@
+schema_version: '1.0'
+requirement_id: RECBIDI-001
+priority: P0
+source:
+  document: 40-reconstruction/417_bidirectional_mesh_splat_interop.md
+  line: 171
+  section: 12. Normative requirements
+requirement: Mesh-splat and splat-surface conversions shall create new content-addressed derivatives and shall preserve every
+  canonical source asset.
+verification_method: Asset-lineage test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-RECBIDI-001
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

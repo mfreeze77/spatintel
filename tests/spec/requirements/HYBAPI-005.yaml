@@ -1,0 +1,37 @@
+schema_version: '1.0'
+requirement_id: HYBAPI-005
+priority: P0
+source:
+  document: 60-platform/614_splat_surface_api_and_events.md
+  line: 329
+  section: 13. Normative requirements
+requirement: Events that assert publication, approval, cancellation, or invalidation shall be emitted only after the corresponding
+  transaction commits.
+verification_method: Outbox consistency test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/worker_manifest.py
+- src/sip/worker_protocol.py
+- src/sip/worker_runtime.py
+- src/sip/operations.py
+- src/sip/representations.py
+- schemas/protobuf/worker.proto
+automated_test_ids:
+- tests/contract/test_event_architecture.py::test_transactional_outbox_emits_complete_payload_hashed_envelope
+- tests/contract/test_governed_hybrid_api.py::test_governed_hybrid_api_admits_quarantines_validates_publishes_and_issues_binding_only_view
+- tests/integration/test_worker_runtime.py::test_reference_fusion_worker_propagates_uncertainty
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

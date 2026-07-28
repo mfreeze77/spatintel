@@ -1,0 +1,35 @@
+{
+  "bootstrap_excluded_inputs": [],
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+    "-q",
+    "tests/integration/test_lifecycle_recovery.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/integration/shards/tests__integration__test_lifecycle_recovery.xml"
+  ],
+  "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "declared_generated_inputs": [],
+  "elapsed_seconds": 9.550824,
+  "exit_code": 0,
+  "input_sha256": "ec973195d2fe7c68a0d8bd7ba559e2386d072c570c40e1acdd70ea40e021c85c",
+  "junit_path": "build/reports/tests/integration-shards/tests__integration__test_lifecycle_recovery.xml",
+  "junit_sha256": "f35ee115784c975d0ed4bdbcbae059554d157f9be38781e10a86e9835bbded61",
+  "log_path": "build/reports/tests/integration-shards/tests__integration__test_lifecycle_recovery.log",
+  "log_sha256": "b1dae1650f4b1847d2c90198a99906486c26f3de3d572571c9349a8a376674c4",
+  "name": "tests__integration__test_lifecycle_recovery",
+  "path": "tests/integration/test_lifecycle_recovery.py",
+  "portable_command": [
+    "python",
+    "tools/run_pytest_isolated.py",
+    "-q",
+    "tests/integration/test_lifecycle_recovery.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=build/reports/tests/integration-shards/tests__integration__test_lifecycle_recovery.xml"
+  ],
+  "schema": "sip.pytest-shard-result/v2",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed"
+}

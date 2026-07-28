@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: PLTGRPC-001
+priority: P0
+source:
+  document: 60-platform/602_grpc_worker_api.md
+  line: 36
+  section: 4. Normative requirements
+requirement: A job lease shall include job/run ID, adapter/profile, input manifest, output staging scope, resource limits,
+  deadline, cancellation token, and workload identity.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/worker_protocol.py
+- src/sip/worker_runtime.py
+- schemas/protobuf/worker.proto
+- schemas/jsonschema/worker-lease.schema.json
+automated_test_ids:
+- tests/contract/test_generated_contracts.py::test_worker_contracts_are_exposed_in_protobuf_typescript_and_python
+- tests/contract/test_worker_manifests.py::test_worker_manifests_are_immutable_least_privilege_and_cover_registry
+- tests/contract/test_worker_protocol.py::test_signed_worker_lease_binds_input_identity_capability_budget_and_deadline
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

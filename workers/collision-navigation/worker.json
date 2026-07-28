@@ -1,0 +1,21 @@
+{
+  "audited": true,
+  "cancellable": true,
+  "capabilities": [
+    "collision.navigation"
+  ],
+  "checkpointed": true,
+  "durable": true,
+  "entrypoint": "workers/collision-navigation/main.py",
+  "execution_manifest": "workers/collision-navigation/worker-manifest.json",
+  "governance": "local_approved_reference",
+  "idempotent": true,
+  "input_contract": "operation.input@v1",
+  "least_privilege": true,
+  "manifest_sha256": "a7c9c74b5335d6686fbf227ff737f4a10534ecdb3e2d82ea5ee668a47fd7cfcf",
+  "name": "collision-navigation",
+  "output_contract": "operation.output@v1",
+  "production_placeholders": false,
+  "schema": "sip.worker-manifest/v1",
+  "version": "1.1.0"
+}

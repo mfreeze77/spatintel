@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/scene-entity.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attributes": {
+      "additionalProperties": true,
+      "title": "Attributes",
+      "type": "object"
+    },
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "entity_id": {
+      "title": "Entity Id",
+      "type": "string"
+    },
+    "entity_type": {
+      "title": "Entity Type",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "policy": {
+      "additionalProperties": true,
+      "title": "Policy",
+      "type": "object"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "source_class": {
+      "$ref": "#/$defs/SourceClass"
+    },
+    "stable_support": {
+      "additionalProperties": true,
+      "title": "Stable Support",
+      "type": "object"
+    }
+  },
+  "required": [
+    "entity_id",
+    "scene_id",
+    "entity_type",
+    "name",
+    "source_class",
+    "authority_class",
+    "confidence",
+    "attributes",
+    "provenance",
+    "policy",
+    "stable_support"
+  ],
+  "title": "SceneEntityContract",
+  "type": "object"
+}

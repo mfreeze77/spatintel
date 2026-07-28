@@ -1,0 +1,30 @@
+{
+  "schema": "sip.vertical-manifest/v1",
+  "vertical_id": "liveforever",
+  "version": "1.1.0",
+  "synthetic_demo": "tests/fixtures/liveforever/conflicting-recollections.json",
+  "required_services": [
+    "control-api",
+    "identity-policy",
+    "scene-service",
+    "evidence-service",
+    "search-service",
+    "export-service",
+    "audit-service"
+  ],
+  "truth_labels": [
+    "direct_record",
+    "recollection",
+    "corroborated_assertion",
+    "inference",
+    "generated_reconstruction",
+    "disputed"
+  ],
+  "default_disabled": [
+    "voice_simulation",
+    "likeness_simulation",
+    "first_person_dialogue",
+    "autonomous_publication"
+  ],
+  "required_experience_controls": ["quiet_mode", "pause", "reset", "safe_exit", "captions", "reduced_motion"]
+}

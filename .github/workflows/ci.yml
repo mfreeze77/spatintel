@@ -1,0 +1,114 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sip-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONHASHSEED: "0"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+
+jobs:
+  python-governance:
+    name: Python, contracts, governance, and demonstrations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Install Python 3.13
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13.14"
+      - name: Install pinned Python dependencies
+        run: python -m pip install --require-virtualenv=false -e '.[dev,postgres,redis,telemetry]'
+      - name: Verify generated artifacts and source policy
+        run: make lint
+      - name: Verify specification and requirements control
+        run: make spec-check
+      - name: Run isolated Python test matrix
+        run: make test
+      - name: Verify append-only migrations
+        run: make migrations
+      - name: Run structural license governance
+        run: make license-check
+      - name: Run local security controls
+        run: make security
+      - name: Run deterministic reference benchmarks
+        run: make benchmark
+      - name: Run retained acceptance demonstrations
+        run: |
+          make demo-foundation
+          make demo-hybrid
+          make demo-construction
+          make demo-liveforever
+      - name: Build release candidate metadata
+        run: python tools/release.py --mode candidate
+      - name: Upload retained reports
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: sip-python-governance-evidence
+          path: |
+            build/evidence
+            build/reports
+            build/release
+          if-no-files-found: error
+          retention-days: 30
+
+  web-source:
+    name: Web dependency-free contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Install Node 24
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "24.18.0"
+      - name: Verify renderer-independent runtime contracts
+        run: npm --workspace apps/web run verify-runtime
+
+  swift-fixtures:
+    name: Swift capture fixture profile
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Build and test Swift package
+        working-directory: apps/ios-capture
+        run: swift test --parallel
+
+  infrastructure-static:
+    name: Infrastructure policy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Install Python 3.13
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.13.14"
+      - name: Validate Compose, Kubernetes, and Terraform structure
+        run: PYTHONPATH=src:. python tools/validate_infrastructure.py

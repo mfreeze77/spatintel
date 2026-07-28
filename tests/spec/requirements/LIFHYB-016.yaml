@@ -1,0 +1,25 @@
+schema_version: '1.0'
+requirement_id: LIFHYB-016
+priority: P1
+source:
+  document: 80-liveforever/814_hybrid_representation_liveforever.md
+  line: 204
+  section: 14. Normative requirements
+requirement: The system shall permit a source-only or evidence-first experience that does not require generated content, splats,
+  avatars, or immersive navigation.
+verification_method: Minimal preservation scenario
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-LIFHYB-016
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

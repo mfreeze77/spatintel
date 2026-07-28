@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: representation-api
+  namespace: sip-system
+  labels:
+    app.kubernetes.io/name: representation-api
+    app.kubernetes.io/part-of: spatial-intelligence-platform
+    app.kubernetes.io/component: api
+    app.kubernetes.io/version: 1.1.0
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: representation-api
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http

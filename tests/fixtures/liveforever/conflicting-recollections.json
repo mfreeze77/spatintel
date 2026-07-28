@@ -1,0 +1,67 @@
+{
+  "conflict": {
+    "kind": "temporal_disagreement",
+    "members": [
+      "memory-a",
+      "memory-b"
+    ],
+    "resolution": "unresolved"
+  },
+  "consent": {
+    "audiences": [
+      "private",
+      "family"
+    ],
+    "grant_id": "grant-family-only",
+    "public": false,
+    "revoked": false
+  },
+  "event": {
+    "date": "1985-06-01",
+    "event_id": "event-storm",
+    "label": "Summer storm"
+  },
+  "experience_controls": {
+    "pause": true,
+    "quiet_mode": true,
+    "reset": true,
+    "safe_exit": true
+  },
+  "generated_reconstruction": {
+    "label": "generated_reconstruction_not_historical_fact",
+    "model_id": "synthetic-denied-by-default",
+    "prompt_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "people": [
+    {
+      "name": "Alex Example",
+      "person_id": "person-a"
+    },
+    {
+      "name": "Jordan Example",
+      "person_id": "person-b"
+    }
+  ],
+  "place": {
+    "name": "Family Kitchen",
+    "place_id": "place-kitchen"
+  },
+  "project_id": "synthetic-liveforever-demo",
+  "recollections": [
+    {
+      "assertion_id": "memory-a",
+      "claim": "The lights failed before dinner",
+      "confidence": 0.7,
+      "label": "recollection",
+      "speaker": "person-a"
+    },
+    {
+      "assertion_id": "memory-b",
+      "claim": "The lights failed after dinner",
+      "confidence": 0.65,
+      "label": "recollection",
+      "speaker": "person-b"
+    }
+  ],
+  "schema": "sip.synthetic-liveforever-project/v1"
+}

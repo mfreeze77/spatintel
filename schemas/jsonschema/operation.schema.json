@@ -1,0 +1,101 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/operation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "minimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "checkpoint": {
+      "additionalProperties": true,
+      "title": "Checkpoint",
+      "type": "object"
+    },
+    "error": {
+      "additionalProperties": true,
+      "title": "Error",
+      "type": "object"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "input_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Manifest Hash",
+      "type": "string"
+    },
+    "max_attempts": {
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "operation_type": {
+      "title": "Operation Type",
+      "type": "string"
+    },
+    "output_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Hash"
+    },
+    "progress": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Progress",
+      "type": "number"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "leased",
+        "running",
+        "succeeded",
+        "failed",
+        "cancel_requested",
+        "cancelled",
+        "quarantined"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "operation_id",
+    "tenant_id",
+    "project_id",
+    "operation_type",
+    "idempotency_key",
+    "state",
+    "progress",
+    "attempt",
+    "max_attempts",
+    "input_manifest_hash",
+    "checkpoint",
+    "error"
+  ],
+  "title": "OperationContract",
+  "type": "object"
+}

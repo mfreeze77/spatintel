@@ -1,0 +1,251 @@
+{
+  "$defs": {
+    "WorkerResourceLimits": {
+      "additionalProperties": false,
+      "description": "Declared execution envelope enforced by runtime and deployment controls.",
+      "properties": {
+        "gpu_count": {
+          "default": 0,
+          "maximum": 16,
+          "minimum": 0,
+          "title": "Gpu Count",
+          "type": "integer"
+        },
+        "max_cpu_seconds": {
+          "default": 900,
+          "maximum": 86400,
+          "minimum": 1,
+          "title": "Max Cpu Seconds",
+          "type": "integer"
+        },
+        "max_input_bytes": {
+          "default": 1073741824,
+          "minimum": 1,
+          "title": "Max Input Bytes",
+          "type": "integer"
+        },
+        "max_memory_bytes": {
+          "default": 2147483648,
+          "minimum": 16777216,
+          "title": "Max Memory Bytes",
+          "type": "integer"
+        },
+        "max_output_bytes": {
+          "default": 268435456,
+          "minimum": 1,
+          "title": "Max Output Bytes",
+          "type": "integer"
+        },
+        "max_wall_seconds": {
+          "default": 900,
+          "maximum": 86400,
+          "minimum": 1,
+          "title": "Max Wall Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "WorkerResourceLimits",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/worker-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable, capability-scoped worker descriptor.\n\nThe digest is calculated over every field except ``manifest_sha256``. File\nhashes bind the descriptor to the exact executable entry point and shared\nruntime source used for the release.",
+  "properties": {
+    "audited": {
+      "const": true,
+      "default": true,
+      "title": "Audited",
+      "type": "boolean"
+    },
+    "cancellable": {
+      "const": true,
+      "default": true,
+      "title": "Cancellable",
+      "type": "boolean"
+    },
+    "capabilities": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "checkpointed": {
+      "const": true,
+      "default": true,
+      "title": "Checkpointed",
+      "type": "boolean"
+    },
+    "compatibility": {
+      "default": ">=1.1.0,<2.0.0",
+      "title": "Compatibility",
+      "type": "string"
+    },
+    "durable": {
+      "const": true,
+      "default": true,
+      "title": "Durable",
+      "type": "boolean"
+    },
+    "entrypoint": {
+      "minLength": 1,
+      "title": "Entrypoint",
+      "type": "string"
+    },
+    "entrypoint_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Entrypoint Sha256",
+      "type": "string"
+    },
+    "filesystem_read_scopes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Filesystem Read Scopes",
+      "type": "array"
+    },
+    "filesystem_write_scopes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Filesystem Write Scopes",
+      "type": "array"
+    },
+    "governance": {
+      "minLength": 1,
+      "title": "Governance",
+      "type": "string"
+    },
+    "idempotent": {
+      "const": true,
+      "default": true,
+      "title": "Idempotent",
+      "type": "boolean"
+    },
+    "input_contract": {
+      "default": "sip.worker-input/v1",
+      "title": "Input Contract",
+      "type": "string"
+    },
+    "least_privilege": {
+      "const": true,
+      "default": true,
+      "title": "Least Privilege",
+      "type": "boolean"
+    },
+    "manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "title": "Name",
+      "type": "string"
+    },
+    "network_access": {
+      "const": false,
+      "default": false,
+      "title": "Network Access",
+      "type": "boolean"
+    },
+    "output_contract": {
+      "default": "sip.worker-result/v1",
+      "title": "Output Contract",
+      "type": "string"
+    },
+    "output_mode": {
+      "const": "quarantine_candidate",
+      "default": "quarantine_candidate",
+      "title": "Output Mode",
+      "type": "string"
+    },
+    "protocol_module": {
+      "default": "src/sip/worker_protocol.py",
+      "title": "Protocol Module",
+      "type": "string"
+    },
+    "protocol_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Protocol Sha256",
+      "type": "string"
+    },
+    "publication_permission": {
+      "const": false,
+      "default": false,
+      "title": "Publication Permission",
+      "type": "boolean"
+    },
+    "requirement_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Requirement Ids",
+      "type": "array"
+    },
+    "resource_limits": {
+      "$ref": "#/$defs/WorkerResourceLimits"
+    },
+    "runtime_module": {
+      "default": "src/sip/worker_runtime.py",
+      "title": "Runtime Module",
+      "type": "string"
+    },
+    "runtime_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Sha256",
+      "type": "string"
+    },
+    "sandbox_module": {
+      "default": "src/sip/worker_sandbox.py",
+      "title": "Sandbox Module",
+      "type": "string"
+    },
+    "sandbox_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sandbox Sha256",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.worker-manifest/v1",
+      "default": "sip.worker-manifest/v1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "shell_access": {
+      "const": false,
+      "default": false,
+      "title": "Shell Access",
+      "type": "boolean"
+    },
+    "version": {
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    },
+    "workload_identity": {
+      "minLength": 1,
+      "title": "Workload Identity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "version",
+    "entrypoint",
+    "entrypoint_sha256",
+    "runtime_sha256",
+    "protocol_sha256",
+    "sandbox_sha256",
+    "workload_identity",
+    "capabilities",
+    "governance",
+    "manifest_sha256"
+  ],
+  "title": "WorkerManifest",
+  "type": "object"
+}

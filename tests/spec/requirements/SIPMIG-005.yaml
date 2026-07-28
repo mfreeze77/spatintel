@@ -1,0 +1,25 @@
+schema_version: '1.0'
+requirement_id: SIPMIG-005
+priority: P0
+source:
+  document: MIGRATION_FROM_1.0.md
+  line: 151
+  section: 9. Normative requirements
+requirement: Legacy proxy-like or visual measurements shall remain approximate unless eligible metric/field evidence supports
+  a higher status.
+verification_method: Measurement migration test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-SIPMIG-005
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

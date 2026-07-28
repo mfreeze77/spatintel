@@ -1,0 +1,26 @@
+syntax = "proto3";
+package sip.v1;
+
+message HashRef {
+  string sha256 = 1;
+  uint64 byte_count = 2;
+  string media_type = 3;
+}
+
+message CoordinateFrame {
+  string frame_id = 1;
+  string parent_frame_id = 2;
+  string convention = 3;
+  string units = 4;
+  repeated double transform_to_parent_column_major = 5;
+  optional double uncertainty_m = 6;
+}
+
+message EvidenceLabel {
+  string source_class = 1;
+  string authority_class = 2;
+  double confidence = 3;
+  string provenance_json = 4;
+  bool generated = 5;
+  string warning = 6;
+}

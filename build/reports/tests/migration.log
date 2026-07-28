@@ -1,0 +1,5 @@
+SIP sharded pytest suite: migration
+
+=== tests/migration/test_migrations.py status=passed exit_code=0 elapsed=18.697795s ===
+.....                                                                    [100%]
+5 passed in 17.38s

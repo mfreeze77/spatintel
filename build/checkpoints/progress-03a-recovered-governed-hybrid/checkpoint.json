@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-07-28T00:21:05.947113+00:00",
+  "checkpoint": "progress-03a-recovered-governed-hybrid",
+  "git_branch": "hybrid-governed",
+  "git_commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+  "git_dirty": true,
+  "notes": [
+    "The prior isolated path was relocated; no source bytes were reconstructed from prose.",
+    "This checkpoint preserves the complete recovered project before further verification.",
+    "No production-readiness or release-completion claim is made."
+  ],
+  "repository_path_at_capture": "/mnt/data/sip-final-work",
+  "schema": "sip.progress-checkpoint/v1",
+  "source_tree_root_sha256": "b7427d53142f8488773c41568598af56f60ce44ba91922fc83977ad92e232f86",
+  "status": "RECOVERED_IMPLEMENTATION_CHECKPOINT_VERIFICATION_PENDING",
+  "verification": {
+    "authoritative_full_matrix": "PENDING_AFTER_WORKTREE_RECOVERY",
+    "focused_hybrid_tests_last_observed": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 20
+    }
+  }
+}

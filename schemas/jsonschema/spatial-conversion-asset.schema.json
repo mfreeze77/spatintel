@@ -1,0 +1,44 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/spatial-conversion-asset.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "role": {
+      "title": "Role",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^(sha256:)?[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "use": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use"
+    }
+  },
+  "required": [
+    "asset_id",
+    "role",
+    "sha256",
+    "coordinate_frame_id"
+  ],
+  "title": "SpatialConversionAssetContract",
+  "type": "object"
+}

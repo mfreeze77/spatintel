@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: ARCEVT-001
+priority: P0
+source:
+  document: 20-architecture/205_event_driven_workflows.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Every event shall include event ID, type, schema version, aggregate ID, tenant/project context, occurrence time,
+  trace ID, producer, and payload hash.
+verification_method: Automated test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/events.py
+- src/sip/operations.py
+- src/sip/database.py
+- schemas/events
+- migrations/versions/0008_complete_event_envelope.py
+automated_test_ids:
+- tests/contract/test_event_architecture.py::test_event_catalog_and_schemas_are_versioned_and_complete
+- tests/contract/test_event_architecture.py::test_transactional_outbox_emits_complete_payload_hashed_envelope
+retained_evidence:
+- build/reports/governance-check.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- schemas/events/event-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

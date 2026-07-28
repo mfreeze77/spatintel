@@ -1,0 +1,370 @@
+{
+  "$defs": {
+    "ProgressRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Checkpoint Hash",
+          "type": "string"
+        },
+        "completed_units": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed Units"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "title": "Payload",
+          "type": "object"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "additionalProperties": true,
+          "title": "Quality",
+          "type": "object"
+        },
+        "resource_use": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "title": "Resource Use",
+          "type": "object"
+        },
+        "safe_to_resume": {
+          "default": false,
+          "title": "Safe To Resume",
+          "type": "boolean"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "stage": {
+          "minLength": 1,
+          "title": "Stage",
+          "type": "string"
+        },
+        "total_units": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Units"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sequence",
+        "stage",
+        "progress",
+        "checkpoint_hash"
+      ],
+      "title": "ProgressRecord",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/worker-receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_profile": {
+      "title": "Adapter Profile",
+      "type": "string"
+    },
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "candidate_core_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Candidate Core Hash"
+    },
+    "checkpoints": {
+      "items": {
+        "$ref": "#/$defs/ProgressRecord"
+      },
+      "title": "Checkpoints",
+      "type": "array"
+    },
+    "code_commit": {
+      "title": "Code Commit",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "container_digest": {
+      "title": "Container Digest",
+      "type": "string"
+    },
+    "elapsed_cpu_seconds": {
+      "minimum": 0,
+      "title": "Elapsed Cpu Seconds",
+      "type": "number"
+    },
+    "elapsed_wall_seconds": {
+      "minimum": 0,
+      "title": "Elapsed Wall Seconds",
+      "type": "number"
+    },
+    "environment_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Hash",
+      "type": "string"
+    },
+    "execution_environment": {
+      "additionalProperties": true,
+      "title": "Execution Environment",
+      "type": "object"
+    },
+    "handler_output_byte_count": {
+      "minimum": 0,
+      "title": "Handler Output Byte Count",
+      "type": "integer"
+    },
+    "handler_output_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Handler Output Hash",
+      "type": "string"
+    },
+    "input_byte_count": {
+      "minimum": 0,
+      "title": "Input Byte Count",
+      "type": "integer"
+    },
+    "input_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Manifest Hash",
+      "type": "string"
+    },
+    "lease_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Lease Hash",
+      "type": "string"
+    },
+    "lease_id": {
+      "title": "Lease Id",
+      "type": "string"
+    },
+    "maximum_rss_bytes": {
+      "minimum": 0,
+      "title": "Maximum Rss Bytes",
+      "type": "integer"
+    },
+    "model_artifacts": {
+      "additionalProperties": true,
+      "title": "Model Artifacts",
+      "type": "object"
+    },
+    "network_access_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Network Access Allowed",
+      "type": "boolean"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "operation_type": {
+      "title": "Operation Type",
+      "type": "string"
+    },
+    "parameters_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Parameters Hash",
+      "type": "string"
+    },
+    "platform_profile": {
+      "title": "Platform Profile",
+      "type": "string"
+    },
+    "protocol_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Protocol Sha256",
+      "type": "string"
+    },
+    "publication_permission": {
+      "const": false,
+      "default": false,
+      "title": "Publication Permission",
+      "type": "boolean"
+    },
+    "python_version": {
+      "title": "Python Version",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "resume_checkpoint_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resume Checkpoint Hash"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "runtime_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Sha256",
+      "type": "string"
+    },
+    "sandbox_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sandbox Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "sip.worker-receipt/v1",
+      "default": "sip.worker-receipt/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shell_access_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Shell Access Allowed",
+      "type": "boolean"
+    },
+    "software_version": {
+      "title": "Software Version",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "traceparent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Traceparent"
+    },
+    "worker_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Worker Manifest Sha256",
+      "type": "string"
+    },
+    "worker_name": {
+      "title": "Worker Name",
+      "type": "string"
+    },
+    "workload_identity": {
+      "title": "Workload Identity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "lease_id",
+    "run_id",
+    "operation_id",
+    "operation_type",
+    "adapter_profile",
+    "attempt",
+    "worker_name",
+    "workload_identity",
+    "lease_hash",
+    "worker_manifest_sha256",
+    "runtime_sha256",
+    "protocol_sha256",
+    "sandbox_sha256",
+    "input_manifest_hash",
+    "parameters_hash",
+    "handler_output_hash",
+    "checkpoints",
+    "execution_environment",
+    "started_at",
+    "completed_at",
+    "elapsed_wall_seconds",
+    "elapsed_cpu_seconds",
+    "maximum_rss_bytes",
+    "input_byte_count",
+    "handler_output_byte_count",
+    "software_version",
+    "code_commit",
+    "container_digest",
+    "python_version",
+    "platform_profile",
+    "environment_hash",
+    "receipt_sha256"
+  ],
+  "title": "WorkerReceipt",
+  "type": "object"
+}

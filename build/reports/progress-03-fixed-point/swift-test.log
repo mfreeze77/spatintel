@@ -1,0 +1,40 @@
+[0/1] Planning build
+Building for debugging...
+[0/3] Write swift-version--1BA0962812E73E12.txt
+Build complete! (0.16s)
+Test Suite 'All tests' started at 2026-07-27 23:57:47.768
+Test Suite 'debug.xctest' started at 2026-07-27 23:57:47.769
+Test Suite 'debug.xctest' passed at 2026-07-27 23:57:47.769
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'All tests' passed at 2026-07-27 23:57:47.769
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+◇ Test "CAPSENS-003 CAPSENS-005 fixture adapter emits explicit tracking events and bounded drops" started.
+◇ Test "CAPIOS-003 CAPREC-001 append-only journal recovers and detects tampering" started.
+◇ Test "CAPIOS-005 CAPIOS-006 policy disables sensors and purge fails closed" started.
+◇ Test "CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics" started.
+◇ Test "CAPQUAL-001 CAPQUAL-003 quality warnings state cause consequence and corrective action" started.
+◇ Test "CAPREC-002 CAPREC-005 recovery offers safe actions and explicit repair lineage" started.
+◇ Test "CAPPRIV-002 CAPPRIV-003 CAPPRIV-005 detector suggestions remain reviewable and broad export fails closed" started.
+◇ Test "CAPIOS-006 resumable transfer persists chunk checkpoints and verifies destination receipt" started.
+◇ Test "CAPSTRAT-003 CAPSTRAT-004 profiles cannot claim accuracy without validation evidence" started.
+◇ Test "CAPSOP-001 CAPSOP-004 field SOP preflight and closeout fail visibly" started.
+◇ Test "CAPIOS-004 CAPREC-004 resource pressure degrades safely before filesystem exhaustion" started.
+◇ Test "CAPIOS-001 state machine covers required persisted states and rejects invalid transitions" started.
+◇ Test "CAPCSCP-001 through CAPCSCP-005 package hashing is deterministic and validation rejects corruption" started.
+✔ Test "CAPSENS-003 CAPSENS-005 fixture adapter emits explicit tracking events and bounded drops" passed after 0.002 seconds.
+✔ Test "CAPQUAL-001 CAPQUAL-003 quality warnings state cause consequence and corrective action" passed after 0.002 seconds.
+✔ Test "CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics" passed after 0.002 seconds.
+✔ Test "CAPIOS-005 CAPIOS-006 policy disables sensors and purge fails closed" passed after 0.002 seconds.
+✔ Test "CAPSTRAT-003 CAPSTRAT-004 profiles cannot claim accuracy without validation evidence" passed after 0.002 seconds.
+✔ Test "CAPSOP-001 CAPSOP-004 field SOP preflight and closeout fail visibly" passed after 0.002 seconds.
+✔ Test "CAPIOS-004 CAPREC-004 resource pressure degrades safely before filesystem exhaustion" passed after 0.002 seconds.
+✔ Test "CAPPRIV-002 CAPPRIV-003 CAPPRIV-005 detector suggestions remain reviewable and broad export fails closed" passed after 0.002 seconds.
+✔ Test "CAPIOS-001 state machine covers required persisted states and rejects invalid transitions" passed after 0.002 seconds.
+✔ Test "CAPREC-002 CAPREC-005 recovery offers safe actions and explicit repair lineage" passed after 0.004 seconds.
+✔ Test "CAPIOS-003 CAPREC-001 append-only journal recovers and detects tampering" passed after 0.008 seconds.
+✔ Test "CAPCSCP-001 through CAPCSCP-005 package hashing is deterministic and validation rejects corruption" passed after 0.011 seconds.
+✔ Test "CAPIOS-006 resumable transfer persists chunk checkpoints and verifies destination receipt" passed after 0.014 seconds.
+✔ Test run with 13 tests in 0 suites passed after 0.014 seconds.

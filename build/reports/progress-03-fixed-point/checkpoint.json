@@ -1,0 +1,205 @@
+{
+  "benchmarks": {
+    "budget_checks": [
+      {
+        "benchmark": "sim3_ransac_500_points_25_outliers",
+        "checks": [
+          {
+            "actual": 51.573021,
+            "metric": "p95_ms",
+            "operator": "<=",
+            "passed": true,
+            "threshold": 350.0
+          },
+          {
+            "actual": 1.324659381143314e-15,
+            "metric": "rmse",
+            "operator": "<=",
+            "passed": true,
+            "threshold": 1e-06
+          },
+          {
+            "actual": 475,
+            "metric": "inliers",
+            "operator": ">=",
+            "passed": true,
+            "threshold": 475
+          }
+        ],
+        "status": "passed"
+      },
+      {
+        "benchmark": "interaction_proxy_12_to_8_faces",
+        "checks": [
+          {
+            "actual": 0.471131,
+            "metric": "p95_ms",
+            "operator": "<=",
+            "passed": true,
+            "threshold": 25.0
+          }
+        ],
+        "status": "passed"
+      },
+      {
+        "benchmark": "mesh_to_splats_12_faces_x8",
+        "checks": [
+          {
+            "actual": 3.19783,
+            "metric": "p95_ms",
+            "operator": "<=",
+            "passed": true,
+            "threshold": 25.0
+          }
+        ],
+        "status": "passed"
+      },
+      {
+        "benchmark": "cscp_validate_16_frames",
+        "checks": [
+          {
+            "actual": 1.990522,
+            "metric": "p95_ms",
+            "operator": "<=",
+            "passed": true,
+            "threshold": 150.0
+          }
+        ],
+        "status": "passed"
+      }
+    ],
+    "profile": {
+      "cpu_count": 5,
+      "execution": "single-process deterministic CPU path",
+      "git": {
+        "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+        "dirty_paths": 266,
+        "working_tree_clean": false
+      },
+      "name": "cpu-reference",
+      "numpy": "2.3.5",
+      "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+      "processor": "",
+      "python": "3.13.5"
+    },
+    "status": "passed"
+  },
+  "checkpoint": "progress-03-fixed-point",
+  "checks": {
+    "git_diff_check": "passed",
+    "infrastructure": "passed",
+    "license": "passed",
+    "requirements": "passed",
+    "schema_codegen": "passed",
+    "security": "passed",
+    "service_catalog": "passed",
+    "static_checks": "passed",
+    "traceability": "passed",
+    "typecheck": "passed",
+    "worker_manifests": "passed"
+  },
+  "created_at": "2026-07-27T23:59:09.622772+00:00",
+  "demos": {
+    "construction": {
+      "evidence_hash": "9bd2a3cf61cbd13f638df8156bb9255d97071cf161ddd01a34764f088f3fb1e1",
+      "finished_at": "2026-07-27T23:58:14.658048+00:00",
+      "status": "passed"
+    },
+    "export": {
+      "evidence_hash": "89472d6d30c87e2158c4ffd4e04d0f51de4addf7c92110e8b862246042f9e5ec",
+      "finished_at": "2026-07-27T23:58:21.782848+00:00",
+      "status": "passed"
+    },
+    "foundation": {
+      "evidence_hash": "982e33c7014f57e45003c0bf6ed30f06e340e981174c3896ae59568d5e6a2907",
+      "finished_at": "2026-07-27T23:58:05.903397+00:00",
+      "status": "passed"
+    },
+    "hybrid": {
+      "evidence_hash": "8f0ce4a972fd90b12099bf6026c0510a8d1ac1a977cb98eae4b6cc11e576adac",
+      "finished_at": "2026-07-27T23:58:09.485179+00:00",
+      "status": "passed"
+    },
+    "liveforever": {
+      "evidence_hash": "f9068b1589c3c7db1fd66a440bce513025b25101fd3dd3cec5b09c04f55df64e",
+      "finished_at": "2026-07-27T23:58:17.966305+00:00",
+      "status": "passed"
+    },
+    "restore": {
+      "evidence_hash": "45532a22af1e24e10ba71e6ddcefafa6b94af8687ad4acfa24b67e33a39978cb",
+      "finished_at": "2026-07-27T23:58:24.715089+00:00",
+      "status": "passed"
+    }
+  },
+  "git": {
+    "base_commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+    "branch": "hybrid-governed",
+    "working_tree_clean": false
+  },
+  "limitations": [
+    "No Docker daemon, Terraform binary/provider access, kubectl/cluster, CUDA GPU, Xcode/iOS hardware, installed Next.js dependency tree, external vulnerability scanners, cloud credentials, or independent legal/security/privacy review were available.",
+    "The repository remains a progress implementation: most normative requirements remain not started or unverified, and no production-release claim is made."
+  ],
+  "python_matrix": {
+    "findings": [],
+    "source_tree_root_sha256": "0062be01d0aca663d38894aca2506e8785965def12208479e4758961e5620345",
+    "status": "passed",
+    "suite_count": 10,
+    "totals": {
+      "elapsed_seconds": 118.491864,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 191
+    }
+  },
+  "requirements": {
+    "overlay_requirements": 204,
+    "status_counts": {
+      "EXTERNAL_VALIDATION_REQUIRED": 3,
+      "IMPLEMENTED_UNVERIFIED": 88,
+      "IN_PROGRESS": 22,
+      "NOT_STARTED": 824,
+      "VERIFIED": 91
+    },
+    "total": 1028
+  },
+  "schema": "sip.progress-checkpoint/v1",
+  "swift": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "working_tree_clean": false
+    },
+    "limitations": [
+      "Linux fixture profile only; Xcode, simulator, Apple signing, ARKit, LiDAR, camera, thermal, and physical-device acceptance remain external."
+    ],
+    "platform": "x86_64-unknown-linux-gnu",
+    "schema": "sip.test-report/v1",
+    "status": "passed",
+    "suite": "swift-linux-fixture",
+    "tests_failed": 0,
+    "tests_passed": 13,
+    "tool_version": "6.2.1",
+    "transcript": "build/evidence/swift-test-linux.log",
+    "transcript_sha256": "32706dd3ce8479777147d4855af0d329019c62efc3465e63a7d93a2b85cb0338"
+  },
+  "web": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "working_tree_clean": false
+    },
+    "limitations": [
+      "Dependency-free source/runtime checks only; Node 24, installed dependencies, Next production build, browser E2E, and accessibility audit remain external."
+    ],
+    "node_version": "v22.16.0",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "schema": "sip.test-report/v1",
+    "source_invariant_checks": 11,
+    "status": "passed",
+    "suite": "web-dependency-free-runtime",
+    "tests_failed": 0,
+    "tests_passed": 4,
+    "transcript": "build/evidence/web-runtime-test.log",
+    "transcript_sha256": "9987f1c1c43a880c15bfb1e5bbf607c411b1d7c3add3bb05f9027d4a0993525a"
+  }
+}

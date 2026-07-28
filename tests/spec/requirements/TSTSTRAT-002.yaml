@@ -1,0 +1,47 @@
+schema_version: '1.0'
+requirement_id: TSTSTRAT-002
+priority: P0
+source:
+  document: 95-testing-delivery/950_test_strategy.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Test evidence shall include input hashes, environment, version, output, result, thresholds, and reviewer when
+  manual.
+verification_method: Automated test
+implementation_status: IN_PROGRESS
+implementation_files:
+- tools/run_test_matrix.py
+- tools/update_requirements.py
+- src/sip/spec_lint.py
+- requirements/requirements-ledger.json
+automated_test_ids:
+- tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans
+- tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix
+- tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup
+- tests/contract/test_test_matrix_resume.py::test_finalized_shard_records_use_repository_relative_live_paths
+- tests/contract/test_test_matrix_resume.py::test_generated_traceability_outputs_do_not_create_a_test_evidence_bootstrap_loop
+- tests/contract/test_test_matrix_resume.py::test_isolated_pytest_runner_terminates_when_controller_disappears
+- tests/contract/test_test_matrix_resume.py::test_source_tree_hash_prunes_generated_trees_and_changes_only_for_relevant_source
+- tests/contract/test_test_matrix_resume.py::test_stage_owner_token_rejects_orphaned_shard_writes
+- tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_is_hash_bound_and_rejects_mutation
+- tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_rejects_evidence_outside_atomic_staging_root
+- tests/contract/test_test_matrix_resume.py::test_suite_sidecar_rejects_changed_source_or_tampered_outputs
+- tests/contract/test_test_matrix_resume.py::test_suite_writer_lease_serializes_independent_processes
+- tests/contract/test_test_matrix_resume.py::test_traceability_shard_resume_is_invalidated_by_generated_input_change_without_matrix_bootstrap
+- tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit
+- tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/e2e.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

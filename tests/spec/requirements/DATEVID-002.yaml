@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: DATEVID-002
+priority: P0
+source:
+  document: 50-data/503_evidence_provenance.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Every evidence record shall identify immutable source asset or record, relevant region/time range, contributor,
+  consent/access, and integrity hash.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/spatial_data.py
+- src/sip/contracts.py
+- src/sip/database.py
+- src/sip/exporting.py
+- migrations/versions/0010_spatial_truth_and_twin_controls.py
+automated_test_ids:
+- tests/integration/test_spatial_truth_twin.py::test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled
+- tests/integration/test_spatial_truth_twin.py::test_datevid_derivation_references_are_scoped_hashed_unique_and_immutable
+- tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- schemas/events/event-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

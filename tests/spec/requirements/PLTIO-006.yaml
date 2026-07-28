@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: PLTIO-006
+priority: P1
+source:
+  document: 60-platform/611_import_export.md
+  line: 41
+  section: 4. Normative requirements
+requirement: Portability verification shall run on a clean offline viewer/reference importer.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/exporting.py
+- src/sip/lifecycle.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration
+- tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state
+retained_evidence:
+- build/evidence/demos/foundation.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

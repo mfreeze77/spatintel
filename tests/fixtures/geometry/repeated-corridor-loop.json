@@ -1,0 +1,18 @@
+{
+  "expected_behavior": "accept_only_geometrically_verified_loop",
+  "geometric_verification": {
+    "10-110": false,
+    "10-210": true
+  },
+  "loop_candidates": [
+    [
+      10,
+      110
+    ],
+    [
+      10,
+      210
+    ]
+  ],
+  "scene": "synthetic_repeated_corridor"
+}

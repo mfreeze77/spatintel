@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "critical_infrastructure",
+        "biometric",
+        "minor"
+      ],
+      "title": "Classification",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/provider-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_classifications": {
+      "items": {
+        "$ref": "#/$defs/Classification"
+      },
+      "title": "Allowed Classifications",
+      "type": "array"
+    },
+    "allowed_purposes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Purposes",
+      "type": "array"
+    },
+    "allowed_regions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Regions",
+      "type": "array"
+    },
+    "approval_state": {
+      "enum": [
+        "approved",
+        "denied",
+        "expired",
+        "revoked",
+        "research_only",
+        "pending"
+      ],
+      "title": "Approval State",
+      "type": "string"
+    },
+    "deployments": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Deployments",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "image_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Digest"
+    },
+    "license_id": {
+      "title": "License Id",
+      "type": "string"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "output_rights": {
+      "title": "Output Rights",
+      "type": "string"
+    },
+    "provider_class": {
+      "enum": [
+        "local_open_source",
+        "private_managed",
+        "external_api",
+        "manual_external",
+        "research_shadow"
+      ],
+      "title": "Provider Class",
+      "type": "string"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "retention_days": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retention Days"
+    },
+    "source_revision": {
+      "title": "Source Revision",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider_id",
+    "version",
+    "provider_class",
+    "source_url",
+    "source_revision",
+    "license_id",
+    "approval_state",
+    "allowed_classifications",
+    "allowed_purposes",
+    "allowed_regions",
+    "output_rights",
+    "manifest_hash"
+  ],
+  "title": "ProviderManifestContract",
+  "type": "object"
+}

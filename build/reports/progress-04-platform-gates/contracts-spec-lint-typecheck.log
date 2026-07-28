@@ -1,0 +1,30 @@
+=== contracts ===
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/schema_codegen/generate.py --check --root .
+{"check": true, "generated": 117}
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/generate_worker_manifests.py --check
+Worker manifests are current
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/generate_test_fixtures.py --check
+{"check": true, "path": "tests/fixtures"}
+=== spec-check ===
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/build_traceability_map.py --check
+{"requirements": 226, "status": "passed"}
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/update_requirements.py --check
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python -m sip.cli spec-check
+{
+  "errors": 0,
+  "findings": [],
+  "ledger_requirements": 1028,
+  "mode": "structural",
+  "spec_requirements": 1028,
+  "status": "passed",
+  "status_counts": {
+    "EXTERNAL_VALIDATION_REQUIRED": 3,
+    "IMPLEMENTED_UNVERIFIED": 110,
+    "IN_PROGRESS": 22,
+    "NOT_STARTED": 802,
+    "VERIFIED": 91
+  },
+  "warnings": 0
+}
+=== lint ===
+PYTHONPATH=/mnt/data/sip-authoritative-work/src:/mnt/data/sip-authoritative-work python tools/static_checks.py

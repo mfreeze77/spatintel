@@ -1,0 +1,12 @@
+{
+  "schema": "sip.adapter-manifest/v1",
+  "adapter_id": "sip-reference-representation",
+  "version": "1.1.0",
+  "approved": true,
+  "region": "local",
+  "deterministic": true,
+  "operations": ["mesh_to_splat", "splat_to_surface", "mesh_to_interaction_proxy"],
+  "lossy": true,
+  "authoritative": false,
+  "prohibited_uses": ["verified_measurement", "survey", "fabrication", "code_compliance", "as_built_certification"]
+}

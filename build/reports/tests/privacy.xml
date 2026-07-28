@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest-privacy" tests="1" failures="0" errors="0" skipped="0" time="2.389000" timestamp="2026-07-28T00:35:14.089825+00:00" hostname="8af374932250">
+    <testcase classname="tests.privacy.test_policy_propagation" name="test_liveforever_revocation_removes_derivative_from_all_affected_audiences" time="2.378" />
+  </testsuite>
+</testsuites>

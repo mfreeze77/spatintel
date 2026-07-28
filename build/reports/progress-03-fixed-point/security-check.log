@@ -1,0 +1,44 @@
+=== security-check ===
+{
+  "controls": [
+    {
+      "detail": "production key and token-tamper checks passed",
+      "name": "fail-closed-runtime-security",
+      "required": true,
+      "status": "passed"
+    },
+    {
+      "detail": "pip-audit is not installed",
+      "name": "dependency-vulnerability-scan",
+      "required": false,
+      "status": "external_validation_required"
+    },
+    {
+      "detail": "gitleaks is not installed",
+      "name": "secret-history-scan",
+      "required": false,
+      "status": "external_validation_required"
+    },
+    {
+      "detail": "trivy is not installed",
+      "name": "container-vulnerability-scan",
+      "required": false,
+      "status": "external_validation_required"
+    }
+  ],
+  "elapsed_seconds": 1.086427,
+  "external_validation_required": [
+    "dependency-vulnerability-scan",
+    "secret-history-scan",
+    "container-vulnerability-scan"
+  ],
+  "findings": [],
+  "limitations": [
+    "Static scanning does not replace dependency-database, container-image, penetration, or independent security review.",
+    "External controls remain explicit and fail the release profile when their approved tools are unavailable."
+  ],
+  "mode": "development",
+  "scanned_files": 424,
+  "schema": "sip.security-report/v1",
+  "status": "passed"
+}

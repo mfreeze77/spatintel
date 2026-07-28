@@ -1,0 +1,143 @@
+{
+  "fixture_count": 15,
+  "fixtures": [
+    {
+      "byte_count": 13215,
+      "category": "capture",
+      "description": "Valid deterministic canonical room capture with RGB, depth, confidence, poses, and calibration.",
+      "expected_error_code": null,
+      "expected_result": "accepted",
+      "path": "capture/canonical-room.sipcapture",
+      "sha256": "34b6c1a38ab31a593b91946803cd8913e5bf3dd3b2c11456487a32a93cbf51ae"
+    },
+    {
+      "byte_count": 13216,
+      "category": "capture",
+      "description": "Structurally valid archive declaring an unsupported future major schema.",
+      "expected_error_code": "CAPTURE_FUTURE_SCHEMA",
+      "expected_result": "rejected",
+      "path": "capture/future-schema.sipcapture",
+      "sha256": "a1174797a470eafd49326b6a65e3e32a03bb7cee1eef3aee3fdd79afb30991da"
+    },
+    {
+      "byte_count": 13223,
+      "category": "capture",
+      "description": "Canonical package with one content byte stream changed without updating its hash.",
+      "expected_error_code": "CAPTURE_ASSET_INTEGRITY",
+      "expected_result": "rejected",
+      "path": "capture/tampered-asset.sipcapture",
+      "sha256": "a9982e71aa24ee5c96d299182c24d64c0bc7c942c3caed1509ff53a5ab42006b"
+    },
+    {
+      "byte_count": 4405,
+      "category": "capture",
+      "description": "Truncated ZIP for parser and recovery rejection.",
+      "expected_error_code": "CAPTURE_ARCHIVE_INVALID",
+      "expected_result": "rejected",
+      "path": "capture/truncated.sipcapture",
+      "sha256": "cc361ce7706e540d26deeabae297031eac8b98a72297948e36d34e21928b3aa5"
+    },
+    {
+      "byte_count": 1171,
+      "category": "construction",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "construction/synthetic-project.json",
+      "sha256": "c7c99a07e4647b55dddc2e68c2534d37347f5e06f3aa64ce85b2ce63d0aacb8a"
+    },
+    {
+      "byte_count": 421,
+      "category": "geometry",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "geometry/known-transform.json",
+      "sha256": "8bfa9d74f93032b0e80da205f16fb2ba3d86e13a7ff3b845bb81673a1bca6dbb"
+    },
+    {
+      "byte_count": 319,
+      "category": "geometry",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "geometry/mixed-coordinate-frames.json",
+      "sha256": "b2f7b6c82496cc515bfee6624f0748cea9f7013a6369304691ca3dc4be2898d2"
+    },
+    {
+      "byte_count": 191,
+      "category": "geometry",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "geometry/proxy-missing-surface.json",
+      "sha256": "5b007fc489aed7cebb134e01807a5e16a25a791e12e82f63e01976d0887b11e9"
+    },
+    {
+      "byte_count": 279,
+      "category": "geometry",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "geometry/repeated-corridor-loop.json",
+      "sha256": "d695afe4003ed463958426f64b2af4059d2cbc5cf9b4cb9a99db3c394a8c9415"
+    },
+    {
+      "byte_count": 1489,
+      "category": "liveforever",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "liveforever/conflicting-recollections.json",
+      "sha256": "38033fb825d164f382835de271f8bfde119cdc7e50bcf63cba77fbd38899d449"
+    },
+    {
+      "byte_count": 685,
+      "category": "providers",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "providers/failure-matrix.json",
+      "sha256": "e7b0ae7c9f55f05dac78c9e9eff2a9a49953af2d1642c0bef2d1549270aa80e2"
+    },
+    {
+      "byte_count": 2194,
+      "category": "security",
+      "description": "Highly compressible entry exceeding the configured compression-ratio guard.",
+      "expected_error_code": "ARCHIVE_COMPRESSION_RATIO",
+      "expected_result": "rejected",
+      "path": "security/compression-bomb.zip",
+      "sha256": "f26e3acec32a2fd0e3875819524d862ffc5ecf494565569041e591fcfe52b712"
+    },
+    {
+      "byte_count": 488,
+      "category": "security",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "security/cross-tenant-attempts.json",
+      "sha256": "aee8f572335e886213c32fc5bcd631f1a3e0512de2c1563630e92261755a4f9c"
+    },
+    {
+      "byte_count": 259,
+      "category": "security",
+      "description": "Synthetic structured fixture; see file content for expected behavior.",
+      "expected_error_code": null,
+      "expected_result": "controlled_fixture",
+      "path": "security/embedded-script-metadata.json",
+      "sha256": "4009de3152bee530ad166179f51410b85aff529a22f27c42b6d02df8d824ce29"
+    },
+    {
+      "byte_count": 253,
+      "category": "security",
+      "description": "Archive containing a parent-directory member.",
+      "expected_error_code": "ARCHIVE_PATH_UNSAFE",
+      "expected_result": "rejected",
+      "path": "security/path-traversal.zip",
+      "sha256": "560b389e69e94513002521764d2805f4995b5443e8f1c147d6ac5193b4e3eed6"
+    }
+  ],
+  "generated_by": "tools/generate_test_fixtures.py",
+  "schema": "sip.test-fixture-corpus/v1",
+  "synthetic_only": true
+}

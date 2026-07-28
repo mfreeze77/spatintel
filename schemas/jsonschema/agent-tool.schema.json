@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/agent-tool.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_source_classes": {
+      "items": {
+        "$ref": "#/$defs/SourceClass"
+      },
+      "minItems": 1,
+      "title": "Allowed Source Classes",
+      "type": "array"
+    },
+    "authority_ceiling": {
+      "enum": [
+        "none",
+        "inferred",
+        "metric_unverified"
+      ],
+      "title": "Authority Ceiling",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "evidence_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Requirements",
+      "type": "array"
+    },
+    "idempotency": {
+      "enum": [
+        "read_only",
+        "idempotency_key_required"
+      ],
+      "title": "Idempotency",
+      "type": "string"
+    },
+    "input_schema": {
+      "additionalProperties": true,
+      "title": "Input Schema",
+      "type": "object"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "output_schema": {
+      "additionalProperties": true,
+      "title": "Output Schema",
+      "type": "object"
+    },
+    "prohibited_actions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Prohibited Actions",
+      "type": "array"
+    },
+    "required_permissions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Required Permissions",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "sip.agent-tool/v1",
+      "default": "sip.agent-tool/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "side_effect": {
+      "enum": [
+        "none",
+        "review_proposal"
+      ],
+      "title": "Side Effect",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "required_permissions",
+    "side_effect",
+    "idempotency",
+    "evidence_requirements",
+    "allowed_source_classes",
+    "input_schema",
+    "output_schema",
+    "authority_ceiling",
+    "prohibited_actions"
+  ],
+  "title": "AgentToolSpec",
+  "type": "object"
+}

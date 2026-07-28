@@ -1,0 +1,37 @@
+schema_version: '1.0'
+requirement_id: RECPROV-001
+priority: P0
+source:
+  document: 40-reconstruction/416_splat_surface_provider_contract.md
+  line: 279
+  section: 12. Normative requirements
+requirement: Every provider shall register a signed capability, execution, coordinate, security, license, and benchmark descriptor
+  before source-data access.
+verification_method: Registry schema and admission test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/contracts.py
+- src/sip/worker_runtime.py
+- src/sip/representations.py
+- src/sip/database.py
+- schemas/jsonschema/provider-capability.schema.json
+- migrations/versions/0011_governed_hybrid_representation.py
+automated_test_ids:
+- tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- schemas/events/event-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

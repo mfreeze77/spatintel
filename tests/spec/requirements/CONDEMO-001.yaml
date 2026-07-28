@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: CONDEMO-001
+priority: P0
+source:
+  document: 70-construction/713_construction_demo_scenario.md
+  line: 36
+  section: 4. Normative requirements
+requirement: The operator shall create a project, import a plan/drawing, capture the room, recover from a pause, and finalize
+  locally.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- src/sip/construction.py
+- tools/run_demo.py
+- docs/user/CONSTRUCTION.md
+- verticals/construction
+automated_test_ids:
+- tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration
+retained_evidence:
+- build/evidence/demos/construction.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

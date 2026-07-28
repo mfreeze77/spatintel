@@ -1,0 +1,39 @@
+schema_version: '1.0'
+requirement_id: RECHYB-002
+priority: P0
+source:
+  document: 40-reconstruction/415_splat_surface_hybrid_representation.md
+  line: 140
+  section: 12. Normative requirements
+requirement: Every interaction proxy shall carry authority class `derived_non_authoritative` and shall be ineligible for verified
+  measurement by itself.
+verification_method: Policy test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/representations.py
+- src/sip/scene.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/contract/test_generated_contracts.py::test_representation_contract_rejects_authority_drift_for_interaction_proxies
+- tests/contract/test_worker_protocol.py::test_interaction_candidate_package_requires_exact_non_authoritative_ceiling_and_disposable
+- tests/e2e/test_platform_demonstrations.py::test_hybrid_representation_demonstration
+- tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard
+- tests/migration/test_migrations.py::test_upgrade_reclassifies_legacy_interaction_representations_without_promoting_others
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/e2e.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/migration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

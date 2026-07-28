@@ -1,0 +1,24 @@
+schema_version: '1.0'
+requirement_id: CONMEAS-010
+priority: P1
+source:
+  document: 70-construction/708_measurements_truth_hierarchy.md
+  line: 139
+  section: 15. Version 1.1 proxy measurement boundary
+requirement: The UI shall visually distinguish proxy hit, metric snap, design geometry, and field-verified point.
+verification_method: UI acceptance test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-CONMEAS-010
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

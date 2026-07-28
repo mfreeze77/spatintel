@@ -1,0 +1,43 @@
+{
+  "schema": "sip.pytest-shard-manifest/v2",
+  "shard_jobs": 1,
+  "shards": [
+    {
+      "bootstrap_excluded_inputs": [],
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/acceptance/test_vertical_demonstrations.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/acceptance/shards/tests__acceptance__test_vertical_demonstrations.xml"
+      ],
+      "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declared_generated_inputs": [],
+      "elapsed_seconds": 6.848413,
+      "exit_code": 0,
+      "input_sha256": "c6ce4c7f4da50da3ff4979f56349a127e945e1e9b4b68970f2826ba24be361ab",
+      "junit_path": "tests__acceptance__test_vertical_demonstrations.xml",
+      "junit_sha256": "47da8e75992bd35c22c64371e747ff43ffa61a61e406493cdbf28865a4e00c72",
+      "log_path": "tests__acceptance__test_vertical_demonstrations.log",
+      "log_sha256": "dbf8aa747a2544f8deb54f83995a9df7837645561d6640299550a36b50397109",
+      "name": "tests__acceptance__test_vertical_demonstrations",
+      "path": "tests/acceptance/test_vertical_demonstrations.py",
+      "portable_command": [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/acceptance/test_vertical_demonstrations.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/acceptance-shards/tests__acceptance__test_vertical_demonstrations.xml"
+      ],
+      "schema": "sip.pytest-shard-result/v2",
+      "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+      "status": "passed"
+    }
+  ],
+  "suite": "acceptance",
+  "timeout_seconds_per_shard": 240
+}

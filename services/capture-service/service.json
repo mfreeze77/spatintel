@@ -1,0 +1,75 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_multipart_status",
+      "path": "/v1/multipart/{upload_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "complete_multipart",
+      "path": "/v1/multipart/{upload_id}/complete"
+    },
+    {
+      "method": "PUT",
+      "operation_id": "put_multipart_part",
+      "path": "/v1/multipart/{upload_id}/parts/{part_number}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "ingest_asset",
+      "path": "/v1/projects/{project_id}/assets"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_asset",
+      "path": "/v1/projects/{project_id}/assets/{asset_id}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "read_asset",
+      "path": "/v1/projects/{project_id}/assets/{asset_id}/content"
+    },
+    {
+      "method": "POST",
+      "operation_id": "issue_asset_read_token",
+      "path": "/v1/projects/{project_id}/assets/{asset_id}/read-token"
+    },
+    {
+      "method": "POST",
+      "operation_id": "begin_multipart",
+      "path": "/v1/projects/{project_id}/multipart"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true
+  },
+  "service_name": "capture-service"
+}

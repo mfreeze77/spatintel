@@ -1,0 +1,19 @@
+name                      = "sip"
+environment               = "production"
+region                    = "us-east-2"
+budget_notification_email = "platform-operations@example.invalid"
+platform_admin_principal_arns = ["arn:aws:iam::123456789012:role/SIPPlatformAdministrator"]
+public_access_cidrs       = []
+monthly_budget_usd        = 10000
+enable_guardduty          = false # Set true only when the account is not already centrally managed.
+enable_security_hub       = false # Set true only when the account is not already centrally managed.
+
+# Resolve exact region-compatible versions before plan:
+# aws eks describe-addon-versions --kubernetes-version 1.34 --addon-name vpc-cni
+# Repeat for coredns, kube-proxy, and eks-pod-identity-agent.
+eks_addon_versions = {
+  vpc_cni                = "REPLACE_WITH_EXACT_VERSION"
+  coredns                = "REPLACE_WITH_EXACT_VERSION"
+  kube_proxy             = "REPLACE_WITH_EXACT_VERSION"
+  eks_pod_identity_agent = "REPLACE_WITH_EXACT_VERSION"
+}

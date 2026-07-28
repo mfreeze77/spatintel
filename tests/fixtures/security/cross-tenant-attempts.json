@@ -1,0 +1,22 @@
+{
+  "attempts": [
+    {
+      "actor_tenant": "tenant-a",
+      "expected": "deny_not_found",
+      "operation": "asset_read",
+      "resource_tenant": "tenant-b"
+    },
+    {
+      "actor_project": "project-a",
+      "body_project": "project-b",
+      "expected": "deny_scope_mismatch",
+      "operation": "hybrid_conversion"
+    },
+    {
+      "assertion_tenant": "tenant-a",
+      "evidence_tenant": "tenant-b",
+      "expected": "deny",
+      "operation": "evidence_link"
+    }
+  ]
+}

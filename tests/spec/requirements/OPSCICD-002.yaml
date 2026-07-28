@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: OPSCICD-002
+priority: P0
+source:
+  document: 90-security-ops/911_ci_cd_supply_chain.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Mobile, web, service, worker, infrastructure, and model manifests shall share a release record.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- .github/workflows/ci.yml
+- .github/workflows/release.yml
+- tools/release.py
+- tools/security_check.py
+- tools/license_check.py
+automated_test_ids:
+- tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates
+- tests/contract/test_delivery_tools.py::test_release_source_zip_is_byte_deterministic
+retained_evidence:
+- build/reports/license-gate.json
+- build/reports/release-report.json
+- build/reports/security-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

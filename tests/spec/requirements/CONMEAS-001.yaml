@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: CONMEAS-001
+priority: P0
+source:
+  document: 70-construction/708_measurements_truth_hierarchy.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Every measurement shall store value, units, geometry/endpoints, class, uncertainty/tolerance, method/tool, calibration/control,
+  author, verifier, time, source commit, and permitted use.
+verification_method: Controlled verification
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/construction.py
+- src/sip/database.py
+- src/sip/models.py
+automated_test_ids:
+- tests/integration/test_export_restore.py::test_preservation_collision_remaps_proxy_measurement_and_anchor_history
+- tests/integration/test_spatial_truth_twin.py::test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards
+- tests/integration/test_verticals.py::test_construction_complete_record_deficiency_retest_measurement_and_reports
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- src/sip/construction.py
+- src/sip/database.py
+- src/sip/models.py
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

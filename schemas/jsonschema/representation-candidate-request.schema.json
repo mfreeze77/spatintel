@@ -1,0 +1,120 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/representation-candidate-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Admitted request to stage a derived representation for independent review.\n\nRepresentation kind, source class, authority class, and provider executable\nidentity are deliberately omitted. The control plane derives them from the\nsigned operation type and immutable worker manifest; a caller cannot elevate\na worker result by changing request fields.",
+  "properties": {
+    "classification": {
+      "default": "internal",
+      "minLength": 1,
+      "title": "Classification",
+      "type": "string"
+    },
+    "coordinate_frame_id": {
+      "minLength": 1,
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "media_type": {
+      "default": "application/vnd.sip.worker-result+json",
+      "minLength": 1,
+      "title": "Media Type",
+      "type": "string"
+    },
+    "prohibited_uses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prohibited Uses",
+      "type": "array"
+    },
+    "provider_id": {
+      "minLength": 1,
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "quality": {
+      "additionalProperties": true,
+      "title": "Quality",
+      "type": "object"
+    },
+    "region": {
+      "minLength": 1,
+      "title": "Region",
+      "type": "string"
+    },
+    "retention_class": {
+      "default": "derived-review",
+      "minLength": 1,
+      "title": "Retention Class",
+      "type": "string"
+    },
+    "scene_id": {
+      "minLength": 1,
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "sip.representation-candidate-request/v1",
+      "default": "sip.representation-candidate-request/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_asset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Asset Ids",
+      "type": "array"
+    },
+    "source_scene_revision_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Scene Revision Id"
+    },
+    "support_map": {
+      "additionalProperties": true,
+      "title": "Support Map",
+      "type": "object"
+    }
+  },
+  "required": [
+    "scene_id",
+    "coordinate_frame_id",
+    "provider_id",
+    "purpose",
+    "region",
+    "source_asset_ids",
+    "intended_uses"
+  ],
+  "title": "CandidateRequest",
+  "type": "object"
+}

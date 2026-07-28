@@ -1,0 +1,21 @@
+{
+  "audited": true,
+  "cancellable": true,
+  "capabilities": [
+    "splat.generate"
+  ],
+  "checkpointed": true,
+  "durable": true,
+  "entrypoint": "workers/splat/main.py",
+  "execution_manifest": "workers/splat/worker-manifest.json",
+  "governance": "local_approved_reference",
+  "idempotent": true,
+  "input_contract": "operation.input@v1",
+  "least_privilege": true,
+  "manifest_sha256": "f7c19dfc70636ba095fa1f9645d2bf74bfcb4ae1f762e8382d0da726a6cb16e0",
+  "name": "splat",
+  "output_contract": "operation.output@v1",
+  "production_placeholders": false,
+  "schema": "sip.worker-manifest/v1",
+  "version": "1.1.0"
+}

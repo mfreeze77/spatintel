@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1.7
+ARG NODE_IMAGE=node:24.18.0-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d
+FROM ${NODE_IMAGE} AS dependencies
+WORKDIR /app
+COPY package.json package-lock.json* ./
+COPY apps/web/package.json ./apps/web/package.json
+RUN npm ci --ignore-scripts
+
+FROM dependencies AS builder
+COPY apps/web ./apps/web
+COPY packages/contracts/typescript ./packages/contracts/typescript
+RUN npm --workspace apps/web run build
+
+FROM ${NODE_IMAGE} AS runtime
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000
+RUN groupadd --gid 10001 sip && useradd --uid 10001 --gid sip --no-create-home --home-dir /nonexistent --shell /usr/sbin/nologin sip
+WORKDIR /app
+COPY --from=builder --chown=sip:sip /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=sip:sip /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=sip:sip /app/apps/web/public ./apps/web/public
+USER 10001:10001
+EXPOSE 3000
+CMD ["node", "apps/web/server.js"]

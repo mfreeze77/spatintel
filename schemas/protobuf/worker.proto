@@ -1,0 +1,264 @@
+syntax = "proto3";
+package sip.v1;
+
+import "common.proto";
+
+// Generic worker-control service. The legacy mutation RPCs remain for wire
+// compatibility. V1 lease/progress/completion RPCs bind every operation to an
+// immutable worker manifest, signed lease, resource envelope, and quarantined
+// candidate. No large spatial or media payload bytes cross this control contract.
+service WorkerControl {
+  rpc Lease(LeaseRequest) returns (OperationResource);
+  rpc Start(WorkerMutation) returns (OperationResource);
+  rpc Heartbeat(HeartbeatRequest) returns (OperationResource);
+  rpc Checkpoint(CheckpointRequest) returns (OperationResource);
+  rpc Complete(CompleteRequest) returns (OperationResource);
+  rpc Fail(FailRequest) returns (OperationResource);
+
+  rpc AcquireLeaseV1(WorkerLeaseRequestV1) returns (SignedWorkerLeaseV1);
+  rpc ReportProgressV1(WorkerProgressRequestV1) returns (WorkerProgressAckV1);
+  rpc CompleteCandidateV1(WorkerCandidateCompletionV1) returns (OperationResource);
+  rpc CompleteResultV1(WorkerResultCompletionV1) returns (OperationResource);
+  rpc FailV1(WorkerFailureV1) returns (OperationResource);
+}
+
+message LeaseRequest {
+  string operation_id = 1;
+  string worker_id = 2;
+  uint32 lease_seconds = 3;
+  repeated string capabilities = 4;
+  string workload_identity = 5;
+}
+
+message WorkerMutation {
+  string operation_id = 1;
+  string worker_id = 2;
+}
+
+message HeartbeatRequest {
+  string operation_id = 1;
+  string worker_id = 2;
+  uint32 lease_seconds = 3;
+}
+
+message CheckpointRequest {
+  string operation_id = 1;
+  string worker_id = 2;
+  double progress = 3;
+  string checkpoint_json = 4;
+  string checkpoint_hash = 5;
+}
+
+message CompleteRequest {
+  string operation_id = 1;
+  string worker_id = 2;
+  string output_manifest_json = 3;
+  string output_hash = 4;
+}
+
+message FailRequest {
+  string operation_id = 1;
+  string worker_id = 2;
+  string code = 3;
+  string message = 4;
+  bool retryable = 5;
+}
+
+message OperationResource {
+  string operation_id = 1;
+  string tenant_id = 2;
+  string project_id = 3;
+  string operation_type = 4;
+  string state = 5;
+  double progress = 6;
+  uint32 attempt = 7;
+  uint32 max_attempts = 8;
+  string input_manifest_hash = 9;
+  string output_hash = 10;
+  string error_json = 11;
+}
+
+message WorkerLeaseRequestV1 {
+  string operation_id = 1;
+  string worker_name = 2;
+  string workload_identity = 3;
+  string worker_manifest_sha256 = 4;
+  uint32 requested_lease_seconds = 5;
+  string adapter_profile = 6;
+}
+
+message WorkerResourceLimitsV1 {
+  uint32 max_wall_seconds = 1;
+  uint32 max_cpu_seconds = 2;
+  uint64 max_memory_bytes = 3;
+  uint64 max_input_bytes = 4;
+  uint64 max_output_bytes = 5;
+  uint32 gpu_count = 6;
+}
+
+message OutputStagingScopeV1 {
+  string scope_id = 1;
+  string mode = 2;
+  string tenant_id = 3;
+  string project_id = 4;
+  string operation_id = 5;
+  uint64 maximum_bytes = 6;
+  string expires_at = 7;
+}
+
+message WorkerLeaseV1 {
+  string schema_version = 1;
+  string lease_id = 2;
+  string run_id = 3;
+  string operation_id = 4;
+  uint32 attempt = 5;
+  string operation_type = 6;
+  string adapter_profile = 7;
+  string input_manifest_json = 8;
+  string input_manifest_hash = 9;
+  uint64 input_byte_count = 10;
+  string resume_checkpoint_json = 11;
+  double resume_progress = 12;
+  OutputStagingScopeV1 output_staging_scope = 13;
+  WorkerResourceLimitsV1 resource_limits = 14;
+  string deadline_at = 15;
+  string cancellation_token = 16;
+  string workload_identity = 17;
+  repeated string capabilities = 18;
+  string worker_manifest_sha256 = 19;
+  string issued_at = 20;
+  string expires_at = 21;
+  string lease_hash = 22;
+}
+
+message SignedWorkerLeaseV1 {
+  WorkerLeaseV1 lease = 1;
+  string signed_token = 2;
+}
+
+message WorkerProgressRecordV1 {
+  uint32 sequence = 1;
+  string stage = 2;
+  double progress = 3;
+  uint64 completed_units = 4;
+  uint64 total_units = 5;
+  string unit = 6;
+  repeated string warnings = 7;
+  string quality_json = 8;
+  string resource_use_json = 9;
+  bool safe_to_resume = 10;
+  string payload_json = 11;
+  string checkpoint_hash = 12;
+}
+
+message WorkerProgressRequestV1 {
+  string signed_lease_token = 1;
+  string worker_manifest_sha256 = 2;
+  WorkerProgressRecordV1 progress = 3;
+}
+
+message WorkerProgressAckV1 {
+  string operation_id = 1;
+  string state = 2;
+  double accepted_progress = 3;
+  uint32 accepted_sequence = 4;
+  bool cancellation_requested = 5;
+  string lease_expires_at = 6;
+}
+
+message RepresentationCandidateSummaryV1 {
+  string schema_version = 1;
+  string candidate_id = 2;
+  string representation_id = 3;
+  string asset_id = 4;
+  string asset_sha256 = 5;
+  string media_type = 6;
+  string operation_id = 7;
+  string operation_type = 8;
+  string state = 9;
+  string output_role = 10;
+  string representation_kind = 11;
+  string coordinate_frame_id = 12;
+  string source_scene_revision_id = 13;
+  repeated string source_asset_ids = 14;
+  string payload_hash = 15;
+  string source_manifest_hash = 16;
+  string parameters_hash = 17;
+  string environment_manifest_hash = 18;
+  string provider_id = 19;
+  string provider_version = 20;
+  string provider_executable_digest = 21;
+  string worker_receipt_hash = 22;
+  string authority_ceiling = 23;
+  bool disposable = 24;
+  bool lossy = 25;
+  repeated string intended_uses = 26;
+  repeated string prohibited_uses = 27;
+  string provider_metrics_json = 28;
+  repeated string limitations = 29;
+  bool publication_permission = 30;
+  bool independent_validation_required = 31;
+  bool human_review_required = 32;
+}
+
+message WorkerReceiptSummaryV1 {
+  string schema_version = 1;
+  string receipt_sha256 = 2;
+  string lease_id = 3;
+  string run_id = 4;
+  string operation_id = 5;
+  string operation_type = 6;
+  uint32 attempt = 7;
+  string worker_name = 8;
+  string workload_identity = 9;
+  string lease_hash = 10;
+  string worker_manifest_sha256 = 11;
+  string runtime_sha256 = 12;
+  string protocol_sha256 = 13;
+  string sandbox_sha256 = 14;
+  string input_manifest_hash = 15;
+  string parameters_hash = 16;
+  string handler_output_hash = 17;
+  string candidate_core_hash = 18;
+  string environment_hash = 19;
+  string code_commit = 20;
+  string container_digest = 21;
+  string started_at = 22;
+  string completed_at = 23;
+  double elapsed_wall_seconds = 24;
+  double elapsed_cpu_seconds = 25;
+  uint64 maximum_rss_bytes = 26;
+  uint64 input_byte_count = 27;
+  uint64 handler_output_byte_count = 28;
+  bool shell_access_allowed = 29;
+  bool network_access_allowed = 30;
+  bool publication_permission = 31;
+  repeated WorkerProgressRecordV1 checkpoints = 32;
+}
+
+message WorkerCandidateCompletionV1 {
+  string signed_lease_token = 1;
+  string worker_manifest_sha256 = 2;
+  RepresentationCandidateSummaryV1 candidate = 3;
+  WorkerReceiptSummaryV1 receipt = 4;
+  string bounded_operation_output_json = 5;
+  string bounded_operation_output_hash = 6;
+}
+
+message WorkerResultCompletionV1 {
+  string signed_lease_token = 1;
+  string worker_manifest_sha256 = 2;
+  WorkerReceiptSummaryV1 receipt = 3;
+  string bounded_result_json = 4;
+  string bounded_result_hash = 5;
+}
+
+message WorkerFailureV1 {
+  string signed_lease_token = 1;
+  string worker_manifest_sha256 = 2;
+  string code = 3;
+  string message = 4;
+  bool retryable = 5;
+  string evidence_json = 6;
+  string evidence_hash = 7;
+}

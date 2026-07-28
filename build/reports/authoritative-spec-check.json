@@ -1,0 +1,16 @@
+{
+  "errors": 0,
+  "findings": [],
+  "ledger_requirements": 1028,
+  "mode": "structural",
+  "spec_requirements": 1028,
+  "status": "passed",
+  "status_counts": {
+    "EXTERNAL_VALIDATION_REQUIRED": 3,
+    "IMPLEMENTED_UNVERIFIED": 110,
+    "IN_PROGRESS": 22,
+    "NOT_STARTED": 802,
+    "VERIFIED": 91
+  },
+  "warnings": 0
+}

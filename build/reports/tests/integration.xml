@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest-integration" tests="58" failures="0" errors="0" skipped="0" time="81.519000" timestamp="2026-07-28T00:35:01.668782+00:00" hostname="8af374932250">
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_datsearc_001_002_search_authorizes_before_counts_ranking_and_snippets" time="1.398" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_pltsql_001_002_003_structured_spatial_temporal_graph_and_evidence_filters" time="1.377" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_datsearc_003_semantic_provenance_and_critical_freshness_fallback" time="1.462" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_saved_query_is_immutable_versioned_permissioned_and_parameterized" time="1.484" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety" time="1.695" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_agent_metric_measurement_uses_published_metric_evidence_and_reports_uncertainty" time="1.722" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_agent_search_marks_embedded_instructions_untrusted_and_proposals_never_commit" time="1.321" />
+    <testcase classname="tests.integration.test_authorized_search_agents" name="test_datsearc_005_search_evaluation_covers_multilingual_ocr_transcript_ambiguity_and_leakage" time="1.248" />
+    <testcase classname="tests.integration.test_export_restore" name="test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity" time="1.541" />
+    <testcase classname="tests.integration.test_export_restore" name="test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state" time="3.046" />
+    <testcase classname="tests.integration.test_export_restore" name="test_preservation_collision_remaps_proxy_measurement_and_anchor_history" time="1.704" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_provider_descriptor_revision_promotion_and_tamper_fail_closed" time="1.437" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_conversion_admission_worker_scope_progress_idempotency_and_cancel" time="1.546" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_quarantine_independent_validation_atomic_publication_and_view_reauthorization" time="1.660" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_provider_or_validation_snapshot_changes_block_publication" time="1.719" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt" time="2.178" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_representation_family_requires_approved_frame_consistent_lods_and_seam_evidence" time="1.510" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_worker_lease_rotation_is_bounded_and_supersedes_prior_credentials" time="1.276" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_provider_failure_retains_cleanup_evidence_and_preserves_published_binding" time="1.528" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_provider_admission_denials_fail_closed_and_retain_safe_evidence" time="1.665" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress" time="1.629" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_provider_training_public_demo_and_retention_require_separate_server_side_authorization" time="1.407" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_candidate_role_size_validation_and_profile_integrity_fail_closed" time="1.360" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_retryable_failure_resumes_only_after_verified_cleanup_and_policy_reauthorization" time="1.020" />
+    <testcase classname="tests.integration.test_governed_hybrid" name="test_worker_renewal_fails_when_admitted_provider_revision_is_no_longer_current" time="1.143" />
+    <testcase classname="tests.integration.test_lifecycle_recovery" name="test_opsdr_002_backup_is_not_valid_until_isolated_restore_rehearsal" time="1.465" />
+    <testcase classname="tests.integration.test_lifecycle_recovery" name="test_opsdr_002_corrupt_backup_fails_before_restore_claim" time="1.390" />
+    <testcase classname="tests.integration.test_lifecycle_recovery" name="test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence" time="1.581" />
+    <testcase classname="tests.integration.test_lifecycle_recovery" name="test_opskey_003_envelope_rotation_rewraps_keys_without_rewriting_ciphertext" time="1.377" />
+    <testcase classname="tests.integration.test_lifecycle_recovery" name="test_opscost_001_quota_admission_and_immutable_price_source_attribution" time="1.725" />
+    <testcase classname="tests.integration.test_s3_store" name="test_s3_content_addressed_store_is_atomic_encrypted_and_rewrappable" time="0.027" />
+    <testcase classname="tests.integration.test_s3_store" name="test_s3_store_detects_ciphertext_tampering" time="0.000" />
+    <testcase classname="tests.integration.test_s3_store" name="test_production_settings_fail_closed_without_keys" time="0.000" />
+    <testcase classname="tests.integration.test_s3_store" name="test_s3_store_rejects_invalid_digest" time="0.000" />
+    <testcase classname="tests.integration.test_scene_representation" name="test_datgit_datscene_stable_entities_commits_diff_and_rollback" time="1.352" />
+    <testcase classname="tests.integration.test_scene_representation" name="test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard" time="1.488" />
+    <testcase classname="tests.integration.test_scene_representation" name="test_representation_publication_rechecks_inherited_policy_and_consent" time="1.548" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datframe_known_basis_round_trip_temporal_transform_and_supersession" time="1.458" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datframe_transform_adapter_conventions_scale_units_and_uncertainty" time="1.572" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datframe_geospatial_pipeline_and_viewer_unit_conversion_are_explicit_and_non_mutating" time="1.396" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datgeom_manifest_inherits_classification_and_matches_representation" time="1.885" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled" time="1.887" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datevid_derivation_references_are_scoped_hashed_unique_and_immutable" time="1.368" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_pltmodel_datevid_model_derivation_has_signed_governance_receipt_and_historical_retry" time="1.240" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datanch_reprojectable_annotations_and_proxy_remap_report" time="1.306" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datgit_dattwin_tags_as_of_change_evidence_and_protected_merge" time="1.539" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_dathyb_dependency_invalidation_supersedes_bindings_and_view_falls_back" time="1.792" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards" time="1.427" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datevid_provenance_gate_corroboration_and_disputed_retrieval" time="1.218" />
+    <testcase classname="tests.integration.test_spatial_truth_twin" name="test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation" time="0.970" />
+    <testcase classname="tests.integration.test_verticals" name="test_construction_complete_record_deficiency_retest_measurement_and_reports" time="1.789" />
+    <testcase classname="tests.integration.test_verticals" name="test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit" time="1.741" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_worker_registry_covers_all_declared_worker_boundaries" time="0.000" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_pose_worker_is_durable_idempotent_and_retains_evidence" time="1.853" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_reference_fusion_worker_propagates_uncertainty" time="1.354" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_candidate_staging_is_idempotent_when_completion_fails_then_retries" time="1.480" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_lingbot_checkpoint_is_hard_denied_and_operation_records_failure" time="1.276" />
+    <testcase classname="tests.integration.test_worker_runtime" name="test_worker_cannot_execute_outside_its_capability" time="1.558" />
+  </testsuite>
+</testsuites>

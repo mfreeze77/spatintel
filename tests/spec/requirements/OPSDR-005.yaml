@@ -1,0 +1,35 @@
+schema_version: '1.0'
+requirement_id: OPSDR-005
+priority: P1
+source:
+  document: 90-security-ops/906_backup_restore_dr.md
+  line: 40
+  section: 4. Normative requirements
+requirement: A restore shall reconcile manifests/hashes, database references, object assets, audit chronology, and queued
+  jobs before reopening writes.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/lifecycle.py
+- src/sip/exporting.py
+- docs/operator/BACKUP_RESTORE.md
+- tools/run_demo.py
+automated_test_ids:
+- tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration
+- tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state
+retained_evidence:
+- build/evidence/demos/foundation.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

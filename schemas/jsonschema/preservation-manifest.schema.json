@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "HashRef": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "byte_count",
+        "media_type"
+      ],
+      "title": "HashRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/preservation-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/HashRef"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "format": {
+      "const": "sip-open-preservation",
+      "default": "sip-open-preservation",
+      "title": "Format",
+      "type": "string"
+    },
+    "format_version": {
+      "default": "1.1.0",
+      "title": "Format Version",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "root_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Root Hash",
+      "type": "string"
+    },
+    "semantic_identity": {
+      "additionalProperties": true,
+      "title": "Semantic Identity",
+      "type": "object"
+    },
+    "tables": {
+      "additionalProperties": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "title": "Tables",
+      "type": "object"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "project_id",
+    "assets",
+    "tables",
+    "semantic_identity",
+    "files",
+    "root_hash"
+  ],
+  "title": "PreservationManifestContract",
+  "type": "object"
+}

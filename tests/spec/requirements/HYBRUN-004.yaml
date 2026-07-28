@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: HYBRUN-004
+priority: P0
+source:
+  document: 60-platform/613_hybrid_scene_runtime.md
+  line: 260
+  section: 17. Normative requirements
+requirement: Measurement endpoints shall resolve to eligible metric support or be saved only as explicitly approximate and
+  unverified.
+verification_method: End-to-end measurement test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/representations.py
+- src/sip/scene.py
+- src/sip/api.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

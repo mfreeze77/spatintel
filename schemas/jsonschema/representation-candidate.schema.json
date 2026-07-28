@@ -1,0 +1,206 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/representation-candidate.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "asset_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Asset Sha256",
+      "type": "string"
+    },
+    "authority_ceiling": {
+      "title": "Authority Ceiling",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "disposable": {
+      "title": "Disposable",
+      "type": "boolean"
+    },
+    "environment_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Manifest Hash",
+      "type": "string"
+    },
+    "human_review_required": {
+      "default": true,
+      "title": "Human Review Required",
+      "type": "boolean"
+    },
+    "independent_validation_required": {
+      "const": true,
+      "default": true,
+      "title": "Independent Validation Required",
+      "type": "boolean"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "lossy": {
+      "title": "Lossy",
+      "type": "boolean"
+    },
+    "media_type": {
+      "title": "Media Type",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "operation_type": {
+      "title": "Operation Type",
+      "type": "string"
+    },
+    "output_role": {
+      "title": "Output Role",
+      "type": "string"
+    },
+    "parameters_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Parameters Hash",
+      "type": "string"
+    },
+    "payload_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Payload Hash",
+      "type": "string"
+    },
+    "prohibited_uses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prohibited Uses",
+      "type": "array"
+    },
+    "provider_executable_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Provider Executable Digest",
+      "type": "string"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "provider_metrics": {
+      "additionalProperties": true,
+      "title": "Provider Metrics",
+      "type": "object"
+    },
+    "provider_version": {
+      "title": "Provider Version",
+      "type": "string"
+    },
+    "publication_permission": {
+      "const": false,
+      "default": false,
+      "title": "Publication Permission",
+      "type": "boolean"
+    },
+    "representation_id": {
+      "title": "Representation Id",
+      "type": "string"
+    },
+    "representation_kind": {
+      "title": "Representation Kind",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "sip.representation-candidate/v1",
+      "default": "sip.representation-candidate/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_asset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Asset Ids",
+      "type": "array"
+    },
+    "source_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Manifest Hash",
+      "type": "string"
+    },
+    "source_scene_revision_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Scene Revision Id"
+    },
+    "state": {
+      "const": "quarantined",
+      "default": "quarantined",
+      "title": "State",
+      "type": "string"
+    },
+    "worker_receipt_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Receipt Hash"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "representation_id",
+    "asset_id",
+    "asset_sha256",
+    "media_type",
+    "operation_id",
+    "operation_type",
+    "output_role",
+    "representation_kind",
+    "coordinate_frame_id",
+    "source_asset_ids",
+    "payload_hash",
+    "source_manifest_hash",
+    "parameters_hash",
+    "environment_manifest_hash",
+    "provider_id",
+    "provider_version",
+    "provider_executable_digest",
+    "authority_ceiling",
+    "disposable",
+    "lossy"
+  ],
+  "title": "CandidatePackage",
+  "type": "object"
+}

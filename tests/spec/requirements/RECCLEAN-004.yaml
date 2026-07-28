@@ -1,0 +1,31 @@
+schema_version: '1.0'
+requirement_id: RECCLEAN-004
+priority: P0
+source:
+  document: 40-reconstruction/418_splat_editing_cleanup.md
+  line: 134
+  section: 11. Normative requirements
+requirement: Hole filling and bridge creation shall be governed by declared purpose and shall not conceal openings relevant
+  to construction or evidence.
+verification_method: Geometry and review test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/representations.py
+- src/sip/geometry.py
+automated_test_ids:
+- tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

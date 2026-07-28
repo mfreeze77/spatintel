@@ -1,0 +1,113 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/evidence-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access_policy": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Access Policy",
+      "type": "object"
+    },
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "chain_of_custody": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "minItems": 1,
+      "title": "Chain Of Custody",
+      "type": "array"
+    },
+    "collected_at": {
+      "format": "date-time",
+      "title": "Collected At",
+      "type": "string"
+    },
+    "collected_by": {
+      "title": "Collected By",
+      "type": "string"
+    },
+    "consent_scope": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Consent Scope",
+      "type": "object"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "device_or_tool": {
+      "title": "Device Or Tool",
+      "type": "string"
+    },
+    "evidence_id": {
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "legal_hold": {
+      "default": false,
+      "title": "Legal Hold",
+      "type": "boolean"
+    },
+    "location_context": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Location Context",
+      "type": "object"
+    },
+    "policy": {
+      "additionalProperties": true,
+      "title": "Policy",
+      "type": "object"
+    },
+    "relevant_region": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Relevant Region",
+      "type": "object"
+    },
+    "relevant_time_end": {
+      "format": "date-time",
+      "title": "Relevant Time End",
+      "type": "string"
+    },
+    "relevant_time_start": {
+      "format": "date-time",
+      "title": "Relevant Time Start",
+      "type": "string"
+    },
+    "retention_class": {
+      "title": "Retention Class",
+      "type": "string"
+    },
+    "source_type": {
+      "title": "Source Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "asset_id",
+    "source_type",
+    "collected_at",
+    "collected_by",
+    "device_or_tool",
+    "location_context",
+    "relevant_region",
+    "relevant_time_start",
+    "relevant_time_end",
+    "content_sha256",
+    "chain_of_custody",
+    "retention_class",
+    "consent_scope",
+    "access_policy"
+  ],
+  "title": "EvidenceRecordContract",
+  "type": "object"
+}

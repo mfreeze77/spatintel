@@ -1,0 +1,106 @@
+{
+  "commit_id": "75c063ef-60d0-4b25-8b66-8e7e005f69b6",
+  "evidence": {
+    "diff": {
+      "entities": {
+        "added": [],
+        "modified": [],
+        "removed": []
+      },
+      "left": "d98861cf-c0a4-4e9b-ac06-66153a44ed20",
+      "representation_changed": true,
+      "right": "75c063ef-60d0-4b25-8b66-8e7e005f69b6"
+    },
+    "direct_measurement_error": "PROXY_MEASUREMENT_CANNOT_BE_VERIFIED",
+    "proxy_resolution": {
+      "acceptance_threshold_m": 0.03,
+      "authoritative_measurement_allowed": true,
+      "estimated_residual_m": 0.01,
+      "interaction_hit": {
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+        "representation_kind": "interaction",
+        "support_hint": {},
+        "world_point": [
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "metric_representation_id": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+      "metric_source_asset_ids": [
+        "45edaa4f-ce6b-457a-b0ed-f7c680da2ebe"
+      ],
+      "proxy_representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+      "reason": null,
+      "resolved": true,
+      "resolved_metric_evidence": {
+        "acceptance_threshold_m": 0.03,
+        "coordinate_frame_id": "world",
+        "estimated_residual_m": 0.01,
+        "metric_representation_id": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+        "metric_source_asset_ids": [
+          "45edaa4f-ce6b-457a-b0ed-f7c680da2ebe"
+        ],
+        "resolution_method": "support_map_metric_reprojection"
+      },
+      "world_point": [
+        1.0,
+        1.0,
+        0.0
+      ]
+    },
+    "replacement": {
+      "new_representation_id": "249c45cd-01f2-419b-91f5-c3e206865ac8",
+      "old_representation_id": "10f7fb60-2e11-42e7-8777-de7cf95c4b3e",
+      "reprojected": 1,
+      "reprojected_anchor_ids": [
+        "anchor-panel"
+      ],
+      "unresolved": 1,
+      "unresolved_anchors": [
+        {
+          "anchor_id": "anchor-removed",
+          "point": [
+            3.5,
+            1.0,
+            0.0
+          ],
+          "semantic_support_id": "entity-removed"
+        }
+      ]
+    }
+  },
+  "layers": [
+    {
+      "authority": "metric",
+      "kind": "metric",
+      "representation_id": "3c24f2fd-95f4-4791-8b89-e27432166fae",
+      "role": "measurement"
+    },
+    {
+      "authority": "visual",
+      "kind": "visual",
+      "representation_id": "6e48ae83-8452-43cd-902b-c530487119ac",
+      "role": "render"
+    },
+    {
+      "authority": "design",
+      "kind": "design",
+      "representation_id": "53ce58a9-e0b4-498d-b85a-b0d03e324a2f",
+      "role": "design_compare"
+    },
+    {
+      "authority": "interaction",
+      "kind": "interaction",
+      "representation_id": "249c45cd-01f2-419b-91f5-c3e206865ac8",
+      "role": "picking"
+    }
+  ],
+  "scene_id": "fbea714e-7992-4e27-b439-cf562c81eecd",
+  "schema": "sip.portable-viewer-session/v1"
+}

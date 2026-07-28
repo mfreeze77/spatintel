@@ -1,0 +1,35 @@
+{
+  "bootstrap_excluded_inputs": [],
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+    "-q",
+    "tests/property/test_geometry_properties.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/property/shards/tests__property__test_geometry_properties.xml"
+  ],
+  "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "declared_generated_inputs": [],
+  "elapsed_seconds": 3.722749,
+  "exit_code": 0,
+  "input_sha256": "feb0d8e92b3e5cc39cd4d8ac1c331c8e667156a9d26cb864b0ed9f4f243216ef",
+  "junit_path": "build/reports/tests/property-shards/tests__property__test_geometry_properties.xml",
+  "junit_sha256": "a305672bd442d8f36c12d1257e1e215f80a36728d52b5cdf5f1980c0b7cab592",
+  "log_path": "build/reports/tests/property-shards/tests__property__test_geometry_properties.log",
+  "log_sha256": "d907fec0e0445cfe67a7272e864304e81194b234052d6bdfcb6ec87c0b123e62",
+  "name": "tests__property__test_geometry_properties",
+  "path": "tests/property/test_geometry_properties.py",
+  "portable_command": [
+    "python",
+    "tools/run_pytest_isolated.py",
+    "-q",
+    "tests/property/test_geometry_properties.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=build/reports/tests/property-shards/tests__property__test_geometry_properties.xml"
+  ],
+  "schema": "sip.pytest-shard-result/v2",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed"
+}

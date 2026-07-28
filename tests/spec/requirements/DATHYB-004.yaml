@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: DATHYB-004
+priority: P0
+source:
+  document: 50-data/514_hybrid_representation_asset_contract.md
+  line: 291
+  section: 13. Normative requirements
+requirement: An interaction, collision, navigation, occlusion, or audio derivative shall default to `derived_non_authoritative`
+  and `disposable=true`.
+verification_method: Defaulting and rejection test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/representations.py
+- src/sip/scene.py
+- src/sip/database.py
+automated_test_ids:
+- tests/contract/test_generated_contracts.py::test_representation_contract_rejects_authority_drift_for_interaction_proxies
+- tests/contract/test_worker_protocol.py::test_interaction_candidate_package_requires_exact_non_authoritative_ceiling_and_disposable
+- tests/migration/test_migrations.py::test_upgrade_reclassifies_legacy_interaction_representations_without_promoting_others
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/migration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

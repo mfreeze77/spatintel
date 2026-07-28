@@ -1,0 +1,32 @@
+schema_version: '1.0'
+requirement_id: CAPCSCP-001
+priority: P0
+source:
+  document: 30-capture/304_canonical_capture_package.md
+  line: 36
+  section: 4. Normative requirements
+requirement: The root manifest shall include schema version, session ID, tenant/project when known, source adapter, device,
+  time range, coordinate frames, segments, asset index, root hash, and signature status.
+verification_method: Automated test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- apps/ios-capture/Tests/CaptureCoreTests
+- src/sip/capture.py
+automated_test_ids:
+- apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-12:CAPCSCP-001 through CAPCSCP-005 package hashing
+  is deterministic and validation rejects corruption
+retained_evidence:
+- build/evidence/swift-test-linux.log
+- build/reports/swift-test-report.json
+- build/reports/test-matrix.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

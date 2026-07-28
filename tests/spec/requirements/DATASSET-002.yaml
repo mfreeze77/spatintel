@@ -1,0 +1,31 @@
+schema_version: '1.0'
+requirement_id: DATASSET-002
+priority: P0
+source:
+  document: 50-data/508_asset_storage_content_addressing.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Multipart uploads shall record chunk hashes and be safely resumable.
+verification_method: Automated test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/assets.py
+- src/sip/database.py
+- src/sip/models.py
+automated_test_ids:
+- tests/unit/test_assets_policy.py::test_datasasset_002_multipart_chunks_are_hash_verified_idempotent_and_resumable
+- tests/unit/test_assets_policy.py::test_multipart_upload_records_verified_chunks_resumes_and_blocks_unverified_publication
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/unit.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

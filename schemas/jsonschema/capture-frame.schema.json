@@ -1,0 +1,104 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/capture-frame.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "camera_pose": {
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Camera Pose",
+      "type": "array"
+    },
+    "confidence_asset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confidence Asset Id"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "depth_asset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Depth Asset Id"
+    },
+    "exposure": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Exposure",
+      "type": "object"
+    },
+    "frame_id": {
+      "title": "Frame Id",
+      "type": "string"
+    },
+    "intrinsics": {
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Intrinsics",
+      "type": "array"
+    },
+    "quality": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Quality",
+      "type": "object"
+    },
+    "restricted_region_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Restricted Region Ids",
+      "type": "array"
+    },
+    "rgb_asset_id": {
+      "title": "Rgb Asset Id",
+      "type": "string"
+    },
+    "timestamp_ns": {
+      "minimum": 0,
+      "title": "Timestamp Ns",
+      "type": "integer"
+    },
+    "tracking_state": {
+      "title": "Tracking State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frame_id",
+    "timestamp_ns",
+    "coordinate_frame_id",
+    "rgb_asset_id",
+    "camera_pose",
+    "intrinsics",
+    "tracking_state"
+  ],
+  "title": "CaptureFrameContract",
+  "type": "object"
+}

@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "critical_infrastructure",
+        "biometric",
+        "minor"
+      ],
+      "title": "Classification",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/geometry-asset-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "audience_policy": {
+      "additionalProperties": true,
+      "title": "Audience Policy",
+      "type": "object"
+    },
+    "bounds": {
+      "additionalProperties": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Bounds",
+      "type": "object"
+    },
+    "classification": {
+      "$ref": "#/$defs/Classification"
+    },
+    "compression": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Compression",
+      "type": "object"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "minProperties": 1,
+      "title": "Counts",
+      "type": "object"
+    },
+    "exporter_compatibility": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exporter Compatibility",
+      "type": "array"
+    },
+    "format": {
+      "title": "Format",
+      "type": "string"
+    },
+    "format_version": {
+      "title": "Format Version",
+      "type": "string"
+    },
+    "geometry_manifest_id": {
+      "title": "Geometry Manifest Id",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "media_type": {
+      "title": "Media Type",
+      "type": "string"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "quality": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Quality",
+      "type": "object"
+    },
+    "rebuild_recipe": {
+      "additionalProperties": true,
+      "title": "Rebuild Recipe",
+      "type": "object"
+    },
+    "representation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Representation Id"
+    },
+    "source_run_id": {
+      "minLength": 1,
+      "title": "Source Run Id",
+      "type": "string"
+    },
+    "supersedes_manifest_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Manifest Id"
+    },
+    "truth_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Truth Label"
+    },
+    "units": {
+      "enum": [
+        "meter",
+        "millimeter"
+      ],
+      "title": "Units",
+      "type": "string"
+    },
+    "validation_state": {
+      "default": "pending",
+      "enum": [
+        "pending",
+        "valid",
+        "invalid",
+        "deprecated"
+      ],
+      "title": "Validation State",
+      "type": "string"
+    },
+    "viewer_compatibility": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Viewer Compatibility",
+      "type": "array"
+    },
+    "visual_content_classes": {
+      "items": {
+        "enum": [
+          "captured",
+          "corrected",
+          "reconstructed",
+          "inpainted",
+          "relit",
+          "generated",
+          "mixed"
+        ],
+        "type": "string"
+      },
+      "title": "Visual Content Classes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "geometry_manifest_id",
+    "asset_id",
+    "media_type",
+    "format",
+    "profile",
+    "format_version",
+    "coordinate_frame_id",
+    "units",
+    "bounds",
+    "counts",
+    "compression",
+    "content_sha256",
+    "source_run_id",
+    "quality",
+    "classification",
+    "manifest_hash"
+  ],
+  "title": "GeometryAssetManifestContract",
+  "type": "object"
+}

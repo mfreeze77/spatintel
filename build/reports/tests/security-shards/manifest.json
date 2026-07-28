@@ -1,0 +1,78 @@
+{
+  "schema": "sip.pytest-shard-manifest/v2",
+  "shard_jobs": 2,
+  "shards": [
+    {
+      "bootstrap_excluded_inputs": [],
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_tenant_isolation.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/security/shards/tests__security__test_tenant_isolation.xml"
+      ],
+      "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declared_generated_inputs": [],
+      "elapsed_seconds": 5.022491,
+      "exit_code": 0,
+      "input_sha256": "6b62e0063eb3a68e7823edf80cae75f8610f734551824627d1261cfa8ab5c9d6",
+      "junit_path": "tests__security__test_tenant_isolation.xml",
+      "junit_sha256": "503119039155a8c0c0028e50bfa60f432ae689190666569fd74a733af7c42e42",
+      "log_path": "tests__security__test_tenant_isolation.log",
+      "log_sha256": "b3ae31be6e4a8db7a6dc34a6435e6b00ad06346c7a88e3edfe15604cec7c473e",
+      "name": "tests__security__test_tenant_isolation",
+      "path": "tests/security/test_tenant_isolation.py",
+      "portable_command": [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_tenant_isolation.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/security-shards/tests__security__test_tenant_isolation.xml"
+      ],
+      "schema": "sip.pytest-shard-result/v2",
+      "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+      "status": "passed"
+    },
+    {
+      "bootstrap_excluded_inputs": [],
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_worker_sandbox.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/security/shards/tests__security__test_worker_sandbox.xml"
+      ],
+      "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declared_generated_inputs": [],
+      "elapsed_seconds": 3.512779,
+      "exit_code": 0,
+      "input_sha256": "adf059553fd7ac9e21ee2531be38c6a60357aa376b9e29348de45071529b33d8",
+      "junit_path": "tests__security__test_worker_sandbox.xml",
+      "junit_sha256": "61e56eef0645a55e42f06fdee2f0309aa9ad70048a6c28afedbde9507f77126e",
+      "log_path": "tests__security__test_worker_sandbox.log",
+      "log_sha256": "bfb94aa3bce5e5c9a8e413d4c0b8cbbecf5444cc553dd49310e15bc548c86a10",
+      "name": "tests__security__test_worker_sandbox",
+      "path": "tests/security/test_worker_sandbox.py",
+      "portable_command": [
+        "python",
+        "tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security/test_worker_sandbox.py",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=build/reports/tests/security-shards/tests__security__test_worker_sandbox.xml"
+      ],
+      "schema": "sip.pytest-shard-result/v2",
+      "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+      "status": "passed"
+    }
+  ],
+  "suite": "security",
+  "timeout_seconds_per_shard": 240
+}

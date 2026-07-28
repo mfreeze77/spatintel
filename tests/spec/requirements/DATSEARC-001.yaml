@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: DATSEARC-001
+priority: P0
+source:
+  document: 50-data/509_search_indexing.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Queries shall support tenant/project, entity type, spatial region, floor/room, time interval, source class, authority,
+  confidence, tags, workflow status, and full text.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/search.py
+- src/sip/spatial_query.py
+- src/sip/database.py
+- schemas/jsonschema/spatial-query.schema.json
+- migrations/versions/0009_authorized_spatial_search_and_agents.py
+automated_test_ids:
+- tests/contract/test_search_agent_api.py::test_api_search_filters_before_counts_snippets_and_vector_metadata
+- tests/integration/test_authorized_search_agents.py::test_pltsql_001_002_003_structured_spatial_temporal_graph_and_evidence_filters
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- schemas/openapi/search-service.openapi.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

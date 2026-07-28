@@ -1,0 +1,120 @@
+groups:
+  - name: sip-slo-recording
+    interval: 30s
+    rules:
+      - record: sip:http_requests:rate5m
+        expr: sum by (service) (rate(sip_http_requests_total[5m]))
+      - record: sip:http_errors:rate5m
+        expr: sum by (service) (rate(sip_http_requests_total{status=~"5.."}[5m]))
+      - record: sip:http_error_ratio:rate5m
+        expr: sip:http_errors:rate5m / clamp_min(sip:http_requests:rate5m, 0.001)
+      - record: sip:http_error_ratio:rate1h
+        expr: sum by (service) (rate(sip_http_requests_total{status=~"5.."}[1h])) / clamp_min(sum by (service) (rate(sip_http_requests_total[1h])), 0.001)
+      - record: sip:http_latency:p95_5m
+        expr: histogram_quantile(0.95, sum by (service, le) (rate(sip_http_request_duration_seconds_bucket[5m])))
+      - record: sip:http_availability:ratio30d
+        expr: 1 - (sum by (service) (rate(sip_http_requests_total{status=~"5.."}[30d])) / clamp_min(sum by (service) (rate(sip_http_requests_total[30d])), 0.001))
+      - record: sip:worker_failure_ratio:rate15m
+        expr: sum by (service, capability) (rate(sip_worker_runs_total{outcome=~"failed|deadline_exceeded"}[15m])) / clamp_min(sum by (service, capability) (rate(sip_worker_runs_total[15m])), 0.001)
+      - record: sip:worker_queue_wait:p95_15m
+        expr: histogram_quantile(0.95, sum by (service, capability, le) (rate(sip_worker_queue_wait_seconds_bucket[15m])))
+      - record: sip:reconstruction_drift:p95_1h
+        expr: histogram_quantile(0.95, sum by (service, capability, capture_profile, le) (rate(sip_reconstruction_drift_ratio_bucket[1h])))
+      - record: sip:reconstruction_coverage:p50_1h
+        expr: histogram_quantile(0.50, sum by (service, capability, capture_profile, le) (rate(sip_reconstruction_coverage_ratio_bucket[1h])))
+      - record: sip:reconstruction_residual:p95_1h
+        expr: histogram_quantile(0.95, sum by (service, capability, capture_profile, le) (rate(sip_reconstruction_residual_meters_bucket[1h])))
+      - record: sip:reconstruction_confidence:p50_1h
+        expr: histogram_quantile(0.50, sum by (service, capability, capture_profile, le) (rate(sip_reconstruction_confidence_ratio_bucket[1h])))
+      - record: sip:reconstruction_quality_delta:p50_1h
+        expr: histogram_quantile(0.50, sum by (service, capability, capture_profile, le) (rate(sip_reconstruction_quality_delta_ratio_bucket[1h])))
+
+  - name: sip-slo-alerts
+    interval: 30s
+    rules:
+      - alert: SIPHighErrorBudgetBurnFast
+        expr: sip:http_error_ratio:rate5m > (14.4 * 0.001) and sip:http_error_ratio:rate1h > (14.4 * 0.001)
+        for: 2m
+        labels:
+          severity: page
+          slo: availability
+        annotations:
+          summary: SIP service is rapidly exhausting its 99.9% availability error budget
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#high-error-budget-burn
+      - alert: SIPHighErrorBudgetBurnSlow
+        expr: (sum by (service) (rate(sip_http_requests_total{status=~"5.."}[6h])) / clamp_min(sum by (service) (rate(sip_http_requests_total[6h])), 0.001)) > (6 * 0.001)
+        for: 30m
+        labels:
+          severity: ticket
+          slo: availability
+        annotations:
+          summary: SIP service is steadily exhausting its availability error budget
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#high-error-budget-burn
+      - alert: SIPLatencyP95High
+        expr: sip:http_latency:p95_5m > 1
+        for: 10m
+        labels:
+          severity: ticket
+          slo: latency
+        annotations:
+          summary: SIP API p95 latency exceeds one second
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#high-latency
+      - alert: SIPReadinessFailures
+        expr: increase(sip_readiness_failures_total[10m]) > 2
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: SIP workload repeatedly failed a dependency readiness probe
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#readiness-failures
+      - alert: SIPUnhandledErrors
+        expr: increase(sip_errors_total{outcome="unhandled_error"}[10m]) > 0
+        for: 1m
+        labels:
+          severity: ticket
+        annotations:
+          summary: SIP encountered an unhandled application exception
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#unhandled-errors
+      - alert: SIPWorkerFailureRatioHigh
+        expr: sip:worker_failure_ratio:rate15m > 0.05
+        for: 10m
+        labels:
+          severity: ticket
+        annotations:
+          summary: A SIP worker capability has exceeded a five percent failure ratio
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#worker-failures
+      - alert: SIPWorkerQueueWaitHigh
+        expr: sip:worker_queue_wait:p95_15m > 300
+        for: 15m
+        labels:
+          severity: ticket
+        annotations:
+          summary: A SIP worker queue has a p95 wait above five minutes
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#worker-queue-delay
+      - alert: SIPReconstructionDriftHigh
+        expr: sip:reconstruction_drift:p95_1h > 0.05
+        for: 15m
+        labels:
+          severity: ticket
+          quality_gate: reconstruction
+        annotations:
+          summary: Reconstruction drift exceeded the default review threshold
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#quality-regression
+      - alert: SIPReconstructionCoverageLow
+        expr: sip:reconstruction_coverage:p50_1h < 0.80
+        for: 15m
+        labels:
+          severity: ticket
+          quality_gate: reconstruction
+        annotations:
+          summary: Median reconstruction coverage dropped below eighty percent
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#quality-regression
+      - alert: SIPReconstructionFailedRegions
+        expr: max by (service, capability, capture_profile) (sip_reconstruction_failed_regions) > 0
+        for: 10m
+        labels:
+          severity: ticket
+          quality_gate: reconstruction
+        annotations:
+          summary: Reconstruction validation reports failed scene regions
+          runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#quality-regression

@@ -1,0 +1,8 @@
+{
+  "aad_sha256": "50f18ee7c4db69a23c6210ea818cd909f80fae29521f058ae493872bd1150c3b",
+  "algorithm": "AES-256-GCM",
+  "content_nonce_b64": "/pBQDNvJy8AzJHQ0",
+  "key_id": "test-master-v1",
+  "wrap_nonce_b64": "14WZkuhE2RXbQ80f",
+  "wrapped_key_b64": "vcr4wLCJ0wcq/M0UkwUcoBDTkZdwRAmdkeAMpVneUDZPcgBsRgKDiGJQGtR8jRiC"
+}

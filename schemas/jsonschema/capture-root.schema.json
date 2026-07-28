@@ -1,0 +1,482 @@
+{
+  "$defs": {
+    "CaptureAssetContract": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "byte_count": {
+          "minimum": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "encryption": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Encryption"
+        },
+        "immutable": {
+          "default": true,
+          "title": "Immutable",
+          "type": "boolean"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "relative_path": {
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "byte_count",
+        "media_type",
+        "asset_id",
+        "relative_path",
+        "role"
+      ],
+      "title": "CaptureAssetContract",
+      "type": "object"
+    },
+    "CaptureFrameContract": {
+      "additionalProperties": false,
+      "properties": {
+        "camera_pose": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Camera Pose",
+          "type": "array"
+        },
+        "confidence_asset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence Asset Id"
+        },
+        "coordinate_frame_id": {
+          "title": "Coordinate Frame Id",
+          "type": "string"
+        },
+        "depth_asset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth Asset Id"
+        },
+        "exposure": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Exposure",
+          "type": "object"
+        },
+        "frame_id": {
+          "title": "Frame Id",
+          "type": "string"
+        },
+        "intrinsics": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Intrinsics",
+          "type": "array"
+        },
+        "quality": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Quality",
+          "type": "object"
+        },
+        "restricted_region_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Restricted Region Ids",
+          "type": "array"
+        },
+        "rgb_asset_id": {
+          "title": "Rgb Asset Id",
+          "type": "string"
+        },
+        "timestamp_ns": {
+          "minimum": 0,
+          "title": "Timestamp Ns",
+          "type": "integer"
+        },
+        "tracking_state": {
+          "title": "Tracking State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "frame_id",
+        "timestamp_ns",
+        "coordinate_frame_id",
+        "rgb_asset_id",
+        "camera_pose",
+        "intrinsics",
+        "tracking_state"
+      ],
+      "title": "CaptureFrameContract",
+      "type": "object"
+    },
+    "CoordinateFrameContract": {
+      "additionalProperties": false,
+      "properties": {
+        "axis_convention": {
+          "default": "right_handed_y_up",
+          "title": "Axis Convention",
+          "type": "string"
+        },
+        "axis_directions": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 3,
+          "title": "Axis Directions",
+          "type": "object"
+        },
+        "convention": {
+          "enum": [
+            "right_handed_y_up_meters",
+            "right_handed_z_up_meters",
+            "source_native"
+          ],
+          "title": "Convention",
+          "type": "string"
+        },
+        "crs_identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Crs Identifier"
+        },
+        "frame_id": {
+          "title": "Frame Id",
+          "type": "string"
+        },
+        "geodetic": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Geodetic"
+        },
+        "gravity_alignment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gravity Alignment"
+        },
+        "handedness": {
+          "default": "right",
+          "enum": [
+            "right",
+            "left"
+          ],
+          "title": "Handedness",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "origin_description": {
+          "default": "capture_session_origin",
+          "title": "Origin Description",
+          "type": "string"
+        },
+        "original_unit_scale_to_meters": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Original Unit Scale To Meters"
+        },
+        "original_units": {
+          "default": "meter",
+          "title": "Original Units",
+          "type": "string"
+        },
+        "parent_frame_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Frame Id"
+        },
+        "semantic_type": {
+          "default": "local_cartesian",
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Semantic Type",
+          "type": "string"
+        },
+        "source": {
+          "default": "platform",
+          "title": "Source",
+          "type": "string"
+        },
+        "supersedes_frame_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Frame Id"
+        },
+        "transform_to_parent": {
+          "anyOf": [
+            {
+              "items": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transform To Parent"
+        },
+        "uncertainty_m": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uncertainty M"
+        },
+        "unit_scale_to_meters": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit Scale To Meters"
+        },
+        "units": {
+          "default": "meter",
+          "enum": [
+            "meter",
+            "millimeter"
+          ],
+          "title": "Units",
+          "type": "string"
+        },
+        "vertical_datum": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vertical Datum"
+        }
+      },
+      "required": [
+        "frame_id",
+        "convention",
+        "axis_directions"
+      ],
+      "title": "CoordinateFrameContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/capture-root.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/CaptureAssetContract"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "capture_profile": {
+      "title": "Capture Profile",
+      "type": "string"
+    },
+    "coordinate_frames": {
+      "items": {
+        "$ref": "#/$defs/CoordinateFrameContract"
+      },
+      "minItems": 1,
+      "title": "Coordinate Frames",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "frames": {
+      "items": {
+        "$ref": "#/$defs/CaptureFrameContract"
+      },
+      "title": "Frames",
+      "type": "array"
+    },
+    "journal_root_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Journal Root Hash"
+    },
+    "merkle_root": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Merkle Root",
+      "type": "string"
+    },
+    "native_source_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Native Source Hash"
+    },
+    "package_id": {
+      "title": "Package Id",
+      "type": "string"
+    },
+    "policy": {
+      "additionalProperties": true,
+      "title": "Policy",
+      "type": "object"
+    },
+    "schema": {
+      "const": "sip.cscp",
+      "default": "sip.cscp",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "1.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_adapter": {
+      "title": "Source Adapter",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "created_at",
+    "capture_profile",
+    "source_adapter",
+    "coordinate_frames",
+    "assets",
+    "frames",
+    "policy",
+    "merkle_root"
+  ],
+  "title": "CaptureRootContract",
+  "type": "object"
+}

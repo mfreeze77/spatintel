@@ -1,0 +1,124 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/intended-use-validation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "behavior_validation": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Behavior Validation",
+      "type": "object"
+    },
+    "candidate_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Snapshot Hash",
+      "type": "string"
+    },
+    "conversion_id": {
+      "title": "Conversion Id",
+      "type": "string"
+    },
+    "coordinate_validation": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Coordinate Validation",
+      "type": "object"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "intended_use": {
+      "title": "Intended Use",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "profile_id": {
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "profile_version": {
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "representation_id": {
+      "title": "Representation Id",
+      "type": "string"
+    },
+    "thresholds": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Thresholds",
+      "type": "object"
+    },
+    "topology": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Topology",
+      "type": "object"
+    },
+    "validation_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Validation Hash",
+      "type": "string"
+    },
+    "validation_id": {
+      "title": "Validation Id",
+      "type": "string"
+    },
+    "validator_id": {
+      "title": "Validator Id",
+      "type": "string"
+    },
+    "validator_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Validator Manifest Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "validation_id",
+    "conversion_id",
+    "representation_id",
+    "intended_use",
+    "profile_id",
+    "profile_version",
+    "validator_id",
+    "validator_manifest_hash",
+    "metrics",
+    "thresholds",
+    "coverage",
+    "topology",
+    "coordinate_validation",
+    "behavior_validation",
+    "passed",
+    "candidate_snapshot_hash",
+    "policy_snapshot_hash",
+    "validation_hash"
+  ],
+  "title": "IntendedUseValidationContract",
+  "type": "object"
+}

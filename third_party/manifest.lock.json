@@ -1,0 +1,374 @@
+{
+  "approval_policy": "deny_by_default_exact_hash_purpose_classification_region_retention",
+  "container_images": [
+    {
+      "digest": "sha256:6ac590e7cabc2fbe8d7b8fc1ce9c9f0582177b334e0df9c927ebd9670469440f",
+      "ecosystem": "oci",
+      "name": "grafana/grafana:12.1.0"
+    },
+    {
+      "digest": "sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e",
+      "ecosystem": "oci",
+      "name": "minio/minio:RELEASE.2025-09-07T16-13-09Z"
+    },
+    {
+      "digest": "sha256:e448b3c73de52e379d85875c3441faf499e470ef91e775439e7937bca67e9c4f",
+      "ecosystem": "oci",
+      "name": "otel/opentelemetry-collector:0.140.1"
+    },
+    {
+      "digest": "sha256:f248a10d133f63d01aefab324f3462d7e1002e9cc1b65c6585626f6cb7a3d85c",
+      "ecosystem": "oci",
+      "name": "postgis/postgis:18-3.6"
+    },
+    {
+      "digest": "sha256:ddc2493835a1509976d5e4e0c94199c4f843ce1f42dd6bcfc8231ba734a93ff7",
+      "ecosystem": "oci",
+      "name": "prom/prometheus:v3.5.3"
+    },
+    {
+      "digest": "sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328",
+      "ecosystem": "oci",
+      "name": "valkey/valkey:9.1.1-alpine3.24"
+    }
+  ],
+  "dependencies": [
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "mypy",
+      "version": "1.19.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "pytest-asyncio",
+      "version": "1.3.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "pytest-cov",
+      "version": "7.0.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "pytest",
+      "version": "9.0.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "ruff",
+      "version": "0.14.14"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "dev",
+      "name": "types-jsonschema",
+      "version": "4.26.0.20260130"
+    },
+    {
+      "ecosystem": "pypi",
+      "extras": "binary",
+      "group": "postgres",
+      "name": "psycopg",
+      "version": "3.3.3"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "redis",
+      "name": "redis",
+      "version": "7.1.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "alembic",
+      "version": "1.18.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "boto3",
+      "version": "1.43.18"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "cryptography",
+      "version": "46.0.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "fastapi",
+      "version": "0.128.2"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "httpx",
+      "version": "0.28.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "numpy",
+      "version": "2.3.5"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "orjson",
+      "version": "3.11.9"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "prometheus-client",
+      "version": "0.25.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "pydantic",
+      "version": "2.13.4"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "scipy",
+      "version": "1.17.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "sqlalchemy",
+      "version": "2.0.50"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "runtime",
+      "name": "uvicorn",
+      "version": "0.48.0"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "telemetry",
+      "name": "opentelemetry-api",
+      "version": "1.39.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "telemetry",
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "version": "1.39.1"
+    },
+    {
+      "ecosystem": "pypi",
+      "group": "telemetry",
+      "name": "opentelemetry-sdk",
+      "version": "1.39.1"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "toolchain",
+      "name": "pnpm",
+      "version": "10.28.2"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "dependencies",
+      "name": "next",
+      "version": "16.2.11"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "dependencies",
+      "name": "react",
+      "version": "19.2.8"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "dependencies",
+      "name": "react-dom",
+      "version": "19.2.8"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "dependencies",
+      "name": "three",
+      "version": "0.185.1"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "@types/node",
+      "version": "24.10.1"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "@types/react",
+      "version": "19.2.17"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "@types/react-dom",
+      "version": "19.2.3"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "@types/three",
+      "version": "0.185.1"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "eslint",
+      "version": "10.7.0"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "eslint-config-next",
+      "version": "16.2.11"
+    },
+    {
+      "ecosystem": "npm",
+      "group": "devDependencies",
+      "name": "typescript",
+      "version": "6.0.3"
+    }
+  ],
+  "governance_manifests": [
+    {
+      "approval_state": "recorded",
+      "identity": "source-lock",
+      "license": null,
+      "path": "third_party/sources/source-lock.json",
+      "runtime_download": false,
+      "schema": "sip.third-party-sources/v1",
+      "sha256": "7ab06012c45abc05b5d608d678cfe27b7a077aee14065a1a151a2689ebaf4635",
+      "source_revision": null
+    },
+    {
+      "approval_state": "denied",
+      "identity": "lingbot-map-checkpoint",
+      "license": "Apache-2.0",
+      "path": "third_party/models/lingbot-map-checkpoint.json",
+      "runtime_download": false,
+      "schema": "sip.model-manifest/v1",
+      "sha256": "c5086ee12852d49f809d5fa611b960494ac08055345e1b10772b26e09c066e8e",
+      "source_revision": "1f480aeb8a47a24656090d46d053115b7fe60435"
+    },
+    {
+      "approval_state": "denied",
+      "identity": "mesh2splat",
+      "license": "UNKNOWN",
+      "path": "third_party/providers/mesh2splat.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "8b1406f9bc5fee4b404b95c779fe8ec5810b2b64fa62d80f029d5138d44b94e0",
+      "source_revision": "UNRESOLVED"
+    },
+    {
+      "approval_state": "denied",
+      "identity": "playcanvas-splattransform",
+      "license": "UNKNOWN",
+      "path": "third_party/providers/playcanvas-splattransform.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "8315f90ba9f9ff489fe3203487a6565f8fff1075ac185587a3cd84a231ed0326",
+      "source_revision": "UNRESOLVED"
+    },
+    {
+      "approval_state": "denied",
+      "identity": "research-extractors",
+      "license": "UNKNOWN",
+      "path": "third_party/providers/research-extractors.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "f9d2463f7709241850634505d88a8367585c4083d88a80d29a7308be7c7606b6",
+      "source_revision": "UNRESOLVED"
+    },
+    {
+      "approval_state": "approved",
+      "identity": "sip-reference-local",
+      "license": "Apache-2.0",
+      "path": "third_party/providers/sip-reference-local.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "2945988b01429675ab2c2a8d26a7940ae213bc0387ec43b4d2f4ea456715c8e2",
+      "source_revision": "WORKTREE"
+    },
+    {
+      "approval_state": "denied",
+      "identity": "spark",
+      "license": "UNKNOWN",
+      "path": "third_party/providers/spark.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "03fbf16070ae55222272b8d15f4376158ef32a4336f48b7d840cc0bf51d67915",
+      "source_revision": "UNRESOLVED"
+    },
+    {
+      "approval_state": "denied",
+      "identity": "splatedit",
+      "license": "UNKNOWN",
+      "path": "third_party/providers/splatedit.json",
+      "runtime_download": false,
+      "schema": "sip.provider-manifest/v1",
+      "sha256": "75b440c1d7cb56a6d8aaf2c3d70f69d954de6dc351b269ffb54e00550fc677a6",
+      "source_revision": "UNRESOLVED"
+    },
+    {
+      "approval_state": "approved",
+      "identity": "sip-deterministic-synthetic-fixtures",
+      "license": "Apache-2.0",
+      "path": "third_party/data/synthetic-fixtures.json",
+      "runtime_download": false,
+      "schema": "sip.dataset-manifest/v1",
+      "sha256": "083e7e7d27037027a4c0c3fd438d67e40e445175421cc49fcc17c6789cfafc84",
+      "source_revision": null
+    }
+  ],
+  "imported_sources": [
+    {
+      "build_image": "adapters/lingbot-map/Dockerfile",
+      "license": "Apache-2.0",
+      "license_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "model_dataset_relationship": "checkpoint governed independently by third_party/models/lingbot-map-checkpoint.json",
+      "name": "lingbot-map",
+      "patches": [],
+      "repository": "https://github.com/Robbyant/lingbot-map",
+      "revision": "1f480aeb8a47a24656090d46d053115b7fe60435",
+      "runtime_state": "source_adapter_approved_checkpoint_denied"
+    },
+    {
+      "build_image": "none-format-reference",
+      "license": "MIT",
+      "license_blob_sha": "6a1707a4a3924f24c087329b72fba5b7d88913c5",
+      "model_dataset_relationship": "none; published export-format reference only",
+      "name": "polyform",
+      "patches": [],
+      "repository": "https://github.com/PolyCam/polyform",
+      "revision": "ad0111832d3b3860e60efd8928e76f4fe97c8b72",
+      "runtime_state": "format_reference_only_no_runtime_dependency"
+    }
+  ],
+  "lock_root_sha256": "84bc4a0e0c3c16363a3dee0e6ecbaed105eba2aaa9f9157de203e4a9241990b2",
+  "runtime_downloads_allowed": false,
+  "schema": "sip.third-party-manifest-lock/v1",
+  "specification_version": "1.1.0"
+}

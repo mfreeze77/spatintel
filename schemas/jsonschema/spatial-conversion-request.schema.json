@@ -1,0 +1,176 @@
+{
+  "$defs": {
+    "SpatialConversionAssetContract": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "coordinate_frame_id": {
+          "title": "Coordinate Frame Id",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^(sha256:)?[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "use": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Use"
+        }
+      },
+      "required": [
+        "asset_id",
+        "role",
+        "sha256",
+        "coordinate_frame_id"
+      ],
+      "title": "SpatialConversionAssetContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/spatial-conversion-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "constraints": {
+      "additionalProperties": true,
+      "title": "Constraints",
+      "type": "object"
+    },
+    "idempotency_key": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "operation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Operation Id"
+    },
+    "output_roles": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Roles",
+      "type": "array"
+    },
+    "policy_context": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Policy Context",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "provider_selector": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Provider Selector",
+      "type": "object"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "reference_assets": {
+      "items": {
+        "$ref": "#/$defs/SpatialConversionAssetContract"
+      },
+      "title": "Reference Assets",
+      "type": "array"
+    },
+    "request_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Request Hash"
+    },
+    "requested_by": {
+      "title": "Requested By",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "scene_revision_id": {
+      "title": "Scene Revision Id",
+      "type": "string"
+    },
+    "schema": {
+      "const": "sip.spatial-conversion.request/1.1",
+      "default": "sip.spatial-conversion.request/1.1",
+      "title": "Schema",
+      "type": "string"
+    },
+    "source_assets": {
+      "items": {
+        "$ref": "#/$defs/SpatialConversionAssetContract"
+      },
+      "minItems": 1,
+      "title": "Source Assets",
+      "type": "array"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "project_id",
+    "scene_id",
+    "scene_revision_id",
+    "purpose",
+    "intended_uses",
+    "output_roles",
+    "source_assets",
+    "policy_context",
+    "provider_selector",
+    "requested_by",
+    "idempotency_key"
+  ],
+  "title": "SpatialConversionRequestContract",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "cleanup_verified": true,
+      "code": "PROVIDER_OOM",
+      "expected_state": "failed_retryable",
+      "retryable": true
+    },
+    {
+      "cleanup_verified": true,
+      "code": "PROVIDER_INVALID_OUTPUT",
+      "expected_state": "failed_terminal",
+      "retryable": false
+    },
+    {
+      "cleanup_verified": false,
+      "code": "PROVIDER_CLEANUP_FAILED",
+      "expected_state": "cleanup_quarantined",
+      "retryable": false
+    },
+    {
+      "code": "DUPLICATE_MESSAGE",
+      "expected": "idempotent_replay_or_conflict_on_payload_change"
+    },
+    {
+      "code": "CANCELLED",
+      "expected": "no_publication_and_durable_audit"
+    }
+  ]
+}

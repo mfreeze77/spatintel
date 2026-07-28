@@ -1,0 +1,35 @@
+schema_version: '1.0'
+requirement_id: PLTSDK-003
+priority: P0
+source:
+  document: 60-platform/610_plugin_sdk.md
+  line: 38
+  section: 4. Normative requirements
+requirement: Runtime shall enforce CPU/GPU/memory/time/network/filesystem limits.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/worker_manifest.py
+- src/sip/worker_sandbox.py
+- src/sip/worker_runtime.py
+- workers
+- infrastructure/kubernetes/base/deployments
+automated_test_ids:
+- tests/contract/test_generated_contracts.py::test_worker_contracts_are_exposed_in_protobuf_typescript_and_python
+- tests/contract/test_worker_manifests.py::test_worker_manifests_are_immutable_least_privilege_and_cover_registry
+- tests/security/test_worker_sandbox.py::test_worker_sandbox_denies_network_and_shell_but_allows_trusted_control_io
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/security.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

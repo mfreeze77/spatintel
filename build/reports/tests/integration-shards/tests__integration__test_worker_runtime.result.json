@@ -1,0 +1,35 @@
+{
+  "bootstrap_excluded_inputs": [],
+  "command": [
+    "/opt/pyvenv/bin/python",
+    "/mnt/data/sip-authoritative-work/tools/run_pytest_isolated.py",
+    "-q",
+    "tests/integration/test_worker_runtime.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=/mnt/data/sip-authoritative-work/build/locks/test-matrix/staging/integration/shards/tests__integration__test_worker_runtime.xml"
+  ],
+  "declared_generated_input_root_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "declared_generated_inputs": [],
+  "elapsed_seconds": 9.495891,
+  "exit_code": 0,
+  "input_sha256": "55a830e741a5af04dea0630e1846fbf2a673db314cab44b0e21ed159aa5bcc3a",
+  "junit_path": "build/reports/tests/integration-shards/tests__integration__test_worker_runtime.xml",
+  "junit_sha256": "ca3ad5427fc92331fca2093d2924d5900d3b02b15518f3c47c47d7e324e54e97",
+  "log_path": "build/reports/tests/integration-shards/tests__integration__test_worker_runtime.log",
+  "log_sha256": "49ca8a8a90ebe115f30c81950ea5e6faec6d6477bc6ad9cdd647f01a4140308c",
+  "name": "tests__integration__test_worker_runtime",
+  "path": "tests/integration/test_worker_runtime.py",
+  "portable_command": [
+    "python",
+    "tools/run_pytest_isolated.py",
+    "-q",
+    "tests/integration/test_worker_runtime.py",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=build/reports/tests/integration-shards/tests__integration__test_worker_runtime.xml"
+  ],
+  "schema": "sip.pytest-shard-result/v2",
+  "source_tree_root_sha256": "afbad174ba76e5dbd3ea121b1ff5a5e582cfc274780c323b1a0a158c614e4346",
+  "status": "passed"
+}

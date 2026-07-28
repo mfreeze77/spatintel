@@ -1,0 +1,429 @@
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/run_demo.py liveforever
+{
+  "artifacts": [
+    {
+      "bytes": 672,
+      "path": "editions/after-revocation.json",
+      "sha256": "9fe116c3a90b2581037d8c492ee6747034dbd21d0e45837586cebdba9e10d610"
+    },
+    {
+      "bytes": 4310,
+      "path": "editions/family-before.json",
+      "sha256": "e6168118d8dee08ef37a9a98f885f596378dca849205d32424e605e8d3301997"
+    },
+    {
+      "bytes": 4994,
+      "path": "editions/private-before.json",
+      "sha256": "e7d85c5c96801c973c56db5103d61b6a4b9c465d81f7b4a1a08b4a4bbb081409"
+    },
+    {
+      "bytes": 648,
+      "path": "editions/public-before.json",
+      "sha256": "edf32e10eec56a7878cc4ae40324c5dedca2d724fe71d5f6210883fee8aa1723"
+    },
+    {
+      "bytes": 11124,
+      "path": "preservation.sip-preservation.zip",
+      "sha256": "db9330ec199fc31232a6e87f6a47880aeebe9ece08dbe3662f44e3621467267f"
+    },
+    {
+      "bytes": 64,
+      "path": "restore-runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.enc",
+      "sha256": "359bf6f437a5f785c9d112b0b535b67f9efcaf50d2377830fa2196493216db36"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.meta.json",
+      "sha256": "dd37f235bd8dcac9bdd758cd2c55e20e82360d37ea9eaec1dff37c4e287f9223"
+    },
+    {
+      "bytes": 61,
+      "path": "restore-runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.enc",
+      "sha256": "bc306211cf3322a944da4178b08b7db9d6ce898826453e19e6013953a74ea84c"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.meta.json",
+      "sha256": "28145e1742ff4214ad565f8b46d67a862571c2ad3996bda0d621312d97c5d99a"
+    },
+    {
+      "bytes": 76,
+      "path": "restore-runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.enc",
+      "sha256": "735efcc746da5ba84a909e5f55665097e3ed0985f5aa7231aa7fe7c721351607"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.meta.json",
+      "sha256": "5f8f49618e47064cf69ba3e7a038aad7b82bc30e54a50e2102b3ac4234c25785"
+    },
+    {
+      "bytes": 43,
+      "path": "restore-runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.enc",
+      "sha256": "4f07d034a6de22b68b345f183f3163b7cbe2d2931fbb6392317101e436ab80af"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.meta.json",
+      "sha256": "f5b5926ad0de2daba49c090f57f1c33082162cdfb0ceed98032b047ceed570bd"
+    },
+    {
+      "bytes": 63,
+      "path": "restore-runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.enc",
+      "sha256": "ff9800b090c2998f44eca2909def101c8e76ccc3dd21bcbc7317b34534fc18f4"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.meta.json",
+      "sha256": "d9b7f48ae66db564e556f8723e7d975e4ea8da6c772304991a37bcd25c057692"
+    },
+    {
+      "bytes": 57,
+      "path": "restore-runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.enc",
+      "sha256": "bb9ec3644192ac4c338d0b4ee99f2f9f679170eefaeecb97cca2f86426c2448a"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.meta.json",
+      "sha256": "a86a23d70d064399c71c7674ae6438b09a8859c4a181e539ae2a18a38c3bbd4a"
+    },
+    {
+      "bytes": 51,
+      "path": "restore-runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.enc",
+      "sha256": "3a1785e43c0d263605e279a77908e4fd2c779b70803d82c5ca12b0b843673042"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.meta.json",
+      "sha256": "d49c67c12dafbc540aaf27f3b6dce58d4c6526c0214a20585d68e9d11818569d"
+    },
+    {
+      "bytes": 11140,
+      "path": "restore-runtime/objects/db/93/db9330ec199fc31232a6e87f6a47880aeebe9ece08dbe3662f44e3621467267f.enc",
+      "sha256": "dc6352832b806aec710af581ffb864d1c92dd083045289a70c2a746f156509e8"
+    },
+    {
+      "bytes": 319,
+      "path": "restore-runtime/objects/db/93/db9330ec199fc31232a6e87f6a47880aeebe9ece08dbe3662f44e3621467267f.meta.json",
+      "sha256": "469133c46571be84fbfa6ea4a4dbf9a8df4e291a554cf5bfee15a1e6eddab6eb"
+    },
+    {
+      "bytes": 1634304,
+      "path": "restore-runtime/sip.sqlite3",
+      "sha256": "b0ccde82a46d3c70cfde43c4e7fc7a706f3cd95463b086d6f0a97083415944bf"
+    },
+    {
+      "bytes": 64,
+      "path": "runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.enc",
+      "sha256": "4236a22087bb777c7520a0fc17a50856a5374afce52b002d472a6adff8288d5c"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/18/44/184478817d8678a59f5515274f5e1eaca3945977ac14817257bf7bd7f89d5268.meta.json",
+      "sha256": "88dd09205250ea3ca3b2d7abc9ceba66362c6686fe13fe6dcfcee68ebd075aad"
+    },
+    {
+      "bytes": 61,
+      "path": "runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.enc",
+      "sha256": "cdb48ed3e5cabb8cbcc17b7f6bbb5e58466b14a032f7e831249aa9c37c200b86"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/3e/56/3e5641fce5a1cc17881cf475d8e4e986b8ee710f34d769cd0b34dfbd82437d9a.meta.json",
+      "sha256": "d083fc5c945127095facc99ea9d3f17445df312d5c84ccb982a90611fb84b932"
+    },
+    {
+      "bytes": 76,
+      "path": "runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.enc",
+      "sha256": "6b3b985eca04a9b163f3e3a99220b9142b9ebae2befbfbe9c53bc6cde42b3e21"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/45/46/45469fd4298ade4cb2d66f0b86dfd2210181d4183c391ec1bf3dfcb97c2fed3a.meta.json",
+      "sha256": "b7a3c9acd065d732089fc67b7731c171db6816566806fad0ad9b44e2c2cd342a"
+    },
+    {
+      "bytes": 43,
+      "path": "runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.enc",
+      "sha256": "3e966ee670b68e3a0fe2fa303b7f91935370574ab7348ea8ac587f9a55e84380"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/6b/8e/6b8e627cde0c97654f5bf1342285f1329b05d15f7b7956a602504bbe03e7fe1e.meta.json",
+      "sha256": "e56cf9d9be7e51bec71f6a06a602ec548067fe637aa17d0171501f9487d5d744"
+    },
+    {
+      "bytes": 63,
+      "path": "runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.enc",
+      "sha256": "8750257b06c83e328ea8d49beb1c28715c4162280ee53ebd7705a2b92281d669"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/7d/81/7d8163d7c1e1662dfb22eb81c414d45fe257accb5cbd099192f18fb4db6a8d75.meta.json",
+      "sha256": "f9e087df7a2b5656eeb2de24c0554c4763d327edb69c5d0c310750e6777e87f6"
+    },
+    {
+      "bytes": 57,
+      "path": "runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.enc",
+      "sha256": "acd36071e9f3309110cb269e75b855e29967de5ffae45425aa74759b4f189625"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/85/5f/855ffd6b8e99dcd58d5e4f9a885d7a1a77545479cb2b46bb719cfcf57b9ea776.meta.json",
+      "sha256": "20f40fd49929545fae39be507656399d0698ba0f3f3feb491b6c345897f7faa8"
+    },
+    {
+      "bytes": 51,
+      "path": "runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.enc",
+      "sha256": "5d455c3fd7022c91415cd4c008a0e4788e591198911ca35e4f8971334aaf0af3"
+    },
+    {
+      "bytes": 319,
+      "path": "runtime/objects/d3/a4/d3a47ad7d5e9aa1c346114a79947f99dc21ddd3a82939811d78870c3ebe5ef52.meta.json",
+      "sha256": "be4adb878c43c22793fdd37c1edc778d6c9190794ee4cf9cb3c35673b048ebef"
+    },
+    {
+      "bytes": 1638400,
+      "path": "runtime/sip.sqlite3",
+      "sha256": "30960ea8183b6e2585ead33271cdfc5b57bad3c766795d503e600f3996dee64d"
+    }
+  ],
+  "canonical_scenario": "liveforever",
+  "claims": "Synthetic acceptance evidence only; this is not a customer pilot, physical-device validation, survey, legal approval, or production-load result.",
+  "demonstration": "liveforever",
+  "environment": {
+    "git": {
+      "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+      "dirty_paths": 265,
+      "working_tree_clean": false
+    },
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "error": null,
+  "evidence_hash": "d43ca2de83a6e75f711b777582c163e205937f7a92105885cece513088725c3a",
+  "finished_at": "2026-07-27T23:58:14.983844+00:00",
+  "result": {
+    "acceptance": {
+      "audiences_separated": true,
+      "conflicts_preserved": true,
+      "generated_content_labeled": true,
+      "open_restore": true,
+      "quiet_mode": true,
+      "revocation_propagated": true,
+      "safe_exit": true
+    },
+    "audience_counts_before": {
+      "family": 6,
+      "private": 7,
+      "public": 1
+    },
+    "consent": {
+      "derivative_access_after": {
+        "family": 0,
+        "private": 0,
+        "public": 0
+      },
+      "grant_id": "3dbde980-effa-4c27-99b4-f9278773fd1b",
+      "revocation": {
+        "affected_records": 7,
+        "grant_id": "3dbde980-effa-4c27-99b4-f9278773fd1b",
+        "state": "revoked"
+      }
+    },
+    "evidence_assets": {
+      "family-photo.jpg": "9df4fceb-0832-4e88-8626-5e3bf1f868a8",
+      "generated-kitchen.png": "d0a2dc12-d305-4430-8aea-0854fc75ba87",
+      "interview-a.txt": "63f3d133-4f10-44c8-bdc6-d7b9d2cf2745",
+      "interview-b.txt": "4e38d637-ca14-4a62-96eb-3086fbc2614e",
+      "letter.txt": "80c3a12d-a626-4dca-891c-c0fa70397ec1",
+      "recording.wav": "55b99269-cece-4d0b-9d82-efd7380fd73d",
+      "transcript.vtt": "0123b8ff-292a-4217-be9c-f42d18876fc3"
+    },
+    "experience": {
+      "captions_required": true,
+      "features": {
+        "autonomous_persona": false,
+        "first_person_dialogue": false,
+        "free_locomotion": false,
+        "likeness_simulation": false,
+        "pause": true,
+        "quiet_mode": true,
+        "reset": true,
+        "safe_exit": true,
+        "voice_simulation": false
+      },
+      "generated_presence_label": null,
+      "reduced_motion_supported": true,
+      "safe_exit_persistent": true,
+      "subject_id": "person-alex-synthetic"
+    },
+    "generated_label": "AI-GENERATED RECONSTRUCTION \u2014 NOT A HISTORICAL FACT",
+    "presence_simulation_blocked": true,
+    "preservation": {
+      "independent_runtime": "/mnt/data/sip-hybrid-work/runtime/demo/liveforever/restore-runtime",
+      "matching_root_hash": true,
+      "operational_replay": {
+        "counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 1,
+          "construction_records": 0,
+          "coordinate_frames": 0,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 7,
+          "representation_bindings": 0,
+          "representations": 0,
+          "retention_rules": 0,
+          "scene_branches": 0,
+          "scene_commits": 0,
+          "scene_entities": 0,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "matches_package": true,
+        "vertical_validation": {
+          "domain_service_query_passed": true,
+          "family_edition_records_after_revocation": 0,
+          "memory_records_present": 7,
+          "revoked_consent_enforced": true
+        }
+      },
+      "package_path": "/mnt/data/sip-hybrid-work/runtime/demo/liveforever/preservation.sip-preservation.zip",
+      "package_sha256": "db9330ec199fc31232a6e87f6a47880aeebe9ece08dbe3662f44e3621467267f",
+      "restored": {
+        "commit_id": null,
+        "domain_schema_version": "1.1.0",
+        "id_maps": {
+          "anchor_remap": {},
+          "annotation": {},
+          "assertion": {},
+          "asset": {
+            "0123b8ff-292a-4217-be9c-f42d18876fc3": "0123b8ff-292a-4217-be9c-f42d18876fc3",
+            "4e38d637-ca14-4a62-96eb-3086fbc2614e": "4e38d637-ca14-4a62-96eb-3086fbc2614e",
+            "55b99269-cece-4d0b-9d82-efd7380fd73d": "55b99269-cece-4d0b-9d82-efd7380fd73d",
+            "63f3d133-4f10-44c8-bdc6-d7b9d2cf2745": "63f3d133-4f10-44c8-bdc6-d7b9d2cf2745",
+            "80c3a12d-a626-4dca-891c-c0fa70397ec1": "80c3a12d-a626-4dca-891c-c0fa70397ec1",
+            "9df4fceb-0832-4e88-8626-5e3bf1f868a8": "9df4fceb-0832-4e88-8626-5e3bf1f868a8",
+            "d0a2dc12-d305-4430-8aea-0854fc75ba87": "d0a2dc12-d305-4430-8aea-0854fc75ba87"
+          },
+          "branch": {},
+          "comment": {},
+          "commit": {},
+          "consent": {
+            "3dbde980-effa-4c27-99b4-f9278773fd1b": "3dbde980-effa-4c27-99b4-f9278773fd1b"
+          },
+          "construction": {},
+          "derivation": {},
+          "entity": {},
+          "evidence": {},
+          "frame": {},
+          "geometry_manifest": {},
+          "legal_hold": {},
+          "measurement": {},
+          "memory": {
+            "073ec752-7c69-4d98-bc73-5f94305ef421": "073ec752-7c69-4d98-bc73-5f94305ef421",
+            "44922bae-b77b-4119-8e1b-74a232fe3593": "44922bae-b77b-4119-8e1b-74a232fe3593",
+            "5284f6ba-3c70-4e0e-8c8b-08c6da7486fd": "5284f6ba-3c70-4e0e-8c8b-08c6da7486fd",
+            "5eb5e437-a43d-4f7a-aabc-e52f9ed29ac1": "5eb5e437-a43d-4f7a-aabc-e52f9ed29ac1",
+            "8b5c659b-6815-4e2e-87b3-5cc321cdaaa6": "8b5c659b-6815-4e2e-87b3-5cc321cdaaa6",
+            "9f809ee5-4f32-4460-b04c-05959d545bee": "9f809ee5-4f32-4460-b04c-05959d545bee",
+            "a9797f71-2da9-46f1-a9b9-835663dc9e2e": "a9797f71-2da9-46f1-a9b9-835663dc9e2e"
+          },
+          "representation": {},
+          "representation_binding": {},
+          "retention_rule": {},
+          "scene": {},
+          "scene_tag": {},
+          "spatial_transform": {},
+          "task": {}
+        },
+        "native_replay": true,
+        "non_activated_evidence": {
+          "archived_tables": [
+            "agent_proposals",
+            "audit_events",
+            "deletion_evidence",
+            "deletion_requests",
+            "exports",
+            "notifications",
+            "operations",
+            "outbox_events",
+            "quota_policies",
+            "role_bindings",
+            "saved_queries",
+            "search_documents",
+            "usage_ledger"
+          ],
+          "governance_tables": [
+            "model_manifests",
+            "provider_manifests"
+          ],
+          "provider_model_reapproval_required": true,
+          "search_reindex_required": true,
+          "security_bindings_replayed": false
+        },
+        "preservation_package_asset_id": "8742b5ff-e035-422c-8b3e-7e1d9fe1429f",
+        "preservation_package_sha256": "db9330ec199fc31232a6e87f6a47880aeebe9ece08dbe3662f44e3621467267f",
+        "project_id": "project-restored-liveforever",
+        "replayed_counts": {
+          "anchor_remaps": 0,
+          "assertions": 0,
+          "collaboration_comments": 0,
+          "collaboration_tasks": 0,
+          "consent_grants": 1,
+          "construction_records": 0,
+          "coordinate_frames": 0,
+          "derivation_events": 0,
+          "evidence_records": 0,
+          "geometry_asset_manifests": 0,
+          "legal_holds": 0,
+          "measurements": 0,
+          "memory_records": 7,
+          "representation_bindings": 0,
+          "representations": 0,
+          "retention_rules": 0,
+          "scene_branches": 0,
+          "scene_commits": 0,
+          "scene_entities": 0,
+          "scene_tags": 0,
+          "spatial_annotations": 0,
+          "spatial_transforms": 0
+        },
+        "restored_assets": {
+          "count": 7,
+          "remapped_ids": 0,
+          "unique_objects": 7
+        },
+        "scene_id": null,
+        "semantic_snapshot_hash": null,
+        "source_root_hash": "2bc439b8deeca8f9c54a56d7a16a69e1182a6acb2bd2a58511e47bdde8f6c3e9",
+        "tenant_id": "tenant-restored-liveforever",
+        "unresolved_references": []
+      },
+      "restored_assets": 8,
+      "root_hash": "2bc439b8deeca8f9c54a56d7a16a69e1182a6acb2bd2a58511e47bdde8f6c3e9",
+      "verified_files": 10
+    },
+    "records": {
+      "conflicting_recollections": [
+        "8b5c659b-6815-4e2e-87b3-5cc321cdaaa6",
+        "073ec752-7c69-4d98-bc73-5f94305ef421"
+      ],
+      "event": "a9797f71-2da9-46f1-a9b9-835663dc9e2e",
+      "generated_reconstruction": "44922bae-b77b-4119-8e1b-74a232fe3593",
+      "person": "9f809ee5-4f32-4460-b04c-05959d545bee",
+      "place": "5284f6ba-3c70-4e0e-8c8b-08c6da7486fd",
+      "private_interview": "5eb5e437-a43d-4f7a-aabc-e52f9ed29ac1"
+    }
+  },
+  "schema": "sip.demo-evidence/v1",
+  "started_at": "2026-07-27T23:58:12.696705+00:00",
+  "status": "passed"
+}

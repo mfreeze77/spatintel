@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "RepresentationKind": {
+      "enum": [
+        "metric",
+        "visual",
+        "interaction",
+        "design",
+        "evidence"
+      ],
+      "title": "RepresentationKind",
+      "type": "string"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/representation-asset.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "authority_ceiling": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "dependencies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "derivation_policy": {
+      "additionalProperties": true,
+      "title": "Derivation Policy",
+      "type": "object"
+    },
+    "disposable": {
+      "title": "Disposable",
+      "type": "boolean"
+    },
+    "fallback_representation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fallback Representation Id"
+    },
+    "format_metadata": {
+      "additionalProperties": true,
+      "title": "Format Metadata",
+      "type": "object"
+    },
+    "information_losses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Information Losses",
+      "type": "array"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "kind": {
+      "$ref": "#/$defs/RepresentationKind"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "lossy": {
+      "title": "Lossy",
+      "type": "boolean"
+    },
+    "privacy_inheritance": {
+      "additionalProperties": true,
+      "title": "Privacy Inheritance",
+      "type": "object"
+    },
+    "prohibited_uses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prohibited Uses",
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "provider_version": {
+      "title": "Provider Version",
+      "type": "string"
+    },
+    "quality": {
+      "additionalProperties": true,
+      "title": "Quality",
+      "type": "object"
+    },
+    "representation_id": {
+      "title": "Representation Id",
+      "type": "string"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "source_class": {
+      "$ref": "#/$defs/SourceClass"
+    },
+    "state": {
+      "enum": [
+        "quarantined",
+        "quality_failed",
+        "approved",
+        "published",
+        "superseded",
+        "invalidated",
+        "deprecated"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "support_map": {
+      "additionalProperties": true,
+      "title": "Support Map",
+      "type": "object"
+    }
+  },
+  "required": [
+    "representation_id",
+    "scene_id",
+    "asset_id",
+    "kind",
+    "provider_id",
+    "provider_version",
+    "coordinate_frame_id",
+    "source_class",
+    "authority_class",
+    "authority_ceiling",
+    "disposable",
+    "lossy",
+    "intended_uses",
+    "prohibited_uses",
+    "quality",
+    "provenance",
+    "support_map",
+    "state"
+  ],
+  "title": "RepresentationAssetContract",
+  "type": "object"
+}

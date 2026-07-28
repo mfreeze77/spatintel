@@ -1,0 +1,32 @@
+schema_version: '1.0'
+requirement_id: ARCADR-003
+priority: P1
+source:
+  document: 20-architecture/210_architecture_decisions.md
+  line: 38
+  section: 4. Normative requirements
+requirement: A model ADR shall include license, checkpoint, hardware, benchmark, operating envelope, and fallback.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- docs/adr
+- docs/adr/index.json
+- governance/risk-register.json
+automated_test_ids:
+- tests/contract/test_governance_registers.py::test_adr_index_links_requirements_risks_benchmarks_source_and_exit_strategy
+retained_evidence:
+- build/reports/governance-check.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- docs/adr/index.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

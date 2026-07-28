@@ -1,0 +1,14 @@
+{
+  "schema": "sip.model-manifest/v1",
+  "model_id": "lingbot-map-checkpoint",
+  "version": "unapproved",
+  "checkpoint_hash": "UNAVAILABLE",
+  "code_revision": "1f480aeb8a47a24656090d46d053115b7fe60435",
+  "code_license": "Apache-2.0",
+  "weights_license": "unknown",
+  "dataset_terms": ["unknown"],
+  "output_terms": "unknown",
+  "approval_state": "denied",
+  "commercial_use": false,
+  "allowed_purposes": ["synthetic_evaluation"]
+}

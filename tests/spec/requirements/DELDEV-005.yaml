@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: DELDEV-005
+priority: P1
+source:
+  document: 95-testing-delivery/959_developer_onboarding.md
+  line: 40
+  section: 4. Normative requirements
+requirement: GPU setup shall verify driver/runtime compatibility and use approved local checkpoints only.
+verification_method: Controlled verification
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- Makefile
+- justfile
+- tools/static_checks.py
+- tools/typecheck.py
+- docs/developer/GETTING_STARTED.md
+- CONTRIBUTING.md
+automated_test_ids:
+- tests/contract/test_delivery_tools.py::test_gpu_doctor_requires_compatible_runtime_and_approved_local_checkpoint
+- tests/contract/test_delivery_tools.py::test_make_and_just_commands_resolve_to_implemented_tools
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: REQUIRED
+  owner: ML Platform / Release Engineering
+  gap: Run the documented GPU doctor on each supported NVIDIA driver/CUDA/container profile with an approved local checkpoint
+    hash; retain driver, runtime, device, image, checkpoint, and pass/fail evidence.

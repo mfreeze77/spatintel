@@ -1,0 +1,782 @@
+{
+  "evidence": {
+    "captured_at": "2026-07-28T00:06:24.379524+00:00",
+    "dependency_snapshot_count": 490,
+    "dependency_snapshot_sha256": "2d053b256f1aa774bb47d2e47a7ec208e021e84c2ca8e08d35eee3fccdf58b37",
+    "git_branch": "hybrid-governed",
+    "git_commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+    "git_dirty": true,
+    "git_status_sha256": "59d32e3dcd97353e32b0a86f66368bc3c563ade467bcce09c240a373398541cf",
+    "machine": "x86_64",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "processor": "",
+    "python_executable": "/opt/pyvenv/bin/python",
+    "python_version": "3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]",
+    "source_tree_root_sha256": "c7283954c2bacbcafe00c0d374b7f4af63fa47eb4645c014d9e936cae74c84d5",
+    "test_profile": "local-deterministic-no-external-hardware-or-credentials"
+  },
+  "findings": [
+    {
+      "code": "SUITE_INPUT_STALE",
+      "detail": "test/configuration input root changed",
+      "suite": "contract"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "contract"
+    },
+    {
+      "code": "SUITE_INPUT_STALE",
+      "detail": "test/configuration input root changed",
+      "suite": "integration"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "integration"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "migration"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "security"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "unit"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "property"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "privacy"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "e2e"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "acceptance"
+    },
+    {
+      "code": "SUITE_SOURCE_STALE",
+      "detail": "executable source tree changed",
+      "suite": "spec"
+    }
+  ],
+  "plugin_autoload_disabled": true,
+  "python": "3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]",
+  "results": [
+    {
+      "captured_at": "2026-07-28T00:04:42.985947+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/contract",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 49.498188,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "2375882090c6226dc97f96a33481bbb8e6b4972c77bf0df4cac0310ed978fe0a",
+      "junit_path": "build/reports/tests/contract.xml",
+      "junit_sha256": "1d410ef1f920c903b4520d03e018d85db80f98ba3fdc1b7d9c1347e4aa43b369",
+      "log_path": "build/reports/tests/contract.log",
+      "log_sha256": "0fdd027b5553608fbce1014afe5afb5f4ce2372f619f33d21cf31c050d7b79a1",
+      "name": "contract",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_api_contract.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_api_contract.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_delivery_tools.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_delivery_tools.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_documentation.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_documentation.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_event_architecture.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_event_architecture.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_generated_contracts.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_generated_contracts.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governance.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governance.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governance_registers.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governance_registers.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_governed_hybrid_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_governed_hybrid_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_infrastructure.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_infrastructure.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_observability.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_observability.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_observability_infrastructure.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_observability_infrastructure.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_repository_boundaries.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_repository_boundaries.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_search_agent_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_search_agent_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_service_boundaries.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_service_boundaries.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_spatial_truth_api.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_spatial_truth_api.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_spec_lint.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_spec_lint.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_test_matrix_resume.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_test_matrix_resume.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_worker_manifests.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_worker_manifests.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/contract/test_worker_protocol.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/contract-shards/tests__contract__test_worker_protocol.xml"
+        ]
+      ],
+      "shard_count": 19,
+      "shard_manifest_path": "build/reports/tests/contract-shards/manifest.json",
+      "shard_manifest_sha256": "5af175ae4d82da947b6241598ade3d9df16d496bde56802ea7d62d217c47b818",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 99
+    },
+    {
+      "captured_at": "2026-07-28T00:05:18.997816+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/integration",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 36.007556,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "346c6b161776076132a2472a4c9ebcc6dc7a472f8904d10eff37379e6ff6b16c",
+      "junit_path": "build/reports/tests/integration.xml",
+      "junit_sha256": "7649dcd5fc6f63f8bb5df16b6cef48e3c663ed74ef4667c24ffaa8ab50e63808",
+      "log_path": "build/reports/tests/integration.log",
+      "log_sha256": "577a9ff4ed35241ffe27ec1afb4feb5fdacff8752c61bb6ce6b2230ef5ebeb7f",
+      "name": "integration",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_authorized_search_agents.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_authorized_search_agents.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_export_restore.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_export_restore.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_governed_hybrid.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_governed_hybrid.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_lifecycle_recovery.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_lifecycle_recovery.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_s3_store.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_s3_store.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_scene_representation.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_scene_representation.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_spatial_truth_twin.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_spatial_truth_twin.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_verticals.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_verticals.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/integration/test_worker_runtime.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/integration-shards/tests__integration__test_worker_runtime.xml"
+        ]
+      ],
+      "shard_count": 9,
+      "shard_manifest_path": "build/reports/tests/integration-shards/manifest.json",
+      "shard_manifest_sha256": "049c6b4537798a22f87edb41db0ad4def1f2cb214c8faf0a3fbb4a459930808e",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 56
+    },
+    {
+      "captured_at": "2026-07-28T00:05:38.786135+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/migration",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 19.784971,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "eda1201439eb05ca7d6a21f38cbcad94ba93ed7d73ef22d95050715b2ebb34a6",
+      "junit_path": "build/reports/tests/migration.xml",
+      "junit_sha256": "63c2db1c18b2b2a030b0f8999136cfd302bd70efe5aad1c47a0b42f8f4d321e2",
+      "log_path": "build/reports/tests/migration.log",
+      "log_sha256": "0f6a43042dce7098e1734162f84bbf86f62d7f224ffd1c7011f0cbd1ab227447",
+      "name": "migration",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/migration/test_migrations.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/migration-shards/tests__migration__test_migrations.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/migration-shards/manifest.json",
+      "shard_manifest_sha256": "b9b41ac6c0212a5cc69a071dc832448307468171588e33843c8d5e38c8773367",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 5
+    },
+    {
+      "captured_at": "2026-07-28T00:05:40.827119+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/security",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 2.035848,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "5128af900dcc7907f9b0c7d6362e55f28756c3bd80d898b73b75b8ff5e0d70f0",
+      "junit_path": "build/reports/tests/security.xml",
+      "junit_sha256": "fe8696aa6c82e7701e2dc6a3c5f51d8af376196cd6eb3a645b44978cd432071b",
+      "log_path": "build/reports/tests/security.log",
+      "log_sha256": "3598e5326a0741bcabcc63318a360a1318ae4350da9f2dbb18325c0fd3707ab9",
+      "name": "security",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/security/test_tenant_isolation.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/security-shards/tests__security__test_tenant_isolation.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/security/test_worker_sandbox.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/security-shards/tests__security__test_worker_sandbox.xml"
+        ]
+      ],
+      "shard_count": 2,
+      "shard_manifest_path": "build/reports/tests/security-shards/manifest.json",
+      "shard_manifest_sha256": "ef5a836e774b3ef7251bdf7ffe2768c6242eb3d7d5e5ad123b60764d027b5393",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 3
+    },
+    {
+      "captured_at": "2026-07-28T00:05:47.477349+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/unit",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 6.647029,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "46b175d78e246df112ed3d0f344f50a6a58300d6919ced8e82fb4202eaeb40ac",
+      "junit_path": "build/reports/tests/unit.xml",
+      "junit_sha256": "392965f4dfe3f1e69f94bcedb1f316f9e93e26738088241e64f9616e9d7f0469",
+      "log_path": "build/reports/tests/unit.log",
+      "log_sha256": "ef096661bc6699db0988a3c1b89f51f790e249474145e6d2ee6adb4373efde94",
+      "name": "unit",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/unit/test_assets_policy.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/unit-shards/tests__unit__test_assets_policy.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/unit/test_capture.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/unit-shards/tests__unit__test_capture.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/unit/test_failure_catalog.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/unit-shards/tests__unit__test_failure_catalog.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/unit/test_geometry.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/unit-shards/tests__unit__test_geometry.xml"
+        ],
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/unit/test_operations.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/unit-shards/tests__unit__test_operations.xml"
+        ]
+      ],
+      "shard_count": 5,
+      "shard_manifest_path": "build/reports/tests/unit-shards/manifest.json",
+      "shard_manifest_sha256": "471d7dfe75618a4f9caef9bb637d3cb9d65818d944fb55b5b6e6809da2fd4d63",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 20
+    },
+    {
+      "captured_at": "2026-07-28T00:05:48.957149+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/property",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 1.476894,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "c2418710a210004affda0fe16e00f594a8ca6391601ff3450b132f17a2b1e6eb",
+      "junit_path": "build/reports/tests/property.xml",
+      "junit_sha256": "28b48bff4500f86e8cc23ca6f6aa15ebde2e51df03a672b54e1b5b3c879ad60e",
+      "log_path": "build/reports/tests/property.log",
+      "log_sha256": "36be71c7121463856f645883c578038c4f36aa960c445072fb67ece9341d0ac6",
+      "name": "property",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/property/test_geometry_properties.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/property-shards/tests__property__test_geometry_properties.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/property-shards/manifest.json",
+      "shard_manifest_sha256": "f80698b05a24845828b04fc88004071fa5f635d693696bd203babaf47d87b336",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 1
+    },
+    {
+      "captured_at": "2026-07-28T00:05:50.984397+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/privacy",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 2.024449,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "c1c42e504defcbc1f5d528b567328419eb09b46d39862b6f143039de425cad97",
+      "junit_path": "build/reports/tests/privacy.xml",
+      "junit_sha256": "b620fd3089673a8c439185447b539462e19bd519f5ff2d81eb505dc8552e20d1",
+      "log_path": "build/reports/tests/privacy.log",
+      "log_sha256": "3c5f874319786164485e0d95896357ceb0d27b8a65a5a89ded9e2f8c54b748d6",
+      "name": "privacy",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/privacy/test_policy_propagation.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/privacy-shards/tests__privacy__test_policy_propagation.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/privacy-shards/manifest.json",
+      "shard_manifest_sha256": "305a0700378a8175a88280d7ded50651f5e810ef5f7be1daf36e5ee6abe37fbe",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 1
+    },
+    {
+      "captured_at": "2026-07-28T00:05:57.499024+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/e2e",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 6.51137,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "2653f5142847ae159ae5fea2b0b5e37697a59cdc0fa844f5ba0797a8d1f127a7",
+      "junit_path": "build/reports/tests/e2e.xml",
+      "junit_sha256": "db6683915a720dc0ad63e38a30757c972e13721ca84cad2a3407f3db2914c67c",
+      "log_path": "build/reports/tests/e2e.log",
+      "log_sha256": "926781532f30eda58e547ef0c2afb0a7cbafa04d2fa84d6142a6e755399b6c92",
+      "name": "e2e",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/e2e/test_platform_demonstrations.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/e2e-shards/tests__e2e__test_platform_demonstrations.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/e2e-shards/manifest.json",
+      "shard_manifest_sha256": "cb24e8992ddb81914ea5be1097566707f032d48e28ed237477499009831040b9",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 5
+    },
+    {
+      "captured_at": "2026-07-28T00:06:02.738966+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/acceptance",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 5.236892,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "9919ccc232f8a8aa45e0f911b1edd4f394b1ac8901dd21d554eef35fa14f4435",
+      "junit_path": "build/reports/tests/acceptance.xml",
+      "junit_sha256": "ff34087cde570849eb96aa97074df513dbe30f5e14501d95f6ae7af0423d2051",
+      "log_path": "build/reports/tests/acceptance.log",
+      "log_sha256": "e28476917b01bf623c26278c80c4bec67294c9d3b1b01532c915c1ab5d1d702e",
+      "name": "acceptance",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/acceptance/test_vertical_demonstrations.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/acceptance-shards/tests__acceptance__test_vertical_demonstrations.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/acceptance-shards/manifest.json",
+      "shard_manifest_sha256": "e562749081b9fd3f9343463df21f21c19f92f789a7b01dd08a2cdb1de4318ce7",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 2
+    },
+    {
+      "captured_at": "2026-07-28T00:06:04.069547+00:00",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "/mnt/data/sip-hybrid-work/tools/run_pytest_isolated.py",
+        "-q",
+        "tests/spec",
+        "-p",
+        "no:cacheprovider",
+        "--sharded-by-test-file"
+      ],
+      "elapsed_seconds": 1.325924,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "input_root_sha256": "30416c3981b09a978616efbd3f98fd64f13058b6bb35cdcbebaaa59cdc6f3af6",
+      "junit_path": "build/reports/tests/spec.xml",
+      "junit_sha256": "ab96b2ec092d4d6afd0947a75a8246aebe009a91bc3b547e203e813084defd1c",
+      "log_path": "build/reports/tests/spec.log",
+      "log_sha256": "97b85cb3810deaca0040732cab0572bb90d0c65e39dd0e31e1b3a381c70d139b",
+      "name": "spec",
+      "shard_commands": [
+        [
+          "python",
+          "tools/run_pytest_isolated.py",
+          "-q",
+          "tests/spec/test_requirements_controls.py",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=build/reports/tests/spec-shards/tests__spec__test_requirements_controls.xml"
+        ]
+      ],
+      "shard_count": 1,
+      "shard_manifest_path": "build/reports/tests/spec-shards/manifest.json",
+      "shard_manifest_sha256": "3f47ccd8f12bc80dd0e92b2c8b1e5af921bac90ac3c43e3e7770c33dae44f8df",
+      "skipped": 0,
+      "source_tree_root_sha256": "4ec071cacfe802473b44972a1b5303bd2848d7a873750230e2eb75a9423a0be1",
+      "status": "passed",
+      "tests": 1
+    }
+  ],
+  "resumable_suite_evidence": true,
+  "schema": "sip.test-matrix/v2",
+  "status": "failed",
+  "suite_parallelism": null,
+  "suite_process_isolation": true,
+  "test_file_process_isolation": true,
+  "totals": {
+    "elapsed_seconds": 130.549121,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 193
+  },
+  "verification_policy": {
+    "manual_reviewer": null,
+    "maximum_errors": 0,
+    "maximum_failures": 0,
+    "required_exit_code": 0
+  }
+}

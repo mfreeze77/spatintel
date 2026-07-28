@@ -1,0 +1,6 @@
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/schema_codegen/generate.py --check --root .
+{"check": true, "generated": 117}
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/generate_worker_manifests.py --check
+Worker manifests are current
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/generate_test_fixtures.py --check
+{"check": true, "path": "tests/fixtures"}

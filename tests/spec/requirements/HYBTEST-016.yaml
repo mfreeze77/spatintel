@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: HYBTEST-016
+priority: P1
+source:
+  document: 95-testing-delivery/961_splat_surface_benchmark_acceptance.md
+  line: 302
+  section: 18. Normative requirements
+requirement: Malformed and adversarial spatial files shall be parsed in isolation with bounded resources and no publication
+  side effect.
+verification_method: Fuzz and abuse test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/geometry.py
+- src/sip/representations.py
+- src/sip/worker_sandbox.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: control-api
+  namespace: sip-system
+  labels: &id001
+    app.kubernetes.io/name: control-api
+    app.kubernetes.io/part-of: spatial-intelligence-platform
+    app.kubernetes.io/component: api
+    app.kubernetes.io/version: 1.1.0
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: control-api
+  template:
+    metadata:
+      labels: *id001
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: /metrics
+    spec:
+      serviceAccountName: control-api
+      automountServiceAccountToken: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: control-api
+      containers:
+      - name: api
+        image: ghcr.io/spatial-intelligence-platform/sip-python:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000
+        imagePullPolicy: IfNotPresent
+        args:
+        - uvicorn
+        - sip.api:app
+        - --host
+        - 0.0.0.0
+        - --port
+        - '8080'
+        - --proxy-headers
+        - --no-server-header
+        env:
+        - name: SIP_SERVICE_NAME
+          value: control-api
+        envFrom:
+        - configMapRef:
+            name: sip-runtime-config
+        - secretRef:
+            name: sip-runtime-secrets
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 10001
+          runAsGroup: 10001
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: '2'
+            memory: 2Gi
+        startupProbe:
+          httpGet:
+            path: /health/live
+            port: http
+          failureThreshold: 30
+          periodSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: http
+          periodSeconds: 15
+          timeoutSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: http
+          periodSeconds: 5
+          timeoutSeconds: 3
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: runtime
+          mountPath: /var/lib/sip/runtime
+        - name: objects
+          mountPath: /var/lib/sip/objects
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: runtime
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: objects
+        emptyDir:
+          sizeLimit: 2Gi

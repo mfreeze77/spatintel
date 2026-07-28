@@ -1,0 +1,31 @@
+schema_version: '1.0'
+requirement_id: DATDB-004
+priority: P1
+source:
+  document: 50-data/507_storage_database_schema.md
+  line: 39
+  section: 4. Normative requirements
+requirement: Database migrations shall be forward-tested, rollback/recovery-tested, and rehearsed against production-sized
+  copies.
+verification_method: Controlled verification
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- src/sip/database.py
+- migrations
+automated_test_ids:
+- tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables
+- tests/migration/test_migrations.py::test_destructive_downgrade_is_denied_without_evidence_and_exactly_restores_prior_schema
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/migration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: REQUIRED
+  owner: Database Reliability Engineering
+  gap: Rehearse forward migration and recovery against a sanitized production-sized PostgreSQL/PostGIS copy, measure duration/locks/storage,
+    validate rollback or forward-fix behavior, and retain environment and database integrity evidence.

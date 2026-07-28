@@ -1,0 +1,61 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/capture-asset.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "byte_count": {
+      "minimum": 0,
+      "title": "Byte Count",
+      "type": "integer"
+    },
+    "encryption": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Encryption"
+    },
+    "immutable": {
+      "default": true,
+      "title": "Immutable",
+      "type": "boolean"
+    },
+    "media_type": {
+      "title": "Media Type",
+      "type": "string"
+    },
+    "relative_path": {
+      "title": "Relative Path",
+      "type": "string"
+    },
+    "role": {
+      "title": "Role",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sha256",
+    "byte_count",
+    "media_type",
+    "asset_id",
+    "relative_path",
+    "role"
+  ],
+  "title": "CaptureAssetContract",
+  "type": "object"
+}

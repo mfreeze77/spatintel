@@ -1,0 +1,25 @@
+schema_version: '1.0'
+requirement_id: PLTIO-010
+priority: P1
+source:
+  document: 60-platform/611_import_export.md
+  line: 139
+  section: 15. Version 1.1 hybrid representation portability
+requirement: Full-project export shall include visual, metric, interaction, design, evidence, and non-splat fallback assets
+  when authorized.
+verification_method: Portability test
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-PLTIO-010
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

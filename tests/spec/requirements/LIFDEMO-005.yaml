@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: LIFDEMO-005
+priority: P1
+source:
+  document: 80-liveforever/813_liveforever_demo_scenario.md
+  line: 40
+  section: 4. Normative requirements
+requirement: A family contributor shall add an alternate recollection and the edition shall present both without overwriting
+  either.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/liveforever.py
+- tools/run_demo.py
+- docs/user/LIVEFOREVER.md
+- verticals/liveforever
+automated_test_ids:
+- tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
+retained_evidence:
+- build/evidence/demos/liveforever.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

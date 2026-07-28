@@ -1,0 +1,117 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/manual-external-receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_or_environment": {
+      "title": "Account Or Environment",
+      "type": "string"
+    },
+    "cleanup_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Cleanup Actions",
+      "type": "array"
+    },
+    "conversion_id": {
+      "title": "Conversion Id",
+      "type": "string"
+    },
+    "evidence_asset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Asset Ids",
+      "type": "array"
+    },
+    "executed_at": {
+      "format": "date-time",
+      "title": "Executed At",
+      "type": "string"
+    },
+    "input_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Input Hashes",
+      "type": "array"
+    },
+    "manual_edits": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Manual Edits",
+      "type": "array"
+    },
+    "operator_id": {
+      "title": "Operator Id",
+      "type": "string"
+    },
+    "options": {
+      "additionalProperties": true,
+      "title": "Options",
+      "type": "object"
+    },
+    "output_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Hashes",
+      "type": "array"
+    },
+    "processing_location": {
+      "enum": [
+        "uploaded_external",
+        "local_operator_device",
+        "approved_private_environment"
+      ],
+      "title": "Processing Location",
+      "type": "string"
+    },
+    "receipt_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Receipt Hash",
+      "type": "string"
+    },
+    "retention_statement": {
+      "title": "Retention Statement",
+      "type": "string"
+    },
+    "tool": {
+      "title": "Tool",
+      "type": "string"
+    },
+    "tool_version": {
+      "title": "Tool Version",
+      "type": "string"
+    },
+    "transfer_id": {
+      "title": "Transfer Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "transfer_id",
+    "conversion_id",
+    "tool",
+    "tool_version",
+    "account_or_environment",
+    "operator_id",
+    "executed_at",
+    "input_hashes",
+    "output_hashes",
+    "options",
+    "processing_location",
+    "retention_statement",
+    "cleanup_actions",
+    "evidence_asset_ids",
+    "receipt_hash"
+  ],
+  "title": "ManualExternalReceiptContract",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "git": {
+    "commit": "8af0aafa0425b3f190b14fa63701990f0bd6d343",
+    "working_tree_clean": false
+  },
+  "limitations": [
+    "Dependency-free source/runtime checks only; Node 24, installed dependencies, Next production build, browser E2E, and accessibility audit remain external."
+  ],
+  "node_version": "v22.16.0",
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "schema": "sip.test-report/v1",
+  "source_invariant_checks": 11,
+  "status": "passed",
+  "suite": "web-dependency-free-runtime",
+  "tests_failed": 0,
+  "tests_passed": 4,
+  "transcript": "build/evidence/web-runtime-test.log",
+  "transcript_sha256": "9987f1c1c43a880c15bfb1e5bbf607c411b1d7c3add3bb05f9027d4a0993525a"
+}

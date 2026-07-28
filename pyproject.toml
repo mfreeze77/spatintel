@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.46.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spatial-intelligence-platform"
+version = "1.1.0"
+description = "Open, self-hostable evidence-aware spatial intelligence platform"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = {text = "Apache-2.0"}
+authors = [{name = "SIP Contributors"}]
+dependencies = [
+  "alembic==1.18.4",
+  "boto3==1.43.18",
+  "cryptography==46.0.4",
+  "fastapi==0.128.2",
+  "httpx==0.28.1",
+  "jsonschema==4.26.0",
+  "numpy==2.3.5",
+  "orjson==3.11.9",
+  "prometheus-client==0.25.0",
+  "pydantic==2.13.4",
+  "scipy==1.17.0",
+  "sqlalchemy==2.0.50",
+  "uvicorn==0.48.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.0.2",
+  "pytest-asyncio==1.3.0",
+  "pytest-cov==7.0.0",
+  "ruff==0.14.14",
+  "mypy==1.19.1",
+  "types-jsonschema==4.26.0.20260130",
+]
+postgres = ["psycopg[binary]==3.3.3"]
+redis = ["redis==7.1.0"]
+telemetry = [
+  "opentelemetry-api==1.39.1",
+  "opentelemetry-sdk==1.39.1",
+  "opentelemetry-exporter-otlp-proto-http==1.39.1",
+]
+
+[project.scripts]
+sip = "sip.cli:main"
+sip-api = "sip.api:main"
+sip-worker = "sip.worker_runtime:main"
+sip-spec-lint = "sip.spec_lint:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+markers = [
+  "unit: isolated unit test",
+  "property: property/fuzz test",
+  "contract: schema/API/event contract test",
+  "integration: local dependency integration test",
+  "e2e: end-to-end workflow test",
+  "security: authorization/security test",
+  "privacy: consent/privacy test",
+  "migration: database migration/recovery test",
+  "acceptance: specification acceptance demonstration",
+  "external: requires external hardware/credentials/legal review",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = ["spec", "third_party"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S", "C4", "RUF"]
+ignore = ["S101"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["sip"]
+exclude = "spec|third_party"
+
+[tool.coverage.run]
+branch = true
+source = ["sip"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false

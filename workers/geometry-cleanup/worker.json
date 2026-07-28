@@ -1,0 +1,21 @@
+{
+  "audited": true,
+  "cancellable": true,
+  "capabilities": [
+    "geometry.cleanup"
+  ],
+  "checkpointed": true,
+  "durable": true,
+  "entrypoint": "workers/geometry-cleanup/main.py",
+  "execution_manifest": "workers/geometry-cleanup/worker-manifest.json",
+  "governance": "local_approved_reference",
+  "idempotent": true,
+  "input_contract": "operation.input@v1",
+  "least_privilege": true,
+  "manifest_sha256": "219818fc3fa16f6e5c4a99d9cdeace1ef80a4d0d5edafb30a430f6012b6afb2e",
+  "name": "geometry-cleanup",
+  "output_contract": "operation.output@v1",
+  "production_placeholders": false,
+  "schema": "sip.worker-manifest/v1",
+  "version": "1.1.0"
+}

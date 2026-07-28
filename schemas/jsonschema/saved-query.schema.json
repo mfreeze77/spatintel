@@ -1,0 +1,561 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "Bounds3D": {
+      "additionalProperties": false,
+      "properties": {
+        "max": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Max",
+          "type": "array"
+        },
+        "min": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Min",
+          "type": "array"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ],
+      "title": "Bounds3D",
+      "type": "object"
+    },
+    "GraphTraversal": {
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "default": "either",
+          "enum": [
+            "outbound",
+            "inbound",
+            "either"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "max_depth": {
+          "default": 1,
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "relationship_types": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Relationship Types",
+          "type": "array"
+        },
+        "start_entity_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Start Entity Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "start_entity_ids",
+        "relationship_types"
+      ],
+      "title": "GraphTraversal",
+      "type": "object"
+    },
+    "SearchQuerySpec": {
+      "additionalProperties": false,
+      "description": "Authorized internal query with server-bound tenant and project scope.",
+      "properties": {
+        "authority_classes": {
+          "items": {
+            "$ref": "#/$defs/AuthorityClass"
+          },
+          "title": "Authority Classes",
+          "type": "array"
+        },
+        "changed_between": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TemporalInterval"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "critical_workflow": {
+          "default": false,
+          "title": "Critical Workflow",
+          "type": "boolean"
+        },
+        "embedding": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 4096,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Embedding"
+        },
+        "embedding_model_manifest_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Embedding Model Manifest Id"
+        },
+        "entity_types": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Entity Types",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "floor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Floor Ids",
+          "type": "array"
+        },
+        "full_text": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Full Text"
+        },
+        "graph": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GraphTraversal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "include_snippets": {
+          "default": true,
+          "title": "Include Snippets",
+          "type": "boolean"
+        },
+        "limit": {
+          "default": 50,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "minimum_confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum Confidence"
+        },
+        "project_id": {
+          "title": "Project Id",
+          "type": "string"
+        },
+        "purpose": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Purpose"
+        },
+        "room_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Room Ids",
+          "type": "array"
+        },
+        "scene_commit_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scene Commit Id"
+        },
+        "schema_version": {
+          "const": "sip.spatial-query/v1",
+          "default": "sip.spatial-query/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_classes": {
+          "items": {
+            "$ref": "#/$defs/SourceClass"
+          },
+          "title": "Source Classes",
+          "type": "array"
+        },
+        "spatial": {
+          "items": {
+            "$ref": "#/$defs/SpatialPredicate"
+          },
+          "maxItems": 20,
+          "title": "Spatial",
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Tags",
+          "type": "array"
+        },
+        "temporal_interval": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TemporalInterval"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tenant_id": {
+          "title": "Tenant Id",
+          "type": "string"
+        },
+        "timeout_ms": {
+          "default": 2000,
+          "maximum": 5000,
+          "minimum": 10,
+          "title": "Timeout Ms",
+          "type": "integer"
+        },
+        "workflow_statuses": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Workflow Statuses",
+          "type": "array"
+        }
+      },
+      "required": [
+        "tenant_id",
+        "project_id"
+      ],
+      "title": "SearchQuerySpec",
+      "type": "object"
+    },
+    "SourceClass": {
+      "enum": [
+        "direct_capture",
+        "observed",
+        "measured",
+        "verified",
+        "design",
+        "proposed",
+        "inferred",
+        "generated",
+        "recalled",
+        "corroborated",
+        "disputed",
+        "superseded"
+      ],
+      "title": "SourceClass",
+      "type": "string"
+    },
+    "SpatialPredicate": {
+      "additionalProperties": false,
+      "properties": {
+        "bounds": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bounds3D"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "distance_m": {
+          "anyOf": [
+            {
+              "maximum": 100000,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance M"
+        },
+        "frame_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frame Id"
+        },
+        "level_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Level Id"
+        },
+        "observer_entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observer Entity Id"
+        },
+        "operator": {
+          "enum": [
+            "within",
+            "intersects",
+            "near",
+            "visible_from",
+            "on_level"
+          ],
+          "title": "Operator",
+          "type": "string"
+        },
+        "point": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Point"
+        }
+      },
+      "required": [
+        "operator"
+      ],
+      "title": "SpatialPredicate",
+      "type": "object"
+    },
+    "TemporalInterval": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "TemporalInterval",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/saved-query.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "author_id": {
+      "title": "Author Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "expected_result_contract": {
+      "additionalProperties": true,
+      "title": "Expected Result Contract",
+      "type": "object"
+    },
+    "immutable": {
+      "const": true,
+      "default": true,
+      "title": "Immutable",
+      "type": "boolean"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": true,
+      "title": "Parameters",
+      "type": "object"
+    },
+    "permissions": {
+      "additionalProperties": true,
+      "title": "Permissions",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "query": {
+      "$ref": "#/$defs/SearchQuerySpec"
+    },
+    "query_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Query Hash",
+      "type": "string"
+    },
+    "saved_query_id": {
+      "title": "Saved Query Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "sip.spatial-query/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "supersedes_saved_query_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Saved Query Id"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "saved_query_id",
+    "tenant_id",
+    "project_id",
+    "name",
+    "schema_version",
+    "version",
+    "author_id",
+    "query",
+    "permissions",
+    "parameters",
+    "expected_result_contract",
+    "query_hash",
+    "created_at"
+  ],
+  "title": "SavedQueryContract",
+  "type": "object"
+}

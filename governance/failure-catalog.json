@@ -1,0 +1,1105 @@
+{
+  "catalog_version": "1.1.0",
+  "compatibility_policy": "Codes and semantics are append-only within major version; aliases preserve retired client identifiers.",
+  "component_fallbacks": {
+    "collision": "disable collision-dependent free movement and use guided viewpoints",
+    "navigation": "disable free navigation and use 2D or guided mode with safe exit",
+    "occlusion": "disable geometry occlusion while preserving source/authority labels",
+    "picking": "disable semantic picking and use entity/evidence list navigation",
+    "spatial_audio": "fall back to non-spatial captioned audio with explicit source context",
+    "visual_rendering": "fall back to preservation mesh, source panoramas, and evidence panels"
+  },
+  "failures": [
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "mobile",
+      "code": "MOBILE_CAPTURE_INTERRUPTED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "mobile_interruption"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "retain local encrypted journal and offer file export",
+      "introduced_version": "1.1.0",
+      "operator_action": "Resume from the last verified journal checkpoint.",
+      "publication_action": "quarantine",
+      "recovery_mode": "resume_new_attempt",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "transient",
+      "retryable": true,
+      "safe_checkpoint": "last_fsynced_journal_entry",
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "tracking",
+      "code": "TRACKING_STATE_LOST",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "tracking_loss"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "preserve prior stable frames; do not infer the missing trajectory",
+      "introduced_version": "1.1.0",
+      "operator_action": "Stop capture guidance and require relocalization.",
+      "publication_action": "block",
+      "recovery_mode": "relocalize_or_new_session",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "last_stable_tracking_frame",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "corrupt",
+      "code": "CAPTURE_PACKAGE_CORRUPT",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "corrupt_package"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "allow independent inspect/report without ingestion",
+      "introduced_version": "1.1.0",
+      "operator_action": "Quarantine the package and preserve original bytes.",
+      "publication_action": "block",
+      "recovery_mode": "new_import_operation",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "invalid_input",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "hash",
+      "code": "CONTENT_HASH_MISMATCH",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "hash_mismatch"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "retain original and failed receipt",
+      "introduced_version": "1.1.0",
+      "operator_action": "Reject publication and investigate transfer/storage integrity.",
+      "publication_action": "block",
+      "recovery_mode": "new_transfer_operation",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "invalid_input",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric"
+      ],
+      "audit_required": true,
+      "category": "clock",
+      "code": "CLOCK_DOMAIN_INVALID",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "clock_error"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "process independent streams without temporal claims",
+      "introduced_version": "1.1.0",
+      "operator_action": "Reject cross-stream fusion until time mapping is corrected.",
+      "publication_action": "block",
+      "recovery_mode": "new_normalization_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "deterministic_algorithm",
+      "retryable": false,
+      "safe_checkpoint": "last_verified_time_correspondence",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric"
+      ],
+      "audit_required": true,
+      "category": "bad",
+      "code": "CALIBRATION_INVALID",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "bad_calibration"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "visual-only display with metric functions disabled",
+      "introduced_version": "1.1.0",
+      "operator_action": "Require a new calibration or documented independent control.",
+      "publication_action": "block",
+      "recovery_mode": "new_calibration_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "invalid_input",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "pose",
+      "code": "POSE_COLLAPSE_DETECTED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "pose_collapse"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "ARKit/LiDAR reference pose fallback",
+      "introduced_version": "1.1.0",
+      "operator_action": "Quarantine learned pose output and use the metric observation lane.",
+      "publication_action": "block",
+      "recovery_mode": "new_solver_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "deterministic_algorithm",
+      "retryable": false,
+      "safe_checkpoint": "last_accepted_pose_window",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "metric"
+      ],
+      "audit_required": true,
+      "category": "misalignment",
+      "code": "REGISTRATION_MISALIGNED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "misalignment",
+        "transform_error"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "keep sessions separate in their original frames",
+      "introduced_version": "1.1.0",
+      "operator_action": "Block fusion and request correspondence review.",
+      "publication_action": "block",
+      "recovery_mode": "new_registration_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "accepted_coarse_alignment",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric"
+      ],
+      "audit_required": true,
+      "category": "false",
+      "code": "LOOP_CLOSURE_FALSE_POSITIVE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "false_loop"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "retain pre-loop trajectory",
+      "introduced_version": "1.1.0",
+      "operator_action": "Disable the suspect constraint and rerun robust optimization.",
+      "publication_action": "block",
+      "recovery_mode": "new_graph_revision",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "deterministic_algorithm",
+      "retryable": false,
+      "safe_checkpoint": "pre_loop_graph",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric"
+      ],
+      "audit_required": true,
+      "category": "depth",
+      "code": "DEPTH_SCALE_IMPLAUSIBLE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "depth_scale_error"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "visual-only representation",
+      "introduced_version": "1.1.0",
+      "operator_action": "Reject metric fusion and require a known-scale control.",
+      "publication_action": "block",
+      "recovery_mode": "new_metric_alignment_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "invalid_input",
+      "retryable": false,
+      "safe_checkpoint": "last_known_scale_control",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "metric",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "dynamic",
+      "code": "DYNAMIC_SCENE_CONTAMINATION",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "dynamic_contamination"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "exclude dynamic regions and preserve evidence frames",
+      "introduced_version": "1.1.0",
+      "operator_action": "Quarantine affected regions for masking/review.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_masked_fusion_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "static_mask_version",
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction"
+      ],
+      "audit_required": true,
+      "category": "mesh",
+      "code": "MESH_TOPOLOGY_DEFECT",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "false_geometry",
+        "mesh_defect"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "native visual plus metric mesh; guided navigation only",
+      "introduced_version": "1.1.0",
+      "operator_action": "Disable affected collision/navigation and quarantine the proxy.",
+      "publication_action": "block",
+      "recovery_mode": "new_proxy_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "deterministic_algorithm",
+      "retryable": false,
+      "safe_checkpoint": "source_metric_revision",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "model",
+      "code": "MODEL_OR_LICENSE_BLOCKED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "model_license_block",
+        "provider_denial"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "deterministic local reference provider",
+      "introduced_version": "1.1.0",
+      "operator_action": "Keep the provider disabled and route to an approved local reference path.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_approved_provider_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "queue",
+      "code": "WORK_QUEUE_UNAVAILABLE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "queue_outage"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "bounded synchronous operator command for recovery only",
+      "introduced_version": "1.1.0",
+      "operator_action": "Pause dispatch and preserve queued intent.",
+      "publication_action": "quarantine",
+      "recovery_mode": "resume_same_operation_new_attempt",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "transient",
+      "retryable": true,
+      "safe_checkpoint": "durable_operation_state",
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "provider",
+      "code": "PROVIDER_UNAVAILABLE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "provider_outage"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "approved local/native hybrid provider",
+      "introduced_version": "1.1.0",
+      "operator_action": "Stop external transfer and invoke approved fallback policy.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_provider_attempt",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "transient",
+      "retryable": true,
+      "safe_checkpoint": "last_provider_checkpoint",
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "index",
+      "code": "SEARCH_INDEX_STALE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "index_staleness"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "transactional metadata browsing",
+      "introduced_version": "1.1.0",
+      "operator_action": "Mark search stale and use bounded metadata navigation.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_index_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "transient",
+      "retryable": true,
+      "safe_checkpoint": "last_index_sequence",
+      "severity": "warning",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "permission",
+      "code": "PERMISSION_BOUNDARY_LEAK",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "permission_leak"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "deny access; no client-side hiding",
+      "introduced_version": "1.1.0",
+      "operator_action": "Disable affected derivative/view and initiate a security incident.",
+      "publication_action": "withdraw",
+      "recovery_mode": "new_authorized_derivative_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "redaction",
+      "code": "REDACTION_APPLICATION_FAILED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "redaction_failure"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "source-only restricted review",
+      "introduced_version": "1.1.0",
+      "operator_action": "Block export/publication and invalidate affected derivatives.",
+      "publication_action": "block",
+      "recovery_mode": "new_redaction_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "deletion",
+      "code": "CONTROLLED_DELETION_FAILED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "deletion_error"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "preserve data and keys pending review",
+      "introduced_version": "1.1.0",
+      "operator_action": "Stop deletion, retain legal hold/backup, and run recovery procedure.",
+      "publication_action": "block",
+      "recovery_mode": "new_two_person_deletion_request",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "non_retryable",
+      "retryable": false,
+      "safe_checkpoint": "pre_deletion_snapshot",
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [],
+      "audit_required": true,
+      "category": "provider",
+      "code": "PROVIDER_EXECUTION_DENIED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "provider_denial"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "local deterministic provider",
+      "introduced_version": "1.1.0",
+      "operator_action": "Retain denial evidence and select an approved provider.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_approved_provider_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "provider",
+      "code": "PROVIDER_APPROVAL_REVOKED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "provider_revocation"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "native hybrid representation using retained accepted assets",
+      "introduced_version": "1.1.0",
+      "operator_action": "Stop new runs and impact-analyze existing derivatives.",
+      "publication_action": "block",
+      "recovery_mode": "new_fallback_provider_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": "last_accepted_candidate",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "malformed",
+      "code": "PROVIDER_OUTPUT_MALFORMED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "malformed_output"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "retain source/metric/visual/evidence and prior proxy",
+      "introduced_version": "1.1.0",
+      "operator_action": "Isolate parser output and quarantine the provider result.",
+      "publication_action": "block",
+      "recovery_mode": "new_provider_or_adapter_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "invalid_input",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "transform",
+      "code": "REPRESENTATION_TRANSFORM_INVALID",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "transform_error"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "display source in isolated frame",
+      "introduced_version": "1.1.0",
+      "operator_action": "Reject scene binding and preserve original coordinate metadata.",
+      "publication_action": "block",
+      "recovery_mode": "new_transform_validation_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "deterministic_algorithm",
+      "retryable": false,
+      "safe_checkpoint": "source_coordinate_frame",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction"
+      ],
+      "audit_required": true,
+      "category": "false",
+      "code": "INTERACTION_FALSE_GEOMETRY",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "false_geometry"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "prior accepted proxy or guided 2D mode",
+      "introduced_version": "1.1.0",
+      "operator_action": "Disable affected picking/collision/navigation profile.",
+      "publication_action": "block",
+      "recovery_mode": "new_constrained_proxy_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "prior_accepted_proxy",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "evidence",
+        "interaction"
+      ],
+      "audit_required": true,
+      "category": "anchor",
+      "code": "ANCHOR_REPROJECTION_FAILED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "anchor_failure"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "historical anchor view plus manual re-anchor",
+      "introduced_version": "1.1.0",
+      "operator_action": "Report unresolved anchors without deleting historical support.",
+      "publication_action": "quarantine",
+      "recovery_mode": "new_remap_revision",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "historical_support_map",
+      "severity": "error",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "evidence",
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "redaction",
+      "code": "DERIVATIVE_REDACTION_FAILED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "redaction_propagation"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "restricted source-only access",
+      "introduced_version": "1.1.0",
+      "operator_action": "Withdraw the derivative, purge caches, and block publication.",
+      "publication_action": "withdraw",
+      "recovery_mode": "new_derivative_graph_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "fatal",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction",
+        "visual"
+      ],
+      "audit_required": true,
+      "category": "authority",
+      "code": "NONAUTHORITATIVE_ASSET_MISUSED",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "authority_misuse"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "resolve against eligible metric or field evidence",
+      "introduced_version": "1.1.0",
+      "operator_action": "Block save/export and open a policy incident.",
+      "publication_action": "block",
+      "recovery_mode": "new_metric_resolution_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "policy",
+      "retryable": false,
+      "safe_checkpoint": null,
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    },
+    {
+      "affected_representations": [
+        "interaction"
+      ],
+      "audit_required": true,
+      "category": "immersive",
+      "code": "IMMERSIVE_NAVIGATION_UNSAFE",
+      "compatibility_aliases": [],
+      "coverage_tags": [
+        "immersive_safety"
+      ],
+      "customer_message": "The operation could not be safely completed. Existing accepted evidence remains available.",
+      "diagnostic_fields": [
+        "adapter_version",
+        "environment_hash",
+        "input_hash",
+        "operation_id",
+        "output_hash"
+      ],
+      "fallback": "2D/guided mode, quiet mode, pause/reset/safe exit",
+      "introduced_version": "1.1.0",
+      "operator_action": "Disable free movement and force safe exit or guided mode.",
+      "publication_action": "block",
+      "recovery_mode": "new_safety_acceptance_run",
+      "remediation": [
+        "retain_failed_run_manifest",
+        "review_bounded_diagnostics",
+        "create_new_run_lineage"
+      ],
+      "retry_class": "manual_review",
+      "retryable": false,
+      "safe_checkpoint": "last_safe_experience_profile",
+      "severity": "unsafe",
+      "test_references": [
+        "tests/unit/test_failure_catalog.py",
+        "tests/contract/test_governance_registers.py"
+      ]
+    }
+  ],
+  "required_coverage_tags": [
+    "anchor_failure",
+    "authority_misuse",
+    "bad_calibration",
+    "clock_error",
+    "corrupt_package",
+    "deletion_error",
+    "depth_scale_error",
+    "dynamic_contamination",
+    "false_geometry",
+    "false_loop",
+    "hash_mismatch",
+    "immersive_safety",
+    "index_staleness",
+    "malformed_output",
+    "mesh_defect",
+    "misalignment",
+    "mobile_interruption",
+    "model_license_block",
+    "permission_leak",
+    "pose_collapse",
+    "provider_denial",
+    "provider_outage",
+    "provider_revocation",
+    "queue_outage",
+    "redaction_failure",
+    "redaction_propagation",
+    "tracking_loss",
+    "transform_error"
+  ],
+  "schema": "sip.failure-catalog/v1",
+  "sensitive_diagnostic_policy": "Diagnostic manifests retain only allowlisted hashes, identifiers, bounded metrics, versions, and environment references; never raw media, transcripts, secrets, biometrics, or precise restricted coordinates."
+}

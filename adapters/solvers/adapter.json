@@ -1,0 +1,14 @@
+{
+  "schema": "sip.adapter-manifest/v1",
+  "adapter_id": "sip-reference-registration",
+  "version": "1.1.0",
+  "backend": "numpy-scipy-reference",
+  "approved": true,
+  "region": "local",
+  "deterministic": true,
+  "algorithms": ["weighted_umeyama_sim3_se3", "seeded_ransac", "coarse_gated_icp"],
+  "future_backends": [
+    {"name": "gtsam", "state": "manifest_required"},
+    {"name": "ceres", "state": "manifest_required"}
+  ]
+}

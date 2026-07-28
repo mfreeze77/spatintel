@@ -1,0 +1,35 @@
+schema_version: '1.0'
+requirement_id: CAPIOS-006
+priority: P1
+source:
+  document: 30-capture/301_ios_app.md
+  line: 41
+  section: 4. Normative requirements
+requirement: The app shall never delete local originals until package integrity and destination receipt are verified and the
+  user or policy authorizes purge.
+verification_method: Controlled verification
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- apps/ios-capture/Sources
+- apps/ios-capture/Tests
+- schemas/jsonschema
+automated_test_ids:
+- apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-7:CAPIOS-005 CAPIOS-006 policy disables sensors
+  and purge fails closed
+- apps/ios-capture/Tests/CaptureTransferTests/CaptureTransferTests.swift::swift-test-1:CAPIOS-006 resumable transfer persists
+  chunk checkpoints and verifies destination receipt
+retained_evidence:
+- build/evidence/swift-test-linux.log
+- build/reports/swift-test-report.json
+- build/reports/test-matrix.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

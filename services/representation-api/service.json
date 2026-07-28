@@ -1,0 +1,125 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_hybrid_conversion",
+      "path": "/v1/projects/{project_id}/hybrid/conversions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_hybrid_conversion",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "cancel_hybrid_conversion",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/cancel"
+    },
+    {
+      "method": "POST",
+      "operation_id": "complete_hybrid_candidate",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/candidate"
+    },
+    {
+      "method": "POST",
+      "operation_id": "report_hybrid_provider_failure",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/failure"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_hybrid_manual_export",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/manual-export"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_hybrid_provider_progress",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/progress"
+    },
+    {
+      "method": "POST",
+      "operation_id": "validate_hybrid_candidate",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/validations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "renew_hybrid_worker_lease",
+      "path": "/v1/projects/{project_id}/hybrid/conversions/{conversion_id}/worker-lease:renew"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_hybrid_interaction_profile",
+      "path": "/v1/projects/{project_id}/hybrid/interaction-profiles"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_hybrid_manual_return",
+      "path": "/v1/projects/{project_id}/hybrid/manual-transfers/{transfer_id}/return"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_representation_candidate",
+      "path": "/v1/projects/{project_id}/representations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "invalidate_representation_dependencies",
+      "path": "/v1/projects/{project_id}/representations/dependencies:invalidate"
+    },
+    {
+      "method": "POST",
+      "operation_id": "select_hybrid_representations",
+      "path": "/v1/projects/{project_id}/representations/view:select"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_hybrid_scene_view",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/hybrid-view"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_representation_family",
+      "path": "/v1/projects/{project_id}/scenes/{scene_id}/representation-families"
+    },
+    {
+      "method": "POST",
+      "operation_id": "replace_interaction_proxy",
+      "path": "/v1/representations/{old_id}/replace/{new_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "review_representation",
+      "path": "/v1/representations/{representation_id}/quality-review"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true
+  },
+  "service_name": "representation-api"
+}

@@ -1,0 +1,344 @@
+{
+  "critical_increase_policy": {
+    "action": "block promotion and open security/safety review",
+    "owner": "release-manager",
+    "review_deadline": "one_business_day"
+  },
+  "register_version": "1.1.0",
+  "risk_acceptance_policy": {
+    "maximum_days": 90,
+    "renewal_requires_current_evidence": true,
+    "safety_or_consent_reclassification_prohibited": true
+  },
+  "risks": [
+    {
+      "band": "critical",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "disable measurement save/export; re-resolve against eligible metric evidence",
+      "id": "RISK-PROXY-AUTHORITY-CONFUSION",
+      "impact": 5,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/runbooks/OPERATIONS_INCIDENTS.md"
+      ],
+      "intended_uses": [
+        "picking",
+        "measurement",
+        "export"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 4,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "proxy_authority_incident_total"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "ARCHHYB-014",
+        "CONMEAS-001",
+        "APPFAIL-007"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "construction",
+        "liveforever"
+      ],
+      "score": 20,
+      "status": "OPEN",
+      "test_ids": [
+        "test_proxy_hit_requires_metric_resolution",
+        "test_failure_catalog_blocks_unsafe_publication"
+      ],
+      "title": "A proxy or splat is used as verified metric evidence"
+    },
+    {
+      "band": "critical",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "deny transfer before source access; use approved local provider",
+      "id": "RISK-PROVIDER-DATA-EGRESS",
+      "impact": 5,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/operator/PROVIDER_GOVERNANCE.md"
+      ],
+      "intended_uses": [
+        "conversion",
+        "semantic-extraction"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 3,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "provider_policy_denial_total"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVSCOPE-009",
+        "HYBAPI-004",
+        "GOVRISK-006"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "critical-infrastructure",
+        "private-family"
+      ],
+      "score": 15,
+      "status": "OPEN",
+      "test_ids": [
+        "test_worker_manifest_is_fail_closed",
+        "test_provider_governance"
+      ],
+      "title": "A provider receives data outside approved classification, purpose, region, or retention"
+    },
+    {
+      "band": "critical",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "quarantine candidate; preserve source/metric/visual/evidence/prior proxy",
+      "id": "RISK-PROTECTED-GEOMETRY-LOSS",
+      "impact": 5,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/runbooks/OPERATIONS_INCIDENTS.md"
+      ],
+      "intended_uses": [
+        "collision",
+        "navigation",
+        "occlusion"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 3,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "protected_geometry_regression_total"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVRISK-006",
+        "APPFAIL-008",
+        "RECHYB-006"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "construction",
+        "memorial-place"
+      ],
+      "score": 15,
+      "status": "OPEN",
+      "test_ids": [
+        "test_hybrid_failure_preserves_all_prior_assets"
+      ],
+      "title": "Conversion removes protected openings, safety surfaces, or evidence geometry"
+    },
+    {
+      "band": "critical",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "retain historical support; report unresolved; require manual re-anchor",
+      "id": "RISK-ANCHOR-DRIFT",
+      "impact": 4,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/runbooks/OPERATIONS_INCIDENTS.md"
+      ],
+      "intended_uses": [
+        "annotation",
+        "story-anchor",
+        "issue"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 4,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "unresolved_anchor_ratio"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVRISK-006",
+        "APPFAIL-007",
+        "RECHYB-011"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "construction",
+        "liveforever"
+      ],
+      "score": 16,
+      "status": "OPEN",
+      "test_ids": [
+        "test_anchor_failure_preserves_historical_support"
+      ],
+      "title": "Representation replacement moves or loses semantic anchors"
+    },
+    {
+      "band": "critical",
+      "category": "safety",
+      "closure_evidence": null,
+      "fail_safe_mode": "disable free movement; force guided/2D mode, quiet mode, pause/reset/safe exit",
+      "id": "RISK-IMMERSIVE-SAFETY",
+      "impact": 5,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/operator/INCIDENT_RESPONSE.md"
+      ],
+      "intended_uses": [
+        "navigation",
+        "spatial-audio",
+        "guided-experience"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 3,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "immersive_safe_exit_failure_total"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVRISK-006",
+        "LIFSAFE-001",
+        "APPFAIL-009"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "liveforever",
+        "construction"
+      ],
+      "score": 15,
+      "status": "OPEN",
+      "test_ids": [
+        "test_component_fallbacks_are_independent"
+      ],
+      "title": "Collision/navigation or experience behavior creates physical or emotional harm"
+    },
+    {
+      "band": "critical",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "withdraw derivative, purge caches/indexes, block export/publication",
+      "id": "RISK-DERIVATIVE-REDACTION",
+      "impact": 5,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/privacy/PRIVACY_AND_CONSENT.md"
+      ],
+      "intended_uses": [
+        "search",
+        "viewer",
+        "export",
+        "notification"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 3,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "derivative_policy_invalidation_lag_seconds"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVRISK-006",
+        "SECPRIV-006",
+        "APPFAIL-007"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "critical-infrastructure",
+        "private-family"
+      ],
+      "score": 15,
+      "status": "OPEN",
+      "test_ids": [
+        "test_redaction_failure_requires_withdrawal"
+      ],
+      "title": "A redaction, consent revocation, or restricted region fails to propagate"
+    },
+    {
+      "band": "high",
+      "category": "platform-trust",
+      "closure_evidence": null,
+      "fail_safe_mode": "native hybrid renderer and deterministic local conversion; open export/restore",
+      "id": "RISK-PROVIDER-LOCK-IN",
+      "impact": 4,
+      "impact_analysis_procedure": "enumerate source and derivative graph by provider/version; suspend affected bindings; preserve prior accepted assets; revalidate policy and authority before replacement",
+      "incident_playbooks": [
+        "docs/operator/PROVIDER_GOVERNANCE.md"
+      ],
+      "intended_uses": [
+        "conversion",
+        "rendering",
+        "preservation"
+      ],
+      "last_reviewed": "2026-07-27",
+      "likelihood": 3,
+      "local_native_fallback": "deterministic reference pipeline and native metric+visual+interaction viewer",
+      "monitors": [
+        "provider_fallback_readiness"
+      ],
+      "owner": "security-assurance",
+      "requirement_ids": [
+        "GOVRISK-006",
+        "GOVRISK-009",
+        "ARCADR-002"
+      ],
+      "residual_risk": null,
+      "reviewers": [
+        "product-safety",
+        "privacy",
+        "platform"
+      ],
+      "risk_acceptance": null,
+      "scene_classes": [
+        "all"
+      ],
+      "score": 12,
+      "status": "OPEN",
+      "test_ids": [
+        "test_provider_fallback_and_impact_procedure_is_declared"
+      ],
+      "title": "A provider failure or revocation prevents open use or recovery"
+    }
+  ],
+  "schema": "sip.risk-register/v1",
+  "scoring": {
+    "critical_threshold": 15,
+    "impact_range": "1-5",
+    "likelihood_range": "1-5"
+  }
+}

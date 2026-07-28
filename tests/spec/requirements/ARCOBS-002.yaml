@@ -1,0 +1,39 @@
+schema_version: '1.0'
+requirement_id: ARCOBS-002
+priority: P0
+source:
+  document: 20-architecture/208_observability.md
+  line: 37
+  section: 4. Normative requirements
+requirement: Metrics shall identify model/checkpoint and capture profile without leaking personal or facility-identifying
+  values.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/observability.py
+- src/sip/api.py
+- src/sip/operations.py
+- infrastructure/observability
+automated_test_ids:
+- tests/contract/test_observability.py::test_invalid_request_id_and_content_length_are_bounded
+- tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers
+- tests/contract/test_observability.py::test_operation_depth_inflight_and_retry_metrics_are_governed
+- tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels
+- tests/contract/test_observability_infrastructure.py::test_kubernetes_workers_are_scrapeable_only_through_observability_policy
+- tests/contract/test_observability_infrastructure.py::test_prometheus_scrapes_every_api_and_isolated_worker
+- tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions
+retained_evidence:
+- build/reports/infrastructure-static-validation.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

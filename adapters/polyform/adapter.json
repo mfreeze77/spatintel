@@ -1,0 +1,18 @@
+{
+  "schema": "sip.adapter-manifest/v1",
+  "adapter_id": "polyform-format-reference",
+  "version": "1.1.0",
+  "mode": "local_in_process",
+  "source_reference": {
+    "repository": "https://github.com/PolyCam/polyform",
+    "revision": "ad0111832d3b3860e60efd8928e76f4fe97c8b72",
+    "license": "MIT",
+    "license_blob_sha": "6a1707a4a3924f24c087329b72fba5b7d88913c5"
+  },
+  "runtime_dependency_on_polycam": false,
+  "copies_polycam_source": false,
+  "preserves_original_archive": true,
+  "allowed_classifications": ["public", "internal", "confidential", "critical_infrastructure", "biometric", "minor"],
+  "allowed_regions": ["local"],
+  "external_data_transfer": false
+}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sip-runtime-config
+  namespace: sip-system
+data:
+  SIP_ENV: development
+  SIP_ALLOW_DEVELOPMENT_AUTH: 'true'
+  SIP_OBJECT_STORE_BACKEND: local
+  SIP_DEPLOYMENT_PROFILE: local

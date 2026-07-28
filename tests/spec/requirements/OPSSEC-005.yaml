@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: OPSSEC-005
+priority: P1
+source:
+  document: 90-security-ops/901_security_architecture.md
+  line: 40
+  section: 4. Normative requirements
+requirement: Containers and mobile builds shall be hardened, signed, scanned, and patched under defined SLAs.
+verification_method: Controlled verification
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- infrastructure/containers
+- infrastructure/kubernetes/base
+- tools/security_check.py
+- docs/security/THREAT_MODEL.md
+automated_test_ids:
+- tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned
+retained_evidence:
+- build/reports/infrastructure-static-validation.json
+- build/reports/security-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: REQUIRED
+  owner: Security Engineering / Mobile Release Engineering
+  gap: Build signed production containers and Apple mobile artifacts, execute vulnerability and hardening scans against their
+    final digests, verify patch-SLA tracking, and retain scanner databases, signatures, and review evidence.

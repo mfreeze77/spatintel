@@ -1,0 +1,20 @@
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/build_traceability_map.py --check
+{"requirements": 204, "status": "passed"}
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/update_requirements.py --check
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python -m sip.cli spec-check
+{
+  "errors": 0,
+  "findings": [],
+  "ledger_requirements": 1028,
+  "mode": "structural",
+  "spec_requirements": 1028,
+  "status": "passed",
+  "status_counts": {
+    "EXTERNAL_VALIDATION_REQUIRED": 3,
+    "IMPLEMENTED_UNVERIFIED": 88,
+    "IN_PROGRESS": 22,
+    "NOT_STARTED": 824,
+    "VERIFIED": 91
+  },
+  "warnings": 0
+}

@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: HYBAPI-006
+priority: P0
+source:
+  document: 60-platform/614_splat_surface_api_and_events.md
+  line: 330
+  section: 13. Normative requirements
+requirement: A publication command shall reject stale candidate, policy, consent, provider, benchmark, transform, scene, or
+  support-remap state.
+verification_method: Optimistic-concurrency test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/worker_manifest.py
+- src/sip/worker_protocol.py
+- src/sip/worker_runtime.py
+- src/sip/operations.py
+- src/sip/representations.py
+- schemas/protobuf/worker.proto
+automated_test_ids:
+- tests/contract/test_governed_hybrid_api.py::test_governed_hybrid_api_admits_quarantines_validates_publishes_and_issues_binding_only_view
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

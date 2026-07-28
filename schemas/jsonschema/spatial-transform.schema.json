@@ -1,0 +1,297 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    },
+    "CRSGridResourceContract": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "uri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uri"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "required": [
+        "name",
+        "sha256"
+      ],
+      "title": "CRSGridResourceContract",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/spatial-transform.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "calibration_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calibration Id"
+    },
+    "covariance": {
+      "anyOf": [
+        {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariance"
+    },
+    "crs_pipeline": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crs Pipeline"
+    },
+    "direction": {
+      "default": "source_to_target",
+      "enum": [
+        "source_to_target",
+        "target_to_source"
+      ],
+      "title": "Direction",
+      "type": "string"
+    },
+    "grid_resources": {
+      "items": {
+        "$ref": "#/$defs/CRSGridResourceContract"
+      },
+      "title": "Grid Resources",
+      "type": "array"
+    },
+    "matrix": {
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Matrix",
+      "type": "array"
+    },
+    "matrix_layout": {
+      "default": "row_major",
+      "enum": [
+        "row_major",
+        "column_major"
+      ],
+      "title": "Matrix Layout",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "multiplication_convention": {
+      "default": "column_vector_pre_multiply",
+      "enum": [
+        "column_vector_pre_multiply",
+        "row_vector_post_multiply"
+      ],
+      "title": "Multiplication Convention",
+      "type": "string"
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed At"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "scale": {
+      "default": 1.0,
+      "exclusiveMinimum": 0,
+      "title": "Scale",
+      "type": "number"
+    },
+    "solver_run_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Solver Run Id"
+    },
+    "source_frame_id": {
+      "title": "Source Frame Id",
+      "type": "string"
+    },
+    "source_type": {
+      "enum": [
+        "calibration",
+        "registration",
+        "control",
+        "manual",
+        "geodetic",
+        "import"
+      ],
+      "title": "Source Type",
+      "type": "string"
+    },
+    "supersedes_transform_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Transform Id"
+    },
+    "target_frame_id": {
+      "title": "Target Frame Id",
+      "type": "string"
+    },
+    "transform_id": {
+      "title": "Transform Id",
+      "type": "string"
+    },
+    "transform_type": {
+      "enum": [
+        "SE3",
+        "SIM3"
+      ],
+      "title": "Transform Type",
+      "type": "string"
+    },
+    "translation_units": {
+      "default": "meter",
+      "enum": [
+        "meter",
+        "millimeter"
+      ],
+      "title": "Translation Units",
+      "type": "string"
+    },
+    "uncertainty": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Uncertainty",
+      "type": "object"
+    },
+    "valid_from": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid From"
+    },
+    "valid_to": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid To"
+    }
+  },
+  "required": [
+    "transform_id",
+    "source_frame_id",
+    "target_frame_id",
+    "transform_type",
+    "matrix",
+    "uncertainty",
+    "source_type",
+    "authority_class"
+  ],
+  "title": "SpatialTransformContract",
+  "type": "object"
+}

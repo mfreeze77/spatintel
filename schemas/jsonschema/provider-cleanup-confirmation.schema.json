@@ -1,0 +1,79 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/provider-cleanup-confirmation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempted": {
+      "title": "Attempted",
+      "type": "boolean"
+    },
+    "cleanup_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Cleanup Hash",
+      "type": "string"
+    },
+    "completed": {
+      "title": "Completed",
+      "type": "boolean"
+    },
+    "deleted_object_count": {
+      "minimum": 0,
+      "title": "Deleted Object Count",
+      "type": "integer"
+    },
+    "evidence_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Hash",
+      "type": "string"
+    },
+    "method": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Method",
+      "type": "string"
+    },
+    "residual_risks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Risks",
+      "type": "array"
+    },
+    "retained_quarantine_asset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Retained Quarantine Asset Ids",
+      "type": "array"
+    },
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "verifier_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Verifier Id",
+      "type": "string"
+    },
+    "workspace_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Workspace Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "attempted",
+    "completed",
+    "method",
+    "workspace_hash",
+    "deleted_object_count",
+    "verified_at",
+    "verifier_id",
+    "evidence_hash",
+    "cleanup_hash"
+  ],
+  "title": "ProviderCleanupConfirmationContract",
+  "type": "object"
+}

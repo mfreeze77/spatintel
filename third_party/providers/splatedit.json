@@ -1,0 +1,15 @@
+{
+  "schema": "sip.provider-manifest/v1",
+  "provider_id": "splatedit",
+  "version": "unapproved",
+  "source_url": "UNRESOLVED",
+  "source_revision": "UNRESOLVED",
+  "license_id": "UNKNOWN",
+  "approval_state": "denied",
+  "allowed_classifications": ["public"],
+  "allowed_purposes": ["synthetic_manual_fixture"],
+  "allowed_regions": ["local"],
+  "retention_days": 0,
+  "external": true,
+  "denial_reason": "Exact source, license, retention, data handling, and production posture require audit before execution."
+}

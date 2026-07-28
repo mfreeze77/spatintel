@@ -1,0 +1,47 @@
+PYTHONPATH=/mnt/data/sip-hybrid-work/src:/mnt/data/sip-hybrid-work python tools/static_checks.py
+{
+  "checks": [
+    {
+      "detail": "no production placeholders, empty function bodies, or dynamic eval/exec",
+      "name": "source-policy",
+      "status": "passed"
+    },
+    {
+      "detail": "",
+      "name": "python-compile",
+      "status": "passed"
+    },
+    {
+      "detail": "{\"check\": true, \"generated\": 117}",
+      "name": "schema-drift",
+      "status": "passed"
+    },
+    {
+      "detail": "Docker Compose worker definitions are synchronized",
+      "name": "compose-worker-drift",
+      "status": "passed"
+    },
+    {
+      "detail": "{\"requirements\": 204, \"status\": \"passed\"}",
+      "name": "traceability-map-drift",
+      "status": "passed"
+    },
+    {
+      "detail": "",
+      "name": "requirements-drift",
+      "status": "passed"
+    },
+    {
+      "detail": "{\"path\": \"third_party/manifest.lock.json\", \"root\": \"84bc4a0e0c3c16363a3dee0e6ecbaed105eba2aaa9f9157de203e4a9241990b2\", \"status\": \"passed\"}",
+      "name": "third-party-lock-drift",
+      "status": "passed"
+    },
+    {
+      "detail": "ty\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-depth-normalizer.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-document-media.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-fusion-tsdf.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-geometry-cleanup.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-lingbot-adapter.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-mesh-lod.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-pose-optimizer.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-report-export.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-representation-quality.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-semantics.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-splat-normalizer.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-splat-surface.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/worker-splat.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/deployments/workflow-service.yaml\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"code\": \"K8S_IMAGE_SENTINEL\",\n      \"message\": \"application image digest has not been replaced by CI\",\n      \"path\": \"/mnt/data/sip-hybrid-work/infrastructure/kubernetes/base/migration-job.yaml\",\n      \"severity\": \"warning\"\n    }\n  ],\n  \"mode\": \"structural\",\n  \"status\": \"passed\",\n  \"warnings\": 31\n}",
+      "name": "infrastructure-policy",
+      "status": "passed"
+    }
+  ],
+  "schema": "sip.static-checks/v1",
+  "status": "passed"
+}

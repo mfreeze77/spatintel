@@ -1,0 +1,38 @@
+schema_version: '1.0'
+requirement_id: ARCIAM-001
+priority: P0
+source:
+  document: 20-architecture/206_identity_tenancy_permissions.md
+  line: 36
+  section: 4. Normative requirements
+requirement: Every request shall be authorized using authenticated principal, tenant, project, action, resource classification,
+  purpose, and relevant consent.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/auth.py
+- src/sip/policy.py
+- src/sip/api.py
+- src/sip/tenancy.py
+automated_test_ids:
+- tests/contract/test_api_contract.py::test_cross_tenant_api_scope_is_denied_without_disclosure
+- tests/contract/test_governed_hybrid_api.py::test_hybrid_api_rejects_body_scope_mismatch_before_admission
+- tests/contract/test_spatial_truth_api.py::test_assertion_reads_require_project_authorization_even_without_linked_evidence
+- tests/contract/test_spatial_truth_api.py::test_derivation_api_idempotency_is_tenant_scoped
+- tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope
+- tests/unit/test_assets_policy.py::test_arciam_001_server_side_tenant_project_purpose_and_sensitive_policy
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/unit.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

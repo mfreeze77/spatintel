@@ -1,0 +1,24 @@
+schema_version: '1.0'
+requirement_id: RECMESH-004
+priority: P1
+source:
+  document: 40-reconstruction/406_meshing_texturing_lod.md
+  line: 39
+  section: 4. Normative requirements
+requirement: Viewer LOD switches shall not change measurement results, which are computed from approved metric geometry.
+verification_method: Controlled verification
+implementation_status: NOT_STARTED
+implementation_files: []
+automated_test_ids:
+- REQ-RECMESH-004
+retained_evidence: []
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: UNASSIGNED
+  gap: ''

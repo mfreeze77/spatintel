@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: DELDEV-006
+priority: P1
+source:
+  document: 95-testing-delivery/959_developer_onboarding.md
+  line: 41
+  section: 4. Normative requirements
+requirement: Contributor documentation shall state code owners, review expectations, ADR process, and release gates.
+verification_method: Controlled verification
+implementation_status: VERIFIED
+implementation_files:
+- Makefile
+- justfile
+- tools/static_checks.py
+- tools/typecheck.py
+- docs/developer/GETTING_STARTED.md
+- CONTRIBUTING.md
+automated_test_ids:
+- tests/contract/test_documentation.py::test_contributor_documentation_defines_ownership_adr_review_and_release_gates
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

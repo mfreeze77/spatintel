@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sip-runtime-config
+  namespace: sip-system
+data:
+  SIP_ENV: production
+  SIP_ALLOW_DEVELOPMENT_AUTH: 'false'
+  SIP_MASTER_KEY_ID: external-kms-v1
+  SIP_OBJECT_STORE_BACKEND: s3
+  SIP_OBJECT_STORE_ROOT: /var/lib/sip/objects
+  SIP_MULTIPART_ROOT: /var/lib/sip/runtime/multipart
+  SIP_MAX_API_BODY_BYTES: '67108864'
+  SIP_LOG_LEVEL: info
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector.sip-observability:4318

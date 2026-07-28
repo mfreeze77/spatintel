@@ -1,0 +1,226 @@
+{
+  "$defs": {
+    "AuthorityClass": {
+      "enum": [
+        "none",
+        "evidence",
+        "metric",
+        "design",
+        "visual",
+        "derived_non_authoritative",
+        "field_verified",
+        "historical_assertion"
+      ],
+      "title": "AuthorityClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/measurement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_class": {
+      "$ref": "#/$defs/AuthorityClass"
+    },
+    "calibration": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Calibration",
+      "type": "object"
+    },
+    "coordinate_frame_id": {
+      "title": "Coordinate Frame Id",
+      "type": "string"
+    },
+    "creator_id": {
+      "title": "Creator Id",
+      "type": "string"
+    },
+    "entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entity Id"
+    },
+    "geometry": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Geometry",
+      "type": "object"
+    },
+    "interaction_hit": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interaction Hit"
+    },
+    "measured_at": {
+      "format": "date-time",
+      "title": "Measured At",
+      "type": "string"
+    },
+    "measurement_id": {
+      "title": "Measurement Id",
+      "type": "string"
+    },
+    "measurement_type": {
+      "minLength": 1,
+      "title": "Measurement Type",
+      "type": "string"
+    },
+    "originating_representation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Originating Representation Id"
+    },
+    "permitted_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Permitted Uses",
+      "type": "array"
+    },
+    "resolved_metric_evidence": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolved Metric Evidence"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "source_asset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Asset Ids",
+      "type": "array"
+    },
+    "source_commit_id": {
+      "title": "Source Commit Id",
+      "type": "string"
+    },
+    "source_method": {
+      "minLength": 1,
+      "title": "Source Method",
+      "type": "string"
+    },
+    "supersedes_measurement_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Measurement Id"
+    },
+    "uncertainty": {
+      "minimum": 0,
+      "title": "Uncertainty",
+      "type": "number"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value",
+      "type": "number"
+    },
+    "verification_date": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verification Date"
+    },
+    "verification_status": {
+      "enum": [
+        "observed",
+        "measured",
+        "verified",
+        "disputed",
+        "superseded"
+      ],
+      "title": "Verification Status",
+      "type": "string"
+    },
+    "verifier_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verifier Id"
+    },
+    "warning": {
+      "default": "Phone-derived geometry is not survey-grade or contract-authoritative without independent verification.",
+      "title": "Warning",
+      "type": "string"
+    }
+  },
+  "required": [
+    "measurement_id",
+    "scene_id",
+    "measurement_type",
+    "geometry",
+    "value",
+    "unit",
+    "uncertainty",
+    "source_method",
+    "measured_at",
+    "coordinate_frame_id",
+    "source_commit_id",
+    "permitted_uses",
+    "source_asset_ids",
+    "calibration",
+    "creator_id",
+    "verification_status",
+    "authority_class"
+  ],
+  "title": "MeasurementContract",
+  "type": "object"
+}

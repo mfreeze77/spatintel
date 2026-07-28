@@ -1,0 +1,39 @@
+
+> @sip/web@1.1.0 verify-runtime
+> node --test test/*.test.mjs && node scripts/verify-source.mjs
+
+TAP version 13
+# Subtest: representation layers remain distinct and bounded
+ok 1 - representation layers remain distinct and bounded
+  ---
+  duration_ms: 1.27604
+  type: 'test'
+  ...
+# Subtest: proxy hits must resolve against metric evidence
+ok 2 - proxy hits must resolve against metric evidence
+  ---
+  duration_ms: 0.247889
+  type: 'test'
+  ...
+# Subtest: proxy replacement preserves stable anchors or reports them unresolved
+ok 3 - proxy replacement preserves stable anchors or reports them unresolved
+  ---
+  duration_ms: 1.016082
+  type: 'test'
+  ...
+# Subtest: viewer snapshot serialization is deterministic
+ok 4 - viewer snapshot serialization is deterministic
+  ---
+  duration_ms: 6.049915
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53.932844
+{"status":"passed","checkedFiles":10,"invariantChecks":11}

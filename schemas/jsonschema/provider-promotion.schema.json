@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "Classification": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "critical_infrastructure",
+        "biometric",
+        "minor"
+      ],
+      "title": "Classification",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.sip.local/v1.1.0/provider-promotion.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "benchmark_evidence_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Benchmark Evidence Hash",
+      "type": "string"
+    },
+    "data_classifications": {
+      "items": {
+        "$ref": "#/$defs/Classification"
+      },
+      "minItems": 1,
+      "title": "Data Classifications",
+      "type": "array"
+    },
+    "execution_zones": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Execution Zones",
+      "type": "array"
+    },
+    "hardware_profiles": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Hardware Profiles",
+      "type": "array"
+    },
+    "intended_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Intended Uses",
+      "type": "array"
+    },
+    "output_roles": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Output Roles",
+      "type": "array"
+    },
+    "policy_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Snapshot Hash",
+      "type": "string"
+    },
+    "promotion_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Promotion Hash",
+      "type": "string"
+    },
+    "promotion_id": {
+      "title": "Promotion Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "provider_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Provider Manifest Hash",
+      "type": "string"
+    },
+    "provider_version": {
+      "title": "Provider Version",
+      "type": "string"
+    },
+    "scene_classes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scene Classes",
+      "type": "array"
+    },
+    "signature": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Signature",
+      "type": "string"
+    },
+    "signed_by": {
+      "title": "Signed By",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "discovered",
+        "research_isolated",
+        "shadow",
+        "limited",
+        "active",
+        "deprecated",
+        "blocked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "valid_from": {
+      "format": "date-time",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "valid_until": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valid Until"
+    }
+  },
+  "required": [
+    "promotion_id",
+    "provider_id",
+    "provider_version",
+    "provider_manifest_hash",
+    "state",
+    "data_classifications",
+    "scene_classes",
+    "output_roles",
+    "intended_uses",
+    "execution_zones",
+    "hardware_profiles",
+    "benchmark_evidence_hash",
+    "policy_snapshot_hash",
+    "valid_from",
+    "signed_by",
+    "promotion_hash",
+    "signature"
+  ],
+  "title": "ProviderPromotionContract",
+  "type": "object"
+}

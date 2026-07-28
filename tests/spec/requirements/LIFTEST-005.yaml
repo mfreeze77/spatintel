@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: LIFTEST-005
+priority: P1
+source:
+  document: 80-liveforever/812_liveforever_acceptance_tests.md
+  line: 40
+  section: 4. Normative requirements
+requirement: The system shall export an offline package with originals, transcript, graph, scene, labels, consent summary,
+  and checksums.
+verification_method: Controlled verification
+implementation_status: IN_PROGRESS
+implementation_files:
+- src/sip/liveforever.py
+- src/sip/exporting.py
+- tools/run_demo.py
+- verticals/liveforever
+automated_test_ids:
+- tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
+retained_evidence:
+- build/evidence/demos/liveforever.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

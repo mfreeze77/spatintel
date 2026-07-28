@@ -1,0 +1,53 @@
+{
+  "classification": "internal",
+  "deficiency": {
+    "correction_evidence": [
+      "photo-after-1"
+    ],
+    "id": "def-1",
+    "retest": "passed",
+    "state": "closed"
+  },
+  "hierarchy": {
+    "building": "Building A",
+    "level": "L1",
+    "rooms": [
+      "Electrical 101",
+      "Corridor 102"
+    ],
+    "site": "Demo Site"
+  },
+  "measurement": {
+    "calibration_id": "tape-verified-1",
+    "uncertainty": 0.003,
+    "units": "meter",
+    "value": 0.914,
+    "verification_date": "2026-01-01",
+    "verifier": "synthetic-inspector"
+  },
+  "project_id": "synthetic-construction-demo",
+  "schema": "sip.synthetic-construction-project/v1",
+  "systems": [
+    {
+      "authority": "evidence",
+      "entity_id": "fa-panel-1",
+      "kind": "fire_alarm",
+      "state": "observed"
+    },
+    {
+      "authority": "design_intent",
+      "entity_id": "door-102a",
+      "kind": "access_control",
+      "state": "design"
+    },
+    {
+      "authority": "field_verified",
+      "entity_id": "ahu-1",
+      "kind": "mechanical",
+      "state": "verified"
+    }
+  ],
+  "warnings": [
+    "phone-derived geometry is not survey-grade or fabrication-authoritative"
+  ]
+}

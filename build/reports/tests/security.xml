@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest-security" tests="3" failures="0" errors="0" skipped="0" time="1.964000" timestamp="2026-07-28T00:35:11.595471+00:00" hostname="8af374932250">
+    <testcase classname="tests.security.test_tenant_isolation" name="test_tstsec_cross_tenant_asset_access_is_indistinguishable_from_missing" time="1.859" />
+    <testcase classname="tests.security.test_worker_sandbox" name="test_worker_sandbox_denies_network_and_shell_but_allows_trusted_control_io" time="0.001" />
+    <testcase classname="tests.security.test_worker_sandbox" name="test_worker_sandbox_enforces_output_staging_limit" time="0.000" />
+  </testsuite>
+</testsuites>

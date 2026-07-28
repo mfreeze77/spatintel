@@ -1,0 +1,22 @@
+{
+  "schema": "sip.third-party-sources/v1",
+  "generated_at": "2026-07-27T00:00:00Z",
+  "sources": [
+    {
+      "name": "lingbot-map",
+      "repository": "https://github.com/Robbyant/lingbot-map",
+      "revision": "1f480aeb8a47a24656090d46d053115b7fe60435",
+      "license": "Apache-2.0",
+      "license_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "runtime_state": "source_adapter_approved_checkpoint_denied"
+    },
+    {
+      "name": "polyform",
+      "repository": "https://github.com/PolyCam/polyform",
+      "revision": "ad0111832d3b3860e60efd8928e76f4fe97c8b72",
+      "license": "MIT",
+      "license_blob_sha": "6a1707a4a3924f24c087329b72fba5b7d88913c5",
+      "runtime_state": "format_reference_only_no_runtime_dependency"
+    }
+  ]
+}

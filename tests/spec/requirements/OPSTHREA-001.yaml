@@ -1,0 +1,32 @@
+schema_version: '1.0'
+requirement_id: OPSTHREA-001
+priority: P0
+source:
+  document: 90-security-ops/900_threat_model.md
+  line: 36
+  section: 4. Normative requirements
+requirement: The threat model shall enumerate capture-device compromise, upload tampering, archive bombs, parser exploits,
+  GPU escape, cross-tenant access, signed-URL leakage, viewer scraping, model exfiltration, prompt injection, insider abuse,
+  and destructive deletion.
+verification_method: Automated test
+implementation_status: VERIFIED
+implementation_files:
+- docs/security/THREAT_MODEL.md
+- src/sip/security.py
+- src/sip/worker_sandbox.py
+automated_test_ids:
+- tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

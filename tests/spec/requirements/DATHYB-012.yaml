@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: DATHYB-012
+priority: P1
+source:
+  document: 50-data/514_hybrid_representation_asset_contract.md
+  line: 299
+  section: 13. Normative requirements
+requirement: The dependency graph shall support selective invalidation and regeneration after privacy, cleanup, transform,
+  provider, or source changes.
+verification_method: Invalidation test
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/representations.py
+- src/sip/scene.py
+- src/sip/database.py
+automated_test_ids:
+- tests/integration/test_scene_representation.py::test_representation_publication_rechecks_inherited_policy_and_consent
+- tests/integration/test_spatial_truth_twin.py::test_dathyb_dependency_invalidation_supersedes_bindings_and_view_falls_back
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

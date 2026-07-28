@@ -1,0 +1,61 @@
+{
+  "append_only": true,
+  "migrations": [
+    {
+      "byte_count": 23119,
+      "path": "migrations/versions/0001_foundation_control_plane.py",
+      "sha256": "f91b5feda3bacb1193b437ea02b47b0fce29132f946b197c4536058e848db026"
+    },
+    {
+      "byte_count": 30346,
+      "path": "migrations/versions/0002_scene_verticals.py",
+      "sha256": "47a4dc283fa54b916ee0a9bb62e9da75b9ba6d172b797764fc68ecc786581faa"
+    },
+    {
+      "byte_count": 16583,
+      "path": "migrations/versions/0003_collaboration_notifications.py",
+      "sha256": "b5277b606cb06e004414d252b07aa44356512e64fdc009af63ff634a3407463e"
+    },
+    {
+      "byte_count": 15673,
+      "path": "migrations/versions/0004_lifecycle_recovery_controls.py",
+      "sha256": "b326baab4c8ed9b2b1f234fdaecfd84d8b5c3372d446f0d4a2eadcdbdcb71892"
+    },
+    {
+      "byte_count": 1640,
+      "path": "migrations/versions/0005_worker_candidate_idempotency.py",
+      "sha256": "1e8ba1cef6e09ea179b1e1aa637925cc3304d8c1337301f41f9a2432fc86012c"
+    },
+    {
+      "byte_count": 1134,
+      "path": "migrations/versions/0006_operation_trace_context.py",
+      "sha256": "7a42d73f0d5d74b3332532a8572ab9297789d5a1b92e862e03f7775c6c814adf"
+    },
+    {
+      "byte_count": 2372,
+      "path": "migrations/versions/0007_representation_authority_contract.py",
+      "sha256": "e9bf5a3ca0f65c7f2176a7e761e72b64997ad99997ed58099b8820e31fd45757"
+    },
+    {
+      "byte_count": 2461,
+      "path": "migrations/versions/0008_complete_event_envelope.py",
+      "sha256": "6f4689c90c11ea4a1e99da599e7d54b4f93dfbfb99c15f7b5d1f63f3be7ddddf"
+    },
+    {
+      "byte_count": 7065,
+      "path": "migrations/versions/0009_authorized_spatial_search_and_agents.py",
+      "sha256": "b9efefaddcd72c8aed75f9c330b1bdf19bd326ee5795abc35bfb280d4f3dcee0"
+    },
+    {
+      "byte_count": 30382,
+      "path": "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+      "sha256": "0efb005c5ea03154ce85b689aff8cd92a2b80bfff2047577b3f3d694fa34dc81"
+    },
+    {
+      "byte_count": 25277,
+      "path": "migrations/versions/0011_governed_hybrid_representation.py",
+      "sha256": "34e22a2b48039faf3320fcf91a06c49446d4bd236f258230c00ab1bbbf0ab837"
+    }
+  ],
+  "schema_version": "1.1.0"
+}

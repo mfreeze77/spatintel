@@ -1,0 +1,36 @@
+schema_version: '1.0'
+requirement_id: RECHYB-005
+priority: P0
+source:
+  document: 40-reconstruction/415_splat_surface_hybrid_representation.md
+  line: 143
+  section: 12. Normative requirements
+requirement: Construction measurements initiated from a proxy shall resolve to eligible metric evidence or remain explicitly
+  approximate and unverified.
+verification_method: End-to-end test
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/representations.py
+- src/sip/scene.py
+- tools/run_demo.py
+automated_test_ids:
+- tests/e2e/test_platform_demonstrations.py::test_hybrid_representation_demonstration
+- tests/integration/test_governed_hybrid.py::test_candidate_role_size_validation_and_profile_integrity_fail_closed
+- tests/integration/test_governed_hybrid.py::test_quarantine_independent_validation_atomic_publication_and_view_reauthorization
+- tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/reports/test-matrix.json
+- build/reports/tests/e2e.xml
+- build/reports/tests/integration.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

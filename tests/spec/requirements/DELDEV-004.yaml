@@ -1,0 +1,34 @@
+schema_version: '1.0'
+requirement_id: DELDEV-004
+priority: P1
+source:
+  document: 95-testing-delivery/959_developer_onboarding.md
+  line: 39
+  section: 4. Normative requirements
+requirement: The onboarding path shall validate schemas, run tests, ingest a fixture, execute mock metric/learned stages,
+  and open the viewer.
+verification_method: Automated test
+implementation_status: IN_PROGRESS
+implementation_files:
+- Makefile
+- justfile
+- tools/static_checks.py
+- tools/typecheck.py
+- docs/developer/GETTING_STARTED.md
+- CONTRIBUTING.md
+automated_test_ids:
+- tests/contract/test_delivery_tools.py::test_make_and_just_commands_resolve_to_implemented_tools
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
+    and remains in progress.

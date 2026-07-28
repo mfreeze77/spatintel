@@ -1,0 +1,33 @@
+schema_version: '1.0'
+requirement_id: ARCSVC-003
+priority: P1
+source:
+  document: 20-architecture/204_service_catalog.md
+  line: 38
+  section: 4. Normative requirements
+requirement: Worker callbacks shall be idempotent and authenticated as workload identities.
+verification_method: Automated test
+implementation_status: VERIFIED
+implementation_files:
+- governance/service-catalog.json
+- tools/generate_service_catalog.py
+- services
+- workers
+automated_test_ids:
+- tests/contract/test_governance_registers.py::test_service_catalog_is_complete_generated_and_owns_recovery_behavior
+retained_evidence:
+- build/reports/governance-check.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- governance/service-catalog.json
+controlled_procedure:
+- Verify all listed implementation files exist at the reviewed commit.
+- Execute each listed automated test or the documented controlled procedure in an isolated environment.
+- Retain machine-readable results, input/output hashes, toolchain, code revision, and environment profile.
+- Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
+- Update the ledger only after evidence paths exist and independently match the claimed result.
+external_validation:
+  status: NOT_REQUIRED
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

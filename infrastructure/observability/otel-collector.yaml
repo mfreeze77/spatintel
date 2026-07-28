@@ -1,0 +1,86 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: otel-collector
+          static_configs:
+            - targets: [127.0.0.1:8888]
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+    spike_limit_mib: 128
+  attributes/privacy:
+    actions:
+      - key: http.request.header.authorization
+        action: delete
+      - key: http.request.header.cookie
+        action: delete
+      - key: http.response.header.set_cookie
+        action: delete
+      - key: enduser.id
+        action: hash
+      - key: sip.asset.content
+        action: delete
+      - key: sip.transcript.content
+        action: delete
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: ${env:SIP_ENV}
+        action: upsert
+      - key: service.namespace
+        value: spatial-intelligence-platform
+        action: upsert
+  batch:
+    send_batch_size: 1024
+    timeout: 5s
+
+exporters:
+  otlphttp/approved_backend:
+    endpoint: ${env:SIP_TELEMETRY_BACKEND_OTLP_ENDPOINT}
+    headers:
+      Authorization: ${env:SIP_TELEMETRY_BACKEND_AUTHORIZATION}
+    sending_queue:
+      enabled: true
+      num_consumers: 4
+      queue_size: 4096
+    retry_on_failure:
+      enabled: true
+      initial_interval: 1s
+      max_interval: 30s
+      max_elapsed_time: 300s
+  debug:
+    verbosity: basic
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+  pprof:
+    endpoint: 127.0.0.1:1777
+
+service:
+  extensions: [health_check, pprof]
+  telemetry:
+    logs:
+      level: info
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, attributes/privacy, resource, batch]
+      exporters: [otlphttp/approved_backend]
+    metrics:
+      receivers: [otlp, prometheus]
+      processors: [memory_limiter, attributes/privacy, resource, batch]
+      exporters: [otlphttp/approved_backend]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, attributes/privacy, resource, batch]
+      exporters: [otlphttp/approved_backend]

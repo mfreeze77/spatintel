@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "sip": "https://schema.sip.local/core#",
+    "id": "@id",
+    "type": "@type",
+    "entityId": "sip:entityId",
+    "sceneId": "sip:sceneId",
+    "sourceClass": "sip:sourceClass",
+    "authorityClass": "sip:authorityClass",
+    "confidence": "sip:confidence",
+    "provenance": "sip:provenance",
+    "coordinateFrame": "sip:coordinateFrame",
+    "audience": "sip:audience",
+    "consentGrant": "sip:consentGrant",
+    "generatedContent": "sip:generatedContent",
+    "supersedes": {"@id": "sip:supersedes", "@type": "@id"}
+  }
+}
