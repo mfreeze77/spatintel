@@ -372,7 +372,11 @@ def _swift_report_passed() -> bool:
         report = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return False
-    return report.get("status") == "passed" and report.get("tests_failed") == 0 and report.get("tests_passed", 0) > 0
+    return (
+        report.get("status") in {"passed", "passed_complete", "passed_with_external_gaps"}
+        and report.get("tests_failed") == 0
+        and report.get("tests_passed", 0) > 0
+    )
 
 
 def _tests_passed(

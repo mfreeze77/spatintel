@@ -106,3 +106,29 @@ def test_post_commit_traceability_gate_requires_every_declared_artifact(tmp_path
     (root / "build/reports").mkdir(parents=True)
     (root / "build/reports/test-matrix.json").write_text("{}\n", encoding="utf-8")
     assert module._missing_declared_evidence(payload) == ["build/reports/tests/contract.xml"]
+
+
+def test_swift_fixture_pass_with_external_gaps_counts_as_linked_test_evidence(tmp_path: Path) -> None:
+    """CONTROL: local Swift tests may pass while hardware acceptance remains explicitly external."""
+    root = tmp_path / "repo"
+    report = root / "build/reports/swift-test-report.json"
+    report.parent.mkdir(parents=True)
+    report.write_text(
+        json.dumps(
+            {
+                "schema": "sip.test-report/v1",
+                "status": "passed_with_external_gaps",
+                "tests_passed": 13,
+                "tests_failed": 0,
+                "limitations": ["LiDAR and physical-device acceptance remain external."],
+            }
+        ),
+        encoding="utf-8",
+    )
+    module = _module(root)
+    assert module._swift_report_passed() is True
+
+    payload = json.loads(report.read_text(encoding="utf-8"))
+    payload["tests_failed"] = 1
+    report.write_text(json.dumps(payload), encoding="utf-8")
+    assert module._swift_report_passed() is False
