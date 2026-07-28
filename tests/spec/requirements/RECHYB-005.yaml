@@ -12,6 +12,7 @@ implementation_status: VERIFIED
 implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/e2e/test_platform_demonstrations.py::test_hybrid_representation_demonstration

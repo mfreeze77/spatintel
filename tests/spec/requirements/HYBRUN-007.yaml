@@ -13,6 +13,7 @@ implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
 - src/sip/api.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/integration/test_governed_hybrid.py::test_provider_failure_retains_cleanup_evidence_and_preserves_published_binding

@@ -13,6 +13,7 @@ implementation_files:
 - src/sip/exporting.py
 - src/sip/lifecycle.py
 - tools/run_demo.py
+- apps/web
 automated_test_ids:
 - tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration
 - tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state

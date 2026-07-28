@@ -14,6 +14,7 @@ implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
 - src/sip/api.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/integration/test_governed_hybrid.py::test_candidate_role_size_validation_and_profile_integrity_fail_closed

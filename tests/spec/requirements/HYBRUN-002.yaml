@@ -13,6 +13,7 @@ implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
 - src/sip/api.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/integration/test_governed_hybrid.py::test_quarantine_independent_validation_atomic_publication_and_view_reauthorization

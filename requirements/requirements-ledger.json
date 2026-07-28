@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-28T02:38:28.803698+00:00",
+  "generated_at": "2026-07-28T02:55:19.606145+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -37080,6 +37080,7 @@
       "implementation_files": [
         "src/sip/representations.py",
         "src/sip/scene.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "VERIFIED",
@@ -37231,6 +37232,7 @@
       "implementation_files": [
         "src/sip/representations.py",
         "src/sip/scene.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "VERIFIED",
@@ -47238,6 +47240,7 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "apps/web",
         "src/sip/representations.py",
         "tools/run_demo.py"
       ],
@@ -49184,7 +49187,8 @@
       "implementation_files": [
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
-        "tools/run_demo.py"
+        "tools/run_demo.py",
+        "apps/web"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -49344,7 +49348,8 @@
       "implementation_files": [
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
-        "tools/run_demo.py"
+        "tools/run_demo.py",
+        "apps/web"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -49649,7 +49654,8 @@
       "implementation_files": [
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
-        "tools/run_demo.py"
+        "tools/run_demo.py",
+        "apps/web"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -49973,6 +49979,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -50026,6 +50033,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -50077,6 +50085,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "VERIFIED",
@@ -50130,6 +50139,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -50221,6 +50231,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -50272,6 +50283,7 @@
         "src/sip/representations.py",
         "src/sip/scene.py",
         "src/sip/api.py",
+        "apps/web",
         "tools/run_demo.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -60846,7 +60858,8 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/liveforever.py",
-        "src/sip/policy.py"
+        "src/sip/policy.py",
+        "apps/web"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -60867,7 +60880,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/LIFHYB-007.yaml",
       "test_result_evidence_paths": [
-        "apps/web/src",
+        "apps/web",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",
@@ -61036,7 +61049,8 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/liveforever.py",
-        "src/sip/policy.py"
+        "src/sip/policy.py",
+        "apps/web"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61057,7 +61071,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/LIFHYB-011.yaml",
       "test_result_evidence_paths": [
-        "apps/web/src",
+        "apps/web",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "src/sip/liveforever.py",

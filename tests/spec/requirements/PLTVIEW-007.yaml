@@ -10,6 +10,7 @@ requirement: Hybrid rendering shall keep visual, metric, interaction, design, an
 verification_method: Viewer integration test
 implementation_status: VERIFIED
 implementation_files:
+- apps/web
 - src/sip/representations.py
 - tools/run_demo.py
 automated_test_ids:

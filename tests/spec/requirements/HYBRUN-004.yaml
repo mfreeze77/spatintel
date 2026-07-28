@@ -14,6 +14,7 @@ implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
 - src/sip/api.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard

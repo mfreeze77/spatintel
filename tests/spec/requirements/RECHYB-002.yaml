@@ -12,6 +12,7 @@ implementation_status: VERIFIED
 implementation_files:
 - src/sip/representations.py
 - src/sip/scene.py
+- apps/web
 - tools/run_demo.py
 automated_test_ids:
 - tests/contract/test_generated_contracts.py::test_representation_contract_rejects_authority_drift_for_interaction_proxies

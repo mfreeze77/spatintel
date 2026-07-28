@@ -12,10 +12,11 @@ implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
 - src/sip/liveforever.py
 - src/sip/policy.py
+- apps/web
 automated_test_ids:
 - tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit
 retained_evidence:
-- apps/web/src
+- apps/web
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 - src/sip/liveforever.py
