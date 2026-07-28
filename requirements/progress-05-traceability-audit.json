@@ -689,7 +689,7 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "partial",
-      "linked_test_count": 7,
+      "linked_test_count": 8,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -698,6 +698,14 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository"
         },
         {
           "declared_requirement_ids": [

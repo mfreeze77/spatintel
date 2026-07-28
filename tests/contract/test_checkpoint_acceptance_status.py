@@ -2,8 +2,17 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 
 from tools import run_checkpoint_acceptance as acceptance
+
+
+def test_acceptance_relative_output_is_rooted_in_repository(tmp_path, monkeypatch) -> None:
+    """REQ: TSTGATE-003 checkpoint evidence output is deterministic even when the CLI receives a relative path."""
+    monkeypatch.setattr(acceptance, "ROOT", tmp_path)
+    resolved = acceptance._rooted_output_path(Path("build/reports/checkpoint-acceptance-gates.json"))
+    assert resolved == (tmp_path / "build/reports/checkpoint-acceptance-gates.json").resolve()
+    assert resolved.relative_to(tmp_path).as_posix() == "build/reports/checkpoint-acceptance-gates.json"
 
 
 def test_acceptance_separates_command_execution_from_child_control_completeness(tmp_path, monkeypatch) -> None:

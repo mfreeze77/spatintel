@@ -77,6 +77,12 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
+def _rooted_output_path(path: Path) -> Path:
+    """Resolve CLI output paths against the repository, not caller CWD state."""
+
+    return path.resolve() if path.is_absolute() else (ROOT / path).resolve()
+
+
 
 def _normalized_control_status(value: object, *, exit_code: int) -> str:
     if exit_code != 0:
@@ -286,10 +292,11 @@ def main() -> None:
     parser.add_argument("--attestation", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=ROOT / "build/reports/checkpoint-acceptance-gates.json")
     args = parser.parse_args()
+    output_path = _rooted_output_path(args.output)
     report = run(attestation_path=args.attestation.resolve())
-    args.output.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
-    args.output.write_text(rendered, encoding="utf-8")
+    output_path.write_text(rendered, encoding="utf-8")
     readiness = {
         "schema": "sip.release-readiness/v2",
         "status": "blocked" if report["status"] != "failed" else "failed",
@@ -298,7 +305,7 @@ def main() -> None:
         "source": report["source"],
         "checkpoint_acceptance_status": report["status"],
         "checkpoint_acceptance_report": {
-            "path": args.output.relative_to(ROOT).as_posix(),
+            "path": output_path.relative_to(ROOT).as_posix(),
             "sha256": __import__("hashlib").sha256(rendered.encode("utf-8")).hexdigest(),
         },
         "production_authorized": False,

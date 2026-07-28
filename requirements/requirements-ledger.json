@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-28T19:44:02.337742+00:00",
+  "generated_at": "2026-07-28T19:55:14.138229+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -67930,6 +67930,7 @@
       "supersession_links": [],
       "test_ids": [
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error",
+        "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwritten",
         "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates",
