@@ -272,7 +272,8 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
         "",
         "> Requirements outside VERIFIED remain incomplete or externally unverified. This report makes no complete-platform or production-readiness claim.",
         "",
-        "Production deployment and release remain **NO-GO** until independent True North acceptance and all required external validation gates pass.",
+        "- Progress 07 remains **unauthorized** pending independent True North acceptance of Progress 06.",
+        "- Production deployment and release remain **NO-GO** until independent True North acceptance and all required external validation gates pass.",
     ]
     return "\n".join(lines) + "\n"
 

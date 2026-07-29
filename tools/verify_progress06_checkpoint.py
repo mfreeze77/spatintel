@@ -22,6 +22,7 @@ from tools.verify_checkpoint import (
     _extract_checked,
     _read_json,
     _report,
+    _git,
     _validate_zip_metadata,
     _verify_evidence_wrapper,
     _verify_git_and_source,
@@ -82,6 +83,52 @@ def _verify_runtime_report(
         verification.fail("RUNTIME_COUNTS", "runtime result does not meet the checkpoint minimum", relative)
     if minimum_source_checks and int(report.get("source_invariant_checks", -1)) < minimum_source_checks:
         verification.fail("RUNTIME_SOURCE_CHECKS", "web source checks do not meet the checkpoint minimum", relative)
+
+
+def _verify_accepted_base_ancestry(
+    root: Path, verification: Verification, source_record: dict[str, Any] | None
+) -> None:
+    """Prove the checkpoint commit descends from the accepted Progress 05-R2 base."""
+    if not isinstance(source_record, dict):
+        return
+    commit = str(source_record.get("commit", ""))
+    branch = str(source_record.get("branch", ""))
+    bundle_record = source_record.get("git_bundle")
+    bundle_relative = str(bundle_record.get("path", "")) if isinstance(bundle_record, dict) else ""
+    try:
+        validate_relative_path(bundle_relative)
+    except ValueError as exc:
+        verification.fail("BASE_ANCESTRY_BUNDLE_PATH", str(exc), "SOURCE_COMMIT.json")
+        return
+    bundle = root / bundle_relative
+    if not bundle.is_file():
+        return
+    with tempfile.TemporaryDirectory(prefix="sip-progress06-ancestry-") as temporary:
+        bare = Path(temporary) / "repo.git"
+        initialized = _git("init", "--bare", str(bare), cwd=Path(temporary))
+        if initialized.returncode != 0:
+            verification.fail("BASE_ANCESTRY_GIT_INIT", initialized.stderr.decode(errors="replace"), bundle_relative)
+            return
+        branch_ref = f"refs/heads/{branch}"
+        fetched = _git("fetch", str(bundle), f"{branch_ref}:refs/heads/checkpoint", cwd=bare)
+        if fetched.returncode != 0:
+            verification.fail("BASE_ANCESTRY_FETCH", fetched.stderr.decode(errors="replace"), bundle_relative)
+            return
+        base_exists = _git("cat-file", "-e", f"{EXPECTED_BASE_COMMIT}^{{commit}}", cwd=bare)
+        if base_exists.returncode != 0:
+            verification.fail("BASE_COMMIT_MISSING", "accepted Progress 05-R2 commit is absent from the Git bundle", bundle_relative)
+            return
+        descendant_exists = _git("cat-file", "-e", f"{commit}^{{commit}}", cwd=bare)
+        if descendant_exists.returncode != 0:
+            verification.fail("CHECKPOINT_COMMIT_MISSING", "checkpoint commit is absent from the Git bundle", bundle_relative)
+            return
+        ancestry = _git("merge-base", "--is-ancestor", EXPECTED_BASE_COMMIT, commit, cwd=bare)
+        if ancestry.returncode != 0:
+            verification.fail(
+                "CHECKPOINT_BASE_ANCESTRY",
+                "checkpoint commit does not descend from accepted Progress 05-R2",
+                bundle_relative,
+            )
 
 
 def _verify_predecessor(root: Path, verification: Verification) -> None:
@@ -347,8 +394,8 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
         verification.fail("CHECKPOINT_FACT_MISSING", f"missing fact {field}", checkpoint_relative)
     if facts.get("checkpoint_id") != CHECKPOINT_ID or facts.get("branch") != "progress-06-vertical-mvps":
         verification.fail("CHECKPOINT_IDENTITY", "checkpoint ID or branch differs", checkpoint_relative)
-    if facts.get("parent") != EXPECTED_BASE_COMMIT:
-        verification.fail("CHECKPOINT_PARENT", "Progress 06 does not descend directly from accepted Progress 05-R2", checkpoint_relative)
+    if not isinstance(facts.get("parent"), str) or len(str(facts.get("parent"))) != 40:
+        verification.fail("CHECKPOINT_PARENT", "checkpoint first-parent identity is missing or malformed", checkpoint_relative)
     if facts.get("working_tree_clean") is not True or facts.get("tested_detached_worktree") is not True:
         verification.fail("CHECKPOINT_WORKTREE", "checkpoint must prove a clean detached acceptance worktree", checkpoint_relative)
     if int(facts.get("python_tests_passed", -1)) < MINIMUM_PYTHON_TESTS:
@@ -480,6 +527,7 @@ def verify_archive(archive_path: Path) -> dict[str, Any]:
         else:
             verification.facts["specification_sha256"] = EXPECTED_SPEC_SHA256
         source_record = _verify_git_and_source(root, verification)
+        _verify_accepted_base_ancestry(root, verification, source_record)
         if source_record and source_record.get("checkpoint_id") != CHECKPOINT_ID:
             verification.fail("SOURCE_CHECKPOINT", "SOURCE_COMMIT.json identifies another checkpoint", "SOURCE_COMMIT.json")
         _verify_predecessor(root, verification)

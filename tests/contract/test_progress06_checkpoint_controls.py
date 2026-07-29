@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import zipfile
 from pathlib import Path
 
@@ -90,4 +91,33 @@ def test_progress06_coverage_report_retains_later_phase_posture() -> None:
     assert "Progress 07" in text
     assert "unauthorized" in text
     assert "Production promotion" in text
+    assert "NO-GO" in text
+
+def test_progress06_final_commit_descends_from_accepted_r2_base() -> None:
+    """CONTROL: Progress 06 may use multiple commits but must descend from the accepted R2 base."""
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", EXPECTED_BASE_COMMIT, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    )
+    assert result.returncode == 0
+
+
+def test_progress06_packaged_coverage_retains_progress07_and_production_posture() -> None:
+    """CONTROL: package-specific coverage rendering retains later-phase prohibitions."""
+    from tools.build_progress06_checkpoint import _render_coverage
+
+    ledger = json.loads((ROOT / "requirements/requirements-ledger.json").read_text(encoding="utf-8"))
+    text = _render_coverage(
+        {
+            "checkpoint_id": CHECKPOINT_ID,
+            "commit": "1" * 40,
+            "source_tree_root_sha256": "2" * 64,
+            "python_tests_passed": 1,
+            "requirements_total": 1028,
+        },
+        ledger,
+    )
+    assert "Progress 07" in text
+    assert "unauthorized" in text
     assert "NO-GO" in text
