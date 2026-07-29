@@ -83,3 +83,11 @@ def test_progress06_migration_and_viewer_truth_are_fail_closed() -> None:
     assert hashlib.sha256(migration.read_bytes()).hexdigest() == EXPECTED_MIGRATION_SHA256
     implementation = json.loads((ROOT / "requirements/implementation-map.json").read_text(encoding="utf-8"))
     assert implementation["requirements"]["PLTVIEW-007"]["implementation_status"] == "IMPLEMENTED_UNVERIFIED"
+
+def test_progress06_coverage_report_retains_later_phase_posture() -> None:
+    """CONTROL: generated coverage retains Progress 07 prohibition and production NO-GO."""
+    text = (ROOT / "requirements/coverage-report.md").read_text(encoding="utf-8")
+    assert "Progress 07" in text
+    assert "unauthorized" in text
+    assert "Production promotion" in text
+    assert "NO-GO" in text

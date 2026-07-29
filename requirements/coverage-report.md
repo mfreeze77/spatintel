@@ -1,6 +1,6 @@
 # Requirements coverage report
 
-Generated: `2026-07-29T16:09:31.896731+00:00`
+Generated: `2026-07-29T16:26:58.109086+00:00`
 
 Total normative requirements: **1,028**
 
@@ -14,3 +14,8 @@ External validation required: **3**
 Blocked: **0**
 
 > Absence from the verified count is not evidence of implementation. Release-mode specification lint remains fail-closed.
+
+## Governing release posture
+
+- Progress 07: **unauthorized** pending independent True North acceptance of Progress 06.
+- Production promotion: **NO-GO**. Production authorization remains fail-closed.

@@ -244,6 +244,11 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         f"Blocked: **{len(blocked)}**",
         "",
         "> Absence from the verified count is not evidence of implementation. Release-mode specification lint remains fail-closed.",
+        "",
+        "## Governing release posture",
+        "",
+        "- Progress 07: **unauthorized** pending independent True North acceptance of Progress 06.",
+        "- Production promotion: **NO-GO**. Production authorization remains fail-closed.",
     ]
     (ROOT / "requirements/coverage-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
