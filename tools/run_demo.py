@@ -981,7 +981,7 @@ def construction(output: Path) -> dict[str, Any]:
     ]
     deficiency = context.construction.create_deficiency(tenant_id=tenant_id, project_id=project_id, entity_id="entity-facp", description="Missing circuit label", severity="medium", evidence_asset_ids=[evidence["panel-photo.jpg"]], actor_id=actor)
     temporal_before = context.construction.compare_temporal_states(tenant_id, project_id, before_ids=systems[:4], after_ids=systems[:4])
-    correction = context.construction.correct_and_retest(deficiency, correction="Installed durable circuit label", correction_asset_ids=[evidence["panel-photo.jpg"]], test_result="pass", test_asset_ids=[evidence["test-record.json"]], tester_id="demo-commissioning-agent")
+    correction = context.construction.correct_and_retest(deficiency, tenant_id=tenant_id, project_id=project_id, correction="Installed durable circuit label", correction_asset_ids=[evidence["panel-photo.jpg"]], test_result="pass", test_asset_ids=[evidence["test-record.json"]], tester_id="demo-commissioning-agent")
     temporal_after = context.construction.compare_temporal_states(tenant_id, project_id, before_ids=systems[:3], after_ids=systems[:4])
     scene = context.scene.create_scene(tenant_id, project_id, name="Construction reference scene", actor_id=actor)
     context.scene.create_entity(
@@ -1120,7 +1120,7 @@ def construction(output: Path) -> dict[str, Any]:
     issue_closed = context.construction.transition_issue(
         issue["issue_id"], tenant_id=tenant_id, project_id=project_id, actor_id="demo-independent-verifier",
         target_state="verified_closed", evidence=[{"asset_id": evidence["test-record.json"], "kind": "passed_retest"}],
-        note="Retest passed.", verifier_id="demo-independent-verifier", residual_limitations=[],
+        note="Retest passed.", residual_limitations=[],
     )
     commissioning = context.construction.record_commissioning(
         tenant_id=tenant_id,
@@ -1468,7 +1468,7 @@ def liveforever(output: Path) -> dict[str, Any]:
     _write_json(output / "editions" / "private-before.json", before["private"])
     _write_json(output / "editions" / "family-before.json", before["family"])
     _write_json(output / "editions" / "public-before.json", before["public"])
-    revoked = context.liveforever.revoke_consent(grant, actor_id="alex-synthetic", reason="synthetic revocation demonstration")
+    revoked = context.liveforever.revoke_consent(grant, tenant_id=tenant_id, project_id=project_id, actor_id="alex-synthetic", reason="synthetic revocation demonstration")
     after = {
         "private": context.liveforever.edition(tenant_id, project_id, audience=Audience.PRIVATE, purpose="preservation"),
         "family": context.liveforever.edition(tenant_id, project_id, audience=Audience.FAMILY, purpose="family_review"),

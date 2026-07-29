@@ -45,7 +45,7 @@ def test_api_openapi_is_stable_unique_and_uses_server_side_auth(tmp_path: Path) 
         for method, operation in path_item.items()
         if method in {"get", "post", "put", "patch", "delete"}
     ]
-    assert len(operation_ids) == len(set(operation_ids)) == 140
+    assert len(operation_ids) == len(set(operation_ids)) == 141
     assert client.get(f"/v1/projects/{project_id}/assets/missing").status_code == 401
     response = client.get(
         f"/v1/projects/{project_id}/assets/missing",
