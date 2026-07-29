@@ -35,8 +35,23 @@
     },
     {
       "method": "POST",
+      "operation_id": "record_construction_commissioning",
+      "path": "/v1/projects/{project_id}/construction/commissioning"
+    },
+    {
+      "method": "POST",
       "operation_id": "create_deficiency",
       "path": "/v1/projects/{project_id}/construction/deficiencies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_document_revision",
+      "path": "/v1/projects/{project_id}/construction/document-revisions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_document_revision",
+      "path": "/v1/projects/{project_id}/construction/document-revisions/{revision_id}"
     },
     {
       "method": "POST",
@@ -45,13 +60,73 @@
     },
     {
       "method": "POST",
+      "operation_id": "create_construction_owner_handoff",
+      "path": "/v1/projects/{project_id}/construction/handoffs"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_handoff",
+      "path": "/v1/projects/{project_id}/construction/handoffs/{handoff_id}"
+    },
+    {
+      "method": "POST",
       "operation_id": "create_construction_hierarchy",
       "path": "/v1/projects/{project_id}/construction/hierarchy"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_construction_interchange",
+      "path": "/v1/projects/{project_id}/construction/interchanges"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues/{issue_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "transition_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues/{issue_id}/transition"
     },
     {
       "method": "GET",
       "operation_id": "get_construction_report",
       "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "search_construction_facility",
+      "path": "/v1/projects/{project_id}/construction/search"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "review_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}/review"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_construction_field_visit",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}/visits"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_system_pack",
+      "path": "/v1/projects/{project_id}/construction/system-packs/{pack}"
     },
     {
       "method": "POST",
@@ -69,6 +144,26 @@
       "path": "/v1/projects/{project_id}/liveforever/consents"
     },
     {
+      "method": "POST",
+      "operation_id": "register_liveforever_derivative",
+      "path": "/v1/projects/{project_id}/liveforever/derivatives"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_derivative",
+      "path": "/v1/projects/{project_id}/liveforever/derivatives/{derivative_id}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_edition_revision",
+      "path": "/v1/projects/{project_id}/liveforever/edition-revisions/{edition_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_edition",
+      "path": "/v1/projects/{project_id}/liveforever/editions"
+    },
+    {
       "method": "GET",
       "operation_id": "get_liveforever_edition",
       "path": "/v1/projects/{project_id}/liveforever/editions/{audience}"
@@ -80,8 +175,58 @@
     },
     {
       "method": "POST",
+      "operation_id": "create_liveforever_governance",
+      "path": "/v1/projects/{project_id}/liveforever/governance"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_governance",
+      "path": "/v1/projects/{project_id}/liveforever/governance/{governance_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_interview",
+      "path": "/v1/projects/{project_id}/liveforever/interviews"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_interview",
+      "path": "/v1/projects/{project_id}/liveforever/interviews/{interview_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_transcript_segment",
+      "path": "/v1/projects/{project_id}/liveforever/interviews/{interview_id}/segments"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_memory_room",
+      "path": "/v1/projects/{project_id}/liveforever/memory-room/{subject_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_preservation_release",
+      "path": "/v1/projects/{project_id}/liveforever/preservation-releases"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_preservation_release",
+      "path": "/v1/projects/{project_id}/liveforever/preservation-releases/{release_id}"
+    },
+    {
+      "method": "POST",
       "operation_id": "create_memory_record",
       "path": "/v1/projects/{project_id}/liveforever/records"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revise_liveforever_record",
+      "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions"
+    },
+    {
+      "method": "POST",
+      "operation_id": "correct_liveforever_transcript_segment",
+      "path": "/v1/projects/{project_id}/liveforever/transcript-segments/{segment_id}/corrections"
     },
     {
       "method": "POST",

@@ -554,6 +554,246 @@ class ExperienceRequest(StrictModel):
     requested_features: dict[str, bool]
     audience: Audience
 
+
+class ConstructionSurveyCreate(StrictModel):
+    name: str = Field(min_length=1, max_length=256)
+    objectives: list[str] = Field(min_length=1)
+    required_place_ids: list[str] = Field(min_length=1)
+    required_system_types: list[str] = Field(default_factory=list)
+    sensitive_regions: list[dict[str, Any]] = Field(default_factory=list)
+    control_requirements: dict[str, Any] = Field(default_factory=dict)
+    measurement_requirements: dict[str, Any] = Field(default_factory=dict)
+    safety: dict[str, Any] = Field(default_factory=dict)
+    permissions: dict[str, Any] = Field(default_factory=dict)
+    deliverables: list[dict[str, Any]] = Field(min_length=1)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    baseline_commit_id: str | None = None
+    return_visit_of_id: str | None = None
+
+
+class ConstructionFieldVisitCreate(StrictModel):
+    scope: dict[str, Any] = Field(default_factory=dict)
+    capture_ids: list[str] = Field(min_length=1)
+    checklist: list[dict[str, Any]] = Field(min_length=1)
+    detail_evidence: list[dict[str, Any]] = Field(default_factory=list)
+    inaccessible_regions: list[dict[str, Any]] = Field(default_factory=list)
+    coverage: dict[str, Any] = Field(default_factory=dict)
+    tracking: dict[str, Any] = Field(default_factory=dict)
+    registration: dict[str, Any] = Field(default_factory=dict)
+    controls: dict[str, Any] = Field(default_factory=dict)
+    inventory: dict[str, Any] = Field(default_factory=dict)
+    unresolved_questions: list[dict[str, Any]] = Field(default_factory=list)
+    privacy: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    exact_prior_commit_id: str | None = None
+    complete: bool = True
+
+
+class ConstructionSurveyReview(StrictModel):
+    decision: Literal['accept', 'reject', 'request_changes']
+    checklist: dict[str, Any] = Field(default_factory=dict)
+    accepted_commit_id: str | None = None
+    limitations: list[str] = Field(default_factory=list)
+
+
+class ConstructionDocumentRevisionCreate(StrictModel):
+    stable_document_id: str | None = None
+    document_type: str
+    title: str = Field(min_length=1, max_length=512)
+    revision: str = Field(min_length=1, max_length=64)
+    issue_date: str
+    issuer: str
+    status: str
+    asset_id: str
+    source_sha256: str = Field(pattern='^[a-f0-9]{64}$')
+    page_count: int = Field(ge=1)
+    permissions: dict[str, Any] = Field(default_factory=dict)
+    page_regions: list[dict[str, Any]] = Field(default_factory=list)
+    spatial_links: list[dict[str, Any]] = Field(default_factory=list)
+    extraction: dict[str, Any] = Field(default_factory=dict)
+    review: dict[str, Any] = Field(default_factory=dict)
+    supersedes_revision_id: str | None = None
+
+
+class ConstructionIssueCreate(StrictModel):
+    issue_type: str
+    description: str = Field(min_length=1)
+    evidence: list[dict[str, Any]] = Field(min_length=1)
+    severity: str
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    entity_id: str | None = None
+    place_id: str | None = None
+    observed_commit_id: str | None = None
+    responsible_party: str | None = None
+    due_at: datetime | None = None
+    permissions: dict[str, Any] = Field(default_factory=dict)
+
+
+class ConstructionIssueTransition(StrictModel):
+    target_state: str
+    evidence: list[dict[str, Any]] = Field(min_length=1)
+    note: str = Field(min_length=1)
+    verifier_id: str | None = None
+    residual_limitations: list[str] = Field(default_factory=list)
+
+
+class ConstructionCommissioningCreate(StrictModel):
+    system_type: str
+    entity_ids: list[str] = Field(min_length=1)
+    procedure: dict[str, Any] = Field(min_length=1)
+    prerequisites: list[dict[str, Any]] = Field(default_factory=list)
+    steps: list[dict[str, Any]] = Field(min_length=1)
+    participants: list[dict[str, Any]] = Field(min_length=1)
+    instruments: list[dict[str, Any]] = Field(default_factory=list)
+    attachments: list[str] = Field(default_factory=list)
+    results: dict[str, Any] = Field(min_length=1)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    issue_id: str | None = None
+    retest_of_id: str | None = None
+    accept: bool = False
+
+
+class ConstructionInterchangeCreate(StrictModel):
+    format: str
+    direction: Literal['import', 'export']
+    source_asset_id: str | None = None
+    source_sha256: str = Field(pattern='^[a-f0-9]{64}$')
+    schema_version: str
+    units: str
+    crs: dict[str, Any] = Field(default_factory=dict)
+    owner_history: dict[str, Any] = Field(default_factory=dict)
+    global_ids: list[str] = Field(default_factory=list)
+    classifications: dict[str, Any] = Field(default_factory=dict)
+    properties: dict[str, Any] = Field(default_factory=dict)
+    relationships: list[dict[str, Any]] = Field(default_factory=list)
+    geometry_conversion_report: dict[str, Any] = Field(default_factory=dict)
+    unsupported_constructs: list[dict[str, Any]] = Field(default_factory=list)
+    alignment: dict[str, Any] = Field(default_factory=dict)
+    mappings: list[dict[str, Any]] = Field(default_factory=list)
+    issues: list[dict[str, Any]] = Field(default_factory=list)
+    truth_labels: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
+class ConstructionHandoffCreate(StrictModel):
+    scope: dict[str, Any] = Field(default_factory=dict)
+    accepted_scene_commit_id: str
+    warranties: list[dict[str, Any]] = Field(default_factory=list)
+    training: list[dict[str, Any]] = Field(default_factory=list)
+    exclusions: list[str] = Field(default_factory=list)
+    audience_profiles: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
+class LiveForeverGovernanceCreate(StrictModel):
+    record_type: str
+    subject_id: str
+    grantor_id: str
+    authority_basis: str
+    data_scope: dict[str, Any] = Field(default_factory=dict)
+    purposes: list[str] = Field(min_length=1)
+    modalities: list[str] = Field(default_factory=list)
+    audiences: list[Audience] = Field(min_length=1)
+    providers: list[str] = Field(default_factory=list)
+    geography: dict[str, Any] = Field(default_factory=dict)
+    effective_at: datetime
+    expires_at: datetime | None = None
+    posthumous_rules: dict[str, Any] = Field(default_factory=dict)
+    evidence_asset_ids: list[str] = Field(default_factory=list)
+    successor_ids: list[str] = Field(default_factory=list)
+    dispute: dict[str, Any] = Field(default_factory=dict)
+    freeze_high_risk: bool = False
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    consent_grant_id: str | None = None
+
+
+class LiveForeverInterviewCreate(StrictModel):
+    subject_id: str
+    participants: list[dict[str, Any]] = Field(min_length=1)
+    consent_context: dict[str, Any] = Field(min_length=1)
+    recording_state: str
+    source_media_ids: list[str] = Field(min_length=1)
+    timeline: dict[str, Any] = Field(min_length=1)
+    device: dict[str, Any] = Field(default_factory=dict)
+    environment: dict[str, Any] = Field(default_factory=dict)
+    interruptions: list[dict[str, Any]] = Field(default_factory=list)
+    question_lineage: list[dict[str, Any]] = Field(default_factory=list)
+    pacing_policy: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    complete: bool = False
+
+
+class LiveForeverTranscriptSegmentCreate(StrictModel):
+    segment_index: int = Field(ge=0)
+    start_ms: int = Field(ge=0)
+    end_ms: int = Field(gt=0)
+    speaker_label: str
+    speaker_confidence: float = Field(ge=0, le=1)
+    original_text: str
+    source_media_id: str
+    spatial_anchor: dict[str, Any] | None = None
+    private_marks: list[dict[str, Any]] = Field(default_factory=list)
+    followup_suggestions: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class LiveForeverTranscriptCorrection(StrictModel):
+    edited_text: str = Field(min_length=1)
+    reason: str = Field(min_length=1)
+    review_state: str = 'reviewed'
+
+
+class LiveForeverRecordRevision(StrictModel):
+    correction_type: str
+    reason: str = Field(min_length=1)
+    changes: dict[str, Any] = Field(min_length=1)
+    audience: Audience | None = None
+    purpose: str = 'family_review'
+
+
+class LiveForeverEditionCreate(StrictModel):
+    name: str = Field(min_length=1, max_length=256)
+    audience: Audience
+    purpose: str
+    presentation_choices: dict[str, Any] = Field(default_factory=dict)
+    scene_commit_id: str | None = None
+    narrative_path: list[dict[str, Any]] = Field(default_factory=list)
+    policy_snapshot: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    publish: bool = False
+    supersedes_edition_id: str | None = None
+
+
+class LiveForeverDerivativeCreate(StrictModel):
+    derivative_type: str
+    source_ids: list[str] = Field(min_length=1)
+    subject_ids: list[str] = Field(min_length=1)
+    consent_grant_ids: list[str] = Field(min_length=1)
+    audience: Audience
+    classification: str
+    retention: dict[str, Any] = Field(default_factory=dict)
+    provider: dict[str, Any] = Field(default_factory=dict)
+    generation_lineage: dict[str, Any] = Field(default_factory=dict)
+    policy: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
+class LiveForeverPreservationCreate(StrictModel):
+    edition_id: str
+    originals: list[dict[str, Any]] = Field(min_length=1)
+    technical_metadata: dict[str, Any] = Field(default_factory=dict)
+    rights_consent: list[dict[str, Any]] = Field(default_factory=list)
+    memory_graph: dict[str, Any] = Field(default_factory=dict)
+    scene_manifests: list[dict[str, Any]] = Field(default_factory=list)
+    open_assets: list[dict[str, Any]] = Field(default_factory=list)
+    human_guide: dict[str, Any] = Field(min_length=1)
+    offline_fallback: dict[str, Any] = Field(min_length=1)
+    replicas: list[dict[str, Any]] = Field(default_factory=list)
+    format_migrations: list[dict[str, Any]] = Field(default_factory=list)
+    succession: dict[str, Any] = Field(default_factory=dict)
+    shutdown: dict[str, Any] = Field(default_factory=dict)
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+
 class NotificationCreate(StrictModel):
     recipient_id: str
     channel: Literal['in_app', 'email', 'sms', 'push']
@@ -2099,6 +2339,323 @@ def _routers() -> dict[str, APIRouter]:
         destination = root / f'{principal.tenant_id}-{project_id}-{new_uuid()}.sip-preservation.zip'
         return _context(request).preservation.export_project(principal.tenant_id, project_id, destination, actor_id=principal.subject_id)
 
+
+    # Progress 06 Construction vertical -----------------------------------------------------
+    @construction.post('/v1/projects/{project_id}/construction/surveys', status_code=201, operation_id='create_construction_survey')
+    def create_construction_survey(project_id: str, body: ConstructionSurveyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.create_survey_plan(
+            tenant_id=principal.tenant_id, project_id=project_id, name=body.name,
+            objectives=body.objectives, required_place_ids=body.required_place_ids,
+            required_system_types=body.required_system_types, sensitive_regions=body.sensitive_regions,
+            control_requirements=body.control_requirements,
+            measurement_requirements=body.measurement_requirements, safety=body.safety,
+            permissions=body.permissions, deliverables=body.deliverables,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+            baseline_commit_id=body.baseline_commit_id, return_visit_of_id=body.return_visit_of_id,
+        )
+
+    @construction.post('/v1/projects/{project_id}/construction/surveys/{survey_id}/visits', status_code=201, operation_id='record_construction_field_visit')
+    def record_construction_field_visit(project_id: str, survey_id: str, body: ConstructionFieldVisitCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.record_field_visit(
+            tenant_id=principal.tenant_id, project_id=project_id, survey_id=survey_id,
+            scope=body.scope, capture_ids=body.capture_ids, checklist=body.checklist,
+            detail_evidence=body.detail_evidence, inaccessible_regions=body.inaccessible_regions,
+            coverage=body.coverage, tracking=body.tracking, registration=body.registration,
+            controls=body.controls, inventory=body.inventory,
+            unresolved_questions=body.unresolved_questions, privacy=body.privacy,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+            exact_prior_commit_id=body.exact_prior_commit_id, complete=body.complete,
+        )
+
+    @construction.get('/v1/projects/{project_id}/construction/surveys/{survey_id}', operation_id='get_construction_survey')
+    def get_construction_survey(project_id: str, survey_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.survey(principal.tenant_id, project_id, survey_id)
+
+    @construction.post('/v1/projects/{project_id}/construction/surveys/{survey_id}/review', operation_id='review_construction_survey')
+    def review_construction_survey(project_id: str, survey_id: str, body: ConstructionSurveyReview, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.review_survey(
+            survey_id, tenant_id=principal.tenant_id, project_id=project_id,
+            reviewer_id=principal.subject_id, decision=body.decision, checklist=body.checklist,
+            accepted_commit_id=body.accepted_commit_id, limitations=body.limitations,
+        )
+
+    @construction.post('/v1/projects/{project_id}/construction/document-revisions', status_code=201, operation_id='create_construction_document_revision')
+    def create_construction_document_revision(project_id: str, body: ConstructionDocumentRevisionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.create_document_revision(
+            tenant_id=principal.tenant_id, project_id=project_id,
+            stable_document_id=body.stable_document_id, document_type=body.document_type,
+            title=body.title, revision=body.revision, issue_date=body.issue_date,
+            issuer=body.issuer, status=body.status, asset_id=body.asset_id,
+            source_sha256=body.source_sha256, page_count=body.page_count,
+            permissions=body.permissions, page_regions=body.page_regions,
+            spatial_links=body.spatial_links, extraction=body.extraction, review=body.review,
+            actor_id=principal.subject_id, supersedes_revision_id=body.supersedes_revision_id,
+        )
+
+    @construction.get('/v1/projects/{project_id}/construction/document-revisions/{revision_id}', operation_id='get_construction_document_revision')
+    def get_construction_document_revision(project_id: str, revision_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.document_revision(principal.tenant_id, project_id, revision_id)
+
+    @construction.post('/v1/projects/{project_id}/construction/issues', status_code=201, operation_id='create_construction_issue')
+    def create_construction_issue(project_id: str, body: ConstructionIssueCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.create_issue(
+            tenant_id=principal.tenant_id, project_id=project_id,
+            issue_type=body.issue_type, description=body.description, evidence=body.evidence,
+            reporter_id=principal.subject_id, severity=body.severity,
+            idempotency_key=body.idempotency_key, entity_id=body.entity_id,
+            place_id=body.place_id, observed_commit_id=body.observed_commit_id,
+            responsible_party=body.responsible_party, due_at=body.due_at,
+            permissions=body.permissions,
+        )
+
+    @construction.get('/v1/projects/{project_id}/construction/issues/{issue_id}', operation_id='get_construction_issue')
+    def get_construction_issue(project_id: str, issue_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.issue(principal.tenant_id, project_id, issue_id)
+
+    @construction.post('/v1/projects/{project_id}/construction/issues/{issue_id}/transition', operation_id='transition_construction_issue')
+    def transition_construction_issue(project_id: str, issue_id: str, body: ConstructionIssueTransition, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.transition_issue(
+            issue_id, tenant_id=principal.tenant_id, project_id=project_id,
+            actor_id=principal.subject_id, target_state=body.target_state,
+            evidence=body.evidence, note=body.note, verifier_id=body.verifier_id,
+            residual_limitations=body.residual_limitations,
+        )
+
+    @construction.post('/v1/projects/{project_id}/construction/commissioning', status_code=201, operation_id='record_construction_commissioning')
+    def record_construction_commissioning(project_id: str, body: ConstructionCommissioningCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.record_commissioning(
+            tenant_id=principal.tenant_id, project_id=project_id,
+            system_type=body.system_type, entity_ids=body.entity_ids, procedure=body.procedure,
+            prerequisites=body.prerequisites, steps=body.steps, participants=body.participants,
+            instruments=body.instruments, attachments=body.attachments, results=body.results,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+            issue_id=body.issue_id, retest_of_id=body.retest_of_id, accept=body.accept,
+        )
+
+    @construction.post('/v1/projects/{project_id}/construction/interchanges', status_code=201, operation_id='record_construction_interchange')
+    def record_construction_interchange(project_id: str, body: ConstructionInterchangeCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.record_interchange(
+            tenant_id=principal.tenant_id, project_id=project_id, format=body.format,
+            direction=body.direction, source_asset_id=body.source_asset_id,
+            source_sha256=body.source_sha256, schema_version=body.schema_version,
+            units=body.units, crs=body.crs, owner_history=body.owner_history,
+            global_ids=body.global_ids, classifications=body.classifications,
+            properties=body.properties, relationships=body.relationships,
+            geometry_conversion_report=body.geometry_conversion_report,
+            unsupported_constructs=body.unsupported_constructs, alignment=body.alignment,
+            mappings=body.mappings, issues=body.issues, truth_labels=body.truth_labels,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+        )
+
+    @construction.post('/v1/projects/{project_id}/construction/handoffs', status_code=201, operation_id='create_construction_owner_handoff')
+    def create_construction_owner_handoff(project_id: str, body: ConstructionHandoffCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        root = _context(request).settings.object_store_root.parent / 'vertical-exports'
+        root.mkdir(parents=True, exist_ok=True)
+        name_hash = sha256_bytes(f'{principal.tenant_id}:{project_id}:{body.idempotency_key}:construction'.encode())[:24]
+        destination = root / f'construction-owner-handoff-{name_hash}.zip'
+        return _context(request).construction.create_owner_handoff(
+            tenant_id=principal.tenant_id, project_id=project_id, destination=destination,
+            scope=body.scope, accepted_scene_commit_id=body.accepted_scene_commit_id,
+            warranties=body.warranties, training=body.training, exclusions=body.exclusions,
+            audience_profiles=body.audience_profiles, actor_id=principal.subject_id,
+            idempotency_key=body.idempotency_key,
+        )
+
+    @construction.get('/v1/projects/{project_id}/construction/handoffs/{handoff_id}', operation_id='get_construction_handoff')
+    def get_construction_handoff(project_id: str, handoff_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.handoff(principal.tenant_id, project_id, handoff_id)
+
+    @construction.get('/v1/projects/{project_id}/construction/search', operation_id='search_construction_facility')
+    def search_construction_facility(
+        project_id: str, request: Request, principal: Principal,
+        query: str = Query(default=''), system_pack: str | None = Query(default=None),
+        state: str | None = Query(default=None), include_restricted: bool = Query(default=False),
+    ) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        if include_restricted:
+            _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.search_facility_records(
+            principal.tenant_id, project_id, query=query, system_pack=system_pack,
+            state=state, include_restricted=include_restricted,
+        )
+
+    @construction.get('/v1/projects/{project_id}/construction/system-packs/{pack}', operation_id='get_construction_system_pack')
+    def get_construction_system_pack(
+        project_id: str, pack: str, request: Request, principal: Principal,
+        include_restricted: bool = Query(default=False),
+    ) -> dict[str, Any]:
+        _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
+        if include_restricted:
+            _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.export_system_pack(
+            principal.tenant_id, project_id, pack=pack, include_restricted=include_restricted,
+        )
+
+    # Progress 06 LiveForever vertical ------------------------------------------------------
+    @memory.post('/v1/projects/{project_id}/liveforever/governance', status_code=201, operation_id='create_liveforever_governance')
+    def create_liveforever_governance(project_id: str, body: LiveForeverGovernanceCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.create_governance_record(
+            tenant_id=principal.tenant_id, project_id=project_id, record_type=body.record_type,
+            subject_id=body.subject_id, grantor_id=body.grantor_id,
+            authority_basis=body.authority_basis, data_scope=body.data_scope,
+            purposes=body.purposes, modalities=body.modalities, audiences=body.audiences,
+            providers=body.providers, geography=body.geography, effective_at=body.effective_at,
+            expires_at=body.expires_at, posthumous_rules=body.posthumous_rules,
+            evidence_asset_ids=body.evidence_asset_ids, successor_ids=body.successor_ids,
+            dispute=body.dispute, freeze_high_risk=body.freeze_high_risk,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+            consent_grant_id=body.consent_grant_id,
+        )
+
+    @memory.get('/v1/projects/{project_id}/liveforever/governance/{governance_id}', operation_id='get_liveforever_governance')
+    def get_liveforever_governance(project_id: str, governance_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.governance_record(principal.tenant_id, project_id, governance_id)
+
+    @memory.post('/v1/projects/{project_id}/liveforever/interviews', status_code=201, operation_id='create_liveforever_interview')
+    def create_liveforever_interview(project_id: str, body: LiveForeverInterviewCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.create_interview(
+            tenant_id=principal.tenant_id, project_id=project_id, subject_id=body.subject_id,
+            participants=body.participants, consent_context=body.consent_context,
+            recording_state=body.recording_state, source_media_ids=body.source_media_ids,
+            timeline=body.timeline, device=body.device, environment=body.environment,
+            interruptions=body.interruptions, question_lineage=body.question_lineage,
+            pacing_policy=body.pacing_policy, actor_id=principal.subject_id,
+            idempotency_key=body.idempotency_key, complete=body.complete,
+        )
+
+    @memory.get('/v1/projects/{project_id}/liveforever/interviews/{interview_id}', operation_id='get_liveforever_interview')
+    def get_liveforever_interview(
+        project_id: str, interview_id: str, request: Request, principal: Principal,
+        include_private_marks: bool = Query(default=False),
+    ) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id)
+        if include_private_marks:
+            _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.interview(
+            principal.tenant_id, project_id, interview_id, include_private_marks=include_private_marks,
+        )
+
+    @memory.post('/v1/projects/{project_id}/liveforever/interviews/{interview_id}/segments', status_code=201, operation_id='create_liveforever_transcript_segment')
+    def create_liveforever_transcript_segment(project_id: str, interview_id: str, body: LiveForeverTranscriptSegmentCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.add_transcript_segment(
+            interview_id, tenant_id=principal.tenant_id, project_id=project_id,
+            segment_index=body.segment_index, start_ms=body.start_ms, end_ms=body.end_ms,
+            speaker_label=body.speaker_label, speaker_confidence=body.speaker_confidence,
+            original_text=body.original_text, source_media_id=body.source_media_id,
+            spatial_anchor=body.spatial_anchor, private_marks=body.private_marks,
+            followup_suggestions=body.followup_suggestions, actor_id=principal.subject_id,
+        )
+
+    @memory.post('/v1/projects/{project_id}/liveforever/transcript-segments/{segment_id}/corrections', operation_id='correct_liveforever_transcript_segment')
+    def correct_liveforever_transcript_segment(project_id: str, segment_id: str, body: LiveForeverTranscriptCorrection, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.correct_transcript_segment(
+            segment_id, tenant_id=principal.tenant_id, project_id=project_id,
+            editor_id=principal.subject_id, edited_text=body.edited_text,
+            reason=body.reason, review_state=body.review_state,
+        )
+
+    @memory.post('/v1/projects/{project_id}/liveforever/records/{record_id}/revisions', status_code=201, operation_id='revise_liveforever_record')
+    def revise_liveforever_record(project_id: str, record_id: str, body: LiveForeverRecordRevision, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        revised_id = _context(request).liveforever.revise_record(
+            record_id, tenant_id=principal.tenant_id, project_id=project_id,
+            editor_id=principal.subject_id, correction_type=body.correction_type,
+            reason=body.reason, changes=body.changes, audience=body.audience,
+            purpose=body.purpose,
+        )
+        return {"record_id": revised_id, "revises_record_id": record_id, "original_preserved": True}
+
+    @memory.post('/v1/projects/{project_id}/liveforever/editions', status_code=201, operation_id='create_liveforever_edition')
+    def create_liveforever_edition(project_id: str, body: LiveForeverEditionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.create_edition(
+            tenant_id=principal.tenant_id, project_id=project_id, name=body.name,
+            audience=body.audience, purpose=body.purpose,
+            presentation_choices=body.presentation_choices, scene_commit_id=body.scene_commit_id,
+            narrative_path=body.narrative_path, policy_snapshot=body.policy_snapshot,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+            publish=body.publish, supersedes_edition_id=body.supersedes_edition_id,
+        )
+
+    @memory.get('/v1/projects/{project_id}/liveforever/edition-revisions/{edition_id}', operation_id='get_liveforever_edition_revision')
+    def get_liveforever_edition_revision(project_id: str, edition_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.edition_by_id(principal.tenant_id, project_id, edition_id)
+
+    @memory.post('/v1/projects/{project_id}/liveforever/derivatives', status_code=201, operation_id='register_liveforever_derivative')
+    def register_liveforever_derivative(project_id: str, body: LiveForeverDerivativeCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.register_derivative(
+            tenant_id=principal.tenant_id, project_id=project_id,
+            derivative_type=body.derivative_type, source_ids=body.source_ids,
+            subject_ids=body.subject_ids, consent_grant_ids=body.consent_grant_ids,
+            audience=body.audience, classification=body.classification,
+            retention=body.retention, provider=body.provider,
+            generation_lineage=body.generation_lineage, policy=body.policy,
+            actor_id=principal.subject_id, idempotency_key=body.idempotency_key,
+        )
+
+    @memory.get('/v1/projects/{project_id}/liveforever/derivatives/{derivative_id}', operation_id='get_liveforever_derivative')
+    def get_liveforever_derivative(project_id: str, derivative_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.derivative(principal.tenant_id, project_id, derivative_id)
+
+    @memory.get('/v1/projects/{project_id}/liveforever/memory-room/{subject_id}', operation_id='get_liveforever_memory_room')
+    def get_liveforever_memory_room(
+        project_id: str, subject_id: str, request: Request, principal: Principal,
+        audience: Audience = Query(...), purpose: str = Query(...),
+        include_private_transcript_marks: bool = Query(default=False),
+    ) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id, purpose=purpose, audience=audience)
+        if include_private_transcript_marks:
+            _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.memory_room(
+            principal.tenant_id, project_id, subject_id=subject_id, audience=audience,
+            purpose=purpose, include_private_transcript_marks=include_private_transcript_marks,
+        )
+
+    @memory.post('/v1/projects/{project_id}/liveforever/preservation-releases', status_code=201, operation_id='create_liveforever_preservation_release')
+    def create_liveforever_preservation_release(project_id: str, body: LiveForeverPreservationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
+        root = _context(request).settings.object_store_root.parent / 'vertical-exports'
+        root.mkdir(parents=True, exist_ok=True)
+        name_hash = sha256_bytes(f'{principal.tenant_id}:{project_id}:{body.idempotency_key}:liveforever'.encode())[:24]
+        destination = root / f'liveforever-preservation-{name_hash}.zip'
+        return _context(request).liveforever.create_preservation_release(
+            tenant_id=principal.tenant_id, project_id=project_id, edition_id=body.edition_id,
+            destination=destination, originals=body.originals,
+            technical_metadata=body.technical_metadata, rights_consent=body.rights_consent,
+            memory_graph=body.memory_graph, scene_manifests=body.scene_manifests,
+            open_assets=body.open_assets, human_guide=body.human_guide,
+            offline_fallback=body.offline_fallback, replicas=body.replicas,
+            format_migrations=body.format_migrations, succession=body.succession,
+            shutdown=body.shutdown, actor_id=principal.subject_id,
+            idempotency_key=body.idempotency_key,
+        )
+
+    @memory.get('/v1/projects/{project_id}/liveforever/preservation-releases/{release_id}', operation_id='get_liveforever_preservation_release')
+    def get_liveforever_preservation_release(project_id: str, release_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.preservation_release(principal.tenant_id, project_id, release_id)
+
     @construction.post('/v1/projects/{project_id}/construction/hierarchy', status_code=201, operation_id='create_construction_hierarchy')
     def construction_hierarchy(project_id: str, body: ConstructionHierarchy, request: Request, principal: Principal) -> dict[str, Any]:
         _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
@@ -2153,7 +2710,7 @@ def _routers() -> dict[str, APIRouter]:
         return {'record_id': record_id}
 
     @memory.post('/v1/projects/{project_id}/liveforever/conflicting-recollections', status_code=201, operation_id='create_conflicting_recollections')
-    def create_conflicts(project_id: str, body: ConflictingRecollections, request: Request, principal: Principal) -> dict[str, Any]:
+    def create_conflicts(project_id: str, body: ConflictingRecollections, request: Request, principal: Principal) -> list[str]:
         _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id)
         return _context(request).liveforever.conflicting_recollections(tenant_id=principal.tenant_id, project_id=project_id, subject_id=body.subject_id, event_key=body.event_key, recollections=body.recollections, audience=body.audience, actor_id=principal.subject_id)
 

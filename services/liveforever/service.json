@@ -1,0 +1,130 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_consent",
+      "path": "/v1/liveforever/consents/{grant_id}/revoke"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_conflicting_recollections",
+      "path": "/v1/projects/{project_id}/liveforever/conflicting-recollections"
+    },
+    {
+      "method": "POST",
+      "operation_id": "grant_consent",
+      "path": "/v1/projects/{project_id}/liveforever/consents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_liveforever_derivative",
+      "path": "/v1/projects/{project_id}/liveforever/derivatives"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_derivative",
+      "path": "/v1/projects/{project_id}/liveforever/derivatives/{derivative_id}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_edition_revision",
+      "path": "/v1/projects/{project_id}/liveforever/edition-revisions/{edition_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_edition",
+      "path": "/v1/projects/{project_id}/liveforever/editions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_edition",
+      "path": "/v1/projects/{project_id}/liveforever/editions/{audience}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "configure_liveforever_experience",
+      "path": "/v1/projects/{project_id}/liveforever/experience"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_governance",
+      "path": "/v1/projects/{project_id}/liveforever/governance"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_governance",
+      "path": "/v1/projects/{project_id}/liveforever/governance/{governance_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_interview",
+      "path": "/v1/projects/{project_id}/liveforever/interviews"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_interview",
+      "path": "/v1/projects/{project_id}/liveforever/interviews/{interview_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_transcript_segment",
+      "path": "/v1/projects/{project_id}/liveforever/interviews/{interview_id}/segments"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_memory_room",
+      "path": "/v1/projects/{project_id}/liveforever/memory-room/{subject_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_liveforever_preservation_release",
+      "path": "/v1/projects/{project_id}/liveforever/preservation-releases"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_liveforever_preservation_release",
+      "path": "/v1/projects/{project_id}/liveforever/preservation-releases/{release_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_memory_record",
+      "path": "/v1/projects/{project_id}/liveforever/records"
+    },
+    {
+      "method": "POST",
+      "operation_id": "correct_liveforever_transcript_segment",
+      "path": "/v1/projects/{project_id}/liveforever/transcript-segments/{segment_id}/corrections"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true
+  },
+  "service_name": "liveforever"
+}

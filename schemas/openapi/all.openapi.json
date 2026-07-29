@@ -854,6 +854,120 @@
         "title": "ConsentRevoke",
         "type": "object"
       },
+      "ConstructionCommissioningCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "accept": {
+            "default": false,
+            "title": "Accept",
+            "type": "boolean"
+          },
+          "attachments": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Attachments",
+            "type": "array"
+          },
+          "entity_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Entity Ids",
+            "type": "array"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "instruments": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Instruments",
+            "type": "array"
+          },
+          "issue_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Issue Id"
+          },
+          "participants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Participants",
+            "type": "array"
+          },
+          "prerequisites": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Prerequisites",
+            "type": "array"
+          },
+          "procedure": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Procedure",
+            "type": "object"
+          },
+          "results": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Results",
+            "type": "object"
+          },
+          "retest_of_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retest Of Id"
+          },
+          "steps": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Steps",
+            "type": "array"
+          },
+          "system_type": {
+            "title": "System Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "system_type",
+          "entity_ids",
+          "procedure",
+          "steps",
+          "participants",
+          "results",
+          "idempotency_key"
+        ],
+        "title": "ConstructionCommissioningCreate",
+        "type": "object"
+      },
       "ConstructionDocument": {
         "additionalProperties": false,
         "properties": {
@@ -914,6 +1028,283 @@
         "title": "ConstructionDocument",
         "type": "object"
       },
+      "ConstructionDocumentRevisionCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": {
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "document_type": {
+            "title": "Document Type",
+            "type": "string"
+          },
+          "extraction": {
+            "additionalProperties": true,
+            "title": "Extraction",
+            "type": "object"
+          },
+          "issue_date": {
+            "title": "Issue Date",
+            "type": "string"
+          },
+          "issuer": {
+            "title": "Issuer",
+            "type": "string"
+          },
+          "page_count": {
+            "minimum": 1.0,
+            "title": "Page Count",
+            "type": "integer"
+          },
+          "page_regions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Page Regions",
+            "type": "array"
+          },
+          "permissions": {
+            "additionalProperties": true,
+            "title": "Permissions",
+            "type": "object"
+          },
+          "review": {
+            "additionalProperties": true,
+            "title": "Review",
+            "type": "object"
+          },
+          "revision": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Revision",
+            "type": "string"
+          },
+          "source_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "spatial_links": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Spatial Links",
+            "type": "array"
+          },
+          "stable_document_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stable Document Id"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "supersedes_revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Revision Id"
+          },
+          "title": {
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_type",
+          "title",
+          "revision",
+          "issue_date",
+          "issuer",
+          "status",
+          "asset_id",
+          "source_sha256",
+          "page_count"
+        ],
+        "title": "ConstructionDocumentRevisionCreate",
+        "type": "object"
+      },
+      "ConstructionFieldVisitCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "capture_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Capture Ids",
+            "type": "array"
+          },
+          "checklist": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Checklist",
+            "type": "array"
+          },
+          "complete": {
+            "default": true,
+            "title": "Complete",
+            "type": "boolean"
+          },
+          "controls": {
+            "additionalProperties": true,
+            "title": "Controls",
+            "type": "object"
+          },
+          "coverage": {
+            "additionalProperties": true,
+            "title": "Coverage",
+            "type": "object"
+          },
+          "detail_evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Detail Evidence",
+            "type": "array"
+          },
+          "exact_prior_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exact Prior Commit Id"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "inaccessible_regions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Inaccessible Regions",
+            "type": "array"
+          },
+          "inventory": {
+            "additionalProperties": true,
+            "title": "Inventory",
+            "type": "object"
+          },
+          "privacy": {
+            "additionalProperties": true,
+            "title": "Privacy",
+            "type": "object"
+          },
+          "registration": {
+            "additionalProperties": true,
+            "title": "Registration",
+            "type": "object"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "tracking": {
+            "additionalProperties": true,
+            "title": "Tracking",
+            "type": "object"
+          },
+          "unresolved_questions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Unresolved Questions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "capture_ids",
+          "checklist",
+          "idempotency_key"
+        ],
+        "title": "ConstructionFieldVisitCreate",
+        "type": "object"
+      },
+      "ConstructionHandoffCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted_scene_commit_id": {
+            "title": "Accepted Scene Commit Id",
+            "type": "string"
+          },
+          "audience_profiles": {
+            "additionalProperties": true,
+            "title": "Audience Profiles",
+            "type": "object"
+          },
+          "exclusions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclusions",
+            "type": "array"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "training": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Training",
+            "type": "array"
+          },
+          "warranties": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Warranties",
+            "type": "array"
+          }
+        },
+        "required": [
+          "accepted_scene_commit_id",
+          "idempotency_key"
+        ],
+        "title": "ConstructionHandoffCreate",
+        "type": "object"
+      },
       "ConstructionHierarchy": {
         "additionalProperties": false,
         "properties": {
@@ -953,6 +1344,438 @@
           "name"
         ],
         "title": "ConstructionHierarchy",
+        "type": "object"
+      },
+      "ConstructionInterchangeCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "alignment": {
+            "additionalProperties": true,
+            "title": "Alignment",
+            "type": "object"
+          },
+          "classifications": {
+            "additionalProperties": true,
+            "title": "Classifications",
+            "type": "object"
+          },
+          "crs": {
+            "additionalProperties": true,
+            "title": "Crs",
+            "type": "object"
+          },
+          "direction": {
+            "enum": [
+              "import",
+              "export"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "format": {
+            "title": "Format",
+            "type": "string"
+          },
+          "geometry_conversion_report": {
+            "additionalProperties": true,
+            "title": "Geometry Conversion Report",
+            "type": "object"
+          },
+          "global_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Global Ids",
+            "type": "array"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "issues": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Issues",
+            "type": "array"
+          },
+          "mappings": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Mappings",
+            "type": "array"
+          },
+          "owner_history": {
+            "additionalProperties": true,
+            "title": "Owner History",
+            "type": "object"
+          },
+          "properties": {
+            "additionalProperties": true,
+            "title": "Properties",
+            "type": "object"
+          },
+          "relationships": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Relationships",
+            "type": "array"
+          },
+          "schema_version": {
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_asset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Asset Id"
+          },
+          "source_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "truth_labels": {
+            "additionalProperties": true,
+            "title": "Truth Labels",
+            "type": "object"
+          },
+          "units": {
+            "title": "Units",
+            "type": "string"
+          },
+          "unsupported_constructs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Unsupported Constructs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "format",
+          "direction",
+          "source_sha256",
+          "schema_version",
+          "units",
+          "idempotency_key"
+        ],
+        "title": "ConstructionInterchangeCreate",
+        "type": "object"
+      },
+      "ConstructionIssueCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "minLength": 1,
+            "title": "Description",
+            "type": "string"
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due At"
+          },
+          "entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Id"
+          },
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "issue_type": {
+            "title": "Issue Type",
+            "type": "string"
+          },
+          "observed_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed Commit Id"
+          },
+          "permissions": {
+            "additionalProperties": true,
+            "title": "Permissions",
+            "type": "object"
+          },
+          "place_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Place Id"
+          },
+          "responsible_party": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsible Party"
+          },
+          "severity": {
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "issue_type",
+          "description",
+          "evidence",
+          "severity",
+          "idempotency_key"
+        ],
+        "title": "ConstructionIssueCreate",
+        "type": "object"
+      },
+      "ConstructionIssueTransition": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "note": {
+            "minLength": 1,
+            "title": "Note",
+            "type": "string"
+          },
+          "residual_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Residual Limitations",
+            "type": "array"
+          },
+          "target_state": {
+            "title": "Target State",
+            "type": "string"
+          },
+          "verifier_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verifier Id"
+          }
+        },
+        "required": [
+          "target_state",
+          "evidence",
+          "note"
+        ],
+        "title": "ConstructionIssueTransition",
+        "type": "object"
+      },
+      "ConstructionSurveyCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "baseline_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Baseline Commit Id"
+          },
+          "control_requirements": {
+            "additionalProperties": true,
+            "title": "Control Requirements",
+            "type": "object"
+          },
+          "deliverables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Deliverables",
+            "type": "array"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "measurement_requirements": {
+            "additionalProperties": true,
+            "title": "Measurement Requirements",
+            "type": "object"
+          },
+          "name": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "objectives": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Objectives",
+            "type": "array"
+          },
+          "permissions": {
+            "additionalProperties": true,
+            "title": "Permissions",
+            "type": "object"
+          },
+          "required_place_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Required Place Ids",
+            "type": "array"
+          },
+          "required_system_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Required System Types",
+            "type": "array"
+          },
+          "return_visit_of_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Visit Of Id"
+          },
+          "safety": {
+            "additionalProperties": true,
+            "title": "Safety",
+            "type": "object"
+          },
+          "sensitive_regions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sensitive Regions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "objectives",
+          "required_place_ids",
+          "deliverables",
+          "idempotency_key"
+        ],
+        "title": "ConstructionSurveyCreate",
+        "type": "object"
+      },
+      "ConstructionSurveyReview": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepted Commit Id"
+          },
+          "checklist": {
+            "additionalProperties": true,
+            "title": "Checklist",
+            "type": "object"
+          },
+          "decision": {
+            "enum": [
+              "accept",
+              "reject",
+              "request_changes"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "decision"
+        ],
+        "title": "ConstructionSurveyReview",
         "type": "object"
       },
       "ConstructionSystem": {
@@ -2542,6 +3365,641 @@
           "review_state"
         ],
         "title": "LicenseDocumentContract",
+        "type": "object"
+      },
+      "LiveForeverDerivativeCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "audience": {
+            "$ref": "#/components/schemas/Audience"
+          },
+          "classification": {
+            "title": "Classification",
+            "type": "string"
+          },
+          "consent_grant_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Consent Grant Ids",
+            "type": "array"
+          },
+          "derivative_type": {
+            "title": "Derivative Type",
+            "type": "string"
+          },
+          "generation_lineage": {
+            "additionalProperties": true,
+            "title": "Generation Lineage",
+            "type": "object"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "policy": {
+            "additionalProperties": true,
+            "title": "Policy",
+            "type": "object"
+          },
+          "provider": {
+            "additionalProperties": true,
+            "title": "Provider",
+            "type": "object"
+          },
+          "retention": {
+            "additionalProperties": true,
+            "title": "Retention",
+            "type": "object"
+          },
+          "source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Ids",
+            "type": "array"
+          },
+          "subject_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Subject Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "derivative_type",
+          "source_ids",
+          "subject_ids",
+          "consent_grant_ids",
+          "audience",
+          "classification",
+          "idempotency_key"
+        ],
+        "title": "LiveForeverDerivativeCreate",
+        "type": "object"
+      },
+      "LiveForeverEditionCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "audience": {
+            "$ref": "#/components/schemas/Audience"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "narrative_path": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Narrative Path",
+            "type": "array"
+          },
+          "policy_snapshot": {
+            "additionalProperties": true,
+            "title": "Policy Snapshot",
+            "type": "object"
+          },
+          "presentation_choices": {
+            "additionalProperties": true,
+            "title": "Presentation Choices",
+            "type": "object"
+          },
+          "publish": {
+            "default": false,
+            "title": "Publish",
+            "type": "boolean"
+          },
+          "purpose": {
+            "title": "Purpose",
+            "type": "string"
+          },
+          "scene_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Commit Id"
+          },
+          "supersedes_edition_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Edition Id"
+          }
+        },
+        "required": [
+          "name",
+          "audience",
+          "purpose",
+          "idempotency_key"
+        ],
+        "title": "LiveForeverEditionCreate",
+        "type": "object"
+      },
+      "LiveForeverGovernanceCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "audiences": {
+            "items": {
+              "$ref": "#/components/schemas/Audience"
+            },
+            "minItems": 1,
+            "title": "Audiences",
+            "type": "array"
+          },
+          "authority_basis": {
+            "title": "Authority Basis",
+            "type": "string"
+          },
+          "consent_grant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consent Grant Id"
+          },
+          "data_scope": {
+            "additionalProperties": true,
+            "title": "Data Scope",
+            "type": "object"
+          },
+          "dispute": {
+            "additionalProperties": true,
+            "title": "Dispute",
+            "type": "object"
+          },
+          "effective_at": {
+            "format": "date-time",
+            "title": "Effective At",
+            "type": "string"
+          },
+          "evidence_asset_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Asset Ids",
+            "type": "array"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "freeze_high_risk": {
+            "default": false,
+            "title": "Freeze High Risk",
+            "type": "boolean"
+          },
+          "geography": {
+            "additionalProperties": true,
+            "title": "Geography",
+            "type": "object"
+          },
+          "grantor_id": {
+            "title": "Grantor Id",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "modalities": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Modalities",
+            "type": "array"
+          },
+          "posthumous_rules": {
+            "additionalProperties": true,
+            "title": "Posthumous Rules",
+            "type": "object"
+          },
+          "providers": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Providers",
+            "type": "array"
+          },
+          "purposes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Purposes",
+            "type": "array"
+          },
+          "record_type": {
+            "title": "Record Type",
+            "type": "string"
+          },
+          "subject_id": {
+            "title": "Subject Id",
+            "type": "string"
+          },
+          "successor_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Successor Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "record_type",
+          "subject_id",
+          "grantor_id",
+          "authority_basis",
+          "purposes",
+          "audiences",
+          "effective_at",
+          "idempotency_key"
+        ],
+        "title": "LiveForeverGovernanceCreate",
+        "type": "object"
+      },
+      "LiveForeverInterviewCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "complete": {
+            "default": false,
+            "title": "Complete",
+            "type": "boolean"
+          },
+          "consent_context": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Consent Context",
+            "type": "object"
+          },
+          "device": {
+            "additionalProperties": true,
+            "title": "Device",
+            "type": "object"
+          },
+          "environment": {
+            "additionalProperties": true,
+            "title": "Environment",
+            "type": "object"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "interruptions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Interruptions",
+            "type": "array"
+          },
+          "pacing_policy": {
+            "additionalProperties": true,
+            "title": "Pacing Policy",
+            "type": "object"
+          },
+          "participants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Participants",
+            "type": "array"
+          },
+          "question_lineage": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Question Lineage",
+            "type": "array"
+          },
+          "recording_state": {
+            "title": "Recording State",
+            "type": "string"
+          },
+          "source_media_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Media Ids",
+            "type": "array"
+          },
+          "subject_id": {
+            "title": "Subject Id",
+            "type": "string"
+          },
+          "timeline": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Timeline",
+            "type": "object"
+          }
+        },
+        "required": [
+          "subject_id",
+          "participants",
+          "consent_context",
+          "recording_state",
+          "source_media_ids",
+          "timeline",
+          "idempotency_key"
+        ],
+        "title": "LiveForeverInterviewCreate",
+        "type": "object"
+      },
+      "LiveForeverPreservationCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "edition_id": {
+            "title": "Edition Id",
+            "type": "string"
+          },
+          "format_migrations": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Format Migrations",
+            "type": "array"
+          },
+          "human_guide": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Human Guide",
+            "type": "object"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "memory_graph": {
+            "additionalProperties": true,
+            "title": "Memory Graph",
+            "type": "object"
+          },
+          "offline_fallback": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Offline Fallback",
+            "type": "object"
+          },
+          "open_assets": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Open Assets",
+            "type": "array"
+          },
+          "originals": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Originals",
+            "type": "array"
+          },
+          "replicas": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Replicas",
+            "type": "array"
+          },
+          "rights_consent": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Rights Consent",
+            "type": "array"
+          },
+          "scene_manifests": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Scene Manifests",
+            "type": "array"
+          },
+          "shutdown": {
+            "additionalProperties": true,
+            "title": "Shutdown",
+            "type": "object"
+          },
+          "succession": {
+            "additionalProperties": true,
+            "title": "Succession",
+            "type": "object"
+          },
+          "technical_metadata": {
+            "additionalProperties": true,
+            "title": "Technical Metadata",
+            "type": "object"
+          }
+        },
+        "required": [
+          "edition_id",
+          "originals",
+          "human_guide",
+          "offline_fallback",
+          "idempotency_key"
+        ],
+        "title": "LiveForeverPreservationCreate",
+        "type": "object"
+      },
+      "LiveForeverRecordRevision": {
+        "additionalProperties": false,
+        "properties": {
+          "audience": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Audience"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "changes": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Changes",
+            "type": "object"
+          },
+          "correction_type": {
+            "title": "Correction Type",
+            "type": "string"
+          },
+          "purpose": {
+            "default": "family_review",
+            "title": "Purpose",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "correction_type",
+          "reason",
+          "changes"
+        ],
+        "title": "LiveForeverRecordRevision",
+        "type": "object"
+      },
+      "LiveForeverTranscriptCorrection": {
+        "additionalProperties": false,
+        "properties": {
+          "edited_text": {
+            "minLength": 1,
+            "title": "Edited Text",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "review_state": {
+            "default": "reviewed",
+            "title": "Review State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "edited_text",
+          "reason"
+        ],
+        "title": "LiveForeverTranscriptCorrection",
+        "type": "object"
+      },
+      "LiveForeverTranscriptSegmentCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "end_ms": {
+            "exclusiveMinimum": 0.0,
+            "title": "End Ms",
+            "type": "integer"
+          },
+          "followup_suggestions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Followup Suggestions",
+            "type": "array"
+          },
+          "original_text": {
+            "title": "Original Text",
+            "type": "string"
+          },
+          "private_marks": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Private Marks",
+            "type": "array"
+          },
+          "segment_index": {
+            "minimum": 0.0,
+            "title": "Segment Index",
+            "type": "integer"
+          },
+          "source_media_id": {
+            "title": "Source Media Id",
+            "type": "string"
+          },
+          "spatial_anchor": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Anchor"
+          },
+          "speaker_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Speaker Confidence",
+            "type": "number"
+          },
+          "speaker_label": {
+            "title": "Speaker Label",
+            "type": "string"
+          },
+          "start_ms": {
+            "minimum": 0.0,
+            "title": "Start Ms",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "segment_index",
+          "start_ms",
+          "end_ms",
+          "speaker_label",
+          "speaker_confidence",
+          "original_text",
+          "source_media_id"
+        ],
+        "title": "LiveForeverTranscriptSegmentCreate",
         "type": "object"
       },
       "ManualExternalReceiptContract": {
@@ -11231,6 +12689,172 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/construction/commissioning": {
+      "post": {
+        "operationId": "record_construction_commissioning",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionCommissioningCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Construction Commissioning",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Construction Commissioning",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/construction/deficiencies": {
       "post": {
         "operationId": "create_deficiency",
@@ -11392,6 +13016,337 @@
           }
         },
         "summary": "Create Deficiency",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/document-revisions": {
+      "post": {
+        "operationId": "create_construction_document_revision",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionDocumentRevisionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Construction Document Revision",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Construction Document Revision",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/document-revisions/{revision_id}": {
+      "get": {
+        "operationId": "get_construction_document_revision",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "revision_id",
+            "required": true,
+            "schema": {
+              "title": "Revision Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Construction Document Revision",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Construction Document Revision",
         "tags": [
           "construction"
         ]
@@ -11563,6 +13518,337 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/construction/handoffs": {
+      "post": {
+        "operationId": "create_construction_owner_handoff",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionHandoffCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Construction Owner Handoff",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Construction Owner Handoff",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/handoffs/{handoff_id}": {
+      "get": {
+        "operationId": "get_construction_handoff",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "handoff_id",
+            "required": true,
+            "schema": {
+              "title": "Handoff Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Construction Handoff",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Construction Handoff",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/construction/hierarchy": {
       "post": {
         "operationId": "create_construction_hierarchy",
@@ -11724,6 +14010,678 @@
           }
         },
         "summary": "Construction Hierarchy",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/interchanges": {
+      "post": {
+        "operationId": "record_construction_interchange",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionInterchangeCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Construction Interchange",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Construction Interchange",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/issues": {
+      "post": {
+        "operationId": "create_construction_issue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionIssueCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Construction Issue",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Construction Issue",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/issues/{issue_id}": {
+      "get": {
+        "operationId": "get_construction_issue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "issue_id",
+            "required": true,
+            "schema": {
+              "title": "Issue Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Construction Issue",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Construction Issue",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/issues/{issue_id}/transition": {
+      "post": {
+        "operationId": "transition_construction_issue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "issue_id",
+            "required": true,
+            "schema": {
+              "title": "Issue Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionIssueTransition"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Transition Construction Issue",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Transition Construction Issue",
         "tags": [
           "construction"
         ]
@@ -11893,6 +14851,1070 @@
           }
         },
         "summary": "Construction Report",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/search": {
+      "get": {
+        "operationId": "search_construction_facility",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "default": "",
+              "title": "Query",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "system_pack",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "System Pack"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_restricted",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Restricted",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Search Construction Facility",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Search Construction Facility",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/surveys": {
+      "post": {
+        "operationId": "create_construction_survey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionSurveyCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Construction Survey",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Construction Survey",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/surveys/{survey_id}": {
+      "get": {
+        "operationId": "get_construction_survey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "survey_id",
+            "required": true,
+            "schema": {
+              "title": "Survey Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Construction Survey",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Construction Survey",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/surveys/{survey_id}/review": {
+      "post": {
+        "operationId": "review_construction_survey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "survey_id",
+            "required": true,
+            "schema": {
+              "title": "Survey Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionSurveyReview"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Review Construction Survey",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Review Construction Survey",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/surveys/{survey_id}/visits": {
+      "post": {
+        "operationId": "record_construction_field_visit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "survey_id",
+            "required": true,
+            "schema": {
+              "title": "Survey Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionFieldVisitCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Construction Field Visit",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Construction Field Visit",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/system-packs/{pack}": {
+      "get": {
+        "operationId": "get_construction_system_pack",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "pack",
+            "required": true,
+            "schema": {
+              "title": "Pack",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_restricted",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Restricted",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Construction System Pack",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Construction System Pack",
         "tags": [
           "construction"
         ]
@@ -15304,9 +19326,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
+                  "items": {
+                    "type": "string"
+                  },
                   "title": "Response Create Conflicting Recollections",
-                  "type": "object"
+                  "type": "array"
                 }
               }
             },
@@ -15490,6 +19514,668 @@
           }
         },
         "summary": "Grant Consent",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/derivatives": {
+      "post": {
+        "operationId": "register_liveforever_derivative",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverDerivativeCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Register Liveforever Derivative",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register Liveforever Derivative",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/derivatives/{derivative_id}": {
+      "get": {
+        "operationId": "get_liveforever_derivative",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "derivative_id",
+            "required": true,
+            "schema": {
+              "title": "Derivative Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Derivative",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Derivative",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/edition-revisions/{edition_id}": {
+      "get": {
+        "operationId": "get_liveforever_edition_revision",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "edition_id",
+            "required": true,
+            "schema": {
+              "title": "Edition Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Edition Revision",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Edition Revision",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/editions": {
+      "post": {
+        "operationId": "create_liveforever_edition",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverEditionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Liveforever Edition",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Liveforever Edition",
         "tags": [
           "liveforever"
         ]
@@ -15834,6 +20520,1376 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/liveforever/governance": {
+      "post": {
+        "operationId": "create_liveforever_governance",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverGovernanceCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Liveforever Governance",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Liveforever Governance",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/governance/{governance_id}": {
+      "get": {
+        "operationId": "get_liveforever_governance",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "governance_id",
+            "required": true,
+            "schema": {
+              "title": "Governance Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Governance",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Governance",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/interviews": {
+      "post": {
+        "operationId": "create_liveforever_interview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverInterviewCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Liveforever Interview",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Liveforever Interview",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/interviews/{interview_id}": {
+      "get": {
+        "operationId": "get_liveforever_interview",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "interview_id",
+            "required": true,
+            "schema": {
+              "title": "Interview Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_private_marks",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Private Marks",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Interview",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Interview",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/interviews/{interview_id}/segments": {
+      "post": {
+        "operationId": "create_liveforever_transcript_segment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "interview_id",
+            "required": true,
+            "schema": {
+              "title": "Interview Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverTranscriptSegmentCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Liveforever Transcript Segment",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Liveforever Transcript Segment",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/memory-room/{subject_id}": {
+      "get": {
+        "operationId": "get_liveforever_memory_room",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "schema": {
+              "title": "Subject Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "audience",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Audience"
+            }
+          },
+          {
+            "in": "query",
+            "name": "purpose",
+            "required": true,
+            "schema": {
+              "title": "Purpose",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_private_transcript_marks",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Private Transcript Marks",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Memory Room",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Memory Room",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/preservation-releases": {
+      "post": {
+        "operationId": "create_liveforever_preservation_release",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverPreservationCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Liveforever Preservation Release",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Liveforever Preservation Release",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/preservation-releases/{release_id}": {
+      "get": {
+        "operationId": "get_liveforever_preservation_release",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "release_id",
+            "required": true,
+            "schema": {
+              "title": "Release Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Liveforever Preservation Release",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Liveforever Preservation Release",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/liveforever/records": {
       "post": {
         "operationId": "create_memory_record",
@@ -15995,6 +22051,356 @@
           }
         },
         "summary": "Create Memory",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions": {
+      "post": {
+        "operationId": "revise_liveforever_record",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "record_id",
+            "required": true,
+            "schema": {
+              "title": "Record Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverRecordRevision"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Revise Liveforever Record",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revise Liveforever Record",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/transcript-segments/{segment_id}/corrections": {
+      "post": {
+        "operationId": "correct_liveforever_transcript_segment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "segment_id",
+            "required": true,
+            "schema": {
+              "title": "Segment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverTranscriptCorrection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Correct Liveforever Transcript Segment",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Correct Liveforever Transcript Segment",
         "tags": [
           "liveforever"
         ]

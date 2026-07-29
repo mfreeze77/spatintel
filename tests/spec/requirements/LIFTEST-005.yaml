@@ -8,18 +8,11 @@ source:
 requirement: The system shall export an offline package with originals, transcript, graph, scene, labels, consent summary,
   and checksums.
 verification_method: Controlled verification
-implementation_status: IN_PROGRESS
-implementation_files:
-- src/sip/liveforever.py
-- src/sip/exporting.py
-- tools/run_demo.py
-- verticals/liveforever
+implementation_status: NOT_STARTED
+implementation_files: []
 automated_test_ids:
-- tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
-retained_evidence:
-- build/evidence/demos/liveforever.json
-- build/reports/test-matrix.json
-- build/reports/tests/acceptance.xml
+- REQ-LIFTEST-005
+retained_evidence: []
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -28,6 +21,5 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  owner: UNASSIGNED
+  gap: ''

@@ -961,14 +961,14 @@ def construction(output: Path) -> dict[str, Any]:
     level = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="level", name="Level 1", parent_id=building, state="observed", actor_id=actor)
     room = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="room", name="Electrical 101", parent_id=level, state="observed", actor_id=actor)
     system_specs = [
-        ("fire_alarm_panel", "entity-facp", {"manufacturer": "Synthetic", "model": "FACP-1", "circuits": ["SLC-1"]}, [evidence["panel-photo.jpg"]]),
-        ("fire_alarm_device", "entity-smoke-1", {"device_type": "smoke_detector", "address": "001"}, [evidence["panel-photo.jpg"]]),
-        ("access_opening", "entity-door-101", {"door": "101", "sequence": "card unlocks strike"}, [evidence["access-photo.jpg"]]),
-        ("access_reader", "entity-reader-101", {"technology": "synthetic credential"}, [evidence["access-photo.jpg"]]),
-        ("bas_equipment", "entity-ahu-1", {"equipment": "AHU-1", "protocol": "BACnet"}, [evidence["nameplate.jpg"]]),
-        ("bas_point", "entity-ahu-1-sat", {"point": "SAT", "units": "degF"}, [evidence["nameplate.jpg"]]),
-        ("mechanical_equipment", "entity-fan-1", {"equipment": "EF-1"}, [evidence["nameplate.jpg"]]),
-        ("electrical_equipment", "entity-panel-l1", {"equipment": "LP-1"}, [evidence["nameplate.jpg"]]),
+        ("fire_alarm_panel", "entity-facp", {"manufacturer": "Synthetic", "model": "FACP-1", "circuits": ["SLC-1"], "network_address": "192.0.2.10"}, [evidence["panel-photo.jpg"]]),
+        ("fire_alarm_device", "entity-smoke-1", {"manufacturer": "Synthetic", "model": "Smoke-1", "device_type": "smoke_detector", "address": "001"}, [evidence["panel-photo.jpg"]]),
+        ("access_opening", "entity-door-101", {"manufacturer": "Synthetic", "model": "Opening-101", "door": "101", "sequence": "card unlocks strike"}, [evidence["access-photo.jpg"]]),
+        ("access_reader", "entity-reader-101", {"manufacturer": "Synthetic", "model": "Reader-101", "technology": "synthetic credential"}, [evidence["access-photo.jpg"]]),
+        ("bas_equipment", "entity-ahu-1", {"manufacturer": "Synthetic", "model": "AHU-1", "equipment": "AHU-1", "protocol": "BACnet"}, [evidence["nameplate.jpg"]]),
+        ("bas_point", "entity-ahu-1-sat", {"manufacturer": "Synthetic", "model": "VirtualPoint", "point": "SAT", "units": "degF"}, [evidence["nameplate.jpg"]]),
+        ("mechanical_equipment", "entity-fan-1", {"manufacturer": "Synthetic", "model": "EF-1", "equipment": "EF-1"}, [evidence["nameplate.jpg"]]),
+        ("electrical_equipment", "entity-panel-l1", {"manufacturer": "Synthetic", "model": "LP-1", "equipment": "LP-1"}, [evidence["nameplate.jpg"]]),
     ]
     systems: list[str] = []
     for system_type, entity_id, data, asset_ids in system_specs:
@@ -1012,12 +1012,178 @@ def construction(output: Path) -> dict[str, Any]:
     reference_points = np.array([[0, 0, 0], [1, 0, 0], [2, 0, 0], [3, 0, 0]], dtype=float)
     changed_points = np.array([[0, 0, 0], [1, 0, 0], [2, 0.4, 0], [4, 0, 0]], dtype=float)
     point_change = change_detection(reference_points, changed_points, threshold_m=0.2)
+
+    survey = context.construction.create_survey_plan(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        name="Synthetic electrical-room spatial survey",
+        objectives=["document room hierarchy", "inventory life-safety and MEP systems", "retain inaccessible regions"],
+        required_place_ids=[room],
+        required_system_types=["fire_alarm_panel", "access_opening", "bas_equipment"],
+        sensitive_regions=[{"region_id": "panel-cabinet-interior", "classification": "restricted", "capture": "prohibited"}],
+        control_requirements={"known_scale": True, "coordinate_frame_id": "world"},
+        measurement_requirements={"height": {"uncertainty_m_max": 0.005}},
+        safety={"stop_work": True, "energized_equipment_opening": False},
+        permissions={"capture": "synthetic-approved", "owner_export": "redacted"},
+        deliverables=[{"type": "survey_report"}, {"type": "owner_handoff"}],
+        actor_id=actor,
+        idempotency_key="construction-demo-survey-v1",
+        baseline_commit_id=scene["commit_id"],
+    )
+    visit = context.construction.record_field_visit(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        survey_id=survey["survey_id"],
+        scope={"rooms": [room], "systems": systems},
+        capture_ids=[capture_asset],
+        checklist=[
+            {"id": "room-coverage", "status": "complete"},
+            {"id": "system-inventory", "status": "complete"},
+        ],
+        detail_evidence=[{"asset_id": evidence["panel-photo.jpg"], "kind": "panel_detail"}],
+        inaccessible_regions=[{"region_id": "panel-cabinet-interior", "reason": "energized and restricted"}],
+        coverage={"observed_fraction": 0.92, "unobserved_regions": ["panel-cabinet-interior"]},
+        tracking={"state": "normal", "interruptions": ["controlled pause and resume"]},
+        registration={"state": "accepted", "frame_id": "world", "residual_m": 0.01},
+        controls={"known_scale": True, "calibration_asset_id": evidence["calibration.json"]},
+        inventory={"system_record_ids": systems},
+        unresolved_questions=[{"id": "rfi-001", "question": "Confirm panel mounting reference"}],
+        privacy={"restricted_regions_redacted": True},
+        actor_id=actor,
+        idempotency_key="construction-demo-visit-v1",
+        exact_prior_commit_id=scene["commit_id"],
+        complete=True,
+    )
+    survey_review = context.construction.review_survey(
+        survey["survey_id"],
+        tenant_id=tenant_id,
+        project_id=project_id,
+        reviewer_id="demo-independent-survey-reviewer",
+        decision="accept",
+        checklist={
+            "items": [
+                {"id": "coverage", "required": True, "status": "pass"},
+                {"id": "inaccessible-regions", "required": True, "status": "pass"},
+            ]
+        },
+        accepted_commit_id=scene["commit_id"],
+        limitations=["Panel cabinet interior was not observed and is not represented as verified absence."],
+    )
+
+    rfi_asset = context.assets.get(tenant_id, project_id, evidence["rfi-001.txt"])
+    rfi_revision = context.construction.create_document_revision(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        stable_document_id="RFI-001",
+        document_type="rfi",
+        title="Confirm fire alarm panel mounting height",
+        revision="1",
+        issue_date="2026-07-29",
+        issuer="Synthetic General Contractor",
+        status="answered",
+        asset_id=rfi_asset.asset_id,
+        source_sha256=rfi_asset.sha256,
+        page_count=1,
+        permissions={"audiences": ["project", "owner"], "owner_export": True},
+        page_regions=[{"page": 1, "polygon": [[0, 0], [1, 0], [1, 1], [0, 1]], "label": "question"}],
+        spatial_links=[{"entity_id": systems[0], "space_id": room, "scene_commit_id": scene["commit_id"]}],
+        extraction={"question": "Confirm mounting height", "response": "Use field-verified 1.52 m datum", "authoritative": False},
+        review={"state": "accepted", "reviewer": "demo-document-reviewer"},
+        actor_id=actor,
+    )
+
+    issue = context.construction.create_issue(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        issue_type="deficiency",
+        description="Missing durable circuit label",
+        evidence=[{"asset_id": evidence["panel-photo.jpg"], "kind": "before"}],
+        reporter_id=actor,
+        severity="medium",
+        idempotency_key="construction-demo-issue-v1",
+        entity_id=systems[0],
+        place_id=room,
+        observed_commit_id=scene["commit_id"],
+        responsible_party="Synthetic Electrical Contractor",
+        permissions={"audience": "project"},
+    )
+    issue_corrected = context.construction.transition_issue(
+        issue["issue_id"], tenant_id=tenant_id, project_id=project_id, actor_id="demo-responsible-technician",
+        target_state="corrected", evidence=[{"asset_id": evidence["panel-photo.jpg"], "kind": "correction"}],
+        note="Installed durable circuit label.", residual_limitations=[],
+    )
+    issue_retest = context.construction.transition_issue(
+        issue["issue_id"], tenant_id=tenant_id, project_id=project_id, actor_id="demo-commissioning-agent",
+        target_state="retest_required", evidence=[{"asset_id": evidence["test-record.json"], "kind": "retest_plan"}],
+        note="Independent retest scheduled.", residual_limitations=[],
+    )
+    issue_closed = context.construction.transition_issue(
+        issue["issue_id"], tenant_id=tenant_id, project_id=project_id, actor_id="demo-independent-verifier",
+        target_state="verified_closed", evidence=[{"asset_id": evidence["test-record.json"], "kind": "passed_retest"}],
+        note="Retest passed.", verifier_id="demo-independent-verifier", residual_limitations=[],
+    )
+    commissioning = context.construction.record_commissioning(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        system_type="fire_alarm_panel",
+        entity_ids=[systems[0]],
+        procedure={"id": "SYN-CX-001", "revision": "1"},
+        prerequisites=[{"id": "issue_closed", "status": "pass"}],
+        steps=[{"step": 1, "expected": "alarm", "actual": "alarm", "result": "pass"}],
+        participants=[{"id": "demo-commissioning-agent", "role": "tester"}],
+        instruments=[{"id": "synthetic-meter", "calibration_state": "current"}],
+        attachments=[evidence["test-record.json"], evidence["calibration.json"]],
+        results={"overall": "pass", "passed": True},
+        actor_id="demo-commissioning-agent",
+        idempotency_key="construction-demo-commissioning-v1",
+        issue_id=issue["issue_id"],
+        accept=True,
+    )
+    drawing_asset = context.assets.get(tenant_id, project_id, evidence["drawing-a101.pdf"])
+    interchange = context.construction.record_interchange(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        format="IFC",
+        direction="import",
+        source_asset_id=drawing_asset.asset_id,
+        source_sha256=drawing_asset.sha256,
+        schema_version="IFC4",
+        units="meter",
+        crs={"identifier": "SYNTHETIC:LOCAL"},
+        owner_history={"application": "Synthetic BIM"},
+        global_ids=["SYN-FACP-1"],
+        classifications={"SYN-FACP-1": "IfcDistributionControlElement"},
+        properties={"SYN-FACP-1": {"manufacturer": "Synthetic"}},
+        relationships=[{"from": "SYN-FACP-1", "to": room, "type": "contained_in"}],
+        geometry_conversion_report={"converted": 1, "failed": 0, "representation": "design"},
+        unsupported_constructs=[{"type": "IfcSyntheticUnsupported", "action": "retained_in_report"}],
+        alignment={"transform_type": "SE3", "residual_m": 0.01, "controls": ["world"]},
+        mappings=[{"design_id": "SYN-FACP-1", "field_id": systems[0], "state": "proposed"}],
+        issues=[],
+        truth_labels={"SYN-FACP-1": "design", systems[0]: "observed"},
+        actor_id=actor,
+        idempotency_key="construction-demo-ifc-v1",
+    )
     technical = context.construction.technical_report(tenant_id, project_id)
     owner = context.construction.owner_report(tenant_id, project_id)
     _write_json(output / "reports" / "technical-report.json", technical)
     _write_json(output / "reports" / "owner-report.json", owner)
     bcf = context.construction.export_bcf(tenant_id, project_id, output / "handoff" / "project.bcf.json")
     ifc = context.construction.export_ifc_handoff_manifest(tenant_id, project_id, output / "handoff" / "ifc-handoff.json")
+    owner_handoff = context.construction.create_owner_handoff(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        destination=output / "handoff" / "owner-handoff.zip",
+        scope={"rooms": [room], "systems": ["fire_alarm", "access_control", "mep"]},
+        accepted_scene_commit_id=scene["commit_id"],
+        warranties=[{"equipment_id": systems[0], "status": "synthetic"}],
+        training=[{"topic": "offline owner viewer", "status": "complete"}],
+        exclusions=["restricted programming data", "inaccessible energized cabinet interior"],
+        audience_profiles={"owner": {"read_only": True}, "restricted_owner_export_approved": False},
+        actor_id=actor,
+        idempotency_key="construction-demo-owner-handoff-v1",
+    )
+    handoff_validation = context.construction.verify_owner_handoff(Path(owner_handoff["package_path"]))
     preservation = _preserve_and_restore(context, tenant_id, project_id, actor, output, restored_suffix="construction")
     if correction["state"] != "closed" or not any(item["measurement_id"] == measurement and item["authority_class"] == "field_verified" for item in technical["measurements"]):
         raise ValidationError("DEMO_CONSTRUCTION_ACCEPTANCE_FAILED", "deficiency closure or field measurement evidence is missing")
@@ -1038,6 +1204,16 @@ def construction(output: Path) -> dict[str, Any]:
         "measurement": {"id": measurement, "source": technical["measurements"][0]},
         "temporal": {"baseline": temporal_before, "after": temporal_after, "point_change": point_change},
         "reports": {"technical": str(output / "reports" / "technical-report.json"), "owner": str(output / "reports" / "owner-report.json"), "bcf": bcf, "ifc": ifc},
+        "progress06_vertical_mvp": {
+            "survey": survey,
+            "field_visit": visit,
+            "survey_review": survey_review,
+            "rfi_revision": rfi_revision,
+            "issue": {"created": issue, "corrected": issue_corrected, "retest": issue_retest, "closed": issue_closed},
+            "commissioning": commissioning,
+            "interchange": interchange,
+            "owner_handoff": {**owner_handoff, "validation": handoff_validation},
+        },
         "preservation": preservation,
         "acceptance": {
             "drawing_imported": "drawing-a101.pdf" in evidence,
@@ -1049,6 +1225,10 @@ def construction(output: Path) -> dict[str, Any]:
             "semantic_diff_reviewable": bool(temporal_after["added"]) and bool(point_change["added_indices"]),
             "design_observed_verified_not_collapsed": True,
             "warning_present": "not survey-grade" in technical["warnings"][0],
+            "survey_reviewed": survey_review["state"] == "accepted" and survey_review["accepted_commit_id"] == scene["commit_id"],
+            "commissioning_accepted": commissioning["state"] == "accepted" and commissioning["results"].get("passed") is True,
+            "rfi_revision_reviewed": context.construction.document_revision(tenant_id, project_id, rfi_revision["revision_id"])["review"].get("state") == "accepted",
+            "open_owner_handoff_verified": owner_handoff["status"] == "verified" and handoff_validation["valid"] is True,
             "restored": preservation["matching_root_hash"],
         },
     }
@@ -1090,6 +1270,182 @@ def liveforever(output: Path) -> dict[str, Any]:
         source_class=SourceClass.GENERATED, confidence=0.8, evidence_asset_ids=[evidence["family-photo.jpg"], evidence["generated-kitchen.png"]], audience=Audience.FAMILY, actor_id=actor,
         generated_lineage={"model_manifest_id": "approved-synthetic-demo", "model_checkpoint_hash": "a" * 64, "prompt_hash": "b" * 64, "input_asset_ids": [evidence["family-photo.jpg"]], "output_hash": sha256_bytes(b"synthetic generated visual reconstruction")},
     )
+    governance = context.liveforever.create_governance_record(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        record_type="consent",
+        subject_id=subject,
+        grantor_id="alex-synthetic",
+        authority_basis="documented synthetic self-consent",
+        data_scope={"records": ["*"], "excluded": ["biometric_templates"]},
+        purposes=["preservation", "family_review"],
+        modalities=["text", "audio", "photo", "generated_visual"],
+        audiences=[Audience.PRIVATE, Audience.FAMILY, Audience.PUBLIC],
+        providers=["local-approved-only"],
+        geography={"execution": "local", "export": "family-approved"},
+        effective_at=datetime.now(UTC),
+        expires_at=datetime.now(UTC) + timedelta(days=365),
+        posthumous_rules={"executor_required": True, "expand_permissions": False},
+        evidence_asset_ids=[evidence["letter.txt"]],
+        successor_ids=["synthetic-executor"],
+        dispute={},
+        freeze_high_risk=False,
+        actor_id="alex-synthetic",
+        idempotency_key="liveforever-demo-governance-v1",
+        consent_grant_id=grant,
+    )
+    interview = context.liveforever.create_interview(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        subject_id=subject,
+        participants=[
+            {"person_id": subject, "role": "narrator"},
+            {"person_id": actor, "role": "interviewer"},
+        ],
+        consent_context={"confirmed": True, "grant_id": grant, "recording_indicator": True},
+        recording_state="stopped",
+        source_media_ids=[evidence["recording.wav"]],
+        timeline={"started_ms": 0, "ended_ms": 4000},
+        device={"type": "synthetic-recorder", "clock": "monotonic"},
+        environment={"location": "synthetic memory room", "privacy": "controlled"},
+        interruptions=[{"at_ms": 2000, "kind": "pause", "reason": "participant-controlled pause"}],
+        question_lineage=[
+            {"question_id": "q-human", "source": "human", "text": "What do you remember about the kitchen?"},
+            {"question_id": "q-agent", "source": "agent", "text": "Which object anchors the memory?", "model_manifest_id": "synthetic-question-model", "prompt_hash": "d" * 64},
+        ],
+        pacing_policy={"pause_allowed": True, "skip_allowed": True, "stop_allowed": True, "distress_behavior": "pause_and_offer_human_handoff_without_diagnosis"},
+        actor_id=actor,
+        idempotency_key="liveforever-demo-interview-v1",
+        complete=True,
+    )
+    segment = context.liveforever.add_transcript_segment(
+        interview["interview_id"],
+        tenant_id=tenant_id,
+        project_id=project_id,
+        segment_index=0,
+        start_ms=0,
+        end_ms=4000,
+        speaker_label="Alex Synthetic",
+        speaker_confidence=0.92,
+        original_text="The radio was near the kitchen window.",
+        source_media_id=evidence["recording.wav"],
+        spatial_anchor={"record_id": place, "source_time_range_ms": [0, 4000], "uncertainty_m": 0.1},
+        private_marks=[{"start": 4, "end": 9, "reason": "family-private"}],
+        followup_suggestions=[{"text": "Would you like to pause?", "policy": "human_review_before_use"}],
+        actor_id=actor,
+    )
+    corrected_segment = context.liveforever.correct_transcript_segment(
+        segment["segment_id"],
+        tenant_id=tenant_id,
+        project_id=project_id,
+        editor_id="alex-synthetic",
+        edited_text="The blue radio was near the kitchen window.",
+        reason="speaker supplied the missing descriptor",
+        review_state="reviewed",
+    )
+    retained_interview = context.liveforever.interview(
+        tenant_id, project_id, interview["interview_id"], include_private_marks=True
+    )
+    with context.database.session() as session:
+        original_event_row = session.get(MemoryRecordRow, event)
+        if original_event_row is None:
+            raise ValidationError("DEMO_MEMORY_RECORD_MISSING", "source memory record disappeared before family correction")
+        original_event_payload = context.liveforever._memory_payload(original_event_row)
+    family_revision = context.liveforever.revise_record(
+        event,
+        tenant_id=tenant_id,
+        project_id=project_id,
+        editor_id="alex-synthetic",
+        correction_type="alternate_interpretation",
+        reason="The contributor now recalls that the weather changed before lunch.",
+        changes={"title": "Family trip — corrected recollection", "assertions": [{"claim": "weather changed before lunch", "status": "alternate_interpretation"}]},
+        audience=Audience.FAMILY,
+        purpose="family_review",
+    )
+    with context.database.session() as session:
+        original_event_after = session.get(MemoryRecordRow, event)
+        revision_row = session.get(MemoryRecordRow, family_revision)
+        family_correction_preserved_original = (
+            original_event_after is not None
+            and revision_row is not None
+            and context.liveforever._memory_payload(original_event_after) == original_event_payload
+            and revision_row.data_json.get("revision_of") == event
+        )
+
+    durable_edition = context.liveforever.create_edition(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        name="Synthetic navigable family memory room",
+        audience=Audience.FAMILY,
+        purpose="family_review",
+        presentation_choices={
+            "evidence_first": True,
+            "source_labels_persistent": True,
+            "generated_toggle": True,
+            "quiet_mode": True,
+            "safe_exit": True,
+        },
+        scene_commit_id="synthetic-memory-room-v1",
+        narrative_path=[
+            {"record_id": place, "scene_commit_id": "synthetic-memory-room-v1"},
+            {"record_id": event, "scene_commit_id": "synthetic-memory-room-v1"},
+            {"record_id": family_revision, "scene_commit_id": "synthetic-memory-room-v1"},
+        ],
+        policy_snapshot={"grant_ids": [grant], "audience": "family", "generated_presence": False},
+        actor_id=actor,
+        idempotency_key="liveforever-demo-edition-v1",
+        publish=True,
+    )
+    memory_room = context.liveforever.memory_room(
+        tenant_id,
+        project_id,
+        subject_id=subject,
+        audience=Audience.FAMILY,
+        purpose="family_review",
+        include_private_transcript_marks=False,
+    )
+    recording_ref = context.assets.get(tenant_id, project_id, evidence["recording.wav"])
+    memory_release = context.liveforever.create_preservation_release(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        edition_id=durable_edition["edition_id"],
+        destination=output / "preservation" / "synthetic-memory-room.zip",
+        originals=[{
+            "asset_id": recording_ref.asset_id,
+            "sha256": recording_ref.sha256,
+            "media_type": "audio/wav",
+            "preservation_master": True,
+            "technical_metadata": {"fixture": "synthetic", "duration_ms": 4000},
+            "rights": {"grant_id": grant, "audience": "family"},
+        }],
+        technical_metadata={"package_profile": "SIP-LIVEFOREVER-PRESERVATION-1.0", "created_by": actor},
+        rights_consent=[{
+            "grant_id": grant,
+            "subject_id": subject,
+            "purpose": "family_review",
+            "audience": "family",
+            "revocation_checked": True,
+        }],
+        memory_graph={
+            "nodes": [person, place, event, family_revision, generated],
+            "edges": [{"from": event, "to": family_revision, "type": "family_correction"}],
+            "source": "synthetic-only",
+        },
+        scene_manifests=[{"scene_commit_id": "synthetic-memory-room-v1", "representations": ["semantic", "evidence", "generated_labeled"]}],
+        open_assets=[
+            {"path": "data/memory-graph.json", "format": "JSON"},
+            {"path": "viewer/index.html", "format": "HTML"},
+        ],
+        human_guide={"title": "Synthetic family preservation guide", "contact": "synthetic-executor"},
+        offline_fallback={"viewer": "viewer/index.html", "network_required": False, "splat_required": False},
+        replicas=[{"replica_id": "offline-copy-a", "independent": True, "fixity_schedule": "annual"}],
+        format_migrations=[{"from": "v1", "to": "v1", "original_preserved": True, "validation": "sha256"}],
+        succession={"administrators": ["synthetic-executor"], "recovery": "documented offline copy", "keys": "family-controlled", "billing": "none", "prohibited_uses": ["voice cloning"]},
+        shutdown={"bulk_export": True, "key_handoff_or_crypto_deletion": True, "family_notice": "required", "generated_presence_disabled": True},
+        actor_id=actor,
+        idempotency_key="liveforever-demo-preservation-v1",
+    )
+    memory_release_validation = context.liveforever.verify_preservation_release(Path(memory_release["package_path"]))
     before = {
         "private": context.liveforever.edition(tenant_id, project_id, audience=Audience.PRIVATE, purpose="preservation"),
         "family": context.liveforever.edition(tenant_id, project_id, audience=Audience.FAMILY, purpose="family_review"),
@@ -1130,8 +1486,32 @@ def liveforever(output: Path) -> dict[str, Any]:
         "generated_label": generated_record["data"]["generated_label"],
         "experience": safe,
         "presence_simulation_blocked": presence_blocked,
+        "progress06_vertical_mvp": {
+            "governance": governance,
+            "interview": interview,
+            "transcript_segment": segment,
+            "corrected_segment": corrected_segment,
+            "retained_interview": retained_interview,
+            "family_revision": {"original_record_id": event, "revision_record_id": family_revision, "original_preserved": family_correction_preserved_original},
+            "edition": durable_edition,
+            "memory_room": memory_room,
+            "preservation_release": {**memory_release, "validation": memory_release_validation},
+        },
         "preservation": preservation,
-        "acceptance": {"conflicts_preserved": len(conflict) == 2, "audiences_separated": True, "generated_content_labeled": True, "revocation_propagated": True, "quiet_mode": True, "safe_exit": True, "open_restore": preservation["matching_root_hash"]},
+        "acceptance": {
+            "conflicts_preserved": len(conflict) == 2,
+            "audiences_separated": True,
+            "generated_content_labeled": True,
+            "revocation_propagated": True,
+            "quiet_mode": True,
+            "safe_exit": True,
+            "interview_source_ranges_preserved": retained_interview["segments"][0]["start_ms"] == 0 and retained_interview["segments"][0]["end_ms"] == 4000,
+            "family_correction_preserved_original": family_correction_preserved_original,
+            "memory_room_navigable": bool(memory_room["room_hash"]) and memory_room["edition"] is not None and bool(memory_room["records"]),
+            "open_memory_preservation_verified": memory_release["status"] == "verified" and memory_release_validation["valid"] is True,
+            "private_marks_withheld": memory_release_validation["valid"] is True,
+            "open_restore": preservation["matching_root_hash"],
+        },
     }
 
 

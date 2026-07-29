@@ -89,6 +89,83 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "construction_commissioning",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.commissioning.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_document_revision",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.document.revised",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_visit",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.field_visit.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_handoff",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.handoff.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_record",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.hierarchy.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_interchange",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.interchange.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_issue",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.issue.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_issue",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.issue.transitioned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_survey",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.survey.planned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_survey",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.survey.reviewed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "construction_record",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.system_record.created",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "coordinate_frame",
       "classification": "inherits_project",
       "owner": "scene-service",
@@ -128,6 +205,76 @@
       "classification": "inherits_project",
       "owner": "representation-api",
       "type": "hybrid_scene_view.issued",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "consent_grant",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.consent.granted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "consent_grant",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.consent.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_derivative",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.derivative.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_edition",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.edition.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_governance",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.governance.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_interview",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.interview.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "memory_record",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.memory.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_preservation",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.preservation.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_transcript_segment",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.transcript.corrected",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_transcript_segment",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.transcript.segmented",
       "version": "1.0.0"
     },
     {

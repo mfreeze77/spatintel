@@ -1,0 +1,85 @@
+from __future__ import annotations
+
+import json
+import zipfile
+from pathlib import Path
+
+from tools.build_progress06_checkpoint import CHECKPOINT_ID, P06_SCOPE_IDS, TOP_LEVEL
+from tools.checkpoint_common import FIXED_ZIP_TIME
+from tools.verify_progress06_checkpoint import (
+    EXPECTED_BASE_COMMIT,
+    EXPECTED_MIGRATION_BYTES,
+    EXPECTED_MIGRATION_SHA256,
+    verify_archive,
+)
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def _zip_info(name: str, mode: int = 0o644) -> zipfile.ZipInfo:
+    info = zipfile.ZipInfo(name, FIXED_ZIP_TIME)
+    info.create_system = 3
+    info.external_attr = mode << 16
+    return info
+
+
+def test_progress06_verifier_rejects_unsafe_paths_before_package_claims(tmp_path: Path) -> None:
+    """CONTROL: Progress 06 verification rejects traversal before evaluating project claims."""
+    archive = tmp_path / "unsafe.zip"
+    with zipfile.ZipFile(archive, "w") as output:
+        output.writestr(_zip_info("../escape.txt"), b"escape")
+    report = verify_archive(archive)
+    assert report["status"] == "failed"
+    assert any(item["code"] == "ZIP_UNSAFE_PATH" for item in report["findings"])
+
+
+def test_progress06_verifier_rehashes_manifest_and_content_root(tmp_path: Path) -> None:
+    """CONTROL: Progress 06 verification independently detects file and aggregate-root tamper."""
+    archive = tmp_path / "tampered.zip"
+    manifest = {
+        "schema": "sip.checkpoint-content-manifest/v1",
+        "checkpoint_id": CHECKPOINT_ID,
+        "top_level": TOP_LEVEL,
+        "excluded_from_content_root": ["CHECKPOINT_CONTENT_MANIFEST.json"],
+        "file_count": 1,
+        "total_uncompressed_bytes": 4,
+        "content_root_sha256": "0" * 64,
+        "files": [{"kind": "file", "mode": "0644", "path": "payload.txt", "sha256": "0" * 64, "size": 4}],
+    }
+    with zipfile.ZipFile(archive, "w") as output:
+        output.writestr(_zip_info(f"{TOP_LEVEL}/payload.txt"), b"real")
+        output.writestr(
+            _zip_info(f"{TOP_LEVEL}/CHECKPOINT_CONTENT_MANIFEST.json"),
+            (json.dumps(manifest, sort_keys=True) + "\n").encode(),
+        )
+    report = verify_archive(archive)
+    codes = {item["code"] for item in report["findings"]}
+    assert report["status"] == "failed"
+    assert "MANIFEST_HASH_MISMATCH" in codes
+    assert "CONTENT_ROOT_MISMATCH" in codes
+
+
+def test_progress06_checkpoint_scope_and_predecessor_are_exact() -> None:
+    """CONTROL: Progress 06 cannot drift beyond the 206 authorized requirements or the accepted R2 base."""
+    scope = json.loads((ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_06.json").read_text(encoding="utf-8"))
+    predecessor = json.loads((ROOT / "PREDECESSOR_CHECKPOINT.json").read_text(encoding="utf-8"))
+    included = {item["requirement_id"] for item in scope["included_requirements"]}
+    deferred = {item["requirement_id"] for item in scope["deferred_requirements"]}
+    assert included.isdisjoint(deferred)
+    assert included | deferred == set(P06_SCOPE_IDS)
+    assert len(included) == 114
+    assert len(deferred) == 92
+    assert scope["progress_07_authorized"] is False
+    assert scope["production_authorized"] is False
+    assert predecessor["accepted_progress_05_r2_checkpoint"]["commit"] == EXPECTED_BASE_COMMIT
+
+
+def test_progress06_migration_and_viewer_truth_are_fail_closed() -> None:
+    """CONTROL: revision 0014 is byte-locked and PLTVIEW-007 remains unverified."""
+    migration = ROOT / "migrations/versions/0014_vertical_mvp.py"
+    import hashlib
+
+    assert migration.stat().st_size == EXPECTED_MIGRATION_BYTES
+    assert hashlib.sha256(migration.read_bytes()).hexdigest() == EXPECTED_MIGRATION_SHA256
+    implementation = json.loads((ROOT / "requirements/implementation-map.json").read_text(encoding="utf-8"))
+    assert implementation["requirements"]["PLTVIEW-007"]["implementation_status"] == "IMPLEMENTED_UNVERIFIED"

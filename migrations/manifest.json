@@ -65,6 +65,11 @@
       "byte_count": 2924,
       "path": "migrations/versions/0013_scene_change_application_atomicity.py",
       "sha256": "0897cddd8d457b547d7377ef84309c818cd7f792c7a6980166cdd769c5eb6abf"
+    },
+    {
+      "byte_count": 35716,
+      "path": "migrations/versions/0014_vertical_mvp.py",
+      "sha256": "c6366d9e702457d12242293335a5cfb746b6c4a00c5ead7fedc8129e4673aab7"
     }
   ],
   "schema_version": "1.1.0"

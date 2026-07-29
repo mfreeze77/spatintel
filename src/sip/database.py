@@ -1216,6 +1216,396 @@ class MemoryRecordRow(Base):
     superseded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class ConstructionSurveyRow(Base):
+    __tablename__ = "construction_surveys"
+    survey_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    name: Mapped[str] = mapped_column(String(256))
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    objectives_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    required_place_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    required_system_types_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    sensitive_regions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    control_requirements_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    measurement_requirements_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    safety_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    permissions_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    deliverables_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    baseline_commit_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    return_visit_of_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    state: Mapped[str] = mapped_column(String(32), default="planned", index=True)
+    review_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    accepted_commit_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    completion_hash: Mapped[str | None] = mapped_column(String(64))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now, onupdate=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_survey_idempotency"),
+    )
+
+
+class ConstructionVisitRow(Base):
+    __tablename__ = "construction_visits"
+    visit_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    survey_id: Mapped[str] = mapped_column(String(64), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    exact_prior_commit_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    capture_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    checklist_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    detail_evidence_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    inaccessible_regions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    coverage_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    tracking_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    registration_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    controls_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    inventory_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    unresolved_questions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    privacy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), default="in_progress", index=True)
+    report_hash: Mapped[str | None] = mapped_column(String(64))
+    created_by: Mapped[str] = mapped_column(String(128))
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_visit_idempotency"),
+    )
+
+
+class ConstructionDocumentRevisionRow(Base):
+    __tablename__ = "construction_document_revisions"
+    revision_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    stable_document_id: Mapped[str] = mapped_column(String(64), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    document_type: Mapped[str] = mapped_column(String(64), index=True)
+    title: Mapped[str] = mapped_column(String(512))
+    revision: Mapped[str] = mapped_column(String(64))
+    issue_date: Mapped[str] = mapped_column(String(64))
+    issuer: Mapped[str] = mapped_column(String(256))
+    status: Mapped[str] = mapped_column(String(64), index=True)
+    asset_id: Mapped[str] = mapped_column(String(64), index=True)
+    source_sha256: Mapped[str] = mapped_column(String(64))
+    page_count: Mapped[int] = mapped_column(Integer)
+    permissions_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    supersedes_revision_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    page_regions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    spatial_links_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    extraction_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    review_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "stable_document_id", "revision", name="uq_construction_document_revision"),
+    )
+
+
+class ConstructionIssueRow(Base):
+    __tablename__ = "construction_issues"
+    issue_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    issue_type: Mapped[str] = mapped_column(String(64), index=True)
+    description: Mapped[str] = mapped_column(Text)
+    entity_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    place_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    observed_commit_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    observed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    evidence_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    reporter_id: Mapped[str] = mapped_column(String(128))
+    severity: Mapped[str] = mapped_column(String(32), index=True)
+    responsible_party: Mapped[str | None] = mapped_column(String(256))
+    due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    status: Mapped[str] = mapped_column(String(64), default="open", index=True)
+    permissions_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    history_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    residual_limitations_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    verification_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now, onupdate=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_issue_idempotency"),
+    )
+
+
+class ConstructionCommissioningRow(Base):
+    __tablename__ = "construction_commissioning_runs"
+    commissioning_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    system_type: Mapped[str] = mapped_column(String(64), index=True)
+    entity_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    issue_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    procedure_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    prerequisites_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    steps_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    participants_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    instruments_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    attachments_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    results_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    retest_of_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    state: Mapped[str] = mapped_column(String(32), default="recorded", index=True)
+    accepted_by: Mapped[str | None] = mapped_column(String(128))
+    accepted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_commissioning_idempotency"),
+    )
+
+
+class ConstructionInterchangeRow(Base):
+    __tablename__ = "construction_interchanges"
+    interchange_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    format: Mapped[str] = mapped_column(String(32), index=True)
+    direction: Mapped[str] = mapped_column(String(16), index=True)
+    source_asset_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    source_sha256: Mapped[str | None] = mapped_column(String(64))
+    schema_version: Mapped[str | None] = mapped_column(String(64))
+    units: Mapped[str | None] = mapped_column(String(32))
+    crs_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    owner_history_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    global_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    classifications_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    properties_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    relationships_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    geometry_conversion_report_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    unsupported_constructs_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    alignment_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    mappings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    issues_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    truth_labels_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_interchange_idempotency"),
+    )
+
+
+class ConstructionHandoffRow(Base):
+    __tablename__ = "construction_handoffs"
+    handoff_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    accepted_scene_commit_id: Mapped[str] = mapped_column(String(64), index=True)
+    inventory_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    verified_attributes_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    documents_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    tests_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    warranties_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    training_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    open_issues_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    exclusions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    exports_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    representation_manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    audience_profiles_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    offline_viewer_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    limitations_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    checksums_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    root_hash: Mapped[str | None] = mapped_column(String(64))
+    package_path: Mapped[str | None] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    validation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_construction_handoff_idempotency"),
+    )
+
+
+class LiveForeverGovernanceRow(Base):
+    __tablename__ = "liveforever_governance"
+    governance_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    record_type: Mapped[str] = mapped_column(String(64), index=True)
+    subject_id: Mapped[str] = mapped_column(String(128), index=True)
+    consent_grant_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    grantor_id: Mapped[str] = mapped_column(String(128))
+    authority_basis: Mapped[str] = mapped_column(String(128))
+    data_scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    purposes_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    modalities_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    audiences_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    providers_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    geography_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    effective_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    posthumous_rules_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_asset_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    successor_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    dispute_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    freeze_high_risk: Mapped[bool] = mapped_column(Boolean, default=False)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_by: Mapped[str | None] = mapped_column(String(128))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_governance_idempotency"),
+    )
+
+
+class LiveForeverInterviewRow(Base):
+    __tablename__ = "liveforever_interviews"
+    interview_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    subject_id: Mapped[str] = mapped_column(String(128), index=True)
+    participants_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    consent_context_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    recording_state: Mapped[str] = mapped_column(String(32), index=True)
+    source_media_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    timeline_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    device_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    environment_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    interruptions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    question_lineage_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    pacing_policy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_interview_idempotency"),
+    )
+
+
+class LiveForeverTranscriptSegmentRow(Base):
+    __tablename__ = "liveforever_transcript_segments"
+    segment_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    interview_id: Mapped[str] = mapped_column(String(64), index=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    segment_index: Mapped[int] = mapped_column(Integer)
+    start_ms: Mapped[int] = mapped_column(Integer)
+    end_ms: Mapped[int] = mapped_column(Integer)
+    speaker_label: Mapped[str] = mapped_column(String(256))
+    speaker_confidence: Mapped[float] = mapped_column(Float)
+    original_text: Mapped[str] = mapped_column(Text)
+    edited_text: Mapped[str | None] = mapped_column(Text)
+    correction_history_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    private_marks_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    source_media_id: Mapped[str] = mapped_column(String(64), index=True)
+    spatial_anchor_json: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    followup_suggestions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    review_state: Mapped[str] = mapped_column(String(32), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("interview_id", "segment_index", name="uq_liveforever_transcript_segment_index"),
+    )
+
+
+class LiveForeverEditionRow(Base):
+    __tablename__ = "liveforever_editions"
+    edition_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    name: Mapped[str] = mapped_column(String(256))
+    audience_profile: Mapped[str] = mapped_column(String(32), index=True)
+    record_revisions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    presentation_choices_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    scene_commit_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    narrative_path_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    truth_legend_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    policy_snapshot_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    supersedes_edition_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    root_hash: Mapped[str] = mapped_column(String(64))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_edition_idempotency"),
+    )
+
+
+class LiveForeverDerivativeRow(Base):
+    __tablename__ = "liveforever_derivatives"
+    derivative_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    derivative_type: Mapped[str] = mapped_column(String(64), index=True)
+    source_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    subject_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    consent_grant_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    audience: Mapped[str] = mapped_column(String(32), index=True)
+    classification: Mapped[str] = mapped_column(String(64), index=True)
+    retention_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    provider_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    generation_lineage_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    policy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    withdrawal_action: Mapped[str | None] = mapped_column(String(64))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now, onupdate=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_derivative_idempotency"),
+    )
+
+
+class LiveForeverPreservationRow(Base):
+    __tablename__ = "liveforever_preservation_releases"
+    release_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    edition_id: Mapped[str] = mapped_column(String(64), index=True)
+    originals_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    technical_metadata_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    rights_consent_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    transcripts_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    memory_graph_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    scene_manifests_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    open_assets_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    checksums_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    human_guide_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    offline_fallback_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    fixity_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    replicas_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    format_migrations_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    succession_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    shutdown_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    package_path: Mapped[str | None] = mapped_column(Text)
+    root_hash: Mapped[str | None] = mapped_column(String(64))
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    validation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_preservation_idempotency"),
+    )
+
+
 class RetentionRuleRow(Base):
     __tablename__ = "retention_rules"
     retention_rule_id: Mapped[str] = mapped_column(String(64), primary_key=True)

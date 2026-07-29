@@ -8,11 +8,29 @@ source:
 requirement: Preservation packages shall include originals, technical metadata, rights/consent, transcripts, memory graph,
   scene/evidence manifests, open spatial assets, checksums, and human-readable guides.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/liveforever.py
+- src/sip/api.py
+- src/sip/archive_safety.py
+- src/sip/database.py
+- migrations/versions/0014_vertical_mvp.py
+- docs/operator/LIVEFOREVER_PRESERVATION.md
 automated_test_ids:
-- REQ-LIFPRESV-001
-retained_evidence: []
+- tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
+- tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation
+- tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline
+- tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages
+- tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates
+retained_evidence:
+- build/evidence/demos/export.json
+- build/evidence/demos/liveforever.json
+- build/evidence/demos/restore.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/unit.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +39,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

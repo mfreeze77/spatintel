@@ -1,0 +1,140 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "retest_deficiency",
+      "path": "/v1/construction/deficiencies/{deficiency_id}/retest"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_construction_commissioning",
+      "path": "/v1/projects/{project_id}/construction/commissioning"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_deficiency",
+      "path": "/v1/projects/{project_id}/construction/deficiencies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_document_revision",
+      "path": "/v1/projects/{project_id}/construction/document-revisions"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_document_revision",
+      "path": "/v1/projects/{project_id}/construction/document-revisions/{revision_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "attach_construction_document",
+      "path": "/v1/projects/{project_id}/construction/documents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_owner_handoff",
+      "path": "/v1/projects/{project_id}/construction/handoffs"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_handoff",
+      "path": "/v1/projects/{project_id}/construction/handoffs/{handoff_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_hierarchy",
+      "path": "/v1/projects/{project_id}/construction/hierarchy"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_construction_interchange",
+      "path": "/v1/projects/{project_id}/construction/interchanges"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues/{issue_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "transition_construction_issue",
+      "path": "/v1/projects/{project_id}/construction/issues/{issue_id}/transition"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_report",
+      "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
+    },
+    {
+      "method": "GET",
+      "operation_id": "search_construction_facility",
+      "path": "/v1/projects/{project_id}/construction/search"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "review_construction_survey",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}/review"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_construction_field_visit",
+      "path": "/v1/projects/{project_id}/construction/surveys/{survey_id}/visits"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_construction_system_pack",
+      "path": "/v1/projects/{project_id}/construction/system-packs/{pack}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_construction_system",
+      "path": "/v1/projects/{project_id}/construction/systems"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true
+  },
+  "service_name": "construction"
+}

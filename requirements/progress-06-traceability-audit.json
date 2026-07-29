@@ -1,0 +1,5632 @@
+{
+  "audited_requirements": [
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONAC-001",
+      "semantic_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONAC-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-003",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
+        }
+      ],
+      "requirement_id": "CONAC-003",
+      "semantic_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONAC-004",
+      "semantic_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONAC-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-003",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
+        }
+      ],
+      "requirement_id": "CONAC-006",
+      "semantic_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONDEMO-001",
+      "semantic_rationale": "synthetic non-sensitive Construction pilot exercises the implemented reference workflow; physical field pilot remains broader",
+      "status": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONDEMO-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONDEMO-003",
+      "semantic_rationale": "synthetic non-sensitive Construction pilot exercises the implemented reference workflow; physical field pilot remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONDEMO-004",
+      "semantic_rationale": "synthetic Construction demonstration records scan-estimate and independently field-verified measurement history",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONDEMO-005",
+      "semantic_rationale": "synthetic Construction demonstration produces a reviewable changed-object semantic diff",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONDEMO-006",
+      "semantic_rationale": "synthetic non-sensitive Construction pilot exercises the implemented reference workflow; physical field pilot remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-001",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-002",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-003",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-004",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-005",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONDOC-006",
+      "semantic_rationale": "document tests exercise immutable revisions, hashes, page regions, spatial links, RFIs, and review-required extraction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONFA-001",
+      "semantic_rationale": "synthetic fire-alarm entity-pack tests exercise records and restricted export behavior without confidential facility data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONFA-002",
+      "semantic_rationale": "synthetic fire-alarm entity-pack tests exercise records and restricted export behavior without confidential facility data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONFA-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONFA-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-003",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
+        }
+      ],
+      "requirement_id": "CONFA-005",
+      "semantic_rationale": "synthetic fire-alarm entity-pack tests exercise records and restricted export behavior without confidential facility data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONFA-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONHAND-001",
+      "semantic_rationale": "owner-handoff tests exercise open offline access, checksums, redaction, and package verification",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONHAND-002",
+      "semantic_rationale": "owner-handoff tests exercise open offline access, checksums, redaction, and package verification",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONHAND-003",
+      "semantic_rationale": "owner-handoff tests exercise open offline access, checksums, redaction, and package verification",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONHAND-004",
+      "semantic_rationale": "owner-handoff tests exercise open offline access, checksums, redaction, and package verification",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHAND-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 4,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
+        }
+      ],
+      "requirement_id": "CONHAND-006",
+      "semantic_rationale": "owner-handoff tests exercise open offline access, checksums, redaction, and package verification",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONHIER-001",
+      "semantic_rationale": "hierarchy tests exercise stable places, coordinate frames, and system zones",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONHIER-002",
+      "semantic_rationale": "hierarchy tests exercise stable places, coordinate frames, and system zones",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHIER-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONHIER-004",
+      "semantic_rationale": "hierarchy tests exercise stable places, coordinate frames, and system zones",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHIER-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHIER-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Domain schema test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Policy and workflow test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Measurement acceptance test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Viewer/export test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Remeshing regression test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Security test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-007",
+            "CONMEAS-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_construction_complete_record_deficiency_retest_measurement_and_reports"
+        }
+      ],
+      "requirement_id": "CONHYB-007",
+      "semantic_rationale": "vertical workflow tests bind issue/commissioning and progress review to scene/evidence controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Workflow test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-008",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Handoff round-trip test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONHYB-009",
+      "semantic_rationale": "vertical workflow tests bind issue/commissioning and progress review to scene/evidence controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Change-detection scenario"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-010",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Vertical review"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-011",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Field UX test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-012",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "IFC interoperability test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-013",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Offline field test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-014",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Reporting acceptance test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-015",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Fault-injection test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-005"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONHYB-016",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Portability test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONMEAS-001",
+            "DATANCH-001",
+            "DATHYB-006",
+            "PLTIO-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_export_restore.py::test_preservation_collision_remaps_proxy_measurement_and_anchor_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONMEAS-001",
+            "DATANCH-001",
+            "DATRET-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHYB-007",
+            "CONMEAS-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_construction_complete_record_deficiency_retest_measurement_and_reports"
+        }
+      ],
+      "requirement_id": "CONMEAS-001",
+      "semantic_rationale": "reference tests exercise measurement authority fields; survey/certification evidence remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-007",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Policy test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-008",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Measurement test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-009",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Report/export test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-010",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "UI acceptance test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-011",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Revision regression test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001",
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONMEAS-012",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Workflow test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONMEP-001",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONMEP-002",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONMEP-003",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONMEP-004",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-001",
+            "CONAC-004",
+            "CONFA-001",
+            "CONFA-002",
+            "CONHIER-001",
+            "CONHIER-002",
+            "CONHIER-004",
+            "CONMEP-001",
+            "CONMEP-002",
+            "CONMEP-003",
+            "CONMEP-004",
+            "CONMEP-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        }
+      ],
+      "requirement_id": "CONMEP-005",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-003",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
+        }
+      ],
+      "requirement_id": "CONMEP-006",
+      "semantic_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONOVR-001",
+            "LIFOVR-001",
+            "PLTAPI-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_vertical_openapi_contracts_are_service_scoped"
+        }
+      ],
+      "requirement_id": "CONOVR-001",
+      "semantic_rationale": "survey-to-owner-handoff API and workflow tests exercise the integrated Construction vertical; field/customer acceptance remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONOVR-002",
+      "semantic_rationale": "survey-to-owner-handoff API and workflow tests exercise the integrated Construction vertical; field/customer acceptance remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONOVR-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONOVR-004",
+      "semantic_rationale": "survey-to-owner-handoff API and workflow tests exercise the integrated Construction vertical; field/customer acceptance remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONOVR-005",
+      "semantic_rationale": "survey-to-owner-handoff API and workflow tests exercise the integrated Construction vertical; field/customer acceptance remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONOVR-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONPROG-001",
+      "semantic_rationale": "temporal comparison tests exercise coverage-aware change review without payment inference",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONPROG-002",
+      "semantic_rationale": "temporal comparison tests exercise coverage-aware change review without payment inference",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONPROG-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONPROG-004",
+      "semantic_rationale": "temporal comparison tests exercise coverage-aware change review without payment inference",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONPROG-005",
+      "semantic_rationale": "temporal comparison tests exercise coverage-aware change review without payment inference",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONPROG-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONQC-001",
+      "semantic_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONQC-002",
+      "semantic_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONQC-003",
+      "semantic_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONOVR-001",
+            "CONOVR-002",
+            "CONOVR-004",
+            "CONOVR-005",
+            "CONQC-001",
+            "CONQC-002",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        }
+      ],
+      "requirement_id": "CONQC-004",
+      "semantic_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONQC-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-003",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
+        }
+      ],
+      "requirement_id": "CONQC-006",
+      "semantic_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONREP-001",
+      "semantic_rationale": "deterministic report tests exercise truth labels, source view identity, redaction state, and stable content identity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONREP-002",
+      "semantic_rationale": "deterministic report tests exercise truth labels, source view identity, redaction state, and stable content identity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONREP-003",
+      "semantic_rationale": "deterministic report tests exercise truth labels, source view identity, redaction state, and stable content identity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONREP-004",
+      "semantic_rationale": "deterministic report tests exercise truth labels, source view identity, redaction state, and stable content identity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "CONREP-005",
+      "semantic_rationale": "deterministic report tests exercise truth labels, source view identity, redaction state, and stable content identity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONREP-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONSURV-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONSURV-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDEMO-001",
+            "CONDEMO-003",
+            "CONDEMO-004",
+            "CONDEMO-005",
+            "CONDEMO-006",
+            "CONHAND-001",
+            "CONHAND-006",
+            "CONQC-003",
+            "CONQC-004",
+            "CONSURV-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "CONSURV-003",
+      "semantic_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONSURV-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "CONSURV-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHYB-009",
+            "CONPROG-001",
+            "CONPROG-002",
+            "CONPROG-004",
+            "CONPROG-005",
+            "CONSURV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_return_visit_and_coverage_safe_temporal_review"
+        }
+      ],
+      "requirement_id": "CONSURV-006",
+      "semantic_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "DATBIM-001",
+      "semantic_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "DATBIM-002",
+      "semantic_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "DATBIM-003",
+      "semantic_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "DATBIM-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "DATBIM-005",
+      "semantic_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "CONDOC-002",
+            "CONDOC-003",
+            "CONDOC-004",
+            "CONDOC-005",
+            "CONDOC-006",
+            "CONHAND-001",
+            "CONHAND-002",
+            "CONHAND-003",
+            "CONHAND-004",
+            "CONHAND-006",
+            "CONREP-001",
+            "CONREP-002",
+            "CONREP-003",
+            "CONREP-004",
+            "CONREP-005",
+            "DATBIM-001",
+            "DATBIM-002",
+            "DATBIM-003",
+            "DATBIM-005",
+            "DATBIM-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        }
+      ],
+      "requirement_id": "DATBIM-006",
+      "semantic_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 5,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFHYB-008",
+            "LIFMEDIA-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFCONS-001",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "LIFCONS-005",
+            "LIFGRAPH-005",
+            "LIFGRAPH-006",
+            "LIFINT-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        }
+      ],
+      "requirement_id": "LIFCONS-002",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFCONS-003",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        }
+      ],
+      "requirement_id": "LIFCONS-004",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-005",
+            "LIFHYB-007",
+            "LIFHYB-011",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "LIFCONS-005",
+            "LIFGRAPH-005",
+            "LIFGRAPH-006",
+            "LIFINT-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        }
+      ],
+      "requirement_id": "LIFCONS-005",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFCONS-006",
+      "semantic_rationale": "consent/governance tests exercise scope, revocation, succession limits, audiences, and dispute freezes; full legal review remains external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "LIFDEMO-001",
+      "semantic_rationale": "synthetic documented-consent memory-room pilot exercises the included workflow without private-family data or likeness/voice simulation",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "LIFDEMO-002",
+      "semantic_rationale": "synthetic documented-consent memory-room pilot exercises the included workflow without private-family data or likeness/voice simulation",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFDEMO-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "LIFDEMO-004",
+      "semantic_rationale": "synthetic LiveForever demonstration preserves generated reconstruction source coverage and generated-gap labeling",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "direct",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        }
+      ],
+      "requirement_id": "LIFDEMO-005",
+      "semantic_rationale": "synthetic LiveForever demonstration presents alternate recollections without collapsing either account",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFDEMO-006",
+      "semantic_rationale": "synthetic documented-consent memory-room pilot exercises the included workflow without private-family data or likeness/voice simulation",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFDISP-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFGRAPH-004",
+            "LIFTEST-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFDISP-002",
+      "semantic_rationale": "conflict and correction tests preserve alternatives and sources without majority-vote factual promotion",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFDISP-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFDISP-004",
+      "semantic_rationale": "conflict and correction tests preserve alternatives and sources without majority-vote factual promotion",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFDISP-005",
+      "semantic_rationale": "conflict and correction tests preserve alternatives and sources without majority-vote factual promotion",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFDISP-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFEXP-007",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Immersive safety test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFEXP-008",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "End-to-end policy test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFEXP-009",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Truth-label test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFEXP-010",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Accessibility test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFEXP-011",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Remesh test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFEXP-012",
+      "semantic_rationale": "offline fallback tests exercise a non-proprietary, non-splat preservation experience",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Preservation test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-001",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-002",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-003",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFGRAPH-004",
+            "LIFTEST-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-004",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "LIFCONS-005",
+            "LIFGRAPH-005",
+            "LIFGRAPH-006",
+            "LIFINT-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-005",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "LIFCONS-005",
+            "LIFGRAPH-005",
+            "LIFGRAPH-006",
+            "LIFINT-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        }
+      ],
+      "requirement_id": "LIFGRAPH-006",
+      "semantic_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Schema and viewer test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Truth-policy test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Remapping and migration test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Consent propagation test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Generation-lineage test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Alternate-memory scenario"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-005",
+            "LIFHYB-007",
+            "LIFHYB-011",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFHYB-007",
+      "semantic_rationale": "generated-presence, provider, private-place, and safe-exit controls are exercised with synthetic/local data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Safety policy test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFHYB-008",
+            "LIFMEDIA-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFHYB-008",
+      "semantic_rationale": "generated-presence, provider, private-place, and safe-exit controls are exercised with synthetic/local data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "External-provider security test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-009",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Evidence UX test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-010",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "VR/desktop navigation test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-005",
+            "LIFHYB-007",
+            "LIFHYB-011",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        }
+      ],
+      "requirement_id": "LIFHYB-011",
+      "semantic_rationale": "generated-presence, provider, private-place, and safe-exit controls are exercised with synthetic/local data",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Accessibility and emotional-safety test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-012",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Audio provenance test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-013",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Branch manifest test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-014",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Independent restore test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-015",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Revocation drill"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFHYB-016",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Minimal preservation scenario"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFINT-001",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFINT-002",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFINT-003",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "LIFCONS-005",
+            "LIFGRAPH-005",
+            "LIFGRAPH-006",
+            "LIFINT-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        }
+      ],
+      "requirement_id": "LIFINT-004",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFINT-005",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFINT-006",
+      "semantic_rationale": "interview tests exercise participants, consent, time-aligned transcripts, question lineage, private marks, pacing, and corrected reading layers",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFLABEL-001",
+      "semantic_rationale": "truth-label tests exercise retained lineage and static/offline legends",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFLABEL-002",
+      "semantic_rationale": "truth-label tests exercise retained lineage and static/offline legends",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFLABEL-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFLABEL-004",
+      "semantic_rationale": "truth-label tests exercise retained lineage and static/offline legends",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFLABEL-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002",
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFLABEL-006",
+      "semantic_rationale": "truth-label tests exercise retained lineage and static/offline legends",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFMEDIA-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFMEDIA-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFMEDIA-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFMEDIA-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFMEDIA-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFHYB-008",
+            "LIFMEDIA-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval"
+        }
+      ],
+      "requirement_id": "LIFMEDIA-006",
+      "semantic_rationale": "policy tests exercise audience and rights enforcement for synthetic media",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONOVR-001",
+            "LIFOVR-001",
+            "PLTAPI-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_vertical_openapi_contracts_are_service_scoped"
+        }
+      ],
+      "requirement_id": "LIFOVR-001",
+      "semantic_rationale": "synthetic memory-room APIs exercise graph, evidence, consent, and generated-content boundaries; human-subject validation remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-005",
+            "LIFHYB-007",
+            "LIFHYB-011",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        }
+      ],
+      "requirement_id": "LIFOVR-002",
+      "semantic_rationale": "synthetic memory-room APIs exercise graph, evidence, consent, and generated-content boundaries; human-subject validation remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        }
+      ],
+      "requirement_id": "LIFOVR-003",
+      "semantic_rationale": "synthetic memory-room APIs exercise graph, evidence, consent, and generated-content boundaries; human-subject validation remains broader",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFOVR-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFOVR-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFOVR-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFPLACE-001",
+      "semantic_rationale": "synthetic graph tests exercise people, places, objects, aliases, uncertainty, relationships, and unidentified references",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFPLACE-002",
+      "semantic_rationale": "synthetic graph tests exercise people, places, objects, aliases, uncertainty, relationships, and unidentified references",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFPLACE-003",
+      "semantic_rationale": "synthetic graph tests exercise people, places, objects, aliases, uncertainty, relationships, and unidentified references",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPLACE-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFDISP-004",
+            "LIFDISP-005",
+            "LIFGRAPH-001",
+            "LIFGRAPH-002",
+            "LIFGRAPH-003",
+            "LIFGRAPH-004",
+            "LIFGRAPH-005",
+            "LIFLABEL-001",
+            "LIFLABEL-002",
+            "LIFPLACE-001",
+            "LIFPLACE-002",
+            "LIFPLACE-003",
+            "LIFPLACE-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        }
+      ],
+      "requirement_id": "LIFPLACE-005",
+      "semantic_rationale": "synthetic graph tests exercise people, places, objects, aliases, uncertainty, relationships, and unidentified references",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-001"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPLACE-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPRES-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPRES-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFPRES-003",
+      "semantic_rationale": "generated-presence and kill-switch tests exercise fail-closed high-risk behavior; approved voice/likeness execution is intentionally absent",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPRES-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFHYB-007",
+            "LIFHYB-008",
+            "LIFPRES-003",
+            "LIFPRES-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
+        }
+      ],
+      "requirement_id": "LIFPRES-005",
+      "semantic_rationale": "generated-presence and kill-switch tests exercise fail-closed high-risk behavior; approved voice/likeness execution is intentionally absent",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-002"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFPRES-006",
+      "semantic_rationale": "generated-presence and kill-switch tests exercise fail-closed high-risk behavior; approved voice/likeness execution is intentionally absent",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 5,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
+        }
+      ],
+      "requirement_id": "LIFPRESV-001",
+      "semantic_rationale": "preservation tests exercise open packages, fixity, offline access, succession, format migration records, and shutdown controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFPRESV-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFPRESV-003",
+      "semantic_rationale": "preservation tests exercise open packages, fixity, offline access, succession, format migration records, and shutdown controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFPRESV-004",
+      "semantic_rationale": "preservation tests exercise open packages, fixity, offline access, succession, format migration records, and shutdown controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFPRESV-005",
+      "semantic_rationale": "preservation tests exercise open packages, fixity, offline access, succession, format migration records, and shutdown controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        }
+      ],
+      "requirement_id": "LIFPRESV-006",
+      "semantic_rationale": "preservation tests exercise open packages, fixity, offline access, succession, format migration records, and shutdown controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-001",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-002",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-003",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-005",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFREC-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFUX-001",
+      "semantic_rationale": "safe-experience tests exercise quiet mode, pause, captions, reduced motion, warning controls, and safe exit in the reference profile",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 2,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFUX-002",
+      "semantic_rationale": "safe-experience tests exercise quiet mode, pause, captions, reduced motion, warning controls, and safe exit in the reference profile",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFUX-003",
+      "semantic_rationale": "safe-experience tests exercise quiet mode, pause, captions, reduced motion, warning controls, and safe exit in the reference profile",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFUX-004",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 3,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-003",
+            "LIFCONS-006",
+            "LIFINT-001",
+            "LIFINT-002",
+            "LIFINT-003",
+            "LIFINT-004",
+            "LIFINT-005",
+            "LIFINT-006",
+            "LIFPRES-006",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-003",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience"
+        }
+      ],
+      "requirement_id": "LIFUX-005",
+      "semantic_rationale": "safe-experience tests exercise quiet mode, pause, captions, reduced motion, warning controls, and safe exit in the reference profile",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "all_linked_tests_declare_requirement_id": true,
+      "coverage_classification": "deferred",
+      "epic_ids": [
+        "LIF-003",
+        "LIF-004"
+      ],
+      "linked_test_count": 0,
+      "linked_tests": [],
+      "requirement_id": "LIFUX-006",
+      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
+      "status": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "authorized_epics": [
+    "CON-001",
+    "CON-002",
+    "CON-003",
+    "CON-004",
+    "CON-005",
+    "LIF-001",
+    "LIF-002",
+    "LIF-003",
+    "LIF-004"
+  ],
+  "finding_count": 0,
+  "findings": [],
+  "milestone": "Progress 06 vertical MVPs",
+  "production_authorized": false,
+  "progress_07_authorized": false,
+  "schema": "sip.progress-06-traceability-audit/v1",
+  "scope_requirement_count": 206,
+  "status": "passed_complete"
+}

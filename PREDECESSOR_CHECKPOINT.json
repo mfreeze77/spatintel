@@ -28,6 +28,17 @@
     "source_root_sha256": "619a698cc16db15f57f543f5da040f694d5415e1db8982b68566df81bdb3d3ae",
     "tree": "7289b7cb659de8d1712e8ab407a832f0be7e66c3"
   },
+  "accepted_progress_05_r2_checkpoint": {
+    "branch": "progress-05-r2-remediation",
+    "checkpoint_id": "sip-v1.1.0-progress-05-r2",
+    "commit": "66b9a804217aa3b5814283777f5cf68424e4a4b5",
+    "outer_delivery_zip_sha256": "aaef8c2a0ec1ef6a74d8c1aa4316612b6c1f1193daaea035955771e8ce6078d4",
+    "parent": "593d8ac16930387d26fa9ed700a04b44b46e2006",
+    "project_zip_sha256": "75eb2e500ba5472951af4844da44609e01131bac36ecf888e9e0b98c448c6a05",
+    "relationship": "Accepted Progress 05-R2 is the exact source-history base authorized by True North for Progress 06 vertical MVP implementation.",
+    "source_root_sha256": "3dfc90422534f6b914f31043dc91a4c5b0cc4dc3c21b07ceab63ece0faa66c4d",
+    "tree": "8bbf18b0bc7e688488c23ee1b9582f89c4e70f37"
+  },
   "import_mapping": {
     "commit": "36e9c44d21a9c47d85971ee945daec8fc98e26d6",
     "relationship": "The import commit reproduces all 2,419 files of the predecessor Progress 04 ZIP byte-for-byte. The predecessor Git object originally claimed by Progress 04 was unavailable, so continuity is represented explicitly as an archive-to-import-commit mapping rather than a false parent relationship.",

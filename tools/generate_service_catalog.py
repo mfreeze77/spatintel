@@ -22,6 +22,27 @@ SERVICE_METADATA: dict[str, dict[str, Any]] = {
     "representation-api": {"owner": "hybrid-representations", "stores": ["postgresql", "object-store"], "tables": ["representations", "representation_bindings", "provider_manifests"], "dependencies": ["identity-policy", "workflow-service", "provider-registry"]},
     "provider-registry": {"owner": "model-provider-governance", "stores": ["postgresql", "source-control-manifests"], "tables": ["provider_manifests", "model_manifests"], "dependencies": ["audit-service"]},
     "representation-publisher": {"owner": "scene-core", "stores": ["postgresql"], "tables": [], "dependencies": ["identity-policy", "representation-api", "scene-service", "audit-service"]},
+    "construction": {
+        "owner": "construction-vertical",
+        "stores": ["postgresql", "postgis", "object-store"],
+        "tables": [
+            "construction_records", "construction_deficiencies", "construction_document_links",
+            "construction_surveys", "construction_visits", "construction_document_revisions",
+            "construction_issues", "construction_commissioning_runs", "construction_interchanges",
+            "construction_handoffs",
+        ],
+        "dependencies": ["identity-policy", "scene-service", "evidence-service", "export-service", "audit-service"],
+    },
+    "liveforever": {
+        "owner": "liveforever-vertical",
+        "stores": ["postgresql", "postgis", "object-store"],
+        "tables": [
+            "consent_grants", "memory_records", "narrative_editions",
+            "liveforever_governance", "liveforever_interviews", "liveforever_transcript_segments",
+            "liveforever_editions", "liveforever_derivatives", "liveforever_preservation_releases",
+        ],
+        "dependencies": ["identity-policy", "scene-service", "evidence-service", "export-service", "audit-service"],
+    },
 }
 
 SHARED_KERNEL_EXCEPTIONS = {
@@ -31,6 +52,7 @@ SHARED_KERNEL_EXCEPTIONS = {
     "identities": ["control-api", "identity-policy"],
     "role_bindings": ["control-api", "identity-policy"],
     "provider_manifests": ["provider-registry", "representation-api"],
+    "consent_grants": ["identity-policy", "liveforever"],
 }
 
 WORKER_OWNER: dict[str, str] = {

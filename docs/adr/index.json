@@ -120,6 +120,28 @@
       ],
       "status": "Accepted",
       "title": "ADR-0008: Policy-bound viewer sessions and governed temporal change review"
+    },
+    {
+      "id": "ADR-0012",
+      "path": "docs/adr/ADR-0012-post-commit-checkpoint-evidence.md",
+      "requirement_ids": [
+        "DELDOC-001",
+        "TSTGATE-003"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0012: Post-commit checkpoint evidence overlays"
+    },
+    {
+      "id": "ADR-0013",
+      "path": "docs/adr/ADR-0013-vertical-workflow-state-and-open-handoff.md",
+      "requirement_ids": [
+        "CONOVR-001",
+        "CONHAND-001",
+        "LIFOVR-001",
+        "LIFPRESV-001"
+      ],
+      "status": "Accepted",
+      "title": "ADR-0013: Vertical workflow state and open handoff"
     }
   ],
   "required_sections": [

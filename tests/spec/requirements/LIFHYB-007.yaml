@@ -15,10 +15,12 @@ implementation_files:
 - apps/web
 automated_test_ids:
 - tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit
+- tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed
 retained_evidence:
 - apps/web
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 - src/sip/liveforever.py
 - src/sip/policy.py
 controlled_procedure:

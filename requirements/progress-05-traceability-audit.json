@@ -419,7 +419,7 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "partial",
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -428,6 +428,14 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/contract/test_progress05_checkpoint_controls.py::test_progress05_r2_traceability_demotes_pltview_007_without_mounted_viewer_integration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-007"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_checkpoint_controls.py::test_progress06_migration_and_viewer_truth_are_fail_closed"
         },
         {
           "declared_requirement_ids": [
@@ -713,7 +721,7 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "partial",
-      "linked_test_count": 9,
+      "linked_test_count": 11,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -779,6 +787,22 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_scope_and_traceability_artifacts_have_no_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_semantically_audits_all_authorized_epics"
         },
         {
           "declared_requirement_ids": [

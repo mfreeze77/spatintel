@@ -19,6 +19,7 @@ implementation_files:
 - tools/run_demo.py
 automated_test_ids:
 - tests/contract/test_progress05_checkpoint_controls.py::test_progress05_r2_traceability_demotes_pltview_007_without_mounted_viewer_integration
+- tests/contract/test_progress06_checkpoint_controls.py::test_progress06_migration_and_viewer_truth_are_fail_closed
 - tests/contract/test_web_viewer_runtime.py::test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated
 retained_evidence:
 - build/evidence/demos/hybrid.json

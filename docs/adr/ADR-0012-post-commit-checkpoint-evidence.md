@@ -20,3 +20,12 @@ The canonical source root excludes generated evidence and packaging metadata acc
 - Checkpoint verification must validate both Git provenance and the outer content manifest.
 - Source archives remain exact and independently restorable.
 - Generated status documents cannot silently alter the tested source root.
+
+## Traceability
+
+- Requirements: DELDOD-001, DELDEV-004, TSTGATE-003, OPSCICD-002
+- Risks: self-referential commit claims, dirty-worktree evidence, packaging-induced source-root drift, stale release pointers, unverifiable source continuity
+- Benchmarks: checkpoint content-root reproduction; Git archive/source-manifest byte equivalence; independent inner and outer verifier execution
+- Source evidence: `tools/build_checkpoint.py`; `tools/verify_checkpoint.py`; `tools/source_identity.py`; `governance/source-root-policy.json`
+- Exit/export strategy: every checkpoint includes a Git bundle, exact source archive, source-file manifest, SHA-256 sidecars, and independently verifiable content manifests
+- Security/privacy review: checkpoint archives reject unsafe paths, symlinks, duplicate members, compression abuse, stale evidence, and source or authorization contradictions

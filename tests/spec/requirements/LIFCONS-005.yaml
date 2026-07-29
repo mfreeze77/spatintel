@@ -16,10 +16,12 @@ implementation_files:
 - src/sip/exporting.py
 automated_test_ids:
 - tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit
+- tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives
 retained_evidence:
 - build/evidence/demos/liveforever.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/privacy.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
