@@ -14,7 +14,9 @@ implementation_files:
 - src/sip/contracts.py
 - src/sip/database.py
 - src/sip/exporting.py
+- src/sip/construction.py
 - migrations/versions/0010_spatial_truth_and_twin_controls.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/contract/test_spatial_truth_api.py::test_spatial_truth_and_twin_contracts_are_authenticated_and_round_trip
 - tests/integration/test_spatial_truth_twin.py::test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled

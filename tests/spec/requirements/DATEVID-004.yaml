@@ -13,7 +13,9 @@ implementation_files:
 - src/sip/contracts.py
 - src/sip/database.py
 - src/sip/exporting.py
+- src/sip/construction.py
 - migrations/versions/0010_spatial_truth_and_twin_controls.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope
 - tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation

@@ -20,11 +20,6 @@
     },
     {
       "method": "POST",
-      "operation_id": "retest_deficiency",
-      "path": "/v1/construction/deficiencies/{deficiency_id}/retest"
-    },
-    {
-      "method": "POST",
       "operation_id": "record_construction_commissioning",
       "path": "/v1/projects/{project_id}/construction/commissioning"
     },
@@ -32,6 +27,11 @@
       "method": "POST",
       "operation_id": "create_deficiency",
       "path": "/v1/projects/{project_id}/construction/deficiencies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "retest_project_deficiency",
+      "path": "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest"
     },
     {
       "method": "POST",
@@ -87,6 +87,11 @@
       "method": "GET",
       "operation_id": "get_construction_report",
       "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "approve_construction_restricted_export",
+      "path": "/v1/projects/{project_id}/construction/restricted-export-approvals"
     },
     {
       "method": "GET",

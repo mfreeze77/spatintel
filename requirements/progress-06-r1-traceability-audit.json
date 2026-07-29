@@ -1,0 +1,792 @@
+{
+  "accepted_base_commit": "383d4bde2518edabe92337df570336a6ecc0d411",
+  "finding_count": 0,
+  "findings": [],
+  "milestone": "Progress 06-R1 security, privacy, provenance, package-integrity, and test-isolation remediation",
+  "production_authorized": false,
+  "progress_07_authorized": false,
+  "requirement_count": 18,
+  "requirements_audited": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "LIFCONS-001",
+            "LIFCONS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml",
+        "build/reports/tests/unit.xml"
+      ],
+      "implementation_files": [
+        "src/sip/auth.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/tenancy.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
+      ],
+      "priority": "P0",
+      "requirement": "Every request shall be authorized using authenticated principal, tenant, project, action, resource classification, purpose, and relevant consent.",
+      "requirement_id": "ARCIAM-001",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Exports for installers shall omit restricted owner security data unless expressly authorized.",
+      "requirement_id": "CONAC-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATBIM-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P0",
+      "requirement": "Documents shall retain source file hash, title, type, revision, issue date, issuer, status, pages, permissions, and supersession links.",
+      "requirement_id": "CONDOC-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/evidence/demos/export.json",
+        "build/evidence/demos/restore.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/archive_safety.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
+      ],
+      "priority": "P0",
+      "requirement": "A handoff package shall include scope, accepted scene commit, asset inventory, verified attributes, documents, tests, warranties, training, open issues, exclusions, exports, and checksums.",
+      "requirement_id": "CONHAND-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/evidence/demos/export.json",
+        "build/evidence/demos/restore.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/archive_safety.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
+      ],
+      "priority": "P1",
+      "requirement": "Facility users shall search by location, tag, manufacturer/model, system, document, and issue history.",
+      "requirement_id": "CONHAND-004",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_owner_handoff_replay_revalidates_current_package_bytes"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/evidence/demos/export.json",
+        "build/evidence/demos/restore.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/unit.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/archive_safety.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
+      ],
+      "priority": "P1",
+      "requirement": "A portability test shall confirm the owner can access core records without the production SIP service.",
+      "requirement_id": "CONHAND-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Sensitive network and controller configuration shall use restricted access and redacted exports.",
+      "requirement_id": "CONMEP-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P0",
+      "requirement": "Closure shall require configured verification, verifier, date, result, and residual limitations.",
+      "requirement_id": "CONQC-003",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P1",
+      "requirement": "Commissioning tests shall support procedures, prerequisites, steps, expected/actual results, participants, instruments, attachments, and retest history.",
+      "requirement_id": "CONQC-004",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P1",
+      "requirement": "Restricted system details shall remain protected in notifications and broad reports.",
+      "requirement_id": "CONQC-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATBIM-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
+      ],
+      "priority": "P0",
+      "requirement": "IFC imports shall retain source file hash, schema/version, units, CRS, owner history, GlobalIds, classifications, properties, relationships, and geometry conversion report.",
+      "requirement_id": "DATBIM-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATBIM-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "schemas/events/event-catalog.json"
+      ],
+      "implementation_files": [
+        "src/sip/spatial_data.py",
+        "src/sip/contracts.py",
+        "src/sip/database.py",
+        "src/sip/exporting.py",
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
+      ],
+      "priority": "P0",
+      "requirement": "Every evidence record shall identify immutable source asset or record, relevant region/time range, contributor, consent/access, and integrity hash.",
+      "requirement_id": "DATEVID-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "LIFCONS-001",
+            "LIFCONS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "src/sip/search.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
+      ],
+      "priority": "P0",
+      "requirement": "Consent records shall include grantor, authority basis, subject/data scope, processing purposes, modalities, audiences, providers, geography, effective/expiry, revocation, posthumous rules, and evidence.",
+      "requirement_id": "LIFCONS-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "LIFCONS-001",
+            "LIFCONS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "src/sip/search.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
+      ],
+      "priority": "P1",
+      "requirement": "Revocation shall stop new processing immediately and initiate derivative review/deletion/restriction according to policy.",
+      "requirement_id": "LIFCONS-005",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/export.json",
+        "build/evidence/demos/liveforever.json",
+        "build/evidence/demos/restore.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/unit.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/api.py",
+        "src/sip/archive_safety.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+      ],
+      "priority": "P0",
+      "requirement": "Preservation packages shall include originals, technical metadata, rights/consent, transcripts, memory graph, scene/evidence manifests, open spatial assets, checksums, and human-readable guides.",
+      "requirement_id": "LIFPRESV-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/THREAT_MODEL.md",
+        "migrations/versions/0011_governed_hybrid_representation.py"
+      ],
+      "priority": "P0",
+      "requirement": "Private residential, restricted building-system, critical-infrastructure, biometric, intimate, and LiveForever-sensitive data shall be blocked from public hosted providers unless a specific higher-order approval permits it.",
+      "requirement_id": "SECEXT-005",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Negative security tests"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTLAY-003",
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_test_matrix.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "tests/fixtures"
+      ],
+      "priority": "P0",
+      "requirement": "API/event tests shall cover idempotency, retries, concurrency, authorization, pagination, and schema compatibility.",
+      "requirement_id": "TSTLAY-003",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTLAY-003",
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml"
+      ],
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "priority": "P0",
+      "requirement": "Test evidence shall include input hashes, environment, version, output, result, thresholds, and reviewer when manual.",
+      "requirement_id": "TSTSTRAT-002",
+      "status": "IN_PROGRESS",
+      "verification_method": "Automated test"
+    }
+  ],
+  "schema": "sip.progress-06-r1-traceability-audit/v1",
+  "status": "passed_complete",
+  "stop_lines": [
+    "cross-tenant consent revocation denied",
+    "cross-tenant deficiency mutation denied",
+    "independent verifier identity derived from authenticated principal",
+    "restricted annex requires exact immutable server-side approval",
+    "owner handoff and preservation packages require complete exact checksum coverage",
+    "idempotent package replay revalidates current bytes and retained identity",
+    "document and interchange provenance requires immutable in-scope assets",
+    "parallel test shards use isolated runtime and database roots"
+  ]
+}

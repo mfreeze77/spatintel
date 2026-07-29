@@ -15,11 +15,13 @@ implementation_files:
 - src/sip/archive_safety.py
 - src/sip/database.py
 - migrations/versions/0014_vertical_mvp.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/operator/CONSTRUCTION_OWNER_HANDOFF.md
 automated_test_ids:
 - tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration
 - tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff
 - tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff
+- tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval
 retained_evidence:
 - build/evidence/demos/construction.json
 - build/evidence/demos/export.json
@@ -28,6 +30,7 @@ retained_evidence:
 - build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

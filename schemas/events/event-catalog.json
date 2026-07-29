@@ -145,6 +145,13 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "construction_restricted_export_approval",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.restricted_export.approved",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "construction_survey",
       "classification": "inherits_project",
       "owner": "construction",

@@ -594,10 +594,24 @@
             "title": "Accepted Scene Commit Id",
             "type": "string"
           },
+          "audience": {
+            "default": "owner",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Audience",
+            "type": "string"
+          },
           "audience_profiles": {
             "additionalProperties": true,
             "title": "Audience Profiles",
             "type": "object"
+          },
+          "classification": {
+            "default": "internal",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Classification",
+            "type": "string"
           },
           "exclusions": {
             "items": {
@@ -611,6 +625,24 @@
             "minLength": 1,
             "title": "Idempotency Key",
             "type": "string"
+          },
+          "purpose": {
+            "default": "owner_handoff",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Purpose",
+            "type": "string"
+          },
+          "restricted_export_approval_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Restricted Export Approval Id"
           },
           "scope": {
             "additionalProperties": true,
@@ -769,15 +801,10 @@
             "type": "string"
           },
           "source_asset_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Asset Id"
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Source Asset Id",
+            "type": "string"
           },
           "source_sha256": {
             "pattern": "^[a-f0-9]{64}$",
@@ -805,6 +832,7 @@
         "required": [
           "format",
           "direction",
+          "source_asset_id",
           "source_sha256",
           "schema_version",
           "units",
@@ -943,17 +971,6 @@
           "target_state": {
             "title": "Target State",
             "type": "string"
-          },
-          "verifier_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Verifier Id"
           }
         },
         "required": [
@@ -962,6 +979,89 @@
           "note"
         ],
         "title": "ConstructionIssueTransition",
+        "type": "object"
+      },
+      "ConstructionRestrictedExportApprovalCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted_scene_commit_id": {
+            "title": "Accepted Scene Commit Id",
+            "type": "string"
+          },
+          "audience": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_profiles": {
+            "additionalProperties": true,
+            "title": "Audience Profiles",
+            "type": "object"
+          },
+          "classification": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Classification",
+            "type": "string"
+          },
+          "exclusions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclusions",
+            "type": "array"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "handoff_idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Handoff Idempotency Key",
+            "type": "string"
+          },
+          "purpose": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Purpose",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Scope",
+            "type": "object"
+          },
+          "training": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Training",
+            "type": "array"
+          },
+          "warranties": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Warranties",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scope",
+          "accepted_scene_commit_id",
+          "handoff_idempotency_key",
+          "classification",
+          "audience",
+          "purpose",
+          "expires_at"
+        ],
+        "title": "ConstructionRestrictedExportApprovalCreate",
         "type": "object"
       },
       "ConstructionSurveyCreate": {
@@ -2233,338 +2333,6 @@
         "summary": "Health Ready"
       }
     },
-    "/v1/construction/deficiencies/{deficiency_id}/retest": {
-      "post": {
-        "operationId": "retest_deficiency",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "deficiency_id",
-            "required": true,
-            "schema": {
-              "title": "Deficiency Id",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-tenant",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Tenant"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-subject",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Subject"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-projects",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Projects"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-roles",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Roles"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-purposes",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Purposes"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-audience",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Audience"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeficiencyRetest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Retest Deficiency",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Retest Deficiency",
-        "tags": [
-          "construction"
-        ]
-      }
-    },
-    "/v1/liveforever/consents/{grant_id}/revoke": {
-      "post": {
-        "operationId": "revoke_consent",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "grant_id",
-            "required": true,
-            "schema": {
-              "title": "Grant Id",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-tenant",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Tenant"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-subject",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Subject"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-projects",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Projects"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-roles",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Roles"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-purposes",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Purposes"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-audience",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Audience"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ConsentRevoke"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Revoke Consent",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Revoke Consent",
-        "tags": [
-          "liveforever"
-        ]
-      }
-    },
     "/v1/projects/{project_id}/comments": {
       "post": {
         "operationId": "create_comment",
@@ -3058,6 +2826,181 @@
           }
         },
         "summary": "Create Deficiency",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest": {
+      "post": {
+        "operationId": "retest_project_deficiency",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "deficiency_id",
+            "required": true,
+            "schema": {
+              "title": "Deficiency Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeficiencyRetest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Retest Project Deficiency",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retest Deficiency",
         "tags": [
           "construction"
         ]
@@ -4898,6 +4841,172 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/construction/restricted-export-approvals": {
+      "post": {
+        "operationId": "approve_construction_restricted_export",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionRestrictedExportApprovalCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Approve Construction Restricted Export",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Construction Restricted Export",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/construction/search": {
       "get": {
         "operationId": "search_construction_facility",
@@ -6457,6 +6566,181 @@
           }
         },
         "summary": "Grant Consent",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke": {
+      "post": {
+        "operationId": "revoke_project_consent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "grant_id",
+            "required": true,
+            "schema": {
+              "title": "Grant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentRevoke"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Revoke Project Consent",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke Consent",
         "tags": [
           "liveforever"
         ]

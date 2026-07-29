@@ -77,7 +77,7 @@ def test_progress06_construction_records_fail_closed_across_tenants_and_redact_o
     handoff_path = tmp_path / "owner-handoff.zip"
     handoff = context.construction.create_owner_handoff(
         tenant_id=tenant_a, project_id=project_a, destination=handoff_path,
-        scope={"systems": ["access_control"], "include_restricted_annex": True},
+        scope={"systems": ["access_control"], "include_restricted_annex": False},
         accepted_scene_commit_id=scene["commit_id"], warranties=[], training=[], exclusions=[],
         audience_profiles={"owner": {"read_only": True}, "restricted_owner_export_approved": False},
         actor_id="admin-a", idempotency_key="security-owner-handoff",

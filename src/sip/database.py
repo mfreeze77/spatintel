@@ -1431,6 +1431,31 @@ class ConstructionHandoffRow(Base):
     )
 
 
+class ConstructionRestrictedExportApprovalRow(Base):
+    __tablename__ = "construction_restricted_export_approvals"
+    approval_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    classification: Mapped[str] = mapped_column(String(64), index=True)
+    audience: Mapped[str] = mapped_column(String(64), index=True)
+    purpose: Mapped[str] = mapped_column(String(128), index=True)
+    approver_id: Mapped[str] = mapped_column(String(128), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    approval_hash: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "request_hash",
+            "approver_id",
+            name="uq_construction_restricted_export_approval",
+        ),
+    )
+
+
 class LiveForeverGovernanceRow(Base):
     __tablename__ = "liveforever_governance"
     governance_id: Mapped[str] = mapped_column(String(64), primary_key=True)

@@ -12,6 +12,7 @@ implementation_files:
 - src/sip/capture.py
 - src/sip/worker_sandbox.py
 - tools/run_test_matrix.py
+- tests/contract/test_progress06_r1_test_matrix_isolation.py
 - tests/fixtures
 automated_test_ids:
 - tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed

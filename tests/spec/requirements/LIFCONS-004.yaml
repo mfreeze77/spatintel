@@ -12,8 +12,11 @@ implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
 - src/sip/liveforever.py
 - src/sip/policy.py
+- src/sip/api.py
+- src/sip/database.py
 - src/sip/search.py
 - src/sip/exporting.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation
 retained_evidence:

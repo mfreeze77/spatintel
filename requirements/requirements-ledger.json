@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-29T16:26:58.109086+00:00",
+  "generated_at": "2026-07-29T18:13:11.852299+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -22541,6 +22541,12 @@
       "source_title": "Document Control and Authority",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_branch_descends_from_accepted_progress06_base",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_packaged_coverage_retains_progress07_and_production_hold",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_verifier_rehashes_manifest_and_content_root",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_verifier_rejects_unsafe_paths_before_claims",
         "tests/contract/test_spec_lint.py::test_spec_lint_indexes_every_normative_requirement",
         "tests/spec/test_requirements_controls.py::test_authoritative_specification_and_requirement_index_are_complete"
       ],
@@ -27017,7 +27023,9 @@
         "src/sip/auth.py",
         "src/sip/policy.py",
         "src/sip/api.py",
-        "src/sip/tenancy.py"
+        "src/sip/tenancy.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -27036,15 +27044,20 @@
       "test_ids": [
         "tests/contract/test_api_contract.py::test_cross_tenant_api_scope_is_denied_without_disclosure",
         "tests/contract/test_governed_hybrid_api.py::test_hybrid_api_rejects_body_scope_mismatch_before_admission",
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
         "tests/contract/test_spatial_truth_api.py::test_assertion_reads_require_project_authorization_even_without_linked_evidence",
         "tests/contract/test_spatial_truth_api.py::test_derivation_api_idempotency_is_tenant_scoped",
         "tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent",
         "tests/unit/test_assets_policy.py::test_arciam_001_server_side_tenant_project_purpose_and_sensitive_policy"
       ],
       "test_plan_path": "tests/spec/requirements/ARCIAM-001.yaml",
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml",
         "build/reports/tests/unit.xml"
       ],
       "text": "Every request shall be authorized using authenticated principal, tenant, project, action, resource classification, purpose, and relevant consent.",
@@ -41053,7 +41066,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -41112,7 +41127,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -41129,6 +41146,7 @@
       "source_title": "Evidence, Assertions, Provenance, and Chain of Derivation",
       "supersession_links": [],
       "test_ids": [
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets",
         "tests/integration/test_spatial_truth_twin.py::test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled",
         "tests/integration/test_spatial_truth_twin.py::test_datevid_derivation_references_are_scoped_hashed_unique_and_immutable",
         "tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation"
@@ -41169,7 +41187,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -41227,7 +41247,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -41285,7 +41307,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -41340,7 +41364,9 @@
         "src/sip/contracts.py",
         "src/sip/database.py",
         "src/sip/exporting.py",
-        "migrations/versions/0010_spatial_truth_and_twin_controls.py"
+        "src/sip/construction.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -42871,11 +42897,15 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/database.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "DATDB-002",
@@ -42886,10 +42916,14 @@
       "source_title": "Transactional, Spatial, Search, and Graph Storage",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATDB-002"
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact"
       ],
       "test_plan_path": "tests/spec/requirements/DATDB-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ],
       "text": "Spatial indexes shall use declared SRID/frame semantics and shall not mix local frames as if they shared one CRS.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -44000,6 +44034,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -44017,7 +44052,8 @@
       "source_title": "BIM, IFC 4.3, BCF, and Design/As-Built Mapping",
       "supersession_links": [],
       "test_ids": [
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
       ],
       "test_plan_path": "tests/spec/requirements/DATBIM-001.yaml",
       "test_result_evidence_paths": [
@@ -44056,6 +44092,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -44112,6 +44149,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -44213,6 +44251,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -44269,6 +44308,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53026,6 +53066,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53122,6 +53163,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53175,6 +53217,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53271,6 +53314,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53288,6 +53332,7 @@
       "source_title": "Access Control and Door Intelligence",
       "supersession_links": [],
       "test_ids": [
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_plan_path": "tests/spec/requirements/CONAC-006.yaml",
@@ -53324,6 +53369,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53377,6 +53423,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53430,6 +53477,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53483,6 +53531,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53536,6 +53585,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53589,6 +53639,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53606,6 +53657,7 @@
       "source_title": "BAS, Mechanical, Electrical, and Equipment Documentation",
       "supersession_links": [],
       "test_ids": [
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_plan_path": "tests/spec/requirements/CONMEP-006.yaml",
@@ -53644,6 +53696,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53662,7 +53715,8 @@
       "supersession_links": [],
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
       ],
       "test_plan_path": "tests/spec/requirements/CONDOC-001.yaml",
       "test_result_evidence_paths": [
@@ -53701,6 +53755,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53757,6 +53812,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53813,6 +53869,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53869,6 +53926,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53925,6 +53983,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -53981,6 +54040,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -54037,6 +54097,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -54093,6 +54154,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -54111,7 +54173,9 @@
       "supersession_links": [],
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
-        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
       ],
       "test_plan_path": "tests/spec/requirements/CONQC-003.yaml",
       "test_result_evidence_paths": [
@@ -54119,7 +54183,8 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Closure shall require configured verification, verifier, date, result, and residual limitations.",
       "verification_method": "Controlled verification",
@@ -54151,6 +54216,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -54169,7 +54235,8 @@
       "supersession_links": [],
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
-        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
       ],
       "test_plan_path": "tests/spec/requirements/CONQC-004.yaml",
       "test_result_evidence_paths": [
@@ -54177,7 +54244,8 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Commissioning tests shall support procedures, prerequisites, steps, expected/actual results, participants, instruments, attachments, and retest history.",
       "verification_method": "Controlled verification",
@@ -54253,6 +54321,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -54270,12 +54339,15 @@
       "source_title": "Deficiencies, Punch, Testing, and Commissioning",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_plan_path": "tests/spec/requirements/CONQC-006.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
       ],
@@ -55216,6 +55288,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -55235,7 +55308,8 @@
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
       ],
       "test_plan_path": "tests/spec/requirements/CONHAND-001.yaml",
       "test_result_evidence_paths": [
@@ -55245,7 +55319,8 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "A handoff package shall include scope, accepted scene commit, asset inventory, verified attributes, documents, tests, warranties, training, open issues, exclusions, exports, and checksums.",
       "verification_method": "Controlled verification",
@@ -55279,6 +55354,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -55338,6 +55414,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -55397,6 +55474,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -55415,7 +55493,8 @@
       "supersession_links": [],
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
       ],
       "test_plan_path": "tests/spec/requirements/CONHAND-004.yaml",
       "test_result_evidence_paths": [
@@ -55424,7 +55503,8 @@
         "build/evidence/demos/restore.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Facility users shall search by location, tag, manufacturer/model, system, document, and issue history.",
       "verification_method": "Controlled verification",
@@ -55503,6 +55583,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -55522,6 +55603,12 @@
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
         "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_owner_handoff_replay_revalidates_current_package_bytes",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed",
         "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages",
         "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
       ],
@@ -59645,8 +59732,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -59664,9 +59754,11 @@
       "supersession_links": [],
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration",
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience",
         "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
         "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/LIFCONS-001.yaml",
@@ -59707,8 +59799,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IN_PROGRESS",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -59762,8 +59857,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -59818,8 +59916,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -59872,8 +59973,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -59891,14 +59995,16 @@
       "supersession_links": [],
       "test_ids": [
         "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit",
-        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
       ],
       "test_plan_path": "tests/spec/requirements/LIFCONS-005.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
-        "build/reports/tests/privacy.xml"
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Revocation shall stop new processing immediately and initiate derivative review/deletion/restriction according to policy.",
       "verification_method": "Controlled verification",
@@ -59928,8 +60034,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -60990,6 +61099,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -61010,6 +61120,12 @@
         "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed",
         "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages",
         "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
       ],
@@ -61111,6 +61227,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -61175,6 +61292,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -61241,6 +61359,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -61305,6 +61424,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
@@ -66868,7 +66988,8 @@
       "supersession_links": [],
       "test_ids": [
         "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence",
-        "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress"
+        "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
       ],
       "test_plan_path": "tests/spec/requirements/SECEXT-005.yaml",
       "test_result_evidence_paths": [
@@ -67430,6 +67551,7 @@
         "tools/run_test_matrix.py",
         "tools/update_requirements.py",
         "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "requirements/requirements-ledger.json"
       ],
       "implementation_status": "IN_PROGRESS",
@@ -67490,6 +67612,7 @@
         "tools/run_test_matrix.py",
         "tools/update_requirements.py",
         "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "requirements/requirements-ledger.json"
       ],
       "implementation_status": "IN_PROGRESS",
@@ -67507,6 +67630,7 @@
       "source_title": "Master Test Strategy",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots",
         "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans",
         "tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix",
         "tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup",
@@ -67809,6 +67933,7 @@
         "src/sip/capture.py",
         "src/sip/worker_sandbox.py",
         "tools/run_test_matrix.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "tests/fixtures"
       ],
       "implementation_status": "IN_PROGRESS",
@@ -67861,11 +67986,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_test_matrix.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "TSTLAY-003",
@@ -67876,10 +68008,13 @@
       "source_title": "Unit, Contract, Integration, and End-to-End Tests",
       "supersession_links": [],
       "test_ids": [
-        "REQ-TSTLAY-003"
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots"
       ],
       "test_plan_path": "tests/spec/requirements/TSTLAY-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ],
       "text": "API/event tests shall cover idempotency, retries, concurrency, authorization, pagination, and schema compatibility.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -67910,6 +68045,7 @@
         "src/sip/capture.py",
         "src/sip/worker_sandbox.py",
         "tools/run_test_matrix.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "tests/fixtures"
       ],
       "implementation_status": "IN_PROGRESS",
@@ -68994,11 +69130,16 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "TSTGATE-001",
@@ -69009,10 +69150,15 @@
       "source_title": "Release Gates and Promotion Evidence",
       "supersession_links": [],
       "test_ids": [
-        "REQ-TSTGATE-001"
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ],
       "text": "Research release shall use authorized test data, explicit research labels, and no commercial/customer output from unapproved models.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,

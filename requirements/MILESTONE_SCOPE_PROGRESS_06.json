@@ -1644,6 +1644,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -1670,6 +1671,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -1696,6 +1698,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -1722,6 +1725,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -1730,6 +1734,7 @@
       "scope_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -1880,6 +1885,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -1889,7 +1895,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
       ],
       "verification_method": "Automated test"
     },
@@ -1909,6 +1916,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -1937,6 +1945,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -1965,6 +1974,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -1993,6 +2003,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -2021,6 +2032,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -2123,7 +2135,8 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
@@ -2131,6 +2144,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "priority": "P0",
@@ -2141,7 +2155,8 @@
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
       ],
       "verification_method": "Controlled verification"
     },
@@ -2163,6 +2178,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "priority": "P0",
@@ -2193,6 +2209,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "priority": "P0",
@@ -2216,7 +2233,8 @@
         "build/evidence/demos/restore.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
@@ -2224,6 +2242,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "priority": "P1",
@@ -2233,7 +2252,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
       ],
       "verification_method": "Controlled verification"
     },
@@ -2257,6 +2277,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"
       ],
       "priority": "P1",
@@ -2267,6 +2288,12 @@
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
         "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_owner_handoff_replay_revalidates_current_package_bytes",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed",
         "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages",
         "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
       ],
@@ -2445,6 +2472,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -2471,6 +2499,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -2497,6 +2526,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P0",
@@ -2523,6 +2553,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -2549,6 +2580,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -2575,6 +2607,7 @@
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
@@ -2583,6 +2616,7 @@
       "scope_rationale": "synthetic MEP/BAS tests exercise equipment, points, interconnections, pathways, operational metadata, and redaction",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -2820,6 +2854,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "priority": "P0",
@@ -2848,6 +2883,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "priority": "P0",
@@ -2870,13 +2906,15 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "priority": "P0",
@@ -2886,7 +2924,9 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
-        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
       ],
       "verification_method": "Controlled verification"
     },
@@ -2900,13 +2940,15 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "priority": "P1",
@@ -2916,7 +2958,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration",
-        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
       ],
       "verification_method": "Controlled verification"
     },
@@ -2928,6 +2971,7 @@
       "evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
       ],
@@ -2936,6 +2980,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
       ],
       "priority": "P1",
@@ -2944,6 +2989,8 @@
       "scope_rationale": "issue and commissioning tests exercise correction, retest, verified closure, procedures, instruments, and restricted reporting",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -3143,6 +3190,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "priority": "P0",
@@ -3151,7 +3199,8 @@
       "scope_rationale": "IFC/BCF identity, alignment, unsupported constructs, mappings, and truth labels are exercised in the deterministic reference profile; vendor interoperability remains broader",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
       ],
       "verification_method": "Automated test"
     },
@@ -3170,6 +3219,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "priority": "P0",
@@ -3197,6 +3247,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "priority": "P0",
@@ -3224,6 +3275,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "priority": "P1",
@@ -3251,6 +3303,7 @@
         "src/sip/api.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"
       ],
       "priority": "P1",
@@ -3280,8 +3333,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P0",
       "requirement": "Consent records shall include grantor, authority basis, subject/data scope, processing purposes, modalities, audiences, providers, geography, effective/expiry, revocation, posthumous rules, and evidence.",
@@ -3290,9 +3346,11 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration",
+        "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience",
         "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
         "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
       ],
       "verification_method": "Controlled verification"
@@ -3310,8 +3368,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P0",
       "requirement": "The policy engine shall evaluate all applicable subject, contributor, third-party, minor, and audience restrictions.",
@@ -3338,8 +3399,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P0",
       "requirement": "A guardian/executor transition shall require documented authority and cannot enable prohibited generated presence.",
@@ -3365,8 +3429,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P1",
       "requirement": "The system shall support sealed/private, family, named-invite, memorial-event, and public editions with separate assets if needed.",
@@ -3387,13 +3454,17 @@
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
-        "build/reports/tests/privacy.xml"
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P1",
       "requirement": "Revocation shall stop new processing immediately and initiate derivative review/deletion/restriction according to policy.",
@@ -3402,7 +3473,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit",
-        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives",
+        "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
       ],
       "verification_method": "Controlled verification"
     },
@@ -3419,8 +3491,11 @@
       "implementation_files": [
         "src/sip/liveforever.py",
         "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
         "src/sip/search.py",
-        "src/sip/exporting.py"
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py"
       ],
       "priority": "P1",
       "requirement": "Disputed authority shall freeze high-risk changes while preserving access needed for due process and safety.",
@@ -4511,6 +4586,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "priority": "P0",
@@ -4522,6 +4598,12 @@
         "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content",
+        "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed",
         "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages",
         "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
       ],
@@ -4545,6 +4627,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "priority": "P0",
@@ -4576,6 +4659,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "priority": "P1",
@@ -4607,6 +4691,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "priority": "P1",
@@ -4637,6 +4722,7 @@
         "src/sip/archive_safety.py",
         "src/sip/database.py",
         "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
         "docs/operator/LIVEFOREVER_PRESERVATION.md"
       ],
       "priority": "P1",

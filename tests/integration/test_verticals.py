@@ -47,6 +47,8 @@ def test_construction_complete_record_deficiency_retest_measurement_and_reports(
     )
     correction = context.construction.correct_and_retest(
         deficiency,
+        tenant_id=tenant_id,
+        project_id=project_id,
         correction="Installed durable circuit label",
         correction_asset_ids=["photo-after"],
         test_result="pass",
@@ -187,6 +189,6 @@ def test_liveforever_conflicting_recollections_generated_label_audience_revocati
         context.liveforever.experience_configuration(
             tenant_id, project_id, subject, requested_features={"voice_simulation": True}, audience=Audience.FAMILY
         )
-    revoked = context.liveforever.revoke_consent(grant, actor_id="alex", reason="changed preference")
+    revoked = context.liveforever.revoke_consent(grant, tenant_id=tenant_id, project_id=project_id, actor_id="alex", reason="changed preference")
     assert revoked["affected_records"] >= 4
     assert context.liveforever.edition(tenant_id, project_id, audience=Audience.FAMILY, purpose="family_review")["records"] == []

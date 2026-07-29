@@ -1,11 +1,9 @@
-# SIP v1.1.0 Progress 06 Candidate Implementation Report
+# SIP v1.1.0 Progress 06-R1 Candidate Implementation Report
 
-Progress 06 adds bounded Construction Spatial Reference and LiveForever vertical MVP workflows while preserving the accepted Progress 05-R2 history and the authority, provenance, consent, policy, and open-export foundations.
+Progress 06-R1 is a narrow remediation of the accepted Progress 06 development snapshot. It does not add Progress 07 scope.
 
-Construction includes governed survey planning and field visits; spatial hierarchy; fire-alarm, access-control, BAS, mechanical, and electrical entity packs; immutable document/RFI revisions; issue correction and retesting; commissioning; IFC/BCF-oriented interchange; deterministic reports; redacted owner views; and open offline owner handoff.
+The remediation makes consent revocation and deficiency retesting tenant/project scoped; derives independent issue-verifier identity from the authenticated principal; replaces caller-controlled restricted-annex booleans with exact immutable server approval and separation of duties; requires complete exact SHA-256 coverage for Construction owner-handoff and LiveForever preservation packages; rejects unexpected, unchecked, malformed, duplicate, unsafe, or altered package content; revalidates package bytes on idempotent replay; requires live immutable in-scope source assets for document and interchange provenance; and isolates every parallel test shard to its own runtime, database, object store, and multipart root.
 
-LiveForever includes people, relationships, places, objects, events, memories, interviews, timestamped transcript segments, conflicting recollections, immutable family corrections, granular consent/governance, generated-presence gates, evidence and quiet modes, safe exit, narrative editions, revocation propagation, and open offline preservation.
+Append-only migration `0015_progress06_r1_security_controls` stores restricted-export approvals. Migrations `0012`, `0013`, and `0014` remain unchanged.
 
-Migration `0014_vertical_mvp` is append-only. Migrations `0012` and `0013` remain unchanged. Demonstrations use synthetic or non-sensitive data only.
-
-Authoritative final commit, source identity, clean-detached acceptance results, package hashes, and verifier findings are generated after source commit. Progress 07 is not authorized and production remains **NO-GO**.
+Final commit, source identity, clean-detached test totals, package hashes, and independent verifier results are generated only after the source is committed and accepted from a clean detached worktree. Progress 07 remains unauthorized and production remains **NO-GO**.

@@ -11,8 +11,11 @@ implementation_status: IN_PROGRESS
 implementation_files:
 - src/sip/liveforever.py
 - src/sip/policy.py
+- src/sip/api.py
+- src/sip/database.py
 - src/sip/search.py
 - src/sip/exporting.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences
 - tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives

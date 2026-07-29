@@ -12,13 +12,18 @@ implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
 - src/sip/liveforever.py
 - src/sip/policy.py
+- src/sip/api.py
+- src/sip/database.py
 - src/sip/search.py
 - src/sip/exporting.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
+- tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations
 - tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation
 - tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience
 - tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval
+- tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped
 - tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed
 retained_evidence:
 - build/evidence/demos/liveforever.json

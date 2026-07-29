@@ -20,11 +20,6 @@
     },
     {
       "method": "POST",
-      "operation_id": "revoke_consent",
-      "path": "/v1/liveforever/consents/{grant_id}/revoke"
-    },
-    {
-      "method": "POST",
       "operation_id": "create_conflicting_recollections",
       "path": "/v1/projects/{project_id}/liveforever/conflicting-recollections"
     },
@@ -32,6 +27,11 @@
       "method": "POST",
       "operation_id": "grant_consent",
       "path": "/v1/projects/{project_id}/liveforever/consents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_project_consent",
+      "path": "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke"
     },
     {
       "method": "POST",
@@ -107,6 +107,11 @@
       "method": "POST",
       "operation_id": "create_memory_record",
       "path": "/v1/projects/{project_id}/liveforever/records"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revise_liveforever_record",
+      "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions"
     },
     {
       "method": "POST",

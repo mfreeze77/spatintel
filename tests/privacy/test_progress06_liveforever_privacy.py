@@ -76,7 +76,7 @@ def test_progress06_revocation_withholds_memory_room_interviews_editions_and_der
         )
     assert private_marks.value.code == "PRIVATE_TRANSCRIPT_MARKS_DENIED"
 
-    revocation = context.liveforever.revoke_consent(grant_id, actor_id=subject, reason="synthetic withdrawal")
+    revocation = context.liveforever.revoke_consent(grant_id, tenant_id=tenant_id, project_id=project_id, actor_id=subject, reason="synthetic withdrawal")
     assert revocation["affected_derivatives"] == 1
     after = context.liveforever.memory_room(
         tenant_id, project_id, subject_id=subject, audience=Audience.FAMILY, purpose="family_review"

@@ -25,3 +25,13 @@ Owner and technical audience profiles are generated independently. Restricted fi
 ## Limitations
 
 The reference IFC/BCF handoff is not certification against every BIM product. Field measurements are not survey-grade unless independently verified under the applicable procedure. The handoff does not certify code compliance, fabrication readiness, payment entitlement, or completeness of unobserved regions.
+
+## Progress 06-R1 restricted-annex approval
+
+`include_restricted_annex` is not authorization. A restricted export requires a current immutable approval created by a principal holding the exact `construction:restricted_export` action. The approval binds the normalized request scope, classification, audience, purpose, approver, expiry, tenant, project, and request hash. The export requester must be independent from the approver.
+
+## Exact checksum profile and replay
+
+`checksums.json` must declare algorithm `sha256`, a nonempty complete file map, and the deterministic root hash. Every archive member except `checksums.json` must be listed, and every listed member must exist. Unexpected or unchecked files—including scripts—cause failure. Duplicate manifest keys, partial or empty maps, malformed digests, altered bytes, and root mismatch also fail.
+
+An idempotent handoff replay reopens the current ZIP, reruns all archive and checksum controls, and compares the current ZIP hash and package root to the retained record. Replacing the file after successful creation is detected.

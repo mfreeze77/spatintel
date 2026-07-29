@@ -633,7 +633,6 @@ class ConstructionIssueTransition(StrictModel):
     target_state: str
     evidence: list[dict[str, Any]] = Field(min_length=1)
     note: str = Field(min_length=1)
-    verifier_id: str | None = None
     residual_limitations: list[str] = Field(default_factory=list)
 
 
@@ -656,7 +655,7 @@ class ConstructionCommissioningCreate(StrictModel):
 class ConstructionInterchangeCreate(StrictModel):
     format: str
     direction: Literal['import', 'export']
-    source_asset_id: str | None = None
+    source_asset_id: str = Field(min_length=1, max_length=64)
     source_sha256: str = Field(pattern='^[a-f0-9]{64}$')
     schema_version: str
     units: str
@@ -683,6 +682,24 @@ class ConstructionHandoffCreate(StrictModel):
     exclusions: list[str] = Field(default_factory=list)
     audience_profiles: dict[str, Any] = Field(default_factory=dict)
     idempotency_key: str = Field(min_length=1, max_length=256)
+    classification: str = Field(default='internal', min_length=1, max_length=64)
+    audience: str = Field(default='owner', min_length=1, max_length=64)
+    purpose: str = Field(default='owner_handoff', min_length=1, max_length=128)
+    restricted_export_approval_id: str | None = None
+
+
+class ConstructionRestrictedExportApprovalCreate(StrictModel):
+    scope: dict[str, Any] = Field(min_length=1)
+    accepted_scene_commit_id: str
+    warranties: list[dict[str, Any]] = Field(default_factory=list)
+    training: list[dict[str, Any]] = Field(default_factory=list)
+    exclusions: list[str] = Field(default_factory=list)
+    audience_profiles: dict[str, Any] = Field(default_factory=dict)
+    handoff_idempotency_key: str = Field(min_length=1, max_length=256)
+    classification: str = Field(min_length=1, max_length=64)
+    audience: str = Field(min_length=1, max_length=64)
+    purpose: str = Field(min_length=1, max_length=128)
+    expires_at: datetime
 
 
 class LiveForeverGovernanceCreate(StrictModel):
@@ -2426,7 +2443,7 @@ def _routers() -> dict[str, APIRouter]:
         return _context(request).construction.transition_issue(
             issue_id, tenant_id=principal.tenant_id, project_id=project_id,
             actor_id=principal.subject_id, target_state=body.target_state,
-            evidence=body.evidence, note=body.note, verifier_id=body.verifier_id,
+            evidence=body.evidence, note=body.note,
             residual_limitations=body.residual_limitations,
         )
 
@@ -2471,6 +2488,50 @@ def _routers() -> dict[str, APIRouter]:
             warranties=body.warranties, training=body.training, exclusions=body.exclusions,
             audience_profiles=body.audience_profiles, actor_id=principal.subject_id,
             idempotency_key=body.idempotency_key,
+            classification=body.classification, audience=body.audience, purpose=body.purpose,
+            restricted_export_approval_id=body.restricted_export_approval_id,
+        )
+
+    @construction.post(
+        '/v1/projects/{project_id}/construction/restricted-export-approvals',
+        status_code=201,
+        operation_id='approve_construction_restricted_export',
+    )
+    def approve_construction_restricted_export(
+        project_id: str,
+        body: ConstructionRestrictedExportApprovalCreate,
+        request: Request,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        _require(
+            request,
+            principal,
+            action='construction:restricted_export',
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            purpose=body.purpose,
+            classification=body.classification,
+        )
+        root = _context(request).settings.object_store_root.parent / 'vertical-exports'
+        name_hash = sha256_bytes(
+            f'{principal.tenant_id}:{project_id}:{body.handoff_idempotency_key}:construction'.encode()
+        )[:24]
+        destination_name = f'construction-owner-handoff-{name_hash}.zip'
+        return _context(request).construction.approve_restricted_export(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            scope=body.scope,
+            accepted_scene_commit_id=body.accepted_scene_commit_id,
+            warranties=body.warranties,
+            training=body.training,
+            exclusions=body.exclusions,
+            audience_profiles=body.audience_profiles,
+            destination_name=destination_name,
+            classification=body.classification,
+            audience=body.audience,
+            purpose=body.purpose,
+            approver_id=principal.subject_id,
+            expires_at=body.expires_at,
         )
 
     @construction.get('/v1/projects/{project_id}/construction/handoffs/{handoff_id}', operation_id='get_construction_handoff')
@@ -2680,10 +2741,44 @@ def _routers() -> dict[str, APIRouter]:
         identifier = _context(request).construction.create_deficiency(tenant_id=principal.tenant_id, project_id=project_id, entity_id=body.entity_id, description=body.description, severity=body.severity, evidence_asset_ids=body.evidence_asset_ids, actor_id=principal.subject_id)
         return {'deficiency_id': identifier}
 
-    @construction.post('/v1/construction/deficiencies/{deficiency_id}/retest', operation_id='retest_deficiency')
-    def retest_deficiency(deficiency_id: str, body: DeficiencyRetest, request: Request, principal: Principal) -> dict[str, Any]:
-        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id)
-        return _context(request).construction.correct_and_retest(deficiency_id, correction=body.correction, correction_asset_ids=body.correction_asset_ids, test_result=body.test_result, test_asset_ids=body.test_asset_ids, tester_id=principal.subject_id)
+    @construction.post(
+        '/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest',
+        operation_id='retest_project_deficiency',
+    )
+    def retest_deficiency(
+        project_id: str,
+        deficiency_id: str,
+        body: DeficiencyRetest,
+        request: Request,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.correct_and_retest(
+            deficiency_id,
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            correction=body.correction,
+            correction_asset_ids=body.correction_asset_ids,
+            test_result=body.test_result,
+            test_asset_ids=body.test_asset_ids,
+            tester_id=principal.subject_id,
+        )
+
+    @construction.post(
+        '/v1/construction/deficiencies/{deficiency_id}/retest',
+        include_in_schema=False,
+        operation_id='deny_unscoped_deficiency_retest',
+    )
+    def deny_unscoped_deficiency_retest(
+        deficiency_id: str,
+        body: DeficiencyRetest,
+        request: Request,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        raise AuthorizationError(
+            'PROJECT_SCOPE_REQUIRED',
+            'deficiency retesting requires an authenticated tenant-and-project-scoped route',
+        )
 
     @construction.get('/v1/projects/{project_id}/construction/reports/{report_type}', operation_id='get_construction_report')
     def construction_report(project_id: str, report_type: Literal['owner', 'technical'], request: Request, principal: Principal) -> dict[str, Any]:
@@ -2698,10 +2793,41 @@ def _routers() -> dict[str, APIRouter]:
         grant_id = _context(request).liveforever.grant_consent(tenant_id=principal.tenant_id, project_id=project_id, subject_id=body.subject_id, granted_by=principal.subject_id, purposes=body.purposes, audiences=body.audiences, scopes=body.scopes, derivative_policy=body.derivative_policy, expires_at=body.expires_at)
         return {'grant_id': grant_id}
 
-    @memory.post('/v1/liveforever/consents/{grant_id}/revoke', operation_id='revoke_consent')
-    def revoke_consent(grant_id: str, body: ConsentRevoke, request: Request, principal: Principal) -> dict[str, Any]:
-        _require(request, principal, action='consent:*', tenant_id=principal.tenant_id)
-        return _context(request).liveforever.revoke_consent(grant_id, actor_id=principal.subject_id, reason=body.reason)
+    @memory.post(
+        '/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke',
+        operation_id='revoke_project_consent',
+    )
+    def revoke_consent(
+        project_id: str,
+        grant_id: str,
+        body: ConsentRevoke,
+        request: Request,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        _require(request, principal, action='consent:*', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.revoke_consent(
+            grant_id,
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            actor_id=principal.subject_id,
+            reason=body.reason,
+        )
+
+    @memory.post(
+        '/v1/liveforever/consents/{grant_id}/revoke',
+        include_in_schema=False,
+        operation_id='deny_unscoped_consent_revoke',
+    )
+    def deny_unscoped_consent_revoke(
+        grant_id: str,
+        body: ConsentRevoke,
+        request: Request,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        raise AuthorizationError(
+            'PROJECT_SCOPE_REQUIRED',
+            'consent revocation requires an authenticated tenant-and-project-scoped route',
+        )
 
     @memory.post('/v1/projects/{project_id}/liveforever/records', status_code=201, operation_id='create_memory_record')
     def create_memory(project_id: str, body: MemoryCreate, request: Request, principal: Principal) -> dict[str, Any]:

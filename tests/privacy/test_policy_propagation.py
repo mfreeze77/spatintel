@@ -45,6 +45,6 @@ def test_liveforever_revocation_removes_derivative_from_all_affected_audiences(b
     )
     before = context.liveforever.edition(tenant_id, project_id, audience=Audience.FAMILY, purpose="family_review")
     assert record_id in {item["record_id"] for item in before["records"]}
-    context.liveforever.revoke_consent(grant_id, actor_id=subject, reason="fixture revocation")
+    context.liveforever.revoke_consent(grant_id, tenant_id=tenant_id, project_id=project_id, actor_id=subject, reason="fixture revocation")
     after = context.liveforever.edition(tenant_id, project_id, audience=Audience.FAMILY, purpose="family_review")
     assert record_id not in {item["record_id"] for item in after["records"]}

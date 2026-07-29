@@ -13,6 +13,7 @@ implementation_files:
 - src/sip/api.py
 - src/sip/database.py
 - migrations/versions/0014_vertical_mvp.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md
 automated_test_ids:
 - tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff

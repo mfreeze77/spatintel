@@ -437,6 +437,35 @@ def _assert_stage_owner(staged_shard_root: Path, writer_token: str) -> None:
         raise RuntimeError("test-matrix staging ownership changed during shard execution")
 
 
+def _shard_runtime_environment(
+    *,
+    environment: dict[str, str],
+    writer_token: str,
+    shard_name: str,
+) -> tuple[Path, dict[str, str]]:
+    """Return a process-private runtime and environment for one pytest shard.
+
+    Parallel shards must never import the API against the repository-level
+    ``runtime/sip.sqlite3``.  The writer token separates matrix controllers and
+    the safe shard name separates every test file within one controller.
+    """
+
+    runtime_root = ROOT / "build" / "runtime" / "test-matrix" / writer_token / shard_name
+    shard_environment = dict(environment)
+    shard_environment.update(
+        {
+            "SIP_ENV": "test",
+            "SIP_ALLOW_DEVELOPMENT_AUTH": "true",
+            "SIP_DATABASE_URL": f"sqlite:///{runtime_root / 'sip.sqlite3'}",
+            "SIP_OBJECT_STORE_BACKEND": "local",
+            "SIP_OBJECT_STORE_ROOT": str(runtime_root / "objects"),
+            "SIP_MULTIPART_ROOT": str(runtime_root / "multipart"),
+            "SIP_MASTER_KEY_ID": "test-matrix-shard-v1",
+        }
+    )
+    return runtime_root, shard_environment
+
+
 def _run_pytest_shard(
     *,
     name: str,
@@ -449,6 +478,13 @@ def _run_pytest_shard(
 ) -> dict[str, Any]:
     _assert_stage_owner(staged_shard_root, writer_token)
     shard_name = _safe_shard_name(path)
+    runtime_root, shard_environment = _shard_runtime_environment(
+        environment=environment,
+        writer_token=writer_token,
+        shard_name=shard_name,
+    )
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    runtime_root.mkdir(parents=True, exist_ok=True)
     junit = staged_shard_root / f"{shard_name}.xml"
     log = staged_shard_root / f"{shard_name}.log"
     command = [
@@ -465,7 +501,7 @@ def _run_pytest_shard(
         process = subprocess.Popen(
             command,
             cwd=ROOT,
-            env=environment,
+            env=shard_environment,
             stdout=output,
             stderr=subprocess.STDOUT,
             start_new_session=True,
@@ -479,6 +515,7 @@ def _run_pytest_shard(
             status = "timeout"
             output.write(f"\nTIMEOUT after {timeout_seconds}s\n".encode("utf-8"))
     elapsed = round(time.perf_counter() - started, 6)
+    shutil.rmtree(runtime_root, ignore_errors=True)
     _assert_stage_owner(staged_shard_root, writer_token)
     declared_inputs = _declared_generated_inputs(path)
     result: dict[str, Any] = {

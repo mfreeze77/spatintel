@@ -10,7 +10,6 @@
             "type": "boolean"
           },
           "attachments": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -32,7 +31,6 @@
             "type": "string"
           },
           "instruments": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -61,7 +59,6 @@
             "type": "array"
           },
           "prerequisites": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -71,11 +68,13 @@
           },
           "procedure": {
             "additionalProperties": true,
+            "minProperties": 1,
             "title": "Procedure",
             "type": "object"
           },
           "results": {
             "additionalProperties": true,
+            "minProperties": 1,
             "title": "Results",
             "type": "object"
           },
@@ -189,7 +188,6 @@
           },
           "extraction": {
             "additionalProperties": true,
-            "default": {},
             "title": "Extraction",
             "type": "object"
           },
@@ -207,7 +205,6 @@
             "type": "integer"
           },
           "page_regions": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -217,27 +214,26 @@
           },
           "permissions": {
             "additionalProperties": true,
-            "default": {},
             "title": "Permissions",
             "type": "object"
           },
           "review": {
             "additionalProperties": true,
-            "default": {},
             "title": "Review",
             "type": "object"
           },
           "revision": {
+            "maxLength": 64,
+            "minLength": 1,
             "title": "Revision",
             "type": "string"
           },
           "source_sha256": {
-            "pattern": "^(sha256:)?[a-f0-9]{64}$",
+            "pattern": "^[a-f0-9]{64}$",
             "title": "Source Sha256",
             "type": "string"
           },
           "spatial_links": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -272,6 +268,8 @@
             "title": "Supersedes Revision Id"
           },
           "title": {
+            "maxLength": 512,
+            "minLength": 1,
             "title": "Title",
             "type": "string"
           }
@@ -290,6 +288,116 @@
         "title": "ConstructionDocumentRevisionCreate",
         "type": "object"
       },
+      "ConstructionFieldVisitCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "capture_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Capture Ids",
+            "type": "array"
+          },
+          "checklist": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Checklist",
+            "type": "array"
+          },
+          "complete": {
+            "default": true,
+            "title": "Complete",
+            "type": "boolean"
+          },
+          "controls": {
+            "additionalProperties": true,
+            "title": "Controls",
+            "type": "object"
+          },
+          "coverage": {
+            "additionalProperties": true,
+            "title": "Coverage",
+            "type": "object"
+          },
+          "detail_evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Detail Evidence",
+            "type": "array"
+          },
+          "exact_prior_commit_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exact Prior Commit Id"
+          },
+          "idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "inaccessible_regions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Inaccessible Regions",
+            "type": "array"
+          },
+          "inventory": {
+            "additionalProperties": true,
+            "title": "Inventory",
+            "type": "object"
+          },
+          "privacy": {
+            "additionalProperties": true,
+            "title": "Privacy",
+            "type": "object"
+          },
+          "registration": {
+            "additionalProperties": true,
+            "title": "Registration",
+            "type": "object"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "tracking": {
+            "additionalProperties": true,
+            "title": "Tracking",
+            "type": "object"
+          },
+          "unresolved_questions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Unresolved Questions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "capture_ids",
+          "checklist",
+          "idempotency_key"
+        ],
+        "title": "ConstructionFieldVisitCreate",
+        "type": "object"
+      },
       "ConstructionHandoffCreate": {
         "additionalProperties": false,
         "properties": {
@@ -297,13 +405,26 @@
             "title": "Accepted Scene Commit Id",
             "type": "string"
           },
+          "audience": {
+            "default": "owner",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Audience",
+            "type": "string"
+          },
           "audience_profiles": {
             "additionalProperties": true,
             "title": "Audience Profiles",
             "type": "object"
           },
+          "classification": {
+            "default": "internal",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Classification",
+            "type": "string"
+          },
           "exclusions": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -316,13 +437,30 @@
             "title": "Idempotency Key",
             "type": "string"
           },
+          "purpose": {
+            "default": "owner_handoff",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Purpose",
+            "type": "string"
+          },
+          "restricted_export_approval_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Restricted Export Approval Id"
+          },
           "scope": {
             "additionalProperties": true,
             "title": "Scope",
             "type": "object"
           },
           "training": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -331,7 +469,6 @@
             "type": "array"
           },
           "warranties": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -341,9 +478,7 @@
           }
         },
         "required": [
-          "scope",
           "accepted_scene_commit_id",
-          "audience_profiles",
           "idempotency_key"
         ],
         "title": "ConstructionHandoffCreate",
@@ -395,13 +530,11 @@
         "properties": {
           "alignment": {
             "additionalProperties": true,
-            "default": {},
             "title": "Alignment",
             "type": "object"
           },
           "classifications": {
             "additionalProperties": true,
-            "default": {},
             "title": "Classifications",
             "type": "object"
           },
@@ -424,12 +557,10 @@
           },
           "geometry_conversion_report": {
             "additionalProperties": true,
-            "default": {},
             "title": "Geometry Conversion Report",
             "type": "object"
           },
           "global_ids": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -443,7 +574,6 @@
             "type": "string"
           },
           "issues": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -452,7 +582,6 @@
             "type": "array"
           },
           "mappings": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -462,18 +591,15 @@
           },
           "owner_history": {
             "additionalProperties": true,
-            "default": {},
             "title": "Owner History",
             "type": "object"
           },
           "properties": {
             "additionalProperties": true,
-            "default": {},
             "title": "Properties",
             "type": "object"
           },
           "relationships": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -486,18 +612,13 @@
             "type": "string"
           },
           "source_asset_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Asset Id"
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Source Asset Id",
+            "type": "string"
           },
           "source_sha256": {
-            "pattern": "^(sha256:)?[a-f0-9]{64}$",
+            "pattern": "^[a-f0-9]{64}$",
             "title": "Source Sha256",
             "type": "string"
           },
@@ -511,7 +632,6 @@
             "type": "string"
           },
           "unsupported_constructs": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -523,11 +643,10 @@
         "required": [
           "format",
           "direction",
+          "source_asset_id",
           "source_sha256",
           "schema_version",
           "units",
-          "crs",
-          "truth_labels",
           "idempotency_key"
         ],
         "title": "ConstructionInterchangeCreate",
@@ -537,6 +656,7 @@
         "additionalProperties": false,
         "properties": {
           "description": {
+            "minLength": 1,
             "title": "Description",
             "type": "string"
           },
@@ -595,7 +715,6 @@
           },
           "permissions": {
             "additionalProperties": true,
-            "default": {},
             "title": "Permissions",
             "type": "object"
           },
@@ -622,12 +741,6 @@
             "title": "Responsible Party"
           },
           "severity": {
-            "enum": [
-              "low",
-              "medium",
-              "high",
-              "life_safety"
-            ],
             "title": "Severity",
             "type": "string"
           }
@@ -646,20 +759,20 @@
         "additionalProperties": false,
         "properties": {
           "evidence": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
             },
+            "minItems": 1,
             "title": "Evidence",
             "type": "array"
           },
           "note": {
+            "minLength": 1,
             "title": "Note",
             "type": "string"
           },
           "residual_limitations": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -667,35 +780,99 @@
             "type": "array"
           },
           "target_state": {
-            "enum": [
-              "open",
-              "acknowledged",
-              "corrected",
-              "retest_required",
-              "verified_closed",
-              "disputed",
-              "superseded"
-            ],
             "title": "Target State",
             "type": "string"
-          },
-          "verifier_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Verifier Id"
           }
         },
         "required": [
           "target_state",
+          "evidence",
           "note"
         ],
         "title": "ConstructionIssueTransition",
+        "type": "object"
+      },
+      "ConstructionRestrictedExportApprovalCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted_scene_commit_id": {
+            "title": "Accepted Scene Commit Id",
+            "type": "string"
+          },
+          "audience": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_profiles": {
+            "additionalProperties": true,
+            "title": "Audience Profiles",
+            "type": "object"
+          },
+          "classification": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Classification",
+            "type": "string"
+          },
+          "exclusions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclusions",
+            "type": "array"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "handoff_idempotency_key": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Handoff Idempotency Key",
+            "type": "string"
+          },
+          "purpose": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Purpose",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Scope",
+            "type": "object"
+          },
+          "training": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Training",
+            "type": "array"
+          },
+          "warranties": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Warranties",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scope",
+          "accepted_scene_commit_id",
+          "handoff_idempotency_key",
+          "classification",
+          "audience",
+          "purpose",
+          "expires_at"
+        ],
+        "title": "ConstructionRestrictedExportApprovalCreate",
         "type": "object"
       },
       "ConstructionSurveyCreate": {
@@ -714,7 +891,6 @@
           },
           "control_requirements": {
             "additionalProperties": true,
-            "default": {},
             "title": "Control Requirements",
             "type": "object"
           },
@@ -735,7 +911,6 @@
           },
           "measurement_requirements": {
             "additionalProperties": true,
-            "default": {},
             "title": "Measurement Requirements",
             "type": "object"
           },
@@ -755,7 +930,6 @@
           },
           "permissions": {
             "additionalProperties": true,
-            "default": {},
             "title": "Permissions",
             "type": "object"
           },
@@ -768,7 +942,6 @@
             "type": "array"
           },
           "required_system_types": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -788,12 +961,10 @@
           },
           "safety": {
             "additionalProperties": true,
-            "default": {},
             "title": "Safety",
             "type": "object"
           },
           "sensitive_regions": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -835,13 +1006,12 @@
             "enum": [
               "accept",
               "reject",
-              "request_return_visit"
+              "request_changes"
             ],
             "title": "Decision",
             "type": "string"
           },
           "limitations": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -850,8 +1020,7 @@
           }
         },
         "required": [
-          "decision",
-          "checklist"
+          "decision"
         ],
         "title": "ConstructionSurveyReview",
         "type": "object"
@@ -909,126 +1078,6 @@
           "data"
         ],
         "title": "ConstructionSystem",
-        "type": "object"
-      },
-      "ConstructionVisitCreate": {
-        "additionalProperties": false,
-        "properties": {
-          "capture_ids": {
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "title": "Capture Ids",
-            "type": "array"
-          },
-          "checklist": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "minItems": 1,
-            "title": "Checklist",
-            "type": "array"
-          },
-          "complete": {
-            "default": true,
-            "title": "Complete",
-            "type": "boolean"
-          },
-          "controls": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Controls",
-            "type": "object"
-          },
-          "coverage": {
-            "additionalProperties": true,
-            "title": "Coverage",
-            "type": "object"
-          },
-          "detail_evidence": {
-            "default": [],
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Detail Evidence",
-            "type": "array"
-          },
-          "exact_prior_commit_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Exact Prior Commit Id"
-          },
-          "idempotency_key": {
-            "maxLength": 256,
-            "minLength": 1,
-            "title": "Idempotency Key",
-            "type": "string"
-          },
-          "inaccessible_regions": {
-            "default": [],
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Inaccessible Regions",
-            "type": "array"
-          },
-          "inventory": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Inventory",
-            "type": "object"
-          },
-          "privacy": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Privacy",
-            "type": "object"
-          },
-          "registration": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Registration",
-            "type": "object"
-          },
-          "scope": {
-            "additionalProperties": true,
-            "title": "Scope",
-            "type": "object"
-          },
-          "tracking": {
-            "additionalProperties": true,
-            "default": {},
-            "title": "Tracking",
-            "type": "object"
-          },
-          "unresolved_questions": {
-            "default": [],
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Unresolved Questions",
-            "type": "array"
-          }
-        },
-        "required": [
-          "scope",
-          "capture_ids",
-          "checklist",
-          "coverage",
-          "idempotency_key"
-        ],
-        "title": "ConstructionVisitCreate",
         "type": "object"
       },
       "DeficiencyCreate": {
@@ -1201,172 +1250,6 @@
           }
         },
         "summary": "Health Ready"
-      }
-    },
-    "/v1/construction/deficiencies/{deficiency_id}/retest": {
-      "post": {
-        "operationId": "retest_deficiency",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "deficiency_id",
-            "required": true,
-            "schema": {
-              "title": "Deficiency Id",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-tenant",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Tenant"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-subject",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Subject"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-projects",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Projects"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-roles",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Roles"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-purposes",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Purposes"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-audience",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Audience"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeficiencyRetest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Retest Deficiency",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Retest Deficiency",
-        "tags": [
-          "construction"
-        ]
       }
     },
     "/v1/projects/{project_id}/construction/commissioning": {
@@ -1696,6 +1579,181 @@
           }
         },
         "summary": "Create Deficiency",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest": {
+      "post": {
+        "operationId": "retest_project_deficiency",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "deficiency_id",
+            "required": true,
+            "schema": {
+              "title": "Deficiency Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeficiencyRetest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Retest Project Deficiency",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retest Deficiency",
         "tags": [
           "construction"
         ]
@@ -3536,6 +3594,172 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/construction/restricted-export-approvals": {
+      "post": {
+        "operationId": "approve_construction_restricted_export",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConstructionRestrictedExportApprovalCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Approve Construction Restricted Export",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Construction Restricted Export",
+        "tags": [
+          "construction"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/construction/search": {
       "get": {
         "operationId": "search_construction_facility",
@@ -4389,7 +4613,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConstructionVisitCreate"
+                "$ref": "#/components/schemas/ConstructionFieldVisitCreate"
               }
             }
           },
@@ -4443,11 +4667,6 @@
             "name": "pack",
             "required": true,
             "schema": {
-              "enum": [
-                "fire_alarm",
-                "access_control",
-                "mep"
-              ],
               "title": "Pack",
               "type": "string"
             }

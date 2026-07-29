@@ -181,7 +181,6 @@
           },
           "generation_lineage": {
             "additionalProperties": true,
-            "default": {},
             "title": "Generation Lineage",
             "type": "object"
           },
@@ -230,9 +229,6 @@
           "consent_grant_ids",
           "audience",
           "classification",
-          "retention",
-          "provider",
-          "policy",
           "idempotency_key"
         ],
         "title": "LiveForeverDerivativeCreate",
@@ -251,11 +247,12 @@
             "type": "string"
           },
           "name": {
+            "maxLength": 256,
+            "minLength": 1,
             "title": "Name",
             "type": "string"
           },
           "narrative_path": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -309,8 +306,6 @@
           "name",
           "audience",
           "purpose",
-          "presentation_choices",
-          "policy_snapshot",
           "idempotency_key"
         ],
         "title": "LiveForeverEditionCreate",
@@ -349,7 +344,6 @@
           },
           "dispute": {
             "additionalProperties": true,
-            "default": {},
             "title": "Dispute",
             "type": "object"
           },
@@ -359,7 +353,6 @@
             "type": "string"
           },
           "evidence_asset_ids": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -385,7 +378,6 @@
           },
           "geography": {
             "additionalProperties": true,
-            "default": {},
             "title": "Geography",
             "type": "object"
           },
@@ -403,18 +395,15 @@
             "items": {
               "type": "string"
             },
-            "minItems": 1,
             "title": "Modalities",
             "type": "array"
           },
           "posthumous_rules": {
             "additionalProperties": true,
-            "default": {},
             "title": "Posthumous Rules",
             "type": "object"
           },
           "providers": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -438,7 +427,6 @@
             "type": "string"
           },
           "successor_ids": {
-            "default": [],
             "items": {
               "type": "string"
             },
@@ -451,9 +439,7 @@
           "subject_id",
           "grantor_id",
           "authority_basis",
-          "data_scope",
           "purposes",
-          "modalities",
           "audiences",
           "effective_at",
           "idempotency_key"
@@ -471,18 +457,17 @@
           },
           "consent_context": {
             "additionalProperties": true,
+            "minProperties": 1,
             "title": "Consent Context",
             "type": "object"
           },
           "device": {
             "additionalProperties": true,
-            "default": {},
             "title": "Device",
             "type": "object"
           },
           "environment": {
             "additionalProperties": true,
-            "default": {},
             "title": "Environment",
             "type": "object"
           },
@@ -493,7 +478,6 @@
             "type": "string"
           },
           "interruptions": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -503,7 +487,6 @@
           },
           "pacing_policy": {
             "additionalProperties": true,
-            "default": {},
             "title": "Pacing Policy",
             "type": "object"
           },
@@ -517,7 +500,6 @@
             "type": "array"
           },
           "question_lineage": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -530,10 +512,10 @@
             "type": "string"
           },
           "source_media_ids": {
-            "default": [],
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "title": "Source Media Ids",
             "type": "array"
           },
@@ -543,7 +525,7 @@
           },
           "timeline": {
             "additionalProperties": true,
-            "default": {},
+            "minProperties": 1,
             "title": "Timeline",
             "type": "object"
           }
@@ -553,6 +535,8 @@
           "participants",
           "consent_context",
           "recording_state",
+          "source_media_ids",
+          "timeline",
           "idempotency_key"
         ],
         "title": "LiveForeverInterviewCreate",
@@ -566,7 +550,6 @@
             "type": "string"
           },
           "format_migrations": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -576,6 +559,7 @@
           },
           "human_guide": {
             "additionalProperties": true,
+            "minProperties": 1,
             "title": "Human Guide",
             "type": "object"
           },
@@ -592,11 +576,11 @@
           },
           "offline_fallback": {
             "additionalProperties": true,
+            "minProperties": 1,
             "title": "Offline Fallback",
             "type": "object"
           },
           "open_assets": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -614,7 +598,6 @@
             "type": "array"
           },
           "replicas": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -631,7 +614,6 @@
             "type": "array"
           },
           "scene_manifests": {
-            "default": [],
             "items": {
               "additionalProperties": true,
               "type": "object"
@@ -641,13 +623,11 @@
           },
           "shutdown": {
             "additionalProperties": true,
-            "default": {},
             "title": "Shutdown",
             "type": "object"
           },
           "succession": {
             "additionalProperties": true,
-            "default": {},
             "title": "Succession",
             "type": "object"
           },
@@ -660,14 +640,156 @@
         "required": [
           "edition_id",
           "originals",
-          "technical_metadata",
-          "rights_consent",
-          "memory_graph",
           "human_guide",
           "offline_fallback",
           "idempotency_key"
         ],
         "title": "LiveForeverPreservationCreate",
+        "type": "object"
+      },
+      "LiveForeverRecordRevision": {
+        "additionalProperties": false,
+        "properties": {
+          "audience": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Audience"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "changes": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Changes",
+            "type": "object"
+          },
+          "correction_type": {
+            "title": "Correction Type",
+            "type": "string"
+          },
+          "purpose": {
+            "default": "family_review",
+            "title": "Purpose",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "correction_type",
+          "reason",
+          "changes"
+        ],
+        "title": "LiveForeverRecordRevision",
+        "type": "object"
+      },
+      "LiveForeverTranscriptCorrection": {
+        "additionalProperties": false,
+        "properties": {
+          "edited_text": {
+            "minLength": 1,
+            "title": "Edited Text",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "review_state": {
+            "default": "reviewed",
+            "title": "Review State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "edited_text",
+          "reason"
+        ],
+        "title": "LiveForeverTranscriptCorrection",
+        "type": "object"
+      },
+      "LiveForeverTranscriptSegmentCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "end_ms": {
+            "exclusiveMinimum": 0.0,
+            "title": "End Ms",
+            "type": "integer"
+          },
+          "followup_suggestions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Followup Suggestions",
+            "type": "array"
+          },
+          "original_text": {
+            "title": "Original Text",
+            "type": "string"
+          },
+          "private_marks": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Private Marks",
+            "type": "array"
+          },
+          "segment_index": {
+            "minimum": 0.0,
+            "title": "Segment Index",
+            "type": "integer"
+          },
+          "source_media_id": {
+            "title": "Source Media Id",
+            "type": "string"
+          },
+          "spatial_anchor": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Anchor"
+          },
+          "speaker_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Speaker Confidence",
+            "type": "number"
+          },
+          "speaker_label": {
+            "title": "Speaker Label",
+            "type": "string"
+          },
+          "start_ms": {
+            "minimum": 0.0,
+            "title": "Start Ms",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "segment_index",
+          "start_ms",
+          "end_ms",
+          "speaker_label",
+          "speaker_confidence",
+          "original_text",
+          "source_media_id"
+        ],
+        "title": "LiveForeverTranscriptSegmentCreate",
         "type": "object"
       },
       "MemoryCreate": {
@@ -761,115 +883,6 @@
         "title": "SourceClass",
         "type": "string"
       },
-      "TranscriptSegmentCorrection": {
-        "additionalProperties": false,
-        "properties": {
-          "edited_text": {
-            "title": "Edited Text",
-            "type": "string"
-          },
-          "reason": {
-            "title": "Reason",
-            "type": "string"
-          },
-          "review_state": {
-            "default": "reviewed",
-            "enum": [
-              "reviewed",
-              "disputed",
-              "private",
-              "needs_speaker_review"
-            ],
-            "title": "Review State",
-            "type": "string"
-          }
-        },
-        "required": [
-          "edited_text",
-          "reason"
-        ],
-        "title": "TranscriptSegmentCorrection",
-        "type": "object"
-      },
-      "TranscriptSegmentCreate": {
-        "additionalProperties": false,
-        "properties": {
-          "end_ms": {
-            "exclusiveMinimum": 0.0,
-            "title": "End Ms",
-            "type": "integer"
-          },
-          "followup_suggestions": {
-            "default": [],
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Followup Suggestions",
-            "type": "array"
-          },
-          "original_text": {
-            "title": "Original Text",
-            "type": "string"
-          },
-          "private_marks": {
-            "default": [],
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "title": "Private Marks",
-            "type": "array"
-          },
-          "segment_index": {
-            "minimum": 0.0,
-            "title": "Segment Index",
-            "type": "integer"
-          },
-          "source_media_id": {
-            "title": "Source Media Id",
-            "type": "string"
-          },
-          "spatial_anchor": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Spatial Anchor"
-          },
-          "speaker_confidence": {
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Speaker Confidence",
-            "type": "number"
-          },
-          "speaker_label": {
-            "title": "Speaker Label",
-            "type": "string"
-          },
-          "start_ms": {
-            "minimum": 0.0,
-            "title": "Start Ms",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "segment_index",
-          "start_ms",
-          "end_ms",
-          "speaker_label",
-          "speaker_confidence",
-          "original_text",
-          "source_media_id"
-        ],
-        "title": "TranscriptSegmentCreate",
-        "type": "object"
-      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -956,172 +969,6 @@
           }
         },
         "summary": "Health Ready"
-      }
-    },
-    "/v1/liveforever/consents/{grant_id}/revoke": {
-      "post": {
-        "operationId": "revoke_consent",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "grant_id",
-            "required": true,
-            "schema": {
-              "title": "Grant Id",
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "authorization",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-tenant",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Tenant"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-subject",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Subject"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-projects",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Projects"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-roles",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Roles"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-purposes",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Purposes"
-            }
-          },
-          {
-            "in": "header",
-            "name": "x-sip-audience",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Sip-Audience"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ConsentRevoke"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Revoke Consent",
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Successful Response"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            },
-            "description": "Validation Error"
-          }
-        },
-        "summary": "Revoke Consent",
-        "tags": [
-          "liveforever"
-        ]
       }
     },
     "/v1/projects/{project_id}/liveforever/conflicting-recollections": {
@@ -1453,6 +1300,181 @@
           }
         },
         "summary": "Grant Consent",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke": {
+      "post": {
+        "operationId": "revoke_project_consent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "grant_id",
+            "required": true,
+            "schema": {
+              "title": "Grant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentRevoke"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Revoke Project Consent",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke Consent",
         "tags": [
           "liveforever"
         ]
@@ -3270,7 +3292,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TranscriptSegmentCreate"
+                "$ref": "#/components/schemas/LiveForeverTranscriptSegmentCreate"
               }
             }
           },
@@ -3339,9 +3361,8 @@
           {
             "in": "query",
             "name": "purpose",
-            "required": false,
+            "required": true,
             "schema": {
-              "default": "preservation",
               "title": "Purpose",
               "type": "string"
             }
@@ -3996,6 +4017,181 @@
         ]
       }
     },
+    "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions": {
+      "post": {
+        "operationId": "revise_liveforever_record",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "record_id",
+            "required": true,
+            "schema": {
+              "title": "Record Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveForeverRecordRevision"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Revise Liveforever Record",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revise Liveforever Record",
+        "tags": [
+          "liveforever"
+        ]
+      }
+    },
     "/v1/projects/{project_id}/liveforever/transcript-segments/{segment_id}/corrections": {
       "post": {
         "operationId": "correct_liveforever_transcript_segment",
@@ -4135,7 +4331,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TranscriptSegmentCorrection"
+                "$ref": "#/components/schemas/LiveForeverTranscriptCorrection"
               }
             }
           },

@@ -116,6 +116,8 @@ SERVICES = [
     "representation-api",
     "provider-registry",
     "representation-publisher",
+    "construction",
+    "liveforever",
 ]
 
 

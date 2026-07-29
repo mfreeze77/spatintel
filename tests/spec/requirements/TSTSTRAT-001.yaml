@@ -13,6 +13,7 @@ implementation_files:
 - tools/run_test_matrix.py
 - tools/update_requirements.py
 - src/sip/spec_lint.py
+- tests/contract/test_progress06_r1_test_matrix_isolation.py
 - requirements/requirements-ledger.json
 automated_test_ids:
 - tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans

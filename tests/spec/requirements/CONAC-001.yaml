@@ -13,6 +13,7 @@ implementation_files:
 - src/sip/construction.py
 - src/sip/api.py
 - src/sip/database.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/user/CONSTRUCTION.md
 automated_test_ids:
 - tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs

@@ -11,7 +11,7 @@ from typing import Any, TypeVar
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from .archive_safety import validate_zip_members
+from .archive_safety import validate_zip_members, verify_checksum_manifest
 from .audit import AuditService
 from .canonical import canonical_json, canonical_sha256, merkle_root, new_uuid, sha256_bytes, sha256_file
 from .database import (
@@ -76,6 +76,19 @@ CORRECTION_TYPES = frozenset({
     "transcription_correction", "factual_correction", "contributor_retraction",
     "consent_restriction", "alternate_interpretation",
 })
+PRESERVATION_MEMBERS = {
+    "manifest.json",
+    "checksums.json",
+    "data/edition.json",
+    "data/transcripts.json",
+    "data/memory-graph.json",
+    "data/rights-consent.json",
+    "data/scene-manifests.json",
+    "data/originals.json",
+    "data/open-assets.json",
+    "viewer/index.html",
+    "README.txt",
+}
 T = TypeVar("T")
 
 
@@ -168,11 +181,17 @@ class LiveForeverService:
                          "liveforever.governance.recorded", "liveforever_governance")
             return self._governance_result(row, False)
 
-    def revoke_consent(self, grant_id: str, *, actor_id: str, reason: str) -> dict[str, Any]:
+    def revoke_consent(
+        self,
+        grant_id: str,
+        *,
+        tenant_id: str,
+        project_id: str,
+        actor_id: str,
+        reason: str,
+    ) -> dict[str, Any]:
         with self.database.session() as session:
-            grant = session.get(ConsentGrantRow, grant_id)
-            if not grant:
-                raise NotFoundError("consent_grant", grant_id)
+            grant = self._scoped(session, ConsentGrantRow, grant_id, tenant_id, project_id, "consent_grant")
             if grant.state == "revoked":
                 affected_derivatives = 0
                 return {"grant_id": grant_id, "state": "revoked", "affected_records": 0,
@@ -827,7 +846,30 @@ class LiveForeverService:
             edition = self._scoped(session, LiveForeverEditionRow, edition_id, tenant_id, project_id, "edition")
             prior = self._idempotent(session, LiveForeverPreservationRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior and prior.status == "verified" and prior.package_path and Path(prior.package_path).is_file():
+                replay_validation = self.verify_preservation_release(Path(prior.package_path))
+                retained_zip_hash = str((prior.validation_json or {}).get("zip_sha256") or "")
+                if (
+                    not replay_validation["valid"]
+                    or replay_validation["root_hash"] != prior.root_hash
+                    or not retained_zip_hash
+                    or replay_validation["zip_sha256"] != retained_zip_hash
+                ):
+                    raise ConflictError(
+                        "PRESERVATION_REPLAY_PACKAGE_CHANGED",
+                        "the retained preservation package no longer matches its verified identity",
+                        {
+                            "release_id": prior.release_id,
+                            "retained_root_hash": prior.root_hash,
+                            "current_root_hash": replay_validation.get("root_hash"),
+                        },
+                    )
                 return self._preservation_result(prior, True)
+            if prior and prior.status == "verified":
+                raise ConflictError(
+                    "PRESERVATION_REPLAY_PACKAGE_MISSING",
+                    "the retained verified preservation package is missing",
+                    {"release_id": prior.release_id},
+                )
             edition_payload = self._edition_payload(edition)
             edition_audience = Audience(edition.audience_profile)
             edition_purpose = str(edition.presentation_choices_json.get("purpose", "preservation"))
@@ -985,23 +1027,18 @@ class LiveForeverService:
             raise ValidationError("PRESERVATION_PACKAGE_MISSING", "preservation package does not exist")
         with zipfile.ZipFile(path) as archive:
             names = validate_zip_members(archive.infolist(), code_prefix="PRESERVATION")
-            required = {"manifest.json", "checksums.json", "viewer/index.html", "data/edition.json",
-                        "data/transcripts.json", "data/memory-graph.json", "data/rights-consent.json"}
-            missing = sorted(required - set(names))
-            if missing:
-                raise ValidationError("PRESERVATION_PACKAGE_INCOMPLETE", "package is incomplete", {"missing": missing})
-            checks = json.loads(archive.read("checksums.json"))
-            findings = []
-            for name, expected in checks.get("files", {}).items():
-                if name not in names:
-                    findings.append({"path": name, "reason": "missing"})
-                elif sha256_bytes(archive.read(name)) != expected:
-                    findings.append({"path": name, "reason": "hash_mismatch"})
-            root = merkle_root(checks.get("files", {}).items())
-            if root != checks.get("root_hash"):
-                findings.append({"path": "checksums.json", "reason": "root_mismatch"})
-        return {"valid": not findings, "findings": findings, "root_hash": root,
-                "zip_sha256": sha256_file(path), "member_count": len(names)}
+            validation = verify_checksum_manifest(
+                archive,
+                names,
+                allowed_members=PRESERVATION_MEMBERS,
+                required_members=PRESERVATION_MEMBERS,
+                code_prefix="PRESERVATION",
+            )
+        return {
+            **validation,
+            "zip_sha256": sha256_file(path),
+            "member_count": len(names),
+        }
 
     # Internal helpers --------------------------------------------------------------------------
     @staticmethod

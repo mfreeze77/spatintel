@@ -15,6 +15,7 @@ implementation_files:
 - src/sip/archive_safety.py
 - src/sip/database.py
 - migrations/versions/0014_vertical_mvp.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/operator/LIVEFOREVER_PRESERVATION.md
 automated_test_ids:
 - tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline

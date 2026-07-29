@@ -2017,7 +2017,7 @@ def test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation
     )
     assert allowed["evidence_id"] == evidence["evidence_id"]
 
-    context.liveforever.revoke_consent(grant_id, actor_id=actor, reason="controlled revocation test")
+    context.liveforever.revoke_consent(grant_id, tenant_id=tenant_id, project_id=project_id, actor_id=actor, reason="controlled revocation test")
     with pytest.raises(AuthorizationError) as denied:
         context.spatial_data.get_evidence(
             tenant_id=tenant_id,

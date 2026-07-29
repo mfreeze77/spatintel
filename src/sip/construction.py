@@ -6,7 +6,7 @@ import json
 import re
 import zipfile
 from collections import Counter
-from datetime import datetime
+from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
 from typing import Any, Iterable, TypeVar
@@ -14,7 +14,7 @@ from typing import Any, Iterable, TypeVar
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from .archive_safety import validate_zip_members
+from .archive_safety import validate_zip_members, verify_checksum_manifest
 from .audit import AuditService
 from .canonical import canonical_json, canonical_sha256, merkle_root, new_uuid, sha256_bytes, sha256_file
 from .database import (
@@ -25,13 +25,14 @@ from .database import (
     ConstructionInterchangeRow,
     ConstructionIssueRow,
     ConstructionRecordRow,
+    ConstructionRestrictedExportApprovalRow,
     ConstructionSurveyRow,
     ConstructionVisitRow,
     Database,
     MeasurementRow,
     SceneCommitRow,
 )
-from .errors import ConflictError, NotFoundError, ValidationError
+from .errors import AuthorizationError, ConflictError, NotFoundError, ValidationError
 from .events import OutboxEventFactory
 from .temporal import db_now
 
@@ -68,6 +69,21 @@ SYSTEM_PACKS: dict[str, dict[str, Any]] = {
     },
 }
 
+OWNER_HANDOFF_MEMBERS = {
+    "manifest.json",
+    "checksums.json",
+    "reports/technical.json",
+    "reports/owner.json",
+    "data/inventory.json",
+    "data/documents.json",
+    "data/issues.json",
+    "data/commissioning.json",
+    "data/interchange.json",
+    "data/handoff-validation.json",
+    "viewer/index.html",
+    "README.txt",
+}
+
 T = TypeVar("T")
 
 
@@ -77,6 +93,33 @@ def _zip_write(handle: zipfile.ZipFile, name: str, data: bytes) -> str:
     info.external_attr = 0o100644 << 16
     handle.writestr(info, data)
     return sha256_bytes(data)
+
+
+def _handoff_request_payload(
+    *,
+    scope: dict[str, Any],
+    accepted_scene_commit_id: str | None,
+    warranties: list[dict[str, Any]],
+    training: list[dict[str, Any]],
+    exclusions: list[str],
+    audience_profiles: dict[str, Any],
+    destination_name: str,
+    classification: str,
+    audience: str,
+    purpose: str,
+) -> dict[str, Any]:
+    return {
+        "scope": scope,
+        "accepted_scene_commit_id": accepted_scene_commit_id,
+        "warranties": warranties,
+        "training": training,
+        "exclusions": exclusions,
+        "audience_profiles": audience_profiles,
+        "destination_name": destination_name,
+        "classification": classification,
+        "audience": audience,
+        "purpose": purpose,
+    }
 
 
 def _hex64(value: str, code: str = "SHA256_INVALID") -> str:
@@ -460,7 +503,7 @@ class ConstructionService:
         stable_document_id = stable_document_id or new_uuid()
         with self.database.session() as session:
             asset = session.get(AssetRefRow, asset_id)
-            if asset and (asset.tenant_id != tenant_id or asset.project_id != project_id or asset.sha256 != digest or asset.tombstoned_at):
+            if not asset or asset.tenant_id != tenant_id or asset.project_id != project_id or asset.sha256 != digest or asset.tombstoned_at:
                 raise ValidationError("DOCUMENT_ASSET_SCOPE", "document asset scope or digest is invalid")
             if supersedes_revision_id:
                 prior = self._scoped(session, ConstructionDocumentRevisionRow, supersedes_revision_id, tenant_id, project_id, "document_revision")
@@ -534,7 +577,7 @@ class ConstructionService:
 
     def transition_issue(self, issue_id: str, *, tenant_id: str, project_id: str, actor_id: str,
                          target_state: str, evidence: list[dict[str, Any]], note: str,
-                         verifier_id: str | None = None, residual_limitations: list[str] | None = None) -> dict[str, Any]:
+                         residual_limitations: list[str] | None = None) -> dict[str, Any]:
         if target_state not in ISSUE_STATES:
             raise ValidationError("ISSUE_STATE_INVALID", "unsupported issue state")
         transitions = {
@@ -553,7 +596,8 @@ class ConstructionService:
                 raise ConflictError("ISSUE_TRANSITION_INVALID", f"cannot transition {row.status} to {target_state}")
             if target_state in {"corrected", "retest_required", "verified_closed"} and not evidence:
                 raise ValidationError("ISSUE_TRANSITION_EVIDENCE", "correction, retest, and closure require evidence")
-            if target_state == "verified_closed" and (not verifier_id or verifier_id == row.reporter_id):
+            verifier_id = actor_id if target_state == "verified_closed" else None
+            if target_state == "verified_closed" and actor_id == row.reporter_id:
                 raise ValidationError("ISSUE_INDEPENDENT_VERIFIER", "verified closure requires an independent verifier")
             history = list(row.history_json)
             history.append({"state": target_state, "at": db_now().isoformat(), "actor_id": actor_id,
@@ -624,7 +668,7 @@ class ConstructionService:
 
     # Interchange, reports and handoff ----------------------------------------------------------
     def record_interchange(self, *, tenant_id: str, project_id: str, format: str, direction: str,
-                           source_asset_id: str | None, source_sha256: str, schema_version: str, units: str,
+                           source_asset_id: str, source_sha256: str, schema_version: str, units: str,
                            crs: dict[str, Any], owner_history: dict[str, Any], global_ids: list[str],
                            classifications: dict[str, Any], properties: dict[str, Any], relationships: list[dict[str, Any]],
                            geometry_conversion_report: dict[str, Any], unsupported_constructs: list[dict[str, Any]],
@@ -648,10 +692,17 @@ class ConstructionService:
             prior = self._idempotent(session, ConstructionInterchangeRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior:
                 return self._interchange_result(prior, True)
-            if source_asset_id:
-                asset = session.get(AssetRefRow, source_asset_id)
-                if asset and (asset.tenant_id != tenant_id or asset.project_id != project_id or asset.sha256 != digest):
-                    raise ValidationError("INTERCHANGE_ASSET_SCOPE", "interchange source asset is out of scope or mismatched")
+            if not source_asset_id:
+                raise ValidationError("INTERCHANGE_ASSET_REQUIRED", "interchange records require an immutable source asset")
+            asset = session.get(AssetRefRow, source_asset_id)
+            if (
+                not asset
+                or asset.tenant_id != tenant_id
+                or asset.project_id != project_id
+                or asset.sha256 != digest
+                or asset.tombstoned_at is not None
+            ):
+                raise ValidationError("INTERCHANGE_ASSET_SCOPE", "interchange source asset is out of scope or mismatched")
             row = ConstructionInterchangeRow(interchange_id=new_uuid(), tenant_id=tenant_id, project_id=project_id,
                                               idempotency_key=idempotency_key, request_hash=request_hash,
                                               format=format_name, direction=direction, source_asset_id=source_asset_id,
@@ -748,18 +799,164 @@ class ConstructionService:
                 "warning": technical["warnings"][0], "technical_report_hash": technical["report_hash"]}
         return {**body, "report_hash": canonical_sha256(body)}
 
+    def approve_restricted_export(
+        self,
+        *,
+        tenant_id: str,
+        project_id: str,
+        scope: dict[str, Any],
+        accepted_scene_commit_id: str | None,
+        warranties: list[dict[str, Any]],
+        training: list[dict[str, Any]],
+        exclusions: list[str],
+        audience_profiles: dict[str, Any],
+        destination_name: str,
+        classification: str,
+        audience: str,
+        purpose: str,
+        approver_id: str,
+        expires_at: datetime,
+    ) -> dict[str, Any]:
+        if scope.get("include_restricted_annex") is not True:
+            raise ValidationError(
+                "RESTRICTED_EXPORT_SCOPE_REQUIRED",
+                "restricted-export approval requires an explicit restricted annex scope",
+            )
+        if not classification.strip() or not audience.strip() or not purpose.strip():
+            raise ValidationError(
+                "RESTRICTED_EXPORT_CONTEXT_REQUIRED",
+                "classification, audience, and purpose are required",
+            )
+        normalized_expiry = expires_at if expires_at.tzinfo else expires_at.replace(tzinfo=UTC)
+        if normalized_expiry <= db_now():
+            raise ValidationError("RESTRICTED_EXPORT_APPROVAL_EXPIRED", "approval expiry must be in the future")
+        request = _handoff_request_payload(
+            scope=scope,
+            accepted_scene_commit_id=accepted_scene_commit_id,
+            warranties=warranties,
+            training=training,
+            exclusions=exclusions,
+            audience_profiles=audience_profiles,
+            destination_name=destination_name,
+            classification=classification,
+            audience=audience,
+            purpose=purpose,
+        )
+        request_hash = canonical_sha256(request)
+        approval_body = {
+            "tenant_id": tenant_id,
+            "project_id": project_id,
+            "request_hash": request_hash,
+            "scope": scope,
+            "classification": classification,
+            "audience": audience,
+            "purpose": purpose,
+            "approver_id": approver_id,
+            "expires_at": normalized_expiry.isoformat(),
+        }
+        approval_hash = canonical_sha256(approval_body)
+        with self.database.session() as session:
+            if accepted_scene_commit_id:
+                self._scoped_commit(session, accepted_scene_commit_id, tenant_id, project_id)
+            existing = session.scalar(select(ConstructionRestrictedExportApprovalRow).where(
+                ConstructionRestrictedExportApprovalRow.tenant_id == tenant_id,
+                ConstructionRestrictedExportApprovalRow.project_id == project_id,
+                ConstructionRestrictedExportApprovalRow.request_hash == request_hash,
+                ConstructionRestrictedExportApprovalRow.approver_id == approver_id,
+            ))
+            if existing:
+                if existing.approval_hash != approval_hash:
+                    raise ConflictError(
+                        "RESTRICTED_EXPORT_APPROVAL_CONFLICT",
+                        "an approval already exists for this request with different immutable context",
+                    )
+                return self._restricted_export_approval_result(existing, True)
+            row = ConstructionRestrictedExportApprovalRow(
+                approval_id=new_uuid(),
+                tenant_id=tenant_id,
+                project_id=project_id,
+                request_hash=request_hash,
+                scope_json=scope,
+                classification=classification,
+                audience=audience,
+                purpose=purpose,
+                approver_id=approver_id,
+                expires_at=normalized_expiry,
+                approval_hash=approval_hash,
+            )
+            session.add(row)
+            self._record(
+                session,
+                tenant_id,
+                project_id,
+                approver_id,
+                "construction:restricted_export_approve",
+                "construction_restricted_export_approval",
+                row.approval_id,
+                {
+                    "request_hash": request_hash,
+                    "classification": classification,
+                    "audience": audience,
+                    "purpose": purpose,
+                    "expires_at": normalized_expiry.isoformat(),
+                },
+                "construction.restricted_export.approved",
+                "construction_restricted_export_approval",
+            )
+            return self._restricted_export_approval_result(row, False)
+
     def create_owner_handoff(self, *, tenant_id: str, project_id: str, destination: Path, scope: dict[str, Any],
                              accepted_scene_commit_id: str | None, warranties: list[dict[str, Any]],
                              training: list[dict[str, Any]], exclusions: list[str], audience_profiles: dict[str, Any],
-                             actor_id: str, idempotency_key: str) -> dict[str, Any]:
-        request = {"scope": scope, "accepted_scene_commit_id": accepted_scene_commit_id, "warranties": warranties,
-                   "training": training, "exclusions": exclusions, "audience_profiles": audience_profiles,
-                   "destination_name": destination.name}
+                             actor_id: str, idempotency_key: str,
+                             classification: str = "internal", audience: str = "owner",
+                             purpose: str = "owner_handoff",
+                             restricted_export_approval_id: str | None = None) -> dict[str, Any]:
+        if audience_profiles.get("restricted_owner_export_approved") is True:
+            raise ValidationError(
+                "RESTRICTED_EXPORT_CALLER_ASSERTION_PROHIBITED",
+                "caller-controlled restricted-export approval flags are not authorization",
+            )
+        request = _handoff_request_payload(
+            scope=scope,
+            accepted_scene_commit_id=accepted_scene_commit_id,
+            warranties=warranties,
+            training=training,
+            exclusions=exclusions,
+            audience_profiles=audience_profiles,
+            destination_name=destination.name,
+            classification=classification,
+            audience=audience,
+            purpose=purpose,
+        )
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
             prior = self._idempotent(session, ConstructionHandoffRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior and prior.status == "verified" and prior.package_path and Path(prior.package_path).is_file():
+                replay_validation = self.verify_owner_handoff(Path(prior.package_path))
+                retained_zip_hash = str((prior.validation_json or {}).get("zip_sha256") or "")
+                if (
+                    not replay_validation["valid"]
+                    or replay_validation["root_hash"] != prior.root_hash
+                    or not retained_zip_hash
+                    or replay_validation["zip_sha256"] != retained_zip_hash
+                ):
+                    raise ConflictError(
+                        "HANDOFF_REPLAY_PACKAGE_CHANGED",
+                        "the retained handoff package no longer matches its verified identity",
+                        {
+                            "handoff_id": prior.handoff_id,
+                            "retained_root_hash": prior.root_hash,
+                            "current_root_hash": replay_validation.get("root_hash"),
+                        },
+                    )
                 return self._handoff_result(prior, True)
+            if prior and prior.status == "verified":
+                raise ConflictError(
+                    "HANDOFF_REPLAY_PACKAGE_MISSING",
+                    "the retained verified handoff package is missing",
+                    {"handoff_id": prior.handoff_id},
+                )
             if prior:
                 row = prior
             else:
@@ -775,10 +972,44 @@ class ConstructionService:
                                               limitations_json=[], checksums_json={}, root_hash="", package_path=None,
                                               status="building", validation_json={}, created_by=actor_id)
                 session.add(row)
-            include_restricted = bool(
-                scope.get("include_restricted_annex") is True
-                and audience_profiles.get("restricted_owner_export_approved") is True
-            )
+            include_restricted = scope.get("include_restricted_annex") is True
+            if include_restricted:
+                if not restricted_export_approval_id:
+                    raise AuthorizationError(
+                        "RESTRICTED_EXPORT_APPROVAL_REQUIRED",
+                        "restricted owner export requires a current server-side approval record",
+                    )
+                approval = self._scoped(
+                    session,
+                    ConstructionRestrictedExportApprovalRow,
+                    restricted_export_approval_id,
+                    tenant_id,
+                    project_id,
+                    "restricted_export_approval",
+                )
+                approval_expiry = approval.expires_at if approval.expires_at.tzinfo else approval.expires_at.replace(tzinfo=UTC)
+                mismatch = (
+                    approval.request_hash != request_hash
+                    or canonical_sha256(approval.scope_json) != canonical_sha256(scope)
+                    or approval.classification != classification
+                    or approval.audience != audience
+                    or approval.purpose != purpose
+                )
+                if mismatch:
+                    raise AuthorizationError(
+                        "RESTRICTED_EXPORT_APPROVAL_MISMATCH",
+                        "restricted-export approval does not match this handoff request",
+                    )
+                if approval_expiry <= db_now():
+                    raise AuthorizationError(
+                        "RESTRICTED_EXPORT_APPROVAL_EXPIRED",
+                        "restricted-export approval has expired",
+                    )
+                if approval.approver_id == actor_id:
+                    raise AuthorizationError(
+                        "RESTRICTED_EXPORT_SEPARATION_OF_DUTIES",
+                        "the handoff requester cannot approve their own restricted export",
+                    )
             snapshot = self._handoff_snapshot(
                 session, tenant_id, project_id, accepted_scene_commit_id,
                 scope=scope, warranties=warranties, training=training, exclusions=exclusions,
@@ -834,22 +1065,18 @@ class ConstructionService:
             raise ValidationError("HANDOFF_MISSING", "handoff package does not exist")
         with zipfile.ZipFile(path) as archive:
             names = validate_zip_members(archive.infolist(), code_prefix="HANDOFF")
-            required = {"manifest.json", "checksums.json", "viewer/index.html", "data/inventory.json"}
-            missing = sorted(required - set(names))
-            if missing:
-                raise ValidationError("HANDOFF_INCOMPLETE", "handoff package is incomplete", {"missing": missing})
-            checks = json.loads(archive.read("checksums.json"))
-            findings = []
-            for name, expected in checks.get("files", {}).items():
-                if name not in names:
-                    findings.append({"path": name, "reason": "missing"})
-                elif sha256_bytes(archive.read(name)) != expected:
-                    findings.append({"path": name, "reason": "hash_mismatch"})
-            actual_root = merkle_root(checks.get("files", {}).items())
-            if actual_root != checks.get("root_hash"):
-                findings.append({"path": "checksums.json", "reason": "root_mismatch"})
-        return {"valid": not findings, "findings": findings, "root_hash": actual_root,
-                "zip_sha256": sha256_file(path), "member_count": len(names)}
+            validation = verify_checksum_manifest(
+                archive,
+                names,
+                allowed_members=OWNER_HANDOFF_MEMBERS,
+                required_members=OWNER_HANDOFF_MEMBERS,
+                code_prefix="HANDOFF",
+            )
+        return {
+            **validation,
+            "zip_sha256": sha256_file(path),
+            "member_count": len(names),
+        }
 
     # Legacy adapters ---------------------------------------------------------------------------
     def attach_document(self, *, tenant_id: str, project_id: str, document_type: str, asset_id: str,
@@ -883,13 +1110,23 @@ class ConstructionService:
                                                evidence_asset_ids_json=evidence_asset_ids, created_by=actor_id))
         return identifier
 
-    def correct_and_retest(self, deficiency_id: str, *, correction: str, correction_asset_ids: list[str],
-                           test_result: str, test_asset_ids: list[str], tester_id: str) -> dict[str, Any]:
+    def correct_and_retest(
+        self,
+        deficiency_id: str,
+        *,
+        tenant_id: str,
+        project_id: str,
+        correction: str,
+        correction_asset_ids: list[str],
+        test_result: str,
+        test_asset_ids: list[str],
+        tester_id: str,
+    ) -> dict[str, Any]:
         if test_result not in {"pass", "fail"} or not correction_asset_ids or not test_asset_ids:
             raise ValidationError("CORRECTION_RETEST_EVIDENCE", "valid correction and retest evidence are required")
         with self.database.session() as session:
-            row = session.get(ConstructionRecordRow, deficiency_id)
-            if not row or row.record_type != "deficiency":
+            row = self._scoped(session, ConstructionRecordRow, deficiency_id, tenant_id, project_id, "deficiency")
+            if row.record_type != "deficiency":
                 raise NotFoundError("deficiency", deficiency_id)
             if row.state == "closed":
                 raise ConflictError("DEFICIENCY_ALREADY_CLOSED", "closed deficiency cannot be changed without a new record")
@@ -1066,6 +1303,23 @@ class ConstructionService:
     def _handoff_result(row: ConstructionHandoffRow, replay: bool) -> dict[str, Any]:
         return {"handoff_id": row.handoff_id, "status": row.status, "package_path": row.package_path,
                 "root_hash": row.root_hash, "validation": row.validation_json, "idempotent_replay": replay}
+
+    @staticmethod
+    def _restricted_export_approval_result(
+        row: ConstructionRestrictedExportApprovalRow,
+        replay: bool,
+    ) -> dict[str, Any]:
+        return {
+            "approval_id": row.approval_id,
+            "request_hash": row.request_hash,
+            "classification": row.classification,
+            "audience": row.audience,
+            "purpose": row.purpose,
+            "approver_id": row.approver_id,
+            "expires_at": row.expires_at.isoformat(),
+            "approval_hash": row.approval_hash,
+            "idempotent_replay": replay,
+        }
 
     @staticmethod
     def _document_body(row: ConstructionDocumentRevisionRow) -> dict[str, Any]:

@@ -11,8 +11,11 @@ implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
 - src/sip/liveforever.py
 - src/sip/policy.py
+- src/sip/api.py
+- src/sip/database.py
 - src/sip/search.py
 - src/sip/exporting.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience
 retained_evidence:

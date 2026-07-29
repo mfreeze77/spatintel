@@ -187,6 +187,7 @@
         "construction.interchange.recorded",
         "construction.issue.created",
         "construction.issue.transitioned",
+        "construction.restricted_export.approved",
         "construction.survey.planned",
         "construction.survey.reviewed",
         "construction.system_record.created"
@@ -204,11 +205,6 @@
         },
         {
           "method": "POST",
-          "operation_id": "retest_deficiency",
-          "path": "/v1/construction/deficiencies/{deficiency_id}/retest"
-        },
-        {
-          "method": "POST",
           "operation_id": "record_construction_commissioning",
           "path": "/v1/projects/{project_id}/construction/commissioning"
         },
@@ -216,6 +212,11 @@
           "method": "POST",
           "operation_id": "create_deficiency",
           "path": "/v1/projects/{project_id}/construction/deficiencies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "retest_project_deficiency",
+          "path": "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest"
         },
         {
           "method": "POST",
@@ -271,6 +272,11 @@
           "method": "GET",
           "operation_id": "get_construction_report",
           "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "approve_construction_restricted_export",
+          "path": "/v1/projects/{project_id}/construction/restricted-export-approvals"
         },
         {
           "method": "GET",
@@ -377,16 +383,6 @@
         },
         {
           "method": "POST",
-          "operation_id": "retest_deficiency",
-          "path": "/v1/construction/deficiencies/{deficiency_id}/retest"
-        },
-        {
-          "method": "POST",
-          "operation_id": "revoke_consent",
-          "path": "/v1/liveforever/consents/{grant_id}/revoke"
-        },
-        {
-          "method": "POST",
           "operation_id": "create_comment",
           "path": "/v1/projects/{project_id}/comments"
         },
@@ -399,6 +395,11 @@
           "method": "POST",
           "operation_id": "create_deficiency",
           "path": "/v1/projects/{project_id}/construction/deficiencies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "retest_project_deficiency",
+          "path": "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest"
         },
         {
           "method": "POST",
@@ -456,6 +457,11 @@
           "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
         },
         {
+          "method": "POST",
+          "operation_id": "approve_construction_restricted_export",
+          "path": "/v1/projects/{project_id}/construction/restricted-export-approvals"
+        },
+        {
           "method": "GET",
           "operation_id": "search_construction_facility",
           "path": "/v1/projects/{project_id}/construction/search"
@@ -499,6 +505,11 @@
           "method": "POST",
           "operation_id": "grant_consent",
           "path": "/v1/projects/{project_id}/liveforever/consents"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_project_consent",
+          "path": "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke"
         },
         {
           "method": "POST",
@@ -956,11 +967,6 @@
         },
         {
           "method": "POST",
-          "operation_id": "revoke_consent",
-          "path": "/v1/liveforever/consents/{grant_id}/revoke"
-        },
-        {
-          "method": "POST",
           "operation_id": "create_conflicting_recollections",
           "path": "/v1/projects/{project_id}/liveforever/conflicting-recollections"
         },
@@ -968,6 +974,11 @@
           "method": "POST",
           "operation_id": "grant_consent",
           "path": "/v1/projects/{project_id}/liveforever/consents"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_project_consent",
+          "path": "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke"
         },
         {
           "method": "POST",
@@ -1043,6 +1054,11 @@
           "method": "POST",
           "operation_id": "create_memory_record",
           "path": "/v1/projects/{project_id}/liveforever/records"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revise_liveforever_record",
+          "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions"
         },
         {
           "method": "POST",

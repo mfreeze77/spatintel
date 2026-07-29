@@ -20,16 +20,6 @@
     },
     {
       "method": "POST",
-      "operation_id": "retest_deficiency",
-      "path": "/v1/construction/deficiencies/{deficiency_id}/retest"
-    },
-    {
-      "method": "POST",
-      "operation_id": "revoke_consent",
-      "path": "/v1/liveforever/consents/{grant_id}/revoke"
-    },
-    {
-      "method": "POST",
       "operation_id": "create_comment",
       "path": "/v1/projects/{project_id}/comments"
     },
@@ -42,6 +32,11 @@
       "method": "POST",
       "operation_id": "create_deficiency",
       "path": "/v1/projects/{project_id}/construction/deficiencies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "retest_project_deficiency",
+      "path": "/v1/projects/{project_id}/construction/deficiencies/{deficiency_id}/retest"
     },
     {
       "method": "POST",
@@ -99,6 +94,11 @@
       "path": "/v1/projects/{project_id}/construction/reports/{report_type}"
     },
     {
+      "method": "POST",
+      "operation_id": "approve_construction_restricted_export",
+      "path": "/v1/projects/{project_id}/construction/restricted-export-approvals"
+    },
+    {
       "method": "GET",
       "operation_id": "search_construction_facility",
       "path": "/v1/projects/{project_id}/construction/search"
@@ -142,6 +142,11 @@
       "method": "POST",
       "operation_id": "grant_consent",
       "path": "/v1/projects/{project_id}/liveforever/consents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_project_consent",
+      "path": "/v1/projects/{project_id}/liveforever/consents/{grant_id}/revoke"
     },
     {
       "method": "POST",

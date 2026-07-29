@@ -23,3 +23,7 @@ Authority transitions require retained evidence and cannot enable a prohibited p
 ## Privacy-safe demonstrations
 
 Progress 06 uses synthetic people, places, media, and consent. It does not use private-family data, real voices, likeness cloning, or external providers. Any later human-subject pilot requires documented consent, privacy and legal review, safe exit, quiet mode, accessibility review, incident response, and explicit data-retention and deletion procedures.
+
+## Progress 06-R1 scoped revocation
+
+Consent revocation requires the project-scoped route and an authenticated principal authorized for that tenant and project. The service resolves a grant by the tuple `(tenant_id, project_id, grant_id)` rather than by primary key alone. The legacy unscoped endpoint always fails closed and is excluded from the generated public OpenAPI contract.

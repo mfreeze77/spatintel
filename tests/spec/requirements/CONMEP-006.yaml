@@ -12,8 +12,10 @@ implementation_files:
 - src/sip/construction.py
 - src/sip/api.py
 - src/sip/database.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/user/CONSTRUCTION.md
 automated_test_ids:
+- tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval
 - tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security
 retained_evidence:
 - build/evidence/demos/construction.json

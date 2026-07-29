@@ -428,7 +428,7 @@ def test_representation_publication_rechecks_inherited_policy_and_consent(bootst
         )
     assert widened.value.code == "REPRESENTATION_AUDIENCE_WIDENING_DENIED"
 
-    context.liveforever.revoke_consent(grant_id, actor_id=actor, reason="publication policy fixture")
+    context.liveforever.revoke_consent(grant_id, tenant_id=tenant_id, project_id=project_id, actor_id=actor, reason="publication policy fixture")
     with pytest.raises(AuthorizationError) as revoked:
         context.publisher.publish(
             governed,

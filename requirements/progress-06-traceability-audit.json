@@ -124,8 +124,20 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
         {
           "declared_requirement_ids": [
             "CONAC-003",
@@ -318,7 +330,7 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -365,6 +377,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATBIM-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
         }
       ],
       "requirement_id": "CONDOC-001",
@@ -719,7 +741,7 @@
       "epic_ids": [
         "CON-004"
       ],
-      "linked_test_count": 3,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -783,6 +805,18 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
         }
       ],
       "requirement_id": "CONHAND-001",
@@ -880,7 +914,7 @@
       "epic_ids": [
         "CON-004"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -927,6 +961,18 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
         }
       ],
       "requirement_id": "CONHAND-004",
@@ -953,7 +999,7 @@
       "epic_ids": [
         "CON-004"
       ],
-      "linked_test_count": 4,
+      "linked_test_count": 10,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -999,6 +1045,59 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_owner_handoff_replay_revalidates_current_package_bytes"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed"
         },
         {
           "declared_requirement_ids": [
@@ -1764,8 +1863,20 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
         {
           "declared_requirement_ids": [
             "CONAC-003",
@@ -2152,7 +2263,7 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -2188,6 +2299,26 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
         }
       ],
       "requirement_id": "CONQC-003",
@@ -2201,7 +2332,7 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -2237,6 +2368,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-004"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent"
         }
       ],
       "requirement_id": "CONQC-004",
@@ -2263,8 +2404,28 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 3,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-006",
+            "LIFCONS-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-003",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        },
         {
           "declared_requirement_ids": [
             "CONAC-003",
@@ -2622,7 +2783,7 @@
       "epic_ids": [
         "CON-004"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -2651,6 +2812,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATBIM-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
         }
       ],
       "requirement_id": "DATBIM-001",
@@ -2845,7 +3016,7 @@
       "epic_ids": [
         "LIF-002"
       ],
-      "linked_test_count": 5,
+      "linked_test_count": 7,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -2865,6 +3036,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONQC-006",
+            "LIFCONS-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations"
         },
         {
           "declared_requirement_ids": [
@@ -2913,6 +3094,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "LIFCONS-001",
+            "LIFCONS-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
         },
         {
           "declared_requirement_ids": [
@@ -3052,7 +3243,7 @@
       "epic_ids": [
         "LIF-002"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -3076,6 +3267,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "LIFCONS-001",
+            "LIFCONS-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped"
         }
       ],
       "requirement_id": "LIFCONS-005",
@@ -5040,7 +5241,7 @@
       "epic_ids": [
         "LIF-003"
       ],
-      "linked_test_count": 5,
+      "linked_test_count": 11,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -5093,6 +5294,59 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed"
         },
         {
           "declared_requirement_ids": [

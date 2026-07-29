@@ -14,16 +14,19 @@ implementation_files:
 - src/sip/api.py
 - src/sip/database.py
 - migrations/versions/0014_vertical_mvp.py
+- migrations/versions/0015_progress06_r1_security_controls.py
 - docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md
 automated_test_ids:
 - tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration
 - tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff
+- tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent
 retained_evidence:
 - build/evidence/demos/construction.json
 - build/reports/test-matrix.json
 - build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

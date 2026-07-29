@@ -39,6 +39,17 @@
     "source_root_sha256": "3dfc90422534f6b914f31043dc91a4c5b0cc4dc3c21b07ceab63ece0faa66c4d",
     "tree": "8bbf18b0bc7e688488c23ee1b9582f89c4e70f37"
   },
+  "accepted_progress_06_checkpoint": {
+    "branch": "progress-06-vertical-mvps",
+    "checkpoint_id": "sip-v1.1.0-progress-06",
+    "commit": "383d4bde2518edabe92337df570336a6ecc0d411",
+    "outer_delivery_zip_sha256": "7c3be32e48c1f0b38371ef0b4be766043a37aea9c56f719c0208df2bb938cc1b",
+    "parent": "15052211e768b3e87c650a81b4fa1aff252be412",
+    "project_zip_sha256": "cfe22e479078ddbb2db3524a650df87fc738256d388a60bc605b07a829f5df17",
+    "relationship": "Accepted Progress 06 is the exact source-history base for the narrow Progress 06-R1 stop-line remediation.",
+    "source_root_sha256": "bcb2a90d04a44f48ddbd2ecafcd7eba54b083b38f79674131ccdc780696def17",
+    "tree": "28babaee5ffb23ed728d4db8aef6cdf2dd898e86"
+  },
   "import_mapping": {
     "commit": "36e9c44d21a9c47d85971ee945daec8fc98e26d6",
     "relationship": "The import commit reproduces all 2,419 files of the predecessor Progress 04 ZIP byte-for-byte. The predecessor Git object originally claimed by Progress 04 was unavailable, so continuity is represented explicitly as an archive-to-import-commit mapping rather than a false parent relationship.",

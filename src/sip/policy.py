@@ -16,6 +16,7 @@ from .temporal import db_now
 ROLE_ACTIONS: dict[str, set[str]] = {
     "tenant_admin": {"*"},
     "project_admin": {"project:*", "asset:*", "scene:*", "construction:*", "liveforever:*", "representation:*", "export:*"},
+    "restricted_export_approver": {"construction:restricted_export", "construction:read", "asset:read"},
     "capture_operator": {"asset:create", "capture:*", "scene:read"},
     "reviewer": {"asset:read", "scene:read", "scene:review", "measurement:review", "construction:read", "liveforever:read"},
     "publisher": {"representation:publish", "scene:commit", "scene:read", "asset:read"},
@@ -23,6 +24,11 @@ ROLE_ACTIONS: dict[str, set[str]] = {
     "viewer": {"asset:read", "scene:read", "construction:read", "liveforever:read"},
     "service_worker": {"operation:lease", "operation:checkpoint", "operation:complete", "asset:read", "asset:create"},
 }
+
+# Namespace wildcards are intentionally insufficient for these higher-order
+# approvals. They require an exact grant (or tenant-wide superuser authority)
+# so a routine project administrator cannot self-authorize a restricted export.
+EXACT_GRANT_ACTIONS = {"construction:restricted_export"}
 
 CLASSIFICATION_ORDER = {
     Classification.PUBLIC.value: 0,
@@ -53,6 +59,8 @@ class PolicyService:
         grants = ROLE_ACTIONS.get(role, set())
         if "*" in grants or action in grants:
             return True
+        if action in EXACT_GRANT_ACTIONS:
+            return False
         namespace = action.split(":", 1)[0] + ":*"
         return namespace in grants
 

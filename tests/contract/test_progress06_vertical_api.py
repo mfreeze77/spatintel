@@ -202,7 +202,7 @@ def test_progress06_construction_api_round_trip_read_search_and_handoff(tmp_path
     for actor, target, payload in [
         ("responsible-tech", "corrected", {"evidence": [{"asset_id": evidence.asset_id, "kind": "correction"}], "note": "Label installed"}),
         ("commissioning-tech", "retest_required", {"evidence": [{"asset_id": evidence.asset_id, "kind": "retest-plan"}], "note": "Retest scheduled"}),
-        ("independent-verifier", "verified_closed", {"evidence": [{"asset_id": evidence.asset_id, "kind": "passed-retest"}], "note": "Retest passed", "verifier_id": "independent-verifier", "residual_limitations": []}),
+        ("independent-verifier", "verified_closed", {"evidence": [{"asset_id": evidence.asset_id, "kind": "passed-retest"}], "note": "Retest passed", "residual_limitations": []}),
     ]:
         transitioned = client.post(
             f"/v1/projects/{project}/construction/issues/{issue_id}/transition",
@@ -593,7 +593,7 @@ def test_progress06_liveforever_api_memory_room_consent_and_preservation(tmp_pat
     assert voice.json()["error"]["code"] == "GENERATED_PRESENCE_DISABLED"
 
     revoked = client.post(
-        f"/v1/liveforever/consents/{grant_id}/revoke",
+        f"/v1/projects/{project}/liveforever/consents/{grant_id}/revoke",
         headers=admin,
         json={"reason": "synthetic participant withdrew consent"},
     )

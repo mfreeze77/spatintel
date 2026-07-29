@@ -114,6 +114,7 @@ spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress05_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
 
 traceability-evidence:
@@ -121,6 +122,7 @@ traceability-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress05_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py

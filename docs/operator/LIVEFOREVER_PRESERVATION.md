@@ -29,3 +29,9 @@ Voice, likeness, dialogue, first-person simulation, and autonomous persona remai
 ## Verification
 
 Use `make demo-liveforever`, `make export-demo`, and `make restore-demo` in the deterministic reference profile. External review is still required for privacy, legal, accessibility, family governance, long-term format migration, independent repository custody, and human-subject use.
+
+## Progress 06-R1 package identity
+
+The preservation verifier uses an exact allowlist and complete SHA-256 manifest. Every package member other than `checksums.json` must be covered; required members must be present; unexpected, unchecked, duplicate, malformed, unsafe, or altered content fails closed. The root is computed from the complete declared member set.
+
+Idempotent replay is a new verification, not a cached status read. The service reopens the current file, verifies all members, and compares its ZIP SHA-256 and Merkle root to the retained release record. Changed or missing bytes produce a stable conflict.
