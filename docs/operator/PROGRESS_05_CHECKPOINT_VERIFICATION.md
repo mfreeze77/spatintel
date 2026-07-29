@@ -1,13 +1,13 @@
-# Progress 05-R1 checkpoint verification
+# Progress 05-R2 checkpoint verification
 
-Progress 05-R1 must be built only after committing source and running acceptance from a clean detached worktree. Production promotion remains fail-closed.
+Progress 05-R2 must be built only after committing source and running acceptance from a clean detached worktree. Production promotion remains fail-closed.
 
 ## Verify the project ZIP
 
 ```bash
 PYTHONPATH=src:. python tools/verify_progress05_checkpoint.py \
-  Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip \
-  --output progress-05-r1.verification.json
+  Spatial-Intelligence-Platform-v1.1.0-progress-05-r2.zip \
+  --output progress-05-r2.verification.json
 ```
 
 The verifier rejects unsafe paths, symlinks, duplicate members, file or mode drift, aggregate-root drift, specification drift, source/Git mismatch, stale evidence, contradictory status documents, unbound test results, a missing predecessor mapping, an incomplete milestone partition, or any production-ready claim.
@@ -18,9 +18,9 @@ The branch must be named explicitly because a bundle is not required to advertis
 
 ```bash
 git clone \
-  -b progress-05-r1-remediation \
-  artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-<commit>.bundle \
-  sip-progress-05-r1
+  -b progress-05-r2-remediation \
+  artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-r2-<commit>.bundle \
+  sip-progress-05-r2
 ```
 
 ## Evidence interpretation

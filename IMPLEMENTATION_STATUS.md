@@ -3,8 +3,8 @@
 This repository remains under active implementation. The status below is generated from the authoritative ledger; it is not a production-complete claim.
 
 - Normative requirements: **1,028**
-- Verified: **91**
-- Implemented but unverified: **127**
+- Verified: **90**
+- Implemented but unverified: **128**
 - In progress: **22**
 - Not started: **785**
 - External validation required: **3**

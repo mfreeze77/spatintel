@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently verify a SIP Progress 05-R1 checkpoint ZIP and its source/evidence provenance."""
+"""Independently verify a SIP Progress 05-R2 checkpoint ZIP and its source/evidence provenance."""
 from __future__ import annotations
 
 import argparse
@@ -45,6 +45,10 @@ EXPECTED_ACCEPTED_P05_COMMIT = "a5c866999df88b32e53ecc87d6917320f2ffe5c8"
 EXPECTED_ACCEPTED_P05_ZIP_SHA256 = "87b7760b255da3c30d94e27673063dc540724b01ccafbccd552dae708d513f0e"
 EXPECTED_ACCEPTED_P05_OUTER_SHA256 = "592bc4c1490a3b647a783b65d314f48cbcb17f08b0ec602450d1b030dcb19f80"
 
+EXPECTED_ACCEPTED_P05_R1_COMMIT = "593d8ac16930387d26fa9ed700a04b44b46e2006"
+EXPECTED_ACCEPTED_P05_R1_ZIP_SHA256 = "0885de42e873ad96d39ca54493c0caad07e4d118d11a239d4fb866d82876e068"
+EXPECTED_ACCEPTED_P05_R1_OUTER_SHA256 = "c88a31119d41a0992fc94f6c48a3555265dee005163a71622a8df919b55f3161"
+
 
 def _verify_bound_runtime_report(
     root: Path,
@@ -83,6 +87,7 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
     mapping = record.get("import_mapping") if isinstance(record.get("import_mapping"), dict) else {}
     accepted = record.get("accepted_checkpoint") if isinstance(record.get("accepted_checkpoint"), dict) else {}
     accepted_p05 = record.get("accepted_progress_05_checkpoint") if isinstance(record.get("accepted_progress_05_checkpoint"), dict) else {}
+    accepted_p05_r1 = record.get("accepted_progress_05_r1_checkpoint") if isinstance(record.get("accepted_progress_05_r1_checkpoint"), dict) else {}
     checks = [
         (predecessor.get("zip_sha256"), EXPECTED_PREDECESSOR_ZIP_SHA256, "predecessor ZIP hash"),
         (mapping.get("commit"), EXPECTED_IMPORT_COMMIT, "import commit"),
@@ -91,6 +96,9 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
         (accepted_p05.get("commit"), EXPECTED_ACCEPTED_P05_COMMIT, "accepted Progress 05 commit"),
         (accepted_p05.get("project_zip_sha256"), EXPECTED_ACCEPTED_P05_ZIP_SHA256, "accepted Progress 05 ZIP hash"),
         (accepted_p05.get("outer_delivery_zip_sha256"), EXPECTED_ACCEPTED_P05_OUTER_SHA256, "accepted Progress 05 outer ZIP hash"),
+        (accepted_p05_r1.get("commit"), EXPECTED_ACCEPTED_P05_R1_COMMIT, "accepted Progress 05-R1 commit"),
+        (accepted_p05_r1.get("project_zip_sha256"), EXPECTED_ACCEPTED_P05_R1_ZIP_SHA256, "accepted Progress 05-R1 ZIP hash"),
+        (accepted_p05_r1.get("outer_delivery_zip_sha256"), EXPECTED_ACCEPTED_P05_R1_OUTER_SHA256, "accepted Progress 05-R1 outer ZIP hash"),
     ]
     for actual, expected, label in checks:
         if actual != expected:
@@ -98,7 +106,7 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
 
 
 def _verify_renderer_remediation(root: Path, verification: Verification) -> None:
-    """Verify renderer controls by behavior-bearing expressions, not local variable names."""
+    """Verify the five-role renderer implementation without upgrading it to viewer-integration evidence."""
 
     viewer_relative = "source/apps/web/components/HybridViewer.tsx"
     canvas_relative = "source/apps/web/components/HybridCanvas.tsx"
@@ -136,8 +144,44 @@ def _verify_renderer_remediation(root: Path, verification: Verification) -> None
         verification.fail("HYBRID_RUNTIME_R1_CONTROL", "renderer directives do not include the evidence role", runtime_relative)
 
 
+def _verify_concurrent_idempotency_remediation(root: Path, verification: Verification) -> None:
+    service_relative = "source/src/sip/scene_runtime.py"
+    test_relative = "source/tests/integration/test_scene_runtime_review.py"
+    service = root / service_relative
+    tests = root / test_relative
+    service_text = service.read_text(encoding="utf-8") if service.is_file() else ""
+    test_text = tests.read_text(encoding="utf-8") if tests.is_file() else ""
+    for required in (
+        "except IntegrityError as exc",
+        "_is_workflow_event_uniqueness_conflict",
+        "_resolve_concurrent_change_application",
+        "CHANGE_APPLICATION_CONCURRENT_STATE_CONFLICT",
+        '"idempotent_replay": True',
+        'OutboxEventRow.event_type == "scene.change.applied"',
+        'OutboxEventRow.event_type == "scene.committed"',
+        'AuditEventRow.action == "semantic_change:apply"',
+        'AuditEventRow.action == "scene:commit"',
+        'conflict("branch_head_mismatch"',
+    ):
+        if required not in service_text:
+            verification.fail("CONCURRENT_IDEMPOTENCY_IMPLEMENTATION", f"missing governed race-recovery behavior: {required}", service_relative)
+    for required in (
+        "test_semantic_change_application_concurrent_callers_resolve_to_one_governed_result",
+        "Barrier(2)",
+        "ThreadPoolExecutor(max_workers=2)",
+        'sorted(result["idempotent_replay"] for result in results) == [False, True]',
+        "assert len(commits) == 1",
+        "branch_row.head_commit_id == commit_id",
+        "assert len(committed_outbox) == 1",
+        "assert len(commit_audits) == 1",
+        "test_concurrent_replay_integrity_gap_returns_stable_sip_conflict",
+    ):
+        if required not in test_text:
+            verification.fail("CONCURRENT_IDEMPOTENCY_TEST", f"missing two-session race assertion: {required}", test_relative)
+
+
 def _verify_status_and_evidence(root: Path, verification: Verification, source_record: dict[str, Any] | None) -> None:
-    checkpoint_relative = "build/checkpoints/progress-05-r1.json"
+    checkpoint_relative = "build/checkpoints/progress-05-r2.json"
     checkpoint = _read_json(root / checkpoint_relative, verification, code="CHECKPOINT_RECORD_INVALID")
     if checkpoint is None:
         return
@@ -154,14 +198,14 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
     if facts.get("checkpoint_id") != CHECKPOINT_ID:
         verification.fail("CHECKPOINT_ID", f"expected {CHECKPOINT_ID}, got {facts.get('checkpoint_id')}", checkpoint_relative)
     if checkpoint.get("milestone_wording") != MILESTONE_WORDING:
-        verification.fail("CHECKPOINT_WORDING", "checkpoint wording differs from the authorized Progress 05-R1 remediation scope", checkpoint_relative)
+        verification.fail("CHECKPOINT_WORDING", "checkpoint wording differs from the authorized Progress 05-R2 remediation scope", checkpoint_relative)
     if checkpoint.get("release_posture") != "blocked" or facts.get("production_authorized") is not False:
         verification.fail("CHECKPOINT_RELEASE_POSTURE", "production release must remain blocked", checkpoint_relative)
     if facts.get("working_tree_clean") is not True or facts.get("tested_detached_worktree") is not True:
         verification.fail("CHECKPOINT_WORKTREE", "checkpoint was not tested from a clean detached worktree", checkpoint_relative)
     if int(facts.get("requirements_total", -1)) != 1028:
         verification.fail("CHECKPOINT_REQUIREMENT_COUNT", "checkpoint must retain all 1,028 requirements", checkpoint_relative)
-    if int(facts.get("python_tests_passed", -1)) < 230:
+    if int(facts.get("python_tests_passed", -1)) < 247:
         verification.fail("CHECKPOINT_TEST_BASELINE", "Progress 05 Python matrix is below the authorized baseline", checkpoint_relative)
     if int(facts.get("swift_tests_passed", -1)) < 13 or int(facts.get("web_runtime_tests_passed", -1)) < 13 or int(facts.get("web_source_checks_passed", -1)) < 32 or int(facts.get("desktop_tests_passed", -1)) < 17:
         verification.fail("CHECKPOINT_RUNTIME_BASELINE", "one or more runtime profiles are below the Progress 05 minimum", checkpoint_relative)
@@ -179,7 +223,7 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
         if latest.get("readiness") != "blocked" or latest.get("production_authorized") is not False:
             verification.fail("LATEST_RELEASE_POSTURE", "latest pointer must remain production blocked", latest_relative)
 
-    milestone_relative = "MILESTONE_SCOPE_PROGRESS_05_R1.json"
+    milestone_relative = "MILESTONE_SCOPE_PROGRESS_05_R2.json"
     milestone = _read_json(root / milestone_relative, verification, code="MILESTONE_SCOPE_INVALID")
     if milestone:
         for key in ("checkpoint_id", "source_commit", "source_tree_root_sha256"):
@@ -273,22 +317,32 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
             if isinstance(item, dict)
         }
         pltview = audited.get("PLTVIEW-007")
-        direct_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
-        if not isinstance(pltview, dict) or pltview.get("coverage_classification") != "direct":
-            verification.fail("PLTVIEW_007_NOT_DIRECT", "PLTVIEW-007 is not supported by direct renderer evidence", audit_relative)
-        elif direct_test not in {str(item.get("test_id")) for item in pltview.get("linked_tests", []) if isinstance(item, dict)}:
-            verification.fail("PLTVIEW_007_TEST_MISSING", "direct renderer-control test is not linked", audit_relative)
+        reference_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated"
+        if not isinstance(pltview, dict) or pltview.get("coverage_classification") != "partial":
+            verification.fail("PLTVIEW_007_EVIDENCE_OVERCLAIM", "PLTVIEW-007 must remain partial until a mounted viewer integration test runs", audit_relative)
+        elif reference_test not in {str(item.get("test_id")) for item in pltview.get("linked_tests", []) if isinstance(item, dict)}:
+            verification.fail("PLTVIEW_007_REFERENCE_TEST_MISSING", "the honest reference-implementation test is not linked", audit_relative)
+        recchang = audited.get("RECCHANG-005")
+        concurrency_test = "tests/integration/test_scene_runtime_review.py::test_semantic_change_application_concurrent_callers_resolve_to_one_governed_result"
+        if not isinstance(recchang, dict) or concurrency_test not in {str(item.get("test_id")) for item in recchang.get("linked_tests", []) if isinstance(item, dict)}:
+            verification.fail("RECCHANG_005_CONCURRENCY_TEST_MISSING", "the barrier-controlled two-session concurrency test is not linked", audit_relative)
         if any(item.get("all_linked_tests_declare_requirement_id") is not True for item in audited.values()):
             verification.fail("P05_TEST_DECLARATION_MISMATCH", "one or more linked tests do not declare the mapped requirement", audit_relative)
 
     implementation = _read_json(root / "source/requirements/implementation-map.json", verification, code="SOURCE_IMPLEMENTATION_MAP_INVALID")
     if implementation:
         pltview = implementation.get("requirements", {}).get("PLTVIEW-007", {})
-        direct_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
-        if pltview.get("implementation_status") != "VERIFIED" or direct_test not in pltview.get("test_ids", []):
-            verification.fail("PLTVIEW_007_TRACEABILITY", "PLTVIEW-007 verified status is not bound to the direct renderer test", "source/requirements/implementation-map.json")
+        reference_test = "tests/contract/test_web_viewer_runtime.py::test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated"
+        notes = str(pltview.get("notes", ""))
+        if (
+            pltview.get("implementation_status") != "IMPLEMENTED_UNVERIFIED"
+            or reference_test not in pltview.get("test_ids", [])
+            or "viewer integration test has not run" not in notes
+        ):
+            verification.fail("PLTVIEW_007_TRACEABILITY", "PLTVIEW-007 must be honestly demoted and retain the exact viewer-integration evidence gap", "source/requirements/implementation-map.json")
 
     _verify_renderer_remediation(root, verification)
+    _verify_concurrent_idempotency_remediation(root, verification)
 
     migration = root / "source/migrations/versions/0013_scene_change_application_atomicity.py"
     if not migration.is_file() or "uq_scene_commit_workflow_event" not in migration.read_text(encoding="utf-8"):
@@ -341,21 +395,21 @@ def _verify_status_and_evidence(root: Path, verification: Verification, source_r
     _verify_bound_runtime_report(root, verification, relative="build/reports/web-runtime-test-report.json", facts=facts, minimum_tests=13, minimum_source_checks=32)
     _verify_bound_runtime_report(root, verification, relative="build/reports/desktop-review-test-report.json", facts=facts, minimum_tests=17)
 
-    readiness_relative = "build/reports/release-readiness-progress-05-r1.json"
+    readiness_relative = "build/reports/release-readiness-progress-05-r2.json"
     readiness = _read_json(root / readiness_relative, verification, code="RELEASE_READINESS_INVALID")
     if readiness:
         source = readiness.get("source") if isinstance(readiness.get("source"), dict) else {}
         if readiness.get("checkpoint_id") != CHECKPOINT_ID or readiness.get("status") != "blocked" or readiness.get("production_authorized") is not False:
-            verification.fail("RELEASE_READINESS_POSTURE", "Progress 05-R1 release readiness must remain blocked", readiness_relative)
+            verification.fail("RELEASE_READINESS_POSTURE", "Progress 05-R2 release readiness must remain blocked", readiness_relative)
         if source.get("commit") != facts.get("commit") or source.get("source_tree_root_sha256") != facts.get("source_tree_root_sha256"):
             verification.fail("RELEASE_READINESS_BINDING", "release readiness is bound to another source", readiness_relative)
         next_action = str(readiness.get("next_action", ""))
         if "Submit" not in next_action or "Build and independently verify" in next_action:
             verification.fail("RELEASE_READINESS_STALE", "release-readiness next action is stale after package construction", readiness_relative)
 
-    remediation = root / "PROGRESS_05_R1_REMEDIATION_REPORT.md"
+    remediation = root / "PROGRESS_05_R2_REMEDIATION_REPORT.md"
     if not remediation.is_file():
-        verification.fail("R1_REMEDIATION_REPORT_MISSING", "Progress 05-R1 remediation report is absent", "PROGRESS_05_R1_REMEDIATION_REPORT.md")
+        verification.fail("R2_REMEDIATION_REPORT_MISSING", "Progress 05-R2 remediation report is absent", "PROGRESS_05_R2_REMEDIATION_REPORT.md")
 
     for markdown in ("IMPLEMENTATION_STATUS.md", "RESUME_IMPLEMENTATION.md", "requirements/coverage-report.md", "FINAL_IMPLEMENTATION_REPORT.md"):
         path = root / markdown
@@ -386,7 +440,7 @@ def verify_archive(archive_path: Path) -> dict[str, Any]:
         return _report(verification)
     verification.facts["archive_sha256"] = sha256_file(archive_path)
     verification.facts["archive_size"] = archive_path.stat().st_size
-    with tempfile.TemporaryDirectory(prefix="sip-progress05-r1-verify-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="sip-progress05-r2-verify-") as temporary:
         extract_root = Path(temporary) / "extract"
         extract_root.mkdir()
         try:

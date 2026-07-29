@@ -418,8 +418,8 @@
     },
     {
       "all_linked_tests_declare_requirement_id": true,
-      "coverage_classification": "direct",
-      "linked_test_count": 1,
+      "coverage_classification": "partial",
+      "linked_test_count": 2,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -427,12 +427,20 @@
           ],
           "declares_requirement_id": true,
           "test_exists": true,
-          "test_id": "tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives"
+          "test_id": "tests/contract/test_progress05_checkpoint_controls.py::test_progress05_r2_traceability_demotes_pltview_007_without_mounted_viewer_integration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTVIEW-007"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/contract/test_web_viewer_runtime.py::test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated"
         }
       ],
       "requirement_id": "PLTVIEW-007",
-      "semantic_rationale": "control-driven renderer directives prove independent visibility, opacity, labeling, evidence role, and proxy pickability",
-      "status": "VERIFIED"
+      "semantic_rationale": "the five-role implementation and directive model are exercised, but no mounted React/Three.js viewer integration test has run in the frozen web toolchain",
+      "status": "IMPLEMENTED_UNVERIFIED"
     },
     {
       "all_linked_tests_declare_requirement_id": true,
@@ -635,8 +643,24 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "direct",
-      "linked_test_count": 2,
+      "linked_test_count": 4,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_concurrent_replay_integrity_gap_returns_stable_sip_conflict"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCHANG-005"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_semantic_change_application_concurrent_callers_resolve_to_one_governed_result"
+        },
         {
           "declared_requirement_ids": [
             "RECCHANG-005"
@@ -806,7 +830,7 @@
   ],
   "finding_count": 0,
   "findings": [],
-  "milestone": "Progress 05-R1",
+  "milestone": "Progress 05-R2",
   "production_authorized": false,
   "schema": "sip.progress-05-traceability-audit/v1",
   "scope_requirement_count": 30,

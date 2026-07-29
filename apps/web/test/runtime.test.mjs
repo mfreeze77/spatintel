@@ -12,7 +12,7 @@ test("representation layers remain distinct and bounded", () => {
 
 
 
-test("PLTVIEW-007 layer controls drive renderer visibility opacity labels and pickability", () => {
+test("PLTVIEW-007 reference layer directives cover visibility opacity labels and pickability", () => {
   let layers = defaultLayers();
   let directives = buildLayerRenderDirectives(layers, 0.72);
   assert.equal(layerDirective(directives, "metric").visible, true);

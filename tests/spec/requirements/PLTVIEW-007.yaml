@@ -8,7 +8,7 @@ source:
 requirement: Hybrid rendering shall keep visual, metric, interaction, design, and evidence roles independently selectable
   and labeled.
 verification_method: Viewer integration test
-implementation_status: VERIFIED
+implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
 - apps/web
 - src/sip/scene_runtime.py
@@ -18,7 +18,8 @@ implementation_files:
 - migrations/versions/0012_scene_runtime_review.py
 - tools/run_demo.py
 automated_test_ids:
-- tests/contract/test_web_viewer_runtime.py::test_pltview_007_controls_drive_actual_canvas_role_directives
+- tests/contract/test_progress05_checkpoint_controls.py::test_progress05_r2_traceability_demotes_pltview_007_without_mounted_viewer_integration
+- tests/contract/test_web_viewer_runtime.py::test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated
 retained_evidence:
 - build/evidence/demos/hybrid.json
 - build/evidence/demos/scene-runtime.json
@@ -34,5 +35,6 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
-    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.
+  gap: 'The five-role renderer implementation and dependency-free directive tests are present, but the specified viewer integration
+    test has not run: the frozen Node 24.18.0/pnpm 10.28.2 React/Three.js toolchain is unavailable in this environment. The
+    requirement is intentionally IMPLEMENTED_UNVERIFIED.'

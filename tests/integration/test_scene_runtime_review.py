@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
+from threading import Barrier
+
 
 import pytest
-from sqlalchemy import select
+from sqlalchemy import event, select
+from sqlalchemy.orm import Session
 
 from sip.database import (
     AuditEventRow,
@@ -533,3 +537,163 @@ def test_semantic_change_application_is_atomic_and_retry_is_idempotent(bootstrap
             )
         )
     assert len(commits) == 1
+
+
+@pytest.mark.integration
+def test_semantic_change_application_concurrent_callers_resolve_to_one_governed_result(bootstrapped) -> None:
+    """REQ: RECCHANG-005 concurrent semantic-change application is governed and idempotent."""
+    context, tenant_id, project_id, actor = bootstrapped
+    comparison, candidate_commit = _accepted_change_fixture(context, tenant_id, project_id, actor)
+    comparison_id = comparison["comparison_id"]
+    workflow_event_id = f"temporal-comparison:{comparison_id}"
+    flush_barrier = Barrier(2)
+
+    def synchronize_competing_scene_commit_flushes(session, flush_context, instances) -> None:
+        del flush_context, instances
+        if session.info.get("r2_workflow_flush_synchronized"):
+            return
+        if any(
+            isinstance(item, SceneCommitRow) and item.workflow_event_id == workflow_event_id
+            for item in session.new
+        ):
+            session.info["r2_workflow_flush_synchronized"] = True
+            flush_barrier.wait(timeout=20)
+
+    def apply() -> dict:
+        return context.scene_runtime.apply_accepted_changes(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            branch="main",
+            expected_head=candidate_commit,
+            message="Concurrent callers must converge on one governed commit",
+            actor_id="publisher",
+        )
+
+    event.listen(Session, "before_flush", synchronize_competing_scene_commit_flushes)
+    try:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            futures = [executor.submit(apply) for _ in range(2)]
+            results = [future.result(timeout=30) for future in futures]
+    finally:
+        event.remove(Session, "before_flush", synchronize_competing_scene_commit_flushes)
+
+    assert {result["commit_id"] for result in results} == {results[0]["commit_id"]}
+    assert sorted(result["idempotent_replay"] for result in results) == [False, True]
+
+    with context.database.session() as db:
+        commits = list(
+            db.scalars(
+                select(SceneCommitRow).where(
+                    SceneCommitRow.tenant_id == tenant_id,
+                    SceneCommitRow.project_id == project_id,
+                    SceneCommitRow.workflow_event_id == workflow_event_id,
+                )
+            )
+        )
+        branch_row = db.scalar(
+            select(SceneBranchRow).where(
+                SceneBranchRow.tenant_id == tenant_id,
+                SceneBranchRow.project_id == project_id,
+                SceneBranchRow.scene_id == comparison["scene_id"],
+                SceneBranchRow.name == "main",
+            )
+        )
+        semantic_events = list(
+            db.scalars(
+                select(SemanticChangeEventRow).where(
+                    SemanticChangeEventRow.tenant_id == tenant_id,
+                    SemanticChangeEventRow.project_id == project_id,
+                    SemanticChangeEventRow.comparison_id == comparison_id,
+                )
+            )
+        )
+        outbox = list(
+            db.scalars(
+                select(OutboxEventRow).where(
+                    OutboxEventRow.tenant_id == tenant_id,
+                    OutboxEventRow.project_id == project_id,
+                    OutboxEventRow.event_type == "scene.change.applied",
+                    OutboxEventRow.aggregate_id == comparison_id,
+                )
+            )
+        )
+        committed_outbox = list(
+            db.scalars(
+                select(OutboxEventRow).where(
+                    OutboxEventRow.tenant_id == tenant_id,
+                    OutboxEventRow.project_id == project_id,
+                    OutboxEventRow.event_type == "scene.committed",
+                    OutboxEventRow.aggregate_id == results[0]["commit_id"],
+                )
+            )
+        )
+        audits = list(
+            db.scalars(
+                select(AuditEventRow).where(
+                    AuditEventRow.tenant_id == tenant_id,
+                    AuditEventRow.project_id == project_id,
+                    AuditEventRow.action == "semantic_change:apply",
+                )
+            )
+        )
+        commit_audits = list(
+            db.scalars(
+                select(AuditEventRow).where(
+                    AuditEventRow.tenant_id == tenant_id,
+                    AuditEventRow.project_id == project_id,
+                    AuditEventRow.action == "scene:commit",
+                    AuditEventRow.resource_id == results[0]["commit_id"],
+                )
+            )
+        )
+
+    assert len(commits) == 1
+    commit_id = commits[0].commit_id
+    assert branch_row is not None and branch_row.head_commit_id == commit_id
+    assert semantic_events and {event_row.applied_commit_id for event_row in semantic_events} == {commit_id}
+    assert len(outbox) == 1 and outbox[0].payload_json["commit_id"] == commit_id
+    assert len(committed_outbox) == 1
+    assert len(audits) == 1 and audits[0].resource_id == commit_id
+    assert len(commit_audits) == 1
+    assert commit_audits[0].details_json["parent"] == candidate_commit
+
+
+@pytest.mark.integration
+def test_concurrent_replay_integrity_gap_returns_stable_sip_conflict(bootstrapped) -> None:
+    """REQ: RECCHANG-005 inconsistent concurrent replay state fails with a stable SIP conflict."""
+    context, tenant_id, project_id, actor = bootstrapped
+    comparison, candidate_commit = _accepted_change_fixture(context, tenant_id, project_id, actor)
+    comparison_id = comparison["comparison_id"]
+    applied = context.scene_runtime.apply_accepted_changes(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        comparison_id=comparison_id,
+        branch="main",
+        expected_head=candidate_commit,
+        message="Create the governed result before integrity-gap injection",
+        actor_id="publisher",
+    )
+    with context.database.session() as db:
+        branch_row = db.scalar(
+            select(SceneBranchRow).where(
+                SceneBranchRow.tenant_id == tenant_id,
+                SceneBranchRow.project_id == project_id,
+                SceneBranchRow.scene_id == comparison["scene_id"],
+                SceneBranchRow.name == "main",
+            )
+        )
+        assert branch_row is not None
+        branch_row.head_commit_id = candidate_commit
+
+    with pytest.raises(ConflictError) as captured:
+        context.scene_runtime._resolve_concurrent_change_application(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            comparison_id=comparison_id,
+            branch="main",
+            expected_head=candidate_commit,
+        )
+    assert captured.value.code == "CHANGE_APPLICATION_CONCURRENT_STATE_CONFLICT"
+    assert captured.value.details["reason"] == "branch_head_mismatch"
+    assert captured.value.details["commit_id"] == applied["commit_id"]

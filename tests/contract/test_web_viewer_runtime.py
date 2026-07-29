@@ -19,8 +19,8 @@ def _node(*args: str) -> str:
     return completed.stdout + completed.stderr
 
 
-def test_pltview_007_controls_drive_actual_canvas_role_directives() -> None:
-    """REQ: PLTVIEW-007 layer controls drive the renderer's five role directives and pick gate."""
+def test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated() -> None:
+    """REQ: PLTVIEW-007 reference layer implementation exists; mounted viewer integration remains unverified."""
     viewer = (WEB / "components/HybridViewer.tsx").read_text(encoding="utf-8")
     canvas = (WEB / "components/HybridCanvas.tsx").read_text(encoding="utf-8")
     runtime = (WEB / "lib/spatial-runtime.ts").read_text(encoding="utf-8")
@@ -42,7 +42,7 @@ def test_pltview_007_controls_drive_actual_canvas_role_directives() -> None:
         "--test-name-pattern=PLTVIEW-007",
         "apps/web/test/runtime.test.mjs",
     )
-    assert "PLTVIEW-007 layer controls drive renderer visibility opacity labels and pickability" in output
+    assert "PLTVIEW-007 reference layer directives cover visibility opacity labels and pickability" in output
     assert "# pass 1" in output
 
 

@@ -31,14 +31,14 @@ from tools.build_checkpoint import (
 from tools.checkpoint_common import build_content_manifest, content_root, sha256_file, stage_records, write_deterministic_zip
 from tools.source_identity import source_identity
 
-CHECKPOINT_ID = "sip-v1.1.0-progress-05-r1"
-TOP_LEVEL = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1"
+CHECKPOINT_ID = "sip-v1.1.0-progress-05-r2"
+TOP_LEVEL = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r2"
 EXPECTED_SPEC_SHA256 = "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb16980bb8"
 MILESTONE_WORDING = (
-    "Checkpoint 05-R1 narrowly remediates the accepted Progress 05 development snapshot by connecting canonical "
-    "metric, visual, interaction, design, and evidence layer controls to the renderer; correcting Progress 05 "
-    "traceability; enforcing authorization-before-response in the local desktop server; and making accepted-change "
-    "application atomic and idempotent. Production approval and all previously declared external validation remain incomplete."
+    "Checkpoint 05-R2 narrowly remediates the accepted Progress 05-R1 development snapshot by making simultaneous "
+    "accepted-change application converge on one governed idempotent result and by demoting PLTVIEW-007 to "
+    "IMPLEMENTED_UNVERIFIED until its specified mounted viewer integration test can run. The existing five-role "
+    "renderer implementation is retained, Progress 06 is not started, and production approval remains incomplete."
 )
 
 EXTERNAL_GAPS = [
@@ -53,7 +53,7 @@ EXTERNAL_GAPS = [
     "Independent penetration testing, privacy review, browser accessibility audit, operator usability study, and legal approval remain incomplete.",
 ]
 NEXT_CLUSTER = (
-    "Submit the independently verified Progress 05-R1 inner checkpoint and consolidated outer envelope for True North "
+    "Submit the independently verified Progress 05-R2 inner checkpoint and consolidated outer envelope for True North "
     "milestone-closure review. Do not begin Progress 06 or production promotion without explicit authorization; production remains NO-GO."
 )
 
@@ -138,7 +138,7 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
         "checkpoint_id": facts["checkpoint_id"],
         "source_commit": facts["commit"],
         "source_tree_root_sha256": facts["source_tree_root_sha256"],
-        "milestone": "Progress 05-R1 narrow remediation checkpoint",
+        "milestone": "Progress 05-R2 narrow remediation checkpoint",
         "authoritative_wording": MILESTONE_WORDING,
         "scope_requirement_ids": sorted(P05_SCOPE_IDS),
         "included_requirements": included,
@@ -152,8 +152,8 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
         "acceptance_criteria": [
             "Viewer sessions are immutable, policy-bound, reproducible, and contain no reusable capability material.",
             "Temporal comparisons preserve commit/evidence/algorithm identity and suppress unobserved removals and nuisance changes.",
-            "Semantic changes require independent human review and explicit scene-commit linkage.",
-            "Native metric, visual, design, interaction, and evidence roles remain distinct in the renderer reference.",
+            "Semantic changes require independent human review and explicit scene-commit linkage; simultaneous callers converge on one commit and one governed replay.",
+            "Native metric, visual, design, interaction, and evidence roles remain distinct in the renderer reference, without claiming the unavailable mounted viewer integration result.",
             "Proxy hits cannot directly create authoritative measurements.",
             "Desktop review is local-first, crash-safe at the deterministic storage layer, conflict-preserving, and export-gated.",
             "Migrations 0012 and 0013 are append-only and rollback/recovery tested in the local reference profile.",
@@ -166,7 +166,7 @@ def _milestone_scope(*, ledger: dict[str, Any], facts: dict[str, Any]) -> dict[s
 
 def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
     lines = [
-        "# SIP v1.1.0 Implementation Status — Progress 05-R1",
+        "# SIP v1.1.0 Implementation Status — Progress 05-R2",
         "",
         MILESTONE_WORDING,
         "",
@@ -193,7 +193,7 @@ def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
         "",
         "## Release posture",
         "",
-        "Progress 05-R1 is a source-bound narrow remediation checkpoint. Production deployment and release remain NO-GO.",
+        "Progress 05-R2 is a source-bound narrow remediation checkpoint. Production deployment and release remain NO-GO.",
         "",
         "## External validation gaps",
         "",
@@ -204,9 +204,9 @@ def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
 
 def _render_resume(facts: dict[str, Any]) -> str:
     return "\n".join([
-        "# Resume Implementation — SIP v1.1.0 Progress 05-R1",
+        "# Resume Implementation — SIP v1.1.0 Progress 05-R2",
         "",
-        "This continuation record is generated from `build/checkpoints/progress-05-r1.json`.",
+        "This continuation record is generated from `build/checkpoints/progress-05-r2.json`.",
         "",
         f"- Branch: `{facts['branch']}`",
         f"- Commit: `{facts['commit']}`",
@@ -245,7 +245,7 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
         priorities.setdefault(str(item["priority"]), Counter())[str(item["implementation_status"])] += 1
     statuses = sorted({status for counter in priorities.values() for status in counter})
     lines = [
-        "# Requirements coverage report — Progress 05-R1",
+        "# Requirements coverage report — Progress 05-R2",
         "",
         f"Checkpoint: `{facts['checkpoint_id']}`",
         f"Commit: `{facts['commit']}`",
@@ -272,7 +272,7 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
 def _require_acceptance(report: dict[str, Any], *, commit: str, source_root: str) -> None:
     source = report.get("source") if isinstance(report.get("source"), dict) else {}
     if report.get("checkpoint_id") != CHECKPOINT_ID or source.get("commit") != commit or source.get("source_tree_root_sha256") != source_root:
-        raise RuntimeError("checkpoint acceptance report is not bound to Progress 05-R1 source")
+        raise RuntimeError("checkpoint acceptance report is not bound to Progress 05-R2 source")
     if report.get("status") not in {"passed_complete", "passed_with_external_gaps"}:
         raise RuntimeError("checkpoint acceptance gates did not pass")
     if int(report.get("required_failure_count", -1)) != 0:
@@ -308,7 +308,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
     if matrix.get("status") not in {"passed", "passed_complete"}:
         raise RuntimeError("Python matrix did not pass")
     python_tests = int(totals.get("tests", 0))
-    if python_tests < 230 or any(int(totals.get(key, 0)) for key in ("failures", "errors", "skipped")):
+    if python_tests < 247 or any(int(totals.get(key, 0)) for key in ("failures", "errors", "skipped")):
         raise RuntimeError("Python matrix does not satisfy the Progress 05 baseline")
     swift = _read_bound_report(evidence_root / "build/reports/swift-test-report.json", commit=commit, source_root=source_root, minimum_tests=13)
     web = _read_bound_report(evidence_root / "build/reports/web-runtime-test-report.json", commit=commit, source_root=source_root, minimum_tests=13)
@@ -317,11 +317,11 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         raise RuntimeError("web source-invariant profile is incomplete")
     acceptance = _load_json(evidence_root / "build/reports/checkpoint-acceptance-gates.json")
     _require_acceptance(acceptance, commit=commit, source_root=source_root)
-    readiness = _load_json(evidence_root / "build/reports/release-readiness-progress-05-r1.json")
+    readiness = _load_json(evidence_root / "build/reports/release-readiness-progress-05-r2.json")
     if readiness.get("status") != "blocked" or readiness.get("production_authorized") is not False:
         raise RuntimeError("production release posture is not fail-closed")
 
-    with tempfile.TemporaryDirectory(prefix="sip-progress-05-r1-build-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="sip-progress-05-r2-build-") as temporary:
         stage = Path(temporary) / TOP_LEVEL
         stage.mkdir(parents=True)
         source_dir = stage / "source"
@@ -338,7 +338,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         artifacts_dir = stage / "artifacts"
         source_archive = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-{commit}.tar.gz"
         _gzip_git_archive(source_archive, prefix="Spatial-Intelligence-Platform-v1.1.0")
-        bundle = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-{commit}.bundle"
+        bundle = artifacts_dir / f"Spatial-Intelligence-Platform-v1.1.0-progress-05-r2-{commit}.bundle"
         bundle.parent.mkdir(parents=True, exist_ok=True)
         _run("git", "bundle", "create", str(bundle), branch)
         complete_source_records = stage_records(source_dir, excluded=())
@@ -417,9 +417,9 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "authoritative_evidence_index": "build/evidence/AUTHORITATIVE_EVIDENCE_INDEX.json",
             "release_posture": "blocked",
         }
-        _write(stage / "build/checkpoints/progress-05-r1.json", checkpoint_record)
+        _write(stage / "build/checkpoints/progress-05-r2.json", checkpoint_record)
         milestone = _milestone_scope(ledger=ledger, facts=facts)
-        _write(stage / "MILESTONE_SCOPE_PROGRESS_05_R1.json", milestone)
+        _write(stage / "MILESTONE_SCOPE_PROGRESS_05_R2.json", milestone)
         (stage / "IMPLEMENTATION_STATUS.md").write_text(_render_status(facts, requirement_counts), encoding="utf-8")
         (stage / "RESUME_IMPLEMENTATION.md").write_text(_render_resume(facts), encoding="utf-8")
         coverage = stage / "requirements/coverage-report.md"
@@ -433,7 +433,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "branch": branch,
             "source_tree_root_sha256": source_root,
             "readiness": "blocked",
-            "checkpoint_record": "build/checkpoints/progress-05-r1.json",
+            "checkpoint_record": "build/checkpoints/progress-05-r2.json",
             "production_authorized": False,
         }
         _write(stage / "build/release/latest.json", latest)
@@ -460,7 +460,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             ],
             "preservation_export": ["build/evidence/demos/export.json", "build/evidence/gates/export-demo.log"],
             "independent_restore": ["build/evidence/demos/restore.json", "build/evidence/gates/restore-demo.log"],
-            "release_readiness": ["build/reports/release-readiness-progress-05-r1.json", "build/reports/checkpoint-acceptance-gates.json", "build/reports/release-report.json", "build/evidence/gates/web-acceptance.log", "build/evidence/gates/release.log", "build/evidence/gates/release-mode.log"],
+            "release_readiness": ["build/reports/release-readiness-progress-05-r2.json", "build/reports/checkpoint-acceptance-gates.json", "build/reports/release-report.json", "build/evidence/gates/web-acceptance.log", "build/evidence/gates/release.log", "build/evidence/gates/release-mode.log"],
         }
         statuses = {
             "python_matrix": "passed_complete",
@@ -521,7 +521,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         _write(stage / "build/evidence/AUTHORITATIVE_EVIDENCE_INDEX.json", index)
 
         report = "\n".join([
-            "# Progress 05-R1 Implementation Report",
+            "# Progress 05-R2 Implementation Report",
             "",
             f"Checkpoint: `{CHECKPOINT_ID}`",
             f"Commit: `{commit}`",
@@ -541,44 +541,44 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
         ]) + "\n"
         (stage / "FINAL_IMPLEMENTATION_REPORT.md").write_text(report, encoding="utf-8")
         remediation = "\n".join([
-            "# Progress 05-R1 Remediation Report",
+            "# Progress 05-R2 Remediation Report",
             "",
             f"Checkpoint: `{CHECKPOINT_ID}`",
             f"Commit: `{commit}`",
             f"Source root: `{source_root}`",
             "",
-            "This narrow checkpoint closes the True North Progress 05 stop-line findings without beginning Progress 06.",
+            "This narrow checkpoint addresses the True North Progress 05-R2 stop-line findings without beginning Progress 06.",
             "",
             "- Canonical layer state now drives metric, visual, interaction, design, and evidence visibility and opacity in the actual renderer.",
             "- Hidden or unauthorized interaction geometry is not pickable; proxy-originated measurements still require metric re-resolution.",
-            "- PLTVIEW-007 is linked to a direct renderer-control integration test rather than the unrelated hybrid demonstration.",
+            "- PLTVIEW-007 is intentionally demoted to IMPLEMENTED_UNVERIFIED because only source and dependency-free directive tests are available; the specified mounted viewer integration test has not run.",
             "- All 30 Progress 05 milestone requirements have a deterministic semantic traceability audit; every linked Python test declares its mapped requirement ID.",
             "- Desktop HTTP authorization occurs before exactly one response status; live socket tests prove denied requests never begin with 200.",
-            "- Accepted semantic changes update branch head, scene commit, event links, outbox, and audit in one transaction with a project-scoped idempotency guard.",
+            "- Concurrent accepted-change callers now resolve the workflow uniqueness race through a fresh transaction, verify commit, branch, semantic-event, outbox, and audit equivalence, and return one governed result with idempotent_replay=true to the loser.",
             "- Three.js observers and pointer listeners are released by the React effect cleanup.",
             "- Acceptance evidence separates command execution status from child control completeness and preserves external-gap semantics.",
-            "- Release-readiness and continuation records point to True North R1 review; production remains NO-GO.",
+            "- Release-readiness and continuation records point to True North R2 review; production remains NO-GO.",
             "",
             f"Python matrix: {python_tests} passed, 0 failed, 0 errors, 0 skipped.",
             "",
-            "Progress 06 remains unauthorized until True North closes Progress 05-R1.",
+            "Progress 06 remains unauthorized until True North closes Progress 05-R2.",
         ]) + "\n"
-        (stage / "PROGRESS_05_R1_REMEDIATION_REPORT.md").write_text(remediation, encoding="utf-8")
+        (stage / "PROGRESS_05_R2_REMEDIATION_REPORT.md").write_text(remediation, encoding="utf-8")
         checkpoint_readme = "\n".join([
-            "# SIP v1.1.0 Progress 05-R1 checkpoint",
+            "# SIP v1.1.0 Progress 05-R2 checkpoint",
             "",
             "The exact committed project is under `source/`. Post-commit evidence and packaging metadata are outside the canonical source namespace.",
             "",
             "Verify:",
             "",
             "```bash",
-            "python source/tools/verify_progress05_checkpoint.py Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip",
+            "python source/tools/verify_progress05_checkpoint.py Spatial-Intelligence-Platform-v1.1.0-progress-05-r2.zip",
             "```",
             "",
             "Clone the included Git bundle:",
             "",
             "```bash",
-            f"git clone -b {branch} artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-{commit}.bundle <destination>",
+            f"git clone -b {branch} artifacts/Spatial-Intelligence-Platform-v1.1.0-progress-05-r2-{commit}.bundle <destination>",
             "```",
             "",
             "Production deployment and release remain NO-GO.",
@@ -606,7 +606,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-root", type=Path, required=True)
     parser.add_argument("--attestation", type=Path, required=True)
-    parser.add_argument("--branch", default="progress-05-r1-remediation")
+    parser.add_argument("--branch", default="progress-05-r2-remediation")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()

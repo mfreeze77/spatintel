@@ -40,7 +40,7 @@ VERIFIED = {
     "PLTGRPC-001", "PLTGRPC-003", "PLTGRPC-004", "PLTGRPC-005", "PLTGRPC-006",
     "PLTAGENT-001", "PLTAGENT-002", "PLTAGENT-003", "PLTAGENT-004", "PLTAGENT-005", "PLTAGENT-006",
     "PLTIO-003", "PLTIO-006", "PLTIO-012", "PLTSDK-003",
-    "PLTSQL-001", "PLTSQL-002", "PLTSQL-003", "PLTSQL-006", "PLTVIEW-007",
+    "PLTSQL-001", "PLTSQL-002", "PLTSQL-003", "PLTSQL-006",
     "DATHYB-004", "RECALIGN-001", "RECHYB-002", "RECHYB-005",
     "RECMESH-010", "RECPROV-007", "RECPROV-013",
 }
@@ -53,6 +53,14 @@ IN_PROGRESS = {
     "TSTSTRAT-001", "TSTSTRAT-002",
 }
 EXTERNAL = {"DATDB-004", "DELDEV-005", "OPSDR-002", "OPSSEC-005"}
+
+UNVERIFIED_DETAILS = {
+    "PLTVIEW-007": (
+        "The five-role renderer implementation and dependency-free directive tests are present, but the specified "
+        "viewer integration test has not run: the frozen Node 24.18.0/pnpm 10.28.2 React/Three.js toolchain is "
+        "unavailable in this environment. The requirement is intentionally IMPLEMENTED_UNVERIFIED."
+    ),
+}
 
 IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "APPFAIL": ["src/sip/failures.py", "governance/failure-catalog.json", "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"],
@@ -519,7 +527,10 @@ def build(
         elif status == "IN_PROGRESS":
             overlay["notes"] = "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress."
         else:
-            overlay["notes"] = "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified."
+            overlay["notes"] = UNVERIFIED_DETAILS.get(
+                requirement_id,
+                "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+            )
         overlays[requirement_id] = overlay
     return {
         "schema_version": "1.0",

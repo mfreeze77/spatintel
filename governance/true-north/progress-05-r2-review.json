@@ -1,0 +1,60 @@
+{
+  "acceptance_gates": {
+    "concurrent_idempotency": "barrier_controlled_two_session_test",
+    "inner_verification": "passed_complete_zero_findings",
+    "outer_verification": "passed_complete_zero_findings",
+    "pltview_007": "real_viewer_integration_or_implemented_unverified",
+    "production_promotion": "no_go",
+    "python_failures_errors_skips": 0
+  },
+  "accepted_snapshot": {
+    "checkpoint_id": "sip-v1.1.0-progress-05-r1",
+    "commit": "593d8ac16930387d26fa9ed700a04b44b46e2006",
+    "outer_zip_sha256": "c88a31119d41a0992fc94f6c48a3555265dee005163a71622a8df919b55f3161",
+    "project_zip_sha256": "0885de42e873ad96d39ca54493c0caad07e4d118d11a239d4fb866d82876e068",
+    "source_root_sha256": "619a698cc16db15f57f543f5da040f694d5415e1db8982b68566df81bdb3d3ae"
+  },
+  "decisions": {
+    "git_source_provenance": "accepted",
+    "inner_project_checkpoint": "accepted",
+    "outer_consolidated_package": "accepted",
+    "production_promotion": "no_go",
+    "progress_05_milestone_closure": "withheld",
+    "progress_05_r1_snapshot": "accepted",
+    "progress_06_authorization": "withheld"
+  },
+  "disposition": "conditional_acceptance_progress_05_r2_required",
+  "production_authorized": false,
+  "required_remediations": [
+    "concurrent_workflow_uniqueness_conflict_resolves_to_governed_idempotent_replay",
+    "barrier_controlled_two_session_concurrency_test",
+    "pltview_007_real_viewer_integration_or_demotion",
+    "regenerate_all_traceability_and_release_records",
+    "clean_detached_full_acceptance",
+    "independent_inner_and_outer_verification"
+  ],
+  "review_id": "true-north-progress-05-r1-to-r2",
+  "schema": "sip.true-north-review/v1",
+  "selected_viewer_disposition": "demote_pltview_007_to_implemented_unverified_until_mounted_viewer_integration_runs",
+  "stop_line_findings": [
+    {
+      "acceptance_assertions": [
+        "exactly_one_workflow_commit",
+        "exactly_one_committed_branch_head_advancement",
+        "no_raw_integrity_error",
+        "both_callers_same_commit",
+        "one_idempotent_replay",
+        "semantic_event_outbox_and_audit_consistent"
+      ],
+      "id": "R2-CONCURRENCY-001",
+      "required_disposition": "specific uniqueness conflict must resolve through a fresh transaction to one equivalent governed result",
+      "title": "simultaneous semantic-change application leaked IntegrityError"
+    },
+    {
+      "id": "R2-TRACEABILITY-001",
+      "reason": "frozen Node 24.18.0/pnpm 10.28.2 React/Three.js integration environment unavailable",
+      "selected_disposition": "IMPLEMENTED_UNVERIFIED",
+      "title": "PLTVIEW-007 lacked its specified mounted viewer integration test"
+    }
+  ]
+}

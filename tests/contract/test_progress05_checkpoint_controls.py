@@ -11,7 +11,11 @@ from tools.build_progress05_checkpoint import CHECKPOINT_ID, TOP_LEVEL, _render_
 from tools.checkpoint_common import FIXED_ZIP_TIME
 from tools.verify_delivery_envelope import verify as verify_delivery
 from tools.verify_checkpoint import Verification
-from tools.verify_progress05_checkpoint import _verify_renderer_remediation, verify_archive
+from tools.verify_progress05_checkpoint import (
+    _verify_concurrent_idempotency_remediation,
+    _verify_renderer_remediation,
+    verify_archive,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -61,8 +65,8 @@ def test_progress05_verifier_rejects_manifest_hash_and_root_tamper(tmp_path: Pat
 
 def test_outer_delivery_verifier_rejects_unexpected_and_unindexed_payload(tmp_path: Path) -> None:
     """CONTROL: the consolidated envelope rejects unexpected files and an incomplete payload index."""
-    top = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1-delivery"
-    project_name = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r1.zip"
+    top = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r2-delivery"
+    project_name = "Spatial-Intelligence-Platform-v1.1.0-progress-05-r2.zip"
     project = b"not-a-real-checkpoint"
     checksum_name = project_name + ".sha256"
     verification_name = project_name + ".verification.json"
@@ -75,7 +79,7 @@ def test_outer_delivery_verifier_rejects_unexpected_and_unindexed_payload(tmp_pa
     }
     index = {
         "schema": "sip.delivery-envelope-index/v1",
-        "delivery_id": "sip-v1.1.0-progress-05-r1-delivery",
+        "delivery_id": "sip-v1.1.0-progress-05-r2-delivery",
         "top_level": top,
         "self_exclusion": {
             "path": "DELIVERY_INDEX.json",
@@ -119,8 +123,8 @@ def test_progress05_acceptance_sequence_contains_new_runtime_gates() -> None:
     assert "desktop-test" in module.REQUIRED_TARGETS
     assert "demo-scene-runtime" in module.REQUIRED_TARGETS
     source = path.read_text(encoding="utf-8")
-    assert "sip-v1.1.0-progress-05-r1" in source
-    assert "release-readiness-progress-05-r1.json" in source
+    assert "sip-v1.1.0-progress-05-r2" in source
+    assert "release-readiness-progress-05-r2.json" in source
 
 
 def test_progress05_generated_coverage_states_production_no_go() -> None:
@@ -144,7 +148,7 @@ def test_progress05_generated_coverage_states_production_no_go() -> None:
 
 
 def test_progress05_renderer_verifier_accepts_behavior_and_rejects_evidence_or_cleanup_tamper(tmp_path: Path) -> None:
-    """CONTROL: the R1 verifier checks renderer behavior without depending on local variable names."""
+    """CONTROL: the R2 verifier preserves the five-role implementation without claiming viewer integration."""
     for relative in (
         "apps/web/components/HybridViewer.tsx",
         "apps/web/components/HybridCanvas.tsx",
@@ -171,3 +175,51 @@ def test_progress05_renderer_verifier_accepts_behavior_and_rejects_evidence_or_c
     codes = {finding.code for finding in tampered.findings}
     assert "HYBRID_CANVAS_ROLE_CONTROL" in codes
     assert "HYBRID_CANVAS_CLEANUP" in codes
+
+
+def test_progress05_r2_verifier_requires_concurrent_idempotency_recovery_and_barrier_test(tmp_path: Path) -> None:
+    """CONTROL: the R2 verifier rejects loss of governed concurrent replay or its two-session test."""
+    for relative in (
+        "src/sip/scene_runtime.py",
+        "tests/integration/test_scene_runtime_review.py",
+    ):
+        source = ROOT / relative
+        destination = tmp_path / "source" / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(source.read_bytes())
+
+    valid = Verification(tmp_path / "valid.zip")
+    _verify_concurrent_idempotency_remediation(tmp_path, valid)
+    assert valid.findings == []
+
+    service = tmp_path / "source/src/sip/scene_runtime.py"
+    service.write_text(
+        service.read_text(encoding="utf-8").replace(
+            "CHANGE_APPLICATION_CONCURRENT_STATE_CONFLICT",
+            "REMOVED_CONCURRENT_CONFLICT_CODE",
+        ),
+        encoding="utf-8",
+    )
+    tests = tmp_path / "source/tests/integration/test_scene_runtime_review.py"
+    tests.write_text(
+        tests.read_text(encoding="utf-8").replace("Barrier(2)", "Barrier(3)"),
+        encoding="utf-8",
+    )
+    tampered = Verification(tmp_path / "tampered.zip")
+    _verify_concurrent_idempotency_remediation(tmp_path, tampered)
+    codes = {finding.code for finding in tampered.findings}
+    assert "CONCURRENT_IDEMPOTENCY_IMPLEMENTATION" in codes
+    assert "CONCURRENT_IDEMPOTENCY_TEST" in codes
+
+
+def test_progress05_r2_traceability_demotes_pltview_007_without_mounted_viewer_integration() -> None:
+    """CONTROL: source traceability cannot promote PLTVIEW-007 on dependency-free evidence alone."""
+    from tools.build_traceability_map import build
+
+    overlay = build(declared_source_state=True)["requirements"]["PLTVIEW-007"]
+    assert overlay["implementation_status"] == "IMPLEMENTED_UNVERIFIED"
+    assert "viewer integration test has not run" in overlay["notes"]
+    assert (
+        "tests/contract/test_web_viewer_runtime.py::"
+        "test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated"
+    ) in overlay["test_ids"]

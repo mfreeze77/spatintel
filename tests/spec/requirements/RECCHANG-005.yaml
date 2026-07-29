@@ -15,6 +15,8 @@ implementation_files:
 - migrations/versions/0012_scene_runtime_review.py
 - schemas/events
 automated_test_ids:
+- tests/integration/test_scene_runtime_review.py::test_concurrent_replay_integrity_gap_returns_stable_sip_conflict
+- tests/integration/test_scene_runtime_review.py::test_semantic_change_application_concurrent_callers_resolve_to_one_governed_result
 - tests/integration/test_scene_runtime_review.py::test_semantic_change_application_is_atomic_and_retry_is_idempotent
 - tests/integration/test_scene_runtime_review.py::test_temporal_change_review_suppresses_unobserved_removal_and_requires_independent_review
 retained_evidence:

@@ -6,6 +6,7 @@ from typing import Any, Iterable
 
 from pydantic import ValidationError as PydanticValidationError
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 
 from .audit import AuditService
 from .canonical import canonical_sha256, new_uuid
@@ -19,11 +20,13 @@ from .contracts import (
 )
 from .database import (
     AssetRefRow,
+    AuditEventRow,
     ChangeBenchmarkRow,
     ChangeCandidateRow,
     ChangeReviewRow,
     Database,
     EvidenceRecordRow,
+    OutboxEventRow,
     ProjectRow,
     SceneBranchRow,
     SceneCommitRow,
@@ -905,12 +908,48 @@ class SceneRuntimeService:
         message: str,
         actor_id: str,
     ) -> dict[str, Any]:
-        """Atomically and idempotently apply independently accepted change events.
+        """Atomically apply accepted changes with concurrent idempotent recovery.
 
-        The temporal-comparison row, semantic events, branch head, scene commit, outbox
-        events, and audit records share one database transaction. The workflow event ID
-        is a project-scoped idempotency key protected by a unique database constraint.
+        The project-scoped workflow-event uniqueness constraint is the final concurrency
+        arbiter. If two transactions race after both pass their initial reads, the losing
+        transaction is rolled back by :class:`Database` and this method resolves the
+        winner from a fresh transaction. Only an equivalent, internally consistent
+        result is returned as an idempotent replay; every mismatch fails with a stable
+        SIP conflict code rather than leaking a database exception.
         """
+        try:
+            return self._apply_accepted_changes_once(
+                tenant_id=tenant_id,
+                project_id=project_id,
+                comparison_id=comparison_id,
+                branch=branch,
+                expected_head=expected_head,
+                message=message,
+                actor_id=actor_id,
+            )
+        except IntegrityError as exc:
+            if not self._is_workflow_event_uniqueness_conflict(exc):
+                raise
+            return self._resolve_concurrent_change_application(
+                tenant_id=tenant_id,
+                project_id=project_id,
+                comparison_id=comparison_id,
+                branch=branch,
+                expected_head=expected_head,
+            )
+
+    def _apply_accepted_changes_once(
+        self,
+        *,
+        tenant_id: str,
+        project_id: str,
+        comparison_id: str,
+        branch: str,
+        expected_head: str,
+        message: str,
+        actor_id: str,
+    ) -> dict[str, Any]:
+        """Execute one transactional semantic-change application attempt."""
         workflow_event_id = f"temporal-comparison:{comparison_id}"
         result: dict[str, Any]
         with self.database.session() as session:
@@ -1066,6 +1105,194 @@ class SceneRuntimeService:
                 "idempotent_replay": False,
             }
         return result
+
+    @staticmethod
+    def _is_workflow_event_uniqueness_conflict(exc: IntegrityError) -> bool:
+        """Recognize only the scene workflow-event uniqueness constraint.
+
+        PostgreSQL exposes the constraint name through ``diag.constraint_name``. SQLite
+        reports the constrained columns in its error text. No other integrity failure is
+        converted into an idempotent replay.
+        """
+        original = exc.orig
+        diagnostic = getattr(original, "diag", None)
+        if getattr(diagnostic, "constraint_name", None) == "uq_scene_commit_workflow_event":
+            return True
+        message = str(original).lower()
+        return (
+            "unique constraint failed" in message
+            and "scene_commits.tenant_id" in message
+            and "scene_commits.project_id" in message
+            and "scene_commits.workflow_event_id" in message
+        )
+
+    def _resolve_concurrent_change_application(
+        self,
+        *,
+        tenant_id: str,
+        project_id: str,
+        comparison_id: str,
+        branch: str,
+        expected_head: str,
+    ) -> dict[str, Any]:
+        """Resolve a losing concurrent caller from a fresh read transaction.
+
+        The winner is accepted only when commit scope, branch ancestry, semantic-event
+        links, comparison state, outbox publication, and immutable audit evidence all
+        agree. This makes a successful replay distinguishable from corruption or an
+        idempotency-key rebound.
+        """
+        workflow_event_id = f"temporal-comparison:{comparison_id}"
+
+        def conflict(reason: str, **details: Any) -> ConflictError:
+            return ConflictError(
+                "CHANGE_APPLICATION_CONCURRENT_STATE_CONFLICT",
+                "concurrent semantic-change application did not resolve to an equivalent governed result",
+                {"reason": reason, **details},
+            )
+
+        with self.database.session() as session:
+            comparison = session.scalar(
+                select(TemporalComparisonRow).where(
+                    TemporalComparisonRow.comparison_id == comparison_id,
+                    TemporalComparisonRow.tenant_id == tenant_id,
+                    TemporalComparisonRow.project_id == project_id,
+                )
+            )
+            if comparison is None:
+                raise conflict("comparison_missing")
+
+            commits = list(
+                session.scalars(
+                    select(SceneCommitRow).where(
+                        SceneCommitRow.tenant_id == tenant_id,
+                        SceneCommitRow.project_id == project_id,
+                        SceneCommitRow.workflow_event_id == workflow_event_id,
+                    )
+                )
+            )
+            if len(commits) != 1:
+                raise conflict("workflow_commit_cardinality", observed=len(commits))
+            commit = commits[0]
+            if (
+                commit.scene_id != comparison.scene_id
+                or commit.branch != branch
+                or commit.review_state != "accepted_change_commit"
+                or list(commit.parent_ids_json) != [expected_head]
+            ):
+                raise conflict(
+                    "workflow_commit_scope_mismatch",
+                    commit_id=commit.commit_id,
+                    observed_branch=commit.branch,
+                )
+
+            semantic_events = list(
+                session.scalars(
+                    select(SemanticChangeEventRow).where(
+                        SemanticChangeEventRow.tenant_id == tenant_id,
+                        SemanticChangeEventRow.project_id == project_id,
+                        SemanticChangeEventRow.comparison_id == comparison_id,
+                    )
+                )
+            )
+            semantic_event_ids = sorted(event.semantic_event_id for event in semantic_events)
+            if not semantic_events or any(
+                event.scene_id != comparison.scene_id or event.applied_commit_id != commit.commit_id
+                for event in semantic_events
+            ):
+                raise conflict("semantic_event_link_mismatch", commit_id=commit.commit_id)
+
+            policy_checks = dict(commit.policy_checks_json or {})
+            if (
+                policy_checks.get("comparison_id") != comparison_id
+                or sorted(policy_checks.get("semantic_event_ids") or []) != semantic_event_ids
+                or policy_checks.get("idempotency_key") != workflow_event_id
+                or policy_checks.get("atomic_application") != "passed"
+            ):
+                raise conflict("workflow_commit_policy_mismatch", commit_id=commit.commit_id)
+            if comparison.state != "applied":
+                raise conflict("comparison_not_applied", observed_state=comparison.state)
+
+            branch_row = session.scalar(
+                select(SceneBranchRow).where(
+                    SceneBranchRow.tenant_id == tenant_id,
+                    SceneBranchRow.project_id == project_id,
+                    SceneBranchRow.scene_id == comparison.scene_id,
+                    SceneBranchRow.name == branch,
+                )
+            )
+            if branch_row is None or branch_row.head_commit_id != commit.commit_id:
+                raise conflict("branch_head_mismatch", commit_id=commit.commit_id)
+
+            applied_events = list(
+                session.scalars(
+                    select(OutboxEventRow).where(
+                        OutboxEventRow.tenant_id == tenant_id,
+                        OutboxEventRow.project_id == project_id,
+                        OutboxEventRow.event_type == "scene.change.applied",
+                        OutboxEventRow.aggregate_id == comparison_id,
+                        OutboxEventRow.causation_id == workflow_event_id,
+                    )
+                )
+            )
+            committed_events = list(
+                session.scalars(
+                    select(OutboxEventRow).where(
+                        OutboxEventRow.tenant_id == tenant_id,
+                        OutboxEventRow.project_id == project_id,
+                        OutboxEventRow.event_type == "scene.committed",
+                        OutboxEventRow.aggregate_id == commit.commit_id,
+                        OutboxEventRow.causation_id == workflow_event_id,
+                    )
+                )
+            )
+            if (
+                len(applied_events) != 1
+                or applied_events[0].payload_json.get("commit_id") != commit.commit_id
+                or applied_events[0].payload_json.get("semantic_event_count") != len(semantic_events)
+                or len(committed_events) != 1
+            ):
+                raise conflict("outbox_evidence_mismatch", commit_id=commit.commit_id)
+
+            application_audits = list(
+                session.scalars(
+                    select(AuditEventRow).where(
+                        AuditEventRow.tenant_id == tenant_id,
+                        AuditEventRow.project_id == project_id,
+                        AuditEventRow.action == "semantic_change:apply",
+                        AuditEventRow.resource_type == "scene_commit",
+                        AuditEventRow.resource_id == commit.commit_id,
+                    )
+                )
+            )
+            commit_audits = list(
+                session.scalars(
+                    select(AuditEventRow).where(
+                        AuditEventRow.tenant_id == tenant_id,
+                        AuditEventRow.project_id == project_id,
+                        AuditEventRow.action == "scene:commit",
+                        AuditEventRow.resource_type == "scene_commit",
+                        AuditEventRow.resource_id == commit.commit_id,
+                    )
+                )
+            )
+            if (
+                len(application_audits) != 1
+                or application_audits[0].details_json.get("comparison_id") != comparison_id
+                or sorted(application_audits[0].details_json.get("semantic_event_ids") or []) != semantic_event_ids
+                or application_audits[0].details_json.get("idempotency_key") != workflow_event_id
+                or len(commit_audits) != 1
+                or commit_audits[0].details_json.get("branch") != branch
+                or commit_audits[0].details_json.get("parent") != expected_head
+            ):
+                raise conflict("audit_evidence_mismatch", commit_id=commit.commit_id)
+
+            return {
+                "comparison_id": comparison_id,
+                "commit_id": commit.commit_id,
+                "semantic_event_ids": semantic_event_ids,
+                "idempotent_replay": True,
+            }
 
     def record_change_benchmark(
         self,

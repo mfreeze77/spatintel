@@ -301,7 +301,7 @@ def run(*, attestation_path: Path) -> dict[str, Any]:
     return {
         "schema": "sip.checkpoint-acceptance-gates/v1",
         "status": status,
-        "checkpoint_id": "sip-v1.1.0-progress-05-r1",
+        "checkpoint_id": "sip-v1.1.0-progress-05-r2",
         "captured_at": datetime.now(UTC).isoformat(),
         "source": binding_before,
         "attestation_path": attestation_path.relative_to(ROOT).as_posix(),
@@ -314,7 +314,7 @@ def run(*, attestation_path: Path) -> dict[str, Any]:
         "blocked_count": len(blockers),
         "external_gap_control_count": len(external_gap_controls),
         "release_authorized": False,
-        "release_block_reason": "Progress 05-R1 requires independent True North acceptance and retains external validation gaps.",
+        "release_block_reason": "Progress 05-R2 requires independent True North acceptance and retains external validation gaps.",
     }
 
 
@@ -349,9 +349,9 @@ def main() -> None:
             "Approved LingBot-Map checkpoint bytes, CUDA/GPU execution, and real-scene validation remain external.",
             "Independent penetration testing, privacy review, browser accessibility audit, desktop operator-usability review, and legal approval remain incomplete.",
         ],
-        "next_action": "Submit the independently verified Progress 05-R1 inner checkpoint and consolidated outer envelope for True North milestone-closure review; production remains NO-GO.",
+        "next_action": "Submit the independently verified Progress 05-R2 inner checkpoint and consolidated outer envelope for True North milestone-closure review; production remains NO-GO.",
     }
-    readiness_path = ROOT / "build/reports/release-readiness-progress-05-r1.json"
+    readiness_path = ROOT / "build/reports/release-readiness-progress-05-r2.json"
     readiness_path.write_text(json.dumps(readiness, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
     raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)

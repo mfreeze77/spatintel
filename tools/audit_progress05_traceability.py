@@ -36,7 +36,7 @@ COVERAGE: dict[str, tuple[str, str]] = {
     "PLTVIEW-004": ("deferred", "persistent label and evidence-view requirement remains NOT_STARTED in the ledger"),
     "PLTVIEW-005": ("direct", "browser-independent runtime and source tests execute keyboard, semantic fallback, captions, reduced motion, and contrast controls"),
     "PLTVIEW-006": ("direct", "round-trip session test compares saved commit, camera, layers, filters, redaction, and accessibility state"),
-    "PLTVIEW-007": ("direct", "control-driven renderer directives prove independent visibility, opacity, labeling, evidence role, and proxy pickability"),
+    "PLTVIEW-007": ("partial", "the five-role implementation and directive model are exercised, but no mounted React/Three.js viewer integration test has run in the frozen web toolchain"),
     "PLTVIEW-008": ("deferred", "stable semantic proxy picking remains outside the included verified scope"),
     "PLTVIEW-009": ("deferred", "proxy-started measurement UI acceptance remains outside the included verified scope"),
     "PLTVIEW-010": ("deferred", "independent diagnostic tooling remains outside this checkpoint"),
@@ -123,7 +123,7 @@ def build() -> dict[str, Any]:
 
     return {
         "schema": "sip.progress-05-traceability-audit/v1",
-        "milestone": "Progress 05-R1",
+        "milestone": "Progress 05-R2",
         "scope_requirement_count": len(P05_SCOPE_IDS),
         "audited_requirements": audited,
         "findings": findings,
