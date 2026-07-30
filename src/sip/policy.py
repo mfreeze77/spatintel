@@ -17,6 +17,9 @@ ROLE_ACTIONS: dict[str, set[str]] = {
     "tenant_admin": {"*"},
     "project_admin": {"project:*", "asset:*", "scene:*", "construction:*", "liveforever:*", "representation:*", "export:*"},
     "restricted_export_approver": {"construction:restricted_export", "construction:read", "asset:read"},
+    "restricted_reader": {"construction:restricted_read", "construction:read", "asset:read"},
+    "construction_verifier": {"construction:verify", "construction:read", "asset:read"},
+    "liveforever_reviewer": {"liveforever:review", "liveforever:read", "asset:read"},
     "capture_operator": {"asset:create", "capture:*", "scene:read"},
     "reviewer": {"asset:read", "scene:read", "scene:review", "measurement:review", "construction:read", "liveforever:read"},
     "publisher": {"representation:publish", "scene:commit", "scene:read", "asset:read"},
@@ -28,7 +31,12 @@ ROLE_ACTIONS: dict[str, set[str]] = {
 # Namespace wildcards are intentionally insufficient for these higher-order
 # approvals. They require an exact grant (or tenant-wide superuser authority)
 # so a routine project administrator cannot self-authorize a restricted export.
-EXACT_GRANT_ACTIONS = {"construction:restricted_export"}
+EXACT_GRANT_ACTIONS = {
+    "construction:restricted_export",
+    "construction:restricted_read",
+    "construction:verify",
+    "liveforever:review",
+}
 
 CLASSIFICATION_ORDER = {
     Classification.PUBLIC.value: 0,

@@ -500,6 +500,14 @@ class ConstructionSystem(StrictModel):
     data: dict[str, Any]
     evidence_asset_ids: list[str] = []
 
+class ConstructionSystemVerification(StrictModel):
+    method: str = Field(min_length=1, max_length=256)
+    scope: dict[str, Any]
+    exclusions: list[str] = Field(default_factory=list)
+    evidence_asset_ids: list[str] = Field(min_length=1)
+    signature_asset_id: str | None = None
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
 class ConstructionDocument(StrictModel):
     document_type: str
     asset_id: str
@@ -533,7 +541,8 @@ class ConsentRevoke(StrictModel):
 
 class MemoryCreate(StrictModel):
     record_type: str
-    subject_id: str
+    subject_id: str | None = None
+    subject_scope: dict[str, Any] | None = None
     related_ids: list[str] = []
     data: dict[str, Any]
     source_class: SourceClass
@@ -542,6 +551,13 @@ class MemoryCreate(StrictModel):
     audience: Audience
     purpose: str
     generated_lineage: dict[str, Any] | None = None
+
+class LiveForeverRecordReview(StrictModel):
+    target_source_class: Literal['corroborated', 'verified']
+    rationale: str = Field(min_length=1)
+    evidence_asset_ids: list[str] = Field(min_length=1)
+    confidence: float = Field(ge=0, le=1)
+    idempotency_key: str = Field(min_length=1, max_length=256)
 
 class ConflictingRecollections(StrictModel):
     subject_id: str
@@ -2415,9 +2431,16 @@ def _routers() -> dict[str, APIRouter]:
         )
 
     @construction.get('/v1/projects/{project_id}/construction/document-revisions/{revision_id}', operation_id='get_construction_document_revision')
-    def get_construction_document_revision(project_id: str, revision_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+    def get_construction_document_revision(
+        project_id: str, revision_id: str, request: Request, principal: Principal,
+        include_restricted: bool = Query(default=False),
+    ) -> dict[str, Any]:
         _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
-        return _context(request).construction.document_revision(principal.tenant_id, project_id, revision_id)
+        if include_restricted:
+            _require(request, principal, action='construction:restricted_read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.document_revision(
+            principal.tenant_id, project_id, revision_id, include_restricted=include_restricted,
+        )
 
     @construction.post('/v1/projects/{project_id}/construction/issues', status_code=201, operation_id='create_construction_issue')
     def create_construction_issue(project_id: str, body: ConstructionIssueCreate, request: Request, principal: Principal) -> dict[str, Any]:
@@ -2547,7 +2570,7 @@ def _routers() -> dict[str, APIRouter]:
     ) -> dict[str, Any]:
         _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
         if include_restricted:
-            _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+            _require(request, principal, action='construction:restricted_read', tenant_id=principal.tenant_id, project_id=project_id)
         return _context(request).construction.search_facility_records(
             principal.tenant_id, project_id, query=query, system_pack=system_pack,
             state=state, include_restricted=include_restricted,
@@ -2560,7 +2583,7 @@ def _routers() -> dict[str, APIRouter]:
     ) -> dict[str, Any]:
         _require(request, principal, action='construction:read', tenant_id=principal.tenant_id, project_id=project_id)
         if include_restricted:
-            _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
+            _require(request, principal, action='construction:restricted_read', tenant_id=principal.tenant_id, project_id=project_id)
         return _context(request).construction.export_system_pack(
             principal.tenant_id, project_id, pack=pack, include_restricted=include_restricted,
         )
@@ -2729,11 +2752,30 @@ def _routers() -> dict[str, APIRouter]:
         identifier = _context(request).construction.create_system_record(tenant_id=principal.tenant_id, project_id=project_id, system_type=body.system_type, parent_id=body.parent_id, entity_id=body.entity_id, state=body.state, data=body.data, evidence_asset_ids=body.evidence_asset_ids, actor_id=principal.subject_id)
         return {'record_id': identifier}
 
+    @construction.post('/v1/projects/{project_id}/construction/systems/{record_id}/verify', operation_id='verify_construction_system')
+    def verify_construction_system(
+        project_id: str, record_id: str, body: ConstructionSystemVerification,
+        request: Request, principal: Principal,
+    ) -> dict[str, Any]:
+        _require(request, principal, action='construction:verify', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).construction.verify_system_record(
+            record_id,
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            verifier_id=principal.subject_id,
+            method=body.method,
+            scope=body.scope,
+            exclusions=body.exclusions,
+            evidence_asset_ids=body.evidence_asset_ids,
+            signature_asset_id=body.signature_asset_id,
+            idempotency_key=body.idempotency_key,
+        )
+
     @construction.post('/v1/projects/{project_id}/construction/documents', status_code=201, operation_id='attach_construction_document')
     def construction_document(project_id: str, body: ConstructionDocument, request: Request, principal: Principal) -> dict[str, Any]:
         _require(request, principal, action='construction:*', tenant_id=principal.tenant_id, project_id=project_id)
         identifier = _context(request).construction.attach_document(tenant_id=principal.tenant_id, project_id=project_id, document_type=body.document_type, asset_id=body.asset_id, parent_id=body.parent_id, page_region=body.page_region, spatial_anchor=body.spatial_anchor, data=body.data, actor_id=principal.subject_id)
-        return {'record_id': identifier}
+        return {'record_id': identifier, 'revision_id': identifier, 'canonical_revision': True}
 
     @construction.post('/v1/projects/{project_id}/construction/deficiencies', status_code=201, operation_id='create_deficiency')
     def create_deficiency(project_id: str, body: DeficiencyCreate, request: Request, principal: Principal) -> dict[str, Any]:
@@ -2832,8 +2874,26 @@ def _routers() -> dict[str, APIRouter]:
     @memory.post('/v1/projects/{project_id}/liveforever/records', status_code=201, operation_id='create_memory_record')
     def create_memory(project_id: str, body: MemoryCreate, request: Request, principal: Principal) -> dict[str, Any]:
         _require(request, principal, action='liveforever:*', tenant_id=principal.tenant_id, project_id=project_id, purpose=body.purpose, audience=body.audience)
-        record_id = _context(request).liveforever.create_record(tenant_id=principal.tenant_id, project_id=project_id, record_type=body.record_type, subject_id=body.subject_id, related_ids=body.related_ids, data=body.data, source_class=body.source_class, confidence=body.confidence, evidence_asset_ids=body.evidence_asset_ids, audience=body.audience, actor_id=principal.subject_id, purpose=body.purpose, generated_lineage=body.generated_lineage)
+        record_id = _context(request).liveforever.create_record(tenant_id=principal.tenant_id, project_id=project_id, record_type=body.record_type, subject_id=body.subject_id, subject_scope=body.subject_scope, related_ids=body.related_ids, data=body.data, source_class=body.source_class, confidence=body.confidence, evidence_asset_ids=body.evidence_asset_ids, audience=body.audience, actor_id=principal.subject_id, purpose=body.purpose, generated_lineage=body.generated_lineage)
         return {'record_id': record_id}
+
+    @memory.post('/v1/projects/{project_id}/liveforever/records/{record_id}/review', status_code=201, operation_id='review_liveforever_record')
+    def review_liveforever_record(
+        project_id: str, record_id: str, body: LiveForeverRecordReview,
+        request: Request, principal: Principal,
+    ) -> dict[str, Any]:
+        _require(request, principal, action='liveforever:review', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).liveforever.review_record(
+            record_id,
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            reviewer_id=principal.subject_id,
+            target_source_class=SourceClass(body.target_source_class),
+            rationale=body.rationale,
+            evidence_asset_ids=body.evidence_asset_ids,
+            confidence=body.confidence,
+            idempotency_key=body.idempotency_key,
+        )
 
     @memory.post('/v1/projects/{project_id}/liveforever/conflicting-recollections', status_code=201, operation_id='create_conflicting_recollections')
     def create_conflicts(project_id: str, body: ConflictingRecollections, request: Request, principal: Principal) -> list[str]:

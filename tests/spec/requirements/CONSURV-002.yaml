@@ -8,11 +8,20 @@ source:
 requirement: The app shall support room/area checklists and detail evidence for labels, panel interiors, ceiling conditions,
   pathways, and interfaces.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/construction.py
+- src/sip/api.py
+- src/sip/database.py
+- migrations/versions/0014_vertical_mvp.py
+- docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md
 automated_test_ids:
-- REQ-CONSURV-002
-retained_evidence: []
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets
+retained_evidence:
+- build/evidence/demos/construction.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +30,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

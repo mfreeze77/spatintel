@@ -1,13 +1,13 @@
 # Requirements coverage report
 
-Generated: `2026-07-29T18:13:11.852299+00:00`
+Generated: `2026-07-30T00:02:28.015032+00:00`
 
 Total normative requirements: **1,028**
 
 | Priority | EXTERNAL_VALIDATION_REQUIRED | IMPLEMENTED_UNVERIFIED | IN_PROGRESS | NOT_STARTED | VERIFIED | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| P0 | 0 | 147 | 18 | 291 | 48 | 504 |
-| P1 | 3 | 86 | 4 | 389 | 42 | 524 |
+| P0 | 0 | 149 | 18 | 289 | 48 | 504 |
+| P1 | 3 | 88 | 4 | 387 | 42 | 524 |
 
 Verified: **90**
 External validation required: **3**

@@ -9,8 +9,9 @@ import pytest
 from fastapi.testclient import TestClient
 
 from sip.api import create_app
+from sip.canonical import sha256_bytes
 from sip.database import ConsentGrantRow, ConstructionRecordRow
-from sip.models import Audience
+from sip.models import Audience, AuthorityClass, Classification, ProvenanceRef, SourceClass
 
 
 def _headers(
@@ -29,6 +30,23 @@ def _headers(
         "X-SIP-Purposes": purposes,
         "X-SIP-Audience": "private",
     }
+
+
+def _asset(context, tenant: str, project: str, name: str):
+    payload = f"synthetic:{name}".encode("utf-8")
+    return context.assets.ingest_bytes(
+        tenant_id=tenant,
+        project_id=project,
+        data=payload,
+        media_type="application/octet-stream",
+        original_name=name,
+        classification=Classification.INTERNAL,
+        retention_class="records",
+        source_class=SourceClass.DIRECT_CAPTURE,
+        authority_class=AuthorityClass.EVIDENCE,
+        provenance=ProvenanceRef(source_ids=[f"synthetic:{name}"], output_hash=sha256_bytes(payload)),
+        actor_id="fixture-builder",
+    )
 
 
 def _two_projects(context, *, vertical: str) -> tuple[str, str, str, str]:
@@ -124,22 +142,25 @@ def test_progress06_r1_consent_revocation_is_tenant_and_project_scoped(context) 
 def test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped(context) -> None:
     """REQ: CONQC-003, CONQC-006, ARCIAM-001 unscoped and cross-tenant deficiency mutation fail closed while the owning project can retest."""
     tenant_a, project_a, tenant_b, project_b = _two_projects(context, vertical="construction")
+    observation = _asset(context, tenant_b, project_b, "synthetic-observation-b")
+    correction = _asset(context, tenant_b, project_b, "synthetic-correction")
+    retest = _asset(context, tenant_b, project_b, "synthetic-retest")
     deficiency_id = context.construction.create_deficiency(
         tenant_id=tenant_b,
         project_id=project_b,
         entity_id="synthetic-device-b",
         description="Synthetic deficiency",
         severity="high",
-        evidence_asset_ids=["synthetic-observation-b"],
+        evidence_asset_ids=[observation.asset_id],
         actor_id="reporter-b",
     )
     client = TestClient(create_app(context=context, service_name="construction"))
     attacker = _headers(tenant_a, project_b, subject="construction-admin-a", roles="project_admin")
     body = {
         "correction": "Synthetic correction",
-        "correction_asset_ids": ["synthetic-correction"],
+        "correction_asset_ids": [correction.asset_id],
         "test_result": "pass",
-        "test_asset_ids": ["synthetic-retest"],
+        "test_asset_ids": [retest.asset_id],
     }
 
     legacy = client.post(
@@ -187,12 +208,15 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         project_id="r1-issue-project",
         actor_id="bootstrap",
     )
+    observation = _asset(context, tenant, project, "observation-1")
+    correction = _asset(context, tenant, project, "correction-1")
+    retest = _asset(context, tenant, project, "retest-1")
     issue = context.construction.create_issue(
         tenant_id=tenant,
         project_id=project,
         issue_type="deficiency",
         description="Synthetic device failed test",
-        evidence=[{"asset_id": "observation-1"}],
+        evidence=[{"asset_id": observation.asset_id}],
         reporter_id="reporter",
         severity="high",
         idempotency_key="r1-issue-create",
@@ -204,7 +228,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         project_id=project,
         actor_id="reporter",
         target_state="corrected",
-        evidence=[{"asset_id": "correction-1"}],
+        evidence=[{"asset_id": correction.asset_id}],
         note="corrected",
     )
     context.construction.transition_issue(
@@ -213,7 +237,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         project_id=project,
         actor_id="reporter",
         target_state="retest_required",
-        evidence=[{"asset_id": "correction-1"}],
+        evidence=[{"asset_id": correction.asset_id}],
         note="ready for retest",
     )
     client = TestClient(create_app(context=context, service_name="construction"))
@@ -224,7 +248,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         headers=reporter,
         json={
             "target_state": "verified_closed",
-            "evidence": [{"asset_id": "retest-1"}],
+            "evidence": [{"asset_id": retest.asset_id}],
             "note": "attempt self-close",
             "verifier_id": "invented-independent-verifier",
         },
@@ -237,7 +261,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         headers=reporter,
         json={
             "target_state": "verified_closed",
-            "evidence": [{"asset_id": "retest-1"}],
+            "evidence": [{"asset_id": retest.asset_id}],
             "note": "attempt self-close",
         },
     )
@@ -250,7 +274,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
         headers=independent,
         json={
             "target_state": "verified_closed",
-            "evidence": [{"asset_id": "retest-1"}],
+            "evidence": [{"asset_id": retest.asset_id}],
             "note": "independent retest passed",
         },
     )
@@ -281,6 +305,7 @@ def test_progress06_r1_restricted_annex_requires_scoped_server_approval(context)
         state="observed",
         actor_id="bootstrap",
     )
+    controller_photo = _asset(context, tenant, project, "synthetic-controller-photo")
     controller_record_id = context.construction.create_system_record(
         tenant_id=tenant,
         project_id=project,
@@ -292,10 +317,10 @@ def test_progress06_r1_restricted_annex_requires_scoped_server_approval(context)
             "manufacturer": "Synthetic",
             "model": "CTRL-R1",
             "network_address": "192.0.2.55",
-            "controller_password": "synthetic-restricted-password",
+            "controller_password_vault_ref": "vault://construction/r1-controller/password",
             "location": "Synthetic room",
         },
-        evidence_asset_ids=["synthetic-controller-photo"],
+        evidence_asset_ids=[controller_photo.asset_id],
         actor_id="bootstrap",
     )
     scene = context.scene.create_scene(tenant, project, name="Synthetic restricted scene", actor_id="bootstrap")
@@ -394,4 +419,6 @@ def test_progress06_r1_restricted_annex_requires_scoped_server_approval(context)
         inventory = json.loads(archive.read("data/inventory.json"))
     controller = next(item for item in inventory if item["record_id"] == controller_record_id)
     assert controller["data"]["network_address"] == "192.0.2.55"
-    assert controller["data"]["controller_password"] == "synthetic-restricted-password"
+    assert controller["data"]["controller_password_vault_ref"] == "vault://construction/r1-controller/password"
+    assert "controller_password" not in controller["data"]
+    assert "synthetic-restricted-password" not in json.dumps(controller, sort_keys=True)

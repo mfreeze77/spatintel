@@ -31,6 +31,7 @@ from sip.database import (
     CollaborationTaskRow,
     ConsentGrantRow,
     ConstructionRecordRow,
+    ConstructionRecordVerificationRow,
     CoordinateFrameRow,
     DerivationEventRow,
     EvidenceRecordRow,
@@ -38,6 +39,7 @@ from sip.database import (
     LegalHoldRow,
     MeasurementRow,
     MemoryRecordRow,
+    LiveForeverRecordReviewRow,
     RepresentationAssetRow,
     RepresentationBindingRow,
     RetentionRuleRow,
@@ -302,7 +304,9 @@ def _preserve_and_restore(
         MeasurementRow,
         ConsentGrantRow,
         ConstructionRecordRow,
+    ConstructionRecordVerificationRow,
         MemoryRecordRow,
+    LiveForeverRecordReviewRow,
         CollaborationCommentRow,
         CollaborationTaskRow,
         RetentionRuleRow,
@@ -1253,8 +1257,9 @@ def liveforever(output: Path) -> dict[str, Any]:
         audiences=[Audience.PRIVATE, Audience.FAMILY, Audience.PUBLIC], scopes=["*"], derivative_policy={"generated_visual": True, "voice": False, "likeness": False, "dialogue": False},
         expires_at=datetime.now(UTC) + timedelta(days=365),
     )
-    person = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="person", subject_id=subject, related_ids=[], data={"name": "Alex Synthetic"}, source_class=SourceClass.CORROBORATED, confidence=1.0, evidence_asset_ids=[evidence["letter.txt"]], audience=Audience.PUBLIC, actor_id=actor)
-    place = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="place", subject_id=subject, related_ids=[person], data={"name": "Synthetic Family Kitchen", "spatial_anchor": {"frame_id": "memory-place", "point": [1.2, 0.8, 0.0]}}, source_class=SourceClass.CORROBORATED, confidence=0.9, evidence_asset_ids=[evidence["family-photo.jpg"]], audience=Audience.FAMILY, actor_id=actor)
+    person_source = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="person", subject_id=subject, related_ids=[], data={"name": "Alex Synthetic"}, source_class=SourceClass.OBSERVED, confidence=0.8, evidence_asset_ids=[evidence["letter.txt"]], audience=Audience.PUBLIC, actor_id=actor)
+    person = context.liveforever.review_record(person_source, tenant_id=tenant_id, project_id=project_id, reviewer_id="demo-liveforever-independent-reviewer", target_source_class=SourceClass.CORROBORATED, rationale="The synthetic letter and photograph independently support the person identity.", evidence_asset_ids=[evidence["letter.txt"], evidence["family-photo.jpg"]], confidence=1.0, idempotency_key="demo-person-corroboration")["reviewed_record_id"]
+    place = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="place", subject_id=subject, related_ids=[person], data={"name": "Synthetic Family Kitchen", "spatial_anchor": {"frame_id": "memory-place", "point": [1.2, 0.8, 0.0]}}, source_class=SourceClass.OBSERVED, confidence=0.9, evidence_asset_ids=[evidence["family-photo.jpg"]], audience=Audience.FAMILY, actor_id=actor)
     event = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="event", subject_id=subject, related_ids=[person, place], data={"title": "Family trip", "date": "1984-06", "timeline_order": 1}, source_class=SourceClass.RECALLED, confidence=0.7, evidence_asset_ids=[evidence["interview-a.txt"]], audience=Audience.FAMILY, actor_id=actor)
     private_interview = context.liveforever.create_record(tenant_id=tenant_id, project_id=project_id, record_type="interview", subject_id=subject, related_ids=[person], data={"speaker": "Alex Synthetic", "recorded_at": "2026-07-27", "transcript_asset_id": evidence["transcript.vtt"], "recording_asset_id": evidence["recording.wav"]}, source_class=SourceClass.DIRECT_CAPTURE, confidence=1.0, evidence_asset_ids=[evidence["transcript.vtt"], evidence["recording.wav"]], audience=Audience.PRIVATE, actor_id=actor)
     conflict = context.liveforever.conflicting_recollections(

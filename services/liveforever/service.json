@@ -110,6 +110,11 @@
     },
     {
       "method": "POST",
+      "operation_id": "review_liveforever_record",
+      "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/review"
+    },
+    {
+      "method": "POST",
       "operation_id": "revise_liveforever_record",
       "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/revisions"
     },

@@ -26,6 +26,7 @@ from .database import (
     ConstructionIssueRow,
     ConstructionRecordRow,
     ConstructionRestrictedExportApprovalRow,
+    ConstructionRecordVerificationRow,
     ConstructionSurveyRow,
     ConstructionVisitRow,
     Database,
@@ -34,6 +35,12 @@ from .database import (
 )
 from .errors import AuthorizationError, ConflictError, NotFoundError, ValidationError
 from .events import OutboxEventFactory
+from .evidence_validation import evidence_ids_and_hashes, require_scoped_immutable_assets
+from .restricted_data import (
+    is_opaque_restricted_reference_key,
+    strip_raw_restricted_values,
+    validate_no_raw_restricted_values,
+)
 from .temporal import db_now
 
 
@@ -147,6 +154,69 @@ def _forbidden_identity_paths(value: Any, *, path: str = "$") -> list[str]:
     return findings
 
 
+_RESTRICTED_CLASSIFICATIONS = {
+    "restricted", "critical_infrastructure", "biometric", "minor",
+}
+
+
+def _restricted_field_names(record_type: str) -> set[str]:
+    for pack in SYSTEM_PACKS.values():
+        if record_type in pack["types"]:
+            return set(pack["restricted"])
+    return set()
+
+
+def _record_is_restricted(record_type: str, data: dict[str, Any]) -> bool:
+    classification = str(data.get("classification") or data.get("security_classification") or "").strip().lower()
+    if classification in _RESTRICTED_CLASSIFICATIONS:
+        return True
+    if data.get("restricted") is True or data.get("search_visibility") is False:
+        return True
+    restricted_fields = _restricted_field_names(record_type)
+    if any(field in data and data.get(field) not in (None, "", [], {}) for field in restricted_fields):
+        return True
+    return any(is_opaque_restricted_reference_key(str(key)) for key in data)
+
+
+def _document_is_restricted(document: ConstructionDocumentRevisionRow) -> bool:
+    permissions = dict(document.permissions_json or {})
+    classification = str(permissions.get("classification") or "").strip().lower()
+    return bool(
+        document.document_type == "programming_record"
+        or permissions.get("owner_export") is False
+        or permissions.get("search_visible") is False
+        or permissions.get("restricted") is True
+        or classification in _RESTRICTED_CLASSIFICATIONS
+    )
+
+
+def _issue_is_restricted(issue: ConstructionIssueRow) -> bool:
+    permissions = dict(issue.permissions_json or {})
+    classification = str(permissions.get("classification") or "").strip().lower()
+    return bool(
+        permissions.get("search_visible") is False
+        or permissions.get("restricted") is True
+        or classification in _RESTRICTED_CLASSIFICATIONS
+    )
+
+
+def _sanitized_record_data(record_type: str, data: dict[str, Any], *, include_restricted: bool) -> tuple[dict[str, Any], list[str]]:
+    # Raw secrets are never disclosed, including in a restricted annex. Legacy
+    # rows are scrubbed defensively while new writes are rejected at admission.
+    scrubbed, removed = strip_raw_restricted_values(dict(data))
+    redacted = list(removed)
+    if not include_restricted:
+        for field in sorted(_restricted_field_names(record_type)):
+            if field in scrubbed:
+                scrubbed.pop(field)
+                redacted.append(f"$.{field}")
+        for key in list(scrubbed):
+            if is_opaque_restricted_reference_key(key):
+                scrubbed.pop(key)
+                redacted.append(f"$.{key}")
+    return scrubbed, sorted(set(redacted))
+
+
 class ConstructionService:
     def __init__(self, database: Database, audit: AuditService) -> None:
         self.database = database
@@ -187,10 +257,27 @@ class ConstructionService:
             raise ValidationError("CONSTRUCTION_SYSTEM_TYPE", "unsupported building system record")
         if state not in CONDITION_STATES:
             raise ValidationError("CONSTRUCTION_STATE", "unsupported condition state")
-        if state in {"observed", "measured", "verified"} and not evidence_asset_ids:
-            raise ValidationError("CONSTRUCTION_EVIDENCE_REQUIRED", "observed/measured/verified system records require evidence")
-        if state == "verified" and not data.get("verified_by"):
-            raise ValidationError("CONSTRUCTION_VERIFIER_REQUIRED", "verified system record requires a verifier")
+        if state == "verified":
+            raise ValidationError(
+                "CONSTRUCTION_DIRECT_VERIFICATION_PROHIBITED",
+                "verified Construction records must be produced by the governed verification transition",
+            )
+        supplied_verification = data.get("verification")
+        if (
+            "verified_by" in data
+            or "verification_id" in data
+            or (
+                isinstance(supplied_verification, dict)
+                and any(key in supplied_verification for key in {"verifier_id", "verification_id", "verified_at", "verification_hash"})
+            )
+        ):
+            raise ValidationError(
+                "CONSTRUCTION_VERIFICATION_METADATA_PROHIBITED",
+                "verification identity and governed verification metadata are server-derived and may not be supplied during record creation",
+            )
+        if state in {"observed", "measured"} and not evidence_asset_ids:
+            raise ValidationError("CONSTRUCTION_EVIDENCE_REQUIRED", "observed and measured system records require immutable evidence")
+        validate_no_raw_restricted_values(data, code_prefix="CONSTRUCTION_SYSTEM")
         pack = self._pack_for_type(system_type)
         missing = sorted(pack["required"] - {key for key, value in data.items() if value not in (None, "")})
         normalized_data = {
@@ -203,6 +290,14 @@ class ConstructionService:
         with self.database.session() as session:
             if parent_id:
                 self._scoped_record(session, parent_id, tenant_id, project_id)
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_asset_ids,
+                code_prefix="CONSTRUCTION_SYSTEM_EVIDENCE",
+                require_nonempty=state in {"observed", "measured"},
+            )
             session.add(ConstructionRecordRow(record_id=identifier, tenant_id=tenant_id, project_id=project_id,
                                                record_type=system_type, parent_id=parent_id, entity_id=entity_id,
                                                state=state, data_json=normalized_data,
@@ -211,6 +306,145 @@ class ConstructionService:
                          identifier, {"system_type": system_type, "state": state, "pack": pack["name"]},
                          "construction.system_record.created", "construction_record")
         return identifier
+
+    def verify_system_record(self, record_id: str, *, tenant_id: str, project_id: str,
+                             verifier_id: str, method: str, scope: dict[str, Any], exclusions: list[str],
+                             evidence_asset_ids: list[str], signature_asset_id: str | None,
+                             idempotency_key: str) -> dict[str, Any]:
+        if not method.strip() or not scope or not idempotency_key.strip():
+            raise ValidationError(
+                "CONSTRUCTION_VERIFICATION_INVALID",
+                "verification requires a method, explicit scope, and idempotency key",
+            )
+        request = {
+            "record_id": record_id,
+            "method": method.strip(),
+            "scope": scope,
+            "exclusions": sorted(set(exclusions)),
+            "evidence_asset_ids": sorted(set(evidence_asset_ids)),
+            "signature_asset_id": signature_asset_id,
+        }
+        request_hash = canonical_sha256(request)
+        with self.database.session() as session:
+            prior = session.scalar(select(ConstructionRecordVerificationRow).where(
+                ConstructionRecordVerificationRow.tenant_id == tenant_id,
+                ConstructionRecordVerificationRow.project_id == project_id,
+                ConstructionRecordVerificationRow.idempotency_key == idempotency_key,
+            ))
+            if prior:
+                if prior.request_hash != request_hash:
+                    raise ConflictError(
+                        "CONSTRUCTION_VERIFICATION_IDEMPOTENCY_CONFLICT",
+                        "verification idempotency key was already used for different content",
+                    )
+                return {
+                    "verification_id": prior.verification_id,
+                    "record_id": prior.record_id,
+                    "state": "verified",
+                    "verifier_id": prior.verifier_id,
+                    "verification_hash": prior.verification_hash,
+                    "idempotent_replay": True,
+                }
+            record = self._scoped(session, ConstructionRecordRow, record_id, tenant_id, project_id, "construction_record")
+            if record.record_type not in SYSTEM_TYPES:
+                raise ValidationError("CONSTRUCTION_VERIFICATION_RECORD_TYPE", "only governed system records may use this transition")
+            if record.state in {"superseded", "disputed"}:
+                raise ConflictError("CONSTRUCTION_VERIFICATION_STATE", "disputed or superseded records cannot be verified")
+            if verifier_id == record.created_by:
+                raise ValidationError(
+                    "CONSTRUCTION_INDEPENDENT_VERIFIER_REQUIRED",
+                    "the creator of a Construction record may not independently verify it",
+                )
+            all_assets = list(evidence_asset_ids)
+            if signature_asset_id:
+                all_assets.append(signature_asset_id)
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=all_assets,
+                code_prefix="CONSTRUCTION_VERIFICATION_EVIDENCE",
+                require_nonempty=True,
+            )
+            if record.state == "verified":
+                existing = session.scalar(select(ConstructionRecordVerificationRow).where(
+                    ConstructionRecordVerificationRow.tenant_id == tenant_id,
+                    ConstructionRecordVerificationRow.project_id == project_id,
+                    ConstructionRecordVerificationRow.record_id == record_id,
+                ))
+                if existing and existing.request_hash == request_hash:
+                    return {
+                        "verification_id": existing.verification_id,
+                        "record_id": record_id,
+                        "state": "verified",
+                        "verifier_id": existing.verifier_id,
+                        "verification_hash": existing.verification_hash,
+                        "idempotent_replay": True,
+                    }
+                raise ConflictError("CONSTRUCTION_ALREADY_VERIFIED", "record was already verified under a different review")
+            verification_id = new_uuid()
+            verification_body = {
+                **request,
+                "verification_id": verification_id,
+                "tenant_id": tenant_id,
+                "project_id": project_id,
+                "verifier_id": verifier_id,
+                "prior_state": record.state,
+            }
+            verification_hash = canonical_sha256(verification_body)
+            review = ConstructionRecordVerificationRow(
+                verification_id=verification_id,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                record_id=record_id,
+                idempotency_key=idempotency_key,
+                request_hash=request_hash,
+                verifier_id=verifier_id,
+                prior_state=record.state,
+                method=method.strip(),
+                scope_json=scope,
+                exclusions_json=sorted(set(exclusions)),
+                evidence_asset_ids_json=sorted(set(evidence_asset_ids)),
+                signature_asset_id=signature_asset_id,
+                verification_hash=verification_hash,
+            )
+            session.add(review)
+            record.state = "verified"
+            record.evidence_asset_ids_json = sorted(set(record.evidence_asset_ids_json + all_assets))
+            record.data_json = {
+                **record.data_json,
+                "verification": {
+                    "verification_id": verification_id,
+                    "verifier_id": verifier_id,
+                    "method": method.strip(),
+                    "scope": scope,
+                    "exclusions": sorted(set(exclusions)),
+                    "evidence_asset_ids": sorted(set(evidence_asset_ids)),
+                    "signature_asset_id": signature_asset_id,
+                    "verification_hash": verification_hash,
+                    "verified_at": db_now().isoformat(),
+                },
+            }
+            self._record(
+                session,
+                tenant_id,
+                project_id,
+                verifier_id,
+                "construction:system_verify",
+                "construction_record_verification",
+                verification_id,
+                {"record_id": record_id, "verification_hash": verification_hash},
+                "construction.system_record.verified",
+                "construction_record_verification",
+            )
+            return {
+                "verification_id": verification_id,
+                "record_id": record_id,
+                "state": "verified",
+                "verifier_id": verifier_id,
+                "verification_hash": verification_hash,
+                "idempotent_replay": False,
+            }
 
     def export_system_pack(self, tenant_id: str, project_id: str, *, pack: str, include_restricted: bool = False) -> dict[str, Any]:
         if pack not in SYSTEM_PACKS:
@@ -224,18 +458,16 @@ class ConstructionService:
             )))
         records = []
         for row in rows:
-            data = dict(row.data_json)
-            redacted: list[str] = []
-            if not include_restricted:
-                for key in sorted(spec["restricted"]):
-                    if key in data:
-                        data.pop(key)
-                        redacted.append(key)
+            source_data = dict(row.data_json)
+            if _record_is_restricted(row.record_type, source_data) and not include_restricted:
+                continue
+            data, redacted = _sanitized_record_data(row.record_type, source_data, include_restricted=include_restricted)
             records.append({"record_id": row.record_id, "record_type": row.record_type, "state": row.state,
                             "data": data, "evidence_asset_ids": row.evidence_asset_ids_json,
                             "redacted_fields": redacted})
         body = {"pack": pack, "project_id": project_id, "records": records,
                 "restricted_fields_included": include_restricted,
+                "raw_secrets_included": False,
                 "truth_rule": "design, observed, inferred, and verified states remain distinct"}
         return {**body, "root_hash": canonical_sha256(body)}
 
@@ -312,6 +544,18 @@ class ConstructionService:
                 self._scoped_commit(session, exact_prior_commit_id, tenant_id, project_id)
                 if survey.baseline_commit_id and survey.baseline_commit_id != exact_prior_commit_id:
                     raise ConflictError("FIELD_VISIT_BASELINE_MISMATCH", "visit prior commit differs from the survey baseline")
+            require_scoped_immutable_assets(
+                session, tenant_id=tenant_id, project_id=project_id, asset_ids=capture_ids,
+                code_prefix="FIELD_VISIT_CAPTURE", require_nonempty=True,
+            )
+            detail_asset_ids, detail_hashes = evidence_ids_and_hashes(
+                detail_evidence, code_prefix="FIELD_VISIT_DETAIL_EVIDENCE"
+            ) if detail_evidence else ([], {})
+            require_scoped_immutable_assets(
+                session, tenant_id=tenant_id, project_id=project_id, asset_ids=detail_asset_ids,
+                expected_hashes=detail_hashes, code_prefix="FIELD_VISIT_DETAIL_EVIDENCE",
+                require_nonempty=False,
+            )
             report = {"survey_id": survey_id, "scope": scope, "capture_ids": sorted(set(capture_ids)),
                       "checklist": checklist, "detail_evidence": detail_evidence,
                       "inaccessible_regions": inaccessible_regions, "coverage": coverage, "tracking": tracking,
@@ -398,9 +642,13 @@ class ConstructionService:
             }
             return {**body, "aggregate_hash": canonical_sha256(body)}
 
-    def document_revision(self, tenant_id: str, project_id: str, revision_id: str) -> dict[str, Any]:
+    def document_revision(self, tenant_id: str, project_id: str, revision_id: str, *,
+                          include_restricted: bool = False) -> dict[str, Any]:
         with self.database.session() as session:
             row = self._scoped(session, ConstructionDocumentRevisionRow, revision_id, tenant_id, project_id, "document_revision")
+            if _document_is_restricted(row) and not include_restricted:
+                # Hide existence as well as content from unauthorized callers.
+                raise NotFoundError("document_revision", revision_id)
             body = {"revision_id": row.revision_id, "stable_document_id": row.stable_document_id,
                     **self._document_body(row), "created_by": row.created_by, "created_at": row.created_at.isoformat()}
             return {**body, "revision_hash": canonical_sha256(self._document_body(row))}
@@ -439,7 +687,6 @@ class ConstructionService:
         if system_pack is not None and system_pack not in SYSTEM_PACKS:
             raise ValidationError("CONSTRUCTION_PACK_UNKNOWN", "unknown system pack")
         allowed_types = SYSTEM_PACKS[system_pack]["types"] if system_pack else None
-        restricted = set().union(*(pack["restricted"] for pack in SYSTEM_PACKS.values()))
         with self.database.session() as session:
             records = list(session.scalars(select(ConstructionRecordRow).where(
                 ConstructionRecordRow.tenant_id == tenant_id, ConstructionRecordRow.project_id == project_id)))
@@ -454,37 +701,48 @@ class ConstructionService:
                 continue
             if state and row.state != state:
                 continue
-            data = dict(row.data_json)
-            haystack = json.dumps({"type": row.record_type, "state": row.state, "data": data}, sort_keys=True).lower()
+            source_data = dict(row.data_json)
+            # Authorization and complete hiding happen before any matching,
+            # counting, hashing, faceting, or URL generation.
+            if _record_is_restricted(row.record_type, source_data) and not include_restricted:
+                continue
+            data, redacted = _sanitized_record_data(
+                row.record_type, source_data, include_restricted=include_restricted
+            )
+            haystack = json.dumps(
+                {"type": row.record_type, "state": row.state, "data": data}, sort_keys=True
+            ).lower()
             if normalized and normalized not in haystack:
                 continue
-            redacted = []
-            if not include_restricted:
-                for field in sorted(restricted):
-                    if field in data:
-                        data.pop(field)
-                        redacted.append(field)
             items.append({"kind": "record", "id": row.record_id, "record_type": row.record_type,
                           "state": row.state, "parent_id": row.parent_id, "entity_id": row.entity_id,
                           "data": data, "redacted_fields": redacted})
         for row in documents:
-            haystack = json.dumps({"title": row.title, "type": row.document_type, "revision": row.revision,
-                                   "links": row.spatial_links_json}, sort_keys=True).lower()
+            if _document_is_restricted(row) and not include_restricted:
+                continue
+            document = {"title": row.title, "type": row.document_type, "revision": row.revision,
+                        "status": row.status, "links": row.spatial_links_json}
+            haystack = json.dumps(document, sort_keys=True).lower()
             if normalized and normalized not in haystack:
                 continue
             items.append({"kind": "document", "id": row.revision_id, "document_type": row.document_type,
                           "title": row.title, "revision": row.revision, "status": row.status,
                           "stable_document_id": row.stable_document_id, "spatial_links": row.spatial_links_json})
         for row in issues:
-            haystack = json.dumps({"type": row.issue_type, "description": row.description,
-                                   "status": row.status, "history": row.history_json}, sort_keys=True).lower()
+            if _issue_is_restricted(row) and not include_restricted:
+                continue
+            issue = {"type": row.issue_type, "description": row.description,
+                     "status": row.status, "history": row.history_json}
+            haystack = json.dumps(issue, sort_keys=True).lower()
             if normalized and normalized not in haystack:
                 continue
             items.append({"kind": "issue", "id": row.issue_id, "issue_type": row.issue_type,
                           "description": row.description, "status": row.status, "severity": row.severity,
                           "entity_id": row.entity_id, "place_id": row.place_id})
         body = {"project_id": project_id, "query": query, "system_pack": system_pack, "state": state,
-                "include_restricted": include_restricted, "items": sorted(items, key=lambda item: (item["kind"], item["id"]))}
+                "include_restricted": include_restricted,
+                "raw_secrets_included": False,
+                "items": sorted(items, key=lambda item: (item["kind"], item["id"]))}
         return {**body, "result_hash": canonical_sha256(body)}
 
     # Documents, RFIs, issues and commissioning ------------------------------------------------
@@ -499,6 +757,11 @@ class ConstructionService:
             raise ValidationError("CONSTRUCTION_DOCUMENT_TYPE", "unsupported construction document type")
         if page_count < 1 or not title.strip() or not revision.strip():
             raise ValidationError("DOCUMENT_REVISION_INVALID", "document title, revision, and positive page count are required")
+        validate_no_raw_restricted_values(
+            {"permissions": permissions, "page_regions": page_regions, "spatial_links": spatial_links,
+             "extraction": extraction, "review": review},
+            code_prefix="CONSTRUCTION_DOCUMENT_METADATA",
+        )
         digest = _hex64(source_sha256)
         stable_document_id = stable_document_id or new_uuid()
         with self.database.session() as session:
@@ -548,12 +811,22 @@ class ConstructionService:
                      due_at: datetime | None = None, permissions: dict[str, Any] | None = None) -> dict[str, Any]:
         if severity not in {"low", "medium", "high", "life_safety"} or not evidence:
             raise ValidationError("ISSUE_INVALID", "issue requires valid severity and evidence")
+        evidence_ids, evidence_hashes = evidence_ids_and_hashes(evidence, code_prefix="CONSTRUCTION_ISSUE_EVIDENCE")
         request = {"issue_type": issue_type, "description": description, "evidence": evidence, "severity": severity,
                    "entity_id": entity_id, "place_id": place_id, "observed_commit_id": observed_commit_id,
                    "responsible_party": responsible_party, "due_at": due_at.isoformat() if due_at else None,
                    "permissions": permissions or {}}
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_ids,
+                expected_hashes=evidence_hashes,
+                code_prefix="CONSTRUCTION_ISSUE_EVIDENCE",
+                require_nonempty=True,
+            )
             prior = self._idempotent(session, ConstructionIssueRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior:
                 return self._issue_result(prior, True)
@@ -588,8 +861,20 @@ class ConstructionService:
             "disputed": {"open", "acknowledged", "superseded"},
             "verified_closed": set(), "superseded": set(),
         }
+        evidence_ids, evidence_hashes = evidence_ids_and_hashes(
+            evidence, code_prefix="CONSTRUCTION_ISSUE_TRANSITION_EVIDENCE"
+        ) if evidence else ([], {})
         with self.database.session() as session:
             row = self._scoped(session, ConstructionIssueRow, issue_id, tenant_id, project_id, "issue")
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_ids,
+                expected_hashes=evidence_hashes,
+                code_prefix="CONSTRUCTION_ISSUE_TRANSITION_EVIDENCE",
+                require_nonempty=target_state in {"corrected", "retest_required", "verified_closed"},
+            )
             if target_state == row.status:
                 return self._issue_result(row, True)
             if target_state not in transitions.get(row.status, set()):
@@ -639,6 +924,14 @@ class ConstructionService:
                    "results": results, "retest_of_id": retest_of_id, "accept": accept}
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=attachments,
+                code_prefix="CONSTRUCTION_COMMISSIONING_ATTACHMENT",
+                require_nonempty=False,
+            )
             prior = self._idempotent(session, ConstructionCommissioningRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior:
                 return self._commissioning_result(prior, True)
@@ -680,6 +973,11 @@ class ConstructionService:
         if direction not in {"import", "export"} or not units or not schema_version:
             raise ValidationError("INTERCHANGE_INVALID", "interchange direction, units, and schema version are required")
         digest = _hex64(source_sha256)
+        validate_no_raw_restricted_values(
+            {"classifications": classifications, "properties": properties, "relationships": relationships,
+             "mappings": mappings, "issues": issues, "truth_labels": truth_labels},
+            code_prefix="CONSTRUCTION_INTERCHANGE_METADATA",
+        )
         request = {"format": format_name, "direction": direction, "source_asset_id": source_asset_id,
                    "source_sha256": digest, "schema_version": schema_version, "units": units, "crs": crs,
                    "owner_history": owner_history, "global_ids": sorted(set(global_ids)),
@@ -1082,16 +1380,58 @@ class ConstructionService:
     def attach_document(self, *, tenant_id: str, project_id: str, document_type: str, asset_id: str,
                         parent_id: str | None, page_region: dict[str, Any] | None,
                         spatial_anchor: dict[str, Any] | None, data: dict[str, Any], actor_id: str) -> str:
+        """Compatibility adapter that creates the canonical immutable revision.
+
+        The legacy generic-record bypass is intentionally removed. All callers
+        now inherit the same scoped immutable-asset and provenance validation as
+        the canonical document-revision workflow.
+        """
         if document_type not in DOCUMENT_TYPES:
             raise ValidationError("CONSTRUCTION_DOCUMENT_TYPE", "unsupported construction document type")
-        identifier = new_uuid()
+        validate_no_raw_restricted_values(data, code_prefix="CONSTRUCTION_DOCUMENT_METADATA")
         with self.database.session() as session:
-            session.add(ConstructionRecordRow(record_id=identifier, tenant_id=tenant_id, project_id=project_id,
-                                               record_type=document_type, parent_id=parent_id, state="observed",
-                                               data_json={**data, "asset_id": asset_id, "page_region": page_region,
-                                                          "spatial_anchor": spatial_anchor},
-                                               evidence_asset_ids_json=[asset_id], created_by=actor_id))
-        return identifier
+            refs = require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=[asset_id],
+                code_prefix="DOCUMENT",
+                require_nonempty=True,
+            )
+            asset = refs[0]
+            if parent_id:
+                self._scoped_record(session, parent_id, tenant_id, project_id)
+            original_name = asset.original_name
+        permissions = dict(data.get("permissions") or {})
+        if document_type == "programming_record":
+            permissions = {**permissions, "restricted": True, "search_visible": False, "owner_export": False}
+        spatial_links = []
+        if spatial_anchor:
+            spatial_links.append(dict(spatial_anchor))
+        if parent_id:
+            spatial_links.append({"record_id": parent_id})
+        result = self.create_document_revision(
+            tenant_id=tenant_id,
+            project_id=project_id,
+            stable_document_id=str(data.get("stable_document_id") or "").strip() or None,
+            document_type=document_type,
+            title=str(data.get("title") or data.get("name") or original_name).strip(),
+            revision=str(data.get("revision") or "legacy-1").strip(),
+            issue_date=str(data.get("issue_date") or db_now().date().isoformat()),
+            issuer=str(data.get("issuer") or actor_id),
+            status=str(data.get("status") or "observed"),
+            asset_id=asset_id,
+            source_sha256=asset.sha256,
+            page_count=max(1, int(data.get("page_count") or 1)),
+            permissions=permissions,
+            page_regions=[dict(page_region)] if page_region else [],
+            spatial_links=spatial_links,
+            extraction=dict(data.get("extraction") or {}),
+            review=dict(data.get("review") or {"state": "compatibility_adapter", "review_required": True}),
+            actor_id=actor_id,
+            supersedes_revision_id=data.get("supersedes_revision_id"),
+        )
+        return str(result["revision_id"])
 
     def create_deficiency(self, *, tenant_id: str, project_id: str, entity_id: str, description: str,
                           severity: str, evidence_asset_ids: list[str], actor_id: str) -> str:
@@ -1126,6 +1466,14 @@ class ConstructionService:
             raise ValidationError("CORRECTION_RETEST_EVIDENCE", "valid correction and retest evidence are required")
         with self.database.session() as session:
             row = self._scoped(session, ConstructionRecordRow, deficiency_id, tenant_id, project_id, "deficiency")
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=[*correction_asset_ids, *test_asset_ids],
+                code_prefix="CONSTRUCTION_DEFICIENCY_RETEST_EVIDENCE",
+                require_nonempty=True,
+            )
             if row.record_type != "deficiency":
                 raise NotFoundError("deficiency", deficiency_id)
             if row.state == "closed":
@@ -1359,16 +1707,21 @@ class ConstructionService:
         inventory: list[dict[str, Any]] = []
         redaction_summary: list[dict[str, Any]] = []
         required_field_findings: list[dict[str, Any]] = []
+        restricted_record_ids: set[str] = set()
         for record in records:
-            data = dict(record.data_json)
-            redacted: list[str] = []
+            source_data = dict(record.data_json)
+            if _record_is_restricted(record.record_type, source_data) and not include_restricted:
+                restricted_record_ids.add(record.record_id)
+                redaction_summary.append({
+                    "record_id": None,
+                    "fields": ["restricted_entity_withheld"],
+                    "reason": "authorization_before_export",
+                })
+                continue
+            data, redacted = _sanitized_record_data(
+                record.record_type, source_data, include_restricted=include_restricted
+            )
             if record.record_type in SYSTEM_TYPES:
-                pack = self._pack_for_type(record.record_type)
-                if not include_restricted:
-                    for key in sorted(pack["restricted"]):
-                        if key in data:
-                            data.pop(key)
-                            redacted.append(key)
                 missing = list(data.get("missing_required_fields", []))
                 if missing:
                     required_field_findings.append({
@@ -1399,17 +1752,24 @@ class ConstructionService:
             doc_data.append({"revision_id": document.revision_id, "stable_document_id": document.stable_document_id,
                              **self._document_body(document)})
 
-        issue_data = [{"issue_id": item.issue_id, "type": item.issue_type, "description": item.description,
-                       "status": item.status, "severity": item.severity, "evidence": item.evidence_json,
-                       "history": item.history_json, "verification": item.verification_json} for item in issues]
+        issue_data = [
+            {"issue_id": item.issue_id, "type": item.issue_type, "description": item.description,
+             "status": item.status, "severity": item.severity, "evidence": item.evidence_json,
+             "history": item.history_json, "verification": item.verification_json}
+            for item in issues if include_restricted or item.entity_id not in restricted_record_ids
+        ]
         run_data = [{"commissioning_id": run.commissioning_id, "system_type": run.system_type, "state": run.state,
                      "procedure": run.procedure_json, "steps": run.steps_json, "results": run.results_json,
                      "participants": run.participants_json, "instruments": run.instruments_json} for run in runs]
-        interchange_data = [{"interchange_id": item.interchange_id, "format": item.format,
-                             "direction": item.direction, "source_sha256": item.source_sha256,
-                             "schema_version": item.schema_version, "units": item.units, "crs": item.crs_json,
-                             "status": item.status, "unsupported_constructs": item.unsupported_constructs_json,
-                             "truth_labels": item.truth_labels_json} for item in interchanges]
+        interchange_data = [
+            {"interchange_id": item.interchange_id, "format": item.format,
+             "direction": item.direction, "source_sha256": item.source_sha256,
+             "schema_version": item.schema_version, "units": item.units, "crs": item.crs_json,
+             "status": item.status, "unsupported_constructs": item.unsupported_constructs_json,
+             "truth_labels": {key: value for key, value in item.truth_labels_json.items()
+                              if include_restricted or key not in restricted_record_ids}}
+            for item in interchanges
+        ]
         technical = self.technical_report(
             tenant_id, project_id, audience="owner", scope=scope,
             scene_commit_id=accepted_commit_id, author_id="sip-owner-handoff-service",
@@ -1437,8 +1797,14 @@ class ConstructionService:
                                 "design": "design intent", "evidence": "immutable source links"},
             "limitations": technical["warnings"], "open_format": True, "offline_viewer": True,
         }
-        verified = {record.record_id: {"state": record.state, "verified_by": record.data_json.get("verified_by")}
-                    for record in records if record.state == "verified"}
+        verified = {
+            record.record_id: {
+                "state": record.state,
+                "verification": dict(record.data_json.get("verification") or {}),
+            }
+            for record in records
+            if record.state == "verified" and (include_restricted or record.record_id not in restricted_record_ids)
+        }
         return {"manifest": manifest, "inventory": inventory, "documents": doc_data, "issues": issue_data,
                 "commissioning": run_data, "interchange": interchange_data, "technical": technical,
                 "owner": owner, "verified_attributes": verified, "handoff_validation": handoff_validation}

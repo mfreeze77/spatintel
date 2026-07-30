@@ -115,7 +115,8 @@
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
@@ -500,6 +501,7 @@
       "evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
         "schemas/events/event-catalog.json"
       ],
       "implementation_files": [

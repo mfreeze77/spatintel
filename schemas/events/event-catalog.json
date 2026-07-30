@@ -173,6 +173,13 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "construction_record_verification",
+      "classification": "inherits_project",
+      "owner": "construction",
+      "type": "construction.system_record.verified",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "coordinate_frame",
       "classification": "inherits_project",
       "owner": "scene-service",
@@ -261,6 +268,13 @@
       "classification": "inherits_project",
       "owner": "liveforever",
       "type": "liveforever.memory.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "liveforever_record_review",
+      "classification": "inherits_project",
+      "owner": "liveforever",
+      "type": "liveforever.memory.reviewed",
       "version": "1.0.0"
     },
     {

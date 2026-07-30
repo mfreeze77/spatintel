@@ -34,7 +34,7 @@ def test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_famil
     subject = "synthetic-graph-subject"
     grant = _grant(context, tenant_id, project_id, subject)
 
-    person = context.liveforever.create_record(
+    person_source = context.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,
         record_type="person",
@@ -52,13 +52,20 @@ def test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_famil
             "emotional_sensitivity": "low",
             "assertions": [{"claim": "preferred name", "evidence": ["synthetic-family-record"]}],
         },
-        source_class=SourceClass.CORROBORATED,
-        confidence=0.98,
+        source_class=SourceClass.OBSERVED,
+        confidence=0.8,
         evidence_asset_ids=["synthetic-family-record"],
         audience=Audience.FAMILY,
         actor_id=actor,
         purpose="family_review",
     )
+    person = context.liveforever.review_record(
+        person_source, tenant_id=tenant_id, project_id=project_id,
+        reviewer_id="family-independent-reviewer", target_source_class=SourceClass.CORROBORATED,
+        rationale="Two immutable family records independently support the identity assertion.",
+        evidence_asset_ids=["synthetic-family-record", "synthetic-signed-consent"], confidence=0.98,
+        idempotency_key="graph-person-corroboration",
+    )["reviewed_record_id"]
     place = context.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,
@@ -83,7 +90,7 @@ def test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_famil
         actor_id=actor,
         purpose="family_review",
     )
-    obj = context.liveforever.create_record(
+    object_source = context.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,
         record_type="object",
@@ -97,16 +104,23 @@ def test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_famil
             "photographs": ["synthetic-radio-photo"],
             "documents": ["synthetic-radio-manual"],
             "preservation_status": "stored",
-            "source_label": "corroborated_synthesis",
+            "source_label": "source_document",
             "time_expression": {"kind": "unknown", "basis": "date not documented"},
         },
-        source_class=SourceClass.CORROBORATED,
-        confidence=0.92,
+        source_class=SourceClass.OBSERVED,
+        confidence=0.75,
         evidence_asset_ids=["synthetic-radio-photo", "synthetic-radio-manual"],
         audience=Audience.FAMILY,
         actor_id=actor,
         purpose="family_review",
     )
+    obj = context.liveforever.review_record(
+        object_source, tenant_id=tenant_id, project_id=project_id,
+        reviewer_id="family-independent-reviewer", target_source_class=SourceClass.CORROBORATED,
+        rationale="The photograph and manual independently identify the preserved radio.",
+        evidence_asset_ids=["synthetic-radio-photo", "synthetic-radio-manual"], confidence=0.92,
+        idempotency_key="graph-radio-corroboration",
+    )["reviewed_record_id"]
     memory = context.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,

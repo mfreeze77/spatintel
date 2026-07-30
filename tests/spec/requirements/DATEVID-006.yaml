@@ -18,9 +18,11 @@ implementation_files:
 - migrations/versions/0015_progress06_r1_security_controls.py
 automated_test_ids:
 - tests/integration/test_spatial_truth_twin.py::test_datevid_provenance_gate_corroboration_and_disputed_retrieval
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 - schemas/events/event-catalog.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

@@ -127,6 +127,11 @@
       "method": "POST",
       "operation_id": "create_construction_system",
       "path": "/v1/projects/{project_id}/construction/systems"
+    },
+    {
+      "method": "POST",
+      "operation_id": "verify_construction_system",
+      "path": "/v1/projects/{project_id}/construction/systems/{record_id}/verify"
     }
   ],
   "required_environment": [

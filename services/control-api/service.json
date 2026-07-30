@@ -135,6 +135,11 @@
     },
     {
       "method": "POST",
+      "operation_id": "verify_construction_system",
+      "path": "/v1/projects/{project_id}/construction/systems/{record_id}/verify"
+    },
+    {
+      "method": "POST",
       "operation_id": "create_conflicting_recollections",
       "path": "/v1/projects/{project_id}/liveforever/conflicting-recollections"
     },
@@ -222,6 +227,11 @@
       "method": "POST",
       "operation_id": "create_memory_record",
       "path": "/v1/projects/{project_id}/liveforever/records"
+    },
+    {
+      "method": "POST",
+      "operation_id": "review_liveforever_record",
+      "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/review"
     },
     {
       "method": "POST",

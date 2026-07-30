@@ -58,7 +58,7 @@ def test_progress06_revocation_withholds_memory_room_interviews_editions_and_der
         provider={"execution": "local", "provider_id": "synthetic-local"},
         generation_lineage={
             "model_manifest_id": "synthetic-approved", "model_checkpoint_hash": "1" * 64,
-            "prompt_hash": "2" * 64, "input_asset_ids": [memory_id], "output_hash": "3" * 64,
+            "prompt_hash": "2" * 64, "input_asset_ids": ["synthetic-audio"], "output_hash": "3" * 64,
         },
         policy={"purpose": "family_review"}, actor_id=actor, idempotency_key="privacy-derivative",
     )

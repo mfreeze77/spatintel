@@ -190,7 +190,8 @@
         "construction.restricted_export.approved",
         "construction.survey.planned",
         "construction.survey.reviewed",
-        "construction.system_record.created"
+        "construction.system_record.created",
+        "construction.system_record.verified"
       ],
       "inbound_apis": [
         {
@@ -312,6 +313,11 @@
           "method": "POST",
           "operation_id": "create_construction_system",
           "path": "/v1/projects/{project_id}/construction/systems"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_construction_system",
+          "path": "/v1/projects/{project_id}/construction/systems/{record_id}/verify"
         }
       ],
       "kind": "service",
@@ -498,6 +504,11 @@
         },
         {
           "method": "POST",
+          "operation_id": "verify_construction_system",
+          "path": "/v1/projects/{project_id}/construction/systems/{record_id}/verify"
+        },
+        {
+          "method": "POST",
           "operation_id": "create_conflicting_recollections",
           "path": "/v1/projects/{project_id}/liveforever/conflicting-recollections"
         },
@@ -585,6 +596,11 @@
           "method": "POST",
           "operation_id": "create_memory_record",
           "path": "/v1/projects/{project_id}/liveforever/records"
+        },
+        {
+          "method": "POST",
+          "operation_id": "review_liveforever_record",
+          "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/review"
         },
         {
           "method": "POST",
@@ -950,6 +966,7 @@
         "liveforever.governance.recorded",
         "liveforever.interview.recorded",
         "liveforever.memory.recorded",
+        "liveforever.memory.reviewed",
         "liveforever.preservation.created",
         "liveforever.transcript.corrected",
         "liveforever.transcript.segmented"
@@ -1054,6 +1071,11 @@
           "method": "POST",
           "operation_id": "create_memory_record",
           "path": "/v1/projects/{project_id}/liveforever/records"
+        },
+        {
+          "method": "POST",
+          "operation_id": "review_liveforever_record",
+          "path": "/v1/projects/{project_id}/liveforever/records/{record_id}/review"
         },
         {
           "method": "POST",

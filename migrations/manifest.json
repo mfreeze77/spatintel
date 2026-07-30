@@ -75,6 +75,11 @@
       "byte_count": 3584,
       "path": "migrations/versions/0015_progress06_r1_security_controls.py",
       "sha256": "41722da684ea9661de60263998abe8e10969dc7139a519e348f94a6ba1ae0b4a"
+    },
+    {
+      "byte_count": 5759,
+      "path": "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+      "sha256": "56572aa96b103ea20dbca9b839819cc30997414bdb633be06f7b443f54394615"
     }
   ],
   "schema_version": "1.1.0"

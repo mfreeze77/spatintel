@@ -286,9 +286,9 @@ def test_progress06_construction_api_round_trip_read_search_and_handoff(tmp_path
         params={"query": "SYN-FACP-1", "system_pack": "fire_alarm"},
     )
     assert search.status_code == 200, search.text
-    panel_result = next(item for item in search.json()["items"] if item["id"] == panel)
-    assert "network_address" not in panel_result["data"]
-    assert "network_address" in panel_result["redacted_fields"]
+    assert all(item["id"] != panel for item in search.json()["items"])
+    assert "network_address" not in search.text
+    assert panel not in search.text
 
     denied = client.get(
         f"/v1/projects/{project}/construction/surveys/{survey_id}",

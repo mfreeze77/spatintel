@@ -1,0 +1,819 @@
+{
+  "acceptance_criteria": [
+    "restricted secret probing denied before matching, counting, URL generation, or hashing",
+    "restricted documents and entities undiscoverable without exact restricted-read authorization",
+    "routine project-administrator wildcard cannot satisfy construction:restricted_read",
+    "raw credentials, passcodes, tokens, private keys, and biometric values rejected from ordinary records and exports",
+    "Construction direct or forged verified state denied and independent authenticated transition required",
+    "LiveForever fabricated evidence and direct strong truth labels denied pending governed review",
+    "blank-subject consent bypass denied and explicit non-personal subject scope required",
+    "legacy document endpoint validates immutable scoped source and creates canonical revision",
+    "nested field, system, generated-lineage, and preservation asset references require live immutable in-scope assets",
+    "complete unchanged-source matrix and clean-detached acceptance against committed R2 bytes",
+    "independent inner and outer verification return passed_complete with zero findings",
+    "PLTVIEW-007 remains IMPLEMENTED_UNVERIFIED",
+    "Progress 07 remains unauthorized and production remains NO-GO"
+  ],
+  "accepted_base_commit": "118ac917a6c35e007d9f2158d5495e1a69883748",
+  "authorized_epics": [
+    "CON-001",
+    "CON-002",
+    "CON-003",
+    "CON-004",
+    "CON-005",
+    "LIF-001",
+    "LIF-002",
+    "LIF-003",
+    "LIF-004"
+  ],
+  "deferred_requirements": [],
+  "explicitly_out_of_scope": [
+    "Progress 07 implementation",
+    "production promotion",
+    "mounted PLTVIEW-007 viewer integration evidence",
+    "Apple-device, LiDAR, GPU/model, cloud deployment, penetration, privacy, accessibility, usability, and legal validation"
+  ],
+  "external_gaps": [
+    "frozen Node/pnpm production web build and mounted viewer integration",
+    "Apple, ARKit, LiDAR, and physical-device acceptance",
+    "approved LingBot checkpoint, commercial model rights, CUDA/GPU, and real-scene validation",
+    "executable Docker, Kubernetes, Terraform, and credentialed cloud recovery",
+    "independent penetration, privacy, accessibility, usability, and legal review"
+  ],
+  "included_by_status": {
+    "IMPLEMENTED_UNVERIFIED": 17,
+    "IN_PROGRESS": 1,
+    "VERIFIED": 1
+  },
+  "included_requirement_count": 19,
+  "included_requirements": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml",
+        "build/reports/tests/unit.xml"
+      ],
+      "implementation_files": [
+        "src/sip/auth.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/tenancy.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P0",
+      "requirement": "Every request shall be authorized using authenticated principal, tenant, project, action, resource classification, purpose, and relevant consent.",
+      "requirement_id": "ARCIAM-001",
+      "status": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P0",
+      "requirement": "Controller panels, network paths, addresses, and security zones shall require elevated access.",
+      "requirement_id": "CONAC-003",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Commissioning tests shall record state transitions, expected/actual result, actor, time, and evidence without retaining unnecessary credential identifiers.",
+      "requirement_id": "CONAC-005",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Exports for installers shall omit restricted owner security data unless expressly authorized.",
+      "requirement_id": "CONAC-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P0",
+      "requirement": "Documents shall retain source file hash, title, type, revision, issue date, issuer, status, pages, permissions, and supersession links.",
+      "requirement_id": "CONDOC-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONFA-002",
+            "CONSURV-004",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P0",
+      "requirement": "A device record shall support manufacturer/model, address/label, panel/loop/circuit, location, mount/condition, drawing reference, photograph, source class, and verification/test status.",
+      "requirement_id": "CONFA-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Programming files and credentials shall be stored through restricted asset policies and never rendered in ordinary reports.",
+      "requirement_id": "CONFA-005",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
+      "requirement": "Sensitive network and controller configuration shall use restricted access and redacted exports.",
+      "requirement_id": "CONMEP-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/restricted_data.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P1",
+      "requirement": "Restricted system details shall remain protected in notifications and broad reports.",
+      "requirement_id": "CONQC-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONSURV-002",
+            "DATEVID-002",
+            "LIFREC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P0",
+      "requirement": "The app shall support room/area checklists and detail evidence for labels, panel interiors, ceiling conditions, pathways, and interfaces.",
+      "requirement_id": "CONSURV-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONFA-002",
+            "CONSURV-004",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P1",
+      "requirement": "Publishing as `verified_as_built` shall require named verifier, scope, date, method, exclusions, and signature/approval evidence.",
+      "requirement_id": "CONSURV-004",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONFA-002",
+            "CONSURV-004",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONSURV-002",
+            "DATEVID-002",
+            "LIFREC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "schemas/events/event-catalog.json"
+      ],
+      "implementation_files": [
+        "src/sip/spatial_data.py",
+        "src/sip/contracts.py",
+        "src/sip/database.py",
+        "src/sip/exporting.py",
+        "src/sip/construction.py",
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P0",
+      "requirement": "Every evidence record shall identify immutable source asset or record, relevant region/time range, contributor, consent/access, and integrity hash.",
+      "requirement_id": "DATEVID-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "schemas/events/event-catalog.json"
+      ],
+      "implementation_files": [
+        "src/sip/spatial_data.py",
+        "src/sip/contracts.py",
+        "src/sip/database.py",
+        "src/sip/exporting.py",
+        "src/sip/construction.py",
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "migrations/versions/0010_spatial_truth_and_twin_controls.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P1",
+      "requirement": "A provenance gap shall prevent verified or corroborated status.",
+      "requirement_id": "DATEVID-006",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "src/sip/search.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P0",
+      "requirement": "Consent records shall include grantor, authority basis, subject/data scope, processing purposes, modalities, audiences, providers, geography, effective/expiry, revocation, posthumous rules, and evidence.",
+      "requirement_id": "LIFCONS-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "src/sip/search.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P0",
+      "requirement": "The policy engine shall evaluate all applicable subject, contributor, third-party, minor, and audience restrictions.",
+      "requirement_id": "LIFCONS-002",
+      "status": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/LIVEFOREVER.md"
+      ],
+      "priority": "P0",
+      "requirement": "A memory record shall include stable ID, title/working label, contributor, source class, time expression, place/object/person relationships, themes, emotional sensitivity, assertions, evidence, consent, and status.",
+      "requirement_id": "LIFGRAPH-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/user/LIVEFOREVER.md"
+      ],
+      "priority": "P0",
+      "requirement": "The platform shall support at minimum: direct_capture, source_document, first_person_recollection, witness_recollection, corroborated_synthesis, inferred, reconstructed, restored, generated, artistic, disputed, and unknown.",
+      "requirement_id": "LIFLABEL-001",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "src/sip/liveforever.py",
+        "src/sip/models.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/models.py",
+        "src/sip/scene.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py"
+      ],
+      "priority": "P0",
+      "requirement": "Every presented factual claim shall link to source evidence or be labeled as unsourced recollection/inference/generation.",
+      "requirement_id": "LIFOVR-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONSURV-002",
+            "DATEVID-002",
+            "LIFREC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+        }
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/evidence_validation.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0016_progress06_r2_truth_and_restricted_data.py",
+        "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"
+      ],
+      "priority": "P0",
+      "requirement": "Every reconstructed region/entity shall carry source class, supporting evidence, confidence/uncertainty, and creator/model lineage.",
+      "requirement_id": "LIFREC-002",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "milestone": "Progress 06-R2 narrow remediation checkpoint",
+  "milestone_result": "remediation_checkpoint_candidate",
+  "production_authorized": false,
+  "progress_07_authorized": false,
+  "schema": "sip.milestone-scope/v1",
+  "scope_statement": "Progress 06-R2 remediates only the True North stop-line findings against the accepted Progress 06-R1 development checkpoint. It adds no Progress 07 product scope and does not promote production readiness.",
+  "unchanged_progress_06_scope": {
+    "meaning": "The accepted Progress 06 vertical scope remains intact; only the listed R2 stop-line controls are modified.",
+    "path": "requirements/MILESTONE_SCOPE_PROGRESS_06.json",
+    "requirement_count": 206
+  }
+}

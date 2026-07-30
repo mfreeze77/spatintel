@@ -16,10 +16,12 @@ implementation_files:
 - docs/user/CONSTRUCTION.md
 automated_test_ids:
 - tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition
 retained_evidence:
 - build/evidence/demos/construction.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

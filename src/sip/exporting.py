@@ -26,6 +26,7 @@ from .database import (
     CollaborationTaskRow,
     ConsentGrantRow,
     ConstructionRecordRow,
+    ConstructionRecordVerificationRow,
     CoordinateFrameRow,
     Database,
     DerivationEventRow,
@@ -37,6 +38,7 @@ from .database import (
     LegalHoldRow,
     MeasurementRow,
     MemoryRecordRow,
+    LiveForeverRecordReviewRow,
     ModelManifestRow,
     NotificationRow,
     OperationRow,
@@ -86,7 +88,9 @@ _NATIVE_REPLAY_MODELS = (
     MeasurementRow,
     ConsentGrantRow,
     ConstructionRecordRow,
+    ConstructionRecordVerificationRow,
     MemoryRecordRow,
+    LiveForeverRecordReviewRow,
     CollaborationCommentRow,
     CollaborationTaskRow,
     RetentionRuleRow,
@@ -135,7 +139,9 @@ _ID_CATEGORIES: dict[str, str] = {
     MeasurementRow.__tablename__: "measurement",
     ConsentGrantRow.__tablename__: "consent",
     ConstructionRecordRow.__tablename__: "construction",
+    ConstructionRecordVerificationRow.__tablename__: "construction_verification",
     MemoryRecordRow.__tablename__: "memory",
+    LiveForeverRecordReviewRow.__tablename__: "memory_review",
     CollaborationCommentRow.__tablename__: "comment",
     CollaborationTaskRow.__tablename__: "task",
     RetentionRuleRow.__tablename__: "retention_rule",
@@ -1036,11 +1042,53 @@ def _replay_values(
         values["entity_id"] = _mapped(maps, "entity", source.get("entity_id"))
         values["data_json"] = _remap_json(source.get("data_json", {}), maps)
         values["evidence_asset_ids_json"] = [_mapped(maps, "asset", item) for item in source.get("evidence_asset_ids_json", [])]
+    elif model is ConstructionRecordVerificationRow:
+        values["record_id"] = _mapped(maps, "construction", source.get("record_id"))
+        values["scope_json"] = _remap_json(source.get("scope_json", {}), maps)
+        values["evidence_asset_ids_json"] = [
+            _mapped(maps, "asset", item) for item in source.get("evidence_asset_ids_json", [])
+        ]
+        values["signature_asset_id"] = _mapped(maps, "asset", source.get("signature_asset_id"))
+        values["request_hash"] = canonical_sha256({
+            "source_request_hash": source.get("request_hash"),
+            "record_id": values["record_id"],
+            "evidence_asset_ids": values["evidence_asset_ids_json"],
+            "signature_asset_id": values["signature_asset_id"],
+            "source_root_hash": source_root_hash,
+        })
+        values["verification_hash"] = canonical_sha256({
+            "source_verification_hash": source.get("verification_hash"),
+            "verification_id": values[primary_key],
+            "record_id": values["record_id"],
+            "request_hash": values["request_hash"],
+            "source_root_hash": source_root_hash,
+        })
     elif model is MemoryRecordRow:
         values["related_ids_json"] = [_mapped_any(maps, item) for item in source.get("related_ids_json", [])]
         values["data_json"] = _remap_json(source.get("data_json", {}), maps)
         values["evidence_asset_ids_json"] = [_mapped(maps, "asset", item) for item in source.get("evidence_asset_ids_json", [])]
         values["generated_lineage_json"] = _remap_json(source.get("generated_lineage_json"), maps)
+    elif model is LiveForeverRecordReviewRow:
+        values["source_record_id"] = _mapped(maps, "memory", source.get("source_record_id"))
+        values["reviewed_record_id"] = _mapped(maps, "memory", source.get("reviewed_record_id"))
+        values["evidence_asset_ids_json"] = [
+            _mapped(maps, "asset", item) for item in source.get("evidence_asset_ids_json", [])
+        ]
+        values["request_hash"] = canonical_sha256({
+            "source_request_hash": source.get("request_hash"),
+            "source_record_id": values["source_record_id"],
+            "reviewed_record_id": values["reviewed_record_id"],
+            "evidence_asset_ids": values["evidence_asset_ids_json"],
+            "source_root_hash": source_root_hash,
+        })
+        values["review_hash"] = canonical_sha256({
+            "source_review_hash": source.get("review_hash"),
+            "review_id": values[primary_key],
+            "source_record_id": values["source_record_id"],
+            "reviewed_record_id": values["reviewed_record_id"],
+            "request_hash": values["request_hash"],
+            "source_root_hash": source_root_hash,
+        })
     elif model is ConsentGrantRow:
         values["derivative_policy_json"] = _remap_json(source.get("derivative_policy_json", {}), maps)
     elif model is CollaborationCommentRow:
@@ -1118,7 +1166,9 @@ def _mapped_any(maps: dict[str, dict[str, str]], value: Any) -> Any:
         "measurement",
         "consent",
         "construction",
+        "construction_verification",
         "memory",
+        "memory_review",
         "comment",
         "task",
         "retention_rule",
@@ -1207,7 +1257,9 @@ def _find_unresolved_references(tables: dict[str, list[dict[str, Any]]], maps: d
     checks = (
         ("measurements", "source_asset_ids_json"),
         ("construction_records", "evidence_asset_ids_json"),
+        ("construction_record_verifications", "evidence_asset_ids_json"),
         ("memory_records", "evidence_asset_ids_json"),
+        ("liveforever_record_reviews", "evidence_asset_ids_json"),
         ("evidence_records", "asset_id"),
         ("geometry_asset_manifests", "asset_id"),
     )

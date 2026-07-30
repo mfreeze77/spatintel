@@ -19,10 +19,12 @@ implementation_files:
 automated_test_ids:
 - tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences
 - tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review
 retained_evidence:
 - build/evidence/demos/liveforever.json
 - build/reports/test-matrix.json
 - build/reports/tests/privacy.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

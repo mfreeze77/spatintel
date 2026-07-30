@@ -31,8 +31,8 @@ def _ingest(context, tenant_id: str, project_id: str, actor: str, payload: bytes
 
 @pytest.mark.integration
 @pytest.mark.migration
-def test_opsdr_002_backup_is_not_valid_until_isolated_restore_rehearsal(bootstrapped, tmp_path: Path) -> None:
-    context, tenant_id, project_id, actor = bootstrapped
+def test_opsdr_002_backup_is_not_valid_until_isolated_restore_rehearsal(minimal_bootstrapped, tmp_path: Path) -> None:
+    context, tenant_id, project_id, actor = minimal_bootstrapped
     asset = _ingest(context, tenant_id, project_id, actor)
     created = context.backup_recovery.create_local_backup(tmp_path / "backup", actor_id=actor)
     with context.database.session() as session:
@@ -115,8 +115,8 @@ def test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_a
 
 @pytest.mark.integration
 @pytest.mark.security
-def test_opskey_003_envelope_rotation_rewraps_keys_without_rewriting_ciphertext(bootstrapped) -> None:
-    context, tenant_id, project_id, actor = bootstrapped
+def test_opskey_003_envelope_rotation_rewraps_keys_without_rewriting_ciphertext(minimal_bootstrapped) -> None:
+    context, tenant_id, project_id, actor = minimal_bootstrapped
     one = _ingest(context, tenant_id, project_id, actor, b"one")
     two = _ingest(context, tenant_id, project_id, actor, b"two")
     before = {item.sha256: sha256_bytes(context.store.path_for(item.sha256).read_bytes()) for item in (one, two)}

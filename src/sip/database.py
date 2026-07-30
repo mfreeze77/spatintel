@@ -1456,6 +1456,71 @@ class ConstructionRestrictedExportApprovalRow(Base):
     )
 
 
+class ConstructionRecordVerificationRow(Base):
+    __tablename__ = "construction_record_verifications"
+    verification_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    record_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    verifier_id: Mapped[str] = mapped_column(String(128), index=True)
+    prior_state: Mapped[str] = mapped_column(String(64))
+    method: Mapped[str] = mapped_column(String(128))
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    exclusions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    evidence_asset_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    signature_asset_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    verification_hash: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "idempotency_key",
+            name="uq_construction_record_verification_idempotency",
+        ),
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "record_id",
+            name="uq_construction_record_verification_record",
+        ),
+    )
+
+
+class LiveForeverRecordReviewRow(Base):
+    __tablename__ = "liveforever_record_reviews"
+    review_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    source_record_id: Mapped[str] = mapped_column(String(64), index=True)
+    reviewed_record_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    reviewer_id: Mapped[str] = mapped_column(String(128), index=True)
+    target_source_class: Mapped[str] = mapped_column(String(64), index=True)
+    rationale: Mapped[str] = mapped_column(Text)
+    evidence_asset_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    confidence: Mapped[float] = mapped_column(Float)
+    review_hash: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "idempotency_key",
+            name="uq_liveforever_record_review_idempotency",
+        ),
+        UniqueConstraint(
+            "tenant_id",
+            "project_id",
+            "reviewed_record_id",
+            name="uq_liveforever_record_review_result",
+        ),
+    )
+
+
 class LiveForeverGovernanceRow(Base):
     __tablename__ = "liveforever_governance"
     governance_id: Mapped[str] = mapped_column(String(64), primary_key=True)

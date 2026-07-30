@@ -68,8 +68,8 @@ def test_progress06_checkpoint_scope_and_predecessor_are_exact() -> None:
     deferred = {item["requirement_id"] for item in scope["deferred_requirements"]}
     assert included.isdisjoint(deferred)
     assert included | deferred == set(P06_SCOPE_IDS)
-    assert len(included) == 114
-    assert len(deferred) == 92
+    assert len(included) == 118
+    assert len(deferred) == 88
     assert scope["progress_07_authorized"] is False
     assert scope["production_authorized"] is False
     assert predecessor["accepted_progress_05_r2_checkpoint"]["commit"] == EXPECTED_BASE_COMMIT

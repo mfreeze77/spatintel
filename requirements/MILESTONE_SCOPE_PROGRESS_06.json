@@ -21,13 +21,13 @@
     "LIF-004"
   ],
   "counts": {
-    "deferred": 92,
+    "deferred": 88,
     "deferred_by_status": {
-      "NOT_STARTED": 92
+      "NOT_STARTED": 88
     },
-    "included": 114,
+    "included": 118,
     "included_by_status": {
-      "IMPLEMENTED_UNVERIFIED": 108,
+      "IMPLEMENTED_UNVERIFIED": 112,
       "IN_PROGRESS": 2,
       "VERIFIED": 4
     },
@@ -48,23 +48,6 @@
       "status": "NOT_STARTED",
       "test_ids": [
         "REQ-CONAC-002"
-      ],
-      "verification_method": "Controlled verification"
-    },
-    {
-      "coverage_classification": "deferred",
-      "epic_ids": [
-        "CON-002"
-      ],
-      "evidence_paths": [],
-      "implementation_files": [],
-      "priority": "P1",
-      "requirement": "Commissioning tests shall record state transitions, expected/actual result, actor, time, and evidence without retaining unnecessary credential identifiers.",
-      "requirement_id": "CONAC-005",
-      "scope_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
-      "test_ids": [
-        "REQ-CONAC-005"
       ],
       "verification_method": "Controlled verification"
     },
@@ -756,40 +739,6 @@
       "status": "NOT_STARTED",
       "test_ids": [
         "REQ-CONSURV-001"
-      ],
-      "verification_method": "Controlled verification"
-    },
-    {
-      "coverage_classification": "deferred",
-      "epic_ids": [
-        "CON-001"
-      ],
-      "evidence_paths": [],
-      "implementation_files": [],
-      "priority": "P0",
-      "requirement": "The app shall support room/area checklists and detail evidence for labels, panel interiors, ceiling conditions, pathways, and interfaces.",
-      "requirement_id": "CONSURV-002",
-      "scope_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
-      "test_ids": [
-        "REQ-CONSURV-002"
-      ],
-      "verification_method": "Controlled verification"
-    },
-    {
-      "coverage_classification": "deferred",
-      "epic_ids": [
-        "CON-001"
-      ],
-      "evidence_paths": [],
-      "implementation_files": [],
-      "priority": "P1",
-      "requirement": "Publishing as `verified_as_built` shall require named verifier, scope, date, method, exclusions, and signature/approval evidence.",
-      "requirement_id": "CONSURV-004",
-      "scope_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
-      "test_ids": [
-        "REQ-CONSURV-004"
       ],
       "verification_method": "Controlled verification"
     },
@@ -1505,23 +1454,6 @@
       "evidence_paths": [],
       "implementation_files": [],
       "priority": "P0",
-      "requirement": "Every reconstructed region/entity shall carry source class, supporting evidence, confidence/uncertainty, and creator/model lineage.",
-      "requirement_id": "LIFREC-002",
-      "scope_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
-      "test_ids": [
-        "REQ-LIFREC-002"
-      ],
-      "verification_method": "Controlled verification"
-    },
-    {
-      "coverage_classification": "deferred",
-      "epic_ids": [
-        "LIF-003"
-      ],
-      "evidence_paths": [],
-      "implementation_files": [],
-      "priority": "P0",
       "requirement": "Generated fill shall be togglable or visually inspectable separately from direct/source-constrained content.",
       "requirement_id": "LIFREC-003",
       "scope_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
@@ -1680,6 +1612,7 @@
       "scope_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -1729,12 +1662,41 @@
         "docs/user/CONSTRUCTION.md"
       ],
       "priority": "P1",
+      "requirement": "Commissioning tests shall record state transitions, expected/actual result, actor, time, and evidence without retaining unnecessary credential identifiers.",
+      "requirement_id": "CONAC-005",
+      "scope_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+      ],
+      "verification_method": "Controlled verification"
+    },
+    {
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-002"
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "priority": "P1",
       "requirement": "Exports for installers shall omit restricted owner security data unless expressly authorized.",
       "requirement_id": "CONAC-006",
       "scope_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -1878,7 +1840,8 @@
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
@@ -1896,7 +1859,8 @@
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
         "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
-        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
       ],
       "verification_method": "Automated test"
     },
@@ -2079,7 +2043,8 @@
       "evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/construction.py",
@@ -2093,7 +2058,8 @@
       "scope_rationale": "synthetic fire-alarm entity-pack tests exercise records and restricted export behavior without confidential facility data",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
       ],
       "verification_method": "Controlled verification"
     },
@@ -2119,6 +2085,7 @@
       "scope_rationale": "synthetic fire-alarm entity-pack tests exercise records and restricted export behavior without confidential facility data",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -2617,6 +2584,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -2991,6 +2960,7 @@
       "test_ids": [
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "verification_method": "Controlled verification"
@@ -3128,6 +3098,34 @@
       "evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P0",
+      "requirement": "The app shall support room/area checklists and detail evidence for labels, panel interiors, ceiling conditions, pathways, and interfaces.",
+      "requirement_id": "CONSURV-002",
+      "scope_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+      ],
+      "verification_method": "Controlled verification"
+    },
+    {
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/integration.xml"
       ],
@@ -3145,6 +3143,34 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/acceptance/test_vertical_demonstrations.py::test_construction_synthetic_acceptance_demonstration"
+      ],
+      "verification_method": "Controlled verification"
+    },
+    {
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "CON-001"
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "priority": "P1",
+      "requirement": "Publishing as `verified_as_built` shall require named verifier, scope, date, method, exclusions, and signature/approval evidence.",
+      "requirement_id": "CONSURV-004",
+      "scope_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
       ],
       "verification_method": "Controlled verification"
     },
@@ -3351,6 +3377,7 @@
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience",
         "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review",
         "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
       ],
       "verification_method": "Controlled verification"
@@ -3363,7 +3390,8 @@
       "evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/privacy.xml"
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/liveforever.py",
@@ -3381,7 +3409,8 @@
       "status": "IN_PROGRESS",
       "test_ids": [
         "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences",
-        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "verification_method": "Controlled verification"
     },
@@ -3755,7 +3784,8 @@
       "evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/liveforever.py",
@@ -3770,7 +3800,8 @@
       "scope_rationale": "graph and immutable-revision tests exercise stable records, uncertainty, editions, corrections, audiences, and consent-aware access",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "verification_method": "Controlled verification"
     },
@@ -4178,7 +4209,8 @@
       "evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "implementation_files": [
         "src/sip/liveforever.py",
@@ -4191,7 +4223,8 @@
       "scope_rationale": "truth-label tests exercise retained lineage and static/offline legends",
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "verification_method": "Controlled verification"
     },
@@ -4336,6 +4369,7 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
         "src/sip/liveforever.py",
         "src/sip/models.py",
         "src/sip/scene.py"
@@ -4352,7 +4386,8 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
-        "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "verification_method": "Controlled verification"
     },
@@ -4732,6 +4767,33 @@
       "status": "IMPLEMENTED_UNVERIFIED",
       "test_ids": [
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+      ],
+      "verification_method": "Controlled verification"
+    },
+    {
+      "coverage_classification": "partial",
+      "epic_ids": [
+        "LIF-003"
+      ],
+      "evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"
+      ],
+      "priority": "P0",
+      "requirement": "Every reconstructed region/entity shall carry source class, supporting evidence, confidence/uncertainty, and creator/model lineage.",
+      "requirement_id": "LIFREC-002",
+      "scope_rationale": "governance tests exercise revocation/restriction behavior while broader inheritance and legal validation remain external",
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
       ],
       "verification_method": "Controlled verification"
     },

@@ -52,8 +52,20 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
+        },
         {
           "declared_requirement_ids": [
             "CONAC-003",
@@ -107,15 +119,27 @@
     },
     {
       "all_linked_tests_declare_requirement_id": true,
-      "coverage_classification": "deferred",
+      "coverage_classification": "partial",
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 0,
-      "linked_tests": [],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        }
+      ],
       "requirement_id": "CONAC-005",
-      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
+      "semantic_rationale": "synthetic access-control entity-pack tests exercise openings, devices, associations, and restricted topology controls",
+      "status": "IMPLEMENTED_UNVERIFIED",
       "verification_method": "Controlled verification"
     },
     {
@@ -124,7 +148,7 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -137,6 +161,29 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
         },
         {
           "declared_requirement_ids": [
@@ -330,7 +377,7 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 3,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -387,6 +434,15 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONDOC-001",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
         }
       ],
       "requirement_id": "CONDOC-001",
@@ -643,7 +699,7 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -663,6 +719,16 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONFA-002",
+            "CONSURV-004",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
         }
       ],
       "requirement_id": "CONFA-002",
@@ -702,8 +768,19 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        },
         {
           "declared_requirement_ids": [
             "CONAC-003",
@@ -1863,7 +1940,7 @@
       "epic_ids": [
         "CON-002"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -1876,6 +1953,29 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-005",
+            "CONAC-006",
+            "CONFA-005",
+            "CONMEP-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
         },
         {
           "declared_requirement_ids": [
@@ -2404,7 +2504,7 @@
       "epic_ids": [
         "CON-003"
       ],
-      "linked_test_count": 3,
+      "linked_test_count": 4,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -2425,6 +2525,18 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "CONAC-003",
+            "CONAC-006",
+            "CONMEP-006",
+            "CONQC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity"
         },
         {
           "declared_requirement_ids": [
@@ -2682,15 +2794,26 @@
     },
     {
       "all_linked_tests_declare_requirement_id": true,
-      "coverage_classification": "deferred",
+      "coverage_classification": "partial",
       "epic_ids": [
         "CON-001"
       ],
-      "linked_test_count": 0,
-      "linked_tests": [],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONSURV-002",
+            "DATEVID-002",
+            "LIFREC-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+        }
+      ],
       "requirement_id": "CONSURV-002",
-      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
+      "semantic_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
       "verification_method": "Controlled verification"
     },
     {
@@ -2726,15 +2849,26 @@
     },
     {
       "all_linked_tests_declare_requirement_id": true,
-      "coverage_classification": "deferred",
+      "coverage_classification": "partial",
       "epic_ids": [
         "CON-001"
       ],
-      "linked_test_count": 0,
-      "linked_tests": [],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONFA-002",
+            "CONSURV-004",
+            "DATEVID-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
+        }
+      ],
       "requirement_id": "CONSURV-004",
-      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
+      "semantic_rationale": "survey and return-visit tests exercise planning, visit evidence, review, coverage, and exact-prior-commit continuity",
+      "status": "IMPLEMENTED_UNVERIFIED",
       "verification_method": "Controlled verification"
     },
     {
@@ -3016,7 +3150,7 @@
       "epic_ids": [
         "LIF-002"
       ],
-      "linked_test_count": 7,
+      "linked_test_count": 8,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -3107,6 +3241,19 @@
         },
         {
           "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
+        },
+        {
+          "declared_requirement_ids": [
             "LIFCONS-001",
             "LIFCONS-003",
             "LIFHYB-007",
@@ -3130,7 +3277,7 @@
       "epic_ids": [
         "LIF-002"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -3151,6 +3298,19 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
         }
       ],
       "requirement_id": "LIFCONS-002",
@@ -3774,7 +3934,7 @@
       "epic_ids": [
         "LIF-001"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -3796,6 +3956,19 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
         }
       ],
       "requirement_id": "LIFGRAPH-001",
@@ -4544,7 +4717,7 @@
         "LIF-002",
         "LIF-003"
       ],
-      "linked_test_count": 1,
+      "linked_test_count": 2,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -4566,6 +4739,19 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
         }
       ],
       "requirement_id": "LIFLABEL-001",
@@ -4835,7 +5021,7 @@
       "epic_ids": [
         "LIF-001"
       ],
-      "linked_test_count": 2,
+      "linked_test_count": 3,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -4864,6 +5050,19 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATEVID-006",
+            "LIFCONS-001",
+            "LIFCONS-002",
+            "LIFGRAPH-001",
+            "LIFLABEL-001",
+            "LIFOVR-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
         }
       ],
       "requirement_id": "LIFOVR-002",
@@ -5539,15 +5738,26 @@
     },
     {
       "all_linked_tests_declare_requirement_id": true,
-      "coverage_classification": "deferred",
+      "coverage_classification": "partial",
       "epic_ids": [
         "LIF-003"
       ],
-      "linked_test_count": 0,
-      "linked_tests": [],
+      "linked_test_count": 1,
+      "linked_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONSURV-002",
+            "DATEVID-002",
+            "LIFREC-002"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+        }
+      ],
       "requirement_id": "LIFREC-002",
-      "semantic_rationale": "The requirement remains explicitly NOT_STARTED in this bounded checkpoint and is not claimed by Progress 06.",
-      "status": "NOT_STARTED",
+      "semantic_rationale": "governance tests exercise revocation/restriction behavior while broader inheritance and legal validation remain external",
+      "status": "IMPLEMENTED_UNVERIFIED",
       "verification_method": "Controlled verification"
     },
     {

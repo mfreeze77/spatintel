@@ -132,19 +132,26 @@ def test_liveforever_conflicting_recollections_generated_label_audience_revocati
         derivative_policy={"generated_visual": True, "voice": False, "likeness": False},
         expires_at=datetime.now(UTC) + timedelta(days=365),
     )
-    person = context.liveforever.create_record(
+    person_source = context.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,
         record_type="person",
         subject_id=subject,
         related_ids=[],
         data={"name": "Alex Example"},
-        source_class=SourceClass.CORROBORATED,
-        confidence=1,
+        source_class=SourceClass.OBSERVED,
+        confidence=0.8,
         evidence_asset_ids=["birth-record"],
         audience=Audience.FAMILY,
         actor_id=actor,
     )
+    person = context.liveforever.review_record(
+        person_source, tenant_id=tenant_id, project_id=project_id,
+        reviewer_id="family-independent-reviewer", target_source_class=SourceClass.CORROBORATED,
+        rationale="Independent family records corroborate the person identity.",
+        evidence_asset_ids=["birth-record", "synthetic-family-record"], confidence=1.0,
+        idempotency_key="vertical-person-corroboration",
+    )["reviewed_record_id"]
     alternatives = context.liveforever.conflicting_recollections(
         tenant_id=tenant_id,
         project_id=project_id,

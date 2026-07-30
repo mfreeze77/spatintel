@@ -22,11 +22,13 @@ from .database import (
     LiveForeverGovernanceRow,
     LiveForeverInterviewRow,
     LiveForeverPreservationRow,
+    LiveForeverRecordReviewRow,
     LiveForeverTranscriptSegmentRow,
     MemoryRecordRow,
 )
 from .errors import AuthorizationError, ConflictError, NotFoundError, ValidationError
 from .events import OutboxEventFactory
+from .evidence_validation import require_scoped_immutable_assets
 from .models import Audience, SourceClass
 from .temporal import db_now
 
@@ -111,6 +113,8 @@ class LiveForeverService:
     def grant_consent(self, *, tenant_id: str, project_id: str, subject_id: str, granted_by: str,
                       purposes: list[str], audiences: list[Audience], scopes: list[str],
                       derivative_policy: dict[str, Any], expires_at: datetime | None) -> str:
+        if not str(subject_id).strip():
+            raise ValidationError("CONSENT_SUBJECT_REQUIRED", "consent requires a non-empty subject identifier")
         if not purposes or not audiences or not scopes:
             raise ValidationError("CONSENT_SCOPE_REQUIRED", "consent requires purpose, audience, and scope")
         if expires_at and _aware(expires_at) <= db_now():
@@ -138,6 +142,8 @@ class LiveForeverService:
         allowed = {"consent", "guardian", "executor", "successor", "minor_protection", "living_third_party", "dispute", "freeze"}
         if record_type not in allowed:
             raise ValidationError("GOVERNANCE_RECORD_TYPE", "unsupported family-governance record type")
+        if not str(subject_id).strip() or not str(grantor_id).strip():
+            raise ValidationError("GOVERNANCE_SUBJECT_REQUIRED", "governance requires subject and grantor identifiers")
         if not purposes or not modalities or not audiences or not data_scope:
             raise ValidationError("GOVERNANCE_SCOPE_REQUIRED", "governance requires data, purpose, modality, and audience scope")
         if expires_at and _aware(expires_at) <= _aware(effective_at):
@@ -152,6 +158,14 @@ class LiveForeverService:
                    "successor_ids": sorted(set(successor_ids)), "dispute": dispute, "freeze_high_risk": freeze_high_risk}
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_asset_ids,
+                code_prefix="LIVEFOREVER_GOVERNANCE_EVIDENCE",
+                require_nonempty=bool(evidence_asset_ids),
+            )
             prior = self._idempotent(session, LiveForeverGovernanceRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior:
                 return self._governance_result(prior, True)
@@ -238,13 +252,22 @@ class LiveForeverService:
                       related_ids: list[str], data: dict[str, Any], source_class: SourceClass,
                       confidence: float, evidence_asset_ids: list[str], audience: Audience,
                       actor_id: str, purpose: str = "preservation",
-                      generated_lineage: dict[str, Any] | None = None) -> str:
+                      generated_lineage: dict[str, Any] | None = None,
+                      subject_scope: dict[str, Any] | None = None) -> str:
         if record_type not in MEMORY_TYPES:
             raise ValidationError("MEMORY_RECORD_TYPE", "unsupported LiveForever record type")
         if not 0 <= confidence <= 1:
             raise ValidationError("MEMORY_CONFIDENCE", "confidence must be between zero and one")
-        if source_class in {SourceClass.CORROBORATED, SourceClass.VERIFIED} and not evidence_asset_ids:
-            raise ValidationError("MEMORY_EVIDENCE_REQUIRED", "corroborated or verified claims require evidence")
+        if subject_id is not None and not str(subject_id).strip():
+            raise ValidationError(
+                "MEMORY_SUBJECT_BLANK",
+                "blank subject identifiers are prohibited; use an explicit governed subject_scope for non-person subjects",
+            )
+        if source_class in {SourceClass.CORROBORATED, SourceClass.VERIFIED}:
+            raise ValidationError(
+                "MEMORY_GOVERNED_REVIEW_REQUIRED",
+                "corroborated and verified LiveForever records must be produced by the governed independent-review transition",
+            )
         source_label = str(data.get("source_label") or DEFAULT_SOURCE_LABEL.get(source_class, "unknown"))
         if source_label not in SOURCE_LABELS:
             raise ValidationError(
@@ -252,14 +275,52 @@ class LiveForeverService:
                 "memory source label is not part of the governed truth legend",
                 {"source_label": source_label, "allowed": sorted(SOURCE_LABELS)},
             )
+        if source_label in {"verified", "corroborated_synthesis"}:
+            raise ValidationError(
+                "MEMORY_TRUTH_LABEL_REVIEW_REQUIRED",
+                "verified and corroborated truth labels require a governed independent review",
+            )
         time_expression = _normalize_time_expression(data.get("time_expression"))
         consent_context: dict[str, Any] = {}
+        normalized_subject_id = str(subject_id).strip() if subject_id is not None else None
+        normalized_subject_scope: dict[str, Any] | None = None
+        if normalized_subject_id is None:
+            allowed_subjectless = {"place", "object", "event", "timeline", "theme"}
+            if record_type not in allowed_subjectless or not subject_scope:
+                raise ValidationError(
+                    "MEMORY_SUBJECT_SCOPE_REQUIRED",
+                    "subject-less records require an explicit non-person subject_scope and an eligible record type",
+                    {"eligible_record_types": sorted(allowed_subjectless)},
+                )
+            normalized_subject_scope = {
+                "kind": str(subject_scope.get("kind") or "").strip(),
+                "scope_id": str(subject_scope.get("scope_id") or "").strip(),
+                "consent_basis": str(subject_scope.get("consent_basis") or "").strip(),
+                "related_subject_ids": sorted({
+                    str(item).strip() for item in subject_scope.get("related_subject_ids", []) if str(item).strip()
+                }),
+            }
+            allowed_basis = {
+                "non_personal_subject", "public_record", "documented_owner_authority", "documented_family_authority",
+            }
+            if not normalized_subject_scope["kind"] or not normalized_subject_scope["scope_id"]:
+                raise ValidationError("MEMORY_SUBJECT_SCOPE_INVALID", "subject_scope requires kind and scope_id")
+            if normalized_subject_scope["consent_basis"] not in allowed_basis:
+                raise ValidationError(
+                    "MEMORY_SUBJECT_SCOPE_CONSENT_BASIS",
+                    "subject_scope requires an explicit governed consent basis",
+                    {"allowed": sorted(allowed_basis)},
+                )
+            for related_subject_id in normalized_subject_scope["related_subject_ids"]:
+                self._require_consent(
+                    tenant_id, project_id, related_subject_id, purpose=purpose, audience=audience, scope=record_type
+                )
         if source_class == SourceClass.GENERATED:
             generated_lineage = self._validate_generated_lineage(generated_lineage)
             source_label = "generated" if source_label == DEFAULT_SOURCE_LABEL[SourceClass.GENERATED] else source_label
-        if subject_id:
+        if normalized_subject_id:
             grant = self._require_consent(
-                tenant_id, project_id, subject_id, purpose=purpose, audience=audience, scope=record_type
+                tenant_id, project_id, normalized_subject_id, purpose=purpose, audience=audience, scope=record_type
             )
             consent_context = {
                 "grant_id": grant.grant_id,
@@ -271,7 +332,7 @@ class LiveForeverService:
             self._enforce_high_risk_freeze(
                 tenant_id,
                 project_id,
-                subject_id,
+                normalized_subject_id,
                 modality="generated" if source_class == SourceClass.GENERATED else "record",
             )
         record_id = new_uuid()
@@ -292,14 +353,29 @@ class LiveForeverService:
             "emotional_sensitivity": data.get("emotional_sensitivity", "unspecified"),
             "assertions": list(data.get("assertions") or []),
             "consent_context": data.get("consent_context") or consent_context,
+            "subject_scope": normalized_subject_scope,
             "status": data.get("status", "active"),
             "access_state": "active",
         }
         if source_class == SourceClass.GENERATED:
             record_data["generated_label"] = "AI-GENERATED RECONSTRUCTION — NOT A HISTORICAL FACT"
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_asset_ids,
+                code_prefix="LIVEFOREVER_RECORD_EVIDENCE",
+                require_nonempty=False,
+            )
+            if source_class == SourceClass.GENERATED:
+                require_scoped_immutable_assets(
+                    session, tenant_id=tenant_id, project_id=project_id,
+                    asset_ids=generated_lineage["input_asset_ids"],
+                    code_prefix="GENERATED_LINEAGE_INPUT", require_nonempty=True,
+                )
             session.add(MemoryRecordRow(record_id=record_id, tenant_id=tenant_id, project_id=project_id,
-                                        record_type=record_type, subject_id=subject_id,
+                                        record_type=record_type, subject_id=normalized_subject_id,
                                         related_ids_json=sorted(set(related_ids)),
                                         data_json=record_data, source_class=source_class.value,
                                         confidence=confidence, evidence_asset_ids_json=sorted(set(evidence_asset_ids)),
@@ -309,6 +385,156 @@ class LiveForeverService:
                                      "source_label": source_label, "audience": audience.value},
                          "liveforever.memory.recorded", "memory_record")
         return record_id
+
+    def review_record(self, record_id: str, *, tenant_id: str, project_id: str, reviewer_id: str,
+                      target_source_class: SourceClass, rationale: str, evidence_asset_ids: list[str],
+                      confidence: float, idempotency_key: str) -> dict[str, Any]:
+        if target_source_class not in {SourceClass.CORROBORATED, SourceClass.VERIFIED}:
+            raise ValidationError(
+                "MEMORY_REVIEW_TARGET_INVALID",
+                "governed record review may produce only corroborated or verified records",
+            )
+        minimum_evidence = 2 if target_source_class == SourceClass.CORROBORATED else 1
+        if len(set(evidence_asset_ids)) < minimum_evidence:
+            raise ValidationError(
+                "MEMORY_REVIEW_EVIDENCE_INSUFFICIENT",
+                "the requested truth class does not have enough independently identified immutable evidence",
+                {"required": minimum_evidence},
+            )
+        if not rationale.strip() or not idempotency_key.strip() or not 0 <= confidence <= 1:
+            raise ValidationError("MEMORY_REVIEW_INVALID", "review requires rationale, idempotency, and valid confidence")
+        request = {
+            "record_id": record_id,
+            "target_source_class": target_source_class.value,
+            "rationale": rationale.strip(),
+            "evidence_asset_ids": sorted(set(evidence_asset_ids)),
+            "confidence": confidence,
+        }
+        request_hash = canonical_sha256(request)
+        with self.database.session() as session:
+            prior = session.scalar(select(LiveForeverRecordReviewRow).where(
+                LiveForeverRecordReviewRow.tenant_id == tenant_id,
+                LiveForeverRecordReviewRow.project_id == project_id,
+                LiveForeverRecordReviewRow.idempotency_key == idempotency_key,
+            ))
+            if prior:
+                if prior.request_hash != request_hash:
+                    raise ConflictError("MEMORY_REVIEW_IDEMPOTENCY_CONFLICT", "review idempotency key was reused")
+                return {
+                    "review_id": prior.review_id,
+                    "source_record_id": prior.source_record_id,
+                    "reviewed_record_id": prior.reviewed_record_id,
+                    "source_class": prior.target_source_class,
+                    "reviewer_id": prior.reviewer_id,
+                    "review_hash": prior.review_hash,
+                    "idempotent_replay": True,
+                }
+            source = self._scoped(session, MemoryRecordRow, record_id, tenant_id, project_id, "memory_record")
+            if source.superseded_at is not None:
+                raise ConflictError("MEMORY_REVIEW_SOURCE_SUPERSEDED", "superseded records cannot be reviewed again")
+            if reviewer_id == source.created_by:
+                raise ValidationError(
+                    "MEMORY_INDEPENDENT_REVIEWER_REQUIRED",
+                    "the contributor of a LiveForever record may not independently corroborate or verify it",
+                )
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=evidence_asset_ids,
+                code_prefix="LIVEFOREVER_REVIEW_EVIDENCE",
+                require_nonempty=True,
+            )
+            if source.subject_id:
+                self._require_consent(
+                    tenant_id,
+                    project_id,
+                    source.subject_id,
+                    purpose="family_review",
+                    audience=Audience(source.audience),
+                    scope=source.record_type,
+                )
+            reviewed_record_id = new_uuid()
+            review_id = new_uuid()
+            source_label = (
+                "corroborated_synthesis" if target_source_class == SourceClass.CORROBORATED else "verified"
+            )
+            review_body = {
+                **request,
+                "review_id": review_id,
+                "reviewer_id": reviewer_id,
+                "source_record_hash": canonical_sha256(self._memory_payload(source)),
+            }
+            review_hash = canonical_sha256(review_body)
+            reviewed_data = {
+                **source.data_json,
+                "source_label": source_label,
+                "revision_of": source.record_id,
+                "governed_review": {
+                    "review_id": review_id,
+                    "reviewer_id": reviewer_id,
+                    "rationale": rationale.strip(),
+                    "evidence_asset_ids": sorted(set(evidence_asset_ids)),
+                    "review_hash": review_hash,
+                    "reviewed_at": db_now().isoformat(),
+                },
+                "status": "active",
+            }
+            reviewed = MemoryRecordRow(
+                record_id=reviewed_record_id,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                record_type=source.record_type,
+                subject_id=source.subject_id,
+                related_ids_json=sorted(set([*source.related_ids_json, source.record_id])),
+                data_json=reviewed_data,
+                source_class=target_source_class.value,
+                confidence=confidence,
+                evidence_asset_ids_json=sorted(set([*source.evidence_asset_ids_json, *evidence_asset_ids])),
+                audience=source.audience,
+                generated_lineage_json=source.generated_lineage_json,
+                created_by=reviewer_id,
+            )
+            session.add(reviewed)
+            session.add(LiveForeverRecordReviewRow(
+                review_id=review_id,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                source_record_id=source.record_id,
+                reviewed_record_id=reviewed_record_id,
+                idempotency_key=idempotency_key,
+                request_hash=request_hash,
+                reviewer_id=reviewer_id,
+                target_source_class=target_source_class.value,
+                rationale=rationale.strip(),
+                evidence_asset_ids_json=sorted(set(evidence_asset_ids)),
+                confidence=confidence,
+                review_hash=review_hash,
+            ))
+            source.superseded_at = db_now()
+            source.data_json = {**source.data_json, "status": "superseded", "superseded_by": reviewed_record_id}
+            self._record(
+                session,
+                tenant_id,
+                project_id,
+                reviewer_id,
+                "liveforever:record_review",
+                "liveforever_record_review",
+                review_id,
+                {"source_record_id": source.record_id, "reviewed_record_id": reviewed_record_id,
+                 "target_source_class": target_source_class.value, "review_hash": review_hash},
+                "liveforever.memory.reviewed",
+                "liveforever_record_review",
+            )
+            return {
+                "review_id": review_id,
+                "source_record_id": source.record_id,
+                "reviewed_record_id": reviewed_record_id,
+                "source_class": target_source_class.value,
+                "reviewer_id": reviewer_id,
+                "review_hash": review_hash,
+                "idempotent_replay": False,
+            }
 
     def revise_record(self, record_id: str, *, tenant_id: str, project_id: str, editor_id: str,
                       correction_type: str, reason: str, changes: dict[str, Any],
@@ -352,6 +578,12 @@ class LiveForeverService:
             "status": "restricted" if correction_type == "consent_restriction" else "active",
         }
         source_class = SourceClass(original_payload["source_class"])
+        if source_class in {SourceClass.CORROBORATED, SourceClass.VERIFIED}:
+            # A family correction is a new unreviewed claim. It cannot inherit
+            # the stronger review state of the original without a new review.
+            source_class = SourceClass.DISPUTED
+            revised_data["source_label"] = "disputed"
+            revised_data["review_required"] = True
         if correction_type in {"factual_correction", "alternate_interpretation"}:
             source_class = SourceClass.DISPUTED
             revised_data["source_label"] = "disputed"
@@ -369,6 +601,7 @@ class LiveForeverService:
             actor_id=editor_id,
             purpose=purpose,
             generated_lineage=original_payload["generated_lineage"],
+            subject_scope=original_payload["data"].get("subject_scope"),
         )
         with self.database.session() as session:
             self._scoped(session, MemoryRecordRow, record_id, tenant_id, project_id, "memory_record")
@@ -421,6 +654,14 @@ class LiveForeverService:
                    "pacing_policy": pacing_policy, "complete": complete}
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=source_media_ids,
+                code_prefix="LIVEFOREVER_INTERVIEW_MEDIA",
+                require_nonempty=recording_state != "not_recorded",
+            )
             prior = self._idempotent(session, LiveForeverInterviewRow, tenant_id, project_id, idempotency_key, request_hash)
             if prior:
                 return self._interview_result(prior, True)
@@ -450,6 +691,14 @@ class LiveForeverService:
         if not 0 <= speaker_confidence <= 1:
             raise ValidationError("SPEAKER_CONFIDENCE", "speaker confidence must be between zero and one")
         with self.database.session() as session:
+            require_scoped_immutable_assets(
+                session,
+                tenant_id=tenant_id,
+                project_id=project_id,
+                asset_ids=[source_media_id],
+                code_prefix="LIVEFOREVER_TRANSCRIPT_MEDIA",
+                require_nonempty=True,
+            )
             interview = self._scoped(session, LiveForeverInterviewRow, interview_id, tenant_id, project_id, "interview")
             prior = session.scalar(select(LiveForeverTranscriptSegmentRow).where(
                 LiveForeverTranscriptSegmentRow.interview_id == interview_id,
@@ -508,8 +757,11 @@ class LiveForeverService:
     def visible_records(self, tenant_id: str, project_id: str, *, audience: Audience, purpose: str,
                         subject_id: str | None = None) -> list[dict[str, Any]]:
         with self.database.session() as session:
-            statement = select(MemoryRecordRow).where(MemoryRecordRow.tenant_id == tenant_id,
-                                                       MemoryRecordRow.project_id == project_id)
+            statement = select(MemoryRecordRow).where(
+                MemoryRecordRow.tenant_id == tenant_id,
+                MemoryRecordRow.project_id == project_id,
+                MemoryRecordRow.superseded_at.is_(None),
+            )
             if subject_id:
                 statement = statement.where(MemoryRecordRow.subject_id == subject_id)
             rows = list(session.scalars(statement))
@@ -770,6 +1022,12 @@ class LiveForeverService:
                    "provider": provider, "generation_lineage": lineage, "policy": policy}
         request_hash = canonical_sha256(request)
         with self.database.session() as session:
+            if lineage:
+                require_scoped_immutable_assets(
+                    session, tenant_id=tenant_id, project_id=project_id,
+                    asset_ids=lineage["input_asset_ids"], code_prefix="DERIVATIVE_LINEAGE_INPUT",
+                    require_nonempty=True,
+                )
             for grant_id in consent_grant_ids:
                 grant = session.get(ConsentGrantRow, grant_id)
                 if not grant or grant.tenant_id != tenant_id or grant.project_id != project_id or grant.state != "active":
@@ -1112,7 +1370,10 @@ class LiveForeverService:
         for key in {"model_checkpoint_hash", "prompt_hash", "output_hash"}:
             if not re.fullmatch(r"[a-f0-9]{64}", str(value[key])):
                 raise ValidationError("GENERATED_LINEAGE_HASH", f"{key} must be a SHA-256 digest")
-        return value
+        inputs = [str(item).strip() for item in value.get("input_asset_ids", []) if str(item).strip()]
+        if not inputs:
+            raise ValidationError("GENERATED_LINEAGE_INPUTS_REQUIRED", "generated lineage requires immutable input assets")
+        return {**value, "input_asset_ids": sorted(set(inputs))}
 
     def _record(self, session: Session, tenant_id: str, project_id: str, actor_id: str, action: str,
                 resource_type: str, resource_id: str, details: dict[str, Any], event_type: str,

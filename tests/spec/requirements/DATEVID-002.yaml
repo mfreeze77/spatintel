@@ -22,9 +22,13 @@ automated_test_ids:
 - tests/integration/test_spatial_truth_twin.py::test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled
 - tests/integration/test_spatial_truth_twin.py::test_datevid_derivation_references_are_scoped_hashed_unique_and_immutable
 - tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets
+- tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 - schemas/events/event-catalog.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

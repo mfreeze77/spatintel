@@ -647,6 +647,7 @@
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_issue_verifier_is_authenticated_and_independent",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/unit/test_assets_policy.py::test_arciam_001_server_side_tenant_project_purpose_and_sensitive_policy"
       ],
       "test_result_evidence_paths": [
@@ -1378,6 +1379,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_result_evidence_paths": [
@@ -1408,6 +1410,28 @@
         "build/reports/tests/integration.xml"
       ]
     },
+    "CONAC-005": {
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0015_progress06_r1_security_controls.py",
+        "docs/user/CONSTRUCTION.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ]
+    },
     "CONAC-006": {
       "implementation_files": [
         "src/sip/construction.py",
@@ -1423,6 +1447,8 @@
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_result_evidence_paths": [
@@ -1553,13 +1579,15 @@
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_construction_api_round_trip_read_search_and_handoff",
         "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_documents_reports_bim_and_owner_handoff",
-        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets"
+        "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "CONDOC-002": {
@@ -1716,12 +1744,14 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs"
+        "tests/integration/test_progress06_construction_workflows.py::test_progress06_construction_hierarchy_coordinate_frames_and_system_packs",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/construction.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "CONFA-005": {
@@ -1737,6 +1767,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_result_evidence_paths": [
@@ -2149,6 +2180,8 @@
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_raw_secrets_are_rejected_and_never_exported",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_result_evidence_paths": [
@@ -2456,6 +2489,7 @@
       "test_ids": [
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_generated_contracts_expose_only_scoped_mutations",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_deficiency_retest_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_identity",
         "tests/security/test_progress06_vertical_security.py::test_progress06_construction_records_fail_closed_across_tenants_and_redact_owner_security"
       ],
       "test_result_evidence_paths": [
@@ -2566,6 +2600,29 @@
         "build/reports/tests/integration.xml"
       ]
     },
+    "CONSURV-002": {
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
     "CONSURV-003": {
       "implementation_files": [
         "src/sip/construction.py",
@@ -2587,6 +2644,29 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/integration.xml"
+      ]
+    },
+    "CONSURV-004": {
+      "implementation_files": [
+        "src/sip/construction.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "migrations/versions/0014_vertical_mvp.py",
+        "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/construction.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "CONSURV-006": {
@@ -2922,11 +3002,15 @@
         "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_document_and_interchange_sources_are_scoped_immutable_assets",
         "tests/integration/test_spatial_truth_twin.py::test_datevid_datgeom_derivation_is_scoped_idempotent_and_truth_labeled",
         "tests/integration/test_spatial_truth_twin.py::test_datevid_derivation_references_are_scoped_hashed_unique_and_immutable",
-        "tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation"
+        "tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_construction_verified_state_requires_governed_independent_transition",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
         "schemas/events/event-catalog.json"
       ]
     },
@@ -3024,11 +3108,13 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/integration/test_spatial_truth_twin.py::test_datevid_provenance_gate_corroboration_and_disputed_retrieval"
+        "tests/integration/test_spatial_truth_twin.py::test_datevid_provenance_gate_corroboration_and_disputed_retrieval",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
         "schemas/events/event-catalog.json"
       ]
     },
@@ -4586,6 +4672,7 @@
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_interview_governance_dispute_and_safe_experience",
         "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_external_provider_requires_complete_scope_bound_approval",
         "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_consent_revocation_is_tenant_and_project_scoped",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review",
         "tests/security/test_progress06_vertical_security.py::test_progress06_liveforever_scope_and_generated_presence_fail_closed"
       ],
       "test_result_evidence_paths": [
@@ -4615,12 +4702,14 @@
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences",
-        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives"
+        "tests/privacy/test_progress06_liveforever_privacy.py::test_progress06_revocation_withholds_memory_room_interviews_editions_and_derivatives",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/privacy.xml"
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "LIFCONS-003": {
@@ -4933,12 +5022,14 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "LIFGRAPH-002": {
@@ -5278,12 +5369,14 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_graph_truth_labels_conflicts_and_immutable_family_correction",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "LIFLABEL-002": {
@@ -5403,12 +5496,14 @@
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
-        "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit"
+        "tests/integration/test_verticals.py::test_liveforever_conflicting_recollections_generated_label_audience_revocation_and_safe_exit",
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_review"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
         "src/sip/liveforever.py",
         "src/sip/models.py",
         "src/sip/scene.py"
@@ -5726,6 +5821,28 @@
         "build/evidence/demos/restore.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
+      ]
+    },
+    "LIFREC-002": {
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/security/test_progress06_r2_stopline_security.py::test_progress06_r2_field_visit_and_generated_lineage_reject_missing_assets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "LIFTEST-004": {

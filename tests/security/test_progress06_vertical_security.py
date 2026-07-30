@@ -9,8 +9,9 @@ import pytest
 from fastapi.testclient import TestClient
 
 from sip.api import create_app
+from sip.canonical import sha256_bytes
 from sip.errors import AuthorizationError, NotFoundError, ValidationError
-from sip.models import Audience
+from sip.models import Audience, AuthorityClass, Classification, ProvenanceRef, SourceClass
 
 
 def _headers(tenant: str, project: str, *, subject: str = "admin", roles: str = "tenant_admin") -> dict[str, str]:
@@ -20,6 +21,18 @@ def _headers(tenant: str, project: str, *, subject: str = "admin", roles: str = 
         "X-SIP-Project": project,
         "X-SIP-Roles": roles,
     }
+
+
+def _asset(context, tenant: str, project: str, name: str):
+    payload = f"synthetic:{name}".encode("utf-8")
+    return context.assets.ingest_bytes(
+        tenant_id=tenant, project_id=project, data=payload,
+        media_type="application/octet-stream", original_name=name,
+        classification=Classification.INTERNAL, retention_class="records",
+        source_class=SourceClass.DIRECT_CAPTURE, authority_class=AuthorityClass.EVIDENCE,
+        provenance=ProvenanceRef(source_ids=[f"synthetic:{name}"], output_hash=sha256_bytes(payload)),
+        actor_id="fixture-builder",
+    )
 
 
 @pytest.mark.security
@@ -34,22 +47,30 @@ def test_progress06_construction_records_fail_closed_across_tenants_and_redact_o
         tenant_id=tenant_a, project_id=project_a, record_type="site", name="Synthetic Site",
         parent_id=None, state="observed", actor_id="admin-a",
     )
+    controller_photo = _asset(context, tenant_a, project_a, "synthetic-photo")
     controller = context.construction.create_system_record(
         tenant_id=tenant_a, project_id=project_a, system_type="access_controller", parent_id=room,
         entity_id="synthetic-controller", state="observed",
         data={
             "manufacturer": "Synthetic", "model": "CTRL-1", "location": "Synthetic Room",
-            "network_address": "192.0.2.10", "controller_password": "never-export",
-            "credential_secret": "never-export", "security_zone": "restricted-zone-a",
+            "network_address": "192.0.2.10",
+            "controller_password_vault_ref": "vault://construction/controller/password",
+            "credential_secret_vault_ref": "vault://construction/controller/credential",
+            "security_zone": "restricted-zone-a",
         },
-        evidence_asset_ids=["synthetic-photo"], actor_id="admin-a",
+        evidence_asset_ids=[controller_photo.asset_id], actor_id="admin-a",
     )
     exported = context.construction.export_system_pack(tenant_a, project_a, pack="access_control")
-    row = next(item for item in exported["records"] if item["record_id"] == controller)
-    assert "network_address" not in row["data"]
+    assert all(item["record_id"] != controller for item in exported["records"])
+    restricted_export = context.construction.export_system_pack(
+        tenant_a, project_a, pack="access_control", include_restricted=True
+    )
+    row = next(item for item in restricted_export["records"] if item["record_id"] == controller)
+    assert row["data"]["controller_password_vault_ref"].startswith("vault://")
+    assert row["data"]["credential_secret_vault_ref"].startswith("vault://")
     assert "controller_password" not in row["data"]
     assert "credential_secret" not in row["data"]
-    assert row["redacted_fields"] == ["controller_password", "credential_secret", "network_address"]
+    assert "never-export" not in json.dumps(row, sort_keys=True)
     cross_tenant_search = context.construction.search_facility_records(tenant_b, project_b, query="synthetic-controller")
     assert cross_tenant_search["items"] == []
     # The authenticated service surface may not accept a tenant/project/body override.
@@ -86,13 +107,12 @@ def test_progress06_construction_records_fail_closed_across_tenants_and_redact_o
     with zipfile.ZipFile(handoff_path) as archive:
         inventory = json.loads(archive.read("data/inventory.json"))
         manifest = json.loads(archive.read("manifest.json"))
-    exported_controller = next(item for item in inventory if item["record_id"] == controller)
-    serialized = json.dumps(exported_controller, sort_keys=True)
+    assert all(item["record_id"] != controller for item in inventory)
+    serialized = json.dumps(inventory, sort_keys=True)
     assert "192.0.2.10" not in serialized
     assert "never-export" not in serialized
-    assert set(exported_controller["redacted_fields"]) == {"controller_password", "credential_secret", "network_address"}
+    assert "vault://construction/controller" not in serialized
     assert manifest["handoff_validation"]["restricted_annex_included"] is False
-    assert manifest["handoff_validation"]["redactions"]
 
 
 @pytest.mark.security
@@ -104,6 +124,7 @@ def test_progress06_liveforever_scope_and_generated_presence_fail_closed(context
     project_a = context.tenancy.create_project(tenant_a, "A", vertical="liveforever", classification="confidential", project_id="project-p06-lif-a", actor_id="admin-a")
     project_b = context.tenancy.create_project(tenant_b, "B", vertical="liveforever", classification="confidential", project_id="project-p06-lif-b", actor_id="admin-b")
     subject = "synthetic-subject-a"
+    audio = _asset(context, tenant_a, project_a, "synthetic-audio")
     grant = context.liveforever.grant_consent(
         tenant_id=tenant_a, project_id=project_a, subject_id=subject, granted_by=subject,
         purposes=["preservation"], audiences=[Audience.PRIVATE, Audience.FAMILY],
@@ -115,7 +136,7 @@ def test_progress06_liveforever_scope_and_generated_presence_fail_closed(context
         tenant_id=tenant_a, project_id=project_a, subject_id=subject,
         participants=[{"person_id": subject, "role": "narrator"}],
         consent_context={"confirmed": True, "grant_id": grant}, recording_state="stopped",
-        source_media_ids=["synthetic-audio"], timeline={"started_ms": 0, "ended_ms": 1000},
+        source_media_ids=[audio.asset_id], timeline={"started_ms": 0, "ended_ms": 1000},
         device={"type": "synthetic"}, environment={"location": "synthetic-room"},
         interruptions=[], question_lineage=[{"source": "human", "text": "Synthetic question"}],
         pacing_policy={"pause_allowed": True, "stop_allowed": True}, actor_id="admin-a",
@@ -124,7 +145,7 @@ def test_progress06_liveforever_scope_and_generated_presence_fail_closed(context
     with pytest.raises(NotFoundError):
         context.liveforever.interview(tenant_b, project_b, interview["interview_id"])
     common = dict(
-        tenant_id=tenant_a, project_id=project_a, source_ids=["synthetic-audio"], subject_ids=[subject],
+        tenant_id=tenant_a, project_id=project_a, source_ids=[audio.asset_id], subject_ids=[subject],
         consent_grant_ids=[grant], audience=Audience.FAMILY, classification="confidential",
         retention={"class": "preservation"}, generation_lineage={}, policy={"purpose": "preservation"},
         actor_id="admin-a",

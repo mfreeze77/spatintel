@@ -39,9 +39,9 @@ from sip.scene import ProxyHit
 
 @pytest.mark.integration
 @pytest.mark.acceptance
-def test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity(bootstrapped, tmp_path: Path) -> None:
+def test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity(minimal_bootstrapped, tmp_path: Path) -> None:
     """REQ: PLTIO-003, PLTIO-012 preservation import retains source hashes and reconstructs semantic scene identity without private vendor knowledge."""
-    context, tenant_id, project_id, actor = bootstrapped
+    context, tenant_id, project_id, actor = minimal_bootstrapped
     payload = b"open-preservation-source"
     asset = context.assets.ingest_bytes(
         tenant_id=tenant_id,
@@ -247,9 +247,9 @@ def test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_s
 @pytest.mark.integration
 @pytest.mark.acceptance
 @pytest.mark.privacy
-def test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state(bootstrapped, tmp_path: Path) -> None:
+def test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state(minimal_bootstrapped, tmp_path: Path) -> None:
     """REQ: PLTIO-003, PLTIO-006, PLTIO-012, OPSDR-005 clean restore reconciles native records and keeps executable/governance state fail-closed."""
-    source, tenant_id, project_id, actor = bootstrapped
+    source, tenant_id, project_id, actor = minimal_bootstrapped
     payload = b"verified preservation evidence"
     evidence = source.assets.ingest_bytes(
         tenant_id=tenant_id,
@@ -407,10 +407,22 @@ def test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails
         system_type="fire_alarm_panel",
         parent_id=room,
         entity_id=entity,
-        state="verified",
-        data={"verified_by": "field-verifier", "photo_asset_id": evidence.asset_id},
+        state="observed",
+        data={"photo_asset_id": evidence.asset_id},
         evidence_asset_ids=[evidence.asset_id],
         actor_id=actor,
+    )
+    source.construction.verify_system_record(
+        construction_record,
+        tenant_id=tenant_id,
+        project_id=project_id,
+        verifier_id="field-verifier",
+        method="independent field inspection",
+        scope={"record_id": construction_record, "system_type": "fire_alarm_panel"},
+        exclusions=[],
+        evidence_asset_ids=[evidence.asset_id],
+        signature_asset_id=None,
+        idempotency_key="preservation-construction-verification",
     )
     subject = "person-preservation-subject"
     consent = source.liveforever.grant_consent(
@@ -418,25 +430,37 @@ def test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails
         project_id=project_id,
         subject_id=subject,
         granted_by="subject",
-        purposes=["preservation"],
+        purposes=["preservation", "family_review"],
         audiences=[Audience.PRIVATE, Audience.FAMILY],
         scopes=["*"],
         derivative_policy={"generated_visual": False, "voice": False},
         expires_at=datetime.now(UTC) + timedelta(days=365),
     )
-    memory = source.liveforever.create_record(
+    memory_source = source.liveforever.create_record(
         tenant_id=tenant_id,
         project_id=project_id,
         record_type="person",
         subject_id=subject,
         related_ids=[],
         data={"name": "Preservation Person", "portrait_asset_id": evidence.asset_id},
-        source_class=SourceClass.CORROBORATED,
-        confidence=0.95,
+        source_class=SourceClass.OBSERVED,
+        confidence=0.8,
         evidence_asset_ids=[evidence.asset_id],
         audience=Audience.FAMILY,
         actor_id=actor,
     )
+    memory_review = source.liveforever.review_record(
+        memory_source,
+        tenant_id=tenant_id,
+        project_id=project_id,
+        reviewer_id="family-independent-reviewer",
+        target_source_class=SourceClass.VERIFIED,
+        rationale="independent preservation review against immutable source evidence",
+        evidence_asset_ids=[evidence.asset_id],
+        confidence=0.95,
+        idempotency_key="preservation-memory-review",
+    )
+    memory = memory_review["reviewed_record_id"]
     comment = source.collaboration.comment(
         tenant_id=tenant_id,
         project_id=project_id,

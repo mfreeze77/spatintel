@@ -147,7 +147,7 @@ def test_progress06_construction_documents_reports_bim_and_owner_handoff(bootstr
         tenant_id=tenant_id, project_id=project_id, system_type="fire_alarm_panel", parent_id=room,
         entity_id="FACP-1", state="observed", actor_id=actor, evidence_asset_ids=["photo-facp"],
         data={"manufacturer": "Synthetic", "model": "FACP-1", "location": "Room 101",
-              "network_address": "192.0.2.10", "programming_password": "never-export"},
+              "network_address": "192.0.2.10", "programming_password_vault_ref": "vault://construction/facp-1/programming"},
     )
     context.construction.create_system_record(
         tenant_id=tenant_id, project_id=project_id, system_type="access_reader", parent_id=room,
@@ -262,18 +262,18 @@ def test_progress06_construction_documents_reports_bim_and_owner_handoff(bootstr
         interchange = json.loads(archive.read("data/interchange.json"))
         validation = json.loads(archive.read("data/handoff-validation.json"))
         html = archive.read("viewer/index.html").decode()
-    panel_export = next(item for item in inventory if item["record_id"] == panel)
-    assert "network_address" not in panel_export["data"]
-    assert "programming_password" not in panel_export["data"]
+    assert all(item["record_id"] != panel for item in inventory)
+    assert all(panel not in item.get("truth_labels", {}) for item in interchange)
+    assert "programming_password_vault_ref" not in json.dumps(inventory)
     assert manifest["scope"]["rooms"] == [room]
     assert manifest["accepted_scene_commit_id"] == scene["commit_id"]
     assert manifest["warranties"] and manifest["training"] and manifest["exclusions"]
     assert validation["status"] == "needs_review"
     assert validation["required_field_findings"]
-    assert interchange[0]["truth_labels"][panel] == "observed"
+    assert panel not in interchange[0]["truth_labels"]
     assert "requires no network connection" in html
     search = context.construction.search_facility_records(tenant_id, project_id, query="FACP-1")
-    assert any(item["kind"] == "record" and item["id"] == panel for item in search["items"])
+    assert all(item.get("id") != panel for item in search["items"])
 
 
 @pytest.mark.integration
