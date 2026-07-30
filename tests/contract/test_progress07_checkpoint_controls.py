@@ -8,6 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from tools.build_progress07_checkpoint import SECURITY_MATRIX_EVIDENCE_PATH
 from tools.verify_progress07_checkpoint import (
     EXPECTED_BASE_COMMIT,
     EXPECTED_BASE_OUTER_SHA256,
@@ -146,3 +147,10 @@ def test_progress07_acceptance_cli_rejects_concurrent_evidence_writers(tmp_path:
             fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
     assert completed.returncode != 0
     assert "already running" in (completed.stdout + completed.stderr)
+
+
+def test_progress07_checkpoint_builder_uses_the_authoritative_security_matrix() -> None:
+    """CONTROL: checkpoint packaging consumes the accepted matrix artifact actually emitted by the security gate."""
+
+    assert SECURITY_MATRIX_EVIDENCE_PATH == "build/reports/tests/security.xml"
+    assert (ROOT / SECURITY_MATRIX_EVIDENCE_PATH).is_file() or not (ROOT / "build/reports/tests/security-direct.xml").exists()
