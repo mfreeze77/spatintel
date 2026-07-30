@@ -35,6 +35,7 @@ EXPECTED_SPEC_SHA256 = "84b570464b98b1baf3107789af22edad2a14086e5420df35a961f5fb
 EXPECTED_BASE_COMMIT = "118ac917a6c35e007d9f2158d5495e1a69883748"
 EXPECTED_BASE_ZIP_SHA256 = "505cac8ff96298f910a6b12d6ab82e92f14988aaf3df3dad72b9a1fd20c861ad"
 EXPECTED_BASE_OUTER_SHA256 = "4d56bf5a0c319f373dcec934637c760288942b22484b21123b5fbffe541ec562"
+EXPECTED_BASE_SOURCE_ROOT = "b98f8095a666da3265159022966ad49994bed4180dffef6a863a01fc124a222e"
 EXPECTED_MIGRATION_SHA256 = "56572aa96b103ea20dbca9b839819cc30997414bdb633be06f7b443f54394615"
 EXPECTED_MIGRATION_BYTES = 5759
 EXPECTED_SCOPE_TOTAL = 19
@@ -144,6 +145,7 @@ def _verify_predecessor(root: Path, verification: Verification) -> None:
         ("commit", EXPECTED_BASE_COMMIT),
         ("project_zip_sha256", EXPECTED_BASE_ZIP_SHA256),
         ("outer_delivery_zip_sha256", EXPECTED_BASE_OUTER_SHA256),
+        ("source_tree_root_sha256", EXPECTED_BASE_SOURCE_ROOT),
     ):
         if accepted.get(key) != expected:
             verification.fail("PREDECESSOR_PROGRESS06_MISMATCH", f"{key} differs from the accepted Progress 06-R1 base", relative)

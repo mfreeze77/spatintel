@@ -52,10 +52,12 @@
   },
   "accepted_progress_06_r1_checkpoint": {
     "branch": "progress-06-r1-remediation",
+    "checkpoint_id": "sip-v1.1.0-progress-06-r1",
     "commit": "118ac917a6c35e007d9f2158d5495e1a69883748",
-    "outer_delivery_sha256": "4d56bf5a0c319f373dcec934637c760288942b22484b21123b5fbffe541ec562",
+    "outer_delivery_zip_sha256": "4d56bf5a0c319f373dcec934637c760288942b22484b21123b5fbffe541ec562",
     "parent": "affb128855bc20933e460d67cabc31d4cdb3e8dd",
     "project_zip_sha256": "505cac8ff96298f910a6b12d6ab82e92f14988aaf3df3dad72b9a1fd20c861ad",
+    "relationship": "Accepted Progress 06-R1 is the exact source-history and evidence base for the narrow Progress 06-R2 stop-line remediation.",
     "source_tree_root_sha256": "b98f8095a666da3265159022966ad49994bed4180dffef6a863a01fc124a222e",
     "tree": "1585dcc029772946cd97e3aeeb4f15c1d9713608"
   },

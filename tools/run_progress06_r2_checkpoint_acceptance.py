@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import hashlib
+from contextlib import contextmanager
 import json
 import os
 import subprocess
@@ -45,6 +47,29 @@ EXPECTED_BLOCKED_TARGETS = ["web-acceptance", "release-mode"]
 POST_EVIDENCE_TARGETS = ["traceability-evidence"]
 
 CONTROL_STATUS_VALUES = {"passed_complete", "passed_with_external_gaps", "blocked", "failed"}
+
+
+@contextmanager
+def _exclusive_acceptance_lock():
+    """Prevent concurrent acceptance runs from overwriting immutable gate snapshots."""
+
+    lock_path = ROOT / "build/locks/progress-06-r2-acceptance.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+", encoding="utf-8") as handle:
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError("Progress 06-R2 checkpoint acceptance is already running") from exc
+        handle.seek(0)
+        handle.truncate()
+        handle.write(json.dumps({"pid": os.getpid(), "started_at": datetime.now(UTC).isoformat()}) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+        try:
+            yield
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
 TARGET_REPORT_PATHS = {
     "lint": "build/reports/static-checks.json",
     "spec-check": "build/reports/spec-lint.json",
@@ -326,39 +351,40 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=ROOT / "build/reports/checkpoint-acceptance-gates.json")
     args = parser.parse_args()
     output_path = _rooted_output_path(args.output)
-    report = run(attestation_path=args.attestation.resolve())
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
-    output_path.write_text(rendered, encoding="utf-8")
-    readiness = {
-        "schema": "sip.release-readiness/v2",
-        "status": "blocked" if report["status"] != "failed" else "failed",
-        "checkpoint_id": report["checkpoint_id"],
-        "captured_at": report["captured_at"],
-        "source": report["source"],
-        "checkpoint_acceptance_status": report["status"],
-        "checkpoint_acceptance_report": {
-            "path": output_path.relative_to(ROOT).as_posix(),
-            "sha256": __import__("hashlib").sha256(rendered.encode("utf-8")).hexdigest(),
-        },
-        "progress_07_authorized": False,
-        "production_authorized": False,
-        "external_validation_gaps": [
-            "Ruff and mypy were unavailable.",
-            "Node 24.18.0, pnpm 10.28.2, a frozen pnpm lockfile, installed dependencies, TypeScript typecheck, ESLint, and the Next production build were unavailable.",
-            "pip-audit, Gitleaks, and Trivy were unavailable.",
-            "Docker Compose runtime, Kubernetes deployment, and Terraform execution were unavailable.",
-            "Xcode, iOS simulator, signing, LiDAR, camera, thermal, battery, interruption, and physical-device validation remain external.",
-            "Approved LingBot-Map checkpoint bytes, CUDA/GPU execution, and real-scene validation remain external.",
-            "Independent penetration testing, privacy review, mounted-browser accessibility audit, desktop operator-usability review, and legal approval remain incomplete.",
-            "No customer construction pilot or human-subject LiveForever pilot occurred; demonstrations are synthetic or non-sensitive.",
-        ],
-        "next_action": "Submit the independently verified Progress 06-R2 inner checkpoint and consolidated outer envelope for True North closure review; Progress 07 and production remain unauthorized.",
-    }
-    readiness_path = ROOT / "build/reports/release-readiness-progress-06-r2.json"
-    readiness_path.write_text(json.dumps(readiness, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps(report, indent=2, sort_keys=True))
-    raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)
+    with _exclusive_acceptance_lock():
+        report = run(attestation_path=args.attestation.resolve())
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
+        output_path.write_text(rendered, encoding="utf-8")
+        readiness = {
+            "schema": "sip.release-readiness/v2",
+            "status": "blocked" if report["status"] != "failed" else "failed",
+            "checkpoint_id": report["checkpoint_id"],
+            "captured_at": report["captured_at"],
+            "source": report["source"],
+            "checkpoint_acceptance_status": report["status"],
+            "checkpoint_acceptance_report": {
+                "path": output_path.relative_to(ROOT).as_posix(),
+                "sha256": __import__("hashlib").sha256(rendered.encode("utf-8")).hexdigest(),
+            },
+            "progress_07_authorized": False,
+            "production_authorized": False,
+            "external_validation_gaps": [
+                "Ruff and mypy were unavailable.",
+                "Node 24.18.0, pnpm 10.28.2, a frozen pnpm lockfile, installed dependencies, TypeScript typecheck, ESLint, and the Next production build were unavailable.",
+                "pip-audit, Gitleaks, and Trivy were unavailable.",
+                "Docker Compose runtime, Kubernetes deployment, and Terraform execution were unavailable.",
+                "Xcode, iOS simulator, signing, LiDAR, camera, thermal, battery, interruption, and physical-device validation remain external.",
+                "Approved LingBot-Map checkpoint bytes, CUDA/GPU execution, and real-scene validation remain external.",
+                "Independent penetration testing, privacy review, mounted-browser accessibility audit, desktop operator-usability review, and legal approval remain incomplete.",
+                "No customer construction pilot or human-subject LiveForever pilot occurred; demonstrations are synthetic or non-sensitive.",
+            ],
+            "next_action": "Submit the independently verified Progress 06-R2 inner checkpoint and consolidated outer envelope for True North closure review; Progress 07 and production remain unauthorized.",
+        }
+        readiness_path = ROOT / "build/reports/release-readiness-progress-06-r2.json"
+        readiness_path.write_text(json.dumps(readiness, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps(report, indent=2, sort_keys=True))
+        raise SystemExit(0 if report["status"] in {"passed_complete", "passed_with_external_gaps"} else 1)
 
 
 if __name__ == "__main__":
