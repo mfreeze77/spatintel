@@ -104,8 +104,7 @@ typecheck:
 security:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/security_check.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/progress07_supply_chain_check.py
-	mkdir -p build/reports/tests
-	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_pytest_isolated.py -q tests/security -p no:cacheprovider --junitxml=build/reports/tests/security-direct.xml > build/reports/tests/security-direct.log 2>&1
+	SIP_TEST_REPORT_ROOT=build/reports/security-direct PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --suite security --jobs 1 --shard-jobs 1 --timeout 300
 
 license-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_third_party_lock.py --check

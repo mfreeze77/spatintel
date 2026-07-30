@@ -152,12 +152,27 @@ def test_progress07_acceptance_cli_rejects_concurrent_evidence_writers(tmp_path:
 def test_progress07_checkpoint_builder_uses_separate_direct_security_evidence() -> None:
     """CONTROL: the security gate cannot overwrite the source-bound complete matrix artifacts."""
 
-    assert SECURITY_DIRECT_EVIDENCE_PATH == "build/reports/tests/security-direct.xml"
+    assert SECURITY_DIRECT_EVIDENCE_PATH == "build/reports/security-direct/security.xml"
     makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
     security_recipe = makefile.split("security:\n", 1)[1].split("\nlicense-check:", 1)[0]
-    assert "security-direct.xml" in security_recipe
-    assert "run_test_matrix.py --suite security" not in security_recipe
+    assert "SIP_TEST_REPORT_ROOT=build/reports/security-direct" in security_recipe
+    assert "run_test_matrix.py --suite security" in security_recipe
+    assert "run_pytest_isolated.py -q tests/security" not in security_recipe
 
+
+def test_matrix_report_root_override_is_explicit_and_rooted(tmp_path: Path, monkeypatch) -> None:
+    """CONTROL: isolated gate output roots are deterministic and cannot alias canonical evidence accidentally."""
+
+    from tools.run_test_matrix import _configured_output_path
+
+    default = tmp_path / "default"
+    monkeypatch.delenv("SIP_TEST_REPORT_ROOT", raising=False)
+    assert _configured_output_path("SIP_TEST_REPORT_ROOT", default, root=tmp_path) == default
+    monkeypatch.setenv("SIP_TEST_REPORT_ROOT", "build/reports/security-direct")
+    assert _configured_output_path("SIP_TEST_REPORT_ROOT", default, root=tmp_path) == tmp_path / "build/reports/security-direct"
+    absolute = tmp_path / "absolute"
+    monkeypatch.setenv("SIP_TEST_REPORT_ROOT", str(absolute))
+    assert _configured_output_path("SIP_TEST_REPORT_ROOT", default, root=tmp_path) == absolute
 
 def test_progress07_coverage_report_retains_later_phase_denial() -> None:
     """CONTROL: packaged coverage explicitly keeps Progress 08 and production fail closed."""

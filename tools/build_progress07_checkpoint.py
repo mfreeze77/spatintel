@@ -80,7 +80,7 @@ def _scope_ids() -> frozenset[str]:
     return identifiers
 
 P07_SCOPE_IDS = _scope_ids()
-SECURITY_DIRECT_EVIDENCE_PATH = "build/reports/tests/security-direct.xml"
+SECURITY_DIRECT_EVIDENCE_PATH = "build/reports/security-direct/security.xml"
 
 REQUIRED_EVIDENCE_CATEGORIES = {
     "source_commit",

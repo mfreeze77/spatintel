@@ -26,8 +26,25 @@ from typing import Any, Sequence
 from tools.source_identity import source_tree_root as canonical_source_tree_root
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT_ROOT = ROOT / "build" / "reports" / "tests"
-MATRIX_PATH = ROOT / "build" / "reports" / "test-matrix.json"
+
+
+def _configured_output_path(environment_name: str, default: Path, *, root: Path = ROOT) -> Path:
+    """Resolve an optional output override inside or outside the repository.
+
+    Suite-specific acceptance gates use an alternate report root so their
+    independently executed evidence cannot overwrite the complete matrix's
+    canonical JUnit, logs, shard manifests, or sidecars.
+    """
+
+    configured = os.environ.get(environment_name)
+    if not configured:
+        return default
+    path = Path(configured)
+    return path if path.is_absolute() else root / path
+
+
+REPORT_ROOT = _configured_output_path("SIP_TEST_REPORT_ROOT", ROOT / "build" / "reports" / "tests")
+MATRIX_PATH = _configured_output_path("SIP_TEST_MATRIX_PATH", ROOT / "build" / "reports" / "test-matrix.json")
 
 
 def _default_lock_root(root: Path) -> Path:
