@@ -80,7 +80,7 @@ def _scope_ids() -> frozenset[str]:
     return identifiers
 
 P07_SCOPE_IDS = _scope_ids()
-SECURITY_MATRIX_EVIDENCE_PATH = "build/reports/tests/security.xml"
+SECURITY_DIRECT_EVIDENCE_PATH = "build/reports/tests/security-direct.xml"
 
 REQUIRED_EVIDENCE_CATEGORIES = {
     "source_commit",
@@ -273,7 +273,8 @@ def _render_coverage(facts: dict[str, Any], ledger: dict[str, Any]) -> str:
         "",
         "> Requirements outside VERIFIED remain incomplete or externally unverified. This report makes no complete-platform or production-readiness claim.",
         "",
-        "- Progress 07 remains **unauthorized** pending independent True North acceptance of Progress 07.",
+        "- Progress 07 is delivered for independent True North milestone-closure review.",
+        "- Progress 08 remains **unauthorized**.",
         "- Production deployment and release remain **NO-GO** until independent True North acceptance and all required external validation gates pass.",
     ]
     return "\n".join(lines) + "\n"
@@ -462,7 +463,7 @@ def build(*, evidence_root: Path, output: Path, branch: str, attestation_path: P
             "contracts": ["build/reports/tests/contract.xml", "build/reports/tests/contract.log", "build/evidence/gates/contracts.log"],
             "migrations": ["build/reports/tests/migration.xml", "build/reports/tests/migration-direct.xml", "build/evidence/gates/migrations.log", "source/migrations/versions/0012_scene_runtime_review.py", "source/migrations/versions/0013_scene_change_application_atomicity.py", "source/migrations/versions/0014_vertical_mvp.py", "source/migrations/versions/0015_progress06_r1_security_controls.py", "source/migrations/versions/0016_progress06_r2_truth_and_restricted_data.py", "source/migrations/versions/0017_progress07_security_privacy_readiness.py"],
             "infrastructure": ["build/reports/infrastructure-validation.json", "build/evidence/gates/infrastructure.log"],
-            "security": ["build/reports/security-report.json", SECURITY_MATRIX_EVIDENCE_PATH, "build/evidence/gates/security.log"],
+            "security": ["build/reports/security-report.json", SECURITY_DIRECT_EVIDENCE_PATH, "build/evidence/gates/security.log"],
             "licensing": ["build/reports/license-gate.json", "build/evidence/gates/license-check.log"],
             "requirements": ["source/requirements/requirements-ledger.json", "source/requirements/requirements-ledger.csv", "source/requirements/requirements-ledger.sqlite", "source/requirements/implementation-map.json", "source/requirements/MILESTONE_SCOPE_PROGRESS_06.json", "source/requirements/progress-06-traceability-audit.json", "source/requirements/MILESTONE_SCOPE_PROGRESS_06_R1.json", "source/requirements/progress-06-r1-traceability-audit.json", "source/requirements/MILESTONE_SCOPE_PROGRESS_06_R2.json", "source/requirements/progress-06-r2-traceability-audit.json", "source/requirements/MILESTONE_SCOPE_PROGRESS_07.json", "source/requirements/progress-07-traceability-audit.json", "build/reports/spec-lint.json", "build/evidence/gates/traceability-evidence.log"],
             "benchmarks": ["build/reports/benchmark-report.json", "build/evidence/gates/benchmark.log"],

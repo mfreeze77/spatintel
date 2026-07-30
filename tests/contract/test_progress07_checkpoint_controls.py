@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from tools.build_progress07_checkpoint import SECURITY_MATRIX_EVIDENCE_PATH
+from tools.build_progress07_checkpoint import SECURITY_DIRECT_EVIDENCE_PATH, _render_coverage
 from tools.verify_progress07_checkpoint import (
     EXPECTED_BASE_COMMIT,
     EXPECTED_BASE_OUTER_SHA256,
@@ -149,8 +149,28 @@ def test_progress07_acceptance_cli_rejects_concurrent_evidence_writers(tmp_path:
     assert "already running" in (completed.stdout + completed.stderr)
 
 
-def test_progress07_checkpoint_builder_uses_the_authoritative_security_matrix() -> None:
-    """CONTROL: checkpoint packaging consumes the accepted matrix artifact actually emitted by the security gate."""
+def test_progress07_checkpoint_builder_uses_separate_direct_security_evidence() -> None:
+    """CONTROL: the security gate cannot overwrite the source-bound complete matrix artifacts."""
 
-    assert SECURITY_MATRIX_EVIDENCE_PATH == "build/reports/tests/security.xml"
-    assert (ROOT / SECURITY_MATRIX_EVIDENCE_PATH).is_file() or not (ROOT / "build/reports/tests/security-direct.xml").exists()
+    assert SECURITY_DIRECT_EVIDENCE_PATH == "build/reports/tests/security-direct.xml"
+    makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
+    security_recipe = makefile.split("security:\n", 1)[1].split("\nlicense-check:", 1)[0]
+    assert "security-direct.xml" in security_recipe
+    assert "run_test_matrix.py --suite security" not in security_recipe
+
+
+def test_progress07_coverage_report_retains_later_phase_denial() -> None:
+    """CONTROL: packaged coverage explicitly keeps Progress 08 and production fail closed."""
+
+    text = _render_coverage(
+        {
+            "checkpoint_id": "sip-v1.1.0-progress-07",
+            "commit": "a" * 40,
+            "source_tree_root_sha256": "b" * 64,
+            "python_tests_passed": 1,
+            "requirements_total": 1,
+        },
+        {"requirements": [{"priority": "P0", "implementation_status": "IMPLEMENTED_UNVERIFIED"}]},
+    )
+    assert "Progress 08" in text and "unauthorized" in text
+    assert "Production" in text and "NO-GO" in text
