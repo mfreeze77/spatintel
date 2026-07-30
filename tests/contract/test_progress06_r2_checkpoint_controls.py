@@ -35,7 +35,15 @@ def test_progress06_r2_acceptance_cli_rejects_concurrent_evidence_writers(tmp_pa
     lock_path = ROOT / "build/locks/progress-06-r2-acceptance.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open("a+", encoding="utf-8") as handle:
-        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        acquired_here = False
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            acquired_here = True
+        except BlockingIOError:
+            # The outer clean-source acceptance runner owns the lock while this
+            # test executes in the complete matrix. That state is equally valid
+            # for proving that a second process is rejected.
+            pass
         completed = subprocess.run(
             [
                 sys.executable,
@@ -51,5 +59,7 @@ def test_progress06_r2_acceptance_cli_rejects_concurrent_evidence_writers(tmp_pa
             text=True,
             check=False,
         )
+        if acquired_here:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
     assert completed.returncode != 0
     assert "already running" in (completed.stdout + completed.stderr)
