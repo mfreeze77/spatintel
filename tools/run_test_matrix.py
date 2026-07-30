@@ -13,6 +13,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 import uuid
 import xml.etree.ElementTree as ET
@@ -27,7 +28,28 @@ from tools.source_identity import source_tree_root as canonical_source_tree_root
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_ROOT = ROOT / "build" / "reports" / "tests"
 MATRIX_PATH = ROOT / "build" / "reports" / "test-matrix.json"
-LOCK_ROOT = Path(os.environ.get("SIP_TEST_MATRIX_LOCK_ROOT", str(ROOT / "build" / "locks" / "test-matrix")))
+
+
+def _default_lock_root(root: Path) -> Path:
+    """Return stable controller state outside generated repository trees.
+
+    Test and acceptance workflows may atomically replace ``build`` subtrees.
+    Keeping writer leases and resumable staging there can unlink a live
+    controller's inode and permit a competing process to publish into the same
+    paths.  A per-worktree operating-system temporary directory survives those
+    cleanups while still serializing all controllers for one checkout.
+    """
+
+    identity = hashlib.sha256(str(root.resolve()).encode("utf-8")).hexdigest()[:24]
+    return Path(tempfile.gettempdir()) / f"sip-test-matrix-{identity}"
+
+
+LOCK_ROOT = Path(os.environ.get("SIP_TEST_MATRIX_LOCK_ROOT", str(_default_lock_root(ROOT))))
+
+
+def _matrix_controller_lock_path(root: Path = ROOT) -> Path:
+    identity = hashlib.sha256(str(root.resolve()).encode("utf-8")).hexdigest()[:24]
+    return Path(tempfile.gettempdir()) / f"sip-test-matrix-controller-{identity}.lock"
 
 CONFIGURED_SUITES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("contract", ("tests/contract",)),
@@ -293,6 +315,45 @@ def _lease_owner_is_active(owner: dict[str, Any] | None, *, lease_dir: Path) -> 
 
 
 @contextmanager
+def _exclusive_matrix_controller_lock():
+    """Prevent complete matrix controllers from interleaving evidence.
+
+    Suite-level leases protect individual staging areas.  A separate process-wide
+    lock is still required because two controllers could otherwise execute
+    different suites concurrently and assemble a mixed report set.  The lock
+    lives outside generated repository trees so cleanup cannot replace its inode.
+    """
+
+    lock_path = _matrix_controller_lock_path()
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+", encoding="utf-8") as handle:
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError("SIP test matrix is already running for this worktree") from exc
+        handle.seek(0)
+        handle.truncate()
+        handle.write(
+            json.dumps(
+                {
+                    "schema": "sip.test-matrix-controller-lock/v1",
+                    "pid": os.getpid(),
+                    "worktree": str(ROOT.resolve()),
+                    "started_at": datetime.now(UTC).isoformat(),
+                },
+                sort_keys=True,
+            )
+            + "\n"
+        )
+        handle.flush()
+        os.fsync(handle.fileno())
+        try:
+            yield
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
+@contextmanager
 def _directory_writer_lease(name: str):
     """Acquire a filesystem-atomic writer lease resilient to lock-file replacement.
 
@@ -466,6 +527,53 @@ def _shard_runtime_environment(
     return runtime_root, shard_environment
 
 
+def _write_synthetic_junit(
+    destination: Path,
+    *,
+    shard_path: str,
+    status: str,
+    message: str,
+    elapsed_seconds: float,
+) -> None:
+    """Retain machine-readable failure evidence when pytest cannot emit JUnit.
+
+    A timed-out or catastrophically terminated pytest process may never reach its
+    JUnit writer.  The matrix must still publish a failed shard atomically rather
+    than crashing while finalizing evidence.  This synthetic document records one
+    controller error and can never be interpreted as a passing test result.
+    """
+
+    suite = ET.Element(
+        "testsuite",
+        {
+            "name": "pytest-shard-controller",
+            "tests": "1",
+            "failures": "0",
+            "errors": "1",
+            "skipped": "0",
+            "time": f"{elapsed_seconds:.6f}",
+            "timestamp": datetime.now(UTC).isoformat(),
+            "hostname": platform.node(),
+        },
+    )
+    case = ET.SubElement(
+        suite,
+        "testcase",
+        {
+            "classname": "sip.test_matrix",
+            "name": f"{status}::{shard_path}",
+            "time": f"{elapsed_seconds:.6f}",
+        },
+    )
+    ET.SubElement(case, "error", {"message": message}).text = status
+    root = ET.Element("testsuites", {"name": "pytest tests"})
+    root.append(suite)
+    tree = ET.ElementTree(root)
+    ET.indent(tree, space="  ")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    tree.write(destination, encoding="utf-8", xml_declaration=True)
+
+
 def _run_pytest_shard(
     *,
     name: str,
@@ -515,6 +623,18 @@ def _run_pytest_shard(
             status = "timeout"
             output.write(f"\nTIMEOUT after {timeout_seconds}s\n".encode("utf-8"))
     elapsed = round(time.perf_counter() - started, 6)
+    if not junit.is_file():
+        _write_synthetic_junit(
+            junit,
+            shard_path=str(path.relative_to(ROOT)),
+            status=status,
+            message=(
+                f"pytest shard exceeded {timeout_seconds}s"
+                if status == "timeout"
+                else f"pytest shard exited with code {exit_code} without JUnit evidence"
+            ),
+            elapsed_seconds=elapsed,
+        )
     shutil.rmtree(runtime_root, ignore_errors=True)
     _assert_stage_owner(staged_shard_root, writer_token)
     declared_inputs = _declared_generated_inputs(path)
@@ -1179,21 +1299,22 @@ def main() -> None:
     args = parser.parse_args()
     if args.assemble and args.suite:
         parser.error("--assemble cannot be combined with --suite")
-    if args.assemble:
-        result = assemble()
-    elif args.suite:
-        result = run_selected(
-            set(args.suite),
-            timeout_seconds=args.timeout,
-            jobs=args.jobs,
-            shard_jobs=args.shard_jobs,
-        )
-    else:
-        result = run(
-            timeout_seconds=args.timeout,
-            jobs=args.jobs,
-            shard_jobs=args.shard_jobs,
-        )
+    with _exclusive_matrix_controller_lock():
+        if args.assemble:
+            result = assemble()
+        elif args.suite:
+            result = run_selected(
+                set(args.suite),
+                timeout_seconds=args.timeout,
+                jobs=args.jobs,
+                shard_jobs=args.shard_jobs,
+            )
+        else:
+            result = run(
+                timeout_seconds=args.timeout,
+                jobs=args.jobs,
+                shard_jobs=args.shard_jobs,
+            )
     print(json.dumps(result, indent=2, sort_keys=True))
     if result["status"] != "passed":
         raise SystemExit(1)

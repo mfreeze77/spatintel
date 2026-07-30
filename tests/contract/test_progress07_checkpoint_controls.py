@@ -110,8 +110,13 @@ def test_progress07_generated_service_and_event_contracts_are_owned_by_security_
 def test_progress07_acceptance_cli_rejects_concurrent_evidence_writers(tmp_path: Path) -> None:
     """CONTROL: concurrent Progress 07 acceptance cannot overwrite immutable gate snapshots."""
 
-    lock_path = ROOT / "build/locks/progress-07-acceptance.lock"
+    from tools.run_progress07_checkpoint_acceptance import _acceptance_lock_path
+
+    lock_path = _acceptance_lock_path()
     lock_path.parent.mkdir(parents=True, exist_ok=True)
+    # The lock must not live beneath any generated repository directory: the
+    # matrix replaces build/locks while acceptance is active.
+    assert not lock_path.is_relative_to(ROOT)
     with lock_path.open("a+", encoding="utf-8") as handle:
         acquired_here = False
         try:

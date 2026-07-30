@@ -10,6 +10,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -50,11 +51,27 @@ POST_EVIDENCE_TARGETS = ["traceability-evidence"]
 CONTROL_STATUS_VALUES = {"passed_complete", "passed_with_external_gaps", "blocked", "failed"}
 
 
+def _acceptance_lock_path(root: Path = ROOT) -> Path:
+    """Return a stable lock outside generated evidence directories.
+
+    The acceptance sequence runs the hermetic test matrix and other generators
+    that may replace repository ``build`` subtrees atomically. Placing this
+    process lock beneath generated output would unlink the locked inode and let
+    a second acceptance writer acquire a newly created file at the same path.  A path derived from
+    the absolute worktree identity in the operating-system temporary directory
+    remains stable for the entire acceptance process while still isolating
+    independent worktrees.
+    """
+
+    identity = hashlib.sha256(str(root.resolve()).encode("utf-8")).hexdigest()[:24]
+    return Path(tempfile.gettempdir()) / f"sip-progress-07-acceptance-{identity}.lock"
+
+
 @contextmanager
 def _exclusive_acceptance_lock():
     """Prevent concurrent acceptance runs from overwriting immutable gate snapshots."""
 
-    lock_path = ROOT / "build/locks/progress-07-acceptance.lock"
+    lock_path = _acceptance_lock_path()
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open("a+", encoding="utf-8") as handle:
         try:

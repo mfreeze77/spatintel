@@ -58,7 +58,7 @@ dev:
 	SIP_ENV=development SIP_ALLOW_DEVELOPMENT_AUTH=true PYTHONPATH=$(PYTHONPATH) $(PYTHON) services/control-api/main.py
 
 test:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 300
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 600
 
 web-test:
 	@mkdir -p build/evidence build/reports

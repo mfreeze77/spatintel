@@ -576,3 +576,77 @@ def test_single_shard_worker_executes_directly_without_nested_thread_pool(
     assert result.status == "passed"
     assert result.tests == 2
     assert executed == ["test_first.py", "test_second.py"]
+
+
+def test_missing_junit_is_replaced_with_controller_error_evidence(tmp_path: Path) -> None:
+    """REQ: TSTSTRAT-002 timed-out shards fail with retained JUnit instead of crashing publication."""
+    module = _module()
+    junit = tmp_path / "timeout.xml"
+    module._write_synthetic_junit(
+        junit,
+        shard_path="tests/migration/test_migrations.py",
+        status="timeout",
+        message="pytest shard exceeded 300s",
+        elapsed_seconds=300.0,
+    )
+    assert junit.is_file()
+    tests, failures, errors, skipped = module._junit_counts(junit)
+    assert (tests, failures, errors, skipped) == (1, 0, 1, 0)
+    payload = junit.read_text(encoding="utf-8")
+    assert "timeout::tests/migration/test_migrations.py" in payload
+    assert "pytest shard exceeded 300s" in payload
+
+
+def test_default_matrix_target_allows_migration_headroom() -> None:
+    """REQ: TSTSTRAT-002 the hermetic matrix retains enough timeout headroom under parallel load."""
+    makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
+    assert "tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 600" in makefile
+
+
+def test_default_matrix_control_root_is_outside_generated_repository_state() -> None:
+    """REQ: TSTSTRAT-002 live matrix leases survive build-tree replacement."""
+    module = _module()
+    expected = module._default_lock_root(module.ROOT)
+    assert module.LOCK_ROOT == expected
+    assert not expected.is_relative_to(module.ROOT)
+    assert expected.name.startswith("sip-test-matrix-")
+
+
+
+def test_matrix_controller_lock_is_external_and_rejects_a_second_writer() -> None:
+    """REQ: TSTSTRAT-002 complete matrix controllers cannot interleave evidence publications."""
+    module = _module()
+    lock_path = module._matrix_controller_lock_path()
+    assert not lock_path.is_relative_to(ROOT)
+    assert not module._default_lock_root(module.ROOT).is_relative_to(ROOT)
+
+    with lock_path.open("a+", encoding="utf-8") as handle:
+        acquired_here = False
+        try:
+            import fcntl
+
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            acquired_here = True
+        except BlockingIOError:
+            # The outer matrix owns this lock when this regression runs as a
+            # shard. A focused pytest run owns it directly here.
+            pass
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                (
+                    "from tools.run_test_matrix import _exclusive_matrix_controller_lock; "
+                    "ctx=_exclusive_matrix_controller_lock(); ctx.__enter__()"
+                ),
+            ],
+            cwd=ROOT,
+            env={**os.environ, "PYTHONPATH": f"{ROOT / 'src'}:{ROOT}"},
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if acquired_here:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+    assert completed.returncode != 0
+    assert "already running" in (completed.stdout + completed.stderr)
