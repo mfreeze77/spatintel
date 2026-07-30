@@ -1,0 +1,86 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/provider-governance-exception.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_by": {
+      "title": "Approved By",
+      "type": "string"
+    },
+    "exception_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Exception Hash",
+      "type": "string"
+    },
+    "exception_id": {
+      "title": "Exception Id",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "requested_waivers": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Requested Waivers",
+      "type": "array"
+    },
+    "scope": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Scope",
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "expired",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "exception_id",
+    "tenant_id",
+    "provider_id",
+    "scope",
+    "purpose",
+    "requested_waivers",
+    "approved_by",
+    "expires_at",
+    "state",
+    "exception_hash"
+  ],
+  "title": "ProviderGovernanceExceptionContract",
+  "type": "object"
+}

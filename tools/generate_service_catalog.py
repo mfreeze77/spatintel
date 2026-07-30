@@ -19,6 +19,19 @@ SERVICE_METADATA: dict[str, dict[str, Any]] = {
     "export-service": {"owner": "preservation", "stores": ["postgresql", "object-store"], "tables": ["export_manifests", "backup_runs"], "dependencies": ["identity-policy", "evidence-service", "scene-service"]},
     "notification-service": {"owner": "platform-runtime", "stores": ["postgresql"], "tables": ["notification_preferences", "notification_deliveries", "collaboration_tasks"], "dependencies": ["identity-policy", "audit-service"]},
     "audit-service": {"owner": "security-assurance", "stores": ["postgresql", "immutable-audit-export"], "tables": ["audit_events"], "dependencies": []},
+    "security-ops": {
+        "owner": "security-privacy",
+        "stores": ["postgresql", "immutable-audit-export", "source-control-manifests"],
+        "tables": [
+            "threat_manifests", "privileged_access_grants", "workload_identity_grants",
+            "key_scopes", "key_access_events", "privacy_inventory", "privacy_impact_assessments",
+            "privacy_rights_requests", "security_incidents", "audit_verifications",
+            "supply_chain_releases", "provider_governance_exceptions", "cache_invalidations",
+            "transport_verifications", "capture_finalization_audits",
+            "immersive_safety_decisions", "provider_output_validations"
+        ],
+        "dependencies": ["identity-policy", "audit-service", "provider-registry", "workflow-service"],
+    },
     "representation-api": {"owner": "hybrid-representations", "stores": ["postgresql", "object-store"], "tables": ["representations", "representation_bindings", "provider_manifests"], "dependencies": ["identity-policy", "workflow-service", "provider-registry"]},
     "provider-registry": {"owner": "model-provider-governance", "stores": ["postgresql", "source-control-manifests"], "tables": ["provider_manifests", "model_manifests"], "dependencies": ["audit-service"]},
     "representation-publisher": {"owner": "scene-core", "stores": ["postgresql"], "tables": [], "dependencies": ["identity-policy", "representation-api", "scene-service", "audit-service"]},

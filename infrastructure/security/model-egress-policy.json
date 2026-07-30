@@ -1,0 +1,10 @@
+{
+  "schema": "sip.model-egress-policy/v1",
+  "default": "deny",
+  "production_runtime_downloads": "denied",
+  "worker_public_internet_egress": "denied",
+  "allowed_destinations": [],
+  "requires": ["approved_provider_manifest", "approved_model_manifest", "purpose", "classification", "region", "retention", "workload_identity"],
+  "local_only_overrides_external": true,
+  "production_authorized": false
+}

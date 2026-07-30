@@ -10,18 +10,28 @@ requirement: Manual external use shall follow controlled minimization, export, c
 verification_method: Procedure and audit test
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/security_ops.py
 - src/sip/hybrid.py
 - src/sip/contracts.py
 - src/sip/model_governance.py
 - src/sip/security.py
 - src/sip/audit.py
 - docs/security/THREAT_MODEL.md
+- docs/security/PROGRESS_07_THREAT_MODEL.md
+- infrastructure/security/model-egress-policy.json
 - migrations/versions/0011_governed_hybrid_representation.py
+- migrations/versions/0017_progress07_security_privacy_readiness.py
 automated_test_ids:
+- tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes
 - tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt
+- tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_provider_model_and_runtime_directive_boundaries
+- tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback
 retained_evidence:
+- build/evidence/demo-progress07-security.json
 - build/reports/license-gate.json
 - build/reports/test-matrix.json
+- build/reports/tests/contract.xml
 - build/reports/tests/integration.xml
 - build/reports/tests/security.xml
 controlled_procedure:

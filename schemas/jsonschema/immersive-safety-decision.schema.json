@@ -1,0 +1,76 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/immersive-safety-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_modes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Modes",
+      "type": "array"
+    },
+    "checks": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Checks",
+      "type": "object"
+    },
+    "decision_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Decision Hash",
+      "type": "string"
+    },
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "fallback_mode": {
+      "title": "Fallback Mode",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "requested_modes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Requested Modes",
+      "type": "array"
+    },
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "allowed",
+        "degraded",
+        "denied"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "tenant_id",
+    "project_id",
+    "scene_id",
+    "checks",
+    "requested_modes",
+    "allowed_modes",
+    "fallback_mode",
+    "state",
+    "decision_hash"
+  ],
+  "title": "ImmersiveSafetyDecisionContract",
+  "type": "object"
+}

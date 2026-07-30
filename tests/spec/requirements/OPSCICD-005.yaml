@@ -7,11 +7,32 @@ source:
   section: 4. Normative requirements
 requirement: Emergency patches shall still produce traceable artifacts and retrospective review.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/security_ops.py
+- .github/workflows/ci.yml
+- .github/workflows/release.yml
+- .github/workflows/progress07-security.yml
+- tools/progress07_supply_chain_check.py
+- tools/release.py
+- tools/security_check.py
+- tools/license_check.py
+- infrastructure/security/release-admission-policy.json
 automated_test_ids:
-- REQ-OPSCICD-005
-retained_evidence: []
+- tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed
+- tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_adversarial_mutations_are_detected
+- tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed
+- tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls
+- tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed
+retained_evidence:
+- build/reports/license-gate.json
+- build/reports/progress07-supply-chain-report.json
+- build/reports/release-report.json
+- build/reports/security-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +41,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

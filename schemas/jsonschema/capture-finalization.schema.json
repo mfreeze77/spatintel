@@ -1,0 +1,77 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/capture-finalization.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "app": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "App",
+      "type": "object"
+    },
+    "archive_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Archive Sha256",
+      "type": "string"
+    },
+    "capture_id": {
+      "title": "Capture Id",
+      "type": "string"
+    },
+    "device": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Device",
+      "type": "object"
+    },
+    "finalization_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Finalization Hash",
+      "type": "string"
+    },
+    "finalization_id": {
+      "title": "Finalization Id",
+      "type": "string"
+    },
+    "package_root_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Root Hash",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "signer_id": {
+      "title": "Signer Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "verification_result": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Verification Result",
+      "type": "string"
+    }
+  },
+  "required": [
+    "finalization_id",
+    "tenant_id",
+    "project_id",
+    "capture_id",
+    "package_root_hash",
+    "archive_sha256",
+    "device",
+    "app",
+    "signer_id",
+    "verification_result",
+    "finalization_hash"
+  ],
+  "title": "CaptureFinalizationContract",
+  "type": "object"
+}

@@ -7,7 +7,7 @@ PYTHONPATH := $(CURDIR)/src:$(CURDIR)
 REPORT_DIR := build/reports
 
 .PHONY: help bootstrap doctor dev test test-all lint typecheck security license-check spec-check benchmark \
-        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever export-demo restore-demo \
+        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever demo-security export-demo restore-demo \
         contracts infrastructure migrations swift-test web-test desktop-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
 
 help:
@@ -28,6 +28,7 @@ help:
 	  '  make demo-scene-runtime Run retained synthetic scene-runtime review demonstration' \
 	  '  make demo-construction  Run retained synthetic Construction demonstration' \
 	  '  make demo-liveforever   Run retained synthetic LiveForever demonstration' \
+	  '  make demo-security      Run retained synthetic Progress 07 security/privacy demonstration' \
 	  '  make export-demo        Run preservation export demonstration' \
 	  '  make restore-demo       Run clean preservation restore demonstration' \
 	  '  make release            Build a hashed release candidate (release gates remain fail-closed)' \
@@ -57,7 +58,7 @@ dev:
 	SIP_ENV=development SIP_ALLOW_DEVELOPMENT_AUTH=true PYTHONPATH=$(PYTHONPATH) $(PYTHON) services/control-api/main.py
 
 test:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 300
 
 web-test:
 	@mkdir -p build/evidence build/reports
@@ -102,7 +103,8 @@ typecheck:
 
 security:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/security_check.py
-	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest -q tests/security --junitxml=$(REPORT_DIR)/tests/security-direct.xml
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/progress07_supply_chain_check.py
+	PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --suite security --jobs 1 --shard-jobs 1 --timeout 300
 
 license-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_third_party_lock.py --check
@@ -116,6 +118,7 @@ spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
 
 traceability-evidence:
@@ -125,6 +128,7 @@ traceability-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py
@@ -143,6 +147,9 @@ demo-construction:
 
 demo-liveforever:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py liveforever
+
+demo-security:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/demo_progress07_security.py
 
 export-demo:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py export

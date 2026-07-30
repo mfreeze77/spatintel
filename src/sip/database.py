@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import JSON, Boolean, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint, create_engine, event
+from sqlalchemy import JSON, BigInteger, Boolean, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint, create_engine, event
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
@@ -1694,6 +1694,311 @@ class LiveForeverPreservationRow(Base):
     __table_args__ = (
         UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_liveforever_preservation_idempotency"),
     )
+
+
+class ThreatManifestRow(Base):
+    __tablename__ = "threat_manifests"
+    threat_manifest_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    scope: Mapped[str] = mapped_column(String(128), index=True)
+    version: Mapped[int] = mapped_column(Integer)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    manifest_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    review_trigger: Mapped[str] = mapped_column(String(128))
+    owner: Mapped[str] = mapped_column(String(128))
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    supersedes_manifest_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    __table_args__ = (UniqueConstraint("scope", "version", name="uq_threat_manifest_scope_version"),)
+
+
+class PrivilegedAccessGrantRow(Base):
+    __tablename__ = "privileged_access_grants"
+    grant_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    subject_id: Mapped[str] = mapped_column(String(128), index=True)
+    actions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    resource_scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    purpose: Mapped[str] = mapped_column(String(128))
+    mfa_method: Mapped[str] = mapped_column(String(64))
+    mfa_verified_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    requested_by: Mapped[str] = mapped_column(String(128))
+    approved_by: Mapped[str] = mapped_column(String(128))
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_by: Mapped[str | None] = mapped_column(String(128))
+    __table_args__ = (UniqueConstraint("tenant_id", "request_hash", name="uq_privileged_access_request"),)
+
+
+class WorkloadIdentityGrantRow(Base):
+    __tablename__ = "workload_identity_grants"
+    grant_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    workload_id: Mapped[str] = mapped_column(String(128), index=True)
+    audience: Mapped[str] = mapped_column(String(256), index=True)
+    scopes_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    purpose: Mapped[str] = mapped_column(String(128))
+    token_jti: Mapped[str] = mapped_column(String(64), unique=True)
+    request_hash: Mapped[str] = mapped_column(String(64), index=True)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    issued_by: Mapped[str] = mapped_column(String(128))
+    issued_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (UniqueConstraint("tenant_id", "request_hash", name="uq_workload_identity_request"),)
+
+
+class KeyScopeRow(Base):
+    __tablename__ = "key_scopes"
+    key_scope_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    person_id: Mapped[str | None] = mapped_column(String(128), index=True)
+    key_id: Mapped[str] = mapped_column(String(128), unique=True)
+    backend: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    recovery_policy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    scope_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    rotated_from_key_id: Mapped[str | None] = mapped_column(String(128))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class KeyAccessEventRow(Base):
+    __tablename__ = "key_access_events"
+    key_access_event_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    key_scope_id: Mapped[str] = mapped_column(String(64), index=True)
+    actor_or_workload: Mapped[str] = mapped_column(String(128), index=True)
+    purpose: Mapped[str] = mapped_column(String(128))
+    action: Mapped[str] = mapped_column(String(64))
+    resource_scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    outcome: Mapped[str] = mapped_column(String(32), index=True)
+    details_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    event_hash: Mapped[str] = mapped_column(String(64), unique=True)
+
+
+class PrivacyInventoryRow(Base):
+    __tablename__ = "privacy_inventory"
+    privacy_inventory_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    data_category: Mapped[str] = mapped_column(String(128), index=True)
+    purpose: Mapped[str] = mapped_column(String(128), index=True)
+    legal_basis: Mapped[str] = mapped_column(String(128))
+    consent_basis: Mapped[str | None] = mapped_column(String(128))
+    processors_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    residency_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    retention_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    security_controls_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    rights_workflow_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    classification: Mapped[str] = mapped_column(String(64))
+    version: Mapped[int] = mapped_column(Integer)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    content_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    supersedes_inventory_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "data_category", "purpose", "version", name="uq_privacy_inventory_version"),)
+
+
+class PrivacyImpactAssessmentRow(Base):
+    __tablename__ = "privacy_impact_assessments"
+    assessment_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    change_type: Mapped[str] = mapped_column(String(64), index=True)
+    change_reference: Mapped[str] = mapped_column(String(256))
+    purpose: Mapped[str] = mapped_column(String(128))
+    data_categories_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    processors_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    risks_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    controls_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    residual_risk: Mapped[str] = mapped_column(String(32))
+    decision: Mapped[str] = mapped_column(String(32), index=True)
+    reviewer_id: Mapped[str] = mapped_column(String(128), index=True)
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
+    request_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class PrivacyRightsRequestRow(Base):
+    __tablename__ = "privacy_rights_requests"
+    rights_request_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    subject_id: Mapped[str] = mapped_column(String(128), index=True)
+    request_type: Mapped[str] = mapped_column(String(64), index=True)
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    requested_by: Mapped[str] = mapped_column(String(128))
+    verified_by: Mapped[str] = mapped_column(String(128))
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    due_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    response_manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    verification_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    request_hash: Mapped[str] = mapped_column(String(64), unique=True)
+
+
+class SecurityIncidentRow(Base):
+    __tablename__ = "security_incidents"
+    incident_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    incident_type: Mapped[str] = mapped_column(String(128), index=True)
+    severity: Mapped[str] = mapped_column(String(32), index=True)
+    affected_subjects_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    affected_resources_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    containment_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    notification_decision_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    incident_hash: Mapped[str] = mapped_column(String(64), unique=True)
+
+
+class AuditVerificationRow(Base):
+    __tablename__ = "audit_verifications"
+    audit_verification_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    event_count: Mapped[int] = mapped_column(Integer)
+    valid: Mapped[bool] = mapped_column(Boolean)
+    head_hash: Mapped[str] = mapped_column(String(64))
+    referenced_manifests_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    findings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    verifier_id: Mapped[str] = mapped_column(String(128))
+    report_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class SupplyChainReleaseRow(Base):
+    __tablename__ = "supply_chain_releases"
+    release_record_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    version: Mapped[str] = mapped_column(String(64), index=True)
+    source_commit: Mapped[str] = mapped_column(String(64))
+    source_root: Mapped[str] = mapped_column(String(64))
+    component_manifests_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    rollback_plan_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    environment_policy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    emergency_patch: Mapped[bool] = mapped_column(Boolean, default=False)
+    retrospective_review_due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    signed_by: Mapped[str] = mapped_column(String(128))
+    signature: Mapped[str] = mapped_column(String(128))
+    release_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    promoted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class ProviderGovernanceExceptionRow(Base):
+    __tablename__ = "provider_governance_exceptions"
+    exception_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    provider_id: Mapped[str] = mapped_column(String(128), index=True)
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    purpose: Mapped[str] = mapped_column(String(128))
+    prohibited_waivers_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    approved_by: Mapped[str] = mapped_column(String(128))
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    exception_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class CacheInvalidationRow(Base):
+    __tablename__ = "cache_invalidations"
+    invalidation_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    resource_id: Mapped[str] = mapped_column(String(128), index=True)
+    reason: Mapped[str] = mapped_column(String(128))
+    targets_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    requested_by: Mapped[str] = mapped_column(String(128))
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    invalidation_hash: Mapped[str] = mapped_column(String(64), unique=True)
+
+
+class TransportVerificationRow(Base):
+    __tablename__ = "transport_verifications"
+    transport_verification_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    environment: Mapped[str] = mapped_column(String(64), index=True)
+    endpoint: Mapped[str] = mapped_column(String(512))
+    protocol: Mapped[str] = mapped_column(String(64))
+    minimum_tls_version: Mapped[str] = mapped_column(String(32))
+    certificate_validated: Mapped[bool] = mapped_column(Boolean)
+    channel_authentication: Mapped[str] = mapped_column(String(128))
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    verification_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    verified_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class CaptureFinalizationAuditRow(Base):
+    __tablename__ = "capture_finalization_audits"
+    capture_finalization_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    capture_id: Mapped[str] = mapped_column(String(128), index=True)
+    package_root_hash: Mapped[str] = mapped_column(String(64), index=True)
+    archive_sha256: Mapped[str] = mapped_column(String(64))
+    device_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    app_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    signer_id: Mapped[str] = mapped_column(String(128))
+    verification_result: Mapped[str] = mapped_column(String(32), index=True)
+    verification_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    record_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class ImmersiveSafetyDecisionRow(Base):
+    __tablename__ = "immersive_safety_decisions"
+    safety_decision_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    scene_id: Mapped[str] = mapped_column(String(64), index=True)
+    profile_hash: Mapped[str] = mapped_column(String(64), index=True)
+    checks_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    disabled_modes_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    fallback_mode: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    decision_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    decided_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class ProviderOutputValidationRow(Base):
+    __tablename__ = "provider_output_validations"
+    output_validation_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    provider_id: Mapped[str] = mapped_column(String(128), index=True)
+    operation_id: Mapped[str] = mapped_column(String(64), index=True)
+    output_sha256: Mapped[str] = mapped_column(String(64), index=True)
+    media_type: Mapped[str] = mapped_column(String(256))
+    byte_count: Mapped[int] = mapped_column(BigInteger)
+    validations_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    findings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    validation_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    validated_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
 
 
 class RetentionRuleRow(Base):

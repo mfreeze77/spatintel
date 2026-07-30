@@ -1,0 +1,72 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/audit-verification.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "record_count": {
+      "minimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "referenced_manifests": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Referenced Manifests",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "verification_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Verification Hash",
+      "type": "string"
+    },
+    "verification_id": {
+      "title": "Verification Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verification_id",
+    "tenant_id",
+    "status",
+    "record_count",
+    "findings",
+    "referenced_manifests",
+    "verification_hash"
+  ],
+  "title": "AuditVerificationContract",
+  "type": "object"
+}

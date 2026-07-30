@@ -1,0 +1,103 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/privileged-access-grant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Actions",
+      "type": "array"
+    },
+    "approved_by": {
+      "title": "Approved By",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "grant_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Grant Hash",
+      "type": "string"
+    },
+    "grant_id": {
+      "title": "Grant Id",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "mfa_method": {
+      "title": "Mfa Method",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "requested_by": {
+      "title": "Requested By",
+      "type": "string"
+    },
+    "resource_scope": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Resource Scope",
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "revoked",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "grant_id",
+    "tenant_id",
+    "subject_id",
+    "actions",
+    "resource_scope",
+    "purpose",
+    "mfa_method",
+    "requested_by",
+    "approved_by",
+    "issued_at",
+    "expires_at",
+    "state",
+    "grant_hash"
+  ],
+  "title": "PrivilegedAccessGrantContract",
+  "type": "object"
+}

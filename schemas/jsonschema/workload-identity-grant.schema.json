@@ -1,0 +1,85 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/workload-identity-grant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "title": "Audience",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "grant_id": {
+      "title": "Grant Id",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "scopes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scopes",
+      "type": "array"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "revoked",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "token_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Token Fingerprint",
+      "type": "string"
+    },
+    "workload_id": {
+      "title": "Workload Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "grant_id",
+    "tenant_id",
+    "workload_id",
+    "audience",
+    "scopes",
+    "purpose",
+    "issued_at",
+    "expires_at",
+    "state",
+    "token_fingerprint"
+  ],
+  "title": "WorkloadIdentityGrantContract",
+  "type": "object"
+}

@@ -8,11 +8,25 @@ source:
 requirement: Subject-access export shall explain source records, derivatives, sharing, consent, and automated processing in
   understandable form.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/security_ops.py
+- src/sip/database.py
+- src/sip/api.py
+- src/sip/policy.py
+- migrations/versions/0017_progress07_security_privacy_readiness.py
+- docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md
+- docs/user/PROGRESS_07_PRIVACY_AND_ACCESS.md
 automated_test_ids:
-- REQ-OPSPRIV-003
-retained_evidence: []
+- tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip
+- tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privacy_rights_directive_boundaries
+retained_evidence:
+- build/evidence/demo-progress07-security.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +35,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

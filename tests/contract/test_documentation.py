@@ -63,7 +63,7 @@ def test_operations_runbooks_cover_required_incident_classes_and_procedure_field
 
 
 def test_threat_model_enumerates_specified_attack_classes() -> None:
-    """REQ: OPSTHREA-001, OPSTHR-007 threat model covers device, parser, provider, tenant, authority, derivative, and immersive threats."""
+    """REQ: OPSTHR-007, OPSTHREA-001 threat model covers device, parser, provider, tenant, authority, derivative, and immersive threats."""
     text = (ROOT / "docs/security/THREAT_MODEL.md").read_text(encoding="utf-8").lower()
     threats = {
         "capture-device compromise",

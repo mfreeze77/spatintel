@@ -132,3 +132,35 @@ def test_swift_fixture_pass_with_external_gaps_counts_as_linked_test_evidence(tm
     payload["tests_failed"] = 1
     report.write_text(json.dumps(payload), encoding="utf-8")
     assert module._swift_report_passed() is False
+
+def test_evidence_traceability_loads_canonical_result_snapshot_once() -> None:
+    """REQ: TSTSTRAT-002 evidence checking reads one immutable result snapshot per build."""
+    path = Path(__file__).resolve().parents[2] / "tools" / "build_traceability_map.py"
+    spec = importlib.util.spec_from_file_location("sip_traceability_single_snapshot", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+
+    calls = {"python": 0, "swift": 0}
+    test_ids = [
+        "tests/contract/test_fixture.py::test_exact",
+        "tests/contract/test_fixture.py::test_second",
+    ]
+    module._tests_by_requirement = lambda: {"TSTSTRAT-002": test_ids}
+
+    def python_results() -> dict[str, str]:
+        calls["python"] += 1
+        return {test_id: "passed" for test_id in test_ids}
+
+    def swift_result() -> bool:
+        calls["swift"] += 1
+        return True
+
+    module._python_test_results = python_results
+    module._swift_report_passed = swift_result
+
+    generated = module.build()
+
+    assert generated["requirements"]["TSTSTRAT-002"]["linked_tests_passed"] is True
+    assert calls == {"python": 1, "swift": 1}

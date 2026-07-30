@@ -18,9 +18,12 @@ automated_test_ids:
 - tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe
 - tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status
 - tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries
+- tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

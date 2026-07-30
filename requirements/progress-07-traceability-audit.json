@@ -1,0 +1,5181 @@
+{
+  "accepted_base_commit": "600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8",
+  "deferred_requirement_count": 3,
+  "finding_count": 0,
+  "findings": [],
+  "included_requirement_count": 61,
+  "milestone": "Progress 07 bounded security, privacy, audit, key, provider, and supply-chain readiness",
+  "production_authorized": false,
+  "progress_07_authorized": true,
+  "progress_08_authorized": false,
+  "requirement_count": 64,
+  "requirements_audited": [
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSSEC-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSKEY-001",
+            "OPSSEC-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAUDIT-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSSEC-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSKEY-001",
+            "OPSSEC-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAUDIT-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCIAM-001",
+            "DATEVID-004",
+            "OPSAUDIT-003",
+            "PLTREST-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATEVID-002",
+            "DATEVID-004",
+            "OPSAUDIT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAUDIT-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSAUDIT-004",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSAUDIT-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_github_actions_are_sha_pinned_and_least_privilege"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement_id": "OPSCICD-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-002",
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_source_zip_is_byte_deterministic"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement_id": "OPSCICD-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSCICD-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement_id": "OPSCICD-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCICD-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCICD-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCICD-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSSEC-003",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSSEC-003",
+            "OPSSEC-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSKEY-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSSEC-003",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSKEY-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSKEY-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSKEY-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSKEY-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSKEY-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSPRIV-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSPRIV-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSPRIV-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSPRIV-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSPRIV-001",
+            "OPSPRIV-002",
+            "OPSPRIV-003",
+            "OPSPRIV-004",
+            "OPSPRIV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSPRIV-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-003",
+            "OPSSEC-001",
+            "OPSSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSEC-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-001",
+            "OPSCICD-003",
+            "OPSSEC-001",
+            "OPSSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSEC-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSSEC-003",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-003",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSSEC-003",
+            "OPSSEC-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSEC-003",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSSEC-003",
+            "OPSSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSKEY-001",
+            "OPSSEC-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSEC-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSSEC-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSKEY-001",
+            "OPSSEC-004",
+            "OPSSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSEC-006",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-007",
+            "OPSTHREA-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHR-007",
+      "verification_method": "Threat-model review"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHR-008",
+      "verification_method": "Security test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATHYB-001",
+            "DATHYB-005",
+            "HYBRUN-003",
+            "HYBRUN-004",
+            "HYBRUN-007",
+            "OPSTHR-009",
+            "OPSTHR-010",
+            "RECHYB-002",
+            "RECHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHR-009",
+      "verification_method": "Policy test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATHYB-001",
+            "DATHYB-005",
+            "HYBRUN-003",
+            "HYBRUN-004",
+            "HYBRUN-007",
+            "OPSTHR-009",
+            "OPSTHR-010",
+            "RECHYB-002",
+            "RECHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHR-010",
+      "verification_method": "Adversarial test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHR-011",
+      "verification_method": "Cache/privacy test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHR-012",
+      "verification_method": "Fault-injection test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-007",
+            "OPSTHREA-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHREA-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHREA-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSTHREA-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHREA-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHREA-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSTHREA-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-003",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSSEC-003",
+            "OPSSEC-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "ARCHHYB-006",
+            "RECPROV-004",
+            "RECPROV-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-005",
+            "SECEXT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "RECPROV-001",
+            "RECPROV-002",
+            "RECPROV-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-006",
+            "SECEXT-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-008"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-001",
+      "verification_method": "Egress and admission test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-003",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSSEC-003",
+            "OPSSEC-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "ARCHHYB-006",
+            "RECPROV-004",
+            "RECPROV-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-005",
+            "SECEXT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "RECPROV-001",
+            "RECPROV-002",
+            "RECPROV-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-006",
+            "SECEXT-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-008"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-002",
+      "verification_method": "Governance policy test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSPRIV-001",
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "OPSTHREA-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-003",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-006",
+            "SECEXT-003",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-003",
+      "verification_method": "Classification review test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECCLEAN-004",
+            "RECPROV-008",
+            "RECPROV-009",
+            "SECEXT-004",
+            "SECEXT-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-004",
+      "verification_method": "Procedure and audit test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "ARCHHYB-006",
+            "RECPROV-004",
+            "RECPROV-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-005",
+            "SECEXT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-006",
+            "SECEXT-003",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONAC-006",
+            "CONHAND-001",
+            "CONHAND-004",
+            "CONMEP-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSSEC-006",
+            "SECEXT-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-005",
+      "verification_method": "Negative security tests"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "ARCHHYB-006",
+            "RECPROV-004",
+            "RECPROV-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-005",
+            "SECEXT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "RECPROV-001",
+            "RECPROV-002",
+            "RECPROV-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-006",
+            "SECEXT-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-006",
+      "verification_method": "License/model gate test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-003",
+            "HYBAPI-002",
+            "HYBAPI-004",
+            "RECPROV-003",
+            "RECPROV-006",
+            "SECEXT-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_conversion_admission_worker_scope_progress_idempotency_and_cancel"
+        },
+        {
+          "declared_requirement_ids": [
+            "HYBAPI-004",
+            "SECEXT-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_worker_lease_rotation_is_bounded_and_supersedes_prior_credentials"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-007",
+      "verification_method": "IAM integration test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-008"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "SECEXT-008",
+      "verification_method": "Consent-purpose test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECCLEAN-004",
+            "RECPROV-008",
+            "RECPROV-009",
+            "SECEXT-004",
+            "SECEXT-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-009",
+      "verification_method": "Security integration test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCHHYB-004",
+            "RECPROV-001",
+            "RECPROV-002",
+            "RECPROV-004",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-006",
+            "SECEXT-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-010",
+      "verification_method": "Change-management test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-011",
+      "verification_method": "Exception lifecycle test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "SECEXT-012",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-012",
+      "verification_method": "Incident exercise"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "SECEXT-013",
+            "SECEXT-014"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_local_only_and_splatedit_provider_boundaries_are_audited"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-013",
+      "verification_method": "Local deployment test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "SECEXT-013",
+            "SECEXT-014"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_local_only_and_splatedit_provider_boundaries_are_audited"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-014",
+      "verification_method": "Provider registry test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSTHR-008",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-015"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-015",
+      "verification_method": "Malformed asset test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "OPSCICD-001",
+            "OPSCICD-002",
+            "OPSCICD-003",
+            "OPSCICD-004",
+            "OPSCICD-005",
+            "OPSCICD-006",
+            "OPSTHR-011",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-009",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-015",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPRIV-004",
+            "OPSPRIV-006",
+            "OPSTHR-011",
+            "SECEXT-001",
+            "SECEXT-002",
+            "SECEXT-003",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-008",
+            "SECEXT-010",
+            "SECEXT-011",
+            "SECEXT-012",
+            "SECEXT-013",
+            "SECEXT-014",
+            "SECEXT-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "SECEXT-016",
+      "verification_method": "Logging privacy test"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-002",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTLAY-002",
+            "TSTLAY-004",
+            "TSTSEC-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "HYBTEST-016",
+            "TSTLAY-002",
+            "TSTSEC-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTAGENT-001",
+            "PLTAGENT-002",
+            "PLTAGENT-004",
+            "PLTAGENT-006",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_authorized_search_agents.py::test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": null,
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "SECEXT-012",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "disposition": "included",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": "Legal/evidentiary admissibility requires jurisdiction-specific counsel and procedure outside software verification.",
+      "direct_tests": [],
+      "disposition": "deferred",
+      "evidence_paths": [],
+      "implementation_files": [],
+      "implementation_status": "NOT_STARTED",
+      "priority": "P1",
+      "requirement_id": "OPSAUDIT-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": "Contractual vendor terms require external legal/procurement review; code will retain provider-purpose controls but cannot establish executed agreements.",
+      "direct_tests": [],
+      "disposition": "deferred",
+      "evidence_paths": [],
+      "implementation_files": [],
+      "implementation_status": "NOT_STARTED",
+      "priority": "P1",
+      "requirement_id": "OPSPRIV-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": "Requires signed/scanned container and Apple build artifacts plus patch-SLA evidence unavailable in this environment.",
+      "direct_tests": [],
+      "disposition": "deferred",
+      "evidence_paths": [],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "OPSSEC-005",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "schema": "sip.progress07-traceability-audit/v1",
+  "status": "passed_complete"
+}

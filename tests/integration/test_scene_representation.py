@@ -98,7 +98,7 @@ def test_datgit_datscene_stable_entities_commits_diff_and_rollback(bootstrapped)
 @pytest.mark.integration
 @pytest.mark.security
 def test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard(bootstrapped) -> None:
-    """REQ: DATHYB-001, DATHYB-005, RECHYB-002, RECHYB-005, HYBRUN-003, HYBRUN-004, HYBRUN-007 candidate/publication separation, typed proxy hits, metric re-resolution, and verified-measurement authority fail closed."""
+    """REQ: DATHYB-001, DATHYB-005, HYBRUN-003, HYBRUN-004, HYBRUN-007, OPSTHR-009, OPSTHR-010, RECHYB-002, RECHYB-005 candidate/publication separation, typed proxy hits, metric re-resolution, and verified-measurement authority fail closed."""
     context, tenant_id, project_id, actor = bootstrapped
     context.spatial_data.register_frame(
         tenant_id=tenant_id,

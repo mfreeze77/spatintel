@@ -92,11 +92,18 @@ class SignedTokenCodec:
             payload = payload_text.encode()
             padding = "=" * (-len(signature_text) % 4)
             signature = base64.urlsafe_b64decode(signature_text + padding)
+            canonical_signature = base64.urlsafe_b64encode(signature).rstrip(b"=").decode()
+            if not hmac.compare_digest(signature_text, canonical_signature):
+                raise AuthenticationError("TOKEN_ENCODING_NONCANONICAL", "token signature encoding is not canonical")
             expected = hmac.new(self.key, payload, sha256).digest()
             if not hmac.compare_digest(signature, expected):
                 raise AuthenticationError("TOKEN_SIGNATURE_INVALID", "token signature is invalid")
             body_padding = "=" * (-len(payload_text) % 4)
-            claims = json.loads(base64.urlsafe_b64decode(payload_text + body_padding))
+            decoded_payload = base64.urlsafe_b64decode(payload_text + body_padding)
+            canonical_payload = base64.urlsafe_b64encode(decoded_payload).rstrip(b"=").decode()
+            if not hmac.compare_digest(payload_text, canonical_payload):
+                raise AuthenticationError("TOKEN_ENCODING_NONCANONICAL", "token payload encoding is not canonical")
+            claims = json.loads(decoded_payload)
         except AuthenticationError:
             raise
         except Exception as exc:

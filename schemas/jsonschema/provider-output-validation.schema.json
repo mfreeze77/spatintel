@@ -1,0 +1,76 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/provider-output-validation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "byte_count": {
+      "minimum": 0,
+      "title": "Byte Count",
+      "type": "integer"
+    },
+    "media_type": {
+      "title": "Media Type",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "output_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "quarantined",
+        "approved",
+        "rejected"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "validation_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Validation Hash",
+      "type": "string"
+    },
+    "validation_id": {
+      "title": "Validation Id",
+      "type": "string"
+    },
+    "validations": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Validations",
+      "type": "object"
+    }
+  },
+  "required": [
+    "validation_id",
+    "tenant_id",
+    "project_id",
+    "provider_id",
+    "operation_id",
+    "output_sha256",
+    "media_type",
+    "byte_count",
+    "validations",
+    "state",
+    "validation_hash"
+  ],
+  "title": "ProviderOutputValidationContract",
+  "type": "object"
+}

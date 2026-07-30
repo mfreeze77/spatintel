@@ -36,6 +36,7 @@ API_SERVICES = [
     "export-service",
     "notification-service",
     "audit-service",
+    "security-ops",
     "representation-api",
     "provider-registry",
     "representation-publisher",

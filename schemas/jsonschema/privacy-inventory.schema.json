@@ -1,0 +1,110 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/privacy-inventory.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "classification": {
+      "title": "Classification",
+      "type": "string"
+    },
+    "consent_basis": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Consent Basis"
+    },
+    "data_category": {
+      "title": "Data Category",
+      "type": "string"
+    },
+    "inventory_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Inventory Hash",
+      "type": "string"
+    },
+    "inventory_id": {
+      "title": "Inventory Id",
+      "type": "string"
+    },
+    "legal_basis": {
+      "title": "Legal Basis",
+      "type": "string"
+    },
+    "processors": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Processors",
+      "type": "array"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "residency": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Residency",
+      "type": "object"
+    },
+    "retention": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Retention",
+      "type": "object"
+    },
+    "rights_workflow": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Rights Workflow",
+      "type": "object"
+    },
+    "security_controls": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Security Controls",
+      "type": "array"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "inventory_id",
+    "tenant_id",
+    "data_category",
+    "purpose",
+    "legal_basis",
+    "processors",
+    "residency",
+    "retention",
+    "security_controls",
+    "rights_workflow",
+    "classification",
+    "inventory_hash"
+  ],
+  "title": "PrivacyInventoryContract",
+  "type": "object"
+}

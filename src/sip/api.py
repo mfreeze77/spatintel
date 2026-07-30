@@ -1053,6 +1053,211 @@ class ModelAuthorize(StrictModel):
     classification: Classification
     region: str = 'local'
 
+class ThreatManifestCreate(StrictModel):
+    scope: str
+    threats: list[dict[str, Any]]
+    misuse_cases: list[dict[str, Any]]
+    public_viewer_analysis: dict[str, Any]
+    residual_risks: list[dict[str, Any]]
+    owner: str
+    review_trigger: str
+
+
+class PrivilegedAccessCreate(StrictModel):
+    project_id: str | None = None
+    subject_id: str
+    actions: list[str]
+    resource_scope: dict[str, Any]
+    purpose: str
+    mfa_method: str
+    mfa_verified_at: datetime
+    duration_seconds: int = Field(ge=60, le=3600)
+    requested_by: str
+
+
+class WorkloadIdentityCreate(StrictModel):
+    project_id: str | None = None
+    workload_id: str
+    audience: str
+    scopes: list[str]
+    purpose: str
+    ttl_seconds: int = Field(ge=30, le=3600)
+
+
+class WorkloadIdentityValidate(StrictModel):
+    token: str
+    workload_id: str
+    audience: str
+    required_scope: str
+    purpose: str
+    project_id: str | None = None
+
+
+class KeyScopeCreate(StrictModel):
+    project_id: str | None = None
+    person_id: str | None = None
+    key_id: str
+    backend: str
+    recovery_policy: dict[str, Any]
+    rotated_from_key_id: str | None = None
+
+
+class KeyAccessCreate(StrictModel):
+    project_id: str | None = None
+    actor_or_workload: str
+    purpose: str
+    action: str
+    resource_scope: dict[str, Any]
+    outcome: str
+    details: dict[str, Any] = Field(default_factory=dict)
+
+
+class EmergencyKeyRevoke(StrictModel):
+    project_id: str | None = None
+    reason: str
+    residual_timeline: list[dict[str, Any]]
+
+
+class PrivacyInventoryCreate(StrictModel):
+    project_id: str | None = None
+    data_category: str
+    purpose: str
+    legal_basis: str
+    consent_basis: str | None = None
+    processors: list[dict[str, Any]]
+    residency: dict[str, Any]
+    retention: dict[str, Any]
+    security_controls: list[str]
+    rights_workflow: dict[str, Any]
+    classification: str
+
+
+class PrivacyImpactCreate(StrictModel):
+    project_id: str | None = None
+    change_type: str
+    change_reference: str
+    purpose: str
+    data_categories: list[str]
+    processors: list[str]
+    risks: list[dict[str, Any]]
+    controls: list[dict[str, Any]]
+    residual_risk: str
+    decision: str
+    expires_at: datetime | None = None
+
+
+class PrivacyRightsCreate(StrictModel):
+    project_id: str | None = None
+    subject_id: str
+    request_type: str
+    scope: dict[str, Any]
+    requested_by: str
+    due_days: int = Field(default=30, ge=1, le=365)
+
+
+class PrivacyRightsComplete(StrictModel):
+    project_id: str | None = None
+    outcomes: dict[str, Any]
+    evidence: list[dict[str, Any]] = Field(min_length=1)
+
+
+class SecurityIncidentCreate(StrictModel):
+    project_id: str | None = None
+    incident_type: str
+    severity: str
+    affected_subjects: list[str] = Field(default_factory=list)
+    affected_resources: list[dict[str, Any]] = Field(default_factory=list)
+    containment: list[dict[str, Any]]
+    notification_decision: dict[str, Any]
+    evidence: list[dict[str, Any]]
+
+
+class ProviderIncidentWithdrawalCreate(StrictModel):
+    provider_id: str
+    source_asset_ids: list[str] = Field(default_factory=list)
+    derivative_asset_ids: list[str] = Field(default_factory=list)
+    publication_ids: list[str] = Field(default_factory=list)
+    cache_resource_ids: list[str] = Field(default_factory=list)
+    export_ids: list[str] = Field(default_factory=list)
+    evidence: list[dict[str, Any]]
+    notification_decision: dict[str, Any]
+
+
+class TransportVerificationCreate(StrictModel):
+    endpoint: str
+    protocol: str
+    minimum_tls_version: str
+    certificate_validated: bool
+    channel_authentication: str
+    evidence: dict[str, Any]
+
+
+class CaptureFinalizationCreate(StrictModel):
+    capture_id: str
+    package_root_hash: str
+    archive_sha256: str
+    device: dict[str, Any]
+    app: dict[str, Any]
+    signer_id: str
+    verification_result: str
+    verification: dict[str, Any]
+
+
+class ProviderOutputValidationCreate(StrictModel):
+    provider_id: str
+    operation_id: str
+    output_sha256: str
+    media_type: str
+    byte_count: int = Field(ge=0)
+    validations: dict[str, Any]
+
+
+class ImmersiveSafetyCreate(StrictModel):
+    scene_id: str
+    checks: dict[str, Any]
+    requested_modes: list[str]
+
+
+class AuditSecurityVerify(StrictModel):
+    project_id: str | None = None
+    referenced_manifests: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class ProviderExecutionAuthorize(StrictModel):
+    classification: str
+    purpose: str
+    region: str
+    external: bool = False
+    audience: str = "private"
+    retention_days: int = Field(default=0, ge=0)
+    telemetry: dict[str, Any] = Field(default_factory=dict)
+
+
+class ProviderExceptionCreate(StrictModel):
+    scope: dict[str, Any]
+    purpose: str
+    requested_waivers: list[str] = Field(default_factory=list)
+    duration_seconds: int = Field(ge=60, le=2592000)
+
+
+class CacheInvalidationCreate(StrictModel):
+    resource_id: str
+    reason: str
+    targets: list[str]
+
+
+class SupplyChainReleaseCreate(StrictModel):
+    version: str
+    source_commit: str
+    source_root: str
+    component_manifests: dict[str, Any]
+    evidence: dict[str, Any]
+    rollback_plan: dict[str, Any]
+    environment_policy: dict[str, Any]
+    emergency_patch: bool = False
+    retrospective_review_due_at: datetime | None = None
+
+
 def _context(request: Request) -> PlatformContext:
     return request.app.state.platform
 
@@ -1090,6 +1295,7 @@ def _routers() -> dict[str, APIRouter]:
     construction = APIRouter(tags=['construction'])
     memory = APIRouter(tags=['liveforever'])
     collaboration = APIRouter(tags=['collaboration'])
+    security_ops = APIRouter(tags=['security-ops'])
 
     @control.get('/version', operation_id='get_version')
     def version(request: Request) -> dict[str, Any]:
@@ -2932,7 +3138,343 @@ def _routers() -> dict[str, APIRouter]:
         _require(request, principal, action='project:*', tenant_id=principal.tenant_id, project_id=project_id)
         notification_id = _context(request).notifications.queue(tenant_id=principal.tenant_id, project_id=project_id, recipient_id=body.recipient_id, channel=body.channel, template_id=body.template_id, payload=body.payload, sensitive=body.sensitive)
         return {'notification_id': notification_id}
-    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration}
+    @security_ops.post('/v1/security/threat-manifests', status_code=201, operation_id='register_threat_manifest')
+    def register_threat_manifest(body: ThreatManifestCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:threat_manage', tenant_id=principal.tenant_id)
+        return _context(request).security_ops.register_threat_manifest(
+            scope=body.scope,
+            threats=body.threats,
+            misuse_cases=body.misuse_cases,
+            public_viewer_analysis=body.public_viewer_analysis,
+            residual_risks=body.residual_risks,
+            owner=body.owner,
+            review_trigger=body.review_trigger,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/privileged-access', status_code=201, operation_id='grant_privileged_access')
+    def grant_privileged_access(tenant_id: str, body: PrivilegedAccessCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privileged_access', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.grant_privileged_access(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            subject_id=body.subject_id,
+            actions=body.actions,
+            resource_scope=body.resource_scope,
+            purpose=body.purpose,
+            mfa_method=body.mfa_method,
+            mfa_verified_at=body.mfa_verified_at,
+            duration_seconds=body.duration_seconds,
+            requested_by=body.requested_by,
+            approved_by=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/privileged-access/{grant_id}/revoke', operation_id='revoke_privileged_access')
+    def revoke_privileged_access(tenant_id: str, grant_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privileged_access', tenant_id=tenant_id)
+        return _context(request).security_ops.revoke_privileged_access(grant_id=grant_id, tenant_id=tenant_id, actor_id=principal.subject_id)
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/workload-identities', status_code=201, operation_id='issue_workload_identity')
+    def issue_workload_identity(tenant_id: str, body: WorkloadIdentityCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:workload_identity', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.issue_workload_identity(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            workload_id=body.workload_id,
+            audience=body.audience,
+            scopes=body.scopes,
+            purpose=body.purpose,
+            ttl_seconds=body.ttl_seconds,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/workload-identities/validate', operation_id='validate_workload_identity')
+    def validate_workload_identity(tenant_id: str, body: WorkloadIdentityValidate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:workload_identity', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.validate_workload_identity(
+            body.token,
+            audience=body.audience,
+            required_scope=body.required_scope,
+            purpose=body.purpose,
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            workload_id=body.workload_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/workload-identities/{grant_id}/revoke', operation_id='revoke_workload_identity')
+    def revoke_workload_identity(tenant_id: str, grant_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:workload_identity', tenant_id=tenant_id)
+        _context(request).security_ops.revoke_workload_identity(grant_id=grant_id, tenant_id=tenant_id, actor_id=principal.subject_id)
+        return {'grant_id': grant_id, 'state': 'revoked'}
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/key-scopes', status_code=201, operation_id='register_key_scope')
+    def register_key_scope(tenant_id: str, body: KeyScopeCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:key_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.register_key_scope(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            person_id=body.person_id,
+            key_id=body.key_id,
+            backend=body.backend,
+            recovery_policy=body.recovery_policy,
+            actor_id=principal.subject_id,
+            rotated_from_key_id=body.rotated_from_key_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/access', status_code=201, operation_id='record_key_access')
+    def record_key_access(tenant_id: str, key_scope_id: str, body: KeyAccessCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:key_manage', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.record_key_access(
+            key_scope_id=key_scope_id,
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            actor_or_workload=body.actor_or_workload,
+            purpose=body.purpose,
+            action=body.action,
+            resource_scope=body.resource_scope,
+            outcome=body.outcome,
+            details=body.details,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/emergency-revoke', operation_id='emergency_revoke_key')
+    def emergency_revoke_key(tenant_id: str, key_scope_id: str, body: EmergencyKeyRevoke, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:key_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.emergency_revoke_key(
+            key_scope_id=key_scope_id,
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            actor_id=principal.subject_id,
+            reason=body.reason,
+            residual_timeline=body.residual_timeline,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/privacy/inventory', status_code=201, operation_id='register_privacy_inventory')
+    def register_privacy_inventory(tenant_id: str, body: PrivacyInventoryCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privacy_manage', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.register_privacy_inventory(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            data_category=body.data_category,
+            purpose=body.purpose,
+            legal_basis=body.legal_basis,
+            consent_basis=body.consent_basis,
+            processors=body.processors,
+            residency=body.residency,
+            retention=body.retention,
+            security_controls=body.security_controls,
+            rights_workflow=body.rights_workflow,
+            classification=body.classification,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/privacy/impact-assessments', status_code=201, operation_id='assess_privacy_change')
+    def assess_privacy_change(tenant_id: str, body: PrivacyImpactCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privacy_manage', tenant_id=tenant_id, project_id=body.project_id, purpose=body.purpose)
+        return _context(request).security_ops.assess_privacy_change(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            change_type=body.change_type,
+            change_reference=body.change_reference,
+            purpose=body.purpose,
+            data_categories=body.data_categories,
+            processors=body.processors,
+            risks=body.risks,
+            controls=body.controls,
+            residual_risk=body.residual_risk,
+            decision=body.decision,
+            reviewer_id=principal.subject_id,
+            expires_at=body.expires_at,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/privacy/rights-requests', status_code=201, operation_id='create_privacy_rights_request')
+    def create_privacy_rights_request(tenant_id: str, body: PrivacyRightsCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privacy_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.create_rights_workflow(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            subject_id=body.subject_id,
+            request_type=body.request_type,
+            scope=body.scope,
+            requested_by=body.requested_by,
+            verified_by=principal.subject_id,
+            due_days=body.due_days,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/privacy/rights-requests/{rights_request_id}/complete', operation_id='complete_privacy_rights_request')
+    def complete_privacy_rights_request(tenant_id: str, rights_request_id: str, body: PrivacyRightsComplete, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:privacy_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.complete_rights_workflow(
+            rights_request_id=rights_request_id,
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            outcomes=body.outcomes,
+            evidence=body.evidence,
+            completed_by=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/security/incidents', status_code=201, operation_id='record_security_incident')
+    def record_security_incident(tenant_id: str, body: SecurityIncidentCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:incident_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.record_incident(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            incident_type=body.incident_type,
+            severity=body.severity,
+            affected_subjects=body.affected_subjects,
+            affected_resources=body.affected_resources,
+            containment=body.containment,
+            notification_decision=body.notification_decision,
+            evidence=body.evidence,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/provider-incidents', status_code=201, operation_id='record_provider_incident_withdrawal')
+    def record_provider_incident_withdrawal(project_id: str, body: ProviderIncidentWithdrawalCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).security_ops.record_provider_incident_withdrawal(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            provider_id=body.provider_id,
+            source_asset_ids=body.source_asset_ids,
+            derivative_asset_ids=body.derivative_asset_ids,
+            publication_ids=body.publication_ids,
+            cache_resource_ids=body.cache_resource_ids,
+            export_ids=body.export_ids,
+            evidence=body.evidence,
+            notification_decision=body.notification_decision,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/security/transport-verifications', status_code=201, operation_id='verify_transport_profile')
+    def verify_transport_profile(body: TransportVerificationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:transport_verify', tenant_id=principal.tenant_id)
+        return _context(request).security_ops.verify_transport_profile(
+            endpoint=body.endpoint,
+            protocol=body.protocol,
+            minimum_tls_version=body.minimum_tls_version,
+            certificate_validated=body.certificate_validated,
+            channel_authentication=body.channel_authentication,
+            evidence=body.evidence,
+            verified_by=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/capture-finalizations', status_code=201, operation_id='record_capture_finalization')
+    def record_capture_finalization(project_id: str, body: CaptureFinalizationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:capture_finalize', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).security_ops.record_capture_finalization(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            capture_id=body.capture_id,
+            package_root_hash=body.package_root_hash,
+            archive_sha256=body.archive_sha256,
+            device=body.device,
+            app=body.app,
+            signer_id=body.signer_id,
+            verification_result=body.verification_result,
+            verification=body.verification,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/provider-outputs', status_code=201, operation_id='validate_provider_output')
+    def validate_provider_output(project_id: str, body: ProviderOutputValidationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:provider_governance', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).security_ops.validate_provider_output(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            provider_id=body.provider_id,
+            operation_id=body.operation_id,
+            output_sha256=body.output_sha256,
+            media_type=body.media_type,
+            byte_count=body.byte_count,
+            validations=body.validations,
+            validated_by=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/immersive-safety', status_code=201, operation_id='evaluate_immersive_safety')
+    def evaluate_immersive_safety(project_id: str, body: ImmersiveSafetyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:immersive_safety', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).security_ops.evaluate_immersive_safety(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            scene_id=body.scene_id,
+            checks=body.checks,
+            requested_modes=body.requested_modes,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/tenants/{tenant_id}/audit/security-verify', operation_id='verify_security_audit_chain')
+    def verify_security_audit_chain(tenant_id: str, body: AuditSecurityVerify, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:audit_verify', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).security_ops.verify_audit_chain(
+            tenant_id=tenant_id,
+            project_id=body.project_id,
+            referenced_manifests=body.referenced_manifests,
+            verifier_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/providers/{provider_id}/authorize', operation_id='authorize_security_provider_execution')
+    def authorize_security_provider_execution(project_id: str, provider_id: str, body: ProviderExecutionAuthorize, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:provider_governance', tenant_id=principal.tenant_id, project_id=project_id, purpose=body.purpose)
+        return _context(request).security_ops.authorize_provider_execution(
+            provider_id=provider_id,
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            classification=body.classification,
+            purpose=body.purpose,
+            region=body.region,
+            external=body.external,
+            audience=body.audience,
+            retention_days=body.retention_days,
+            telemetry=body.telemetry,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/providers/{provider_id}/exceptions', status_code=201, operation_id='create_provider_governance_exception')
+    def create_provider_governance_exception(project_id: str, provider_id: str, body: ProviderExceptionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:provider_governance', tenant_id=principal.tenant_id, project_id=project_id, purpose=body.purpose)
+        return _context(request).security_ops.create_provider_exception(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            provider_id=provider_id,
+            scope=body.scope,
+            purpose=body.purpose,
+            requested_waivers=body.requested_waivers,
+            approved_by=principal.subject_id,
+            duration_seconds=body.duration_seconds,
+        )
+
+    @security_ops.post('/v1/projects/{project_id}/security/cache-invalidations', status_code=201, operation_id='invalidate_security_caches')
+    def invalidate_security_caches(project_id: str, body: CacheInvalidationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:cache_invalidate', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).security_ops.invalidate_caches(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            resource_id=body.resource_id,
+            reason=body.reason,
+            targets=body.targets,
+            actor_id=principal.subject_id,
+        )
+
+    @security_ops.post('/v1/security/releases', status_code=201, operation_id='create_supply_chain_release')
+    def create_supply_chain_release(body: SupplyChainReleaseCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:release_manage', tenant_id=principal.tenant_id)
+        return _context(request).security_ops.create_release_record(
+            version=body.version,
+            source_commit=body.source_commit,
+            source_root=body.source_root,
+            component_manifests=body.component_manifests,
+            evidence=body.evidence,
+            rollback_plan=body.rollback_plan,
+            environment_policy=body.environment_policy,
+            signed_by=principal.subject_id,
+            emergency_patch=body.emergency_patch,
+            retrospective_review_due_at=body.retrospective_review_due_at,
+        )
+
+    @security_ops.post('/v1/security/releases/{release_record_id}/promote', operation_id='promote_supply_chain_release')
+    def promote_supply_chain_release(release_record_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='security:release_manage', tenant_id=principal.tenant_id)
+        return _context(request).security_ops.promote_release(release_record_id=release_record_id, actor_id=principal.subject_id)
+
+    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops}
 SERVICE_DEPENDENCIES: dict[str, set[str]] = {'control-api': {'control-api', 'construction', 'liveforever', 'collaboration'}, 'all': set(_routers().keys())}
 
 def create_app(*, context: PlatformContext | None=None, service_name: str | None=None) -> FastAPI:

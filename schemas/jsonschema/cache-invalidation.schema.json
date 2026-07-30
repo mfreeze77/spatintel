@@ -1,0 +1,68 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/cache-invalidation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "invalidation_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Invalidation Hash",
+      "type": "string"
+    },
+    "invalidation_id": {
+      "title": "Invalidation Id",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "resource_id": {
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "completed",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Targets",
+      "type": "array"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "invalidation_id",
+    "tenant_id",
+    "resource_id",
+    "reason",
+    "targets",
+    "state",
+    "invalidation_hash"
+  ],
+  "title": "CacheInvalidationContract",
+  "type": "object"
+}

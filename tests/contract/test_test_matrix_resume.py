@@ -460,3 +460,119 @@ def test_active_staging_is_isolated_from_published_report_cleanup(tmp_path: Path
     module._assert_stage_owner(staged_shards, "active-writer")
     assert staged_junit.read_text(encoding="utf-8") == "in progress\n"
     assert staged_log.read_text(encoding="utf-8") == "in progress\n"
+
+
+def test_single_suite_worker_uses_main_thread_controller(monkeypatch) -> None:
+    """REQ: TSTSTRAT-002 one-worker matrix execution avoids thread-to-process deadlocks."""
+    module = _module()
+    expected = module.SuiteResult(
+        name="contract",
+        command=["pytest"],
+        status="passed",
+        exit_code=0,
+        elapsed_seconds=0.1,
+        tests=1,
+        failures=0,
+        errors=0,
+        skipped=0,
+        junit_path="build/reports/tests/contract.xml",
+        log_path="build/reports/tests/contract.log",
+        input_root_sha256="a" * 64,
+        source_tree_root_sha256="b" * 64,
+        junit_sha256="c" * 64,
+        log_sha256="d" * 64,
+        captured_at="2026-07-30T00:00:00+00:00",
+    )
+    calls: list[tuple[str, tuple[str, ...], int]] = []
+
+    monkeypatch.setattr(module, "_active_suites", lambda: [("contract", ("tests/contract",))])
+    monkeypatch.setattr(module, "_source_tree_root", lambda: "b" * 64)
+
+    def fake_suite(name, paths, *, timeout_seconds, source_tree_root, shard_jobs):
+        assert source_tree_root == "b" * 64
+        calls.append((name, tuple(paths), shard_jobs))
+        return expected
+
+    class ForbiddenExecutor:
+        def __init__(self, *args, **kwargs):  # pragma: no cover - failure path
+            raise AssertionError("single-suite execution must not create a ThreadPoolExecutor")
+
+    monkeypatch.setattr(module, "_suite", fake_suite)
+    monkeypatch.setattr(module, "ThreadPoolExecutor", ForbiddenExecutor)
+    result = module.run_selected({"contract"}, jobs=1, shard_jobs=1, timeout_seconds=30)
+    assert result["status"] == "passed"
+    assert result["totals"]["tests"] == 1
+    assert calls == [("contract", ("tests/contract",), 1)]
+
+
+def test_single_shard_worker_executes_directly_without_nested_thread_pool(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """REQ: TSTSTRAT-002 serial shard execution remains process-isolated without nested workers."""
+    module = _module()
+    root = tmp_path / "repo"
+    tests_dir = root / "tests" / "contract"
+    tests_dir.mkdir(parents=True)
+    (root / "pytest.ini").write_text("[pytest]\n", encoding="utf-8")
+    (root / "pyproject.toml").write_text(
+        "[project]\nname='fixture'\nversion='0.0.0'\n", encoding="utf-8"
+    )
+    first = tests_dir / "test_first.py"
+    second = tests_dir / "test_second.py"
+    first.write_text("def test_first():\n    assert True\n", encoding="utf-8")
+    second.write_text("def test_second():\n    assert True\n", encoding="utf-8")
+    report_root = root / "build" / "reports" / "tests"
+    lock_root = root / "build" / "locks" / "test-matrix"
+    monkeypatch.setattr(module, "ROOT", root)
+    monkeypatch.setattr(module, "REPORT_ROOT", report_root)
+    monkeypatch.setattr(module, "LOCK_ROOT", lock_root)
+
+    executed: list[str] = []
+
+    def fake_shard(*, name, path, staged_shard_root, timeout_seconds, environment, source_tree_root, writer_token):
+        module._assert_stage_owner(staged_shard_root, writer_token)
+        shard_name = module._safe_shard_name(path)
+        junit = staged_shard_root / f"{shard_name}.xml"
+        log = staged_shard_root / f"{shard_name}.log"
+        junit.write_text(
+            '<testsuite tests="1" failures="0" errors="0" skipped="0"></testsuite>',
+            encoding="utf-8",
+        )
+        log.write_text("1 passed\n", encoding="utf-8")
+        executed.append(path.name)
+        return {
+            "schema": "sip.pytest-shard-result/v2",
+            "name": shard_name,
+            "path": path.relative_to(root).as_posix(),
+            "command": ["python", "tools/run_pytest_isolated.py", path.relative_to(root).as_posix()],
+            "status": "passed",
+            "exit_code": 0,
+            "elapsed_seconds": 0.01,
+            "input_sha256": module._sha256_file(path),
+            "declared_generated_inputs": [],
+            "declared_generated_input_root_sha256": module._hash_declared_input_roots(()),
+            "bootstrap_excluded_inputs": [],
+            "source_tree_root_sha256": source_tree_root,
+            "junit_path": str(junit),
+            "log_path": str(log),
+            "junit_sha256": module._sha256_file(junit),
+            "log_sha256": module._sha256_file(log),
+        }
+
+    class ForbiddenExecutor:
+        def __init__(self, *args, **kwargs):  # pragma: no cover - failure path
+            raise AssertionError("single-shard execution must not create a ThreadPoolExecutor")
+
+    monkeypatch.setattr(module, "_run_pytest_shard", fake_shard)
+    monkeypatch.setattr(module, "ThreadPoolExecutor", ForbiddenExecutor)
+    result = module._suite_unlocked(
+        "contract",
+        ("tests/contract",),
+        timeout_seconds=30,
+        source_tree_root="e" * 64,
+        shard_jobs=1,
+        writer_token="serial-controller",
+    )
+    assert result.status == "passed"
+    assert result.tests == 2
+    assert executed == ["test_first.py", "test_second.py"]

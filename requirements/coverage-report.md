@@ -1,13 +1,13 @@
 # Requirements coverage report
 
-Generated: `2026-07-30T00:02:28.015032+00:00`
+Generated: `2026-07-30T19:02:03.250191+00:00`
 
 Total normative requirements: **1,028**
 
 | Priority | EXTERNAL_VALIDATION_REQUIRED | IMPLEMENTED_UNVERIFIED | IN_PROGRESS | NOT_STARTED | VERIFIED | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| P0 | 0 | 149 | 18 | 289 | 48 | 504 |
-| P1 | 3 | 88 | 4 | 387 | 42 | 524 |
+| P0 | 0 | 165 | 18 | 273 | 48 | 504 |
+| P1 | 3 | 117 | 4 | 358 | 42 | 524 |
 
 Verified: **90**
 External validation required: **3**
@@ -17,5 +17,6 @@ Blocked: **0**
 
 ## Governing release posture
 
-- Progress 07: **unauthorized** pending independent True North acceptance of Progress 06.
+- Progress 07: **authorized as a bounded OPS-001 development milestone** from accepted commit `600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8`.
+- Progress 08: **unauthorized** pending independent True North acceptance of Progress 07.
 - Production promotion: **NO-GO**. Production authorization remains fail-closed.

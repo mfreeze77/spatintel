@@ -11,13 +11,18 @@ verification_method: Threat-model review
 implementation_status: VERIFIED
 implementation_files:
 - docs/security/THREAT_MODEL.md
+- docs/security/PROGRESS_07_THREAT_MODEL.md
+- src/sip/security_ops.py
 - src/sip/security.py
 - src/sip/worker_sandbox.py
+- tools/demo_progress07_security.py
 automated_test_ids:
 - tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes
+- tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

@@ -47,10 +47,31 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "audit_verification",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "audit_verification.completed",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "backup_run",
       "classification": "internal",
       "owner": "export-service",
       "type": "backup.rehearsed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "cache_invalidation",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "cache_invalidation.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "capture_finalization",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "capture.finalized",
       "version": "1.0.0"
     },
     {
@@ -222,6 +243,34 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "immersive_safety_decision",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "immersive_safety.decided",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "key_access_event",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "key_scope.accessed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "key_scope",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "key_scope.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "key_scope",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "key_scope.revoked",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "consent_grant",
       "classification": "inherits_project",
       "owner": "liveforever",
@@ -369,6 +418,62 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "privacy_impact_assessment",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privacy_impact.decided",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "privacy_inventory",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privacy_inventory.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "privacy_rights_request",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privacy_rights.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "privacy_rights_request",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privacy_rights.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "privileged_access_grant",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privileged_access.granted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "privileged_access_grant",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "privileged_access.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_manifest",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "provider.execution.authorized",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_manifest",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "provider.execution.denied",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "provider_promotion",
       "classification": "internal",
       "owner": "provider-registry",
@@ -380,6 +485,20 @@
       "classification": "internal",
       "owner": "provider-registry",
       "type": "provider.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_governance_exception",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "provider_exception.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_output_validation",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "provider_output.validated",
       "version": "1.0.0"
     },
     {
@@ -537,6 +656,13 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "security_incident",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "security_incident.created",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "spatial_transform",
       "classification": "inherits_project",
       "owner": "scene-service",
@@ -544,10 +670,38 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "supply_chain_release",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "supply_chain_release.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "supply_chain_release",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "supply_chain_release.promoted",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "temporal_comparison",
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "temporal_comparison.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "threat_manifest",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "threat_manifest.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "transport_verification",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "transport.verified",
       "version": "1.0.0"
     },
     {
@@ -562,6 +716,20 @@
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "viewer_session.replayed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "workload_identity_grant",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "workload_identity.issued",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "workload_identity_grant",
+      "classification": "inherits_project",
+      "owner": "security-ops",
+      "type": "workload_identity.revoked",
       "version": "1.0.0"
     }
   ]

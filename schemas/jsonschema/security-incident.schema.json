@@ -1,0 +1,106 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/security-incident.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_resources": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Affected Resources",
+      "type": "array"
+    },
+    "affected_subjects": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Subjects",
+      "type": "array"
+    },
+    "containment": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Containment",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "incident_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Incident Hash",
+      "type": "string"
+    },
+    "incident_id": {
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "incident_type": {
+      "title": "Incident Type",
+      "type": "string"
+    },
+    "notification_decision": {
+      "additionalProperties": true,
+      "title": "Notification Decision",
+      "type": "object"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "severity": {
+      "enum": [
+        "low",
+        "moderate",
+        "high",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "open",
+        "contained",
+        "resolved"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "incident_id",
+    "tenant_id",
+    "incident_type",
+    "severity",
+    "affected_subjects",
+    "affected_resources",
+    "containment",
+    "notification_decision",
+    "evidence",
+    "state",
+    "incident_hash"
+  ],
+  "title": "SecurityIncidentContract",
+  "type": "object"
+}

@@ -1,0 +1,103 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/privacy-rights-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "due_at": {
+      "format": "date-time",
+      "title": "Due At",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "outcomes": {
+      "additionalProperties": true,
+      "title": "Outcomes",
+      "type": "object"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "request_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "request_type": {
+      "enum": [
+        "access",
+        "deletion",
+        "correction",
+        "restriction",
+        "portability"
+      ],
+      "title": "Request Type",
+      "type": "string"
+    },
+    "requested_by": {
+      "title": "Requested By",
+      "type": "string"
+    },
+    "rights_request_id": {
+      "title": "Rights Request Id",
+      "type": "string"
+    },
+    "scope": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Scope",
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "open",
+        "completed",
+        "denied",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "subject_id": {
+      "title": "Subject Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "verified_by": {
+      "title": "Verified By",
+      "type": "string"
+    }
+  },
+  "required": [
+    "rights_request_id",
+    "tenant_id",
+    "subject_id",
+    "request_type",
+    "scope",
+    "requested_by",
+    "verified_by",
+    "state",
+    "due_at",
+    "request_hash"
+  ],
+  "title": "PrivacyRightsRequestContract",
+  "type": "object"
+}

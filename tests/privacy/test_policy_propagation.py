@@ -9,7 +9,7 @@ from sip.models import Audience, SourceClass
 
 @pytest.mark.privacy
 def test_liveforever_revocation_removes_derivative_from_all_affected_audiences(bootstrapped) -> None:
-    """REQ: LIFCONS-002 consent revocation propagates to indexed and derivative records."""
+    """REQ: LIFCONS-002, TSTSEC-002 consent revocation propagates to indexed and derivative records."""
     context, tenant_id, project_id, actor = bootstrapped
     subject = "person-policy-fixture"
     grant_id = context.liveforever.grant_consent(

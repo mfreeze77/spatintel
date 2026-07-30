@@ -3281,7 +3281,8 @@
       "linked_tests": [
         {
           "declared_requirement_ids": [
-            "LIFCONS-002"
+            "LIFCONS-002",
+            "TSTSEC-002"
           ],
           "declares_requirement_id": true,
           "test_exists": true,

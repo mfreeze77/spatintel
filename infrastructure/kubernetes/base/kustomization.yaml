@@ -27,6 +27,8 @@ resources:
 - services/notification-service.yaml
 - deployments/audit-service.yaml
 - services/audit-service.yaml
+- deployments/security-ops.yaml
+- services/security-ops.yaml
 - deployments/representation-api.yaml
 - services/representation-api.yaml
 - deployments/provider-registry.yaml

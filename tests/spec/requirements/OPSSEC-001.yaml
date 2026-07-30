@@ -7,11 +7,40 @@ source:
   section: 4. Normative requirements
 requirement: Human privileged access shall require phishing-resistant MFA where available and just-in-time elevation.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/security_ops.py
+- src/sip/security.py
+- src/sip/policy.py
+- src/sip/api.py
+- src/sip/database.py
+- migrations/versions/0017_progress07_security_privacy_readiness.py
+- services/security-ops
+- infrastructure/containers
+- infrastructure/kubernetes/base
+- infrastructure/security
+- infrastructure/postgres/audit-immutability.sql
+- tools/security_check.py
+- tools/progress07_supply_chain_check.py
+- docs/security/THREAT_MODEL.md
+- docs/security/PROGRESS_07_THREAT_MODEL.md
 automated_test_ids:
-- REQ-OPSSEC-001
-retained_evidence: []
+- tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo
+- tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary
+- tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope
+- tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries
+- tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries
+retained_evidence:
+- build/evidence/demo-progress07-security.json
+- build/reports/infrastructure-static-validation.json
+- build/reports/progress07-supply-chain-report.json
+- build/reports/security-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +49,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

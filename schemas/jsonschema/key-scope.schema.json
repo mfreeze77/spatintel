@@ -1,0 +1,96 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/key-scope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "backend": {
+      "enum": [
+        "managed_kms",
+        "governed_local",
+        "hardware_backed"
+      ],
+      "title": "Backend",
+      "type": "string"
+    },
+    "key_id": {
+      "title": "Key Id",
+      "type": "string"
+    },
+    "key_scope_id": {
+      "title": "Key Scope Id",
+      "type": "string"
+    },
+    "person_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Person Id"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "recovery_policy": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Recovery Policy",
+      "type": "object"
+    },
+    "rotated_from_key_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotated From Key Id"
+    },
+    "scope_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Hash",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "rotated",
+        "revoked",
+        "erased"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "key_scope_id",
+    "tenant_id",
+    "key_id",
+    "backend",
+    "recovery_policy",
+    "state",
+    "scope_hash"
+  ],
+  "title": "KeyScopeContract",
+  "type": "object"
+}

@@ -286,7 +286,7 @@ def test_progress06_r1_issue_verifier_is_authenticated_and_independent(context) 
 @pytest.mark.security
 @pytest.mark.integration
 def test_progress06_r1_restricted_annex_requires_scoped_server_approval(context) -> None:
-    """REQ: CONHAND-001, CONHAND-004, CONAC-006, CONMEP-006, SECEXT-005 restricted annexes require exact server authorization, immutable approval, and separation of duties."""
+    """REQ: CONAC-006, CONHAND-001, CONHAND-004, CONMEP-006, SECEXT-005 restricted annexes require exact server authorization, immutable approval, and separation of duties."""
     tenant = context.tenancy.create_tenant("R1 restricted tenant", tenant_id="r1-restricted-tenant")
     project = context.tenancy.create_project(
         tenant,

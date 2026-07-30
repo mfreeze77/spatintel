@@ -1,0 +1,164 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "invalidate_security_caches",
+      "path": "/v1/projects/{project_id}/security/cache-invalidations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_capture_finalization",
+      "path": "/v1/projects/{project_id}/security/capture-finalizations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "evaluate_immersive_safety",
+      "path": "/v1/projects/{project_id}/security/immersive-safety"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_provider_incident_withdrawal",
+      "path": "/v1/projects/{project_id}/security/provider-incidents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "validate_provider_output",
+      "path": "/v1/projects/{project_id}/security/provider-outputs"
+    },
+    {
+      "method": "POST",
+      "operation_id": "authorize_security_provider_execution",
+      "path": "/v1/projects/{project_id}/security/providers/{provider_id}/authorize"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_provider_governance_exception",
+      "path": "/v1/projects/{project_id}/security/providers/{provider_id}/exceptions"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_supply_chain_release",
+      "path": "/v1/security/releases"
+    },
+    {
+      "method": "POST",
+      "operation_id": "promote_supply_chain_release",
+      "path": "/v1/security/releases/{release_record_id}/promote"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_threat_manifest",
+      "path": "/v1/security/threat-manifests"
+    },
+    {
+      "method": "POST",
+      "operation_id": "verify_transport_profile",
+      "path": "/v1/security/transport-verifications"
+    },
+    {
+      "method": "POST",
+      "operation_id": "verify_security_audit_chain",
+      "path": "/v1/tenants/{tenant_id}/audit/security-verify"
+    },
+    {
+      "method": "POST",
+      "operation_id": "assess_privacy_change",
+      "path": "/v1/tenants/{tenant_id}/privacy/impact-assessments"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_privacy_inventory",
+      "path": "/v1/tenants/{tenant_id}/privacy/inventory"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_privacy_rights_request",
+      "path": "/v1/tenants/{tenant_id}/privacy/rights-requests"
+    },
+    {
+      "method": "POST",
+      "operation_id": "complete_privacy_rights_request",
+      "path": "/v1/tenants/{tenant_id}/privacy/rights-requests/{rights_request_id}/complete"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_security_incident",
+      "path": "/v1/tenants/{tenant_id}/security/incidents"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_key_scope",
+      "path": "/v1/tenants/{tenant_id}/security/key-scopes"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_key_access",
+      "path": "/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/access"
+    },
+    {
+      "method": "POST",
+      "operation_id": "emergency_revoke_key",
+      "path": "/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/emergency-revoke"
+    },
+    {
+      "method": "POST",
+      "operation_id": "grant_privileged_access",
+      "path": "/v1/tenants/{tenant_id}/security/privileged-access"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_privileged_access",
+      "path": "/v1/tenants/{tenant_id}/security/privileged-access/{grant_id}/revoke"
+    },
+    {
+      "method": "POST",
+      "operation_id": "issue_workload_identity",
+      "path": "/v1/tenants/{tenant_id}/security/workload-identities"
+    },
+    {
+      "method": "POST",
+      "operation_id": "validate_workload_identity",
+      "path": "/v1/tenants/{tenant_id}/security/workload-identities/validate"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_workload_identity",
+      "path": "/v1/tenants/{tenant_id}/security/workload-identities/{grant_id}/revoke"
+    }
+  ],
+  "required_environment": [
+    "SIP_ENV",
+    "SIP_DATABASE_URL",
+    "SIP_OBJECT_STORE_BACKEND",
+    "SIP_SIGNING_KEY_B64",
+    "SIP_MASTER_KEY_B64"
+  ],
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "network_egress_default_deny": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true,
+    "short_lived_workload_identity_required": true
+  },
+  "service_name": "security-ops"
+}

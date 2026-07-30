@@ -1,37 +1,25 @@
-# Automatic Resume — SIP v1.1.0 Progress 06-R2
+# Automatic Resume — SIP v1.1.0 Progress 07
 
-This branch is the narrow True North-directed remediation of accepted Progress 06-R1 commit `118ac917a6c35e007d9f2158d5495e1a69883748`. No Progress 07 product work is authorized.
+Progress 07 is the bounded OPS-001 security, privacy, audit, key-management, provider-governance, and supply-chain milestone authorized by True North from accepted Progress 06-R2 commit `600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8`.
 
 ## Continuous completion sequence
 
-1. regenerate contracts, events, migrations, fixtures, requirements ledgers, milestone scope, and semantic traceability;
-2. execute every locally available test and control against one unchanged source root;
-3. repair all locally executable failures and reach a generated-evidence fixed point;
-4. commit the complete R2 source on `progress-06-r2-remediation`;
+1. maintain the exact 61-included / 3-deferred Progress 07 scope and zero-finding semantic traceability audit;
+2. run every locally executable source, contract, migration, security, privacy, infrastructure, benchmark, demonstration, export, and restore control;
+3. repair every local failure and regenerate controlled artifacts to a fixed point;
+4. commit the final Progress 07 source on `progress-07-bounded`;
 5. create a clean detached worktree at that exact commit and attest its source identity;
-6. repeat the complete acceptance sequence against the exact committed bytes;
-7. build and independently verify `Spatial-Intelligence-Platform-v1.1.0-progress-06-r2.zip`;
-8. build and independently verify the consolidated Progress 06-R2 delivery envelope;
-9. publish Git/source provenance, manifests, ledgers, scope, traceability, acceptance, security, migration, and release-readiness evidence.
+6. rerun complete acceptance against the committed bytes;
+7. build and independently verify `Spatial-Intelligence-Platform-v1.1.0-progress-07.zip`;
+8. build and independently verify the consolidated Progress 07 delivery envelope;
+9. publish Git/source provenance, manifests, ledgers, milestone scope, traceability, acceptance, security, privacy, migration, and release-readiness evidence.
 
 On interruption, resume automatically from the first unfinished action. Never package an uncommitted or dirty worktree.
 
-## Required stop-line outcomes
-
-- restricted secret probing denied before matching;
-- restricted documents and entity identities undiscoverable without exact authority;
-- routine project administrators denied restricted read;
-- raw credentials rejected from storage and export;
-- forged Construction verification denied;
-- fabricated LiveForever evidence and direct strong truth labels denied;
-- blank-subject consent bypass denied;
-- source-less legacy documents denied;
-- parallel test matrix hermetic;
-- inner and outer verifiers return `passed_complete` with zero findings.
-
 ## Governing posture
 
-- Progress 07: **not authorized**.
+- Progress 07: **authorized bounded development milestone**.
+- Progress 08: **unauthorized**.
 - Production promotion: **NO-GO**.
 - `PLTVIEW-007`: **IMPLEMENTED_UNVERIFIED**.
-- Frozen web-production, Apple/LiDAR, approved model/GPU, executable infrastructure, penetration, privacy, accessibility, usability, and legal validation remain explicit external gaps.
+- Frozen web-production, mounted viewer integration, Apple/LiDAR, approved model/GPU, executable infrastructure, independent penetration/privacy/accessibility/usability/legal review, and customer/human-subject pilots remain explicit gaps.

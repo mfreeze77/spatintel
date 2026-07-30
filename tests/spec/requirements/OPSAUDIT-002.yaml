@@ -7,11 +7,30 @@ source:
   section: 4. Normative requirements
 requirement: Capture finalization shall record package root hash, device/app, signer, and verification result.
 verification_method: Automated test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/security_ops.py
+- src/sip/audit.py
+- src/sip/spatial_data.py
+- src/sip/database.py
+- src/sip/model_governance.py
+- src/sip/lifecycle.py
+- src/sip/exporting.py
+- migrations
 automated_test_ids:
-- REQ-OPSAUDIT-002
-retained_evidence: []
+- tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only
+- tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip
+- tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_audit_integrity_and_denial_durability
+- tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service
+- tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed
+- tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit
+retained_evidence:
+- build/evidence/demo-progress07-security.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +39,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

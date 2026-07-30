@@ -736,19 +736,25 @@
         }
       ],
       "evidence_paths": [
+        "build/evidence/demo-progress07-security.json",
         "build/reports/license-gate.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
       ],
       "implementation_files": [
+        "src/sip/security_ops.py",
         "src/sip/hybrid.py",
         "src/sip/contracts.py",
         "src/sip/model_governance.py",
         "src/sip/security.py",
         "src/sip/audit.py",
         "docs/security/THREAT_MODEL.md",
-        "migrations/versions/0011_governed_hybrid_representation.py"
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security/model-egress-policy.json",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
       ],
       "priority": "P0",
       "requirement": "Private residential, restricted building-system, critical-infrastructure, biometric, intimate, and LiveForever-sensitive data shall be blocked from public hosted providers unless a specific higher-order approval permits it.",

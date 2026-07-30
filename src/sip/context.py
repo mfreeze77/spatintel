@@ -22,6 +22,7 @@ from .scene import SceneService
 from .scene_runtime import SceneRuntimeService
 from .search import SearchService
 from .security import EnvelopeCipher, SignedTokenCodec
+from .security_ops import SecurityOperationsService
 from .spatial_data import SpatialDataService
 from .tenancy import TenancyService
 
@@ -55,6 +56,7 @@ class PlatformContext:
     collaboration: CollaborationService
     notifications: NotificationService
     agents: AgentService
+    security_ops: SecurityOperationsService
 
     @classmethod
     def create(cls, settings: Settings | None = None, *, create_schema: bool | None = None) -> "PlatformContext":
@@ -105,6 +107,14 @@ class PlatformContext:
         )
         scene_service = SceneService(database, audit)
         scene_runtime = SceneRuntimeService(database, audit, policy, hybrid, scene_service)
+        security_ops = SecurityOperationsService(
+            database,
+            audit,
+            token_codec,
+            settings.signing_key,
+            environment=settings.environment,
+            local_only=settings.object_store_backend == "local",
+        )
         return cls(
             settings=settings,
             database=database,
@@ -133,6 +143,7 @@ class PlatformContext:
             collaboration=CollaborationService(database),
             notifications=NotificationService(database),
             agents=AgentService(database, policy, search, audit),
+            security_ops=security_ops,
         )
 
 

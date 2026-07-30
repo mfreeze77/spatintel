@@ -578,7 +578,7 @@ def test_proxy_hit_api_reresolves_server_side_and_rejects_forged_metric_evidence
 
 
 def test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope(tmp_path: Path) -> None:
-    """REQ: DATEVID-004, ARCIAM-001, OPSAUDIT-003, PLTREST-001 evidence inspection is server-authorized and cannot leak across audience, purpose, or tenant scope."""
+    """REQ: ARCIAM-001, DATEVID-004, OPSAUDIT-003, PLTREST-001 evidence inspection is server-authorized and cannot leak across audience, purpose, or tenant scope."""
     context = PlatformContext.create(temporary_settings(tmp_path))
     tenant_id = context.tenancy.create_tenant("Evidence read tenant", tenant_id="evidence-read-tenant", actor_id="bootstrap")
     project_id = context.tenancy.create_project(

@@ -174,6 +174,7 @@ def test_progress06_r2_restricted_search_authorizes_before_matching_and_hides_id
         params={"include_restricted": "true"},
     )
     assert direct.status_code == 200, direct.text
+    client.close()
 
 
 @pytest.mark.security
@@ -224,6 +225,7 @@ def test_progress06_r2_raw_secrets_are_rejected_and_never_exported(context) -> N
     assert row["data"]["controller_password_vault_ref"].startswith("vault://")
     assert "SUPERSECRET" not in str(pack)
     assert pack["raw_secrets_included"] is False
+    client.close()
 
 
 @pytest.mark.security
@@ -299,6 +301,7 @@ def test_progress06_r2_construction_verified_state_requires_governed_independent
     assert verified.status_code == 200, verified.text
     assert verified.json()["state"] == "verified"
     assert verified.json()["verifier_id"] == "independent-verifier"
+    client.close()
 
 
 @pytest.mark.security
@@ -400,6 +403,7 @@ def test_progress06_r2_liveforever_truth_requires_scoped_evidence_consent_and_re
         },
     )
     assert subjectless.status_code == 201, subjectless.text
+    client.close()
 
 
 @pytest.mark.security
@@ -432,6 +436,7 @@ def test_progress06_r2_legacy_document_adapter_requires_scoped_immutable_asset(c
     )
     assert fetched.status_code == 200
     assert fetched.json()["source_sha256"] == asset.sha256
+    client.close()
 
 
 @pytest.mark.security

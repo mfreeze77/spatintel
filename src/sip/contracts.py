@@ -1341,6 +1341,225 @@ def _reject_capability_material(value: Any, path: str = "root") -> None:
             _reject_capability_material(item, f"{path}[{index}]")
 
 
+class ThreatManifestContract(ContractModel):
+    threat_manifest_id: str
+    version: int = Field(ge=1)
+    scope: str = Field(min_length=1)
+    threats: list[dict[str, Any]] = Field(min_length=1)
+    misuse_cases: list[dict[str, Any]] = Field(min_length=1)
+    public_viewer_analysis: dict[str, Any] = Field(min_length=1)
+    residual_risks: list[dict[str, Any]]
+    owner: str = Field(min_length=1)
+    review_trigger: str = Field(min_length=1)
+    manifest_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    state: Literal["active", "superseded"] = "active"
+
+
+class PrivilegedAccessGrantContract(ContractModel):
+    grant_id: str
+    tenant_id: str
+    project_id: str | None = None
+    subject_id: str
+    actions: list[str] = Field(min_length=1)
+    resource_scope: dict[str, Any] = Field(min_length=1)
+    purpose: str = Field(min_length=1)
+    mfa_method: str
+    requested_by: str
+    approved_by: str
+    issued_at: datetime
+    expires_at: datetime
+    state: Literal["active", "revoked", "expired"]
+    grant_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+    @model_validator(mode="after")
+    def validate_grant(self) -> "PrivilegedAccessGrantContract":
+        if self.requested_by == self.approved_by:
+            raise ValueError("privileged access requires independent approval")
+        if self.expires_at <= self.issued_at:
+            raise ValueError("privileged access must expire after issuance")
+        return self
+
+
+class WorkloadIdentityGrantContract(ContractModel):
+    grant_id: str
+    tenant_id: str
+    project_id: str | None = None
+    workload_id: str
+    audience: str
+    scopes: list[str] = Field(min_length=1)
+    purpose: str
+    issued_at: datetime
+    expires_at: datetime
+    state: Literal["active", "revoked", "expired"]
+    token_fingerprint: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class KeyScopeContract(ContractModel):
+    key_scope_id: str
+    tenant_id: str
+    project_id: str | None = None
+    person_id: str | None = None
+    key_id: str
+    backend: Literal["managed_kms", "governed_local", "hardware_backed"]
+    recovery_policy: dict[str, Any] = Field(min_length=1)
+    state: Literal["active", "rotated", "revoked", "erased"]
+    rotated_from_key_id: str | None = None
+    scope_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class PrivacyInventoryContract(ContractModel):
+    inventory_id: str
+    tenant_id: str
+    project_id: str | None = None
+    data_category: str
+    purpose: str
+    legal_basis: str
+    consent_basis: str | None = None
+    processors: list[dict[str, Any]]
+    residency: dict[str, Any] = Field(min_length=1)
+    retention: dict[str, Any] = Field(min_length=1)
+    security_controls: list[str] = Field(min_length=1)
+    rights_workflow: dict[str, Any] = Field(min_length=1)
+    classification: str
+    inventory_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class PrivacyRightsRequestContract(ContractModel):
+    rights_request_id: str
+    tenant_id: str
+    project_id: str | None = None
+    subject_id: str
+    request_type: Literal["access", "deletion", "correction", "restriction", "portability"]
+    scope: dict[str, Any] = Field(min_length=1)
+    requested_by: str
+    verified_by: str
+    state: Literal["open", "completed", "denied", "expired"]
+    due_at: datetime
+    outcomes: dict[str, Any] = Field(default_factory=dict)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+    request_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class SecurityIncidentContract(ContractModel):
+    incident_id: str
+    tenant_id: str
+    project_id: str | None = None
+    incident_type: str
+    severity: Literal["low", "moderate", "high", "critical"]
+    affected_subjects: list[str]
+    affected_resources: list[dict[str, Any]]
+    containment: list[dict[str, Any]]
+    notification_decision: dict[str, Any]
+    evidence: list[dict[str, Any]]
+    state: Literal["open", "contained", "resolved"]
+    incident_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class AuditVerificationContract(ContractModel):
+    verification_id: str
+    tenant_id: str
+    project_id: str | None = None
+    status: Literal["passed", "failed"]
+    record_count: int = Field(ge=0)
+    findings: list[dict[str, Any]]
+    referenced_manifests: list[dict[str, Any]]
+    verification_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class SupplyChainReleaseContract(ContractModel):
+    release_record_id: str
+    version: str
+    source_commit: str = Field(pattern=r"^[a-f0-9]{40}$")
+    source_root: str = Field(pattern=r"^[a-f0-9]{64}$")
+    component_manifests: dict[str, Any] = Field(min_length=1)
+    evidence: dict[str, Any] = Field(min_length=1)
+    rollback_plan: dict[str, Any] = Field(min_length=1)
+    environment_policy: dict[str, Any] = Field(min_length=1)
+    signed_by: str
+    signature: str
+    state: Literal["candidate", "promoted", "revoked"]
+    release_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    emergency_patch: bool = False
+
+
+class ProviderOutputValidationContract(ContractModel):
+    validation_id: str
+    tenant_id: str
+    project_id: str
+    provider_id: str
+    operation_id: str
+    output_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    media_type: str
+    byte_count: int = Field(ge=0)
+    validations: dict[str, Any] = Field(min_length=1)
+    state: Literal["quarantined", "approved", "rejected"]
+    validation_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class TransportVerificationContract(ContractModel):
+    verification_id: str
+    endpoint: str
+    protocol: str
+    minimum_tls_version: str
+    certificate_validated: bool
+    channel_authentication: str
+    evidence: dict[str, Any] = Field(min_length=1)
+    result: Literal["passed", "failed"]
+    verification_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class CaptureFinalizationContract(ContractModel):
+    finalization_id: str
+    tenant_id: str
+    project_id: str
+    capture_id: str
+    package_root_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    archive_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    device: dict[str, Any] = Field(min_length=1)
+    app: dict[str, Any] = Field(min_length=1)
+    signer_id: str
+    verification_result: Literal["passed", "failed"]
+    finalization_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class ImmersiveSafetyDecisionContract(ContractModel):
+    decision_id: str
+    tenant_id: str
+    project_id: str
+    scene_id: str
+    checks: dict[str, Any] = Field(min_length=1)
+    requested_modes: list[str] = Field(min_length=1)
+    allowed_modes: list[str]
+    fallback_mode: str
+    state: Literal["allowed", "degraded", "denied"]
+    decision_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class ProviderGovernanceExceptionContract(ContractModel):
+    exception_id: str
+    tenant_id: str
+    project_id: str | None = None
+    provider_id: str
+    scope: dict[str, Any] = Field(min_length=1)
+    purpose: str
+    requested_waivers: list[str] = Field(min_length=1)
+    approved_by: str
+    expires_at: datetime
+    state: Literal["active", "expired", "revoked"]
+    exception_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class CacheInvalidationContract(ContractModel):
+    invalidation_id: str
+    tenant_id: str
+    project_id: str | None = None
+    resource_id: str
+    reason: str
+    targets: list[str] = Field(min_length=1)
+    state: Literal["pending", "completed", "failed"]
+    invalidation_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
 class ConsentGrantContract(ContractModel):
     grant_id: str
     subject_id: str

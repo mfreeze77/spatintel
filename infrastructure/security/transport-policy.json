@@ -1,0 +1,8 @@
+{
+  "schema": "sip.transport-policy/v1",
+  "minimum_tls_version": "TLSv1.3",
+  "certificate_validation_required": true,
+  "mutual_authentication_required_for_workloads": true,
+  "plaintext_external_transport": "denied",
+  "production_authorized": false
+}

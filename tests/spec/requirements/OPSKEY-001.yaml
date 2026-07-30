@@ -8,11 +8,31 @@ source:
 requirement: All network connections shall use current approved TLS with certificate validation; local transfer uses authenticated
   encrypted channels.
 verification_method: Automated test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/security_ops.py
+- src/sip/database.py
+- src/sip/api.py
+- migrations/versions/0017_progress07_security_privacy_readiness.py
+- docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md
+- src/sip/lifecycle.py
+- src/sip/assets.py
+- docs/runbooks/KEY_ROTATION.md
 automated_test_ids:
-- REQ-OPSKEY-001
-retained_evidence: []
+- tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo
+- tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies
+- tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip
+- tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets
+- tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_workload_and_key_directive_boundaries
+- tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit
+retained_evidence:
+- build/evidence/demo-progress07-security.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +41,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

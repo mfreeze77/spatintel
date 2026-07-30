@@ -1,0 +1,92 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/supply-chain-release.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "component_manifests": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Component Manifests",
+      "type": "object"
+    },
+    "emergency_patch": {
+      "default": false,
+      "title": "Emergency Patch",
+      "type": "boolean"
+    },
+    "environment_policy": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Environment Policy",
+      "type": "object"
+    },
+    "evidence": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Evidence",
+      "type": "object"
+    },
+    "release_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Release Hash",
+      "type": "string"
+    },
+    "release_record_id": {
+      "title": "Release Record Id",
+      "type": "string"
+    },
+    "rollback_plan": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Rollback Plan",
+      "type": "object"
+    },
+    "signature": {
+      "title": "Signature",
+      "type": "string"
+    },
+    "signed_by": {
+      "title": "Signed By",
+      "type": "string"
+    },
+    "source_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Source Commit",
+      "type": "string"
+    },
+    "source_root": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Root",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "candidate",
+        "promoted",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "release_record_id",
+    "version",
+    "source_commit",
+    "source_root",
+    "component_manifests",
+    "evidence",
+    "rollback_plan",
+    "environment_policy",
+    "signed_by",
+    "signature",
+    "state",
+    "release_hash"
+  ],
+  "title": "SupplyChainReleaseContract",
+  "type": "object"
+}

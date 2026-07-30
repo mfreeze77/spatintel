@@ -8,11 +8,17 @@ source:
 requirement: Consent restriction/revocation shall propagate to processing, viewer, search, agents, reports, notifications,
   exports, and future model training.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/capture.py
+- src/sip/security.py
+- src/sip/worker_sandbox.py
+- tests/fixtures
 automated_test_ids:
-- REQ-TSTSEC-002
-retained_evidence: []
+- tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/privacy.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +27,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

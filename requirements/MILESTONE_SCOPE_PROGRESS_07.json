@@ -1,0 +1,2397 @@
+{
+  "acceptance_criteria": [
+    "critical threats map to preventative, detective, and recovery controls with owners and tests",
+    "privileged access is phishing-resistant-MFA bound, time-limited, independently approved, and audited",
+    "service identities are short-lived, audience/scope bound, revocable, and denied outside policy",
+    "key access, rewrap, recovery quorum, emergency revocation, and cryptographic-erasure evidence are governed",
+    "privacy inventory, impact review, subject access, rights workflows, and incident impact are durable and policy scoped",
+    "audit chains detect gaps, mutation, invalid signatures, and missing referenced manifests",
+    "external provider changes, exceptions, incidents, local-only denial, output quarantine, and privacy-safe telemetry fail closed",
+    "release promotion consumes one signed cross-component release record and remains fail-closed without required evidence",
+    "complete clean-source acceptance and independent inner/outer verification return zero findings",
+    "Progress 08 and production remain unauthorized"
+  ],
+  "accepted_base_commit": "600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8",
+  "authorized_epics": [
+    "OPS-001"
+  ],
+  "branch": "progress-07-bounded",
+  "deferred_requirement_count": 3,
+  "deferred_requirements": [
+    {
+      "defer_reason": "Requires signed/scanned container and Apple build artifacts plus patch-SLA evidence unavailable in this environment.",
+      "direct_tests": [],
+      "evidence_paths": [],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "Containers and mobile builds shall be hardened, signed, scanned, and patched under defined SLAs.",
+      "requirement_id": "OPSSEC-005",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": "Contractual vendor terms require external legal/procurement review; code will retain provider-purpose controls but cannot establish executed agreements.",
+      "direct_tests": [],
+      "evidence_paths": [],
+      "implementation_files": [],
+      "implementation_status": "NOT_STARTED",
+      "priority": "P1",
+      "requirement": "Vendor agreements and settings shall prohibit training/use beyond approved purpose where required.",
+      "requirement_id": "OPSPRIV-005",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "defer_reason": "Legal/evidentiary admissibility requires jurisdiction-specific counsel and procedure outside software verification.",
+      "direct_tests": [],
+      "evidence_paths": [],
+      "implementation_files": [],
+      "implementation_status": "NOT_STARTED",
+      "priority": "P1",
+      "requirement": "Legal/evidentiary claims shall require separate counsel and jurisdictional procedure.",
+      "requirement_id": "OPSAUDIT-006",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "dependency_rationale": "OPS-001 is the first dependency-valid Phase 7 epic. OPS-003 depends on OPS-001; OPS-004 depends on OPS-003; QA-002 depends on OPS-004 and QA-001.",
+  "explicitly_out_of_scope": [
+    "OPS-002 observability/SLO/cost milestone",
+    "OPS-003 deployment profiles",
+    "OPS-004 disaster recovery expansion",
+    "QA-001 benchmark laboratory expansion",
+    "QA-002 release closure",
+    "PILOT-001 customer pilots",
+    "production promotion"
+  ],
+  "external_gaps": [
+    "container and Apple artifact signing/scanning/patch-SLA evidence",
+    "executed vendor agreements and external privacy/legal review",
+    "jurisdiction-specific evidentiary counsel",
+    "frozen Node production build, Apple/LiDAR, approved LingBot/GPU, executable cloud infrastructure, penetration/accessibility/usability/legal review"
+  ],
+  "included_requirement_count": 61,
+  "included_requirements": [
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "The threat model shall enumerate capture-device compromise, upload tampering, archive bombs, parser exploits, GPU escape, cross-tenant access, signed-URL leakage, viewer scraping, model exfiltration, prompt injection, insider abuse, and destructive deletion.",
+      "requirement_id": "OPSTHREA-001",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Each critical threat shall map to preventative, detective, and recovery controls plus tests and owners.",
+      "requirement_id": "OPSTHREA-002",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Sensitive facility and family data shall use misuse/abuse cases beyond ordinary confidentiality.",
+      "requirement_id": "OPSTHREA-003",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "The threat model shall be reviewed when adding a sensor, model provider, sharing mode, plugin, or new data purpose.",
+      "requirement_id": "OPSTHREA-004",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Residual risks shall be visible to release decision makers.",
+      "requirement_id": "OPSTHREA-005",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "A public viewer shall be analyzed as hostile client code with no trusted secrets.",
+      "requirement_id": "OPSTHREA-006",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_documentation.py::test_threat_model_enumerates_specified_attack_classes"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Threat modeling shall cover geometry/splat payload parsing, provider egress, topology disclosure, derivative redaction, authority spoofing, and immersive collision/navigation failure.",
+      "requirement_id": "OPSTHR-007",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 136,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Threat-model review"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Untrusted provider outputs shall remain quarantined with malware/resource/format/transform/content validation.",
+      "requirement_id": "OPSTHR-008",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 137,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Security test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Authorization shall apply to geometry derivatives even when texture or obvious personal data has been removed.",
+      "requirement_id": "OPSTHR-009",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 138,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_scene_representation.py::test_hybrid_provider_quarantine_quality_publisher_and_proxy_measurement_guard"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Abuse tests shall attempt to elevate proxy/design assets to verified/observed authority through API, import, UI, and export paths.",
+      "requirement_id": "OPSTHR-010",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 139,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Adversarial test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Client and CDN caches shall purge or invalidate superseded/redacted hybrid assets according to policy.",
+      "requirement_id": "OPSTHR-011",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 140,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Cache/privacy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "src/sip/security_ops.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Immersive safety failures shall disable affected locomotion modes while preserving a safe fallback.",
+      "requirement_id": "OPSTHR-012",
+      "source_document": "90-security-ops/900_threat_model.md",
+      "source_line": 141,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Fault-injection test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Human privileged access shall require phishing-resistant MFA where available and just-in-time elevation.",
+      "requirement_id": "OPSSEC-001",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Service-to-service authentication shall use short-lived workload identities with audience and scope.",
+      "requirement_id": "OPSSEC-002",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Network policies shall restrict worker egress and prevent runtime model downloads in production.",
+      "requirement_id": "OPSSEC-003",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Secrets shall live in an approved secret manager and never in repositories, images, logs, manifests, or mobile packages.",
+      "requirement_id": "OPSSEC-004",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/containers",
+        "infrastructure/kubernetes/base",
+        "infrastructure/security",
+        "tools/security_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Sensitive-access and administrative events shall be immutable and monitored.",
+      "requirement_id": "OPSSEC-006",
+      "source_document": "90-security-ops/901_security_architecture.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "All network connections shall use current approved TLS with certificate validation; local transfer uses authenticated encrypted channels.",
+      "requirement_id": "OPSKEY-001",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_secrets_and_transport_have_fail_closed_deployment_policies"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Data keys shall be generated securely, wrapped by managed or local key-encryption keys, and scoped by policy.",
+      "requirement_id": "OPSKEY-002",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Key access shall be logged with actor/workload, purpose, resource scope, and outcome.",
+      "requirement_id": "OPSKEY-003",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Rotation shall support rewrapping and emergency revocation with bounded impact.",
+      "requirement_id": "OPSKEY-004",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Recovery mechanisms shall avoid one-person permanent loss while respecting local-only and family succession policy.",
+      "requirement_id": "OPSKEY-005",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/runbooks/KEY_ROTATION.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/lifecycle.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "docs/runbooks/KEY_ROTATION.md",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Cryptographic erasure shall include key deletion evidence and residual replica/backup timelines.",
+      "requirement_id": "OPSKEY-006",
+      "source_document": "90-security-ops/902_encryption_key_management.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "The platform shall maintain a data inventory linking category, purpose, legal/consent basis, processors, residency, retention, security, and rights workflow.",
+      "requirement_id": "OPSPRIV-001",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "New data purposes or providers shall require privacy impact review before processing.",
+      "requirement_id": "OPSPRIV-002",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Subject-access export shall explain source records, derivatives, sharing, consent, and automated processing in understandable form.",
+      "requirement_id": "OPSPRIV-003",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Correction/restriction/deletion requests shall be tracked and verified across canonical and derived stores.",
+      "requirement_id": "OPSPRIV-004",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_key_governance_privacy_rights_and_incidents"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/policy.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md",
+        "docs/privacy/PRIVACY_AND_CONSENT.md",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Incident workflows shall identify affected people/projects and applicable notification decision without exposing additional data.",
+      "requirement_id": "OPSPRIV-006",
+      "source_document": "90-security-ops/903_privacy_compliance.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Audit events shall include actor/workload, action, resource, tenant/project, time, source IP/device context when appropriate, purpose, outcome, trace, and before/after references.",
+      "requirement_id": "OPSAUDIT-001",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Capture finalization shall record package root hash, device/app, signer, and verification result.",
+      "requirement_id": "OPSAUDIT-002",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Evidence access, model execution, authority changes, consent changes, exports, and deletion shall be audited.",
+      "requirement_id": "OPSAUDIT-003",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Audit storage shall prevent ordinary application roles from altering or deleting events.",
+      "requirement_id": "OPSAUDIT-004",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/audit.py",
+        "src/sip/spatial_data.py",
+        "src/sip/database.py",
+        "src/sip/model_governance.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "migrations"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Verification tools shall detect gaps, broken chains, invalid signatures, and missing referenced manifests.",
+      "requirement_id": "OPSAUDIT-005",
+      "source_document": "90-security-ops/904_audit_chain_of_custody.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_github_actions_are_sha_pinned_and_least_privilege"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement": "CI shall run formatting, type checks, unit/integration tests, schema compatibility, license/SBOM, secret scan, vulnerability scan, and artifact signing.",
+      "requirement_id": "OPSCICD-001",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "IN_PROGRESS",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates"
+        },
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_source_zip_is_byte_deterministic"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement": "Mobile, web, service, worker, infrastructure, and model manifests shall share a release record.",
+      "requirement_id": "OPSCICD-002",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement": "Production deployment shall verify signatures and environment policy.",
+      "requirement_id": "OPSCICD-003",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Release promotion shall require benchmark and acceptance evidence from `955_release_gates.md`.",
+      "requirement_id": "OPSCICD-004",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Emergency patches shall still produce traceable artifacts and retrospective review.",
+      "requirement_id": "OPSCICD-005",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/release-report.json",
+        "build/reports/security-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/progress07-security.yml",
+        "tools/release.py",
+        "tools/security_check.py",
+        "tools/license_check.py",
+        "tools/progress07_supply_chain_check.py",
+        "src/sip/security_ops.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Rollback shall include service, worker routing/model, configuration, and database compatibility plans.",
+      "requirement_id": "OPSCICD-006",
+      "source_document": "90-security-ops/911_ci_cd_supply_chain.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "An external or unknown provider shall not access source or derived scene bytes before an approved provider dossier and matching data/purpose policy exist.",
+      "requirement_id": "SECEXT-001",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 191,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Egress and admission test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_security_api_enforces_exact_privilege_and_workload_scope"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_supply_chain.py::test_progress07_security_policy_files_deny_runtime_models_and_repository_secrets"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Unknown data processing, retention, training, region, license, or security facts shall default to no production data access.",
+      "requirement_id": "SECEXT-002",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 192,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Governance policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_infrastructure_security.py::test_progress07_worker_egress_and_runtime_model_downloads_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Data classification shall account for geometry, layout, inference, relationships, and security context even when textures or obvious identifiers are removed.",
+      "requirement_id": "SECEXT-003",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 193,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Classification review test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Manual external use shall follow controlled minimization, export, custody, receipt, import validation, independent review, and deletion/cleanup recording.",
+      "requirement_id": "SECEXT-004",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 194,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Procedure and audit test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_spatial_classification_signals_raise_the_floor_and_block_sensitive_external_egress"
+        },
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress06_r1_stopline_security.py::test_progress06_r1_restricted_annex_requires_scoped_server_approval"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Private residential, restricted building-system, critical-infrastructure, biometric, intimate, and LiveForever-sensitive data shall be blocked from public hosted providers unless a specific higher-order approval permits it.",
+      "requirement_id": "SECEXT-005",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 195,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Negative security tests"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_admission_denials_fail_closed_and_retain_safe_evidence"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Provider approval shall separately cover source code, weights, datasets, dependencies, commercial rights, deployment mode, and execution artifact hashes.",
+      "requirement_id": "SECEXT-006",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 196,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "License/model gate test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_conversion_admission_worker_scope_progress_idempotency_and_cancel"
+        },
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_worker_lease_rotation_is_bounded_and_supersedes_prior_credentials"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Provider credentials and object access shall be short-lived, least-privilege, operation-scoped, and revoked at completion or incident.",
+      "requirement_id": "SECEXT-007",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 197,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "IAM integration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_training_public_demo_and_retention_require_separate_server_side_authorization"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "A consented preservation or construction purpose shall not be expanded to provider training, public demonstration, or unrelated retention without separate authorization.",
+      "requirement_id": "SECEXT-008",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 198,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Consent-purpose test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Approved external execution shall use destination controls, egress monitoring, content hashes, signed receipts, quarantine, and return validation appropriate to the data class.",
+      "requirement_id": "SECEXT-009",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 199,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Security integration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_governed_hybrid.py::test_provider_descriptor_revision_promotion_and_tamper_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "A provider version or material terms/control change shall enter review or shadow state and shall not inherit approval automatically.",
+      "requirement_id": "SECEXT-010",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 200,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Change-management test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Provider exceptions shall be scoped, approved, audited, automatically expiring, and unable to waive truth, consent, legal-hold, or authority rules.",
+      "requirement_id": "SECEXT-011",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 201,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Exception lifecycle test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Incidents shall identify and withdraw affected source, derivative, publication, cache, and export assets while preserving investigation evidence.",
+      "requirement_id": "SECEXT-012",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 202,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Incident exercise"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_local_only_and_splatedit_provider_boundaries_are_audited"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Local-only deployments shall deny network-required providers by default and expose the attempted egress in audit.",
+      "requirement_id": "SECEXT-013",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 203,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Local deployment test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_local_only_and_splatedit_provider_boundaries_are_audited"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "SplatEdit shall remain limited to synthetic, public, or explicitly public-cleared fixtures until its production-relevant processing and permission posture is approved.",
+      "requirement_id": "SECEXT-014",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 204,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Provider registry test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_output_quarantine_and_immersive_fallback"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Output from an external provider shall be treated as untrusted content and parsed, scanned, registered, and validated in isolation.",
+      "requirement_id": "SECEXT-015",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 205,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Malformed asset test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_policy_exception_cache_and_telemetry_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/license-gate.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/security_ops.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "src/sip/model_governance.py",
+        "src/sip/security.py",
+        "src/sip/audit.py",
+        "docs/security/PROGRESS_07_THREAT_MODEL.md",
+        "infrastructure/security",
+        "migrations/versions/0011_governed_hybrid_representation.py",
+        "migrations/versions/0017_progress07_security_privacy_readiness.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Operational telemetry about provider use shall not contain raw geometry, media, transcripts, secrets, or unnecessary precise locations.",
+      "requirement_id": "SECEXT-016",
+      "source_document": "90-security-ops/913_external_spatial_provider_governance.md",
+      "source_line": 206,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Logging privacy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe"
+        },
+        {
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status"
+        },
+        {
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Tests shall attempt unauthorized discovery through IDs, counts, search snippets, vectors, thumbnails, tiles, caches, logs, share links, signed URLs, exports, and agent tools.",
+      "requirement_id": "TSTSEC-001",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Consent restriction/revocation shall propagate to processing, viewer, search, agents, reports, notifications, exports, and future model training.",
+      "requirement_id": "TSTSEC-002",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed"
+        },
+        {
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/e2e.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IN_PROGRESS",
+      "priority": "P0",
+      "requirement": "File ingestion shall test malicious archives, media parsers, oversized dimensions, embedded scripts, and metadata injection.",
+      "requirement_id": "TSTSEC-003",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "IN_PROGRESS",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_authorized_search_agents.py::test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Agent tests shall cover destructive requests, role confusion, evidence fabrication, source-label removal, and speaking as an unconsented person.",
+      "requirement_id": "TSTSEC-004",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Deletion tests shall verify canonical, derivatives, indexes, caches, links, and backup expiry behavior.",
+      "requirement_id": "TSTSEC-005",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/capture.py",
+        "src/sip/security.py",
+        "src/sip/worker_sandbox.py",
+        "tests/fixtures"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Incident and support access controls shall be exercised through realistic scenarios.",
+      "requirement_id": "TSTSEC-006",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "NOT_STARTED",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "included_status_counts": {
+    "IMPLEMENTED_UNVERIFIED": 55,
+    "IN_PROGRESS": 4,
+    "VERIFIED": 2
+  },
+  "milestone": "Progress 07 \u2014 OPS-001 security, privacy, audit, key-management, and supply-chain readiness",
+  "milestone_result": "implementation_ready_for_clean_source_acceptance",
+  "production_authorized": false,
+  "progress_07_authorized": true,
+  "progress_08_authorized": false,
+  "schema": "sip.milestone-scope",
+  "schema_version": "1.0.0",
+  "scope_state": "frozen_before_implementation_claims",
+  "scope_statement": "Bounded implementation of OPS-001 security, privacy, audit, key-management, provider-governance, and supply-chain readiness controls descending from accepted Progress 06-R2. External legal, signing/scanning, jurisdiction-specific evidence, deployment, and production controls remain deferred or externally validated."
+}

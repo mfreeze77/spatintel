@@ -10,19 +10,34 @@ requirement: CI shall run formatting, type checks, unit/integration tests, schem
 verification_method: Automated test
 implementation_status: IN_PROGRESS
 implementation_files:
+- src/sip/security_ops.py
 - .github/workflows/ci.yml
 - .github/workflows/release.yml
+- .github/workflows/progress07-security.yml
+- tools/progress07_supply_chain_check.py
 - tools/release.py
 - tools/security_check.py
 - tools/license_check.py
+- infrastructure/security/release-admission-policy.json
 automated_test_ids:
+- tests/acceptance/test_progress07_security_demo.py::test_progress07_security_privacy_and_supply_chain_demo
 - tests/contract/test_delivery_tools.py::test_github_actions_are_sha_pinned_and_least_privilege
+- tests/contract/test_progress07_infrastructure_security.py::test_progress07_security_ops_is_a_distinct_nonroot_service_boundary
+- tests/contract/test_progress07_security_api.py::test_progress07_release_provider_and_cache_api_fail_closed
+- tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_adversarial_mutations_are_detected
+- tests/contract/test_progress07_supply_chain.py::test_progress07_supply_chain_contracts_are_pinned_and_fail_closed
+- tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls
+- tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed
 retained_evidence:
 - build/reports/license-gate.json
+- build/reports/progress07-supply-chain-report.json
 - build/reports/release-report.json
 - build/reports/security-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

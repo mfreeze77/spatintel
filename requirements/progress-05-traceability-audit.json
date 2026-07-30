@@ -820,7 +820,7 @@
     {
       "all_linked_tests_declare_requirement_id": true,
       "coverage_classification": "partial",
-      "linked_test_count": 3,
+      "linked_test_count": 5,
       "linked_tests": [
         {
           "declared_requirement_ids": [
@@ -845,6 +845,32 @@
           "declares_requirement_id": true,
           "test_exists": true,
           "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-006",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "test_exists": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
         }
       ],
       "requirement_id": "TSTSEC-001",

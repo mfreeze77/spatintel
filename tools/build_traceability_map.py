@@ -133,8 +133,10 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "LIFUX": ["src/sip/liveforever.py", "src/sip/api.py", "docs/user/LIVEFOREVER.md"],
     "LIFEXP": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/database.py", "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"],
     "LIFPRESV": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/archive_safety.py", "src/sip/database.py", "migrations/versions/0014_vertical_mvp.py", "migrations/versions/0015_progress06_r1_security_controls.py", "docs/operator/LIVEFOREVER_PRESERVATION.md"],
+    "OPSPRIV": ["src/sip/security_ops.py", "src/sip/database.py", "src/sip/api.py", "src/sip/policy.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md", "docs/user/PROGRESS_07_PRIVACY_AND_ACCESS.md"],
     "OPSCOST": ["src/sip/lifecycle.py", "src/sip/operations.py", "src/sip/database.py"],
     "OPSAUDIT": [
+        "src/sip/security_ops.py",
         "src/sip/audit.py",
         "src/sip/spatial_data.py",
         "src/sip/database.py",
@@ -143,13 +145,13 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
         "src/sip/exporting.py",
         "migrations",
     ],
-    "OPSKEY": ["src/sip/lifecycle.py", "src/sip/assets.py", "docs/runbooks/KEY_ROTATION.md"],
-    "OPSCICD": [".github/workflows/ci.yml", ".github/workflows/release.yml", "tools/release.py", "tools/security_check.py", "tools/license_check.py"],
+    "OPSKEY": ["src/sip/security_ops.py", "src/sip/database.py", "src/sip/api.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md", "src/sip/lifecycle.py", "src/sip/assets.py", "docs/runbooks/KEY_ROTATION.md"],
+    "OPSCICD": ["src/sip/security_ops.py", ".github/workflows/ci.yml", ".github/workflows/release.yml", ".github/workflows/progress07-security.yml", "tools/progress07_supply_chain_check.py", "tools/release.py", "tools/security_check.py", "tools/license_check.py", "infrastructure/security/release-admission-policy.json"],
     "OPSDR": ["src/sip/lifecycle.py", "src/sip/exporting.py", "docs/operator/BACKUP_RESTORE.md", "tools/run_demo.py"],
-    "OPSSEC": ["infrastructure/containers", "infrastructure/kubernetes/base", "tools/security_check.py", "docs/security/THREAT_MODEL.md"],
+    "OPSSEC": ["src/sip/security_ops.py", "src/sip/security.py", "src/sip/policy.py", "src/sip/api.py", "src/sip/database.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "services/security-ops", "infrastructure/containers", "infrastructure/kubernetes/base", "infrastructure/security", "infrastructure/postgres/audit-immutability.sql", "tools/security_check.py", "tools/progress07_supply_chain_check.py", "docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md"],
     "OPSSRE": ["docs/operator/INCIDENT_RESPONSE.md", "docs/runbooks/OPERATIONS_INCIDENTS.md", "docs/runbooks/OBSERVABILITY_INCIDENTS.md"],
-    "OPSTHR": ["docs/security/THREAT_MODEL.md", "src/sip/security.py", "src/sip/worker_sandbox.py"],
-    "OPSTHREA": ["docs/security/THREAT_MODEL.md", "src/sip/security.py", "src/sip/worker_sandbox.py"],
+    "OPSTHR": ["docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md", "src/sip/security_ops.py", "src/sip/security.py", "src/sip/worker_sandbox.py", "tools/demo_progress07_security.py"],
+    "OPSTHREA": ["docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md", "src/sip/security_ops.py", "src/sip/security.py", "src/sip/worker_sandbox.py", "tools/demo_progress07_security.py"],
     "PLTAPI": ["src/sip/api.py", "schemas/openapi", "services"],
     "PLTGRPC": ["src/sip/worker_protocol.py", "src/sip/worker_runtime.py", "schemas/protobuf/worker.proto", "schemas/jsonschema/worker-lease.schema.json"],
     "PLTREST": ["src/sip/assets.py", "src/sip/api.py", "src/sip/audit.py", "src/sip/security.py"],
@@ -172,7 +174,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "RECALIGN": ["src/sip/geometry.py", "src/sip/provider_sdk.py", "tools/run_benchmarks.py"],
     "RECBIDI": ["src/sip/geometry.py", "src/sip/provider_sdk.py", "src/sip/representations.py", "tools/run_demo.py"],
     "RECCLEAN": ["src/sip/hybrid.py", "src/sip/representations.py", "src/sip/geometry.py"],
-    "SECEXT": ["src/sip/hybrid.py", "src/sip/contracts.py", "src/sip/model_governance.py", "src/sip/security.py", "src/sip/audit.py", "docs/security/THREAT_MODEL.md", "migrations/versions/0011_governed_hybrid_representation.py"],
+    "SECEXT": ["src/sip/security_ops.py", "src/sip/hybrid.py", "src/sip/contracts.py", "src/sip/model_governance.py", "src/sip/security.py", "src/sip/audit.py", "docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md", "infrastructure/security/model-egress-policy.json", "migrations/versions/0011_governed_hybrid_representation.py", "migrations/versions/0017_progress07_security_privacy_readiness.py"],
     "RECHYB": ["src/sip/representations.py", "src/sip/scene.py", "apps/web", "tools/run_demo.py"],
     "RECMESH": ["src/sip/geometry.py", "src/sip/representations.py", "src/sip/scene.py", "tools/run_demo.py"],
     "RECPROV": ["src/sip/hybrid.py", "src/sip/contracts.py", "src/sip/worker_runtime.py", "src/sip/representations.py", "src/sip/database.py", "schemas/jsonschema/provider-capability.schema.json", "migrations/versions/0011_governed_hybrid_representation.py"],
@@ -277,12 +279,13 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "LIFUX": ["build/evidence/demos/liveforever.json"],
     "LIFEXP": ["build/evidence/demos/liveforever.json", "build/reports/tests/security.xml"],
     "LIFPRESV": ["build/evidence/demos/liveforever.json", "build/evidence/demos/export.json", "build/evidence/demos/restore.json"],
+    "OPSPRIV": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
     "OPSCOST": ["src/sip/lifecycle.py", "src/sip/operations.py", "src/sip/database.py"],
-    "OPSAUDIT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml"],
-    "OPSKEY": ["src/sip/lifecycle.py", "src/sip/assets.py", "docs/runbooks/KEY_ROTATION.md"],
-    "OPSCICD": ["build/reports/release-report.json", "build/reports/security-report.json", "build/reports/license-gate.json"],
+    "OPSAUDIT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
+    "OPSKEY": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
+    "OPSCICD": ["build/reports/release-report.json", "build/reports/security-report.json", "build/reports/license-gate.json", "build/reports/progress07-supply-chain-report.json"],
     "OPSDR": ["build/evidence/demos/foundation.json"],
-    "OPSSEC": ["build/reports/security-report.json", "build/reports/infrastructure-static-validation.json"],
+    "OPSSEC": ["build/reports/security-report.json", "build/reports/infrastructure-static-validation.json", "build/reports/progress07-supply-chain-report.json", "build/evidence/demo-progress07-security.json"],
     "PLTAGENT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "schemas/jsonschema/agent-tool.schema.json", "schemas/jsonschema/agent-answer.schema.json"],
     "PLTREST": ["build/reports/tests/contract.xml", "build/reports/tests/unit.xml"],
     "PLTSQL": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "schemas/jsonschema/spatial-query.schema.json"],
@@ -296,7 +299,7 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "RECHYB": ["build/evidence/demos/hybrid.json"],
     "RECMESH": ["build/evidence/demos/hybrid.json"],
     "RECPROV": ["build/reports/tests/contract.xml", "build/reports/tests/integration.xml", "schemas/events/event-catalog.json"],
-    "SECEXT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/license-gate.json"],
+    "SECEXT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/tests/contract.xml", "build/reports/license-gate.json", "build/evidence/demo-progress07-security.json"],
     "SIPMIG": ["migrations", "src/sip/database.py", "src/sip/scene.py", "src/sip/assets.py"],
     "TSTGATE": ["build/reports/release-report.json", "build/reports/spec-lint.json"],
     "TSTSTRAT": ["build/reports/test-matrix.json"],
@@ -537,6 +540,15 @@ def build(
         raise ValueError(f"tests reference unknown requirement IDs: {unknown}")
     if declared_source_state:
         python_results, swift_ok = _declared_passing_results(test_map)
+    else:
+        # Evidence mode must load and validate the canonical result snapshot once.
+        # Recomputing the full source root and reparsing every retained JUnit suite
+        # for each requirement makes the fail-closed post-commit gate needlessly
+        # quadratic and can cause the verifier itself to exceed bounded runtimes.
+        if python_results is None:
+            python_results = _python_test_results()
+        if swift_ok is None:
+            swift_ok = _swift_report_passed()
     overlays: dict[str, Any] = {}
     for requirement_id, test_ids in test_map.items():
         prefix = _prefix(requirement_id)

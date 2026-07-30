@@ -1,0 +1,63 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/transport-verification.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "certificate_validated": {
+      "title": "Certificate Validated",
+      "type": "boolean"
+    },
+    "channel_authentication": {
+      "title": "Channel Authentication",
+      "type": "string"
+    },
+    "endpoint": {
+      "title": "Endpoint",
+      "type": "string"
+    },
+    "evidence": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Evidence",
+      "type": "object"
+    },
+    "minimum_tls_version": {
+      "title": "Minimum Tls Version",
+      "type": "string"
+    },
+    "protocol": {
+      "title": "Protocol",
+      "type": "string"
+    },
+    "result": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Result",
+      "type": "string"
+    },
+    "verification_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Verification Hash",
+      "type": "string"
+    },
+    "verification_id": {
+      "title": "Verification Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verification_id",
+    "endpoint",
+    "protocol",
+    "minimum_tls_version",
+    "certificate_validated",
+    "channel_authentication",
+    "evidence",
+    "result",
+    "verification_hash"
+  ],
+  "title": "TransportVerificationContract",
+  "type": "object"
+}

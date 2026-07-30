@@ -1,0 +1,8 @@
+{
+  "schema": "sip.release-admission-policy/v1",
+  "default": "deny",
+  "required_evidence": ["source_commit", "source_root", "python_matrix", "contracts", "migrations", "security", "licensing", "requirements", "rollback_plan"],
+  "requires_signed_component_manifests": true,
+  "requires_production_environment_authorization": true,
+  "production_authorized": false
+}

@@ -15,6 +15,7 @@ implementation_files:
 automated_test_ids:
 - tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked
 - tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact
+- tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml

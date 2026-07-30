@@ -1845,6 +1845,232 @@
       }
     },
     {
+      "blast_radius": "tenant/project scoped requests handled by security-ops; no cross-tenant fail-open behavior",
+      "data_stores": [
+        "postgresql",
+        "immutable-audit-export",
+        "source-control-manifests"
+      ],
+      "degraded_behavior": "fail closed for authorization/publication; expose bounded read-only metadata where explicitly safe",
+      "dependency_controls": {
+        "circuit_breaker": "open after bounded consecutive failures; half-open probe",
+        "connect_timeout_seconds": 3,
+        "cross_region_failover": "deny unless pre-approved",
+        "request_timeout_seconds": 15
+      },
+      "events_consumed": [],
+      "events_produced": [
+        "audit_verification.completed",
+        "cache_invalidation.completed",
+        "capture.finalized",
+        "immersive_safety.decided",
+        "key_scope.accessed",
+        "key_scope.registered",
+        "key_scope.revoked",
+        "privacy_impact.decided",
+        "privacy_inventory.registered",
+        "privacy_rights.completed",
+        "privacy_rights.created",
+        "privileged_access.granted",
+        "privileged_access.revoked",
+        "provider.execution.authorized",
+        "provider.execution.denied",
+        "provider_exception.created",
+        "provider_output.validated",
+        "security_incident.created",
+        "supply_chain_release.created",
+        "supply_chain_release.promoted",
+        "threat_manifest.registered",
+        "transport.verified",
+        "workload_identity.issued",
+        "workload_identity.revoked"
+      ],
+      "inbound_apis": [
+        {
+          "method": "GET",
+          "operation_id": "health_live",
+          "path": "/health/live"
+        },
+        {
+          "method": "GET",
+          "operation_id": "health_ready",
+          "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "invalidate_security_caches",
+          "path": "/v1/projects/{project_id}/security/cache-invalidations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_capture_finalization",
+          "path": "/v1/projects/{project_id}/security/capture-finalizations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_immersive_safety",
+          "path": "/v1/projects/{project_id}/security/immersive-safety"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_provider_incident_withdrawal",
+          "path": "/v1/projects/{project_id}/security/provider-incidents"
+        },
+        {
+          "method": "POST",
+          "operation_id": "validate_provider_output",
+          "path": "/v1/projects/{project_id}/security/provider-outputs"
+        },
+        {
+          "method": "POST",
+          "operation_id": "authorize_security_provider_execution",
+          "path": "/v1/projects/{project_id}/security/providers/{provider_id}/authorize"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_provider_governance_exception",
+          "path": "/v1/projects/{project_id}/security/providers/{provider_id}/exceptions"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_supply_chain_release",
+          "path": "/v1/security/releases"
+        },
+        {
+          "method": "POST",
+          "operation_id": "promote_supply_chain_release",
+          "path": "/v1/security/releases/{release_record_id}/promote"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_threat_manifest",
+          "path": "/v1/security/threat-manifests"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_transport_profile",
+          "path": "/v1/security/transport-verifications"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_security_audit_chain",
+          "path": "/v1/tenants/{tenant_id}/audit/security-verify"
+        },
+        {
+          "method": "POST",
+          "operation_id": "assess_privacy_change",
+          "path": "/v1/tenants/{tenant_id}/privacy/impact-assessments"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_privacy_inventory",
+          "path": "/v1/tenants/{tenant_id}/privacy/inventory"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_privacy_rights_request",
+          "path": "/v1/tenants/{tenant_id}/privacy/rights-requests"
+        },
+        {
+          "method": "POST",
+          "operation_id": "complete_privacy_rights_request",
+          "path": "/v1/tenants/{tenant_id}/privacy/rights-requests/{rights_request_id}/complete"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_security_incident",
+          "path": "/v1/tenants/{tenant_id}/security/incidents"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_key_scope",
+          "path": "/v1/tenants/{tenant_id}/security/key-scopes"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_key_access",
+          "path": "/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/access"
+        },
+        {
+          "method": "POST",
+          "operation_id": "emergency_revoke_key",
+          "path": "/v1/tenants/{tenant_id}/security/key-scopes/{key_scope_id}/emergency-revoke"
+        },
+        {
+          "method": "POST",
+          "operation_id": "grant_privileged_access",
+          "path": "/v1/tenants/{tenant_id}/security/privileged-access"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_privileged_access",
+          "path": "/v1/tenants/{tenant_id}/security/privileged-access/{grant_id}/revoke"
+        },
+        {
+          "method": "POST",
+          "operation_id": "issue_workload_identity",
+          "path": "/v1/tenants/{tenant_id}/security/workload-identities"
+        },
+        {
+          "method": "POST",
+          "operation_id": "validate_workload_identity",
+          "path": "/v1/tenants/{tenant_id}/security/workload-identities/validate"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_workload_identity",
+          "path": "/v1/tenants/{tenant_id}/security/workload-identities/{grant_id}/revoke"
+        }
+      ],
+      "kind": "service",
+      "name": "security-ops",
+      "outbound_dependencies": [
+        "audit-service",
+        "identity-policy",
+        "provider-registry",
+        "workflow-service"
+      ],
+      "owned_tables": [
+        "audit_verifications",
+        "cache_invalidations",
+        "capture_finalization_audits",
+        "immersive_safety_decisions",
+        "key_access_events",
+        "key_scopes",
+        "privacy_impact_assessments",
+        "privacy_inventory",
+        "privacy_rights_requests",
+        "privileged_access_grants",
+        "provider_governance_exceptions",
+        "provider_output_validations",
+        "security_incidents",
+        "supply_chain_releases",
+        "threat_manifests",
+        "transport_verifications",
+        "workload_identity_grants"
+      ],
+      "owner": "security-privacy",
+      "recovery_strategy": "restart from durable database/outbox state; verify audit and object hashes before readiness",
+      "repository_path": "services/security-ops",
+      "retry_safety": "idempotency key or immutable command identifier required for mutations",
+      "rpo": "0 for committed transactional state; object writes verified before publication",
+      "rto": "15 minutes local/hybrid target; profile-specific production objective requires deployment validation",
+      "secret_references": [
+        "sip-runtime-secrets/SIP_DATABASE_URL",
+        "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
+      ],
+      "shared_kernel_exceptions": [],
+      "shutdown": {
+        "drain_seconds": 30,
+        "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
+      },
+      "slo": {
+        "availability_target": "99.9%",
+        "error_budget_window_days": 30,
+        "latency_budget": "p95 <= 1000ms for bounded control operations"
+      }
+    },
+    {
       "blast_radius": "tenant/project scoped requests handled by workflow-service; no cross-tenant fail-open behavior",
       "data_stores": [
         "postgresql",

@@ -792,22 +792,42 @@ def _suite_unlocked(
     if shards:
         print(f"[test-matrix] {name}: resuming {len(shards)} completed file shard(s)", flush=True)
     if pending:
-        with ThreadPoolExecutor(max_workers=min(max(1, shard_jobs), len(pending))) as executor:
-            futures = {
-                executor.submit(
-                    _run_pytest_shard,
-                    name=name,
-                    path=path,
-                    staged_shard_root=staged_shard_root,
-                    timeout_seconds=timeout_seconds,
-                    environment=environment,
-                    source_tree_root=source_tree_root,
-                    writer_token=writer_token,
-                ): path
-                for path in pending
-            }
-            for future in as_completed(futures):
-                shards.append(future.result())
+        shard_worker_count = min(max(1, shard_jobs), len(pending))
+        if shard_worker_count == 1:
+            # Popen from nested ThreadPoolExecutor workers can deadlock during
+            # interpreter startup on some libc/Python combinations.  A caller
+            # that explicitly requests one shard worker is asking for the
+            # deterministic serial path, so execute it in the suite controller
+            # thread rather than creating another worker thread.
+            for path in pending:
+                shards.append(
+                    _run_pytest_shard(
+                        name=name,
+                        path=path,
+                        staged_shard_root=staged_shard_root,
+                        timeout_seconds=timeout_seconds,
+                        environment=environment,
+                        source_tree_root=source_tree_root,
+                        writer_token=writer_token,
+                    )
+                )
+        else:
+            with ThreadPoolExecutor(max_workers=shard_worker_count) as executor:
+                futures = {
+                    executor.submit(
+                        _run_pytest_shard,
+                        name=name,
+                        path=path,
+                        staged_shard_root=staged_shard_root,
+                        timeout_seconds=timeout_seconds,
+                        environment=environment,
+                        source_tree_root=source_tree_root,
+                        writer_token=writer_token,
+                    ): path
+                    for path in pending
+                }
+                for future in as_completed(futures):
+                    shards.append(future.result())
     shards.sort(key=lambda item: item["path"])
     _assert_stage_owner(staged_shard_root, writer_token)
     _merge_junit(shards, staged_junit, suite_name=name)
@@ -943,21 +963,36 @@ def run_selected(
         raise ValueError(f"unknown or empty test suites: {unknown}")
     source_tree_root = _source_tree_root()
     by_name: dict[str, SuiteResult] = {}
-    with ThreadPoolExecutor(max_workers=max(1, min(jobs, len(suites)))) as executor:
-        futures = {
-            executor.submit(
-                _suite,
+    suite_worker_count = max(1, min(jobs, len(suites)))
+    if suite_worker_count == 1:
+        # Keep the deterministic serial controller on the main thread.  This
+        # avoids a second layer of thread-to-process spawning and gives the
+        # parent-death watchdog an unambiguous controller PID.
+        for name, paths in suites:
+            result = _suite(
                 name,
                 paths,
                 timeout_seconds=timeout_seconds,
                 source_tree_root=source_tree_root,
                 shard_jobs=shard_jobs,
-            ): name
-            for name, paths in suites
-        }
-        for future in as_completed(futures):
-            result = future.result()
+            )
             by_name[result.name] = result
+    else:
+        with ThreadPoolExecutor(max_workers=suite_worker_count) as executor:
+            futures = {
+                executor.submit(
+                    _suite,
+                    name,
+                    paths,
+                    timeout_seconds=timeout_seconds,
+                    source_tree_root=source_tree_root,
+                    shard_jobs=shard_jobs,
+                ): name
+                for name, paths in suites
+            }
+            for future in as_completed(futures):
+                result = future.result()
+                by_name[result.name] = result
     results = [by_name[name] for name, _ in suites]
     status = "passed" if all(item.status == "passed" for item in results) else "failed"
     return {

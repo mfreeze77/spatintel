@@ -23,7 +23,10 @@ ROLE_ACTIONS: dict[str, set[str]] = {
     "capture_operator": {"asset:create", "capture:*", "scene:read"},
     "reviewer": {"asset:read", "scene:read", "scene:review", "measurement:review", "construction:read", "liveforever:read"},
     "publisher": {"representation:publish", "scene:commit", "scene:read", "asset:read"},
-    "privacy_officer": {"consent:*", "deletion:*", "liveforever:*", "asset:read"},
+    "privacy_officer": {"consent:*", "deletion:*", "liveforever:*", "asset:read", "security:privacy_manage", "security:incident_manage", "security:cache_invalidate"},
+    "security_admin": {"security:threat_manage", "security:privileged_access", "security:workload_identity", "security:key_manage", "security:privacy_manage", "security:audit_verify", "security:provider_governance", "security:cache_invalidate", "security:release_manage", "security:transport_verify", "security:capture_finalize", "security:immersive_safety", "security:incident_manage", "asset:read"},
+    "key_custodian": {"security:key_manage", "asset:read"},
+    "release_manager": {"security:release_manage", "security:audit_verify", "asset:read"},
     "viewer": {"asset:read", "scene:read", "construction:read", "liveforever:read"},
     "service_worker": {"operation:lease", "operation:checkpoint", "operation:complete", "asset:read", "asset:create"},
 }
@@ -36,6 +39,19 @@ EXACT_GRANT_ACTIONS = {
     "construction:restricted_read",
     "construction:verify",
     "liveforever:review",
+    "security:threat_manage",
+    "security:privileged_access",
+    "security:workload_identity",
+    "security:key_manage",
+    "security:privacy_manage",
+    "security:audit_verify",
+    "security:provider_governance",
+    "security:cache_invalidate",
+    "security:release_manage",
+    "security:transport_verify",
+    "security:capture_finalize",
+    "security:immersive_safety",
+    "security:incident_manage",
 }
 
 CLASSIFICATION_ORDER = {

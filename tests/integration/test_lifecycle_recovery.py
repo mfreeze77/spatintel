@@ -61,6 +61,7 @@ def test_opsdr_002_corrupt_backup_fails_before_restore_claim(bootstrapped, tmp_p
 @pytest.mark.integration
 @pytest.mark.security
 def test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence(bootstrapped, tmp_path: Path) -> None:
+    """REQ: TSTSEC-005 destructive deletion requires hold release, verified backup, independent approval, and retained evidence."""
     context, tenant_id, project_id, actor = bootstrapped
     asset = _ingest(context, tenant_id, project_id, actor)
     context.lifecycle.set_retention_rule(

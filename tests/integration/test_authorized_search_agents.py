@@ -284,7 +284,7 @@ def test_saved_query_is_immutable_versioned_permissioned_and_parameterized(boots
 
 @pytest.mark.security
 def test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety(bootstrapped) -> None:
-    """REQ: PLTAGENT-001, PLTAGENT-002, PLTAGENT-004, PLTAGENT-006 tools are explicit, grounded, labeled, and fail closed."""
+    """REQ: PLTAGENT-001, PLTAGENT-002, PLTAGENT-004, PLTAGENT-006, TSTSEC-004 tools are explicit, grounded, labeled, and fail closed."""
     context, tenant_id, project_id, _ = bootstrapped
     principal = _principal(tenant_id, project_id)
     tools = context.agents.list_tools(principal=principal, project_id=project_id)

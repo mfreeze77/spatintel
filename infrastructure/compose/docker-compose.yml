@@ -202,6 +202,14 @@ services:
   audit-service:
     <<: *python-service
     environment: {<<: *common-environment, SIP_SERVICE_NAME: audit-service}
+  security-ops:
+    <<: *python-service
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: security-ops
+      SIP_LOCAL_ONLY: "true"
+      SIP_MODEL_EGRESS_DEFAULT: denied
+    networks: [backend]
   representation-api:
     <<: *python-service
     environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-api}

@@ -247,7 +247,8 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         "",
         "## Governing release posture",
         "",
-        "- Progress 07: **unauthorized** pending independent True North acceptance of Progress 06.",
+        "- Progress 07: **authorized as a bounded OPS-001 development milestone** from accepted commit `600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8`.",
+        "- Progress 08: **unauthorized** pending independent True North acceptance of Progress 07.",
         "- Production promotion: **NO-GO**. Production authorization remains fail-closed.",
     ]
     (ROOT / "requirements/coverage-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

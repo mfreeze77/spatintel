@@ -144,7 +144,7 @@ def test_release_source_zip_is_byte_deterministic(tmp_path: Path) -> None:
 
 @pytest.mark.contract
 def test_release_readiness_fails_closed_for_open_gates(monkeypatch: pytest.MonkeyPatch) -> None:
-    """REQ: TSTGATE-003, OPSCICD-002 release promotion must reject unresolved evidence."""
+    """REQ: OPSCICD-002, TSTGATE-003 release promotion must reject unresolved evidence."""
     module = _release_module()
     version = module._project_version()
     blockers = module._requirements_blockers() + module._environment_blockers(version, signing_available=False)

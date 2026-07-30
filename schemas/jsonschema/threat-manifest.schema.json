@@ -1,0 +1,91 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/threat-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "misuse_cases": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "minItems": 1,
+      "title": "Misuse Cases",
+      "type": "array"
+    },
+    "owner": {
+      "minLength": 1,
+      "title": "Owner",
+      "type": "string"
+    },
+    "public_viewer_analysis": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Public Viewer Analysis",
+      "type": "object"
+    },
+    "residual_risks": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Residual Risks",
+      "type": "array"
+    },
+    "review_trigger": {
+      "minLength": 1,
+      "title": "Review Trigger",
+      "type": "string"
+    },
+    "scope": {
+      "minLength": 1,
+      "title": "Scope",
+      "type": "string"
+    },
+    "state": {
+      "default": "active",
+      "enum": [
+        "active",
+        "superseded"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "threat_manifest_id": {
+      "title": "Threat Manifest Id",
+      "type": "string"
+    },
+    "threats": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "minItems": 1,
+      "title": "Threats",
+      "type": "array"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "threat_manifest_id",
+    "version",
+    "scope",
+    "threats",
+    "misuse_cases",
+    "public_viewer_analysis",
+    "residual_risks",
+    "owner",
+    "review_trigger",
+    "manifest_hash"
+  ],
+  "title": "ThreatManifestContract",
+  "type": "object"
+}

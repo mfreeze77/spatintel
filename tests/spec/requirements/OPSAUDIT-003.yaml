@@ -9,6 +9,7 @@ requirement: Evidence access, model execution, authority changes, consent change
 verification_method: Controlled verification
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/security_ops.py
 - src/sip/audit.py
 - src/sip/spatial_data.py
 - src/sip/database.py
@@ -17,9 +18,17 @@ implementation_files:
 - src/sip/exporting.py
 - migrations
 automated_test_ids:
+- tests/contract/test_progress07_infrastructure_security.py::test_progress07_audit_database_role_is_append_only
+- tests/contract/test_progress07_security_api.py::test_progress07_privacy_key_audit_and_incident_api_round_trip
 - tests/contract/test_spatial_truth_api.py::test_evidence_and_assertion_reads_enforce_server_side_audience_purpose_and_scope
+- tests/integration/test_progress07_security_ops.py::test_progress07_audit_provider_cache_and_supply_chain_controls
 - tests/integration/test_spatial_truth_twin.py::test_datevid_evidence_read_rechecks_referenced_consent_and_audits_revocation
+- tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_audit_integrity_and_denial_durability
+- tests/security/test_progress07_security_controls.py::test_progress07_events_are_bounded_and_owned_by_security_service
+- tests/security/test_progress07_security_controls.py::test_progress07_release_record_and_audit_integrity_fail_closed
+- tests/security/test_progress07_security_controls.py::test_progress07_transport_and_capture_finalization_audit
 retained_evidence:
+- build/evidence/demo-progress07-security.json
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
 - build/reports/tests/integration.xml

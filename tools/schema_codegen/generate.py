@@ -50,6 +50,21 @@ from sip.contracts import (
     ChangeCandidateContract,
     ChangeReviewContract,
     ChangeBenchmarkContract,
+    ThreatManifestContract,
+    PrivilegedAccessGrantContract,
+    WorkloadIdentityGrantContract,
+    KeyScopeContract,
+    PrivacyInventoryContract,
+    PrivacyRightsRequestContract,
+    SecurityIncidentContract,
+    AuditVerificationContract,
+    SupplyChainReleaseContract,
+    ProviderOutputValidationContract,
+    TransportVerificationContract,
+    CaptureFinalizationContract,
+    ImmersiveSafetyDecisionContract,
+    ProviderGovernanceExceptionContract,
+    CacheInvalidationContract,
 )
 
 MODELS = {
@@ -100,6 +115,21 @@ MODELS = {
     "agent-tool": AgentToolSpec,
     "agent-answer": AgentAnswer,
     "agent-proposal": AgentProposalContract,
+    "threat-manifest": ThreatManifestContract,
+    "privileged-access-grant": PrivilegedAccessGrantContract,
+    "workload-identity-grant": WorkloadIdentityGrantContract,
+    "key-scope": KeyScopeContract,
+    "privacy-inventory": PrivacyInventoryContract,
+    "privacy-rights-request": PrivacyRightsRequestContract,
+    "security-incident": SecurityIncidentContract,
+    "audit-verification": AuditVerificationContract,
+    "supply-chain-release": SupplyChainReleaseContract,
+    "provider-output-validation": ProviderOutputValidationContract,
+    "transport-verification": TransportVerificationContract,
+    "capture-finalization": CaptureFinalizationContract,
+    "immersive-safety-decision": ImmersiveSafetyDecisionContract,
+    "provider-governance-exception": ProviderGovernanceExceptionContract,
+    "cache-invalidation": CacheInvalidationContract,
 }
 SERVICES = [
     "all",
@@ -118,6 +148,7 @@ SERVICES = [
     "representation-publisher",
     "construction",
     "liveforever",
+    "security-ops",
 ]
 
 

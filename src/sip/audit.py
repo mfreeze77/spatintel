@@ -33,6 +33,15 @@ class AuditService:
         resource_id: str,
         outcome: str,
         details: dict[str, Any] | None = None,
+        purpose: str | None = None,
+        workload_identity: str | None = None,
+        source_ip: str | None = None,
+        device_context: dict[str, Any] | None = None,
+        trace_id: str | None = None,
+        before_ref: dict[str, Any] | None = None,
+        after_ref: dict[str, Any] | None = None,
+        referenced_manifests: list[dict[str, Any]] | None = None,
+        manifest_refs: list[dict[str, Any]] | None = None,
         session: Session | None = None,
     ) -> str:
         owns_session = session is None
@@ -48,6 +57,20 @@ class AuditService:
             audit_id = new_uuid()
             occurred_at = db_now()
             previous_hash = previous.event_hash if previous else "0" * 64
+            normalized_details = dict(details or {})
+            audit_context = {
+                "purpose": purpose,
+                "workload_identity": workload_identity,
+                "source_ip": source_ip,
+                "device_context": device_context,
+                "trace_id": trace_id,
+                "before_ref": before_ref,
+                "after_ref": after_ref,
+                "referenced_manifests": referenced_manifests if referenced_manifests is not None else manifest_refs,
+            }
+            retained_context = {key: value for key, value in audit_context.items() if value is not None}
+            if retained_context:
+                normalized_details["audit_context"] = retained_context
             body = {
                 "audit_id": audit_id,
                 "tenant_id": tenant_id,
@@ -57,7 +80,7 @@ class AuditService:
                 "resource_type": resource_type,
                 "resource_id": resource_id,
                 "outcome": outcome,
-                "details": details or {},
+                "details": normalized_details,
                 "occurred_at": _timestamp(occurred_at),
                 "previous_hash": previous_hash,
             }
@@ -73,7 +96,7 @@ class AuditService:
                     resource_type=resource_type,
                     resource_id=resource_id,
                     outcome=outcome,
-                    details_json=details or {},
+                    details_json=normalized_details,
                     occurred_at=occurred_at,
                     previous_hash=previous_hash,
                     event_hash=event_hash,

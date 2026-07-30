@@ -1,0 +1,24 @@
+name: Progress 07 Security Controls
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sip-progress07-security-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  bounded-security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: '3.13.14'
+      - run: python -m pip install --require-virtualenv=false -e '.[dev,postgres,redis,telemetry]'
+      - run: PYTHONPATH=src:. python tools/progress07_supply_chain_check.py
+      - run: PYTHONPATH=src:. pytest -q tests/security tests/contract/test_progress07_security_api.py tests/integration/test_progress07_security_ops.py -p no:ddtrace -p no:cov -p no:json-report
+      - run: make spec-check contracts migrations

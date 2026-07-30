@@ -340,7 +340,7 @@ def _complete(context, admitted: dict[str, object], tenant_id: str, project_id: 
 @pytest.mark.integration
 @pytest.mark.security
 def test_provider_descriptor_revision_promotion_and_tamper_fail_closed(bootstrapped) -> None:
-    """REQ: ARCHHYB-004, SECEXT-001, SECEXT-002, SECEXT-006, RECPROV-001, RECPROV-002, RECPROV-004 provider execution requires intact signed descriptor revisions, complete data-use facts, and scoped promotions before source access."""
+    """REQ: ARCHHYB-004, RECPROV-001, RECPROV-002, RECPROV-004, SECEXT-001, SECEXT-002, SECEXT-006, SECEXT-010 provider execution requires intact signed descriptor revisions, complete data-use facts, and scoped promotions before source access."""
     context, tenant_id, project_id, actor = bootstrapped
     context.providers.register(
         {
@@ -407,7 +407,7 @@ def test_provider_descriptor_revision_promotion_and_tamper_fail_closed(bootstrap
 @pytest.mark.integration
 @pytest.mark.security
 def test_conversion_admission_worker_scope_progress_idempotency_and_cancel(bootstrapped) -> None:
-    """REQ: ARCHHYB-003, SECEXT-007, HYBAPI-002, HYBAPI-004, RECPROV-003, RECPROV-006 admission is immutable, coordinate/authority records are explicit, worker credentials are least-privilege, and operations are resumable/cancellable."""
+    """REQ: ARCHHYB-003, HYBAPI-002, HYBAPI-004, RECPROV-003, RECPROV-006, SECEXT-007 admission is immutable, coordinate/authority records are explicit, worker credentials are least-privilege, and operations are resumable/cancellable."""
     context, tenant_id, project_id, actor = bootstrapped
     scene, source = _frame_scene_asset(context, tenant_id, project_id, actor)
     context.providers.register(_descriptor("local-provider"), actor_id=actor)
@@ -627,7 +627,7 @@ def test_provider_or_validation_snapshot_changes_block_publication(bootstrapped)
 @pytest.mark.integration
 @pytest.mark.security
 def test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt(bootstrapped) -> None:
-    """REQ: SECEXT-004, RECCLEAN-004, RECPROV-008, RECPROV-009 manual tools use controlled derivative export, custody receipts, exact return hashes, quarantine, and independent validation."""
+    """REQ: RECCLEAN-004, RECPROV-008, RECPROV-009, SECEXT-004, SECEXT-009 manual tools use controlled derivative export, custody receipts, exact return hashes, quarantine, and independent validation."""
     context, tenant_id, project_id, actor = bootstrapped
     scene, derivative = _frame_scene_asset(
         context,
@@ -957,7 +957,7 @@ def test_representation_family_requires_approved_frame_consistent_lods_and_seam_
 @pytest.mark.integration
 @pytest.mark.security
 def test_worker_lease_rotation_is_bounded_and_supersedes_prior_credentials(bootstrapped) -> None:
-    """REQ: SECEXT-007, HYBAPI-004 durable operation-scoped worker leases rotate, remain short-lived and token-bounded, and cannot be replayed after supersession."""
+    """REQ: HYBAPI-004, SECEXT-007 durable operation-scoped worker leases rotate, remain short-lived and token-bounded, and cannot be replayed after supersession."""
     context, tenant_id, project_id, actor = bootstrapped
     scene, source = _frame_scene_asset(context, tenant_id, project_id, actor)
     context.providers.register(_descriptor("lease-provider"), actor_id=actor)
@@ -1095,7 +1095,7 @@ def test_provider_failure_retains_cleanup_evidence_and_preserves_published_bindi
 @pytest.mark.integration
 @pytest.mark.security
 def test_provider_admission_denials_fail_closed_and_retain_safe_evidence(bootstrapped) -> None:
-    """REQ: ARCHHYB-004, ARCHHYB-006, SECEXT-001, SECEXT-002, SECEXT-005, SECEXT-006, RECPROV-004, RECPROV-006 model, license, promotion, classification, external-transfer, and quota gates fail closed before source access."""
+    """REQ: ARCHHYB-004, ARCHHYB-006, RECPROV-004, RECPROV-006, SECEXT-001, SECEXT-002, SECEXT-005, SECEXT-006 model, license, promotion, classification, external-transfer, and quota gates fail closed before source access."""
     context, tenant_id, project_id, actor = bootstrapped
     scene, source = _frame_scene_asset(context, tenant_id, project_id, actor)
 
