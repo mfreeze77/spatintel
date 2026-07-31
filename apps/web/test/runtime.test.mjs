@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { finalReconstructionAdmission, orderedCostStages, summarizeCostEstimate, validateCostEstimate } from "../lib/cost-planner-runtime.mjs";
 import { buildHybridRenderPlan, buildLayerRenderDirectives, defaultLayers, directProxyMeasurement, interactionDiagnostics, layerDirective, navigationFromKey, pickInteractionOnly, planResourceAdmission, pointPassesClipping, reprojectAnchors, resolveProxyHit, selectDeterministicLod, semanticFallback, serializeViewerSnapshot, synchronizedComparison, updateLayer, validateViewerSessionState } from "../lib/spatial-runtime.mjs";
 
 test("representation layers remain distinct and bounded", () => {
@@ -134,4 +135,20 @@ test("semantic fallback and keyboard navigation preserve accessible scene access
   const moved = navigationFromKey({ position: [0, 0, 0], savedPosition: [5, 5, 5], reducedMotion: true }, "ArrowUp");
   assert.deepEqual(moved.position, [0, 0, -0.1]);
   assert.deepEqual(navigationFromKey(moved, "Home").position, [5, 5, 5]);
+});
+
+
+test("governed cost estimates reject stale pricing and require acknowledgement for expensive processing", () => {
+  const now = Date.parse("2030-01-01T00:00:00Z");
+  const expensive = summarizeCostEstimate({ totalAmount: 12.5, currency: "usd", processingTier: "gpu-high", priceSourceVersion: "catalog-v1", expiresAt: "2030-01-02T00:00:00Z" }, now);
+  assert.equal(expensive.currency, "USD");
+  assert.deepEqual(finalReconstructionAdmission(expensive, false), { allowed: false, reason: "COST_ACKNOWLEDGEMENT_REQUIRED" });
+  assert.deepEqual(finalReconstructionAdmission(expensive, true), { allowed: true, reason: null });
+
+  const stale = summarizeCostEstimate({ totalAmount: 1, currency: "USD", processingTier: "CPU reference", priceSourceVersion: "catalog-v1", expiresAt: "2029-12-31T23:59:59Z" }, now);
+  assert.deepEqual(finalReconstructionAdmission(stale, true), { allowed: false, reason: "STALE_COST_ESTIMATE" });
+
+  const view = { estimateId: "estimate-1", processingTier: "CPU reference", totalAmount: 4.25, currency: "USD", stageEstimates: [], priceSourceVersion: "catalog-v1", priceSourceHash: "1".repeat(64), expiresAt: "2030-01-02T00:00:00Z", state: "active" };
+  assert.equal(validateCostEstimate(view, new Date(now)).canStart, true);
+  assert.deepEqual(orderedCostStages([{ stage: "zeta", amount: 2, weight: 1 }, { stage: "alpha", amount: 1, weight: 1 }]).map((stage) => stage.stage), ["alpha", "zeta"]);
 });
