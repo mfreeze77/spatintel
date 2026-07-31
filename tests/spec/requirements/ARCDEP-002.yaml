@@ -8,8 +8,13 @@ source:
 requirement: Deployment manifests shall pin service images, infrastructure versions, secrets references, network policies,
   and resource limits.
 verification_method: Controlled verification
-implementation_status: IN_PROGRESS
+implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/deployment.py
+- src/sip/api.py
+- src/sip/assets.py
+- src/sip/operations.py
+- infrastructure/deployment/profiles
 - infrastructure/compose/docker-compose.yml
 - infrastructure/kubernetes/base
 - infrastructure/terraform
@@ -18,10 +23,18 @@ automated_test_ids:
 - tests/contract/test_infrastructure.py::test_infrastructure_structural_policy_gate
 - tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist
 - tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned
+- tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated
+- tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny
+- tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence
+- tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material
+- tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence
 retained_evidence:
+- build/evidence/demo-progress09-deployment.json
 - build/reports/infrastructure-static-validation.json
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -31,5 +44,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

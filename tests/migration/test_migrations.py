@@ -106,7 +106,7 @@ def test_clean_install_reaches_head_and_matches_canonical_tables(tmp_path: Path)
     expected = set(Base.metadata.tables)
     assert expected <= actual
     assert actual - expected == {"alembic_version"}
-    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0018_progress08_observability_cost_support"
+    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0019_progress09_deployment_profiles"
 
 
 @pytest.mark.migration
@@ -240,4 +240,4 @@ def test_append_only_migration_manifest_matches_bytes() -> None:
         assert len(payload) == item["byte_count"]
         assert hashlib.sha256(payload).hexdigest() == item["sha256"]
         revisions.append(path.stem.split("_", 1)[0])
-    assert revisions == ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010", "0011", "0012", "0013", "0014", "0015", "0016", "0017", "0018"]
+    assert revisions == ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010", "0011", "0012", "0013", "0014", "0015", "0016", "0017", "0018", "0019"]

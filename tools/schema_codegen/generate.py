@@ -65,6 +65,13 @@ from sip.contracts import (
     ImmersiveSafetyDecisionContract,
     ProviderGovernanceExceptionContract,
     CacheInvalidationContract,
+    DeploymentProfileContract,
+    ResidencyPolicyContract,
+    EdgeNodeContract,
+    OfflineUpdateContract,
+    DeploymentMigrationContract,
+    AwsEnvironmentManifestContract,
+    DeploymentAdmissionContract,
 )
 
 MODELS = {
@@ -130,6 +137,13 @@ MODELS = {
     "immersive-safety-decision": ImmersiveSafetyDecisionContract,
     "provider-governance-exception": ProviderGovernanceExceptionContract,
     "cache-invalidation": CacheInvalidationContract,
+    "deployment-profile": DeploymentProfileContract,
+    "residency-policy": ResidencyPolicyContract,
+    "edge-node": EdgeNodeContract,
+    "offline-update": OfflineUpdateContract,
+    "deployment-migration": DeploymentMigrationContract,
+    "aws-environment-manifest": AwsEnvironmentManifestContract,
+    "deployment-admission": DeploymentAdmissionContract,
 }
 SERVICES = [
     "all",
@@ -150,6 +164,7 @@ SERVICES = [
     "liveforever",
     "security-ops",
     "operations-intelligence",
+    "deployment-control",
 ]
 
 
@@ -186,8 +201,8 @@ def main() -> None:
         ) + "\n"
 
     build_root = root / "build" / "generated" / "openapi"
+    context = PlatformContext.create(temporary_settings(build_root / "runtime-schema-codegen"))
     for service in SERVICES:
-        context = PlatformContext.create(temporary_settings(build_root / f"runtime-{service}"))
         schema = create_app(context=context, service_name=service).openapi()
         generated[root / "schemas" / "openapi" / f"{service}.openapi.json"] = json.dumps(schema, indent=2, sort_keys=True) + "\n"
         manifest_path = root / "services" / service / "service.json"

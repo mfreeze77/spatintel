@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-31T01:16:04.608751+00:00",
+  "generated_at": "2026-07-31T17:29:27.755567+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -25995,11 +25995,22 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "ARCDEP-001",
@@ -26010,10 +26021,19 @@
       "source_title": "Deployment Profiles and Topology",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCDEP-001"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
       ],
       "test_plan_path": "tests/spec/requirements/ARCDEP-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Each profile shall declare which features require cloud connectivity and what happens when unavailable.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -26043,15 +26063,20 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
         "infrastructure/compose/docker-compose.yml",
         "infrastructure/kubernetes/base",
         "infrastructure/terraform",
         "tools/validate_infrastructure.py"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
@@ -26065,13 +26090,21 @@
       "test_ids": [
         "tests/contract/test_infrastructure.py::test_infrastructure_structural_policy_gate",
         "tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist",
-        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned"
+        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/ARCDEP-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Deployment manifests shall pin service images, infrastructure versions, secrets references, network policies, and resource limits.",
       "verification_method": "Controlled verification",
@@ -26101,11 +26134,22 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCDEP-003",
@@ -26116,10 +26160,22 @@
       "source_title": "Deployment Profiles and Topology",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCDEP-003"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_residency_is_enforced_before_upload_and_worker_scheduling",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
       ],
       "test_plan_path": "tests/spec/requirements/ARCDEP-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Data residency policy shall be enforceable before asset upload or worker scheduling.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -26148,11 +26204,22 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCDEP-004",
@@ -26163,10 +26230,19 @@
       "source_title": "Deployment Profiles and Topology",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCDEP-004"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
       ],
       "test_plan_path": "tests/spec/requirements/ARCDEP-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Local upgrades shall be reversible and preserve compatible export paths.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -26195,11 +26271,22 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCDEP-005",
@@ -26210,10 +26297,19 @@
       "source_title": "Deployment Profiles and Topology",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCDEP-005"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
       ],
       "test_plan_path": "tests/spec/requirements/ARCDEP-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Cloud autoscaling shall enforce tenant quotas and global budget limits.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -27528,6 +27624,7 @@
       "source_title": "Observability, Quality Telemetry, and Audit Correlation",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability",
         "tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads",
@@ -43116,7 +43213,8 @@
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked",
         "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
         "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked",
-        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked"
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress09_checkpoint_controls.py::test_progress09_append_only_migration_is_integrity_locked"
       ],
       "test_plan_path": "tests/spec/requirements/DATDB-002.yaml",
       "test_result_evidence_paths": [
@@ -66014,11 +66112,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSHYB-001",
@@ -66029,10 +66135,19 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-001"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Every deployment shall expose the same canonical package, scene, evidence, and export contracts.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66058,11 +66173,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSHYB-002",
@@ -66073,10 +66196,17 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-002"
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_hybrid_transfer_rules_block_sensitive_early_or_unapproved_transfer",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Hybrid transfer policy shall specify which asset classes may leave the site and at what processing stage.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66102,11 +66232,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSHYB-003",
@@ -66117,10 +66255,21 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-003"
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift",
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Edge nodes shall enroll with unique identity, signed software, disk encryption, health reporting, and revocation.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -66146,11 +66295,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSHYB-004",
@@ -66161,10 +66318,16 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-004"
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback",
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Offline updates shall be signed and rollback-capable.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66190,11 +66353,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSHYB-005",
@@ -66205,10 +66376,18 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-005"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "A project migration between deployment modes shall preserve IDs, history, permissions, consent, hashes, and model/run manifests.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -66234,11 +66413,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSHYB-006",
@@ -66249,10 +66436,15 @@
       "source_title": "Cloud, Hybrid, Edge, and Local Deployment",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSHYB-006"
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSHYB-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Cloud dependence shall be visible to administrators before enabling a feature.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66278,11 +66470,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSAWS-001",
@@ -66293,10 +66493,20 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-001"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Infrastructure shall be defined as code with separate environments/accounts or equivalent strong boundaries.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66322,11 +66532,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSAWS-002",
@@ -66337,10 +66555,18 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-002"
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Databases and object stores shall be private, encrypted, backed up, and accessible only through approved identities/endpoints.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -66366,11 +66592,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSAWS-003",
@@ -66381,10 +66615,23 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-003"
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "GPU queues shall enforce tenant/profile quotas, cost budgets, and dead-letter handling.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66410,11 +66657,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSAWS-004",
@@ -66425,10 +66680,18 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-004"
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_cdn_rejects_raw_or_restricted_origins_and_requires_current_signed_authorization",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "CloudFront/CDN delivery shall use signed authorization and redacted immutable derivatives; raw assets are not public origins.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66454,11 +66717,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSAWS-005",
@@ -66469,10 +66740,21 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-005"
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "KMS/secrets access shall be least privilege and audited.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66498,11 +66780,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSAWS-006",
@@ -66513,10 +66803,18 @@
       "source_title": "AWS Reference Architecture",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSAWS-006"
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSAWS-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Provider-specific services shall have documented export/replacement paths.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66564,6 +66862,7 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
         "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
@@ -67740,6 +68039,7 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
         "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",

@@ -38,6 +38,7 @@ API_SERVICES = [
     "audit-service",
     "security-ops",
     "operations-intelligence",
+    "deployment-control",
     "representation-api",
     "provider-registry",
     "representation-publisher",
@@ -146,7 +147,7 @@ def api_deployment(name: str) -> dict[str, Any]:
                 },
                 "spec": {
                     "serviceAccountName": name,
-                    "automountServiceAccountToken": True,
+                    "automountServiceAccountToken": False,
                     "securityContext": pod_security_context(),
                     "terminationGracePeriodSeconds": 30,
                     "topologySpreadConstraints": [
@@ -349,7 +350,7 @@ def migration_job() -> dict[str, Any]:
                 "spec": {
                     "restartPolicy": "OnFailure",
                     "serviceAccountName": "sip-migrator",
-                    "automountServiceAccountToken": True,
+                    "automountServiceAccountToken": False,
                     "securityContext": pod_security_context(),
                     "containers": [
                         {
@@ -382,7 +383,7 @@ def network_policies() -> list[dict[str, Any]]:
         {
             "apiVersion": "networking.k8s.io/v1",
             "kind": "NetworkPolicy",
-            "metadata": {"name": "default-deny", "namespace": NAMESPACE},
+            "metadata": {"name": "default-deny-all", "namespace": NAMESPACE},
             "spec": {"podSelector": {}, "policyTypes": ["Ingress", "Egress"]},
         },
         {
@@ -865,6 +866,56 @@ def generate() -> None:
         },
     )
     dump(local / "stateful-dependencies.yaml", *local_dependencies())
+
+    edge = OVERLAYS / "edge"
+    edge.mkdir(parents=True, exist_ok=True)
+    dump(
+        edge / "kustomization.yaml",
+        {
+            "apiVersion": "kustomize.config.k8s.io/v1beta1",
+            "kind": "Kustomization",
+            "resources": ["../../base", "edge-egress.yaml"],
+            "patches": [{"path": "edge-config.patch.yaml"}],
+        },
+    )
+    dump(
+        edge / "edge-config.patch.yaml",
+        {
+            "apiVersion": "v1",
+            "kind": "ConfigMap",
+            "metadata": {"name": "sip-runtime-config", "namespace": NAMESPACE},
+            "data": {
+                "SIP_DEPLOYMENT_PROFILE": "edge",
+                "SIP_OBJECT_STORE_BACKEND": "local",
+                "SIP_REQUIRE_PRIVATE_ENDPOINTS": "true",
+                "SIP_PRODUCTION_AUTHORIZED": "false",
+            },
+        },
+    )
+    dump(
+        edge / "edge-egress.yaml",
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "NetworkPolicy",
+            "metadata": {"name": "edge-governed-egress", "namespace": NAMESPACE},
+            "spec": {
+                "podSelector": {
+                    "matchExpressions": [
+                        {
+                            "key": "app.kubernetes.io/component",
+                            "operator": "In",
+                            "values": ["api", "worker", "migration"],
+                        }
+                    ]
+                },
+                "policyTypes": ["Egress"],
+                "egress": [
+                    {"ports": [{"protocol": "UDP", "port": 53}, {"protocol": "TCP", "port": 53}]},
+                    {"ports": [{"protocol": "TCP", "port": 5432}, {"protocol": "TCP", "port": 6379}, {"protocol": "TCP", "port": 443}]},
+                ],
+            },
+        },
+    )
 
     hybrid = OVERLAYS / "hybrid"
     hybrid.mkdir(parents=True, exist_ok=True)

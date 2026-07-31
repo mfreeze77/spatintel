@@ -1,0 +1,104 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/deployment-admission.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admission_id": {
+      "title": "Admission Id",
+      "type": "string"
+    },
+    "admission_type": {
+      "enum": [
+        "asset_upload",
+        "worker_schedule",
+        "asset_transfer",
+        "autoscale",
+        "gpu_queue",
+        "production_promotion"
+      ],
+      "title": "Admission Type",
+      "type": "string"
+    },
+    "decided_at": {
+      "format": "date-time",
+      "title": "Decided At",
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "deny"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "deployment_profile_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deployment Profile Id"
+    },
+    "evidence_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Hash",
+      "type": "string"
+    },
+    "obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Obligations",
+      "type": "array"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "reason_code": {
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "region": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Region"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "admission_id",
+    "tenant_id",
+    "admission_type",
+    "decision",
+    "reason_code",
+    "obligations",
+    "evidence_hash",
+    "decided_at"
+  ],
+  "title": "DeploymentAdmissionContract",
+  "type": "object"
+}

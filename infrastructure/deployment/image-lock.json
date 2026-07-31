@@ -1,0 +1,20 @@
+{
+  "content_sha256": "29838409379dee609771680a27664345d6d31949899dbb6c10e6109e497915dc",
+  "images": {
+    "audit-service": "ghcr.io/spatial-intelligence-platform/audit-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "capture-service": "ghcr.io/spatial-intelligence-platform/capture-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "control-api": "ghcr.io/spatial-intelligence-platform/control-api:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "deployment-control": "ghcr.io/spatial-intelligence-platform/deployment-control:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "evidence-service": "ghcr.io/spatial-intelligence-platform/evidence-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "export-service": "ghcr.io/spatial-intelligence-platform/export-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "identity-policy": "ghcr.io/spatial-intelligence-platform/identity-policy:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "operations-intelligence": "ghcr.io/spatial-intelligence-platform/operations-intelligence:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "scene-service": "ghcr.io/spatial-intelligence-platform/scene-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "search-service": "ghcr.io/spatial-intelligence-platform/search-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "security-ops": "ghcr.io/spatial-intelligence-platform/security-ops:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "workflow-service": "ghcr.io/spatial-intelligence-platform/workflow-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "production_authorized": false,
+  "schema": "sip.image-lock/v1",
+  "state": "development_sentinels_unresolved"
+}

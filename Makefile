@@ -7,8 +7,8 @@ PYTHONPATH := $(CURDIR)/src:$(CURDIR)
 REPORT_DIR := build/reports
 
 .PHONY: help bootstrap doctor dev test test-all lint typecheck security license-check spec-check benchmark \
-        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever demo-security demo-operations export-demo restore-demo \
-        contracts infrastructure migrations swift-test web-test desktop-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
+        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever demo-security demo-operations demo-deployment export-demo restore-demo \
+        contracts infrastructure migrations swift-test web-test desktop-test web-acceptance fixtures deployment-profiles release release-mode traceability-evidence checkpoint-verify clean
 
 help:
 	@printf '%s\n' \
@@ -30,6 +30,7 @@ help:
 	  '  make demo-liveforever   Run retained synthetic LiveForever demonstration' \
 	  '  make demo-security      Run retained synthetic Progress 07 security/privacy demonstration' \
 	  '  make demo-operations    Run retained synthetic Progress 08 operations-intelligence demonstration' \
+	  '  make demo-deployment    Run retained synthetic Progress 09 deployment demonstration' \
 	  '  make export-demo        Run preservation export demonstration' \
 	  '  make restore-demo       Run clean preservation restore demonstration' \
 	  '  make release            Build a hashed release candidate (release gates remain fail-closed)' \
@@ -45,6 +46,8 @@ bootstrap:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_test_fixtures.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/schema_codegen/generate.py --root .
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_kubernetes.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_deployment_profiles.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_progress09_scope.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_third_party_lock.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_traceability_map.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/update_requirements.py
@@ -83,12 +86,19 @@ contracts:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/schema_codegen/generate.py --check --root .
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_worker_manifests.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_test_fixtures.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_deployment_profiles.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_progress09_scope.py --check
 
 fixtures:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_test_fixtures.py
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_test_fixtures.py --check
 
+deployment-profiles:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_deployment_profiles.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_deployment_profiles.py --check
+
 infrastructure:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/generate_deployment_profiles.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/validate_infrastructure.py
 
 migrations:
@@ -121,6 +131,8 @@ spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress08_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_progress09_scope.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress09_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
 
 traceability-evidence:
@@ -132,6 +144,8 @@ traceability-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress08_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/build_progress09_scope.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress09_traceability.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py
@@ -156,6 +170,9 @@ demo-security:
 
 demo-operations:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/demo_progress08_operations.py
+
+demo-deployment:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/demo_progress09_deployment.py
 
 export-demo:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py export

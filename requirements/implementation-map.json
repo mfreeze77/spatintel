@@ -297,27 +297,167 @@
         "docs/adr/index.json"
       ]
     },
-    "ARCDEP-002": {
+    "ARCDEP-001": {
       "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
         "infrastructure/compose/docker-compose.yml",
         "infrastructure/kubernetes/base",
         "infrastructure/terraform",
         "tools/validate_infrastructure.py"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCDEP-002": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/contract/test_infrastructure.py::test_infrastructure_structural_policy_gate",
         "tests/contract/test_infrastructure.py::test_release_gate_fails_closed_before_images_and_outputs_exist",
-        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned"
+        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "ARCDEP-003": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_residency_is_enforced_before_upload_and_worker_scheduling",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "ARCDEP-004": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCDEP-005": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "tools/validate_infrastructure.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "ARCEVT-001": {
@@ -671,6 +811,7 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability",
         "tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads",
@@ -3120,7 +3261,8 @@
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked",
         "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
         "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked",
-        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked"
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress09_checkpoint_controls.py::test_progress09_append_only_migration_is_integrity_locked"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
@@ -6315,6 +6457,178 @@
         "build/reports/tests/security.xml"
       ]
     },
+    "OPSAWS-001": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSAWS-002": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSAWS-003": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSAWS-004": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_cdn_rejects_raw_or_restricted_origins_and_requires_current_signed_authorization",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSAWS-005": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSAWS-006": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
     "OPSCICD-001": {
       "implementation_files": [
         "src/sip/security_ops.py",
@@ -6547,6 +6861,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
         "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
@@ -6729,6 +7044,166 @@
         "build/reports/test-matrix.json",
         "build/reports/tests/e2e.xml",
         "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSHYB-001": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control",
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSHYB-002": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_hybrid_transfer_rules_block_sensitive_early_or_unapproved_transfer",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSHYB-003": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed",
+        "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift",
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation",
+        "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSHYB-004": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback",
+        "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSHYB-005": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration",
+        "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics",
+        "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSHYB-006": {
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress09-deployment.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "OPSKEY-001": {
@@ -7612,6 +8087,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root",
         "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
         "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",

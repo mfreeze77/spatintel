@@ -1,0 +1,119 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/aws-environment-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_boundary": {
+      "title": "Account Boundary",
+      "type": "string"
+    },
+    "aws_environment_id": {
+      "title": "Aws Environment Id",
+      "type": "string"
+    },
+    "cdn": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Cdn",
+      "type": "object"
+    },
+    "database": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Database",
+      "type": "object"
+    },
+    "environment": {
+      "title": "Environment",
+      "type": "string"
+    },
+    "evidence_class": {
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "export_replacement_paths": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Export Replacement Paths",
+      "type": "object"
+    },
+    "gpu": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Gpu",
+      "type": "object"
+    },
+    "infrastructure_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Infrastructure Versions",
+      "type": "object"
+    },
+    "kms": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Kms",
+      "type": "object"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "network": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Network",
+      "type": "object"
+    },
+    "object_store": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Object Store",
+      "type": "object"
+    },
+    "production_approved": {
+      "default": false,
+      "title": "Production Approved",
+      "type": "boolean"
+    },
+    "queue": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Queue",
+      "type": "object"
+    },
+    "region": {
+      "title": "Region",
+      "type": "string"
+    },
+    "secrets": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Secrets",
+      "type": "object"
+    }
+  },
+  "required": [
+    "aws_environment_id",
+    "environment",
+    "account_boundary",
+    "region",
+    "infrastructure_versions",
+    "network",
+    "database",
+    "object_store",
+    "queue",
+    "kms",
+    "secrets",
+    "cdn",
+    "gpu",
+    "export_replacement_paths",
+    "evidence_class",
+    "manifest_hash"
+  ],
+  "title": "AwsEnvironmentManifestContract",
+  "type": "object"
+}

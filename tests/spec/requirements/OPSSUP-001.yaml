@@ -15,6 +15,7 @@ implementation_files:
 - src/sip/api.py
 - docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md
 automated_test_ids:
+- tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root
 - tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration
 - tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields
 - tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence

@@ -1,0 +1,85 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/residency-policy.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_modes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Modes",
+      "type": "array"
+    },
+    "allowed_regions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Regions",
+      "type": "array"
+    },
+    "asset_rules": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Asset Rules",
+      "type": "object"
+    },
+    "default_action": {
+      "const": "deny",
+      "default": "deny",
+      "title": "Default Action",
+      "type": "string"
+    },
+    "policy_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Hash",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "residency_policy_id": {
+      "title": "Residency Policy Id",
+      "type": "string"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "superseded",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "worker_rules": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Worker Rules",
+      "type": "object"
+    }
+  },
+  "required": [
+    "residency_policy_id",
+    "tenant_id",
+    "project_id",
+    "revision",
+    "allowed_regions",
+    "allowed_modes",
+    "asset_rules",
+    "worker_rules",
+    "policy_hash",
+    "state"
+  ],
+  "title": "ResidencyPolicyContract",
+  "type": "object"
+}

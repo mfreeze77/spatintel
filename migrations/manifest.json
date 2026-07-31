@@ -90,6 +90,11 @@
       "byte_count": 44262,
       "path": "migrations/versions/0018_progress08_observability_cost_support.py",
       "sha256": "2d4a79656918e8b0eab057e3d865f3512c0408b4cbe21b5cc0b15a2b3f85b12f"
+    },
+    {
+      "byte_count": 33248,
+      "path": "migrations/versions/0019_progress09_deployment_profiles.py",
+      "sha256": "22e3ceb60be68f02a0cfa68f832ab19ecd2c9e0c831b61f4b32bc4db5eabe8f4"
     }
   ],
   "schema_version": "1.1.0"

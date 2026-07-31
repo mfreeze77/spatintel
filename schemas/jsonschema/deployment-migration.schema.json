@@ -1,0 +1,77 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/deployment-migration.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "migration_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Migration Hash",
+      "type": "string"
+    },
+    "migration_id": {
+      "title": "Migration Id",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "source_profile_id": {
+      "title": "Source Profile Id",
+      "type": "string"
+    },
+    "source_snapshot_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Snapshot Hash",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "planned",
+        "completed",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "target_profile_id": {
+      "title": "Target Profile Id",
+      "type": "string"
+    },
+    "target_snapshot_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Snapshot Hash"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "validation": {
+      "additionalProperties": true,
+      "title": "Validation",
+      "type": "object"
+    }
+  },
+  "required": [
+    "migration_id",
+    "tenant_id",
+    "project_id",
+    "source_profile_id",
+    "target_profile_id",
+    "source_snapshot_hash",
+    "validation",
+    "state",
+    "migration_hash"
+  ],
+  "title": "DeploymentMigrationContract",
+  "type": "object"
+}

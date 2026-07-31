@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -23,7 +24,12 @@ def _prices() -> dict[str, dict[str, Any]]:
 
 
 def run_demo(root: Path) -> dict[str, Any]:
-    context = PlatformContext.create(temporary_settings(root / "runtime"))
+    # The demonstration owns only this dedicated runtime subtree. Reset it so
+    # retries and acceptance reruns are deterministic without deleting or
+    # mutating any shared platform runtime or customer data.
+    runtime_root = root / "runtime"
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    context = PlatformContext.create(temporary_settings(runtime_root))
     tenant = context.tenancy.create_tenant("Synthetic operations tenant", tenant_id="demo-ops-tenant", actor_id="demo")
     project = context.tenancy.create_project(
         tenant, "Synthetic operations project", vertical="platform", classification="internal",
@@ -125,6 +131,8 @@ def main() -> None:
     parser.add_argument("--root", type=Path, default=Path("runtime/demo-progress08"))
     parser.add_argument("--output", type=Path, default=Path("build/evidence/demo-progress08-operations.json"))
     args = parser.parse_args()
+    # ``run_demo`` resets only its dedicated runtime subtree, making the CLI
+    # safely repeatable without deleting unrelated caller state.
     report = run_demo(args.root)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")

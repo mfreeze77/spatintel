@@ -1,0 +1,72 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/offline-update.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Bundle Hash",
+      "type": "string"
+    },
+    "compatible_export_versions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Compatible Export Versions",
+      "type": "array"
+    },
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "from_release": {
+      "title": "From Release",
+      "type": "string"
+    },
+    "manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "rollback_bundle_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Rollback Bundle Hash",
+      "type": "string"
+    },
+    "signing_key_id": {
+      "title": "Signing Key Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "verified",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "to_release": {
+      "title": "To Release",
+      "type": "string"
+    },
+    "update_id": {
+      "title": "Update Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "update_id",
+    "deployment_profile_id",
+    "from_release",
+    "to_release",
+    "bundle_hash",
+    "manifest_hash",
+    "signing_key_id",
+    "rollback_bundle_hash",
+    "compatible_export_versions",
+    "state"
+  ],
+  "title": "OfflineUpdateContract",
+  "type": "object"
+}

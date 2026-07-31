@@ -1583,3 +1583,115 @@ class PreservationManifestContract(ContractModel):
     semantic_identity: dict[str, Any]
     files: list[HashRef]
     root_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class DeploymentProfileContract(ContractModel):
+    deployment_profile_id: str
+    name: str
+    revision: str
+    mode: Literal["local_only", "edge", "hybrid", "single_tenant_cloud", "multi_tenant_cloud", "aws_reference"]
+    canonical_contracts: dict[str, Any] = Field(min_length=4)
+    canonical_contracts_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    features: dict[str, Any] = Field(min_length=1)
+    service_images: dict[str, str] = Field(min_length=1)
+    infrastructure_versions: dict[str, str] = Field(min_length=1)
+    secret_references: dict[str, str] = Field(min_length=1)
+    network_policy: dict[str, Any] = Field(min_length=1)
+    resource_limits: dict[str, Any] = Field(min_length=1)
+    supported_regions: list[str] = Field(min_length=1)
+    degraded_modes: dict[str, Any] = Field(min_length=1)
+    provider_replacements: dict[str, Any] = Field(min_length=1)
+    production_approved: bool = False
+    state: Literal["active", "superseded", "revoked"]
+    profile_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class ResidencyPolicyContract(ContractModel):
+    residency_policy_id: str
+    tenant_id: str
+    project_id: str
+    revision: str
+    allowed_regions: list[str] = Field(min_length=1)
+    allowed_modes: list[str] = Field(min_length=1)
+    asset_rules: dict[str, Any] = Field(min_length=1)
+    worker_rules: dict[str, Any] = Field(min_length=1)
+    default_action: Literal["deny"] = "deny"
+    policy_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    state: Literal["active", "superseded", "revoked"]
+
+
+class EdgeNodeContract(ContractModel):
+    edge_node_id: str
+    tenant_id: str
+    project_id: str | None = None
+    deployment_profile_id: str
+    node_identity: str
+    identity_public_key_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    software_manifest_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    signing_key_id: str
+    disk_encryption: dict[str, Any] = Field(min_length=1)
+    region: str
+    capabilities: dict[str, Any]
+    health: dict[str, Any]
+    state: Literal["enrolled", "healthy", "degraded", "offline", "quarantined", "revoked"]
+    enrollment_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class OfflineUpdateContract(ContractModel):
+    update_id: str
+    deployment_profile_id: str
+    from_release: str
+    to_release: str
+    bundle_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    manifest_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    signing_key_id: str
+    rollback_bundle_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    compatible_export_versions: list[str] = Field(min_length=1)
+    state: Literal["verified", "revoked"]
+
+
+class DeploymentMigrationContract(ContractModel):
+    migration_id: str
+    tenant_id: str
+    project_id: str
+    source_profile_id: str
+    target_profile_id: str
+    source_snapshot_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    target_snapshot_hash: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    validation: dict[str, Any]
+    state: Literal["planned", "completed", "failed"]
+    migration_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class AwsEnvironmentManifestContract(ContractModel):
+    aws_environment_id: str
+    environment: str
+    account_boundary: str
+    region: str
+    infrastructure_versions: dict[str, str] = Field(min_length=1)
+    network: dict[str, Any] = Field(min_length=1)
+    database: dict[str, Any] = Field(min_length=1)
+    object_store: dict[str, Any] = Field(min_length=1)
+    queue: dict[str, Any] = Field(min_length=1)
+    kms: dict[str, Any] = Field(min_length=1)
+    secrets: dict[str, Any] = Field(min_length=1)
+    cdn: dict[str, Any] = Field(min_length=1)
+    gpu: dict[str, Any] = Field(min_length=1)
+    export_replacement_paths: dict[str, Any] = Field(min_length=1)
+    evidence_class: str
+    production_approved: bool = False
+    manifest_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class DeploymentAdmissionContract(ContractModel):
+    admission_id: str
+    tenant_id: str
+    project_id: str | None = None
+    admission_type: Literal["asset_upload", "worker_schedule", "asset_transfer", "autoscale", "gpu_queue", "production_promotion"]
+    deployment_profile_id: str | None = None
+    region: str | None = None
+    decision: Literal["allow", "deny"]
+    reason_code: str
+    obligations: list[str]
+    evidence_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    decided_at: datetime

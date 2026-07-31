@@ -1,0 +1,103 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/edge-node.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capabilities": {
+      "additionalProperties": true,
+      "title": "Capabilities",
+      "type": "object"
+    },
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "disk_encryption": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Disk Encryption",
+      "type": "object"
+    },
+    "edge_node_id": {
+      "title": "Edge Node Id",
+      "type": "string"
+    },
+    "enrollment_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Enrollment Hash",
+      "type": "string"
+    },
+    "health": {
+      "additionalProperties": true,
+      "title": "Health",
+      "type": "object"
+    },
+    "identity_public_key_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Identity Public Key Hash",
+      "type": "string"
+    },
+    "node_identity": {
+      "title": "Node Identity",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "region": {
+      "title": "Region",
+      "type": "string"
+    },
+    "signing_key_id": {
+      "title": "Signing Key Id",
+      "type": "string"
+    },
+    "software_manifest_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Software Manifest Hash",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "enrolled",
+        "healthy",
+        "degraded",
+        "offline",
+        "quarantined",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edge_node_id",
+    "tenant_id",
+    "deployment_profile_id",
+    "node_identity",
+    "identity_public_key_hash",
+    "software_manifest_hash",
+    "signing_key_id",
+    "disk_encryption",
+    "region",
+    "capabilities",
+    "health",
+    "state",
+    "enrollment_hash"
+  ],
+  "title": "EdgeNodeContract",
+  "type": "object"
+}

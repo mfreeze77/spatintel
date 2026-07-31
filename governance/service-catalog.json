@@ -676,6 +676,226 @@
       }
     },
     {
+      "blast_radius": "tenant/project scoped requests handled by deployment-control; no cross-tenant fail-open behavior",
+      "data_stores": [
+        "postgresql",
+        "source-control-manifests",
+        "object-store"
+      ],
+      "degraded_behavior": "fail closed for authorization/publication; expose bounded read-only metadata where explicitly safe",
+      "dependency_controls": {
+        "circuit_breaker": "open after bounded consecutive failures; half-open probe",
+        "connect_timeout_seconds": 3,
+        "cross_region_failover": "deny unless pre-approved",
+        "request_timeout_seconds": 15
+      },
+      "events_consumed": [],
+      "events_produced": [
+        "deployment.admission.decided",
+        "deployment.autoscaling.decided",
+        "deployment.autoscaling.registered",
+        "deployment.aws.registered",
+        "deployment.cdn.derivative_registered",
+        "deployment.drift.detected",
+        "deployment.edge.enrolled",
+        "deployment.edge.health_reported",
+        "deployment.edge.revoked",
+        "deployment.migration.completed",
+        "deployment.migration.created",
+        "deployment.profile.registered",
+        "deployment.project.assigned",
+        "deployment.provider.replacement_registered",
+        "deployment.residency.registered",
+        "deployment.transfer.registered",
+        "deployment.update.applied",
+        "deployment.update.registered",
+        "deployment.update.rolled_back",
+        "deployment.upgrade.rehearsed",
+        "deployment.worker.shutdown_verified"
+      ],
+      "inbound_apis": [
+        {
+          "method": "GET",
+          "operation_id": "health_live",
+          "path": "/health/live"
+        },
+        {
+          "method": "GET",
+          "operation_id": "health_ready",
+          "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_aws_deployment_environment",
+          "path": "/v1/deployment/aws-environments"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_graceful_shutdown_evidence",
+          "path": "/v1/deployment/graceful-shutdown-evidence"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_local_upgrade_rehearsal",
+          "path": "/v1/deployment/local-upgrade-rehearsals"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_offline_update",
+          "path": "/v1/deployment/offline-updates"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_profile",
+          "path": "/v1/deployment/profiles"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_deployment_profile",
+          "path": "/v1/deployment/profiles/{profile_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "check_deployment_configuration_drift",
+          "path": "/v1/deployment/profiles/{profile_id}/drift-checks"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_deployment_feature_availability",
+          "path": "/v1/deployment/profiles/{profile_id}/features/{feature}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_deployment_production_admission",
+          "path": "/v1/deployment/profiles/{profile_id}/production-admission"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_provider_replacement",
+          "path": "/v1/deployment/provider-replacements"
+        },
+        {
+          "method": "POST",
+          "operation_id": "authorize_deployment_admission",
+          "path": "/v1/projects/{project_id}/deployment/admissions"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_cdn_derivative",
+          "path": "/v1/projects/{project_id}/deployment/cdn-derivatives"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_project_deployment_migration",
+          "path": "/v1/projects/{project_id}/deployment/migrations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "complete_project_deployment_migration",
+          "path": "/v1/projects/{project_id}/deployment/migrations/{migration_id}/complete"
+        },
+        {
+          "method": "POST",
+          "operation_id": "assign_project_deployment_profile",
+          "path": "/v1/projects/{project_id}/deployment/profile"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_residency_policy",
+          "path": "/v1/projects/{project_id}/deployment/residency-policies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_transfer_policy",
+          "path": "/v1/projects/{project_id}/deployment/transfer-policies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_deployment_autoscaling_policy",
+          "path": "/v1/tenants/{tenant_id}/deployment/autoscaling-policies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "admit_deployment_autoscaling",
+          "path": "/v1/tenants/{tenant_id}/deployment/autoscaling-policies/{autoscaling_policy_id}/admit"
+        },
+        {
+          "method": "POST",
+          "operation_id": "enroll_deployment_edge_node",
+          "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes"
+        },
+        {
+          "method": "POST",
+          "operation_id": "report_deployment_edge_health",
+          "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/health"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_deployment_edge_node",
+          "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/revoke"
+        },
+        {
+          "method": "POST",
+          "operation_id": "apply_deployment_offline_update",
+          "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/apply"
+        },
+        {
+          "method": "POST",
+          "operation_id": "rollback_deployment_offline_update",
+          "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/rollback"
+        }
+      ],
+      "kind": "service",
+      "name": "deployment-control",
+      "outbound_dependencies": [
+        "audit-service",
+        "export-service",
+        "identity-policy",
+        "operations-intelligence",
+        "security-ops",
+        "workflow-service"
+      ],
+      "owned_tables": [
+        "autoscaling_admissions",
+        "autoscaling_policies",
+        "aws_environment_manifests",
+        "cdn_derivative_deliveries",
+        "deployment_admissions",
+        "deployment_drift_reports",
+        "deployment_profiles",
+        "edge_nodes",
+        "edge_update_applications",
+        "graceful_shutdown_evidence",
+        "hybrid_transfer_policies",
+        "local_upgrade_rehearsals",
+        "offline_update_packages",
+        "project_deployment_bindings",
+        "project_deployment_migrations",
+        "provider_replacement_paths",
+        "residency_policies"
+      ],
+      "owner": "deployment-reliability",
+      "recovery_strategy": "restart from durable database/outbox state; verify audit and object hashes before readiness",
+      "repository_path": "services/deployment-control",
+      "retry_safety": "idempotency key or immutable command identifier required for mutations",
+      "rpo": "0 for committed transactional state; object writes verified before publication",
+      "rto": "15 minutes local/hybrid target; profile-specific production objective requires deployment validation",
+      "secret_references": [
+        "sip-runtime-secrets/SIP_DATABASE_URL",
+        "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
+      ],
+      "shared_kernel_exceptions": [],
+      "shutdown": {
+        "drain_seconds": 30,
+        "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
+      },
+      "slo": {
+        "availability_target": "99.9%",
+        "error_budget_window_days": 30,
+        "latency_budget": "p95 <= 1000ms for bounded control operations"
+      }
+    },
+    {
       "blast_radius": "tenant/project scoped requests handled by evidence-service; no cross-tenant fail-open behavior",
       "data_stores": [
         "postgresql",

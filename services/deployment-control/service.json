@@ -1,0 +1,158 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_aws_deployment_environment",
+      "path": "/v1/deployment/aws-environments"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_graceful_shutdown_evidence",
+      "path": "/v1/deployment/graceful-shutdown-evidence"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_local_upgrade_rehearsal",
+      "path": "/v1/deployment/local-upgrade-rehearsals"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_offline_update",
+      "path": "/v1/deployment/offline-updates"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_profile",
+      "path": "/v1/deployment/profiles"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_deployment_profile",
+      "path": "/v1/deployment/profiles/{profile_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "check_deployment_configuration_drift",
+      "path": "/v1/deployment/profiles/{profile_id}/drift-checks"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_deployment_feature_availability",
+      "path": "/v1/deployment/profiles/{profile_id}/features/{feature}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "evaluate_deployment_production_admission",
+      "path": "/v1/deployment/profiles/{profile_id}/production-admission"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_provider_replacement",
+      "path": "/v1/deployment/provider-replacements"
+    },
+    {
+      "method": "POST",
+      "operation_id": "authorize_deployment_admission",
+      "path": "/v1/projects/{project_id}/deployment/admissions"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_cdn_derivative",
+      "path": "/v1/projects/{project_id}/deployment/cdn-derivatives"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_project_deployment_migration",
+      "path": "/v1/projects/{project_id}/deployment/migrations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "complete_project_deployment_migration",
+      "path": "/v1/projects/{project_id}/deployment/migrations/{migration_id}/complete"
+    },
+    {
+      "method": "POST",
+      "operation_id": "assign_project_deployment_profile",
+      "path": "/v1/projects/{project_id}/deployment/profile"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_residency_policy",
+      "path": "/v1/projects/{project_id}/deployment/residency-policies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_transfer_policy",
+      "path": "/v1/projects/{project_id}/deployment/transfer-policies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_deployment_autoscaling_policy",
+      "path": "/v1/tenants/{tenant_id}/deployment/autoscaling-policies"
+    },
+    {
+      "method": "POST",
+      "operation_id": "admit_deployment_autoscaling",
+      "path": "/v1/tenants/{tenant_id}/deployment/autoscaling-policies/{autoscaling_policy_id}/admit"
+    },
+    {
+      "method": "POST",
+      "operation_id": "enroll_deployment_edge_node",
+      "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes"
+    },
+    {
+      "method": "POST",
+      "operation_id": "report_deployment_edge_health",
+      "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/health"
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_deployment_edge_node",
+      "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/revoke"
+    },
+    {
+      "method": "POST",
+      "operation_id": "apply_deployment_offline_update",
+      "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/apply"
+    },
+    {
+      "method": "POST",
+      "operation_id": "rollback_deployment_offline_update",
+      "path": "/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/rollback"
+    }
+  ],
+  "required_environment": {
+    "SIP_DATABASE_URL": "secret_reference",
+    "SIP_PRODUCTION_AUTHORIZED": "false",
+    "SIP_SERVICE_NAME": "deployment-control",
+    "SIP_SIGNING_KEY": "secret_reference"
+  },
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "network_egress_default_deny": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true,
+    "short_lived_workload_identity_required": true
+  },
+  "service_name": "deployment-control"
+}

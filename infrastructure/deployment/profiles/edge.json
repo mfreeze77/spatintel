@@ -1,0 +1,98 @@
+{
+  "cloud_dependencies": [],
+  "edge": {
+    "disk_encryption_attestation": true,
+    "health_and_revocation": true,
+    "short_lived_workload_identity": true,
+    "signed_offline_updates": true,
+    "unique_identity": true
+  },
+  "evidence_class": "synthetic_structural",
+  "features": {
+    "capture": {
+      "administrator_notice": "Capture remains local.",
+      "enabled": true,
+      "requires_cloud_connectivity": false,
+      "when_unavailable": "continue_local"
+    },
+    "gpu_reconstruction": {
+      "administrator_notice": "Cloud GPU execution is not available without residency and deployment admission.",
+      "enabled": false,
+      "requires_cloud_connectivity": false,
+      "when_unavailable": "queue_or_cpu_reference"
+    },
+    "semantic_viewer": {
+      "administrator_notice": "Viewer degrades without changing authority.",
+      "enabled": true,
+      "requires_cloud_connectivity": false,
+      "when_unavailable": "static_semantic_fallback"
+    }
+  },
+  "image_digest_state": "unresolved-development-sentinel",
+  "infrastructure_versions": {
+    "docker_compose": "2.39.1",
+    "kubernetes": "1.34.0",
+    "object_store_api": "s3-compatible-v1",
+    "postgresql": "17.5",
+    "terraform": "1.13.0",
+    "valkey": "8.1.3"
+  },
+  "mode": "edge",
+  "network_policy": {
+    "allowed_egress": [
+      "dns",
+      "postgresql",
+      "valkey",
+      "object-store"
+    ],
+    "default_deny_egress": true,
+    "default_deny_ingress": true
+  },
+  "production_authorized": false,
+  "profile_id": "edge",
+  "provider_replacement_paths": {
+    "cdn": "docs/operator/provider-replacement/cdn.md",
+    "database": "docs/operator/provider-replacement/database.md",
+    "gpu": "docs/operator/provider-replacement/gpu.md",
+    "kms": "docs/operator/provider-replacement/kms.md",
+    "object_store": "docs/operator/provider-replacement/object-store.md",
+    "queue": "docs/operator/provider-replacement/queue.md",
+    "secrets": "docs/operator/provider-replacement/secrets.md",
+    "workflow": "docs/operator/provider-replacement/workflow.md"
+  },
+  "resource_limits": {
+    "control_api": {
+      "cpu": 2.0,
+      "memory_mb": 2048
+    },
+    "worker_reference": {
+      "cpu": 4.0,
+      "memory_mb": 8192
+    }
+  },
+  "revision": "1.0.0",
+  "schema": "sip.deployment-profile-fixture/v1",
+  "secret_references": {
+    "database": "secret://sip/database",
+    "object_store": "secret://sip/object-store",
+    "signing": "vault://sip/signing",
+    "workload_identity": "secret://sip/workload-identity"
+  },
+  "service_images": {
+    "audit-service": "ghcr.io/spatial-intelligence-platform/audit-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "capture-service": "ghcr.io/spatial-intelligence-platform/capture-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "control-api": "ghcr.io/spatial-intelligence-platform/control-api:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "deployment-control": "ghcr.io/spatial-intelligence-platform/deployment-control:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "evidence-service": "ghcr.io/spatial-intelligence-platform/evidence-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "export-service": "ghcr.io/spatial-intelligence-platform/export-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "identity-policy": "ghcr.io/spatial-intelligence-platform/identity-policy:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "operations-intelligence": "ghcr.io/spatial-intelligence-platform/operations-intelligence:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "scene-service": "ghcr.io/spatial-intelligence-platform/scene-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "search-service": "ghcr.io/spatial-intelligence-platform/search-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "security-ops": "ghcr.io/spatial-intelligence-platform/security-ops:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "workflow-service": "ghcr.io/spatial-intelligence-platform/workflow-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "supported_regions": [
+    "local-edge"
+  ]
+}

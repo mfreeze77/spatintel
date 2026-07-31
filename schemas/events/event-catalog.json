@@ -320,6 +320,153 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "deployment_admission",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.admission.decided",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "autoscaling_admission",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.autoscaling.decided",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "autoscaling_policy",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.autoscaling.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "aws_environment",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.aws.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "cdn_derivative",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.cdn.derivative_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deployment_drift",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.drift.detected",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "edge_node",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.edge.enrolled",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "edge_node",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.edge.health_reported",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "edge_node",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.edge.revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deployment_migration",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.migration.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deployment_migration",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.migration.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deployment_profile",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.profile.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "project_deployment",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.project.assigned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "provider_replacement",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.provider.replacement_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "residency_policy",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.residency.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "transfer_policy",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.transfer.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "edge_node",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.update.applied",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "offline_update",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.update.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "edge_node",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.update.rolled_back",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "local_upgrade_rehearsal",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.upgrade.rehearsed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "graceful_shutdown",
+      "classification": "inherits_project",
+      "owner": "deployment-control",
+      "type": "deployment.worker.shutdown_verified",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "derivation",
       "classification": "inherits_project",
       "owner": "evidence-service",

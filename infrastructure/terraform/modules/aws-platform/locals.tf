@@ -20,6 +20,7 @@ locals {
     "audit-service",
     "security-ops",
     "operations-intelligence",
+    "deployment-control",
     "representation-api",
     "provider-registry",
     "representation-publisher",

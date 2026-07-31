@@ -2598,6 +2598,341 @@ class IncidentActionRow(Base):
     occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
 
 
+class DeploymentProfileRow(Base):
+    __tablename__ = "deployment_profiles"
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    name: Mapped[str] = mapped_column(String(128), index=True)
+    revision: Mapped[str] = mapped_column(String(64))
+    mode: Mapped[str] = mapped_column(String(32), index=True)
+    canonical_contracts_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    canonical_contracts_hash: Mapped[str] = mapped_column(String(64), index=True)
+    features_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    service_images_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    infrastructure_versions_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    secret_references_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    network_policy_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    resource_limits_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    supported_regions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    degraded_modes_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    provider_replacements_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    production_approved: Mapped[bool] = mapped_column(Boolean, default=False)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    profile_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    supersedes_profile_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("name", "revision", name="uq_deployment_profile_revision"),)
+
+
+class ProjectDeploymentBindingRow(Base):
+    __tablename__ = "project_deployment_bindings"
+    binding_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(ForeignKey("deployment_profiles.deployment_profile_id", ondelete="RESTRICT"), index=True)
+    residency_policy_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    transfer_policy_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    revision: Mapped[str] = mapped_column(String(64))
+    feature_overrides_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    cloud_dependencies_acknowledged: Mapped[bool] = mapped_column(Boolean, default=False)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    binding_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    superseded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "revision", name="uq_project_deployment_binding_revision"),)
+
+
+class ResidencyPolicyRow(Base):
+    __tablename__ = "residency_policies"
+    residency_policy_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    revision: Mapped[str] = mapped_column(String(64))
+    home_region: Mapped[str] = mapped_column(String(64))
+    allowed_regions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    allowed_modes_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    asset_rules_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    worker_rules_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    provider_rules_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    default_action: Mapped[str] = mapped_column(String(16), default="deny")
+    policy_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "revision", name="uq_residency_policy_revision"),)
+
+
+class HybridTransferPolicyRow(Base):
+    __tablename__ = "hybrid_transfer_policies"
+    transfer_policy_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    revision: Mapped[str] = mapped_column(String(64))
+    source_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    destination_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    rules_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    purpose: Mapped[str] = mapped_column(String(128))
+    policy_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "revision", name="uq_transfer_policy_revision"),)
+
+
+class EdgeNodeRow(Base):
+    __tablename__ = "edge_nodes"
+    edge_node_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    node_identity: Mapped[str] = mapped_column(String(128), unique=True)
+    identity_public_key_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    workload_identity_grant_id: Mapped[str] = mapped_column(String(64), unique=True)
+    software_release: Mapped[str] = mapped_column(String(128))
+    software_manifest_hash: Mapped[str] = mapped_column(String(64), index=True)
+    software_signature: Mapped[str] = mapped_column(Text)
+    signing_key_id: Mapped[str] = mapped_column(String(128))
+    disk_encryption_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    region: Mapped[str] = mapped_column(String(64), index=True)
+    capabilities_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    health_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), default="enrolled", index=True)
+    enrollment_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    enrolled_by: Mapped[str] = mapped_column(String(128))
+    enrolled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_by: Mapped[str | None] = mapped_column(String(128))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revocation_reason: Mapped[str | None] = mapped_column(String(256))
+
+
+class OfflineUpdatePackageRow(Base):
+    __tablename__ = "offline_update_packages"
+    update_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    from_release: Mapped[str] = mapped_column(String(128))
+    to_release: Mapped[str] = mapped_column(String(128))
+    bundle_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    manifest_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    signature: Mapped[str] = mapped_column(Text)
+    signing_key_id: Mapped[str] = mapped_column(String(128))
+    rollback_bundle_hash: Mapped[str] = mapped_column(String(64))
+    rollback_signature: Mapped[str] = mapped_column(Text)
+    compatible_export_versions_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    state: Mapped[str] = mapped_column(String(32), default="verified", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class EdgeUpdateApplicationRow(Base):
+    __tablename__ = "edge_update_applications"
+    application_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    edge_node_id: Mapped[str] = mapped_column(ForeignKey("edge_nodes.edge_node_id", ondelete="RESTRICT"), index=True)
+    update_id: Mapped[str] = mapped_column(ForeignKey("offline_update_packages.update_id", ondelete="RESTRICT"), index=True)
+    previous_release: Mapped[str] = mapped_column(String(128))
+    target_release: Mapped[str] = mapped_column(String(128))
+    state: Mapped[str] = mapped_column(String(32), default="applied", index=True)
+    application_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    applied_by: Mapped[str] = mapped_column(String(128))
+    applied_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    rolled_back_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    rollback_reason: Mapped[str | None] = mapped_column(String(256))
+    __table_args__ = (UniqueConstraint("edge_node_id", "update_id", name="uq_edge_update_application"),)
+
+
+class ProjectDeploymentMigrationRow(Base):
+    __tablename__ = "project_deployment_migrations"
+    migration_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    source_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    target_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    source_snapshot_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    source_snapshot_hash: Mapped[str] = mapped_column(String(64))
+    target_snapshot_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    target_snapshot_hash: Mapped[str | None] = mapped_column(String(64))
+    validation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), default="planned", index=True)
+    migration_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_project_deployment_migration_idempotency"),)
+
+
+class LocalUpgradeRehearsalRow(Base):
+    __tablename__ = "local_upgrade_rehearsals"
+    rehearsal_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    from_release: Mapped[str] = mapped_column(String(128))
+    to_release: Mapped[str] = mapped_column(String(128))
+    from_schema: Mapped[str] = mapped_column(String(128))
+    to_schema: Mapped[str] = mapped_column(String(128))
+    pre_export_root: Mapped[str] = mapped_column(String(64))
+    post_upgrade_export_root: Mapped[str] = mapped_column(String(64))
+    rollback_export_root: Mapped[str] = mapped_column(String(64))
+    object_store_root: Mapped[str] = mapped_column(String(64))
+    queue_root: Mapped[str] = mapped_column(String(64))
+    job_recovery_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    rehearsal_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="verified", index=True)
+    actor_id: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class AutoscalingPolicyRow(Base):
+    __tablename__ = "autoscaling_policies"
+    autoscaling_policy_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    queue_class: Mapped[str] = mapped_column(String(64), index=True)
+    revision: Mapped[str] = mapped_column(String(64))
+    min_replicas: Mapped[int] = mapped_column(Integer)
+    max_replicas: Mapped[int] = mapped_column(Integer)
+    tenant_concurrency_limit: Mapped[int] = mapped_column(Integer)
+    profile_quotas_json: Mapped[dict[str, int]] = mapped_column(JSON, default=dict)
+    global_budget_limit: Mapped[float] = mapped_column(Float)
+    currency: Mapped[str] = mapped_column(String(3))
+    dead_letter_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    restricted_egress: Mapped[bool] = mapped_column(Boolean, default=True)
+    policy_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("tenant_id", "project_id", "queue_class", "revision", name="uq_autoscaling_policy_revision"),)
+
+
+class AutoscalingAdmissionRow(Base):
+    __tablename__ = "autoscaling_admissions"
+    admission_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    autoscaling_policy_id: Mapped[str] = mapped_column(String(64), index=True)
+    queue_class: Mapped[str] = mapped_column(String(64), index=True)
+    capability_profile: Mapped[str] = mapped_column(String(128), index=True)
+    current_replicas: Mapped[int] = mapped_column(Integer)
+    requested_replicas: Mapped[int] = mapped_column(Integer)
+    admitted_replicas: Mapped[int] = mapped_column(Integer)
+    active_jobs: Mapped[int] = mapped_column(Integer)
+    estimated_incremental_cost: Mapped[float] = mapped_column(Float)
+    global_cost_after: Mapped[float] = mapped_column(Float)
+    decision: Mapped[str] = mapped_column(String(16), index=True)
+    reason_code: Mapped[str] = mapped_column(String(128), index=True)
+    decision_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    requested_by: Mapped[str] = mapped_column(String(128))
+    decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class AwsEnvironmentManifestRow(Base):
+    __tablename__ = "aws_environment_manifests"
+    aws_environment_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    environment: Mapped[str] = mapped_column(String(32), index=True)
+    account_boundary: Mapped[str] = mapped_column(String(128), index=True)
+    region: Mapped[str] = mapped_column(String(64), index=True)
+    infrastructure_versions_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    network_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    database_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    object_store_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    queue_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    kms_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    secrets_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    cdn_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    gpu_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    export_replacement_paths_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_class: Mapped[str] = mapped_column(String(64), default="synthetic_structural")
+    production_approved: Mapped[bool] = mapped_column(Boolean, default=False)
+    manifest_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("environment", "account_boundary", "region", name="uq_aws_environment_boundary"),)
+
+
+class CdnDerivativeDeliveryRow(Base):
+    __tablename__ = "cdn_derivative_deliveries"
+    delivery_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    asset_id: Mapped[str] = mapped_column(String(64), index=True)
+    immutable_sha256: Mapped[str] = mapped_column(String(64))
+    redaction_profile: Mapped[str] = mapped_column(String(128))
+    redaction_hash: Mapped[str] = mapped_column(String(64))
+    signed_authorization_required: Mapped[bool] = mapped_column(Boolean, default=True)
+    raw_origin: Mapped[bool] = mapped_column(Boolean, default=False)
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    delivery_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class ProviderReplacementPathRow(Base):
+    __tablename__ = "provider_replacement_paths"
+    replacement_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    provider_name: Mapped[str] = mapped_column(String(128), index=True)
+    service_class: Mapped[str] = mapped_column(String(128), index=True)
+    export_format: Mapped[str] = mapped_column(String(128))
+    adapter_contract: Mapped[str] = mapped_column(String(256))
+    replacement_steps_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    data_exit_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    limitations_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    replacement_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="approved", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (UniqueConstraint("provider_name", "service_class", name="uq_provider_replacement_path"),)
+
+
+class DeploymentAdmissionRow(Base):
+    __tablename__ = "deployment_admissions"
+    admission_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    admission_type: Mapped[str] = mapped_column(String(64), index=True)
+    deployment_profile_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    region: Mapped[str | None] = mapped_column(String(64), index=True)
+    request_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    decision: Mapped[str] = mapped_column(String(16), index=True)
+    reason_code: Mapped[str] = mapped_column(String(128), index=True)
+    obligations_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    evidence_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    decided_by: Mapped[str] = mapped_column(String(128))
+    decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class DeploymentDriftReportRow(Base):
+    __tablename__ = "deployment_drift_reports"
+    drift_report_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    expected_hash: Mapped[str] = mapped_column(String(64))
+    observed_hash: Mapped[str] = mapped_column(String(64))
+    findings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    report_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    observed_by: Mapped[str] = mapped_column(String(128))
+    observed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class GracefulShutdownEvidenceRow(Base):
+    __tablename__ = "graceful_shutdown_evidence"
+    shutdown_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    worker_id: Mapped[str] = mapped_column(String(128), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    operation_ids_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    checkpoint_hashes_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    queue_before_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    queue_after_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    recovery_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    shutdown_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="verified", index=True)
+    recorded_by: Mapped[str] = mapped_column(String(128))
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
 class Database:
     def __init__(self, url: str, *, create: bool = False) -> None:
         self.url = url

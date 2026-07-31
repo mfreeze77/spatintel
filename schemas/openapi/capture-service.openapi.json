@@ -4,6 +4,11 @@
       "AssetIngest": {
         "additionalProperties": false,
         "properties": {
+          "asset_class": {
+            "default": "source",
+            "title": "Asset Class",
+            "type": "string"
+          },
           "authority_class": {
             "$ref": "#/components/schemas/AuthorityClass",
             "default": "evidence"
@@ -15,6 +20,17 @@
           "content_base64": {
             "title": "Content Base64",
             "type": "string"
+          },
+          "deployment_region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deployment Region"
           },
           "media_type": {
             "title": "Media Type",
@@ -89,6 +105,22 @@
       "MultipartBegin": {
         "additionalProperties": false,
         "properties": {
+          "asset_class": {
+            "default": "source",
+            "title": "Asset Class",
+            "type": "string"
+          },
+          "deployment_region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deployment Region"
+          },
           "expected_bytes": {
             "minimum": 0.0,
             "title": "Expected Bytes",

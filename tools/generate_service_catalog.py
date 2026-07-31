@@ -50,6 +50,23 @@ SERVICE_METADATA: dict[str, dict[str, Any]] = {
             "evidence-service", "notification-service",
         ],
     },
+    "deployment-control": {
+        "owner": "deployment-reliability",
+        "stores": ["postgresql", "source-control-manifests", "object-store"],
+        "tables": [
+            "deployment_profiles", "project_deployment_bindings", "residency_policies",
+            "hybrid_transfer_policies", "edge_nodes", "offline_update_packages",
+            "edge_update_applications", "project_deployment_migrations",
+            "local_upgrade_rehearsals", "autoscaling_policies", "autoscaling_admissions",
+            "aws_environment_manifests", "cdn_derivative_deliveries",
+            "provider_replacement_paths", "deployment_admissions",
+            "deployment_drift_reports", "graceful_shutdown_evidence",
+        ],
+        "dependencies": [
+            "identity-policy", "security-ops", "operations-intelligence",
+            "workflow-service", "audit-service", "export-service",
+        ],
+    },
     "representation-api": {"owner": "hybrid-representations", "stores": ["postgresql", "object-store"], "tables": ["representations", "representation_bindings", "provider_manifests"], "dependencies": ["identity-policy", "workflow-service", "provider-registry"]},
     "provider-registry": {"owner": "model-provider-governance", "stores": ["postgresql", "source-control-manifests"], "tables": ["provider_manifests", "model_manifests"], "dependencies": ["audit-service"]},
     "representation-publisher": {"owner": "scene-core", "stores": ["postgresql"], "tables": [], "dependencies": ["identity-policy", "representation-api", "scene-service", "audit-service"]},

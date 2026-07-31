@@ -1,0 +1,137 @@
+{
+  "account_boundary": "separate-environment-account",
+  "cdn": {
+    "immutable_derivatives": true,
+    "raw_asset_origin": false,
+    "redacted_derivatives_only": true,
+    "signed_authorization": true
+  },
+  "database": {
+    "approved_identity_only": true,
+    "backup_enabled": true,
+    "encrypted": true,
+    "private": true,
+    "public_access": false
+  },
+  "evidence_class": "synthetic_structural",
+  "features": {
+    "capture": {
+      "administrator_notice": "Capture remains local.",
+      "enabled": true,
+      "requires_cloud_connectivity": false,
+      "when_unavailable": "continue_local"
+    },
+    "gpu_reconstruction": {
+      "administrator_notice": "Cloud GPU execution is not available without residency and deployment admission.",
+      "enabled": true,
+      "requires_cloud_connectivity": true,
+      "when_unavailable": "queue_or_cpu_reference"
+    },
+    "semantic_viewer": {
+      "administrator_notice": "Viewer degrades without changing authority.",
+      "enabled": true,
+      "requires_cloud_connectivity": false,
+      "when_unavailable": "static_semantic_fallback"
+    }
+  },
+  "gpu": {
+    "isolated_subnets": true,
+    "prebaked_approved_models": true,
+    "restricted_egress": true
+  },
+  "image_digest_state": "unresolved-development-sentinel",
+  "infrastructure_versions": {
+    "docker_compose": "2.39.1",
+    "kubernetes": "1.34.0",
+    "object_store_api": "s3-compatible-v1",
+    "postgresql": "17.5",
+    "terraform": "1.13.0",
+    "valkey": "8.1.3"
+  },
+  "kms": {
+    "audit_enabled": true,
+    "least_privilege": true
+  },
+  "mode": "aws_reference",
+  "network_policy": {
+    "allowed_egress": [
+      "dns",
+      "private-postgresql",
+      "private-object-store",
+      "private-queue"
+    ],
+    "default_deny_egress": true,
+    "default_deny_ingress": true,
+    "private_subnets": true
+  },
+  "object_store": {
+    "approved_identity_only": true,
+    "backup_enabled": true,
+    "encrypted": true,
+    "private": true,
+    "public_access": false
+  },
+  "production_authorized": false,
+  "production_blockers": [
+    "executed_terraform",
+    "executed_kubernetes",
+    "external_security_review",
+    "production_image_digests"
+  ],
+  "profile_id": "aws-reference",
+  "provider_replacement_paths": {
+    "cdn": "docs/operator/provider-replacement/cdn.md",
+    "database": "docs/operator/provider-replacement/database.md",
+    "gpu": "docs/operator/provider-replacement/gpu.md",
+    "kms": "docs/operator/provider-replacement/kms.md",
+    "object_store": "docs/operator/provider-replacement/object-store.md",
+    "queue": "docs/operator/provider-replacement/queue.md",
+    "secrets": "docs/operator/provider-replacement/secrets.md",
+    "workflow": "docs/operator/provider-replacement/workflow.md"
+  },
+  "queue": {
+    "budget_enforced": true,
+    "dead_letter_enabled": true,
+    "restricted_egress": true,
+    "tenant_quota_enforced": true
+  },
+  "resource_limits": {
+    "control_api": {
+      "cpu": 2.0,
+      "memory_mb": 2048
+    },
+    "worker_reference": {
+      "cpu": 4.0,
+      "memory_mb": 8192
+    }
+  },
+  "revision": "1.0.0",
+  "schema": "sip.deployment-profile-fixture/v1",
+  "secret_references": {
+    "database": "secret://sip/database",
+    "object_store": "secret://sip/object-store",
+    "signing": "vault://sip/signing",
+    "workload_identity": "secret://sip/workload-identity"
+  },
+  "secrets": {
+    "audit_enabled": true,
+    "least_privilege": true
+  },
+  "service_images": {
+    "audit-service": "ghcr.io/spatial-intelligence-platform/audit-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "capture-service": "ghcr.io/spatial-intelligence-platform/capture-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "control-api": "ghcr.io/spatial-intelligence-platform/control-api:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "deployment-control": "ghcr.io/spatial-intelligence-platform/deployment-control:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "evidence-service": "ghcr.io/spatial-intelligence-platform/evidence-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "export-service": "ghcr.io/spatial-intelligence-platform/export-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "identity-policy": "ghcr.io/spatial-intelligence-platform/identity-policy:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "operations-intelligence": "ghcr.io/spatial-intelligence-platform/operations-intelligence:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "scene-service": "ghcr.io/spatial-intelligence-platform/scene-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "search-service": "ghcr.io/spatial-intelligence-platform/search-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "security-ops": "ghcr.io/spatial-intelligence-platform/security-ops:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "workflow-service": "ghcr.io/spatial-intelligence-platform/workflow-service:1.1.0@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "supported_regions": [
+    "us-east-1"
+  ]
+}

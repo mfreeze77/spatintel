@@ -16,6 +16,7 @@ implementation_files:
 - src/sip/operations.py
 - infrastructure/observability
 automated_test_ids:
+- tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root
 - tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration
 - tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability
 - tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads

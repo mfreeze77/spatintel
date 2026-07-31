@@ -1,0 +1,20 @@
+{
+  "accepted_checkpoint": "sip-v1.1.0-progress-08",
+  "accepted_commit": "cc3c24ca3acff704144ed7d112566a2acaa88d79",
+  "accepted_inner_zip_sha256": "b5e479cceebf0ee5c581af0f6918ebb4b9a4d51b4a51735b6986118e03ff5014",
+  "accepted_outer_zip_sha256": "cd3484b38973c67559569f72cb7c8f9c28ff5a0a87b90c79d73b21922854b75d",
+  "accepted_tree": "f8587585ad74446d41ea47d243b9adce6d3693e6",
+  "decision_date": "2026-07-31",
+  "note": "Machine-readable transcription of the user-supplied binding True North directive; the source Markdown is retained byte-for-byte.",
+  "production_authorized": false,
+  "production_posture": "NO-GO",
+  "progress_09": {
+    "authorized": true,
+    "bounded_epic": "OPS-003",
+    "title": "Deployment profiles and production-shaped infrastructure"
+  },
+  "progress_10_authorized": false,
+  "schema": "sip.true-north-authorization-record/v1",
+  "source_directive_path": "governance/true-north/PROGRESS_08_ACCEPTANCE_PROGRESS_09_AUTHORIZATION.md",
+  "source_directive_sha256": "a5610ebe63bb5d4d44591c45df5937a4c3446a5b9734c20799f80fbfbc527779"
+}

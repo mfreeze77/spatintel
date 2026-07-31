@@ -84,12 +84,16 @@ class AssetIngest(StrictModel):
     source_class: SourceClass = SourceClass.DIRECT_CAPTURE
     authority_class: AuthorityClass = AuthorityClass.EVIDENCE
     provenance: ProvenanceRef
+    deployment_region: str | None = None
+    asset_class: str = 'source'
 
 class MultipartBegin(StrictModel):
     expected_sha256: str = Field(pattern='^[a-f0-9]{64}$')
     expected_bytes: int = Field(ge=0)
     media_type: str
     metadata: dict[str, Any] = {}
+    deployment_region: str | None = None
+    asset_class: str = 'source'
 
 class MultipartPart(StrictModel):
     content_base64: str
@@ -1516,6 +1520,171 @@ class AfterActionReviewCreate(StrictModel):
     owner: str
     due_at: datetime
 
+class DeploymentProfileCreate(StrictModel):
+    name: str = Field(min_length=1, max_length=128)
+    revision: str = Field(min_length=1, max_length=64)
+    mode: Literal['local_only', 'edge', 'hybrid', 'single_tenant_cloud', 'multi_tenant_cloud', 'aws_reference']
+    features: dict[str, Any] = Field(min_length=1)
+    service_images: dict[str, str] = Field(min_length=1)
+    infrastructure_versions: dict[str, str] = Field(min_length=1)
+    secret_references: dict[str, str] = Field(min_length=1)
+    network_policy: dict[str, Any] = Field(min_length=1)
+    resource_limits: dict[str, Any] = Field(min_length=1)
+    supported_regions: list[str] = Field(min_length=1)
+    degraded_modes: dict[str, Any] = Field(min_length=1)
+    provider_replacements: dict[str, Any] = Field(min_length=1)
+    production_approved: bool = False
+    supersedes_profile_id: str | None = None
+
+class ProjectDeploymentAssign(StrictModel):
+    deployment_profile_id: str
+    revision: str
+    residency_policy_id: str | None = None
+    transfer_policy_id: str | None = None
+    feature_overrides: dict[str, Any] = Field(default_factory=dict)
+    cloud_dependencies_acknowledged: bool = False
+
+class ResidencyPolicyCreate(StrictModel):
+    revision: str
+    home_region: str
+    allowed_regions: list[str] = Field(min_length=1)
+    allowed_modes: list[str] = Field(min_length=1)
+    asset_rules: dict[str, Any] = Field(min_length=1)
+    worker_rules: dict[str, Any] = Field(min_length=1)
+    provider_rules: dict[str, Any] = Field(min_length=1)
+    default_action: Literal['allow', 'deny'] = 'deny'
+
+class TransferPolicyCreate(StrictModel):
+    revision: str
+    source_profile_id: str
+    destination_profile_id: str
+    rules: list[dict[str, Any]] = Field(min_length=1)
+    purpose: str = Field(min_length=1, max_length=128)
+
+class DeploymentAdmissionCreate(StrictModel):
+    admission_type: Literal['asset_upload', 'worker_schedule', 'asset_transfer', 'autoscale', 'gpu_queue', 'production_promotion']
+    deployment_profile_id: str | None = None
+    region: str | None = None
+    request: dict[str, Any] = Field(default_factory=dict)
+
+class EdgeNodeEnroll(StrictModel):
+    project_id: str | None = None
+    deployment_profile_id: str
+    node_identity: str
+    identity_public_key_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    software_manifest: dict[str, Any] = Field(min_length=1)
+    software_signature: str = Field(min_length=43)
+    signing_key_id: str
+    disk_encryption: dict[str, Any] = Field(min_length=1)
+    region: str
+    capabilities: dict[str, Any] = Field(default_factory=dict)
+
+class EdgeHealthCreate(StrictModel):
+    health: dict[str, Any] = Field(min_length=1)
+
+class EdgeRevocationCreate(StrictModel):
+    reason: str = Field(min_length=1, max_length=256)
+
+class OfflineUpdateCreate(StrictModel):
+    deployment_profile_id: str
+    manifest: dict[str, Any] = Field(min_length=1)
+    signature: str = Field(min_length=43)
+    signing_key_id: str
+
+class OfflineUpdateApply(StrictModel):
+    current_release: str
+
+class ProjectDeploymentMigrationCreate(StrictModel):
+    source_profile_id: str
+    target_profile_id: str
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+class AutoscalingPolicyCreate(StrictModel):
+    project_id: str | None = None
+    queue_class: str
+    revision: str
+    min_replicas: int = Field(ge=0)
+    max_replicas: int = Field(gt=0)
+    tenant_concurrency_limit: int = Field(gt=0)
+    profile_quotas: dict[str, int] = Field(min_length=1)
+    global_budget_limit: float = Field(gt=0)
+    currency: str = Field(min_length=3, max_length=3)
+    dead_letter: dict[str, Any] = Field(min_length=1)
+    restricted_egress: bool = True
+
+class AutoscalingAdmissionCreate(StrictModel):
+    project_id: str | None = None
+    compute_profile: str
+    current_replicas: int = Field(default=0, ge=0)
+    requested_replicas: int = Field(gt=0)
+    current_tenant_jobs: int = Field(ge=0)
+    projected_cost: float = Field(ge=0)
+
+class AwsEnvironmentCreate(StrictModel):
+    environment: str
+    account_boundary: str
+    region: str
+    infrastructure_versions: dict[str, str] = Field(min_length=1)
+    network: dict[str, Any] = Field(min_length=1)
+    database: dict[str, Any] = Field(min_length=1)
+    object_store: dict[str, Any] = Field(min_length=1)
+    queue: dict[str, Any] = Field(min_length=1)
+    kms: dict[str, Any] = Field(min_length=1)
+    secrets: dict[str, Any] = Field(min_length=1)
+    cdn: dict[str, Any] = Field(min_length=1)
+    gpu: dict[str, Any] = Field(min_length=1)
+    export_replacement_paths: dict[str, Any] = Field(min_length=1)
+
+class DeploymentDriftCheckCreate(StrictModel):
+    observed_manifest: dict[str, Any] = Field(min_length=1)
+
+class ProductionAdmissionCreate(StrictModel):
+    aws_environment_id: str | None = None
+    evidence: dict[str, Any] = Field(default_factory=dict)
+
+class OfflineUpdateRollback(StrictModel):
+    reason: str = Field(min_length=1, max_length=256)
+
+class LocalUpgradeRehearsalCreate(StrictModel):
+    deployment_profile_id: str
+    from_release: str
+    to_release: str
+    from_schema: str
+    to_schema: str
+    pre_export_root: str = Field(pattern=r'^[a-f0-9]{64}$')
+    post_upgrade_export_root: str = Field(pattern=r'^[a-f0-9]{64}$')
+    rollback_export_root: str = Field(pattern=r'^[a-f0-9]{64}$')
+    object_store_root: str = Field(pattern=r'^[a-f0-9]{64}$')
+    queue_root: str = Field(pattern=r'^[a-f0-9]{64}$')
+    job_recovery: dict[str, Any] = Field(min_length=1)
+    evidence: dict[str, Any] = Field(min_length=1)
+
+class GracefulShutdownCreate(StrictModel):
+    worker_id: str
+    deployment_profile_id: str
+    operation_ids: list[str] = Field(min_length=1)
+    checkpoint_hashes: dict[str, str] = Field(min_length=1)
+    queue_before: dict[str, Any] = Field(min_length=1)
+    queue_after: dict[str, Any] = Field(min_length=1)
+    recovery: dict[str, Any] = Field(min_length=1)
+
+class CdnDerivativeCreate(StrictModel):
+    asset_id: str
+    immutable_sha256: str = Field(pattern=r'^[a-f0-9]{64}$')
+    redaction_profile: str
+    redaction_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    authorization_token: str = Field(min_length=32)
+    expires_at: datetime
+
+class ProviderReplacementCreate(StrictModel):
+    provider_name: str
+    service_class: str
+    export_format: str
+    adapter_contract: str
+    replacement_steps: list[dict[str, Any]] = Field(min_length=1)
+    data_exit: dict[str, Any] = Field(min_length=1)
+    limitations: list[str] = Field(default_factory=list)
+
 def _context(request: Request) -> PlatformContext:
     return request.app.state.platform
 
@@ -1555,6 +1724,7 @@ def _routers() -> dict[str, APIRouter]:
     collaboration = APIRouter(tags=['collaboration'])
     security_ops = APIRouter(tags=['security-ops'])
     operations_intelligence = APIRouter(tags=['operations-intelligence'])
+    deployment_control = APIRouter(tags=['deployment-control'])
 
     @control.get('/version', operation_id='get_version')
     def version(request: Request) -> dict[str, Any]:
@@ -1598,7 +1768,7 @@ def _routers() -> dict[str, APIRouter]:
             payload = base64.b64decode(body.content_base64, validate=True)
         except Exception as exc:
             raise ValidationError('ASSET_BASE64_INVALID', 'asset content is not valid base64') from exc
-        result = _context(request).assets.ingest_bytes(tenant_id=principal.tenant_id, project_id=project_id, data=payload, media_type=body.media_type, original_name=body.original_name, classification=body.classification, retention_class=body.retention_class, source_class=body.source_class, authority_class=body.authority_class, provenance=body.provenance, actor_id=principal.subject_id)
+        result = _context(request).assets.ingest_bytes(tenant_id=principal.tenant_id, project_id=project_id, data=payload, media_type=body.media_type, original_name=body.original_name, classification=body.classification, retention_class=body.retention_class, source_class=body.source_class, authority_class=body.authority_class, provenance=body.provenance, actor_id=principal.subject_id, deployment_region=body.deployment_region, asset_class=body.asset_class)
         return _json(result)
 
     @capture.get('/v1/projects/{project_id}/assets/{asset_id}', operation_id='get_asset')
@@ -1622,7 +1792,7 @@ def _routers() -> dict[str, APIRouter]:
     @capture.post('/v1/projects/{project_id}/multipart', status_code=201, operation_id='begin_multipart')
     def begin_multipart(project_id: str, body: MultipartBegin, request: Request, principal: Principal) -> dict[str, Any]:
         _require(request, principal, action='asset:create', tenant_id=principal.tenant_id, project_id=project_id)
-        upload_id = _context(request).assets.begin_multipart(tenant_id=principal.tenant_id, project_id=project_id, expected_sha256=body.expected_sha256, expected_bytes=body.expected_bytes, media_type=body.media_type, metadata=body.metadata, actor_id=principal.subject_id)
+        upload_id = _context(request).assets.begin_multipart(tenant_id=principal.tenant_id, project_id=project_id, expected_sha256=body.expected_sha256, expected_bytes=body.expected_bytes, media_type=body.media_type, metadata=body.metadata, actor_id=principal.subject_id, deployment_region=body.deployment_region, asset_class=body.asset_class)
         return {'upload_id': upload_id}
 
     @capture.put('/v1/multipart/{upload_id}/parts/{part_number}', operation_id='put_multipart_part')
@@ -3929,7 +4099,128 @@ def _routers() -> dict[str, APIRouter]:
         _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
         return _context(request).operations_intelligence.create_after_action_review(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
 
-    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence}
+
+    @deployment_control.post('/v1/deployment/profiles', status_code=201, operation_id='register_deployment_profile')
+    def register_deployment_profile(body: DeploymentProfileCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:profile_manage', tenant_id=principal.tenant_id)
+        return _context(request).deployment.register_profile(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.get('/v1/deployment/profiles/{profile_id}', operation_id='get_deployment_profile')
+    def get_deployment_profile(profile_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:read', tenant_id=principal.tenant_id)
+        return _context(request).deployment.get_profile(profile_id)
+
+    @deployment_control.get('/v1/deployment/profiles/{profile_id}/features/{feature}', operation_id='get_deployment_feature_availability')
+    def get_deployment_feature_availability(profile_id: str, feature: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:read', tenant_id=principal.tenant_id)
+        return _context(request).deployment.feature_availability(profile_id=profile_id, feature=feature)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/profile', status_code=201, operation_id='assign_project_deployment_profile')
+    def assign_project_deployment_profile(project_id: str, body: ProjectDeploymentAssign, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:project_assign', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.assign_project_profile(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/residency-policies', status_code=201, operation_id='register_deployment_residency_policy')
+    def register_deployment_residency_policy(project_id: str, body: ResidencyPolicyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:residency_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.register_residency_policy(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/transfer-policies', status_code=201, operation_id='register_deployment_transfer_policy')
+    def register_deployment_transfer_policy(project_id: str, body: TransferPolicyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:transfer_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.register_transfer_policy(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/admissions', status_code=201, operation_id='authorize_deployment_admission')
+    def authorize_deployment_admission(project_id: str, body: DeploymentAdmissionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:admit', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.authorize_admission(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/edge-nodes', status_code=201, operation_id='enroll_deployment_edge_node')
+    def enroll_deployment_edge_node(tenant_id: str, body: EdgeNodeEnroll, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:edge_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).deployment.enroll_edge_node(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/health', operation_id='report_deployment_edge_health')
+    def report_deployment_edge_health(tenant_id: str, edge_node_id: str, body: EdgeHealthCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:edge_manage', tenant_id=tenant_id)
+        return _context(request).deployment.report_edge_health(tenant_id=tenant_id, edge_node_id=edge_node_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/revoke', operation_id='revoke_deployment_edge_node')
+    def revoke_deployment_edge_node(tenant_id: str, edge_node_id: str, body: EdgeRevocationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:edge_manage', tenant_id=tenant_id)
+        return _context(request).deployment.revoke_edge_node(tenant_id=tenant_id, edge_node_id=edge_node_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/offline-updates', status_code=201, operation_id='register_deployment_offline_update')
+    def register_deployment_offline_update(body: OfflineUpdateCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:update_manage', tenant_id=principal.tenant_id)
+        return _context(request).deployment.register_offline_update(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/apply', operation_id='apply_deployment_offline_update')
+    def apply_deployment_offline_update(tenant_id: str, edge_node_id: str, update_id: str, body: OfflineUpdateApply, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:update_manage', tenant_id=tenant_id)
+        return _context(request).deployment.apply_offline_update(tenant_id=tenant_id, edge_node_id=edge_node_id, update_id=update_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/edge-nodes/{edge_node_id}/updates/{update_id}/rollback', operation_id='rollback_deployment_offline_update')
+    def rollback_deployment_offline_update(tenant_id: str, edge_node_id: str, update_id: str, body: OfflineUpdateRollback, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:update_manage', tenant_id=tenant_id)
+        return _context(request).deployment.rollback_offline_update(tenant_id=tenant_id, edge_node_id=edge_node_id, update_id=update_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/migrations', status_code=201, operation_id='create_project_deployment_migration')
+    def create_project_deployment_migration(project_id: str, body: ProjectDeploymentMigrationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:migrate', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.create_project_migration(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/migrations/{migration_id}/complete', operation_id='complete_project_deployment_migration')
+    def complete_project_deployment_migration(project_id: str, migration_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:migrate', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.complete_project_migration(tenant_id=principal.tenant_id, project_id=project_id, migration_id=migration_id, actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/autoscaling-policies', status_code=201, operation_id='register_deployment_autoscaling_policy')
+    def register_deployment_autoscaling_policy(tenant_id: str, body: AutoscalingPolicyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:autoscale_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).deployment.register_autoscaling_policy(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/tenants/{tenant_id}/deployment/autoscaling-policies/{autoscaling_policy_id}/admit', operation_id='admit_deployment_autoscaling')
+    def admit_deployment_autoscaling(tenant_id: str, autoscaling_policy_id: str, body: AutoscalingAdmissionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:autoscale_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).deployment.admit_autoscaling(tenant_id=tenant_id, autoscaling_policy_id=autoscaling_policy_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/aws-environments', status_code=201, operation_id='register_aws_deployment_environment')
+    def register_aws_deployment_environment(body: AwsEnvironmentCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:aws_manage', tenant_id=principal.tenant_id)
+        return _context(request).deployment.register_aws_environment(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/profiles/{profile_id}/drift-checks', status_code=201, operation_id='check_deployment_configuration_drift')
+    def check_deployment_configuration_drift(profile_id: str, body: DeploymentDriftCheckCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:drift_check', tenant_id=principal.tenant_id)
+        return _context(request).deployment.detect_drift(deployment_profile_id=profile_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/local-upgrade-rehearsals', status_code=201, operation_id='record_local_upgrade_rehearsal')
+    def record_local_upgrade_rehearsal(body: LocalUpgradeRehearsalCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:migrate', tenant_id=principal.tenant_id)
+        return _context(request).deployment.record_local_upgrade_rehearsal(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/graceful-shutdown-evidence', status_code=201, operation_id='record_graceful_shutdown_evidence')
+    def record_graceful_shutdown_evidence(body: GracefulShutdownCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:update_manage', tenant_id=principal.tenant_id)
+        return _context(request).deployment.record_graceful_shutdown(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/projects/{project_id}/deployment/cdn-derivatives', status_code=201, operation_id='register_deployment_cdn_derivative')
+    def register_deployment_cdn_derivative(project_id: str, body: CdnDerivativeCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:aws_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).deployment.register_cdn_derivative(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/provider-replacements', status_code=201, operation_id='register_deployment_provider_replacement')
+    def register_deployment_provider_replacement(body: ProviderReplacementCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:profile_manage', tenant_id=principal.tenant_id)
+        return _context(request).deployment.register_provider_replacement_path(**body.model_dump(), actor_id=principal.subject_id)
+
+    @deployment_control.post('/v1/deployment/profiles/{profile_id}/production-admission', operation_id='evaluate_deployment_production_admission')
+    def evaluate_deployment_production_admission(profile_id: str, body: ProductionAdmissionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deployment:admit', tenant_id=principal.tenant_id)
+        return _context(request).deployment.production_admission(deployment_profile_id=profile_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence, 'deployment-control': deployment_control}
 SERVICE_DEPENDENCIES: dict[str, set[str]] = {'control-api': {'control-api', 'construction', 'liveforever', 'collaboration'}, 'all': set(_routers().keys())}
 
 def create_app(*, context: PlatformContext | None=None, service_name: str | None=None) -> FastAPI:

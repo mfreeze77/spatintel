@@ -10,6 +10,7 @@ from .collaboration import CollaborationService, NotificationService
 from .config import Settings
 from .construction import ConstructionService
 from .database import Database
+from .deployment import DeploymentService
 from .exporting import PreservationService
 from .lifecycle import AdmissionController, BackupRecoveryService, KeyRotationService, LifecycleService
 from .liveforever import LiveForeverService
@@ -59,6 +60,7 @@ class PlatformContext:
     agents: AgentService
     security_ops: SecurityOperationsService
     operations_intelligence: OperationsIntelligenceService
+    deployment: DeploymentService
 
     @classmethod
     def create(cls, settings: Settings | None = None, *, create_schema: bool | None = None) -> "PlatformContext":
@@ -121,9 +123,19 @@ class PlatformContext:
             database,
             audit,
             bundle_root=settings.object_store_root.parent / "support-bundles",
-            release="1.1.0-progress08",
+            release="1.1.0-progress09",
             environment=settings.environment,
         )
+        deployment = DeploymentService(
+            database,
+            audit,
+            settings.signing_key,
+            root=Path(__file__).resolve().parents[2],
+            environment=settings.environment,
+            security_ops=security_ops,
+        )
+        assets.set_deployment_service(deployment)
+        operations.set_deployment_service(deployment)
         return cls(
             settings=settings,
             database=database,
@@ -154,6 +166,7 @@ class PlatformContext:
             agents=AgentService(database, policy, search, audit),
             security_ops=security_ops,
             operations_intelligence=operations_intelligence,
+            deployment=deployment,
         )
 
 

@@ -21,6 +21,10 @@ class OperationService:
     def __init__(self, database: Database, audit: AuditService) -> None:
         self.database = database
         self.audit = audit
+        self.deployment: Any | None = None
+
+    def set_deployment_service(self, deployment: Any) -> None:
+        self.deployment = deployment
 
     def create(
         self,
@@ -36,6 +40,19 @@ class OperationService:
     ) -> dict[str, Any]:
         if not idempotency_key:
             raise ValidationError("IDEMPOTENCY_KEY_REQUIRED", "operation requires an idempotency key")
+        if self.deployment is not None:
+            self.deployment.authorize_if_configured(
+                tenant_id=tenant_id,
+                project_id=project_id,
+                admission_type="worker_schedule",
+                region=input_manifest.get("deployment_region"),
+                request={
+                    "worker_class": str(input_manifest.get("worker_class", operation_type)),
+                    "operation_type": operation_type,
+                    "compute_profile": input_manifest.get("compute_profile"),
+                },
+                actor_id=actor_id,
+            )
         input_hash = canonical_sha256(input_manifest)
         traceparent = normalize_traceparent(traceparent)
         with self.database.session() as session:

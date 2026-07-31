@@ -7,11 +7,25 @@ source:
   section: 4. Normative requirements
 requirement: Every deployment shall expose the same canonical package, scene, evidence, and export contracts.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/deployment.py
+- src/sip/security_ops.py
+- src/sip/api.py
+- src/sip/database.py
+- infrastructure/deployment/profiles
+- docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSHYB-001
-retained_evidence: []
+- tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration
+- tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control
+- tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence
+retained_evidence:
+- build/evidence/demo-progress09-deployment.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +34,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

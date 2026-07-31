@@ -24,6 +24,7 @@ API_SERVICES = {
     "provider-registry",
     "representation-publisher",
     "operations-intelligence",
+    "deployment-control",
 }
 WORKERS = {f"worker-{path.parent.name}" for path in (ROOT / "workers").glob("*/worker-manifest.json")}
 

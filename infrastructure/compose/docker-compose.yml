@@ -218,6 +218,15 @@ services:
       SIP_LOCAL_ONLY: "true"
       SIP_SUPPORT_BUNDLE_MODE: metadata-only
     networks: [backend]
+  deployment-control:
+    <<: *python-service
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: deployment-control
+      SIP_LOCAL_ONLY: "true"
+      SIP_PRODUCTION_AUTHORIZED: "false"
+      SIP_DEFAULT_EGRESS: denied
+    networks: [backend]
   representation-api:
     <<: *python-service
     environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-api}

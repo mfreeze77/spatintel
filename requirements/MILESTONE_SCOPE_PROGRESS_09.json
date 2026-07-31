@@ -1,0 +1,727 @@
+{
+  "acceptance_criteria": [
+    "cross-tenant deployment boundaries fail closed",
+    "default-deny network policy is explicit and generated",
+    "region and residency admission occurs before upload and scheduling",
+    "source, images, manifests, logs, and support evidence contain no embedded secrets",
+    "service images and release manifests bind immutable digests and exact source commits",
+    "edge workload identities are short-lived, scope-bound, revocable, and signed",
+    "autoscaling enforces tenant/profile quotas and global budget limits under concurrency",
+    "local upgrades and offline edge updates are signed, reversible, and export compatible",
+    "project migrations preserve stable IDs, history, permissions, consent, hashes, and model/run manifests",
+    "object-store and queue continuity plus graceful job recovery are retained",
+    "configuration drift is detected against immutable profile intent",
+    "production admission remains fail closed without external executed deployment evidence",
+    "complete exact-commit acceptance and both dedicated package verifiers return zero findings"
+  ],
+  "accepted_base_commit": "cc3c24ca3acff704144ed7d112566a2acaa88d79",
+  "authorized_epics": [
+    "OPS-003"
+  ],
+  "branch": "progress-09-deployment",
+  "checkpoint_id": "sip-v1.1.0-progress-09",
+  "deferred_requirement_count": 0,
+  "deferred_requirements": [],
+  "dependency_rationale": "Progress 08 closed OPS-002 and True North authorized only OPS-003 as its bounded successor.",
+  "explicitly_out_of_scope": [
+    "OPS-004 disaster recovery certification",
+    "QA-002 final release gates",
+    "customer or human-subject pilots",
+    "production credentials, data, or traffic",
+    "Progress 10",
+    "production promotion"
+  ],
+  "external_gaps": [
+    "Docker Compose structural validation is not an executed deployment.",
+    "Kubernetes manifests and policies require an executable cluster and independent network-policy validation.",
+    "Terraform syntax and structural checks require provider initialization, plan, apply, and credentialed AWS evidence.",
+    "Image digest sentinels require approved built, signed, and scanned release images.",
+    "Edge-node controls require physical encrypted hardware, update, rollback, revocation, and offline operation evidence.",
+    "Cloud autoscaling, object-store, queue, database, CDN, KMS, secrets, and GPU controls require deployed infrastructure evidence."
+  ],
+  "included_requirement_count": 17,
+  "included_requirements": [
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Each profile shall declare which features require cloud connectivity and what happens when unavailable.",
+      "requirement_id": "ARCDEP-001",
+      "source_document": "20-architecture/202_deployment_architecture.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Deployment manifests shall pin service images, infrastructure versions, secrets references, network policies, and resource limits.",
+      "requirement_id": "ARCDEP-002",
+      "source_document": "20-architecture/202_deployment_architecture.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_residency_is_enforced_before_upload_and_worker_scheduling"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Data residency policy shall be enforceable before asset upload or worker scheduling.",
+      "requirement_id": "ARCDEP-003",
+      "source_document": "20-architecture/202_deployment_architecture.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Local upgrades shall be reversible and preserve compatible export paths.",
+      "requirement_id": "ARCDEP-004",
+      "source_document": "20-architecture/202_deployment_architecture.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Cloud autoscaling shall enforce tenant quotas and global budget limits.",
+      "requirement_id": "ARCDEP-005",
+      "source_document": "20-architecture/202_deployment_architecture.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Every deployment shall expose the same canonical package, scene, evidence, and export contracts.",
+      "requirement_id": "OPSHYB-001",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_hybrid_transfer_rules_block_sensitive_early_or_unapproved_transfer"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Hybrid transfer policy shall specify which asset classes may leave the site and at what processing stage.",
+      "requirement_id": "OPSHYB-002",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Edge nodes shall enroll with unique identity, signed software, disk encryption, health reporting, and revocation.",
+      "requirement_id": "OPSHYB-003",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Offline updates shall be signed and rollback-capable.",
+      "requirement_id": "OPSHYB-004",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A project migration between deployment modes shall preserve IDs, history, permissions, consent, hashes, and model/run manifests.",
+      "requirement_id": "OPSHYB-005",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Cloud dependence shall be visible to administrators before enabling a feature.",
+      "requirement_id": "OPSHYB-006",
+      "source_document": "90-security-ops/907_cloud_hybrid_deployment.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Infrastructure shall be defined as code with separate environments/accounts or equivalent strong boundaries.",
+      "requirement_id": "OPSAWS-001",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Databases and object stores shall be private, encrypted, backed up, and accessible only through approved identities/endpoints.",
+      "requirement_id": "OPSAWS-002",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "GPU queues shall enforce tenant/profile quotas, cost budgets, and dead-letter handling.",
+      "requirement_id": "OPSAWS-003",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_cdn_rejects_raw_or_restricted_origins_and_requires_current_signed_authorization"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "CloudFront/CDN delivery shall use signed authorization and redacted immutable derivatives; raw assets are not public origins.",
+      "requirement_id": "OPSAWS-004",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "KMS/secrets access shall be least privilege and audited.",
+      "requirement_id": "OPSAWS-005",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control"
+        },
+        {
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Provider-specific services shall have documented export/replacement paths.",
+      "requirement_id": "OPSAWS-006",
+      "source_document": "90-security-ops/908_aws_reference_architecture.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "production_authorized": false,
+  "progress_09_authorized": true,
+  "progress_10_authorized": false,
+  "schema": "sip.milestone-scope/v1",
+  "scope_statement": "Progress 09 is limited to OPS-003 deployment profiles and production-shaped infrastructure. OPS-004, QA-002, pilots, Progress 10, production data, production traffic, and production promotion remain unauthorized."
+}

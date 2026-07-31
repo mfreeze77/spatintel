@@ -7,11 +7,23 @@ source:
   section: 4. Normative requirements
 requirement: Hybrid transfer policy shall specify which asset classes may leave the site and at what processing stage.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/deployment.py
+- src/sip/security_ops.py
+- src/sip/api.py
+- src/sip/database.py
+- infrastructure/deployment/profiles
+- docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSHYB-002
-retained_evidence: []
+- tests/integration/test_progress09_hybrid_edge.py::test_progress09_hybrid_transfer_rules_block_sensitive_early_or_unapproved_transfer
+- tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials
+- tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped
+retained_evidence:
+- build/evidence/demo-progress09-deployment.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +32,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

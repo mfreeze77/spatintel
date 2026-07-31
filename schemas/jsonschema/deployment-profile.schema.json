@@ -1,0 +1,144 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/deployment-profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_contracts": {
+      "additionalProperties": true,
+      "minProperties": 4,
+      "title": "Canonical Contracts",
+      "type": "object"
+    },
+    "canonical_contracts_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Canonical Contracts Hash",
+      "type": "string"
+    },
+    "degraded_modes": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Degraded Modes",
+      "type": "object"
+    },
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Features",
+      "type": "object"
+    },
+    "infrastructure_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Infrastructure Versions",
+      "type": "object"
+    },
+    "mode": {
+      "enum": [
+        "local_only",
+        "edge",
+        "hybrid",
+        "single_tenant_cloud",
+        "multi_tenant_cloud",
+        "aws_reference"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "network_policy": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Network Policy",
+      "type": "object"
+    },
+    "production_approved": {
+      "default": false,
+      "title": "Production Approved",
+      "type": "boolean"
+    },
+    "profile_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Profile Hash",
+      "type": "string"
+    },
+    "provider_replacements": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Provider Replacements",
+      "type": "object"
+    },
+    "resource_limits": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Resource Limits",
+      "type": "object"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "string"
+    },
+    "secret_references": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Secret References",
+      "type": "object"
+    },
+    "service_images": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Service Images",
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "superseded",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "supported_regions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Supported Regions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "deployment_profile_id",
+    "name",
+    "revision",
+    "mode",
+    "canonical_contracts",
+    "canonical_contracts_hash",
+    "features",
+    "service_images",
+    "infrastructure_versions",
+    "secret_references",
+    "network_policy",
+    "resource_limits",
+    "supported_regions",
+    "degraded_modes",
+    "provider_replacements",
+    "state",
+    "profile_hash"
+  ],
+  "title": "DeploymentProfileContract",
+  "type": "object"
+}

@@ -408,6 +408,10 @@ class AssetService:
         self.token_codec = token_codec
         self.multipart_root = multipart_root or Path("runtime/multipart")
         self.multipart_root.mkdir(parents=True, exist_ok=True)
+        self.deployment: Any | None = None
+
+    def set_deployment_service(self, deployment: Any) -> None:
+        self.deployment = deployment
 
     def ingest_bytes(
         self,
@@ -424,7 +428,18 @@ class AssetService:
         provenance: ProvenanceRef,
         actor_id: str,
         asset_id: str | None = None,
+        deployment_region: str | None = None,
+        asset_class: str = "generic_asset",
     ) -> AssetReference:
+        if self.deployment is not None:
+            self.deployment.authorize_if_configured(
+                tenant_id=tenant_id,
+                project_id=project_id,
+                admission_type="asset_upload",
+                region=deployment_region,
+                request={"asset_class": asset_class, "byte_count": len(data), "media_type": media_type},
+                actor_id=actor_id,
+            )
         digest = sha256_bytes(data)
         metadata = self.store.write_bytes(digest, data)
         # A storage API acknowledgement is not publication evidence. Read the immutable
@@ -639,11 +654,23 @@ class AssetService:
         media_type: str,
         metadata: dict[str, Any],
         actor_id: str,
+        deployment_region: str | None = None,
+        asset_class: str = "generic_asset",
     ) -> str:
         if expected_bytes < 0:
             raise ValidationError("UPLOAD_SIZE_INVALID", "expected upload size cannot be negative")
         if len(expected_sha256) != 64 or any(character not in "0123456789abcdef" for character in expected_sha256):
             raise ValidationError("UPLOAD_HASH_INVALID", "expected upload hash must be lowercase SHA-256")
+        if self.deployment is not None:
+            self.deployment.authorize_if_configured(
+                tenant_id=tenant_id,
+                project_id=project_id,
+                admission_type="asset_upload",
+                region=deployment_region,
+                request={"asset_class": asset_class, "byte_count": expected_bytes, "media_type": media_type, "multipart": True},
+                actor_id=actor_id,
+            )
+        metadata = {**metadata, "deployment_region": deployment_region, "asset_class": asset_class}
         upload_id = new_uuid()
         with self.database.session() as session:
             project = session.get(ProjectRow, project_id)
@@ -806,6 +833,8 @@ class AssetService:
                 raise ValidationError("UPLOAD_PART_GAP", "multipart parts must be contiguous starting at one")
             tenant_id, project_id, media_type = upload.tenant_id, upload.project_id, upload.media_type
             expected_digest, expected_bytes = upload.expected_sha256, upload.expected_bytes
+            deployment_region = upload.metadata_json.get("deployment_region")
+            asset_class = str(upload.metadata_json.get("asset_class", "generic_asset"))
         data = b"".join(Path(chunk.path).read_bytes() for chunk in chunks)
         if len(data) != expected_bytes or sha256_bytes(data) != expected_digest:
             raise ValidationError("UPLOAD_FINAL_INTEGRITY_FAILED", "multipart payload does not match expected size and hash")
@@ -821,6 +850,8 @@ class AssetService:
             authority_class=authority_class,
             provenance=provenance,
             actor_id=actor_id,
+            deployment_region=deployment_region,
+            asset_class=asset_class,
         )
         with self.database.session() as session:
             upload = session.get(MultipartUploadRow, upload_id)

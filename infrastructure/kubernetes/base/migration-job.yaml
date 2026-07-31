@@ -21,7 +21,7 @@ spec:
     spec:
       restartPolicy: OnFailure
       serviceAccountName: sip-migrator
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
         runAsUser: 10001

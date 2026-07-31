@@ -1,0 +1,1186 @@
+{
+  "accepted_base_commit": "cc3c24ca3acff704144ed7d112566a2acaa88d79",
+  "authorized_epics": [
+    "OPS-003"
+  ],
+  "deferred_requirement_count": 0,
+  "finding_count": 0,
+  "findings": [],
+  "included_requirement_count": 17,
+  "milestone": "Progress 09 bounded deployment profiles and production-shaped infrastructure",
+  "production_authorized": false,
+  "progress_09_authorized": true,
+  "progress_10_authorized": false,
+  "requirement_count": 17,
+  "requirements_audited": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "ARCDEP-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "OPSHYB-001",
+            "OPSHYB-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCDEP-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "ARCDEP-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "OPSHYB-001",
+            "OPSHYB-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-002",
+            "OPSAWS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCDEP-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "ARCDEP-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_deployment_api_is_authenticated_scoped_and_generated"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_residency_is_enforced_before_upload_and_worker_scheduling"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003",
+            "OPSHYB-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003",
+            "OPSHYB-002",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCDEP-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCDEP-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-005",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-005",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/assets.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "infrastructure/compose/docker-compose.yml",
+        "infrastructure/kubernetes/base",
+        "infrastructure/terraform",
+        "migrations/versions/0019_progress09_deployment_profiles.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCDEP-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-005",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAWS-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-002",
+            "OPSAWS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAWS-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_graceful_worker_shutdown_requires_checkpoint_coverage"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-005",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_autoscaling_enforces_profile_quota_tenant_limit_budget_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-005",
+            "OPSAWS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_autoscaling_simultaneous_replay_is_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSAWS-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_cdn_rejects_raw_or_restricted_origins_and_requires_current_signed_authorization"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSAWS-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-005",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-005",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-002",
+            "OPSAWS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_aws_manifests_reject_raw_secret_material"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSAWS-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-006",
+            "OPSHYB-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_aws_terraform_is_environment_scoped_private_and_replacement_documented"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSAWS-001",
+            "OPSAWS-002",
+            "OPSAWS-003",
+            "OPSAWS-004",
+            "OPSAWS-005",
+            "OPSAWS-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_profile_and_production_admission_fail_closed_on_unpinned_or_missing_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/terraform/modules/aws-platform",
+        "infrastructure/deployment/profiles/aws-reference.json",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSAWS-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-006",
+            "OPSHYB-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_service_openapi_and_event_contracts_are_owned_by_deployment_control"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "OPSHYB-001",
+            "OPSHYB-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSHYB-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSHYB-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_hybrid_transfer_rules_block_sensitive_early_or_unapproved_transfer"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003",
+            "OPSHYB-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_admission_does_not_accept_caller_precomputed_decisions_and_retains_denials"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003",
+            "OPSHYB-002",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSHYB-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-001",
+            "OPSAWS-005",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSHYB-003",
+            "OPSHYB-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAWS-005",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSHYB-003",
+            "OPSHYB-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-003",
+            "OPSHYB-002",
+            "OPSHYB-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSHYB-003",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSHYB-003",
+            "OPSHYB-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSHYB-003",
+            "OPSHYB-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSHYB-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-003",
+            "ARCDEP-004",
+            "ARCDEP-005",
+            "OPSAWS-001",
+            "OPSAWS-003",
+            "OPSHYB-001",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress09_deployment_demo.py::test_progress09_synthetic_deployment_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_project_mode_migration_and_local_upgrade_preserve_semantics"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-004",
+            "OPSHYB-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_migration_scaling.py::test_progress09_project_migration_and_local_upgrade_preserve_semantic_and_export_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSHYB-005",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-001",
+            "ARCDEP-002",
+            "OPSHYB-001",
+            "OPSHYB-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress09_deployment_profiles.py::test_progress09_profiles_pin_runtime_contracts_and_disclose_cloud_dependence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress09-deployment.json"
+      ],
+      "implementation_files": [
+        "src/sip/deployment.py",
+        "src/sip/security_ops.py",
+        "src/sip/api.py",
+        "src/sip/database.py",
+        "infrastructure/deployment/profiles",
+        "migrations/versions/0019_progress09_deployment_profiles.py",
+        "docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSHYB-006",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "schema": "sip.progress09-traceability-audit/v1",
+  "status": "passed_complete"
+}

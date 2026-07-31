@@ -7,11 +7,27 @@ source:
   section: 4. Normative requirements
 requirement: Edge nodes shall enroll with unique identity, signed software, disk encryption, health reporting, and revocation.
 verification_method: Automated test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/deployment.py
+- src/sip/security_ops.py
+- src/sip/api.py
+- src/sip/database.py
+- infrastructure/deployment/profiles
+- docs/operator/PROGRESS_09_DEPLOYMENT_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSHYB-003
-retained_evidence: []
+- tests/contract/test_progress09_deployment_api.py::test_progress09_api_keeps_production_and_cross_tenant_operations_fail_closed
+- tests/contract/test_progress09_infrastructure.py::test_progress09_compose_and_kubernetes_are_nonroot_digest_pinned_and_default_deny
+- tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_identity_signed_software_health_revocation_and_offline_rollback
+- tests/integration/test_progress09_edge_upgrade_portability.py::test_progress09_edge_workload_identity_scope_expiry_and_configuration_drift
+- tests/integration/test_progress09_hybrid_edge.py::test_progress09_edge_identity_health_signed_update_rollback_and_revocation
+- tests/security/test_progress09_deployment_security.py::test_progress09_deployment_boundaries_are_tenant_and_project_scoped
+retained_evidence:
+- build/evidence/demo-progress09-deployment.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +36,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

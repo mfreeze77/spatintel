@@ -16,6 +16,7 @@ implementation_files:
 - apps/web/components/CostEstimatePanel.tsx
 - docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md
 automated_test_ids:
+- tests/acceptance/test_progress08_operations_demo.py::test_progress08_operations_demonstration_is_repeatable_on_the_same_dedicated_root
 - tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration
 - tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence
 - tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles
