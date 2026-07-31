@@ -51,6 +51,8 @@ def test_progress08_scope_traceability_and_posture_are_exact_and_fail_closed() -
     deferred = scope["deferred_requirements"]
     assert scope["accepted_base_commit"] == EXPECTED_BASE_COMMIT
     assert scope["authorized_epics"] == ["OPS-002"]
+    assert scope["scope_statement"].startswith("Progress 08 is limited to OPS-002")
+    assert "Progress 09" in scope["scope_statement"] and "production promotion" in scope["scope_statement"]
     assert len(included) == EXPECTED_INCLUDED == EXPECTED_SCOPE_TOTAL
     assert len(deferred) == EXPECTED_DEFERRED == 0
     identifiers = {item["requirement_id"] for item in included}

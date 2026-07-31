@@ -1491,5 +1491,6 @@
   "progress_08_authorized": true,
   "progress_09_authorized": false,
   "schema": "sip.milestone-scope/v1",
+  "scope_statement": "Progress 08 is limited to OPS-002 privacy-safe observability, SLOs, performance budgets, cost estimation and allocation, quota and admission controls, resilience and GPU compatibility declarations, queue and anomaly dashboards, and customer-approved support tooling. It excludes OPS-003 deployment, OPS-004 disaster-recovery expansion, QA-002 final release gates, pilots, Progress 09, and production promotion.",
   "title": "Progress 08 \u2014 Observability, SLOs, cost, and support tooling"
 }
