@@ -153,7 +153,18 @@ class OperationService:
                     "checkpoint progress cannot move backwards",
                     {"prior_progress": row.progress, "progress": progress},
                 )
-            checkpoint_hash = canonical_sha256(checkpoint)
+            persisted_checkpoint = dict(checkpoint)
+            resume_manifest: dict[str, Any] | None = None
+            if bool(persisted_checkpoint.get("safe_to_resume", False)):
+                candidate = persisted_checkpoint.get("manifest")
+                if candidate is not None and not isinstance(candidate, dict):
+                    raise ValidationError("CHECKPOINT_MANIFEST_INVALID", "resumable checkpoint manifest must be an object")
+                resume_manifest = dict(candidate) if isinstance(candidate, dict) else {
+                    key: value for key, value in persisted_checkpoint.items() if key not in {"manifest", "checkpoint_hash"}
+                }
+                persisted_checkpoint["manifest"] = resume_manifest
+                persisted_checkpoint["checkpoint_hash"] = canonical_sha256(resume_manifest)
+            checkpoint_hash = canonical_sha256(persisted_checkpoint)
             if row.cancel_requested:
                 row.state = OperationState.CANCELLED.value
                 row.lease_owner = None
@@ -161,7 +172,7 @@ class OperationService:
             else:
                 row.state = OperationState.RUNNING.value
                 row.progress = progress
-                row.checkpoint_json = checkpoint
+                row.checkpoint_json = persisted_checkpoint
             row.updated_at = db_now()
             self._outbox(
                 session,

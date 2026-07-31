@@ -20,12 +20,16 @@ from prometheus_client import CollectorRegistry, Counter, Gauge, Histogram, gene
 RELEASE = os.getenv("SIP_RELEASE", "1.1.0-dev")
 _NONE = "none"
 _SENSITIVE_KEY = re.compile(
-    r"(?:authorization|cookie|token|secret|password|credential|private[_-]?key|master[_-]?key|signing[_-]?key|content_base64)",
+    r"(?:authorization|cookie|token|secret|password|passcode|credential|private[_-]?key|master[_-]?key|signing[_-]?key|"
+    r"api[_-]?key|content_base64|raw[_-]?(?:media|image|audio|video|asset|content)|transcript|prompt|response|"
+    r"biometric|faceprint|voiceprint|precise[_-]?(?:coordinate|location)|restricted[_-]?(?:construction|facility|record)|"
+    r"controller[_-]?(?:password|address)|network[_-]?(?:address|topology))",
     re.IGNORECASE,
 )
 _SENSITIVE_TEXT = (
     re.compile(r"(?i)\bBearer\s+[A-Za-z0-9._~+/=-]+"),
-    re.compile(r"(?i)\b(password|token|secret|credential|api[_-]?key)\s*[:=]\s*[^\s,;]+"),
+    re.compile(r"(?i)\b(password|passcode|token|secret|credential|api[_-]?key|private[_-]?key)\s*[:=]\s*[^\s,;]+"),
+    re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
 )
 _SAFE_METRIC_LABEL = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:/@-]{0,127}$")
 _SHA256 = re.compile(r"^[a-fA-F0-9]{64}$")

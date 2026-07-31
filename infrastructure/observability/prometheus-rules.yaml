@@ -118,3 +118,22 @@ groups:
         annotations:
           summary: Reconstruction validation reports failed scene regions
           runbook_url: docs/runbooks/OBSERVABILITY_INCIDENTS.md#quality-regression
+
+  - name: sip-operations-intelligence-alerts
+    interval: 30s
+    rules:
+      - alert: SIPBudgetAdmissionDeniedSpike
+        expr: increase(sip_ops_budget_admission_denials_total[10m]) > 5
+        for: 5m
+        labels: {severity: ticket}
+        annotations: {summary: Governed budget admissions are being denied unusually often}
+      - alert: SIPBudgetReservationLeakSuspected
+        expr: sip_ops_budget_expired_active_reservations > 0
+        for: 10m
+        labels: {severity: ticket}
+        annotations: {summary: Expired budget reservations remain active}
+      - alert: SIPSupportGrantExpiredInUse
+        expr: sip_ops_support_expired_active_grants > 0
+        for: 1m
+        labels: {severity: page}
+        annotations: {summary: An expired support grant appears to remain active}

@@ -52,7 +52,7 @@ IN_PROGRESS = {
     "TSTGATE-001", "TSTGATE-003", "TSTLAY-002", "TSTLAY-004", "TSTSEC-003",
     "TSTSTRAT-001", "TSTSTRAT-002",
 }
-EXTERNAL = {"DATDB-004", "DELDEV-005", "OPSDR-002", "OPSSEC-005"}
+EXTERNAL = {"DATDB-004", "DELDEV-005", "OPSDR-002", "OPSSEC-005", "OPSPERF-001", "OPSPERF-002"}
 
 UNVERIFIED_DETAILS = {
     "PLTVIEW-007": (
@@ -71,7 +71,8 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "ARCDEP": ["infrastructure/compose/docker-compose.yml", "infrastructure/kubernetes/base", "infrastructure/terraform", "tools/validate_infrastructure.py"],
     "ARCIAM": ["src/sip/auth.py", "src/sip/policy.py", "src/sip/api.py", "src/sip/tenancy.py", "src/sip/database.py", "migrations/versions/0015_progress06_r1_security_controls.py"],
     "ARCHHYB": ["src/sip/hybrid.py", "src/sip/representations.py", "src/sip/operations.py", "src/sip/api.py", "src/sip/database.py", "services/provider-registry", "services/representation-api", "migrations/versions/0011_governed_hybrid_representation.py"],
-    "ARCOBS": ["src/sip/observability.py", "src/sip/api.py", "src/sip/operations.py", "infrastructure/observability"],
+    "ARCOBS": ["src/sip/observability.py", "src/sip/ops_intelligence.py", "src/sip/api.py", "src/sip/operations.py", "infrastructure/observability"],
+    "ARCRES": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/search.py", "src/sip/database.py", "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"],
     "CAPIOS": ["apps/ios-capture/Sources", "apps/ios-capture/Tests", "schemas/jsonschema"],
     "CAPREC": ["apps/ios-capture/Sources/CaptureCore", "apps/ios-capture/Tests/CaptureCoreTests"],
     "CAPSENS": ["apps/ios-capture/Sources/CaptureSensors", "apps/ios-capture/Tests/CaptureCoreTests"],
@@ -134,7 +135,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "LIFEXP": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/database.py", "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"],
     "LIFPRESV": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/archive_safety.py", "src/sip/database.py", "migrations/versions/0014_vertical_mvp.py", "migrations/versions/0015_progress06_r1_security_controls.py", "docs/operator/LIVEFOREVER_PRESERVATION.md"],
     "OPSPRIV": ["src/sip/security_ops.py", "src/sip/database.py", "src/sip/api.py", "src/sip/policy.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md", "docs/user/PROGRESS_07_PRIVACY_AND_ACCESS.md"],
-    "OPSCOST": ["src/sip/lifecycle.py", "src/sip/operations.py", "src/sip/database.py"],
+    "OPSCOST": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/database.py", "apps/web/components/CostEstimatePanel.tsx", "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"],
     "OPSAUDIT": [
         "src/sip/security_ops.py",
         "src/sip/audit.py",
@@ -149,7 +150,10 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "OPSCICD": ["src/sip/security_ops.py", ".github/workflows/ci.yml", ".github/workflows/release.yml", ".github/workflows/progress07-security.yml", "tools/progress07_supply_chain_check.py", "tools/release.py", "tools/security_check.py", "tools/license_check.py", "infrastructure/security/release-admission-policy.json"],
     "OPSDR": ["src/sip/lifecycle.py", "src/sip/exporting.py", "docs/operator/BACKUP_RESTORE.md", "tools/run_demo.py"],
     "OPSSEC": ["src/sip/security_ops.py", "src/sip/security.py", "src/sip/policy.py", "src/sip/api.py", "src/sip/database.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "services/security-ops", "infrastructure/containers", "infrastructure/kubernetes/base", "infrastructure/security", "infrastructure/postgres/audit-immutability.sql", "tools/security_check.py", "tools/progress07_supply_chain_check.py", "docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md"],
-    "OPSSRE": ["docs/operator/INCIDENT_RESPONSE.md", "docs/runbooks/OPERATIONS_INCIDENTS.md", "docs/runbooks/OBSERVABILITY_INCIDENTS.md"],
+    "OPSSRE": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/security_ops.py", "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md", "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"],
+    "OPSPERF": ["src/sip/ops_intelligence.py", "src/sip/observability.py", "apps/web/lib/cost-planner.ts", "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"],
+    "OPSSUP": ["src/sip/ops_intelligence.py", "src/sip/archive_safety.py", "src/sip/api.py", "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"],
+    "RECGPU": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/database.py", "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"],
     "OPSTHR": ["docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md", "src/sip/security_ops.py", "src/sip/security.py", "src/sip/worker_sandbox.py", "tools/demo_progress07_security.py"],
     "OPSTHREA": ["docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md", "src/sip/security_ops.py", "src/sip/security.py", "src/sip/worker_sandbox.py", "tools/demo_progress07_security.py"],
     "PLTAPI": ["src/sip/api.py", "schemas/openapi", "services"],
@@ -202,6 +206,14 @@ EXTERNAL_DETAILS = {
         "Security Engineering / Mobile Release Engineering",
         "Build signed production containers and Apple mobile artifacts, execute vulnerability and hardening scans against their final digests, verify patch-SLA tracking, and retain scanner databases, signatures, and review evidence.",
     ),
+    "OPSPERF-001": (
+        "Mobile Engineering / Performance QA",
+        "Run the declared capture profile on every supported physical iPhone/iPad tier under controlled thermal and battery states; retain frame-drop, responsiveness, thermal, device, build, and profile evidence.",
+    ),
+    "OPSPERF-002": (
+        "Mobile Engineering / Network Performance QA",
+        "Run foreground-responsiveness and resumable-upload trials on supported physical devices across declared network profiles; retain throughput, responsiveness, interruption, resume, device, and build evidence.",
+    ),
 }
 
 CANONICAL_PYTHON_SUITES = (
@@ -227,7 +239,8 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "GOVRISK": ["governance/risk-register.json", "build/reports/governance-check.json"],
     "ARCSYNC": ["build/reports/tests/unit.xml"],
     "ARCDEP": ["build/reports/infrastructure-static-validation.json"],
-    "ARCOBS": ["build/reports/infrastructure-static-validation.json"],
+    "ARCOBS": ["build/reports/infrastructure-static-validation.json", "build/evidence/demo-progress08-operations.json"],
+    "ARCRES": ["build/reports/tests/integration.xml", "build/evidence/demo-progress08-operations.json"],
     "CAPIOS": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
     "CAPREC": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
     "CAPSENS": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
@@ -280,7 +293,11 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "LIFEXP": ["build/evidence/demos/liveforever.json", "build/reports/tests/security.xml"],
     "LIFPRESV": ["build/evidence/demos/liveforever.json", "build/evidence/demos/export.json", "build/evidence/demos/restore.json"],
     "OPSPRIV": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
-    "OPSCOST": ["src/sip/lifecycle.py", "src/sip/operations.py", "src/sip/database.py"],
+    "OPSCOST": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/evidence/demo-progress08-operations.json"],
+    "OPSPERF": ["build/reports/tests/integration.xml", "build/reports/web-runtime-test-report.json", "build/evidence/demo-progress08-operations.json"],
+    "OPSSUP": ["build/reports/tests/security.xml", "build/reports/tests/integration.xml", "build/evidence/demo-progress08-operations.json"],
+    "OPSSRE": ["build/reports/tests/integration.xml", "build/evidence/demo-progress08-operations.json"],
+    "RECGPU": ["build/reports/tests/integration.xml", "build/reports/benchmark-report.json"],
     "OPSAUDIT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
     "OPSKEY": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
     "OPSCICD": ["build/reports/release-report.json", "build/reports/security-report.json", "build/reports/license-gate.json", "build/reports/progress07-supply-chain-report.json"],

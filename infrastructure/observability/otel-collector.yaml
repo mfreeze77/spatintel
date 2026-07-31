@@ -31,6 +31,14 @@ processors:
         action: delete
       - key: sip.transcript.content
         action: delete
+      - key: sip.raw_media
+        action: delete
+      - key: sip.biometric.content
+        action: delete
+      - key: sip.restricted_construction.details
+        action: delete
+      - key: sip.private_key
+        action: delete
   resource:
     attributes:
       - key: deployment.environment

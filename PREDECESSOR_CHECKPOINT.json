@@ -71,6 +71,16 @@
     "source_tree_root_sha256": "f6980edfe32e56d6e92d4495de01e7922e6b4f54adaa6d6e9efd81ab50e5ee68",
     "tree": "6effd40bed3334581eba6de2f2d5769f73b10779"
   },
+  "accepted_progress_07_checkpoint": {
+    "branch": "progress-07-bounded",
+    "checkpoint_id": "sip-v1.1.0-progress-07",
+    "commit": "986c198a127616f8bf1d2379e9f9df5138dabc40",
+    "outer_delivery_zip_sha256": "cb9e363ba0ee4f39d4602710fd3b6e786853daa1439bd69b596d5bda2283ce83",
+    "project_zip_sha256": "cf2ee7aedb50e4b44cea0850c3f958e57368907df43bdfb3d4c535a1b987e8d1",
+    "relationship": "Accepted Progress 07 is the exact source-history and evidence base authorized by True North for the bounded Progress 08 OPS-002 milestone.",
+    "source_tree_root_sha256": "66b9e9f1a831874f5c9d654d07a97b9b79a4b38979a4d02dc4529a523c50472e",
+    "tree": "34eae3b05db111127082ed3f6e454c07f7395c53"
+  },
   "import_mapping": {
     "commit": "36e9c44d21a9c47d85971ee945daec8fc98e26d6",
     "relationship": "The import commit reproduces all 2,419 files of the predecessor Progress 04 ZIP byte-for-byte. The predecessor Git object originally claimed by Progress 04 was unavailable, so continuity is represented explicitly as an archive-to-import-commit mapping rather than a false parent relationship.",

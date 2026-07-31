@@ -7,11 +7,22 @@ source:
   section: 4. Normative requirements
 requirement: Incident actions shall be audited and preserve forensic evidence without copying sensitive data unnecessarily.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/ops_intelligence.py
+- src/sip/operations.py
+- src/sip/security_ops.py
+- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md
 automated_test_ids:
-- REQ-OPSSRE-003
-retained_evidence: []
+- tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence
+- tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days
+- tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence
+retained_evidence:
+- build/evidence/demo-progress08-operations.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +31,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

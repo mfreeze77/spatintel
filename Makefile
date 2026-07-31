@@ -7,7 +7,7 @@ PYTHONPATH := $(CURDIR)/src:$(CURDIR)
 REPORT_DIR := build/reports
 
 .PHONY: help bootstrap doctor dev test test-all lint typecheck security license-check spec-check benchmark \
-        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever demo-security export-demo restore-demo \
+        demo-foundation demo-hybrid demo-scene-runtime demo-construction demo-liveforever demo-security demo-operations export-demo restore-demo \
         contracts infrastructure migrations swift-test web-test desktop-test web-acceptance fixtures release release-mode traceability-evidence checkpoint-verify clean
 
 help:
@@ -29,6 +29,7 @@ help:
 	  '  make demo-construction  Run retained synthetic Construction demonstration' \
 	  '  make demo-liveforever   Run retained synthetic LiveForever demonstration' \
 	  '  make demo-security      Run retained synthetic Progress 07 security/privacy demonstration' \
+	  '  make demo-operations    Run retained synthetic Progress 08 operations-intelligence demonstration' \
 	  '  make export-demo        Run preservation export demonstration' \
 	  '  make restore-demo       Run clean preservation restore demonstration' \
 	  '  make release            Build a hashed release candidate (release gates remain fail-closed)' \
@@ -119,6 +120,7 @@ spec-check:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress08_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m sip.spec_lint
 
 traceability-evidence:
@@ -129,6 +131,7 @@ traceability-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r1_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress06_r2_traceability.py --check
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress07_traceability.py --check
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/audit_progress08_traceability.py --check
 
 benchmark:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_benchmarks.py
@@ -150,6 +153,9 @@ demo-liveforever:
 
 demo-security:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/demo_progress07_security.py
+
+demo-operations:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/demo_progress08_operations.py
 
 export-demo:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_demo.py export

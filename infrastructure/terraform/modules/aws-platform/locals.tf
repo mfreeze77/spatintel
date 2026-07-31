@@ -19,6 +19,7 @@ locals {
     "notification-service",
     "audit-service",
     "security-ops",
+    "operations-intelligence",
     "representation-api",
     "provider-registry",
     "representation-publisher",

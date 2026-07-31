@@ -7,11 +7,20 @@ source:
   section: 4. Normative requirements
 requirement: Upload shall saturate available policy-permitted bandwidth while preserving foreground responsiveness and resumability.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- src/sip/ops_intelligence.py
+- src/sip/observability.py
+- apps/web/lib/cost-planner.ts
+- docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSPERF-002
-retained_evidence: []
+- tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels
+- tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets
+retained_evidence:
+- build/evidence/demo-progress08-operations.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
+- build/reports/web-runtime-test-report.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -19,6 +28,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  status: REQUIRED
+  owner: Mobile Engineering / Network Performance QA
+  gap: Run foreground-responsiveness and resumable-upload trials on supported physical devices across declared network profiles;
+    retain throughput, responsiveness, interruption, resume, device, and build evidence.

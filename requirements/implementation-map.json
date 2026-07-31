@@ -660,6 +660,7 @@
     "ARCOBS-001": {
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -670,22 +671,37 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability",
         "tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads",
+        "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
         "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers",
         "tests/contract/test_observability.py::test_structured_logs_include_required_safe_context_without_raw_identifiers",
         "tests/contract/test_observability_infrastructure.py::test_local_collector_is_non_exporting_and_privacy_filtered",
-        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned"
+        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "ARCOBS-002": {
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -696,23 +712,37 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_invalid_request_id_and_content_length_are_bounded",
         "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers",
         "tests/contract/test_observability.py::test_operation_depth_inflight_and_retry_metrics_are_governed",
         "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels",
         "tests/contract/test_observability_infrastructure.py::test_kubernetes_workers_are_scrapeable_only_through_observability_policy",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
         "tests/contract/test_observability_infrastructure.py::test_prometheus_scrapes_every_api_and_isolated_worker",
-        "tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions"
+        "tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "ARCOBS-003": {
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -723,18 +753,30 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
         "tests/contract/test_worker_protocol.py::test_invalid_trace_context_is_rejected_before_operation_persistence",
-        "tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease"
+        "tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "ARCOBS-004": {
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -746,12 +788,160 @@
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels",
-        "tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals"
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "ARCOBS-005": {
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "src/sip/operations.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_audit_storage_remains_append_only_for_support_users",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCRES-001": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCRES-002": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCRES-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCRES-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "ARCRES-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_governed_hybrid.py::test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
       ]
     },
     "ARCSVC-001": {
@@ -2929,7 +3119,8 @@
       "test_ids": [
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked",
         "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
-        "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked"
+        "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
@@ -6342,6 +6533,181 @@
         "build/reports/tests/security.xml"
       ]
     },
+    "OPSCOST-001": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSCOST-002": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSCOST-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_override_and_alert_approval_are_independent_and_expiring",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval",
+        "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSCOST-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSCOST-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSCOST-006": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
     "OPSDR-005": {
       "implementation_files": [
         "src/sip/lifecycle.py",
@@ -6545,6 +6911,150 @@
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSPERF-001": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Run the declared capture profile on every supported physical iPhone/iPad tier under controlled thermal and battery states; retain frame-drop, responsiveness, thermal, device, build, and profile evidence.",
+      "owner": "Mobile Engineering / Performance QA",
+      "test_ids": [
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "OPSPERF-002": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Run foreground-responsiveness and resumable-upload trials on supported physical devices across declared network profiles; retain throughput, responsiveness, interruption, resume, device, and build evidence.",
+      "owner": "Mobile Engineering / Network Performance QA",
+      "test_ids": [
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "OPSPERF-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "OPSPERF-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "OPSPERF-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ]
+    },
+    "OPSPERF-006": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/reports/web-runtime-test-report.json"
       ]
     },
     "OPSPRIV-001": {
@@ -6947,9 +7457,11 @@
     },
     "OPSSRE-001": {
       "implementation_files": [
-        "docs/operator/INCIDENT_RESPONSE.md",
-        "docs/runbooks/OPERATIONS_INCIDENTS.md",
-        "docs/runbooks/OBSERVABILITY_INCIDENTS.md"
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -6957,18 +7469,24 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
       ]
     },
     "OPSSRE-002": {
       "implementation_files": [
-        "docs/operator/INCIDENT_RESPONSE.md",
-        "docs/runbooks/OPERATIONS_INCIDENTS.md",
-        "docs/runbooks/OBSERVABILITY_INCIDENTS.md"
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -6976,11 +7494,279 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
       ],
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSSRE-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSSRE-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSSRE-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSSRE-006": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "OPSSUP-001": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSSUP-002": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSSUP-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSSUP-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSSUP-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "OPSSUP-006": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "OPSTHR-007": {
@@ -8398,6 +9184,138 @@
         "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
       ],
       "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-001": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-002": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-003": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-004": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-005": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ]
+    },
+    "RECGPU-006": {
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
       ]

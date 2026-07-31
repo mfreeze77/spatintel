@@ -11,16 +11,25 @@ verification_method: Controlled verification
 implementation_status: VERIFIED
 implementation_files:
 - src/sip/observability.py
+- src/sip/ops_intelligence.py
 - src/sip/api.py
 - src/sip/operations.py
 - infrastructure/observability
 automated_test_ids:
 - tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels
+- tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics
 - tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals
+- tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared
+- tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard
+- tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets
+- tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval
 retained_evidence:
+- build/evidence/demo-progress08-operations.json
 - build/reports/infrastructure-static-validation.json
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

@@ -1,0 +1,12 @@
+{
+  "title": "SIP Operations Intelligence",
+  "schemaVersion": 39,
+  "panels": [
+    {"id": 1, "title": "SLO error-budget burn", "type": "timeseries"},
+    {"id": 2, "title": "Queue depth and wait", "type": "timeseries"},
+    {"id": 3, "title": "Budget reserved vs hard limit", "type": "timeseries"},
+    {"id": 4, "title": "Estimate vs actual", "type": "timeseries"},
+    {"id": 5, "title": "Quality drift / coverage / residual", "type": "timeseries"},
+    {"id": 6, "title": "Support access denials", "type": "timeseries"}
+  ]
+}

@@ -7,11 +7,26 @@ source:
   section: 4. Normative requirements
 requirement: Costs shall roll up by tenant, project, capture, run, stage, model, and calendar period.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/ops_intelligence.py
+- src/sip/operations.py
+- src/sip/database.py
+- apps/web/components/CostEstimatePanel.tsx
+- docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSCOST-002
-retained_evidence: []
+- tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration
+- tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared
+- tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history
+- tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission
+- tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed
+retained_evidence:
+- build/evidence/demo-progress08-operations.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +35,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

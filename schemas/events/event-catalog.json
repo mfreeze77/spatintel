@@ -5,6 +5,13 @@
   "delivery_semantics": "at-least-once with event_id and payload_hash deduplication",
   "events": [
     {
+      "aggregate": "after_action_review",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "after_action_review.created",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "agent_proposal",
       "classification": "inherits_project",
       "owner": "search-service",
@@ -23,6 +30,20 @@
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "annotation.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "anomaly_alert",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "anomaly.acknowledged",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "anomaly_alert",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "anomaly.detected",
       "version": "1.0.0"
     },
     {
@@ -61,10 +82,59 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "cost_estimate",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.admission_denied",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "budget_override",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.override_approved",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "budget_override",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.override_requested",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "budget_policy",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.policy_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "budget_reservation",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.reservation_admitted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "budget_reservation",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "budget.reservation_released",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "cache_invalidation",
       "classification": "inherits_project",
       "owner": "security-ops",
       "type": "cache_invalidation.completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "capacity_plan",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "capacity.plan_registered",
       "version": "1.0.0"
     },
     {
@@ -93,6 +163,20 @@
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "change_candidate.reviewed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "compute_profile",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "compute_profile.oom_recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "compute_profile",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "compute_profile.registered",
       "version": "1.0.0"
     },
     {
@@ -208,6 +292,27 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "actual_cost",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "cost.actual_recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "cost_estimate",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "cost.estimated",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "cost_reconciliation",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "cost.reconciled",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "deletion_request",
       "classification": "restricted",
       "owner": "evidence-service",
@@ -229,6 +334,13 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "game_day_exercise",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "game_day.completed",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "geometry_manifest",
       "classification": "inherits_resource",
       "owner": "evidence-service",
@@ -247,6 +359,13 @@
       "classification": "inherits_project",
       "owner": "security-ops",
       "type": "immersive_safety.decided",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "incident_action",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "incident.action_recorded",
       "version": "1.0.0"
     },
     {
@@ -363,6 +482,13 @@
     },
     {
       "aggregate": "operation",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "operation.checkpoint_resume_authorized",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "operation",
       "classification": "internal",
       "owner": "workflow-service",
       "type": "operation.checkpointed",
@@ -415,6 +541,20 @@
       "classification": "internal",
       "owner": "workflow-service",
       "type": "operation.succeeded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "performance_budget",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "performance_budget.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "price_catalog",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "price_catalog.registered",
       "version": "1.0.0"
     },
     {
@@ -499,6 +639,13 @@
       "classification": "inherits_project",
       "owner": "security-ops",
       "type": "provider_output.validated",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "queue_snapshot",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "queue.snapshot_recorded",
       "version": "1.0.0"
     },
     {
@@ -614,6 +761,13 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "resilience_profile",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "resilience.profile_registered",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "saved_query",
       "classification": "inherits_project",
       "owner": "search-service",
@@ -663,6 +817,20 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "slo_definition",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "slo.definition_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "slo_measurement",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "slo.measurement_recorded",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "spatial_transform",
       "classification": "inherits_project",
       "owner": "scene-service",
@@ -681,6 +849,55 @@
       "classification": "inherits_project",
       "owner": "security-ops",
       "type": "supply_chain_release.promoted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_access_grant",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.access_granted",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_access_grant",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.access_requested",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_access_grant",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.access_revoked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_bundle",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.bundle_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_ticket",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.ticket_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "support_ticket",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "support.ticket_resolved",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "telemetry_record",
+      "classification": "inherits_project",
+      "owner": "operations-intelligence",
+      "type": "telemetry.recorded",
       "version": "1.0.0"
     },
     {

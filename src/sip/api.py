@@ -1258,6 +1258,264 @@ class SupplyChainReleaseCreate(StrictModel):
     retrospective_review_due_at: datetime | None = None
 
 
+class TelemetryRecordCreate(StrictModel):
+    telemetry_type: str
+    service: str
+    release: str
+    correlation_id: str
+    trace_id: str | None = Field(default=None, pattern=r'^[a-f0-9]{32}$')
+    traceparent: str | None = None
+    operation_id: str | None = None
+    route_template: str | None = None
+    stage: str | None = None
+    model_id: str | None = None
+    checkpoint_hash: str | None = Field(default=None, pattern=r'^[a-f0-9]{64}$')
+    capture_profile: str | None = None
+    hardware_profile: str | None = None
+    execution_profile: str | None = None
+    queue_class: str | None = None
+    vertical: str | None = None
+    severity: str = 'info'
+    outcome: str
+    stable_error_code: str | None = None
+    payload: dict[str, Any] = Field(default_factory=dict)
+    labels: dict[str, Any] = Field(default_factory=dict)
+
+class ResilienceProfileCreate(StrictModel):
+    component: str
+    version: str
+    owner: str
+    blast_radius: str
+    retry_safety: str
+    recovery_point_seconds: int = Field(ge=0)
+    recovery_time_seconds: int = Field(gt=0)
+    degraded_behavior: dict[str, Any]
+    dependencies: list[dict[str, Any]] = Field(default_factory=list)
+
+class ComputeProfileCreate(StrictModel):
+    name: str
+    revision: str
+    resolution: str
+    dtype: str
+    backend: str
+    model_id: str
+    checkpoint_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+    window_policy: dict[str, Any]
+    memory_limit_mb: int = Field(gt=0)
+    timeout_seconds: int = Field(gt=0)
+    output_class: str
+    quality_tier: str
+    cuda_version: str | None = None
+    driver_constraint: str | None = None
+    container_digest: str
+    tenant_isolation: str
+    oom_fallback: dict[str, Any]
+    expected_runtime_seconds: float = Field(gt=0)
+    peak_vram_mb: int = Field(ge=0)
+    peak_ram_mb: int = Field(gt=0)
+    cost_stage_weights: dict[str, float]
+
+class ComputeCompatibilityCheck(StrictModel):
+    runtime: dict[str, Any]
+
+class ComputeOOMDisposition(StrictModel):
+    checkpoint_id: str | None = None
+
+class SLOCreate(StrictModel):
+    project_id: str | None = None
+    name: str
+    target_type: str
+    dimensions: dict[str, Any]
+    indicator: dict[str, Any]
+    objective: float = Field(gt=0, le=1)
+    percentile: float = Field(gt=0, le=1)
+    window_seconds: int = Field(gt=0)
+    budget: dict[str, Any]
+    degradation_behavior: str
+    evidence_class: str
+    owner: str
+    version: str
+
+class SLOMeasurementCreate(StrictModel):
+    project_id: str | None = None
+    window_start: datetime
+    window_end: datetime
+    numerator: float = Field(ge=0)
+    denominator: float = Field(gt=0)
+    dimensions: dict[str, Any]
+    source_profile: str
+    source_manifest_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+
+class PerformanceBudgetCreate(StrictModel):
+    project_id: str | None = None
+    profile_type: str
+    profile_name: str
+    input_class: dict[str, Any]
+    hardware_profile: str
+    execution_profile: str
+    model_id: str | None = None
+    checkpoint_hash: str | None = Field(default=None, pattern=r'^[a-f0-9]{64}$')
+    queue_class: str | None = None
+    vertical: str | None = None
+    percentile: float = Field(gt=0, le=1)
+    warm_state: str
+    concurrency: int = Field(gt=0)
+    budgets: dict[str, float]
+    degradation_behavior: str
+    evidence_class: str
+    version: str
+
+class PerformanceBudgetEvaluate(StrictModel):
+    observed: dict[str, float]
+    evidence_class: str
+    source_manifest_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+
+class PriceCatalogCreate(StrictModel):
+    version: str
+    currency: str = Field(min_length=3, max_length=3)
+    effective_at: datetime
+    expires_at: datetime | None = None
+    prices: dict[str, dict[str, Any]]
+    source_reference: str
+    source_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+
+class CostEstimateCreate(StrictModel):
+    operation_id: str | None = None
+    capture_id: str | None = None
+    run_id: str
+    compute_profile_id: str
+    price_catalog_id: str
+    input_class: dict[str, Any]
+    quantities: dict[str, float]
+    ttl_seconds: int = Field(default=3600, gt=0, le=86400)
+
+class ActualCostCreate(StrictModel):
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    operation_id: str | None = None
+    capture_id: str | None = None
+    run_id: str
+    stage: str
+    model_id: str | None = None
+    checkpoint_hash: str | None = Field(default=None, pattern=r'^[a-f0-9]{64}$')
+    price_catalog_id: str
+    usage: dict[str, float]
+    occurred_at: datetime
+
+class CapacityPlanCreate(StrictModel):
+    project_id: str | None = None
+    profile_name: str
+    measurement_window: dict[str, Any]
+    scene_minutes: float = Field(gt=0)
+    frames: int = Field(gt=0)
+    area_m2: float = Field(gt=0)
+    peak_concurrency: int = Field(gt=0)
+    headroom_ratio: float = Field(ge=1.0)
+    required_capacity: dict[str, Any]
+    evidence_class: str
+    source_manifest_hash: str = Field(pattern=r'^[a-f0-9]{64}$')
+
+class IncidentActionCreate(StrictModel):
+    incident_reference: str
+    runbook_reference: str
+    action_type: str
+    command_reference: str | None = None
+    decision: dict[str, Any]
+    evidence_references: list[dict[str, Any]] = Field(default_factory=list, max_length=50)
+    validation: dict[str, Any]
+    rollback: dict[str, Any]
+    communication: dict[str, Any]
+    sensitive_copy_created: bool = False
+    occurred_at: datetime
+
+class BudgetPolicyCreate(StrictModel):
+    project_id: str | None = None
+    revision: str
+    currency: str = Field(min_length=3, max_length=3)
+    period_seconds: int = Field(gt=0)
+    soft_limit: float = Field(ge=0)
+    hard_limit: float = Field(gt=0)
+    concurrency_limit: int = Field(gt=0)
+    storage_limit_bytes: int = Field(gt=0)
+    retention_limit_days: int = Field(gt=0)
+    anomaly_threshold: float = Field(gt=0)
+
+class BudgetOverrideCreate(StrictModel):
+    budget_id: str
+    reason: str
+    additional_amount: float = Field(gt=0)
+    currency: str = Field(min_length=3, max_length=3)
+    expires_at: datetime
+
+class BudgetReservationCreate(StrictModel):
+    estimate_id: str
+    operation_id: str | None = None
+    idempotency_key: str = Field(min_length=1, max_length=256)
+    ttl_seconds: int = Field(default=3600, gt=0, le=86400)
+    override_id: str | None = None
+
+class BudgetReservationRelease(StrictModel):
+    reason: str
+
+class AnomalyCreate(StrictModel):
+    category: str
+    severity: str
+    metric_name: str
+    observed_value: float
+    baseline_value: float
+    threshold: float = Field(gt=0)
+    evidence: dict[str, Any]
+
+class AnomalyAcknowledge(StrictModel):
+    suppress_until: datetime | None = None
+
+class QueueSnapshotCreate(StrictModel):
+    queue_class: str
+    depth: int = Field(ge=0)
+    in_flight: int = Field(ge=0)
+    retries: int = Field(ge=0)
+    oldest_age_seconds: float = Field(ge=0)
+    capacity: int = Field(gt=0)
+
+class SupportAccessCreate(StrictModel):
+    resource_scope: dict[str, Any]
+    purpose: str
+    personnel: list[str] = Field(min_length=1)
+    duration_seconds: int = Field(ge=60, le=28800)
+
+class SupportBundleCreate(StrictModel):
+    grant_id: str
+    telemetry_ids: list[str] | None = None
+    hardware_profile: dict[str, Any]
+    manifest_references: list[dict[str, Any]] = Field(default_factory=list)
+
+class SupportTicketCreate(StrictModel):
+    risk_class: str
+    issue_type: str
+    summary: str
+    stable_error_codes: list[str] = Field(default_factory=list)
+
+class SupportTicketResolve(StrictModel):
+    remediation_reference: str
+    affected_release: str
+
+class GameDayCreate(StrictModel):
+    scenario: str
+    runbook_reference: str
+    participants: list[str] = Field(min_length=1)
+    observations: list[dict[str, Any]]
+    corrective_requirements: list[dict[str, Any]]
+    test_ids: list[str] = Field(min_length=1)
+    started_at: datetime
+    completed_at: datetime
+
+class AfterActionReviewCreate(StrictModel):
+    incident_reference: str
+    findings: list[dict[str, Any]] = Field(min_length=1)
+    corrective_requirements: list[dict[str, Any]] = Field(min_length=1)
+    test_ids: list[str] = Field(min_length=1)
+    owner: str
+    due_at: datetime
+
 def _context(request: Request) -> PlatformContext:
     return request.app.state.platform
 
@@ -1296,6 +1554,7 @@ def _routers() -> dict[str, APIRouter]:
     memory = APIRouter(tags=['liveforever'])
     collaboration = APIRouter(tags=['collaboration'])
     security_ops = APIRouter(tags=['security-ops'])
+    operations_intelligence = APIRouter(tags=['operations-intelligence'])
 
     @control.get('/version', operation_id='get_version')
     def version(request: Request) -> dict[str, Any]:
@@ -3474,7 +3733,203 @@ def _routers() -> dict[str, APIRouter]:
         _require(request, principal, action='security:release_manage', tenant_id=principal.tenant_id)
         return _context(request).security_ops.promote_release(release_record_id=release_record_id, actor_id=principal.subject_id)
 
-    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops}
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/telemetry', status_code=201, operation_id='record_operations_telemetry')
+    def record_operations_telemetry(project_id: str, body: TelemetryRecordCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_telemetry(
+            tenant_id=principal.tenant_id, project_id=project_id, telemetry_type=body.telemetry_type,
+            service=body.service, release=body.release, correlation_id=body.correlation_id,
+            trace_id=body.trace_id, traceparent=body.traceparent, operation_id=body.operation_id, route_template=body.route_template,
+            stage=body.stage, model_id=body.model_id, checkpoint_hash=body.checkpoint_hash,
+            capture_profile=body.capture_profile, hardware_profile=body.hardware_profile,
+            execution_profile=body.execution_profile, queue_class=body.queue_class,
+            vertical=body.vertical, severity=body.severity, outcome=body.outcome,
+            stable_error_code=body.stable_error_code, payload=body.payload, labels=body.labels,
+            actor_id=principal.subject_id,
+        )
+
+    @operations_intelligence.get('/v1/projects/{project_id}/operations/telemetry', operation_id='query_operations_telemetry')
+    def query_operations_telemetry(project_id: str, request: Request, principal: Principal, telemetry_type: str | None = Query(default=None), correlation_id: str | None = Query(default=None), service: str | None = Query(default=None), stage: str | None = Query(default=None), outcome: str | None = Query(default=None), limit: int = Query(default=100, ge=1, le=500)) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.query_telemetry(tenant_id=principal.tenant_id, project_id=project_id, telemetry_type=telemetry_type, correlation_id=correlation_id, service=service, stage=stage, outcome=outcome, limit=limit)
+
+    @operations_intelligence.get('/v1/projects/{project_id}/operations/quality-dashboard', operation_id='get_operations_quality_dashboard')
+    def get_operations_quality_dashboard(project_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.quality_dashboard(tenant_id=principal.tenant_id, project_id=project_id)
+
+    @operations_intelligence.post('/v1/operations/resilience-profiles', status_code=201, operation_id='register_resilience_profile')
+    def register_resilience_profile(body: ResilienceProfileCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id)
+        return _context(request).operations_intelligence.register_resilience_profile(component=body.component, version=body.version, owner=body.owner, blast_radius=body.blast_radius, retry_safety=body.retry_safety, recovery_point_seconds=body.recovery_point_seconds, recovery_time_seconds=body.recovery_time_seconds, degraded_behavior=body.degraded_behavior, dependencies=body.dependencies, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/operations/compute-profiles', status_code=201, operation_id='register_compute_profile')
+    def register_compute_profile(body: ComputeProfileCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id)
+        return _context(request).operations_intelligence.register_compute_profile(**body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/operations/compute-profiles/{compute_profile_id}/compatibility', operation_id='check_compute_compatibility')
+    def check_compute_compatibility(compute_profile_id: str, body: ComputeCompatibilityCheck, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id)
+        return _context(request).operations_intelligence.check_compute_compatibility(compute_profile_id=compute_profile_id, runtime=body.runtime)
+
+    @operations_intelligence.post('/v1/operations/compute-profiles/{compute_profile_id}/oom-disposition', operation_id='compute_oom_disposition')
+    def compute_oom_disposition(compute_profile_id: str, body: ComputeOOMDisposition, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id)
+        return _context(request).operations_intelligence.explicit_oom_disposition(compute_profile_id=compute_profile_id, checkpoint_id=body.checkpoint_id, tenant_id=principal.tenant_id, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/slos', status_code=201, operation_id='register_slo')
+    def register_slo(tenant_id: str, body: SLOCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:slo_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).operations_intelligence.register_slo(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/slos/{slo_id}/measurements', status_code=201, operation_id='record_slo_measurement')
+    def record_slo_measurement(tenant_id: str, slo_id: str, body: SLOMeasurementCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:slo_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).operations_intelligence.record_slo_measurement(tenant_id=tenant_id, slo_id=slo_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/performance-budgets', status_code=201, operation_id='register_performance_budget')
+    def register_performance_budget(tenant_id: str, body: PerformanceBudgetCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:slo_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).operations_intelligence.register_performance_budget(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/performance-budgets/{performance_budget_id}/evaluate', operation_id='evaluate_performance_budget')
+    def evaluate_performance_budget(tenant_id: str, performance_budget_id: str, body: PerformanceBudgetEvaluate, request: Request, principal: Principal, project_id: str | None = Query(default=None)) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.evaluate_performance_budget(tenant_id=tenant_id, project_id=project_id, performance_budget_id=performance_budget_id, observed=body.observed, evidence_class=body.evidence_class, source_manifest_hash=body.source_manifest_hash)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/price-catalogs', status_code=201, operation_id='register_price_catalog')
+    def register_price_catalog(tenant_id: str, body: PriceCatalogCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=tenant_id)
+        return _context(request).operations_intelligence.register_price_catalog(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/cost-estimates', status_code=201, operation_id='estimate_operation_cost')
+    def estimate_operation_cost(project_id: str, body: CostEstimateCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.estimate_cost(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/actual-costs', status_code=201, operation_id='record_operation_actual_cost')
+    def record_operation_actual_cost(project_id: str, body: ActualCostCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_actual_cost(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.get('/v1/projects/{project_id}/operations/cost-rollup', operation_id='get_operation_cost_rollup')
+    def get_operation_cost_rollup(project_id: str, request: Request, principal: Principal, period_start: datetime, period_end: datetime, dimensions: list[str] = Query(default=['stage', 'model'])) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_read', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.cost_rollup(tenant_id=principal.tenant_id, project_id=project_id, period_start=period_start, period_end=period_end, dimensions=dimensions)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/cost-reconciliations/{run_id}', status_code=201, operation_id='reconcile_operation_cost')
+    def reconcile_operation_cost(project_id: str, run_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.reconcile_cost(tenant_id=principal.tenant_id, project_id=project_id, run_id=run_id, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/capacity-plans', status_code=201, operation_id='register_capacity_plan')
+    def register_capacity_plan(tenant_id: str, body: CapacityPlanCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:slo_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).operations_intelligence.register_capacity_plan(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/{operation_id}/resume-checkpoint', operation_id='authorize_checkpoint_resume')
+    def authorize_checkpoint_resume(project_id: str, operation_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.verified_checkpoint_resume(tenant_id=principal.tenant_id, project_id=project_id, operation_id=operation_id, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/tenants/{tenant_id}/operations/budgets', status_code=201, operation_id='set_budget_policy')
+    def set_budget_policy(tenant_id: str, body: BudgetPolicyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:quota_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).operations_intelligence.register_budget_policy(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/budget-overrides', status_code=201, operation_id='request_budget_override')
+    def request_budget_override(project_id: str, body: BudgetOverrideCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.request_budget_override(tenant_id=principal.tenant_id, project_id=project_id, requested_by=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/budget-overrides/{override_id}/approve', operation_id='approve_budget_override')
+    def approve_budget_override(project_id: str, override_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:budget_override', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.approve_budget_override(tenant_id=principal.tenant_id, project_id=project_id, override_id=override_id, approved_by=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/budget-reservations', status_code=201, operation_id='reserve_operation_budget')
+    def reserve_operation_budget(project_id: str, body: BudgetReservationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.reserve_budget(tenant_id=principal.tenant_id, project_id=project_id, requested_by=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/budget-reservations/{reservation_id}/release', operation_id='release_operation_budget')
+    def release_operation_budget(project_id: str, reservation_id: str, body: BudgetReservationRelease, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:cost_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.release_budget_reservation(tenant_id=principal.tenant_id, project_id=project_id, reservation_id=reservation_id, reason=body.reason, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/anomalies', status_code=201, operation_id='record_operation_anomaly')
+    def record_operation_anomaly(project_id: str, body: AnomalyCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_anomaly(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/anomalies/{alert_id}/acknowledge', operation_id='acknowledge_operation_anomaly')
+    def acknowledge_operation_anomaly(project_id: str, alert_id: str, body: AnomalyAcknowledge, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.acknowledge_anomaly(tenant_id=principal.tenant_id, project_id=project_id, alert_id=alert_id, actor_id=principal.subject_id, suppress_until=body.suppress_until)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/queue-snapshots', status_code=201, operation_id='record_queue_snapshot')
+    def record_queue_snapshot(project_id: str, body: QueueSnapshotCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_queue_snapshot(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.get('/v1/projects/{project_id}/operations/queue-dashboard', operation_id='get_queue_dashboard')
+    def get_queue_dashboard(project_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:observe', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.queue_dashboard(tenant_id=principal.tenant_id, project_id=project_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-access', status_code=201, operation_id='request_support_access')
+    def request_support_access(project_id: str, body: SupportAccessCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_request', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.request_support_access(tenant_id=principal.tenant_id, project_id=project_id, requested_by=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-access/{grant_id}/approve', operation_id='approve_support_access')
+    def approve_support_access(project_id: str, grant_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_approve', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.approve_support_access(tenant_id=principal.tenant_id, project_id=project_id, grant_id=grant_id, approved_by=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-access/{grant_id}/revoke', operation_id='revoke_support_access')
+    def revoke_support_access(project_id: str, grant_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_approve', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.revoke_support_access(tenant_id=principal.tenant_id, project_id=project_id, grant_id=grant_id, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-bundles', status_code=201, operation_id='create_support_bundle')
+    def create_support_bundle(project_id: str, body: SupportBundleCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_access', tenant_id=principal.tenant_id, project_id=project_id, purpose='support')
+        return _context(request).operations_intelligence.create_support_bundle(tenant_id=principal.tenant_id, project_id=project_id, actor_id=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-bundles/{bundle_id}/verify', operation_id='verify_support_bundle')
+    def verify_support_bundle(project_id: str, bundle_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_access', tenant_id=principal.tenant_id, project_id=project_id, purpose='support')
+        return _context(request).operations_intelligence.verify_support_bundle(tenant_id=principal.tenant_id, project_id=project_id, bundle_id=bundle_id, actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-tickets', status_code=201, operation_id='create_support_ticket')
+    def create_support_ticket(project_id: str, body: SupportTicketCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_request', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.create_support_ticket(tenant_id=principal.tenant_id, project_id=project_id, actor_id=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/support-tickets/{ticket_id}/resolve', operation_id='resolve_support_ticket')
+    def resolve_support_ticket(project_id: str, ticket_id: str, body: SupportTicketResolve, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:support_access', tenant_id=principal.tenant_id, project_id=project_id, purpose='support')
+        return _context(request).operations_intelligence.resolve_support_ticket(tenant_id=principal.tenant_id, project_id=project_id, ticket_id=ticket_id, actor_id=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/incident-actions', status_code=201, operation_id='record_incident_action')
+    def record_incident_action(project_id: str, body: IncidentActionCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_incident_action(tenant_id=principal.tenant_id, project_id=project_id, actor_id=principal.subject_id, **body.model_dump())
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/game-days', status_code=201, operation_id='record_game_day')
+    def record_game_day(project_id: str, body: GameDayCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.record_game_day(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @operations_intelligence.post('/v1/projects/{project_id}/operations/after-action-reviews', status_code=201, operation_id='create_after_action_review')
+    def create_after_action_review(project_id: str, body: AfterActionReviewCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='ops:incident_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).operations_intelligence.create_after_action_review(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence}
 SERVICE_DEPENDENCIES: dict[str, set[str]] = {'control-api': {'control-api', 'construction', 'liveforever', 'collaboration'}, 'all': set(_routers().keys())}
 
 def create_app(*, context: PlatformContext | None=None, service_name: str | None=None) -> FastAPI:
@@ -3739,7 +4194,10 @@ def create_app(*, context: PlatformContext | None=None, service_name: str | None
     @app.get('/metrics', include_in_schema=False)
     def metrics() -> Response:
         telemetry.refresh_operation_depth(context.database)
-        return Response(content=telemetry.render(), media_type='text/plain; version=0.0.4; charset=utf-8')
+        content = telemetry.render()
+        if service_name in {'operations-intelligence', 'all'}:
+            content += b'\n' + context.operations_intelligence.render_aggregate_prometheus_metrics()
+        return Response(content=content, media_type='text/plain; version=0.0.4; charset=utf-8')
 
     routers = _routers()
     selected = SERVICE_DEPENDENCIES.get(service_name, {service_name})

@@ -13,7 +13,7 @@ from tests.progress07_helpers import bootstrap, fresh_now, output_checks, regist
 
 
 def test_progress07_threat_manifest_jit_and_workload_identity(tmp_path: Path) -> None:
-    """REQ: OPSSEC-001, OPSSEC-002, OPSSEC-003, OPSSEC-006, OPSTHR-007, OPSTHREA-001, OPSTHREA-002, OPSTHREA-003, OPSTHREA-004, OPSTHREA-005, OPSTHREA-006, SECEXT-001, SECEXT-002, TSTSEC-006 threat modeling, independently approved JIT access, and short-lived scoped workload identity fail closed."""
+    """REQ: OPSSEC-001, OPSSEC-002, OPSSEC-003, OPSSEC-006, OPSSRE-006, OPSTHR-007, OPSTHREA-001, OPSTHREA-002, OPSTHREA-003, OPSTHREA-004, OPSTHREA-005, OPSTHREA-006, SECEXT-001, SECEXT-002, TSTSEC-006 threat modeling, independently approved JIT access, and short-lived scoped workload identity fail closed."""
     context, tenant, project = bootstrap(tmp_path, name="p07-identity")
     threat = context.security_ops.register_threat_manifest(**threat_payload(), actor_id="security-officer")
     assert threat["version"] == 1 and threat["state"] == "active"

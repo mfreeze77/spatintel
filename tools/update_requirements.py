@@ -247,8 +247,9 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         "",
         "## Governing release posture",
         "",
-        "- Progress 07: **authorized as a bounded OPS-001 development milestone** from accepted commit `600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8`.",
-        "- Progress 08: **unauthorized** pending independent True North acceptance of Progress 07.",
+        "- Progress 07: **accepted and closed** at commit `986c198a127616f8bf1d2379e9f9df5138dabc40`.",
+        "- Progress 08: **authorized only for the bounded OPS-002 observability, SLO, cost, quota, resilience, and support-tooling milestone**.",
+        "- Progress 09: **unauthorized** pending independent True North closure of Progress 08.",
         "- Production promotion: **NO-GO**. Production authorization remains fail-closed.",
     ]
     (ROOT / "requirements/coverage-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -289,6 +290,10 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         f"- External validation required: **{all_counts['EXTERNAL_VALIDATION_REQUIRED']:,}**",
         "",
         "Release mode remains fail-closed until every gap is either verified or explicitly governed under the specification's allowed external-validation/waiver rules.",
+        "",
+        "- Progress 07: **accepted and closed** at `986c198a127616f8bf1d2379e9f9df5138dabc40`.",
+        "- Progress 08: **authorized only for OPS-002**; this repository does not authorize Progress 09 or production.",
+        "- Production: **NO-GO**.",
     ]
     (ROOT / "IMPLEMENTATION_STATUS.md").write_text("\n".join(status_lines) + "\n", encoding="utf-8")
 

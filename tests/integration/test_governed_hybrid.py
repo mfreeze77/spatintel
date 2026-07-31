@@ -1541,3 +1541,44 @@ def test_worker_renewal_fails_when_admitted_provider_revision_is_no_longer_curre
         assert row is not None
         assert row.worker_lease_generation == 1
         assert row.state == "admitted"
+
+
+@pytest.mark.integration
+@pytest.mark.security
+def test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region(bootstrapped, monkeypatch) -> None:
+    """REQ: ARCRES-005 provider-region failure is fail-closed and never reads or moves source bytes to an unapproved region."""
+    context, tenant_id, project_id, actor = bootstrapped
+    scene, source = _frame_scene_asset(context, tenant_id, project_id, actor, data=b"region-bound-source" * 32)
+    context.providers.register(
+        _descriptor(
+            "region-bound-external",
+            provider_class="external_api",
+            external=True,
+            deployment_modes=["managed_cloud"],
+        ),
+        actor_id=actor,
+    )
+    _promote(context, "region-bound-external", execution_zones=["local-cpu"])
+    request = _request(
+        tenant_id,
+        project_id,
+        scene,
+        source,
+        actor,
+        key="unapproved-region",
+        deployment="managed_cloud",
+        allow_external=True,
+    )
+    request["policy_context"]["region"] = "unapproved-region"  # type: ignore[index]
+    request["provider_selector"]["preferred_provider_ids"] = ["region-bound-external"]  # type: ignore[index]
+    reads: list[str] = []
+
+    def unexpected_read(digest: str) -> bytes:
+        reads.append(digest)
+        raise AssertionError("source bytes were read before region admission completed")
+
+    monkeypatch.setattr(context.assets.store, "read_bytes", unexpected_read)
+    with pytest.raises(AuthorizationError) as denied:
+        context.hybrid.create_conversion(request, actor_id=actor)
+    assert denied.value.code in {"HYB_PROVIDER_NO_ELIGIBLE_MATCH", "HYB_PROVIDER_PROCESSING_REGION_DENIED"}
+    assert reads == []

@@ -20,6 +20,7 @@ scrape_configs:
           - export-service:8080
           - notification-service:8080
           - audit-service:8080
+          - operations-intelligence:8080
           - representation-api:8080
           - provider-registry:8080
           - representation-publisher:8080

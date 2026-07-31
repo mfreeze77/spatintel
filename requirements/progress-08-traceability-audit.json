@@ -1,0 +1,3045 @@
+{
+  "accepted_base_commit": "986c198a127616f8bf1d2379e9f9df5138dabc40",
+  "authorized_epics": [
+    "OPS-002"
+  ],
+  "deferred_requirement_count": 0,
+  "finding_count": 0,
+  "findings": [],
+  "included_requirement_count": 40,
+  "milestone": "Progress 08 bounded observability, SLO, cost, quota, resilience, and support tooling",
+  "production_authorized": false,
+  "progress_08_authorized": true,
+  "progress_09_authorized": false,
+  "requirement_count": 40,
+  "requirements_audited": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "OPSSUP-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_structured_logs_include_required_safe_context_without_raw_identifiers"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_local_collector_is_non_exporting_and_privacy_filtered"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCDEP-002",
+            "ARCOBS-001",
+            "OPSSEC-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "OPSSUP-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSSRE-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCOBS-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_invalid_request_id_and_content_length_are_bounded"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_operation_depth_inflight_and_retry_metrics_are_governed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_kubernetes_workers_are_scrapeable_only_through_observability_policy"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004",
+            "OPSCOST-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_prometheus_scrapes_every_api_and_isolated_worker"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "PLTGRPC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "OPSSUP-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSSRE-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCOBS-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSSRE-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_worker_protocol.py::test_invalid_trace_context_is_rejected_before_operation_persistence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCOBS-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004",
+            "OPSCOST-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-005",
+            "OPSSRE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCOBS-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_audit_storage_remains_append_only_for_support_users"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCOBS-005",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/assets.py",
+        "src/sip/search.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCRES-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/assets.py",
+        "src/sip/search.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "ARCRES-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/assets.py",
+        "src/sip/search.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCRES-003",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/assets.py",
+        "src/sip/search.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCRES-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/assets.py",
+        "src/sip/search.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "ARCRES-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "RECGPU-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-004",
+            "OPSCOST-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSCOST-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-005",
+            "OPSSRE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "RECGPU-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-004",
+            "OPSCOST-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSCOST-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004",
+            "OPSCOST-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-005",
+            "OPSSRE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-003",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_override_and_alert_approval_are_independent_and_expiring"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-003",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSCOST-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-004",
+            "OPSCOST-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCOST-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-005",
+            "OPSSRE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "RECGPU-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCOST-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "RECGPU-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-004",
+            "OPSCOST-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSCOST-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "OPSPERF-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "OPSPERF-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSPERF-003",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSPERF-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "ARCOBS-004",
+            "ARCOBS-005",
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSPERF-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-003",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSPERF-001",
+            "OPSPERF-002",
+            "OPSPERF-003",
+            "OPSPERF-004",
+            "OPSPERF-005",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-003",
+            "OPSPERF-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSPERF-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-004",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-005",
+            "OPSSRE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002",
+            "OPSSRE-003",
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSRE-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002",
+            "OPSSRE-003",
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSRE-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002",
+            "OPSSRE-003",
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-003",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSRE-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002",
+            "OPSSRE-003",
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSRE-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-001",
+            "OPSSRE-002",
+            "OPSSRE-003",
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-004",
+            "OPSSRE-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSRE-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSSRE-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSSRE-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSRE-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "OPSSUP-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "OPSSUP-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSUP-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSUP-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "OPSSUP-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-004",
+            "OPSSUP-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSUP-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-004",
+            "OPSSUP-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSUP-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-001",
+            "ARCOBS-002",
+            "ARCOBS-003",
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCOBS-002",
+            "ARCOBS-004",
+            "OPSCOST-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-003",
+            "OPSCOST-004",
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-004",
+            "OPSSUP-005",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-001",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSUP-002",
+            "OPSSUP-003",
+            "OPSSUP-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "OPSSUP-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "RECGPU-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "RECGPU-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "RECGPU-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "RECGPU-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSCOST-001",
+            "OPSCOST-002",
+            "OPSCOST-005",
+            "OPSCOST-006",
+            "RECGPU-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "RECGPU-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004",
+            "RECGPU-005",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSRE-003",
+            "RECGPU-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "RECGPU-006",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "schema": "sip.progress08-traceability-audit/v1",
+  "status": "passed_complete"
+}

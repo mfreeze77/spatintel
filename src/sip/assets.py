@@ -427,6 +427,17 @@ class AssetService:
     ) -> AssetReference:
         digest = sha256_bytes(data)
         metadata = self.store.write_bytes(digest, data)
+        # A storage API acknowledgement is not publication evidence. Read the immutable
+        # object back through the configured backend and verify plaintext identity before
+        # any database object or tenant/project reference becomes visible.
+        persisted = self.store.read_bytes(digest)
+        persisted_digest = sha256_bytes(persisted)
+        if persisted_digest != digest or persisted != data:
+            raise ValidationError(
+                "OBJECT_POST_WRITE_VERIFICATION_FAILED",
+                "object-store bytes failed post-write integrity verification",
+                {"expected_sha256": digest, "actual_sha256": persisted_digest},
+            )
         asset_id = asset_id or new_uuid()
         with self.database.session() as session:
             project = session.get(ProjectRow, project_id)

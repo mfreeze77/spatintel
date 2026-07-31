@@ -34,6 +34,7 @@ API_SERVICE_ACCOUNTS = {
     "notification-service",
     "audit-service",
     "security-ops",
+    "operations-intelligence",
     "representation-api",
     "provider-registry",
     "representation-publisher",

@@ -16,6 +16,7 @@ from .liveforever import LiveForeverService
 from .hybrid import HybridControlService
 from .model_governance import ModelRegistry
 from .operations import OperationService
+from .ops_intelligence import OperationsIntelligenceService
 from .policy import PolicyService
 from .representations import ProviderRegistry, RepresentationPublisher, RepresentationService
 from .scene import SceneService
@@ -57,6 +58,7 @@ class PlatformContext:
     notifications: NotificationService
     agents: AgentService
     security_ops: SecurityOperationsService
+    operations_intelligence: OperationsIntelligenceService
 
     @classmethod
     def create(cls, settings: Settings | None = None, *, create_schema: bool | None = None) -> "PlatformContext":
@@ -115,6 +117,13 @@ class PlatformContext:
             environment=settings.environment,
             local_only=settings.object_store_backend == "local",
         )
+        operations_intelligence = OperationsIntelligenceService(
+            database,
+            audit,
+            bundle_root=settings.object_store_root.parent / "support-bundles",
+            release="1.1.0-progress08",
+            environment=settings.environment,
+        )
         return cls(
             settings=settings,
             database=database,
@@ -144,6 +153,7 @@ class PlatformContext:
             notifications=NotificationService(database),
             agents=AgentService(database, policy, search, audit),
             security_ops=security_ops,
+            operations_intelligence=operations_intelligence,
         )
 
 

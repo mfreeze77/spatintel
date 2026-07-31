@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-30T19:55:44.127950+00:00",
+  "generated_at": "2026-07-31T01:16:04.608751+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -27508,6 +27508,7 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -27527,18 +27528,32 @@
       "source_title": "Observability, Quality Telemetry, and Audit Correlation",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_error_responses_include_safe_correlation_and_retryability",
         "tests/contract/test_observability.py::test_log_redaction_removes_credentials_and_large_binary_payloads",
+        "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
         "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers",
         "tests/contract/test_observability.py::test_structured_logs_include_required_safe_context_without_raw_identifiers",
         "tests/contract/test_observability_infrastructure.py::test_local_collector_is_non_exporting_and_privacy_filtered",
-        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned"
+        "tests/contract/test_observability_infrastructure.py::test_observability_profile_is_hardened_and_digest_pinned",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_plan_path": "tests/spec/requirements/ARCOBS-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Logs shall be structured and include release, service, tenant-safe context, trace, operation, outcome, and stable error code.",
       "verification_method": "Controlled verification",
@@ -27567,6 +27582,7 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -27586,19 +27602,32 @@
       "source_title": "Observability, Quality Telemetry, and Audit Correlation",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
         "tests/contract/test_observability.py::test_invalid_request_id_and_content_length_are_bounded",
         "tests/contract/test_observability.py::test_metrics_use_route_templates_and_security_headers",
         "tests/contract/test_observability.py::test_operation_depth_inflight_and_retry_metrics_are_governed",
         "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels",
         "tests/contract/test_observability_infrastructure.py::test_kubernetes_workers_are_scrapeable_only_through_observability_policy",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
         "tests/contract/test_observability_infrastructure.py::test_prometheus_scrapes_every_api_and_isolated_worker",
-        "tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions"
+        "tests/contract/test_observability_infrastructure.py::test_workers_publish_metrics_without_broadening_compute_permissions",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_plan_path": "tests/spec/requirements/ARCOBS-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Metrics shall identify model/checkpoint and capture profile without leaking personal or facility-identifying values.",
       "verification_method": "Controlled verification",
@@ -27627,6 +27656,7 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -27646,14 +27676,25 @@
       "source_title": "Observability, Quality Telemetry, and Audit Correlation",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles",
         "tests/contract/test_worker_protocol.py::test_invalid_trace_context_is_rejected_before_operation_persistence",
-        "tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease"
+        "tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing"
       ],
       "test_plan_path": "tests/spec/requirements/ARCOBS-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Distributed traces shall connect ingest, orchestration, worker, storage, validation, and publication.",
       "verification_method": "Controlled verification",
@@ -27682,6 +27723,7 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
         "src/sip/api.py",
         "src/sip/operations.py",
         "infrastructure/observability"
@@ -27702,13 +27744,21 @@
       "supersession_links": [],
       "test_ids": [
         "tests/contract/test_observability.py::test_worker_and_quality_metrics_use_only_governed_low_cardinality_labels",
-        "tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals"
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_observability_infrastructure.py::test_quality_dashboard_and_alerts_cover_required_operational_signals",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval"
       ],
       "test_plan_path": "tests/spec/requirements/ARCOBS-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/infrastructure-static-validation.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Quality dashboards shall show drift, coverage, residuals, confidence distribution, failed regions, and comparison to prior versions.",
       "verification_method": "Controlled verification",
@@ -27735,11 +27785,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/observability.py",
+        "src/sip/ops_intelligence.py",
+        "src/sip/api.py",
+        "src/sip/operations.py",
+        "infrastructure/observability"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCOBS-005",
@@ -27750,10 +27807,18 @@
       "source_title": "Observability, Quality Telemetry, and Audit Correlation",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCOBS-005"
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_audit_storage_remains_append_only_for_support_users",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
       ],
       "test_plan_path": "tests/spec/requirements/ARCOBS-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/infrastructure-static-validation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Audit events shall be append-only and protected from ordinary support modification.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -27783,11 +27848,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "ARCRES-001",
@@ -27798,10 +27870,15 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCRES-001"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Each component shall declare blast radius, retry safety, recovery point, recovery time, and degraded behavior.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -27831,11 +27908,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "ARCRES-002",
@@ -27846,10 +27930,15 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCRES-002"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Worker resource exhaustion shall terminate the job without terminating shared control-plane services.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -27879,11 +27968,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCRES-003",
@@ -27894,10 +27990,14 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCRES-003"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Object-store write success shall be followed by hash verification before database publication.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -27927,11 +28027,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCRES-004",
@@ -27942,10 +28049,15 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCRES-004"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Index outage shall fall back to bounded metadata navigation rather than returning unauthorized or stale results.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -27975,11 +28087,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/search.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCRES-005",
@@ -27990,10 +28109,15 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "REQ-ARCRES-005"
+        "tests/integration/test_governed_hybrid.py::test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Provider-region failure shall not trigger unapproved cross-region data movement.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -36546,11 +36670,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECGPU-001",
@@ -36561,10 +36691,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-001"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Each compute profile shall pin resolution, dtype, backend, model, window policy, memory limit, timeout, output class, and expected quality tier.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -36594,11 +36729,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECGPU-002",
@@ -36609,10 +36750,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-002"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The scheduler shall prevent incompatible CUDA/driver/container combinations.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -36642,11 +36788,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "RECGPU-003",
@@ -36657,10 +36809,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-003"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "GPU workers shall run one tenant security context per isolated job or approved batch boundary.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -36690,11 +36847,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "RECGPU-004",
@@ -36705,10 +36868,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-004"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "OOM fallback shall be explicit and recorded; silent parameter reduction is prohibited.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -36738,11 +36906,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "RECGPU-005",
@@ -36753,10 +36927,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-005"
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Cost estimation shall include decode, inference, optimization, fusion, splat, semantic processing, storage, and egress.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -36786,11 +36965,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "RECGPU-006",
@@ -36801,10 +36986,15 @@
       "source_title": "GPU Compute Profiles and Resource Scheduling",
       "supersession_links": [],
       "test_ids": [
-        "REQ-RECGPU-006"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_compute_profiles_compatibility_oom_cost_stages_and_resume",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/RECGPU-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/benchmark-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Preempted jobs shall resume from verified checkpoints when supported.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -42925,7 +43115,8 @@
       "test_ids": [
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_append_only_migration_is_integrity_locked",
         "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
-        "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked"
+        "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked"
       ],
       "test_plan_path": "tests/spec/requirements/DATDB-002.yaml",
       "test_result_evidence_paths": [
@@ -65206,9 +65397,11 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/operator/INCIDENT_RESPONSE.md",
-        "docs/runbooks/OPERATIONS_INCIDENTS.md",
-        "docs/runbooks/OBSERVABILITY_INCIDENTS.md"
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -65225,12 +65418,16 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
       ],
       "text": "Runbooks shall cover database outage, object corruption, queue backlog, GPU failure, model regression, cross-tenant suspicion, leaked share link, consent failure, bad redaction, deletion error, and backup restore.",
       "verification_method": "Controlled verification",
@@ -65258,9 +65455,11 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/operator/INCIDENT_RESPONSE.md",
-        "docs/runbooks/OPERATIONS_INCIDENTS.md",
-        "docs/runbooks/OBSERVABILITY_INCIDENTS.md"
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -65277,12 +65476,15 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields"
+        "tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
       ],
       "text": "Each runbook shall include trigger, severity, roles, commands/controls, decision points, evidence, validation, rollback, and communications.",
       "verification_method": "Controlled verification",
@@ -65309,11 +65511,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSSRE-003",
@@ -65324,10 +65533,17 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSRE-003"
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_verified_checkpoint_resume_and_incident_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Incident actions shall be audited and preserve forensic evidence without copying sensitive data unnecessarily.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65353,11 +65569,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSRE-004",
@@ -65368,10 +65591,15 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSRE-004"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "After-action reviews shall create tracked corrective requirements and tests.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65397,11 +65625,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSRE-005",
@@ -65412,10 +65647,15 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSRE-005"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_game_day_and_after_action_create_corrective_requirements"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Runbooks shall be exercised through game days.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65441,11 +65681,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/security_ops.py",
+        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md",
+        "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSRE-006",
@@ -65456,10 +65703,16 @@
       "source_title": "SRE Runbooks and Incident Operations",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSRE-006"
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped",
+        "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSRE-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "On-call access shall use just-in-time privileges and recorded sessions where appropriate.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66289,11 +66542,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSCOST-001",
@@ -66304,10 +66564,22 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-001"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "The model shall attribute CPU seconds, GPU seconds by profile, memory, object bytes by tier, database/storage growth, requests, search/vector usage, CDN/egress, transcription/OCR/model API use, and support overhead.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -66333,11 +66605,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSCOST-002",
@@ -66348,10 +66627,21 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-002"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Costs shall roll up by tenant, project, capture, run, stage, model, and calendar period.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66377,11 +66667,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSCOST-003",
@@ -66392,10 +66689,25 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-003"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_override_and_alert_approval_are_independent_and_expiring",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_anomaly_suppression_requires_independent_bounded_approval",
+        "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Admission control shall enforce project budgets, tenant quotas, concurrency, and anomaly detection.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66421,11 +66733,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSCOST-004",
@@ -66436,10 +66755,20 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-004"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "The UI shall show estimated cost/processing tier before optional expensive final reconstruction.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66465,11 +66794,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSCOST-005",
@@ -66480,10 +66816,20 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-005"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_slo_cost_queue_quality_and_support_dashboards_are_declared",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Capacity plans shall use measured scene minutes/frames/area and peak concurrency with headroom.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66509,11 +66855,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/operations.py",
+        "src/sip/database.py",
+        "apps/web/components/CostEstimatePanel.tsx",
+        "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSCOST-006",
@@ -66524,10 +66877,19 @@
       "source_title": "Cost, Capacity, and Unit Economics Model",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSCOST-006"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_cost_model_reconciliation_capacity_and_price_history",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_price_catalog_actual_cost_and_estimate_idempotency_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSCOST-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "A price-source update shall be versioned and not change historical actual-cost records.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66556,13 +66918,19 @@
         "OPS-002",
         "QA-001"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Run the declared capture profile on every supported physical iPhone/iPad tier under controlled thermal and battery states; retain frame-drop, responsiveness, thermal, device, build, and profile evidence.",
+      "owner": "Mobile Engineering / Performance QA",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSPERF-001",
@@ -66573,10 +66941,16 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-001"
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "The iOS app shall maintain capture responsiveness and bounded frame-drop behavior on supported devices under declared thermal conditions.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66605,13 +66979,19 @@
         "OPS-002",
         "QA-001"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Run foreground-responsiveness and resumable-upload trials on supported physical devices across declared network profiles; retain throughput, responsiveness, interruption, resume, device, and build evidence.",
+      "owner": "Mobile Engineering / Network Performance QA",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSPERF-002",
@@ -66622,10 +67002,16 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-002"
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Upload shall saturate available policy-permitted bandwidth while preserving foreground responsiveness and resumability.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66656,11 +67042,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSPERF-003",
@@ -66671,10 +67063,16 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-003"
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "API and search SLOs shall be defined by endpoint class and result size.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -66705,11 +67103,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSPERF-004",
@@ -66720,10 +67124,16 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-004"
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "The viewer shall define frame-time, first-meaningful-scene, memory, and network budgets by device tier and scene size.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66754,11 +67164,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSPERF-005",
@@ -66769,10 +67185,17 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-005"
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets",
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Pipeline profiles shall define expected runtime and peak VRAM/RAM per input class.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66803,11 +67226,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/observability.py",
+        "apps/web/lib/cost-planner.ts",
+        "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSPERF-006",
@@ -66818,10 +67247,19 @@
       "source_title": "Performance and Scalability Budgets",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSPERF-006"
+        "tests/integration/test_progress08_cost_quota.py::test_progress08_concurrent_admission_is_atomic_idempotent_and_leak_free",
+        "tests/integration/test_progress08_observability_slo.py::test_progress08_slos_performance_budgets_and_external_evidence_labels",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_cost_estimation_actuals_rollups_and_quota_admission",
+        "tests/security/test_progress08_operations_security.py::test_progress08_quota_race_override_and_denial_evidence_are_governed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSPERF-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/reports/web-runtime-test-report.json"
+      ],
       "text": "Load tests shall include noisy-neighbor and tenant-quota behavior.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67281,11 +67719,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSSUP-001",
@@ -67296,10 +67740,24 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-001"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability.py::test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields",
+        "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_generated_service_and_event_contracts_are_owned_by_operations_intelligence",
+        "tests/contract/test_progress08_infrastructure_observability.py::test_progress08_collector_scrubs_sensitive_content_before_export",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Support bundles shall contain versions, manifests, metrics, stable errors, hardware/profile, and selected redacted logs without raw media by default.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67325,11 +67783,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSSUP-002",
@@ -67340,10 +67804,21 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-002"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Customer-approved scene access shall state scope, purpose, personnel, duration, and revocation.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67369,11 +67844,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSSUP-003",
@@ -67384,10 +67865,22 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-003"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Support engineers shall not copy raw assets to unmanaged systems.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67413,11 +67906,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSUP-004",
@@ -67428,10 +67927,19 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-004"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "High-risk LiveForever or security-system issues shall route to specially authorized personnel.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67457,11 +67965,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSUP-005",
@@ -67472,10 +67986,19 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-005"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_high_risk_support_routes_and_retains_no_raw_customer_data"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Resolved tickets shall link remediation and affected release without retaining unnecessary customer data.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -67501,11 +68024,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/ops_intelligence.py",
+        "src/sip/archive_safety.py",
+        "src/sip/api.py",
+        "docs/operator/PROGRESS_08_SUPPORT_OPERATIONS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSSUP-006",
@@ -67516,10 +68045,23 @@
       "source_title": "Support, Customer Operations, and Safe Diagnostics",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSSUP-006"
+        "tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration",
+        "tests/contract/test_observability_infrastructure.py::test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics",
+        "tests/contract/test_progress08_operations_api.py::test_progress08_cost_override_and_support_approval_require_exact_roles",
+        "tests/integration/test_progress08_operations_intelligence.py::test_progress08_customer_approved_support_bundle_and_ticket_routing",
+        "tests/security/test_progress08_operations_security.py::test_progress08_support_authorization_scope_and_archive_attacks_fail_closed",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_bundle_rejects_unchecked_unexpected_symlink_and_changed_replay",
+        "tests/security/test_progress08_support_observability_security.py::test_progress08_support_scope_approval_expiration_revocation_and_cross_tenant_isolation"
       ],
       "test_plan_path": "tests/spec/requirements/OPSSUP-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress08-operations.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Support tooling shall enforce tenant isolation and cannot generate unrestricted signed URLs.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,

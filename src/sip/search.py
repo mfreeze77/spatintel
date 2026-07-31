@@ -295,6 +295,101 @@ class SearchService:
         )
         return result
 
+    def metadata_fallback(self, *, principal: SignedPrincipal, spec: SearchQuerySpec) -> dict[str, Any]:
+        """Return bounded canonical navigation metadata when the search index is unavailable.
+
+        Authorization and freshness filtering are applied before any navigation item, count,
+        snippet, or ranking signal is constructed. Full-text and semantic inputs are ignored
+        deliberately so sensitive terms cannot become an existence oracle in degraded mode.
+        """
+        if principal.tenant_id != spec.tenant_id:
+            raise AuthorizationError("SEARCH_TENANT_SCOPE_DENIED", "search tenant does not match authenticated principal")
+        if spec.project_id not in principal.project_ids and "tenant_admin" not in principal.roles:
+            raise AuthorizationError("SEARCH_PROJECT_SCOPE_DENIED", "search project is outside authenticated scope")
+        with self.database.session() as session:
+            rows = list(
+                session.scalars(
+                    select(SearchDocumentRow).where(
+                        SearchDocumentRow.tenant_id == spec.tenant_id,
+                        SearchDocumentRow.project_id == spec.project_id,
+                    )
+                )
+            )
+        authorized = [row for row in rows if _authorized(row, principal, spec)]
+        items: list[dict[str, Any]] = []
+        stale_authorized = 0
+        stale_critical_omitted = 0
+        allowed_types = set(spec.entity_types)
+        for row in sorted(authorized, key=lambda item: item.document_id):
+            if allowed_types and row.entity_type not in allowed_types:
+                continue
+            fresh = int(row.index_sequence) >= int(row.source_sequence)
+            if not fresh:
+                stale_authorized += 1
+                if spec.critical_workflow:
+                    stale_critical_omitted += 1
+                    continue
+            items.append(
+                {
+                    "document_id": row.document_id,
+                    "entity_id": row.entity_id,
+                    "entity_type": row.entity_type,
+                    "asset_id": row.asset_id,
+                    "scene_commit_id": row.scene_commit_id,
+                    "source_hash": row.source_hash,
+                    "access": {
+                        "audience": row.policy_json.get("audience", "private"),
+                        "classification": row.classification,
+                        "policy_enforced_server_side": True,
+                    },
+                    "freshness": {
+                        "source_sequence": row.source_sequence,
+                        "index_sequence": row.index_sequence,
+                        "fresh": fresh,
+                    },
+                    "navigation": {
+                        "entity_id": row.entity_id,
+                        "asset_id": row.asset_id,
+                        "scene_commit_id": row.scene_commit_id,
+                        "spatial_frame_id": row.spatial_frame_id,
+                    },
+                }
+            )
+            if len(items) >= min(spec.limit, 200):
+                break
+        result = {
+            "schema_version": "sip.search-metadata-fallback/v1",
+            "degraded_mode": "bounded_metadata_navigation",
+            "authorization_before_navigation": True,
+            "full_text_applied": False,
+            "semantic_ranking_applied": False,
+            "snippets_included": False,
+            "items": items,
+            "authorized_count": len(items),
+            "truncated": len(items) >= min(spec.limit, 200),
+            "freshness": {
+                "stale_authorized_documents": stale_authorized,
+                "critical_stale_results_omitted": stale_critical_omitted,
+                "canonical_lookup_required": True,
+            },
+        }
+        self.audit.append(
+            tenant_id=spec.tenant_id,
+            project_id=spec.project_id,
+            actor_id=principal.subject_id,
+            action="search:metadata_fallback",
+            resource_type="search_query",
+            resource_id=canonical_sha256({"tenant_id": spec.tenant_id, "project_id": spec.project_id, "mode": "metadata_fallback"}),
+            outcome="allowed",
+            details={
+                "returned_count": len(items),
+                "critical_workflow": spec.critical_workflow,
+                "stale_authorized_documents": stale_authorized,
+                "full_text_ignored": bool(spec.full_text),
+            },
+        )
+        return result
+
     def save_query(
         self,
         *,

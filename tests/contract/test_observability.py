@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -231,3 +232,23 @@ def test_operation_depth_inflight_and_retry_metrics_are_governed(tmp_path: Path)
     assert 'sip_operation_queue_depth{operation_type="fusion.tsdf",service="workflow-service",state="pending"} 1.0' in metrics
     assert 'sip_worker_retries_total{capability="fusion.tsdf",service="workflow-service"} 1.0' in metrics
     assert 'sip_worker_operations_in_flight{capability="fusion.tsdf",service="workflow-service"} 0.0' in metrics
+
+
+def test_log_redaction_removes_transcripts_biometrics_precise_locations_and_restricted_facility_fields() -> None:
+    """REQ: ARCOBS-001, OPSSUP-001 ordinary telemetry removes transcripts, biometrics, precise locations, and restricted facility details."""
+    value = redact({
+        "transcript": "private interview text",
+        "biometric_template": "face-vector",
+        "precise_location": {"latitude": 39.0, "longitude": -95.0},
+        "restricted_facility_details": {"controller": "panel-7"},
+        "nested": {"raw_audio": b"private", "safe_count": 2},
+    })
+    assert value["transcript"] == "[REDACTED]"
+    assert value["biometric_template"] == "[REDACTED]"
+    assert value["precise_location"] == "[REDACTED]"
+    assert value["restricted_facility_details"] == "[REDACTED]"
+    assert value["nested"]["raw_audio"] == "[REDACTED]"
+    assert value["nested"]["safe_count"] == 2
+    rendered = json.dumps(value, sort_keys=True)
+    for secret in ("private interview", "face-vector", "39.0", "panel-7"):
+        assert secret not in rendered

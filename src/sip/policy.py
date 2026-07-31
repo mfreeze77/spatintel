@@ -15,7 +15,7 @@ from .temporal import db_now
 
 ROLE_ACTIONS: dict[str, set[str]] = {
     "tenant_admin": {"*"},
-    "project_admin": {"project:*", "asset:*", "scene:*", "construction:*", "liveforever:*", "representation:*", "export:*"},
+    "project_admin": {"project:*", "asset:*", "scene:*", "construction:*", "liveforever:*", "representation:*", "export:*", "ops:support_request", "ops:cost_read"},
     "restricted_export_approver": {"construction:restricted_export", "construction:read", "asset:read"},
     "restricted_reader": {"construction:restricted_read", "construction:read", "asset:read"},
     "construction_verifier": {"construction:verify", "construction:read", "asset:read"},
@@ -27,7 +27,12 @@ ROLE_ACTIONS: dict[str, set[str]] = {
     "security_admin": {"security:threat_manage", "security:privileged_access", "security:workload_identity", "security:key_manage", "security:privacy_manage", "security:audit_verify", "security:provider_governance", "security:cache_invalidate", "security:release_manage", "security:transport_verify", "security:capture_finalize", "security:immersive_safety", "security:incident_manage", "asset:read"},
     "key_custodian": {"security:key_manage", "asset:read"},
     "release_manager": {"security:release_manage", "security:audit_verify", "asset:read"},
-    "viewer": {"asset:read", "scene:read", "construction:read", "liveforever:read"},
+    "ops_admin": {"ops:observe", "ops:slo_manage", "ops:cost_manage", "ops:quota_manage", "ops:incident_manage", "ops:support_request", "asset:read"},
+    "budget_approver": {"ops:budget_override", "ops:cost_read", "asset:read"},
+    "support_approver": {"ops:support_approve", "ops:support_read", "asset:read"},
+    "support_engineer": {"ops:support_access", "ops:support_read", "ops:observe", "asset:read"},
+    "specialized_support": {"ops:support_access", "ops:support_read", "ops:observe", "construction:restricted_read", "liveforever:read", "asset:read"},
+    "viewer": {"asset:read", "scene:read", "construction:read", "liveforever:read", "ops:cost_read"},
     "service_worker": {"operation:lease", "operation:checkpoint", "operation:complete", "asset:read", "asset:create"},
 }
 
@@ -52,6 +57,13 @@ EXACT_GRANT_ACTIONS = {
     "security:capture_finalize",
     "security:immersive_safety",
     "security:incident_manage",
+    "ops:slo_manage",
+    "ops:cost_manage",
+    "ops:quota_manage",
+    "ops:budget_override",
+    "ops:support_approve",
+    "ops:support_access",
+    "ops:incident_manage",
 }
 
 CLASSIFICATION_ORDER = {

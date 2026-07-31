@@ -10,16 +10,28 @@ verification_method: Controlled verification
 implementation_status: VERIFIED
 implementation_files:
 - src/sip/observability.py
+- src/sip/ops_intelligence.py
 - src/sip/api.py
 - src/sip/operations.py
 - infrastructure/observability
 automated_test_ids:
+- tests/acceptance/test_progress08_operations_demo.py::test_progress08_synthetic_operations_demonstration
+- tests/contract/test_progress08_infrastructure_observability.py::test_progress08_operations_service_is_nonroot_readonly_and_scraped
+- tests/contract/test_progress08_operations_api.py::test_progress08_operations_api_enforces_tenant_scope_and_observability_roles
 - tests/contract/test_worker_protocol.py::test_invalid_trace_context_is_rejected_before_operation_persistence
 - tests/contract/test_worker_protocol.py::test_trace_context_is_durable_and_cryptographically_bound_to_worker_lease
+- tests/integration/test_progress08_observability_slo.py::test_progress08_privacy_safe_telemetry_trace_and_quality_dashboard
+- tests/integration/test_progress08_operations_intelligence.py::test_progress08_observability_slos_and_performance_budgets
+- tests/security/test_progress08_operations_security.py::test_progress08_telemetry_isolation_scrubbing_cardinality_and_trace_spoofing
+- tests/security/test_progress08_support_observability_security.py::test_progress08_telemetry_scrubs_secrets_and_resists_injection_cardinality_and_trace_spoofing
 retained_evidence:
+- build/evidence/demo-progress08-operations.json
 - build/reports/infrastructure-static-validation.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

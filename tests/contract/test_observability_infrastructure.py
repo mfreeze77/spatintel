@@ -23,6 +23,7 @@ API_SERVICES = {
     "representation-api",
     "provider-registry",
     "representation-publisher",
+    "operations-intelligence",
 }
 WORKERS = {f"worker-{path.parent.name}" for path in (ROOT / "workers").glob("*/worker-manifest.json")}
 
@@ -144,3 +145,23 @@ def test_observability_operator_documentation_covers_worker_quality_incidents() 
     compose_readme = (ROOT / "infrastructure" / "compose" / "README.md").read_text(encoding="utf-8")
     assert "--profile observability" in compose_readme
     assert "SIP_OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318" in compose_readme
+
+
+def test_progress08_operations_dashboard_and_alerts_use_privacy_safe_aggregate_metrics() -> None:
+    """REQ: ARCOBS-002, ARCOBS-004, OPSCOST-003, OPSSUP-006 operations dashboards and alerts use aggregate, low-cardinality, privacy-safe signals."""
+    dashboard = json.loads((OBS / "grafana/sip-operations-intelligence.json").read_text(encoding="utf-8"))
+    titles = {panel["title"] for panel in dashboard["panels"]}
+    assert {
+        "SLO error-budget burn",
+        "Queue depth and wait",
+        "Budget reserved vs hard limit",
+        "Estimate vs actual",
+        "Quality drift / coverage / residual",
+        "Support access denials",
+    } <= titles
+    rendered = json.dumps(dashboard, sort_keys=True).lower()
+    for forbidden in ("asset_id", "person_id", "transcript", "password", "precise_location", "controller_password"):
+        assert forbidden not in rendered
+    rules = (OBS / "prometheus-rules.yaml").read_text(encoding="utf-8")
+    for alert in ("SIPBudgetAdmissionDeniedSpike", "SIPBudgetReservationLeakSuspected", "SIPSupportGrantExpiredInUse"):
+        assert f"alert: {alert}" in rules

@@ -1,22 +1,23 @@
 # Requirements coverage report
 
-Generated: `2026-07-30T19:55:44.127950+00:00`
+Generated: `2026-07-31T01:16:04.608751+00:00`
 
 Total normative requirements: **1,028**
 
 | Priority | EXTERNAL_VALIDATION_REQUIRED | IMPLEMENTED_UNVERIFIED | IN_PROGRESS | NOT_STARTED | VERIFIED | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| P0 | 0 | 165 | 18 | 273 | 48 | 504 |
-| P1 | 3 | 117 | 4 | 358 | 42 | 524 |
+| P0 | 2 | 178 | 18 | 258 | 48 | 504 |
+| P1 | 3 | 135 | 4 | 339 | 43 | 524 |
 
-Verified: **90**
-External validation required: **3**
+Verified: **91**
+External validation required: **5**
 Blocked: **0**
 
 > Absence from the verified count is not evidence of implementation. Release-mode specification lint remains fail-closed.
 
 ## Governing release posture
 
-- Progress 07: **authorized as a bounded OPS-001 development milestone** from accepted commit `600e3d81ffb47a88cc0a3041b7fdc7a5901a9fe8`.
-- Progress 08: **unauthorized** pending independent True North acceptance of Progress 07.
+- Progress 07: **accepted and closed** at commit `986c198a127616f8bf1d2379e9f9df5138dabc40`.
+- Progress 08: **authorized only for the bounded OPS-002 observability, SLO, cost, quota, resilience, and support-tooling milestone**.
+- Progress 09: **unauthorized** pending independent True North closure of Progress 08.
 - Production promotion: **NO-GO**. Production authorization remains fail-closed.

@@ -10,14 +10,19 @@ requirement: Each runbook shall include trigger, severity, roles, commands/contr
 verification_method: Controlled verification
 implementation_status: VERIFIED
 implementation_files:
-- docs/operator/INCIDENT_RESPONSE.md
-- docs/runbooks/OPERATIONS_INCIDENTS.md
-- docs/runbooks/OBSERVABILITY_INCIDENTS.md
+- src/sip/ops_intelligence.py
+- src/sip/operations.py
+- src/sip/security_ops.py
+- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md
 automated_test_ids:
 - tests/contract/test_documentation.py::test_operations_runbooks_cover_required_incident_classes_and_procedure_fields
+- tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_incident_actions_after_action_reviews_and_game_days
 retained_evidence:
+- build/evidence/demo-progress08-operations.json
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

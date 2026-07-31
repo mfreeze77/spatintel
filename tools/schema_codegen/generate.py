@@ -149,6 +149,7 @@ SERVICES = [
     "construction",
     "liveforever",
     "security-ops",
+    "operations-intelligence",
 ]
 
 

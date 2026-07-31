@@ -1195,6 +1195,306 @@
       }
     },
     {
+      "blast_radius": "tenant/project scoped requests handled by operations-intelligence; no cross-tenant fail-open behavior",
+      "data_stores": [
+        "postgresql",
+        "object-store",
+        "metrics-store",
+        "trace-store"
+      ],
+      "degraded_behavior": "fail closed for authorization/publication; expose bounded read-only metadata where explicitly safe",
+      "dependency_controls": {
+        "circuit_breaker": "open after bounded consecutive failures; half-open probe",
+        "connect_timeout_seconds": 3,
+        "cross_region_failover": "deny unless pre-approved",
+        "request_timeout_seconds": 15
+      },
+      "events_consumed": [],
+      "events_produced": [
+        "after_action_review.created",
+        "anomaly.acknowledged",
+        "anomaly.detected",
+        "budget.admission_denied",
+        "budget.override_approved",
+        "budget.override_requested",
+        "budget.policy_registered",
+        "budget.reservation_admitted",
+        "budget.reservation_released",
+        "capacity.plan_registered",
+        "compute_profile.oom_recorded",
+        "compute_profile.registered",
+        "cost.actual_recorded",
+        "cost.estimated",
+        "cost.reconciled",
+        "game_day.completed",
+        "incident.action_recorded",
+        "operation.checkpoint_resume_authorized",
+        "performance_budget.registered",
+        "price_catalog.registered",
+        "queue.snapshot_recorded",
+        "resilience.profile_registered",
+        "slo.definition_registered",
+        "slo.measurement_recorded",
+        "support.access_granted",
+        "support.access_requested",
+        "support.access_revoked",
+        "support.bundle_created",
+        "support.ticket_created",
+        "support.ticket_resolved",
+        "telemetry.recorded"
+      ],
+      "inbound_apis": [
+        {
+          "method": "GET",
+          "operation_id": "health_live",
+          "path": "/health/live"
+        },
+        {
+          "method": "GET",
+          "operation_id": "health_ready",
+          "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_compute_profile",
+          "path": "/v1/operations/compute-profiles"
+        },
+        {
+          "method": "POST",
+          "operation_id": "check_compute_compatibility",
+          "path": "/v1/operations/compute-profiles/{compute_profile_id}/compatibility"
+        },
+        {
+          "method": "POST",
+          "operation_id": "compute_oom_disposition",
+          "path": "/v1/operations/compute-profiles/{compute_profile_id}/oom-disposition"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_resilience_profile",
+          "path": "/v1/operations/resilience-profiles"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_operation_actual_cost",
+          "path": "/v1/projects/{project_id}/operations/actual-costs"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_after_action_review",
+          "path": "/v1/projects/{project_id}/operations/after-action-reviews"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_operation_anomaly",
+          "path": "/v1/projects/{project_id}/operations/anomalies"
+        },
+        {
+          "method": "POST",
+          "operation_id": "acknowledge_operation_anomaly",
+          "path": "/v1/projects/{project_id}/operations/anomalies/{alert_id}/acknowledge"
+        },
+        {
+          "method": "POST",
+          "operation_id": "request_budget_override",
+          "path": "/v1/projects/{project_id}/operations/budget-overrides"
+        },
+        {
+          "method": "POST",
+          "operation_id": "approve_budget_override",
+          "path": "/v1/projects/{project_id}/operations/budget-overrides/{override_id}/approve"
+        },
+        {
+          "method": "POST",
+          "operation_id": "reserve_operation_budget",
+          "path": "/v1/projects/{project_id}/operations/budget-reservations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "release_operation_budget",
+          "path": "/v1/projects/{project_id}/operations/budget-reservations/{reservation_id}/release"
+        },
+        {
+          "method": "POST",
+          "operation_id": "estimate_operation_cost",
+          "path": "/v1/projects/{project_id}/operations/cost-estimates"
+        },
+        {
+          "method": "POST",
+          "operation_id": "reconcile_operation_cost",
+          "path": "/v1/projects/{project_id}/operations/cost-reconciliations/{run_id}"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_operation_cost_rollup",
+          "path": "/v1/projects/{project_id}/operations/cost-rollup"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_game_day",
+          "path": "/v1/projects/{project_id}/operations/game-days"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_incident_action",
+          "path": "/v1/projects/{project_id}/operations/incident-actions"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_operations_quality_dashboard",
+          "path": "/v1/projects/{project_id}/operations/quality-dashboard"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_queue_dashboard",
+          "path": "/v1/projects/{project_id}/operations/queue-dashboard"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_queue_snapshot",
+          "path": "/v1/projects/{project_id}/operations/queue-snapshots"
+        },
+        {
+          "method": "POST",
+          "operation_id": "request_support_access",
+          "path": "/v1/projects/{project_id}/operations/support-access"
+        },
+        {
+          "method": "POST",
+          "operation_id": "approve_support_access",
+          "path": "/v1/projects/{project_id}/operations/support-access/{grant_id}/approve"
+        },
+        {
+          "method": "POST",
+          "operation_id": "revoke_support_access",
+          "path": "/v1/projects/{project_id}/operations/support-access/{grant_id}/revoke"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_support_bundle",
+          "path": "/v1/projects/{project_id}/operations/support-bundles"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_support_bundle",
+          "path": "/v1/projects/{project_id}/operations/support-bundles/{bundle_id}/verify"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_support_ticket",
+          "path": "/v1/projects/{project_id}/operations/support-tickets"
+        },
+        {
+          "method": "POST",
+          "operation_id": "resolve_support_ticket",
+          "path": "/v1/projects/{project_id}/operations/support-tickets/{ticket_id}/resolve"
+        },
+        {
+          "method": "GET",
+          "operation_id": "query_operations_telemetry",
+          "path": "/v1/projects/{project_id}/operations/telemetry"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_operations_telemetry",
+          "path": "/v1/projects/{project_id}/operations/telemetry"
+        },
+        {
+          "method": "POST",
+          "operation_id": "authorize_checkpoint_resume",
+          "path": "/v1/projects/{project_id}/operations/{operation_id}/resume-checkpoint"
+        },
+        {
+          "method": "POST",
+          "operation_id": "set_budget_policy",
+          "path": "/v1/tenants/{tenant_id}/operations/budgets"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_capacity_plan",
+          "path": "/v1/tenants/{tenant_id}/operations/capacity-plans"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_performance_budget",
+          "path": "/v1/tenants/{tenant_id}/operations/performance-budgets"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_performance_budget",
+          "path": "/v1/tenants/{tenant_id}/operations/performance-budgets/{performance_budget_id}/evaluate"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_price_catalog",
+          "path": "/v1/tenants/{tenant_id}/operations/price-catalogs"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_slo",
+          "path": "/v1/tenants/{tenant_id}/operations/slos"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_slo_measurement",
+          "path": "/v1/tenants/{tenant_id}/operations/slos/{slo_id}/measurements"
+        }
+      ],
+      "kind": "service",
+      "name": "operations-intelligence",
+      "outbound_dependencies": [
+        "audit-service",
+        "evidence-service",
+        "identity-policy",
+        "notification-service",
+        "workflow-service"
+      ],
+      "owned_tables": [
+        "actual_costs",
+        "after_action_reviews",
+        "anomaly_alerts",
+        "budget_overrides",
+        "budget_policies",
+        "budget_reservations",
+        "capacity_plans",
+        "compute_profiles",
+        "cost_estimates",
+        "cost_reconciliations",
+        "game_day_exercises",
+        "incident_actions",
+        "performance_budgets",
+        "price_catalogs",
+        "queue_snapshots",
+        "resilience_profiles",
+        "slo_definitions",
+        "slo_measurements",
+        "support_access_grants",
+        "support_bundles",
+        "support_tickets",
+        "telemetry_records"
+      ],
+      "owner": "operations-reliability",
+      "recovery_strategy": "restart from durable database/outbox state; verify audit and object hashes before readiness",
+      "repository_path": "services/operations-intelligence",
+      "retry_safety": "idempotency key or immutable command identifier required for mutations",
+      "rpo": "0 for committed transactional state; object writes verified before publication",
+      "rto": "15 minutes local/hybrid target; profile-specific production objective requires deployment validation",
+      "secret_references": [
+        "sip-runtime-secrets/SIP_DATABASE_URL",
+        "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
+      ],
+      "shared_kernel_exceptions": [],
+      "shutdown": {
+        "drain_seconds": 30,
+        "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
+      },
+      "slo": {
+        "availability_target": "99.9%",
+        "error_budget_window_days": 30,
+        "latency_budget": "p95 <= 1000ms for bounded control operations"
+      }
+    },
+    {
       "blast_radius": "tenant/project scoped requests handled by provider-registry; no cross-tenant fail-open behavior",
       "data_stores": [
         "postgresql",

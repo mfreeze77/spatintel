@@ -210,6 +210,14 @@ services:
       SIP_LOCAL_ONLY: "true"
       SIP_MODEL_EGRESS_DEFAULT: denied
     networks: [backend]
+  operations-intelligence:
+    <<: *python-service
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: operations-intelligence
+      SIP_LOCAL_ONLY: "true"
+      SIP_SUPPORT_BUNDLE_MODE: metadata-only
+    networks: [backend]
   representation-api:
     <<: *python-service
     environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-api}
