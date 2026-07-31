@@ -1,0 +1,122 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/restore-run.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "idempotent_replay": {
+      "default": false,
+      "title": "Idempotent Replay",
+      "type": "boolean"
+    },
+    "output": {
+      "additionalProperties": true,
+      "title": "Output",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "reconciliation": {
+      "additionalProperties": true,
+      "title": "Reconciliation",
+      "type": "object"
+    },
+    "recovery_point_id": {
+      "title": "Recovery Point Id",
+      "type": "string"
+    },
+    "requested_point_at": {
+      "format": "date-time",
+      "title": "Requested Point At",
+      "type": "string"
+    },
+    "restore_id": {
+      "title": "Restore Id",
+      "type": "string"
+    },
+    "restore_mode": {
+      "enum": [
+        "isolated_clone",
+        "in_place_rehearsal",
+        "portability_fallback"
+      ],
+      "title": "Restore Mode",
+      "type": "string"
+    },
+    "rpo_seconds_observed": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rpo Seconds Observed"
+    },
+    "rto_seconds_observed": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rto Seconds Observed"
+    },
+    "state": {
+      "enum": [
+        "requested",
+        "running",
+        "reconciliation_required",
+        "completed",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "target_project_id": {
+      "title": "Target Project Id",
+      "type": "string"
+    },
+    "target_region": {
+      "title": "Target Region",
+      "type": "string"
+    },
+    "target_tenant_id": {
+      "title": "Target Tenant Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "writes_reopened": {
+      "title": "Writes Reopened",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "restore_id",
+    "tenant_id",
+    "project_id",
+    "recovery_point_id",
+    "target_tenant_id",
+    "target_project_id",
+    "target_region",
+    "restore_mode",
+    "requested_point_at",
+    "state",
+    "reconciliation",
+    "output",
+    "writes_reopened"
+  ],
+  "title": "RestoreRunContract",
+  "type": "object"
+}

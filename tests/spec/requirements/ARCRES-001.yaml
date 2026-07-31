@@ -9,18 +9,24 @@ requirement: Each component shall declare blast radius, retry safety, recovery p
 verification_method: Controlled verification
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/ops_intelligence.py
 - src/sip/operations.py
 - src/sip/search.py
 - src/sip/database.py
-- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
+- tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed
 - tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity
 - tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom
+- tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency
+- tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence
 retained_evidence:
-- build/evidence/demo-progress08-operations.json
+- build/evidence/demo-progress10-recovery.json
 - build/reports/test-matrix.json
+- build/reports/tests/contract.xml
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.

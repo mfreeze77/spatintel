@@ -1,0 +1,78 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/recovery-game-day.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "evidence_class": {
+      "enum": [
+        "synthetic",
+        "local_executed",
+        "cloud_executed",
+        "external_witnessed"
+      ],
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "game_day_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Game Day Hash",
+      "type": "string"
+    },
+    "metrics": {
+      "additionalProperties": true,
+      "title": "Metrics",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "recovery_game_day_id": {
+      "title": "Recovery Game Day Id",
+      "type": "string"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "passed",
+        "passed_with_gaps",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recovery_game_day_id",
+    "deployment_profile_id",
+    "scenario",
+    "evidence_class",
+    "tenant_id",
+    "project_id",
+    "state",
+    "metrics",
+    "findings",
+    "game_day_hash"
+  ],
+  "title": "RecoveryGameDayContract",
+  "type": "object"
+}

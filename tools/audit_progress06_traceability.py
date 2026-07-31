@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -17,6 +18,11 @@ AUTHORIZED_EPICS = (
     "CON-001", "CON-002", "CON-003", "CON-004", "CON-005",
     "LIF-001", "LIF-002", "LIF-003", "LIF-004",
 )
+ACCEPTED_SCOPE_SHA256 = "fa1d7070d7b6328f517e8efcd8a8e03dfa5353dcc623e49f946d86dca19ce217"
+ACCEPTED_AUDIT_SHA256 = "1b0eaf783926766027ab348e157029f2761ccf070e6c1c924a42743f0eaad908"
+ACCEPTED_SCOPE_TOTAL = 206
+ACCEPTED_SCOPE_INCLUDED = 118
+ACCEPTED_SCOPE_DEFERRED = 88
 DIRECT_VERIFIED = {
     "CONDEMO-004": "synthetic Construction demonstration records scan-estimate and independently field-verified measurement history",
     "CONDEMO-005": "synthetic Construction demonstration produces a reviewable changed-object semantic diff",
@@ -217,32 +223,105 @@ def build_scope() -> dict[str, Any]:
     }
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_accepted_snapshot() -> dict[str, Any]:
+    """Validate the immutable, True-North-accepted Progress 06 snapshot.
+
+    Later milestones may implement requirements that were deferred in Progress 06.
+    Those later facts belong in the global ledger and their own milestone scopes; they
+    must never rewrite the accepted historical Progress 06 scope or audit.
+    """
+    findings: list[dict[str, Any]] = []
+    scope: dict[str, Any] = {}
+    audit: dict[str, Any] = {}
+    if not SCOPE_DESTINATION.is_file():
+        findings.append({"code": "SCOPE_MISSING", "path": str(SCOPE_DESTINATION.relative_to(ROOT))})
+    else:
+        scope = json.loads(SCOPE_DESTINATION.read_text(encoding="utf-8"))
+        actual = _sha256(SCOPE_DESTINATION)
+        if actual != ACCEPTED_SCOPE_SHA256:
+            findings.append({"code": "SCOPE_SNAPSHOT_DRIFT", "expected": ACCEPTED_SCOPE_SHA256, "actual": actual})
+
+    if not DESTINATION.is_file():
+        findings.append({"code": "AUDIT_MISSING", "path": str(DESTINATION.relative_to(ROOT))})
+    else:
+        audit = json.loads(DESTINATION.read_text(encoding="utf-8"))
+        actual = _sha256(DESTINATION)
+        if actual != ACCEPTED_AUDIT_SHA256:
+            findings.append({"code": "AUDIT_SNAPSHOT_DRIFT", "expected": ACCEPTED_AUDIT_SHA256, "actual": actual})
+
+    included = scope.get("included_requirements", [])
+    deferred = scope.get("deferred_requirements", [])
+    included_ids = {item.get("requirement_id") for item in included if isinstance(item, dict)}
+    deferred_ids = {item.get("requirement_id") for item in deferred if isinstance(item, dict)}
+    if len(included) != ACCEPTED_SCOPE_INCLUDED:
+        findings.append({"code": "SCOPE_INCLUDED_COUNT", "expected": ACCEPTED_SCOPE_INCLUDED, "actual": len(included)})
+    if len(deferred) != ACCEPTED_SCOPE_DEFERRED:
+        findings.append({"code": "SCOPE_DEFERRED_COUNT", "expected": ACCEPTED_SCOPE_DEFERRED, "actual": len(deferred)})
+    if included_ids & deferred_ids:
+        findings.append({"code": "SCOPE_OVERLAP", "requirement_ids": sorted(included_ids & deferred_ids)})
+    if len(included_ids | deferred_ids) != ACCEPTED_SCOPE_TOTAL:
+        findings.append({"code": "SCOPE_TOTAL_COUNT", "expected": ACCEPTED_SCOPE_TOTAL, "actual": len(included_ids | deferred_ids)})
+    if tuple(scope.get("authorized_epics", [])) != AUTHORIZED_EPICS:
+        findings.append({"code": "SCOPE_EPICS", "expected": list(AUTHORIZED_EPICS), "actual": scope.get("authorized_epics")})
+    if scope.get("production_authorized") is not False or scope.get("progress_07_authorized") is not False:
+        findings.append({"code": "SCOPE_POSTURE"})
+
+    audited = audit.get("audited_requirements", [])
+    if audit.get("scope_requirement_count") != ACCEPTED_SCOPE_TOTAL or len(audited) != ACCEPTED_SCOPE_TOTAL:
+        findings.append({"code": "AUDIT_REQUIREMENT_COUNT", "expected": ACCEPTED_SCOPE_TOTAL, "actual": len(audited)})
+    if audit.get("status") != "passed_complete" or audit.get("finding_count") != 0 or audit.get("findings") != []:
+        findings.append({"code": "AUDIT_ACCEPTED_STATUS", "status": audit.get("status"), "finding_count": audit.get("finding_count")})
+    if tuple(audit.get("authorized_epics", [])) != AUTHORIZED_EPICS:
+        findings.append({"code": "AUDIT_EPICS", "expected": list(AUTHORIZED_EPICS), "actual": audit.get("authorized_epics")})
+    if audit.get("production_authorized") is not False or audit.get("progress_07_authorized") is not False:
+        findings.append({"code": "AUDIT_POSTURE"})
+
+    tests = _tests()
+    for record in audited:
+        if not isinstance(record, dict):
+            findings.append({"code": "AUDIT_RECORD_TYPE"})
+            continue
+        requirement_id = record.get("requirement_id")
+        for linked in record.get("linked_tests", []):
+            test_id = linked.get("test_id") if isinstance(linked, dict) else None
+            declared = tests.get(test_id) if isinstance(test_id, str) else None
+            if declared is None:
+                findings.append({"code": "ACCEPTED_LINKED_TEST_MISSING", "requirement_id": requirement_id, "test_id": test_id})
+            elif requirement_id not in declared:
+                findings.append({"code": "ACCEPTED_LINKED_TEST_DECLARATION_DRIFT", "requirement_id": requirement_id, "test_id": test_id, "declared": sorted(declared)})
+
+    return {
+        "status": "passed_complete" if not findings else "failed",
+        "requirements": ACCEPTED_SCOPE_TOTAL,
+        "included": len(included),
+        "deferred": len(deferred),
+        "findings": findings,
+        "finding_count": len(findings),
+        "scope_sha256": _sha256(SCOPE_DESTINATION) if SCOPE_DESTINATION.is_file() else None,
+        "audit_sha256": _sha256(DESTINATION) if DESTINATION.is_file() else None,
+        "historical_snapshot": True,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--check", action="store_true", help="validate the immutable accepted snapshot")
+    parser.add_argument(
+        "--regenerate-current",
+        action="store_true",
+        help="print a current-ledger candidate to stdout only; never rewrite the accepted historical files",
+    )
     args = parser.parse_args()
-    audit = build()
-    scope = build_scope()
-    audit_rendered = json.dumps(audit, indent=2, sort_keys=True) + "\n"
-    scope_rendered = json.dumps(scope, indent=2, sort_keys=True) + "\n"
-    if args.check:
-        drift = (
-            not DESTINATION.is_file() or DESTINATION.read_text(encoding="utf-8") != audit_rendered
-            or not SCOPE_DESTINATION.is_file() or SCOPE_DESTINATION.read_text(encoding="utf-8") != scope_rendered
-        )
-        if drift:
-            raise SystemExit("Progress 06 scope/traceability drift detected; run tools/audit_progress06_traceability.py")
-    else:
-        DESTINATION.write_text(audit_rendered, encoding="utf-8")
-        SCOPE_DESTINATION.write_text(scope_rendered, encoding="utf-8")
-    print(json.dumps({
-        "status": audit["status"],
-        "requirements": audit["scope_requirement_count"],
-        "included": scope["counts"]["included"],
-        "deferred": scope["counts"]["deferred"],
-        "findings": audit["finding_count"],
-    }, sort_keys=True))
-    raise SystemExit(0 if audit["status"] == "passed_complete" else 1)
+    if args.regenerate_current:
+        print(json.dumps({"audit": build(), "scope": build_scope()}, indent=2, sort_keys=True))
+        return
+    result = validate_accepted_snapshot()
+    print(json.dumps(result, sort_keys=True))
+    raise SystemExit(0 if result["status"] == "passed_complete" else 1)
 
 
 if __name__ == "__main__":

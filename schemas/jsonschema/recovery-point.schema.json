@@ -1,0 +1,123 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/recovery-point.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "configuration_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Configuration Hash",
+      "type": "string"
+    },
+    "database_profile": {
+      "title": "Database Profile",
+      "type": "string"
+    },
+    "database_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Database Sha256"
+    },
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "evidence_class": {
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "idempotent_replay": {
+      "default": false,
+      "title": "Idempotent Replay",
+      "type": "boolean"
+    },
+    "immutable_until": {
+      "format": "date-time",
+      "title": "Immutable Until",
+      "type": "string"
+    },
+    "object_root_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Root Hash",
+      "type": "string"
+    },
+    "package_root_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Root Hash",
+      "type": "string"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "recovery_point_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recovery Point Hash",
+      "type": "string"
+    },
+    "recovery_point_id": {
+      "title": "Recovery Point Id",
+      "type": "string"
+    },
+    "region": {
+      "title": "Region",
+      "type": "string"
+    },
+    "requested_point_at": {
+      "format": "date-time",
+      "title": "Requested Point At",
+      "type": "string"
+    },
+    "snapshot_at": {
+      "format": "date-time",
+      "title": "Snapshot At",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "created",
+        "verified",
+        "expired",
+        "quarantined"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recovery_point_id",
+    "tenant_id",
+    "project_id",
+    "deployment_profile_id",
+    "region",
+    "evidence_class",
+    "database_profile",
+    "package_sha256",
+    "package_root_hash",
+    "object_root_hash",
+    "configuration_hash",
+    "requested_point_at",
+    "snapshot_at",
+    "immutable_until",
+    "state",
+    "recovery_point_hash"
+  ],
+  "title": "RecoveryPointContract",
+  "type": "object"
+}

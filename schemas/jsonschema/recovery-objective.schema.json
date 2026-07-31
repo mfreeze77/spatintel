@@ -1,0 +1,109 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/recovery-objective.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "data_class": {
+      "title": "Data Class",
+      "type": "string"
+    },
+    "degraded_behavior": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Degraded Behavior",
+      "type": "object"
+    },
+    "deployment_profile_id": {
+      "title": "Deployment Profile Id",
+      "type": "string"
+    },
+    "evidence_class": {
+      "enum": [
+        "local_controlled",
+        "local_executed",
+        "synthetic",
+        "cloud_executed",
+        "external_witnessed"
+      ],
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "objective_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Objective Hash",
+      "type": "string"
+    },
+    "project_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Id"
+    },
+    "recovery_method": {
+      "additionalProperties": true,
+      "minProperties": 1,
+      "title": "Recovery Method",
+      "type": "object"
+    },
+    "recovery_objective_id": {
+      "title": "Recovery Objective Id",
+      "type": "string"
+    },
+    "rpo_seconds": {
+      "minimum": 0,
+      "title": "Rpo Seconds",
+      "type": "integer"
+    },
+    "rto_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Rto Seconds",
+      "type": "integer"
+    },
+    "service_class": {
+      "title": "Service Class",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "superseded",
+        "revoked"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "tenant_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tenant Id"
+    }
+  },
+  "required": [
+    "recovery_objective_id",
+    "deployment_profile_id",
+    "data_class",
+    "service_class",
+    "rpo_seconds",
+    "rto_seconds",
+    "degraded_behavior",
+    "recovery_method",
+    "evidence_class",
+    "objective_hash",
+    "state"
+  ],
+  "title": "RecoveryObjectiveContract",
+  "type": "object"
+}

@@ -33,6 +33,8 @@ resources:
 - services/operations-intelligence.yaml
 - deployments/deployment-control.yaml
 - services/deployment-control.yaml
+- deployments/recovery-control.yaml
+- services/recovery-control.yaml
 - deployments/representation-api.yaml
 - services/representation-api.yaml
 - deployments/provider-registry.yaml

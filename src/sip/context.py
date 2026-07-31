@@ -20,6 +20,7 @@ from .operations import OperationService
 from .ops_intelligence import OperationsIntelligenceService
 from .policy import PolicyService
 from .representations import ProviderRegistry, RepresentationPublisher, RepresentationService
+from .recovery import RecoveryOperationsService
 from .scene import SceneService
 from .scene_runtime import SceneRuntimeService
 from .search import SearchService
@@ -61,6 +62,7 @@ class PlatformContext:
     security_ops: SecurityOperationsService
     operations_intelligence: OperationsIntelligenceService
     deployment: DeploymentService
+    recovery: RecoveryOperationsService
 
     @classmethod
     def create(cls, settings: Settings | None = None, *, create_schema: bool | None = None) -> "PlatformContext":
@@ -134,6 +136,19 @@ class PlatformContext:
             environment=settings.environment,
             security_ops=security_ops,
         )
+        lifecycle = LifecycleService(database, assets, audit)
+        recovery = RecoveryOperationsService(
+            database,
+            assets,
+            preservation,
+            lifecycle,
+            audit,
+            deployment,
+            security_ops,
+            settings.signing_key,
+            recovery_root=settings.object_store_root.parent / "recovery",
+            environment=settings.environment,
+        )
         assets.set_deployment_service(deployment)
         operations.set_deployment_service(deployment)
         return cls(
@@ -146,7 +161,7 @@ class PlatformContext:
             policy=policy,
             operations=operations,
             preservation=preservation,
-            lifecycle=LifecycleService(database, assets, audit),
+            lifecycle=lifecycle,
             backup_recovery=BackupRecoveryService(database, preservation, assets, audit),
             key_rotation=KeyRotationService(database, assets, audit),
             admission=admission,
@@ -167,6 +182,7 @@ class PlatformContext:
             security_ops=security_ops,
             operations_intelligence=operations_intelligence,
             deployment=deployment,
+            recovery=recovery,
         )
 
 

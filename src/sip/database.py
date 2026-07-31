@@ -2933,6 +2933,300 @@ class GracefulShutdownEvidenceRow(Base):
     recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
 
 
+
+class RecoveryObjectiveRow(Base):
+    __tablename__ = "recovery_objectives"
+    recovery_objective_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    data_class: Mapped[str] = mapped_column(String(128), index=True)
+    service_class: Mapped[str] = mapped_column(String(128), index=True)
+    rpo_seconds: Mapped[int] = mapped_column(Integer)
+    rto_seconds: Mapped[int] = mapped_column(Integer)
+    degraded_behavior_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    recovery_method_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_class: Mapped[str] = mapped_column(String(64), index=True)
+    objective_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        Index("ix_recovery_objective_scope", "tenant_id", "project_id", "deployment_profile_id", "data_class", "service_class", "state"),
+    )
+
+
+class RecoveryPointRow(Base):
+    __tablename__ = "recovery_points"
+    recovery_point_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    region: Mapped[str] = mapped_column(String(64), index=True)
+    evidence_class: Mapped[str] = mapped_column(String(64), index=True)
+    database_profile: Mapped[str] = mapped_column(String(128))
+    package_path: Mapped[str] = mapped_column(Text)
+    package_sha256: Mapped[str] = mapped_column(String(64))
+    package_root_hash: Mapped[str] = mapped_column(String(64))
+    database_snapshot_path: Mapped[str | None] = mapped_column(Text)
+    database_sha256: Mapped[str | None] = mapped_column(String(64))
+    object_manifest_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    object_root_hash: Mapped[str] = mapped_column(String(64))
+    configuration_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    configuration_hash: Mapped[str] = mapped_column(String(64))
+    audit_heads_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    queue_manifest_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    key_references_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    requested_point_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    snapshot_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    immutable_until: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(32), default="created", index=True)
+    recovery_point_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    expired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        Index("ix_recovery_point_scope_time", "tenant_id", "project_id", "snapshot_at", "state"),
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_recovery_point_idempotency"),
+    )
+
+
+class RestoreRunRow(Base):
+    __tablename__ = "recovery_restore_runs"
+    restore_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    recovery_point_id: Mapped[str] = mapped_column(String(64), index=True)
+    target_tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    target_project_id: Mapped[str] = mapped_column(String(64), index=True)
+    target_region: Mapped[str] = mapped_column(String(64), index=True)
+    requested_point_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    restore_mode: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(64), default="requested", index=True)
+    reconciliation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    output_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    writes_reopened: Mapped[bool] = mapped_column(Boolean, default=False)
+    rpo_seconds_observed: Mapped[int | None] = mapped_column(Integer)
+    rto_seconds_observed: Mapped[int | None] = mapped_column(Integer)
+    evidence_hash: Mapped[str | None] = mapped_column(String(64))
+    requested_by: Mapped[str] = mapped_column(String(128))
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_recovery_restore_idempotency"),
+    )
+
+
+class KeyRecoveryExerciseRow(Base):
+    __tablename__ = "key_recovery_exercises"
+    key_recovery_exercise_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    key_scope_id: Mapped[str] = mapped_column(String(64), index=True)
+    guardians_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    approvals_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    recovery_artifact_reference: Mapped[str] = mapped_column(String(512))
+    root_key_exposed: Mapped[bool] = mapped_column(Boolean, default=False)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    exercise_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    exercised_by: Mapped[str] = mapped_column(String(128))
+    exercised_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class RetentionAssignmentRow(Base):
+    __tablename__ = "retention_assignments"
+    retention_assignment_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    resource_type: Mapped[str] = mapped_column(String(128), index=True)
+    resource_id: Mapped[str] = mapped_column(String(128), index=True)
+    retention_class: Mapped[str] = mapped_column(String(64), index=True)
+    policy_source: Mapped[str] = mapped_column(Text)
+    hold_status: Mapped[str] = mapped_column(String(32), index=True)
+    deletion_eligible_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
+    deletion_eligible: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    assignment_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    evaluated_by: Mapped[str] = mapped_column(String(128))
+    evaluated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        Index("ix_retention_assignment_resource", "tenant_id", "project_id", "resource_type", "resource_id", "state"),
+    )
+
+
+class DeletionGraphRow(Base):
+    __tablename__ = "deletion_dependency_graphs"
+    deletion_graph_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    scope_type: Mapped[str] = mapped_column(String(64), index=True)
+    scope_id: Mapped[str] = mapped_column(String(128), index=True)
+    nodes_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    edges_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    holds_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    store_plan_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    exceptions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    eligible: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    state: Mapped[str] = mapped_column(String(32), default="planned", index=True)
+    graph_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class PurgeRunRow(Base):
+    __tablename__ = "purge_runs"
+    purge_run_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    deletion_graph_id: Mapped[str] = mapped_column(String(64), index=True)
+    idempotency_key: Mapped[str] = mapped_column(String(256))
+    request_hash: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(32), default="requested", index=True)
+    store_results_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    unresolved_exceptions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    backup_expiry_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    cryptographic_erasure_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    evidence_hash: Mapped[str | None] = mapped_column(String(64), index=True)
+    requested_by: Mapped[str] = mapped_column(String(128))
+    approved_by: Mapped[str | None] = mapped_column(String(128))
+    executed_by: Mapped[str | None] = mapped_column(String(128))
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    executed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "idempotency_key", name="uq_purge_run_idempotency"),
+    )
+
+
+class BackupExpiryEvidenceRow(Base):
+    __tablename__ = "backup_expiry_evidence"
+    backup_expiry_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    recovery_point_id: Mapped[str] = mapped_column(String(64), index=True)
+    resource_scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    scheduled_for: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    residuals_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    state: Mapped[str] = mapped_column(String(32), default="scheduled", index=True)
+    evidence_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    recorded_by: Mapped[str] = mapped_column(String(128))
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    executed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class FixityCheckRow(Base):
+    __tablename__ = "fixity_checks"
+    fixity_check_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    resource_type: Mapped[str] = mapped_column(String(64), index=True)
+    resource_id: Mapped[str] = mapped_column(String(128), index=True)
+    expected_sha256: Mapped[str] = mapped_column(String(64))
+    observed_sha256: Mapped[str | None] = mapped_column(String(64))
+    replicas_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    repair_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    check_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    checked_by: Mapped[str] = mapped_column(String(128))
+    checked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class FormatMigrationEvidenceRow(Base):
+    __tablename__ = "format_migration_evidence"
+    format_migration_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    source_asset_id: Mapped[str] = mapped_column(String(64), index=True)
+    derivative_asset_id: Mapped[str] = mapped_column(String(64), index=True)
+    source_sha256: Mapped[str] = mapped_column(String(64))
+    derivative_sha256: Mapped[str] = mapped_column(String(64))
+    source_format: Mapped[str] = mapped_column(String(128))
+    target_format: Mapped[str] = mapped_column(String(128))
+    migration_tool_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    validation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    migration_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    migrated_by: Mapped[str] = mapped_column(String(128))
+    migrated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class TenantOffboardingRow(Base):
+    __tablename__ = "tenant_offboarding_runs"
+    offboarding_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    export_manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    retention_report_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    deletion_report_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    offboarding_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    requested_by: Mapped[str] = mapped_column(String(128))
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class RecoveryGameDayRow(Base):
+    __tablename__ = "recovery_game_days"
+    recovery_game_day_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    deployment_profile_id: Mapped[str] = mapped_column(String(64), index=True)
+    recovery_point_id: Mapped[str] = mapped_column(String(64), index=True)
+    scenario: Mapped[str] = mapped_column(String(128), index=True)
+    affected_region: Mapped[str | None] = mapped_column(String(64))
+    affected_services_json: Mapped[list[str]] = mapped_column(JSON, default=list)
+    timeline_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    metrics_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    portability_export_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    findings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    evidence_class: Mapped[str] = mapped_column(String(64), index=True)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    game_day_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    conducted_by: Mapped[str] = mapped_column(String(128))
+    conducted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class LegacyMigrationRunRow(Base):
+    __tablename__ = "legacy_migration_runs"
+    legacy_migration_run_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    source_release: Mapped[str] = mapped_column(String(64))
+    target_release: Mapped[str] = mapped_column(String(64))
+    source_backup_id: Mapped[str] = mapped_column(String(64), index=True)
+    asset_mappings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    quarantines_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    unresolved_anchors_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    policy_diffs_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    validation_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    rollback_evidence_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    compatibility_report_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), index=True)
+    report_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    signed_report: Mapped[str] = mapped_column(Text)
+    migrated_by: Mapped[str] = mapped_column(String(128))
+    migrated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+
+
+class RecoveryLockRow(Base):
+    __tablename__ = "recovery_locks"
+    recovery_lock_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True)
+    project_id: Mapped[str] = mapped_column(String(64), index=True)
+    lock_scope: Mapped[str] = mapped_column(String(128), index=True)
+    operation_type: Mapped[str] = mapped_column(String(64))
+    owner_operation_id: Mapped[str] = mapped_column(String(64), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    acquired_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "project_id", "lock_scope", name="uq_recovery_lock_scope"),
+    )
+
+
 class Database:
     def __init__(self, url: str, *, create: bool = False) -> None:
         self.url = url

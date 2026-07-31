@@ -1,0 +1,133 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "evaluate_recovery_production_admission",
+      "path": "/v1/deployment/profiles/{deployment_profile_id}/recovery/production-admission"
+    },
+    {
+      "method": "POST",
+      "operation_id": "schedule_backup_expiry",
+      "path": "/v1/projects/{project_id}/backup-expiry"
+    },
+    {
+      "method": "POST",
+      "operation_id": "execute_backup_expiry",
+      "path": "/v1/projects/{project_id}/backup-expiry/{backup_expiry_id}/execute"
+    },
+    {
+      "method": "POST",
+      "operation_id": "build_deletion_graph",
+      "path": "/v1/projects/{project_id}/deletion-graphs"
+    },
+    {
+      "method": "POST",
+      "operation_id": "check_recovery_fixity",
+      "path": "/v1/projects/{project_id}/fixity-checks"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_recovery_format_migration",
+      "path": "/v1/projects/{project_id}/format-migrations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_legacy_migration",
+      "path": "/v1/projects/{project_id}/legacy-migrations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "request_recovery_purge",
+      "path": "/v1/projects/{project_id}/purges"
+    },
+    {
+      "method": "POST",
+      "operation_id": "approve_recovery_purge",
+      "path": "/v1/projects/{project_id}/purges/{purge_run_id}/approve"
+    },
+    {
+      "method": "POST",
+      "operation_id": "execute_recovery_purge",
+      "path": "/v1/projects/{project_id}/purges/{purge_run_id}/execute"
+    },
+    {
+      "method": "POST",
+      "operation_id": "run_recovery_game_day",
+      "path": "/v1/projects/{project_id}/recovery/game-days"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_recovery_point",
+      "path": "/v1/projects/{project_id}/recovery/points"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_recovery_point",
+      "path": "/v1/projects/{project_id}/recovery/points/{recovery_point_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "verify_recovery_point",
+      "path": "/v1/projects/{project_id}/recovery/points/{recovery_point_id}/verify"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_recovery_restore",
+      "path": "/v1/projects/{project_id}/recovery/restores"
+    },
+    {
+      "method": "POST",
+      "operation_id": "evaluate_retention_inventory",
+      "path": "/v1/projects/{project_id}/retention/evaluations"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_tenant_offboarding",
+      "path": "/v1/tenants/{tenant_id}/offboarding"
+    },
+    {
+      "method": "POST",
+      "operation_id": "exercise_recovery_key",
+      "path": "/v1/tenants/{tenant_id}/recovery/key-exercises"
+    },
+    {
+      "method": "POST",
+      "operation_id": "register_recovery_objective",
+      "path": "/v1/tenants/{tenant_id}/recovery/objectives"
+    }
+  ],
+  "required_environment": {
+    "SIP_DATABASE_URL": "secret_reference",
+    "SIP_PRODUCTION_AUTHORIZED": "false",
+    "SIP_SERVICE_NAME": "recovery-control",
+    "SIP_SIGNING_KEY": "secret_reference"
+  },
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "network_egress_default_deny": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true,
+    "short_lived_workload_identity_required": true
+  },
+  "service_name": "recovery-control"
+}

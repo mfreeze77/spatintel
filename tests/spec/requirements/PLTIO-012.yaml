@@ -9,15 +9,19 @@ requirement: A clean reference importer shall reconstruct the hybrid layer regis
 verification_method: Independent verification
 implementation_status: VERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/exporting.py
 - src/sip/lifecycle.py
+- src/sip/hybrid.py
 - tools/run_demo.py
 - apps/web
 automated_test_ids:
 - tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration
 - tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state
 - tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline
 retained_evidence:
+- build/evidence/demo-progress10-recovery.json
 - build/evidence/demos/foundation.json
 - build/reports/test-matrix.json
 - build/reports/tests/e2e.xml

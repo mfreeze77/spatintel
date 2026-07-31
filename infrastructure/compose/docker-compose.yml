@@ -227,6 +227,16 @@ services:
       SIP_PRODUCTION_AUTHORIZED: "false"
       SIP_DEFAULT_EGRESS: denied
     networks: [backend]
+  recovery-control:
+    <<: *python-service
+    environment:
+      <<: *common-environment
+      SIP_SERVICE_NAME: recovery-control
+      SIP_LOCAL_ONLY: "true"
+      SIP_PRODUCTION_AUTHORIZED: "false"
+      SIP_RECOVERY_EVIDENCE_CLASS: local_executed
+      SIP_RECOVERY_WRITES_REOPEN: reconciled-only
+    networks: [backend]
   representation-api:
     <<: *python-service
     environment: {<<: *common-environment, SIP_SERVICE_NAME: representation-api}

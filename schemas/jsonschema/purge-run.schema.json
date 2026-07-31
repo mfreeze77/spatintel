@@ -1,0 +1,91 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/purge-run.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "backup_expiry": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Backup Expiry",
+      "type": "array"
+    },
+    "cryptographic_erasure": {
+      "additionalProperties": true,
+      "title": "Cryptographic Erasure",
+      "type": "object"
+    },
+    "deletion_graph_id": {
+      "title": "Deletion Graph Id",
+      "type": "string"
+    },
+    "evidence_hash": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Hash"
+    },
+    "idempotent_replay": {
+      "default": false,
+      "title": "Idempotent Replay",
+      "type": "boolean"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "purge_run_id": {
+      "title": "Purge Run Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "awaiting_approval",
+        "approved",
+        "executed",
+        "blocked",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "store_results": {
+      "additionalProperties": true,
+      "title": "Store Results",
+      "type": "object"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "unresolved_exceptions": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Unresolved Exceptions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "purge_run_id",
+    "tenant_id",
+    "project_id",
+    "deletion_graph_id",
+    "state",
+    "store_results",
+    "unresolved_exceptions",
+    "backup_expiry",
+    "cryptographic_erasure"
+  ],
+  "title": "PurgeRunContract",
+  "type": "object"
+}

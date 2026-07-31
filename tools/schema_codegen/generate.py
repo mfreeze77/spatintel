@@ -72,6 +72,13 @@ from sip.contracts import (
     DeploymentMigrationContract,
     AwsEnvironmentManifestContract,
     DeploymentAdmissionContract,
+    RecoveryObjectiveContract,
+    RecoveryPointContract,
+    RestoreRunContract,
+    DeletionGraphContract,
+    PurgeRunContract,
+    RecoveryGameDayContract,
+    LegacyMigrationReportContract,
 )
 
 MODELS = {
@@ -144,6 +151,13 @@ MODELS = {
     "deployment-migration": DeploymentMigrationContract,
     "aws-environment-manifest": AwsEnvironmentManifestContract,
     "deployment-admission": DeploymentAdmissionContract,
+    "recovery-objective": RecoveryObjectiveContract,
+    "recovery-point": RecoveryPointContract,
+    "restore-run": RestoreRunContract,
+    "deletion-graph": DeletionGraphContract,
+    "purge-run": PurgeRunContract,
+    "recovery-game-day": RecoveryGameDayContract,
+    "legacy-migration-report": LegacyMigrationReportContract,
 }
 SERVICES = [
     "all",
@@ -165,6 +179,7 @@ SERVICES = [
     "security-ops",
     "operations-intelligence",
     "deployment-control",
+    "recovery-control",
 ]
 
 

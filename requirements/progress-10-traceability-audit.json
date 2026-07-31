@@ -1,0 +1,2752 @@
+{
+  "accepted_base_commit": "f293d6425182ef04f5893275724e2a4bd28cf00e",
+  "authorized_epics": [
+    "OPS-004"
+  ],
+  "deferred_requirement_count": 0,
+  "finding_count": 0,
+  "findings": [],
+  "included_requirement_count": 45,
+  "milestone": "Progress 10 bounded backup, restore, disaster recovery, retention, and deletion",
+  "production_authorized": false,
+  "progress_10_authorized": true,
+  "progress_11_authorized": false,
+  "requirement_count": 45,
+  "requirements_audited": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "OPSDR-001",
+            "OPSDR-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/operations.py",
+        "src/sip/deployment.py",
+        "src/sip/observability.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "ARCRES-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "OPSDR-001",
+            "OPSDR-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-002",
+            "DATRET-002",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/operations.py",
+        "src/sip/deployment.py",
+        "src/sip/observability.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "requirement_id": "ARCRES-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/operations.py",
+        "src/sip/deployment.py",
+        "src/sip/observability.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "ARCRES-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-004",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_requires_queue_reconciliation_before_writes_reopen"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/operations.py",
+        "src/sip/deployment.py",
+        "src/sip/observability.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "ARCRES-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "ARCRES-004",
+            "ARCRES-005",
+            "OPSPERF-005",
+            "RECGPU-001",
+            "RECGPU-002",
+            "RECGPU-003",
+            "RECGPU-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_recovery_denials_retain_audit_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/operations.py",
+        "src/sip/deployment.py",
+        "src/sip/observability.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "requirement_id": "ARCRES-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-001",
+            "DATRET-002",
+            "DATRET-004",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONMEAS-001",
+            "DATANCH-001",
+            "DATRET-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_spatial_truth_twin.py::test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-005",
+            "OPSDR-001",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-004",
+            "OPSDR-004",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-001",
+            "DATRET-002",
+            "DATRET-004",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_deletion_scope_isolated_between_projects"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-002",
+            "DATRET-002",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-003",
+            "LIFCONS-002",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-004",
+            "OPSDR-004",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-004",
+            "DATRET-006",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-001",
+            "DATRET-002",
+            "DATRET-004",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_backup_expiry_is_bounded_hold_aware_and_idempotent"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-004",
+            "OPSDR-006",
+            "PLTIO-003",
+            "PLTIO-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-005",
+            "OPSDR-001",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-004",
+            "DATRET-006",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-001",
+            "DATRET-002",
+            "DATRET-004",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_retention_deletion.py::test_progress10_deletion_scope_isolated_between_projects"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "DATRET-006"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFCONS-004",
+            "LIFGRAPH-003",
+            "LIFOVR-001",
+            "LIFOVR-002",
+            "LIFOVR-003",
+            "LIFPRESV-001",
+            "LIFUX-001",
+            "LIFUX-002",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_unexpected_member_even_when_checksummed"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_tampered_required_content"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_vertical_package_member_validation_rejects_traversal_backslash_drive_symlink_and_duplicates"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONHAND-006",
+            "LIFPRESV-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_vertical_package_safety.py::test_handoff_and_liveforever_verifiers_reject_unsafe_packages"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-004",
+            "OPSDR-006",
+            "PLTIO-003",
+            "PLTIO-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFCONS-001",
+            "LIFDEMO-001",
+            "LIFDEMO-002",
+            "LIFDEMO-004",
+            "LIFDEMO-005",
+            "LIFDEMO-006",
+            "LIFINT-001",
+            "LIFINT-003",
+            "LIFPRESV-001",
+            "LIFPRESV-004",
+            "LIFUX-001",
+            "LIFUX-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "LIFDEMO-006",
+            "LIFEXP-012",
+            "LIFLABEL-004",
+            "LIFLABEL-006",
+            "LIFPRESV-001",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-001",
+            "LIFPRESV-002",
+            "LIFPRESV-003",
+            "LIFPRESV-004",
+            "LIFPRESV-005",
+            "LIFPRESV-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/liveforever.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "LIFPRESV-006"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "OPSDR-001",
+            "OPSDR-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-005",
+            "OPSDR-001",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "OPSDR-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "requirement_id": "OPSDR-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-002",
+            "OPSDR-001",
+            "OPSDR-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "requirement_id": "OPSDR-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-004",
+            "OPSDR-004",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_key_recovery_requires_quorum_opaque_reference_and_no_root_exposure"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "OPSDR-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-005",
+            "OPSDR-001",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "ARCRES-003",
+            "ARCRES-004",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-004",
+            "DATRET-006",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-004",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_requires_queue_reconciliation_before_writes_reopen"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-005",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_recovery_denials_retain_audit_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-002",
+            "DATRET-002",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-002",
+            "OPSDR-003",
+            "OPSDR-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "OPSDR-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-004",
+            "OPSDR-006",
+            "PLTIO-003",
+            "PLTIO-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-002",
+            "DATRET-004",
+            "OPSDR-004",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "ARCRES-001",
+            "OPSDR-001",
+            "OPSDR-002",
+            "OPSDR-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "src/sip/api.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/runbooks/PROGRESS_10_RECOVERY_INCIDENTS.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "OPSDR-006"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-004",
+            "OPSDR-006",
+            "PLTIO-003",
+            "PLTIO-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        },
+        {
+          "declared_requirement_ids": [
+            "CONMEAS-001",
+            "DATANCH-001",
+            "DATHYB-006",
+            "PLTIO-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_preservation_collision_remaps_proxy_measurement_and_anchor_history"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-007",
+            "PLTIO-010",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "PLTIO-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DATRET-005",
+            "LIFPRESV-004",
+            "OPSDR-006",
+            "PLTIO-003",
+            "PLTIO-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-007",
+            "PLTIO-010",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "PLTIO-006"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-007",
+            "PLTIO-010",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-007"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-008",
+            "RECCLEAN-004",
+            "RECPROV-008",
+            "RECPROV-009",
+            "SECEXT-004",
+            "SECEXT-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-008"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-009"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-007",
+            "PLTIO-010",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-010"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "PLTIO-011"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSDR-005",
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-003",
+            "PLTIO-006",
+            "PLTIO-007",
+            "PLTIO-010",
+            "PLTIO-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/exporting.py",
+        "src/sip/recovery.py",
+        "src/sip/hybrid.py",
+        "src/sip/contracts.py",
+        "docs/developer/PROGRESS_10_RECOVERY_API.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "requirement_id": "PLTIO-012"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001",
+            "SIPMIG-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-001"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-002"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-003"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-004"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-005"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001",
+            "SIPMIG-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-006"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-007"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-008"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-009"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml",
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/checkpoint-acceptance-gates.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/spatial_data.py",
+        "src/sip/scene.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "requirement_id": "SIPMIG-010"
+    }
+  ],
+  "schema": "sip.progress10-traceability-audit/v1",
+  "status": "passed_complete"
+}

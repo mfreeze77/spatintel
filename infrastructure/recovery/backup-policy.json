@@ -1,0 +1,29 @@
+{
+  "schema": "sip.backup-policy/v1",
+  "production_authorized": false,
+  "profiles": {
+    "local-reference": {
+      "database": "sqlite_online_backup",
+      "objects": "open_preservation_package",
+      "configuration": "content_addressed_manifest",
+      "audit": "signed_hash_chain",
+      "immutability_days": 30,
+      "verification": "mandatory_before_restore",
+      "restore_target": "isolated_generated_scope"
+    },
+    "cloud-reference": {
+      "database": "pitr_contract_only",
+      "objects": "versioned_immutable_contract_only",
+      "configuration": "signed_release_manifest",
+      "audit": "immutable_export_contract",
+      "execution_status": "external_validation_required"
+    }
+  },
+  "restore_stop_lines": [
+    "hash_reconciliation_incomplete",
+    "object_version_missing",
+    "residency_denied",
+    "audit_chronology_incomplete",
+    "restore_would_resurrect_deleted_data"
+  ]
+}

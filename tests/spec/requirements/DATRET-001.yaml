@@ -7,12 +7,14 @@ source:
   section: 4. Normative requirements
 requirement: Every stored asset and record shall have retention class, policy source, hold status, and deletion eligibility.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/lifecycle.py
 - src/sip/database.py
-- docs/runbooks/CONTROLLED_DELETION.md
+- docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md
 automated_test_ids:
+- tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge
 - tests/integration/test_spatial_truth_twin.py::test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards
 retained_evidence:
 - build/reports/test-matrix.json
@@ -26,5 +28,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

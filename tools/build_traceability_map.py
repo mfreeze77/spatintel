@@ -41,6 +41,8 @@ VERIFIED = {
     "PLTGRPC-001", "PLTGRPC-003", "PLTGRPC-004", "PLTGRPC-005", "PLTGRPC-006",
     "PLTAGENT-001", "PLTAGENT-002", "PLTAGENT-003", "PLTAGENT-004", "PLTAGENT-005", "PLTAGENT-006",
     "PLTIO-003", "PLTIO-006", "PLTIO-012", "PLTSDK-003",
+    "DATRET-001", "DATRET-002", "DATRET-003", "DATRET-004", "DATRET-005", "DATRET-006",
+    "OPSDR-004", "OPSDR-005",
     "PLTSQL-001", "PLTSQL-002", "PLTSQL-003", "PLTSQL-006",
     "DATHYB-004", "RECALIGN-001", "RECHYB-002", "RECHYB-005",
     "RECMESH-010", "RECPROV-007", "RECPROV-013",
@@ -53,7 +55,7 @@ IN_PROGRESS = {
     "TSTGATE-001", "TSTGATE-003", "TSTLAY-002", "TSTLAY-004", "TSTSEC-003",
     "TSTSTRAT-001", "TSTSTRAT-002",
 }
-EXTERNAL = {"DATDB-004", "DELDEV-005", "OPSDR-002", "OPSSEC-005", "OPSPERF-001", "OPSPERF-002"}
+EXTERNAL = {"DATDB-004", "DELDEV-005", "ARCRES-002", "ARCRES-005", "OPSDR-002", "OPSDR-003", "OPSSEC-005", "OPSPERF-001", "OPSPERF-002"}
 
 UNVERIFIED_DETAILS = {
     "PLTVIEW-007": (
@@ -73,7 +75,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "ARCIAM": ["src/sip/auth.py", "src/sip/policy.py", "src/sip/api.py", "src/sip/tenancy.py", "src/sip/database.py", "migrations/versions/0015_progress06_r1_security_controls.py"],
     "ARCHHYB": ["src/sip/hybrid.py", "src/sip/representations.py", "src/sip/operations.py", "src/sip/api.py", "src/sip/database.py", "services/provider-registry", "services/representation-api", "migrations/versions/0011_governed_hybrid_representation.py"],
     "ARCOBS": ["src/sip/observability.py", "src/sip/ops_intelligence.py", "src/sip/api.py", "src/sip/operations.py", "infrastructure/observability"],
-    "ARCRES": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/search.py", "src/sip/database.py", "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"],
+    "ARCRES": ["src/sip/recovery.py", "src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/search.py", "src/sip/database.py", "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"],
     "CAPIOS": ["apps/ios-capture/Sources", "apps/ios-capture/Tests", "schemas/jsonschema"],
     "CAPREC": ["apps/ios-capture/Sources/CaptureCore", "apps/ios-capture/Tests/CaptureCoreTests"],
     "CAPSENS": ["apps/ios-capture/Sources/CaptureSensors", "apps/ios-capture/Tests/CaptureCoreTests"],
@@ -106,7 +108,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "GOVETH": ["src/sip/spatial_data.py", "src/sip/models.py", "src/sip/policy.py", "docs/security/THREAT_MODEL.md"],
     "DATGIT": ["src/sip/scene.py", "src/sip/spatial_data.py", "src/sip/database.py", "migrations/versions/0010_spatial_truth_and_twin_controls.py"],
     "DATHYB": ["src/sip/representations.py", "src/sip/scene.py", "src/sip/database.py"],
-    "DATRET": ["src/sip/lifecycle.py", "src/sip/database.py", "docs/runbooks/CONTROLLED_DELETION.md"],
+    "DATRET": ["src/sip/recovery.py", "src/sip/lifecycle.py", "src/sip/database.py", "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"],
     "DATSCENE": ["src/sip/scene.py", "src/sip/database.py", "src/sip/models.py"],
     "DATASSET": ["src/sip/assets.py", "src/sip/database.py", "src/sip/models.py"],
     "DATSEARC": ["src/sip/search.py", "src/sip/spatial_query.py", "src/sip/database.py", "schemas/jsonschema/spatial-query.schema.json", "migrations/versions/0009_authorized_spatial_search_and_agents.py"],
@@ -134,7 +136,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "LIFLABEL": ["src/sip/liveforever.py", "src/sip/api.py", "docs/user/LIVEFOREVER.md"],
     "LIFUX": ["src/sip/liveforever.py", "src/sip/api.py", "docs/user/LIVEFOREVER.md"],
     "LIFEXP": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/database.py", "docs/privacy/LIVEFOREVER_CONSENT_GOVERNANCE.md"],
-    "LIFPRESV": ["src/sip/liveforever.py", "src/sip/api.py", "src/sip/archive_safety.py", "src/sip/database.py", "migrations/versions/0014_vertical_mvp.py", "migrations/versions/0015_progress06_r1_security_controls.py", "docs/operator/LIVEFOREVER_PRESERVATION.md"],
+    "LIFPRESV": ["src/sip/recovery.py", "src/sip/exporting.py", "src/sip/liveforever.py", "src/sip/api.py", "src/sip/archive_safety.py", "src/sip/database.py", "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"],
     "OPSPRIV": ["src/sip/security_ops.py", "src/sip/database.py", "src/sip/api.py", "src/sip/policy.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md", "docs/user/PROGRESS_07_PRIVACY_AND_ACCESS.md"],
     "OPSCOST": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/database.py", "apps/web/components/CostEstimatePanel.tsx", "docs/operator/PROGRESS_08_COST_CAPACITY_RUNBOOK.md"],
     "OPSAUDIT": [
@@ -149,7 +151,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     ],
     "OPSKEY": ["src/sip/security_ops.py", "src/sip/database.py", "src/sip/api.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "docs/operator/PROGRESS_07_KEY_AND_PRIVACY_RUNBOOK.md", "src/sip/lifecycle.py", "src/sip/assets.py", "docs/runbooks/KEY_ROTATION.md"],
     "OPSCICD": ["src/sip/security_ops.py", ".github/workflows/ci.yml", ".github/workflows/release.yml", ".github/workflows/progress07-security.yml", "tools/progress07_supply_chain_check.py", "tools/release.py", "tools/security_check.py", "tools/license_check.py", "infrastructure/security/release-admission-policy.json"],
-    "OPSDR": ["src/sip/lifecycle.py", "src/sip/exporting.py", "docs/operator/BACKUP_RESTORE.md", "tools/run_demo.py"],
+    "OPSDR": ["src/sip/recovery.py", "src/sip/lifecycle.py", "src/sip/exporting.py", "src/sip/security_ops.py", "src/sip/database.py", "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"],
     "OPSSEC": ["src/sip/security_ops.py", "src/sip/security.py", "src/sip/policy.py", "src/sip/api.py", "src/sip/database.py", "migrations/versions/0017_progress07_security_privacy_readiness.py", "services/security-ops", "infrastructure/containers", "infrastructure/kubernetes/base", "infrastructure/security", "infrastructure/postgres/audit-immutability.sql", "tools/security_check.py", "tools/progress07_supply_chain_check.py", "docs/security/THREAT_MODEL.md", "docs/security/PROGRESS_07_THREAT_MODEL.md"],
     "OPSSRE": ["src/sip/ops_intelligence.py", "src/sip/operations.py", "src/sip/security_ops.py", "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md", "docs/runbooks/PROGRESS_08_OPERATIONS_INCIDENTS.md"],
     "OPSPERF": ["src/sip/ops_intelligence.py", "src/sip/observability.py", "apps/web/lib/cost-planner.ts", "docs/operator/PROGRESS_08_SLO_PERFORMANCE_RUNBOOK.md"],
@@ -163,7 +165,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "PLTGRPC": ["src/sip/worker_protocol.py", "src/sip/worker_runtime.py", "schemas/protobuf/worker.proto", "schemas/jsonschema/worker-lease.schema.json"],
     "PLTREST": ["src/sip/assets.py", "src/sip/api.py", "src/sip/audit.py", "src/sip/security.py"],
     "PLTAGENT": ["src/sip/agents.py", "src/sip/search.py", "src/sip/policy.py", "schemas/jsonschema/agent-tool.schema.json", "schemas/jsonschema/agent-answer.schema.json", "migrations/versions/0009_authorized_spatial_search_and_agents.py"],
-    "PLTIO": ["src/sip/exporting.py", "src/sip/lifecycle.py", "tools/run_demo.py", "apps/web"],
+    "PLTIO": ["src/sip/recovery.py", "src/sip/exporting.py", "src/sip/lifecycle.py", "src/sip/hybrid.py", "tools/run_demo.py", "apps/web"],
     "PLTJOB": ["src/sip/operations.py", "src/sip/database.py", "migrations/versions/0005_worker_candidate_idempotency.py", "migrations/versions/0006_operation_trace_context.py"],
     "PLTMODEL": [
         "src/sip/model_governance.py",
@@ -185,7 +187,7 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "RECHYB": ["src/sip/representations.py", "src/sip/scene.py", "apps/web", "tools/run_demo.py"],
     "RECMESH": ["src/sip/geometry.py", "src/sip/representations.py", "src/sip/scene.py", "tools/run_demo.py"],
     "RECPROV": ["src/sip/hybrid.py", "src/sip/contracts.py", "src/sip/worker_runtime.py", "src/sip/representations.py", "src/sip/database.py", "schemas/jsonschema/provider-capability.schema.json", "migrations/versions/0011_governed_hybrid_representation.py"],
-    "SIPMIG": ["migrations", "src/sip/database.py", "src/sip/scene.py", "src/sip/assets.py"],
+    "SIPMIG": ["src/sip/recovery.py", "migrations", "src/sip/database.py", "src/sip/scene.py", "src/sip/assets.py", "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"],
     "TSTGATE": ["src/sip/spec_lint.py", "tools/release.py", ".github/workflows/release.yml"],
     "TSTLAY": ["src/sip/capture.py", "src/sip/worker_sandbox.py", "tools/run_test_matrix.py", "tests/contract/test_progress06_r1_test_matrix_isolation.py", "tests/fixtures"],
     "TSTSEC": ["src/sip/capture.py", "src/sip/security.py", "src/sip/worker_sandbox.py", "tests/fixtures"],
@@ -193,6 +195,18 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
 }
 
 EXTERNAL_DETAILS = {
+    "ARCRES-002": (
+        "Platform Reliability Engineering",
+        "Execute GPU/worker resource-exhaustion and OOM isolation on supported deployed runtimes, proving shared control-plane continuity and retaining resource, container, driver, and recovery evidence.",
+    ),
+    "ARCRES-005": (
+        "Cloud Reliability / Privacy Engineering",
+        "Execute an approved provider-region-loss exercise under real residency policies and credentials, proving no unapproved cross-region movement and retaining network, audit, provider, and policy evidence.",
+    ),
+    "OPSDR-003": (
+        "Storage Reliability Engineering",
+        "Enable managed object versioning or immutable equivalent, execute accidental and malicious deletion recovery, verify exact object versions and retention locks, and retain provider-backed evidence.",
+    ),
     "DELDEV-005": (
         "ML Platform / Release Engineering",
         "Run the documented GPU doctor on each supported NVIDIA driver/CUDA/container profile with an approved local checkpoint hash; retain driver, runtime, device, image, checkpoint, and pass/fail evidence.",
@@ -245,7 +259,7 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "OPSHYB": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/evidence/demo-progress09-deployment.json"],
     "OPSAWS": ["build/reports/infrastructure-static-validation.json", "build/reports/tests/security.xml", "build/evidence/demo-progress09-deployment.json"],
     "ARCOBS": ["build/reports/infrastructure-static-validation.json", "build/evidence/demo-progress08-operations.json"],
-    "ARCRES": ["build/reports/tests/integration.xml", "build/evidence/demo-progress08-operations.json"],
+    "ARCRES": ["build/reports/tests/integration.xml", "build/evidence/demo-progress10-recovery.json"],
     "CAPIOS": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
     "CAPREC": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
     "CAPSENS": ["build/reports/swift-test-report.json", "build/evidence/swift-test-linux.log"],
@@ -306,12 +320,12 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "OPSAUDIT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
     "OPSKEY": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "build/evidence/demo-progress07-security.json"],
     "OPSCICD": ["build/reports/release-report.json", "build/reports/security-report.json", "build/reports/license-gate.json", "build/reports/progress07-supply-chain-report.json"],
-    "OPSDR": ["build/evidence/demos/foundation.json"],
+    "OPSDR": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/evidence/demo-progress10-recovery.json"],
     "OPSSEC": ["build/reports/security-report.json", "build/reports/infrastructure-static-validation.json", "build/reports/progress07-supply-chain-report.json", "build/evidence/demo-progress07-security.json"],
     "PLTAGENT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "schemas/jsonschema/agent-tool.schema.json", "schemas/jsonschema/agent-answer.schema.json"],
     "PLTREST": ["build/reports/tests/contract.xml", "build/reports/tests/unit.xml"],
     "PLTSQL": ["build/reports/tests/integration.xml", "build/reports/tests/contract.xml", "schemas/jsonschema/spatial-query.schema.json"],
-    "PLTIO": ["build/evidence/demos/foundation.json"],
+    "PLTIO": ["build/evidence/demos/foundation.json", "build/evidence/demo-progress10-recovery.json"],
     "PLTMODEL": ["build/reports/license-gate.json", "build/reports/tests/integration.xml", "build/reports/tests/security.xml"],
     "PLTVIEW": ["build/evidence/demos/hybrid.json", "build/evidence/demos/scene-runtime.json", "build/reports/web-runtime-test-report.json"],
     "PLTDESK": ["build/reports/desktop-review-test-report.json"],
@@ -322,7 +336,7 @@ SUPPLEMENTAL_EVIDENCE: dict[str, list[str]] = {
     "RECMESH": ["build/evidence/demos/hybrid.json"],
     "RECPROV": ["build/reports/tests/contract.xml", "build/reports/tests/integration.xml", "schemas/events/event-catalog.json"],
     "SECEXT": ["build/reports/tests/integration.xml", "build/reports/tests/security.xml", "build/reports/tests/contract.xml", "build/reports/license-gate.json", "build/evidence/demo-progress07-security.json"],
-    "SIPMIG": ["migrations", "src/sip/database.py", "src/sip/scene.py", "src/sip/assets.py"],
+    "SIPMIG": ["src/sip/recovery.py", "migrations", "src/sip/database.py", "src/sip/scene.py", "src/sip/assets.py", "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"],
     "TSTGATE": ["build/reports/release-report.json", "build/reports/spec-lint.json"],
     "TSTSTRAT": ["build/reports/test-matrix.json"],
 }

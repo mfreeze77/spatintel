@@ -1,0 +1,29 @@
+{
+  "schema": "sip.recovery-objectives/v1",
+  "production_authorized": false,
+  "evidence_posture": "structural_and_local_only",
+  "objectives": [
+    {
+      "data_class": "canonical-project",
+      "service_class": "control-plane",
+      "rpo_seconds": 3600,
+      "rto_seconds": 900,
+      "degraded_behavior": "read_only_until_hash_reconciliation",
+      "required_external_evidence": [
+        "credentialed_cloud_restore",
+        "external_witnessed_region_loss_exercise"
+      ]
+    },
+    {
+      "data_class": "immutable-evidence",
+      "service_class": "object-store",
+      "rpo_seconds": 0,
+      "rto_seconds": 3600,
+      "degraded_behavior": "deny_mutation_and_serve_only_verified_local_evidence",
+      "required_external_evidence": [
+        "versioned_object_restore",
+        "kms_recovery_rehearsal"
+      ]
+    }
+  ]
+}

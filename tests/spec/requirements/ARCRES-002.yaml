@@ -7,20 +7,25 @@ source:
   section: 4. Normative requirements
 requirement: Worker resource exhaustion shall terminate the job without terminating shared control-plane services.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/ops_intelligence.py
 - src/sip/operations.py
 - src/sip/search.py
 - src/sip/database.py
-- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
+- tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed
 - tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity
 - tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom
+- tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed
 retained_evidence:
-- build/evidence/demo-progress08-operations.json
+- build/evidence/demo-progress10-recovery.json
 - build/reports/test-matrix.json
+- build/reports/tests/contract.xml
 - build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -28,7 +33,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  status: REQUIRED
+  owner: Platform Reliability Engineering
+  gap: Execute GPU/worker resource-exhaustion and OOM isolation on supported deployed runtimes, proving shared control-plane
+    continuity and retaining resource, container, driver, and recovery evidence.

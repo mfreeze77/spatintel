@@ -9,15 +9,17 @@ requirement: Object-store write success shall be followed by hash verification b
 verification_method: Automated test
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/ops_intelligence.py
 - src/sip/operations.py
 - src/sip/search.py
 - src/sip/database.py
-- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
 - tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity
+- tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency
 retained_evidence:
-- build/evidence/demo-progress08-operations.json
+- build/evidence/demo-progress10-recovery.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 controlled_procedure:

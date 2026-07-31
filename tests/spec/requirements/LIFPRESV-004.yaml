@@ -9,16 +9,18 @@ requirement: At least one edition shall be viewable without a proprietary cloud 
 verification_method: Automated test
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
+- src/sip/exporting.py
 - src/sip/liveforever.py
 - src/sip/api.py
 - src/sip/archive_safety.py
 - src/sip/database.py
-- migrations/versions/0014_vertical_mvp.py
-- migrations/versions/0015_progress06_r1_security_controls.py
-- docs/operator/LIVEFOREVER_PRESERVATION.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
+- tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo
 - tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
 - tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable
 retained_evidence:
 - build/evidence/demos/export.json
 - build/evidence/demos/liveforever.json

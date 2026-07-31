@@ -8,11 +8,22 @@ source:
 requirement: Hybrid export shall preserve role, authority, transform, derivation, use suitability, limitations, support maps,
   and policy labels.
 verification_method: Independent import test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- src/sip/recovery.py
+- src/sip/exporting.py
+- src/sip/lifecycle.py
+- src/sip/hybrid.py
+- tools/run_demo.py
+- apps/web
 automated_test_ids:
-- REQ-PLTIO-007
-retained_evidence: []
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed
+retained_evidence:
+- build/evidence/demo-progress10-recovery.json
+- build/evidence/demos/foundation.json
+- build/reports/test-matrix.json
+- build/reports/tests/integration.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +32,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

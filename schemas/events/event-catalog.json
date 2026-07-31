@@ -75,6 +75,20 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "backup_expiry",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "backup.expiry_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "backup_expiry",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "backup.expiry_recorded",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "backup_run",
       "classification": "internal",
       "owner": "export-service",
@@ -317,6 +331,41 @@
       "classification": "restricted",
       "owner": "evidence-service",
       "type": "deletion.executed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deletion_dependency_graph",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "deletion.graph_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "deletion_graph",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "deletion.graph_planned",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "purge_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "deletion.purge_approved",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "purge_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "deletion.purge_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "purge_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "deletion.purge_requested",
       "version": "1.0.0"
     },
     {
@@ -621,6 +670,20 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "legacy_migration_exercise",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "migration.exercise_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "legacy_migration_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "migration.legacy_validated",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "operation",
       "classification": "internal",
       "owner": "workflow-service",
@@ -695,6 +758,20 @@
       "classification": "inherits_project",
       "owner": "operations-intelligence",
       "type": "performance_budget.registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "fixity_check",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "preservation.fixity_checked",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "format_migration",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "preservation.format_migrated",
       "version": "1.0.0"
     },
     {
@@ -793,6 +870,104 @@
       "classification": "inherits_project",
       "owner": "operations-intelligence",
       "type": "queue.snapshot_recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_denial",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.action_denied",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_backup",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.backup_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "backup_expiry",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.backup_expired",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_backup",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.backup_verified",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_game_day",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.game_day_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "key_recovery_exercise",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.key_exercise_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "object_version",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.object_version_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "object_version",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.object_version_restored",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_objective",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.objective_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_point",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.point_created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_point",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.point_verified",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "recovery_admission",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.production_admission_denied",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "restore_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.restore_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "restore_run",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "recovery.restore_failed",
       "version": "1.0.0"
     },
     {
@@ -912,6 +1087,20 @@
       "classification": "inherits_project",
       "owner": "operations-intelligence",
       "type": "resilience.profile_registered",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "retention_evaluation",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "retention.evaluated",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "retention_inventory",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "retention.inventory_evaluated",
       "version": "1.0.0"
     },
     {
@@ -1052,6 +1241,20 @@
       "classification": "inherits_project",
       "owner": "scene-service",
       "type": "temporal_comparison.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "tenant_offboarding",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "tenant.offboarding_completed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "tenant_offboarding",
+      "classification": "inherits_project",
+      "owner": "recovery-control",
+      "type": "tenant.offboarding_prepared",
       "version": "1.0.0"
     },
     {

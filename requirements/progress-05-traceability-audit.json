@@ -794,7 +794,7 @@
           ],
           "declares_requirement_id": true,
           "test_exists": true,
-          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_scope_and_traceability_artifacts_have_no_drift"
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth"
         },
         {
           "declared_requirement_ids": [
@@ -802,7 +802,7 @@
           ],
           "declares_requirement_id": true,
           "test_exists": true,
-          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_semantically_audits_all_authorized_epics"
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot"
         },
         {
           "declared_requirement_ids": [

@@ -7,11 +7,26 @@ source:
   section: 4. Normative requirements
 requirement: Database backups shall support point-in-time recovery and periodic isolated restore tests.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- src/sip/recovery.py
+- src/sip/lifecycle.py
+- src/sip/exporting.py
+- src/sip/security_ops.py
+- src/sip/database.py
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSDR-002
-retained_evidence: []
+- tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent
+- tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed
+- tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency
+- tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed
+- tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence
+retained_evidence:
+- build/evidence/demo-progress10-recovery.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -19,6 +34,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  status: REQUIRED
+  owner: Site Reliability Engineering
+  gap: Configure production PostgreSQL point-in-time recovery and object-version backup, execute an isolated account-backed
+    restore to a matched recovery point, measure RPO/RTO, and retain manifests, hashes, and reconciliation evidence.

@@ -1,0 +1,14 @@
+{
+  "schema": "sip.recovery-game-day/v1",
+  "production_authorized": false,
+  "synthetic_scenarios": [
+    "database_corruption",
+    "object_version_loss",
+    "queue_service_loss",
+    "provider_exit",
+    "regional_service_unavailability"
+  ],
+  "required_measurements": ["rpo_seconds", "rto_seconds", "root_hash_match", "unresolved_findings"],
+  "evidence_classes": ["synthetic", "local_executed", "cloud_executed", "external_witnessed"],
+  "production_certification_requires": ["cloud_executed", "external_witnessed"]
+}

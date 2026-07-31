@@ -1006,7 +1006,11 @@
       "shared_kernel_exceptions": [
         "asset_refs",
         "assets",
-        "audit_events"
+        "audit_events",
+        "deletion_evidence",
+        "deletion_requests",
+        "legal_holds",
+        "retention_rules"
       ],
       "shutdown": {
         "drain_seconds": 30,
@@ -1073,7 +1077,9 @@
         "sip-runtime-secrets/SIP_DATABASE_URL",
         "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
       ],
-      "shared_kernel_exceptions": [],
+      "shared_kernel_exceptions": [
+        "backup_runs"
+      ],
       "shutdown": {
         "drain_seconds": 30,
         "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
@@ -1800,6 +1806,220 @@
       ],
       "shared_kernel_exceptions": [
         "provider_manifests"
+      ],
+      "shutdown": {
+        "drain_seconds": 30,
+        "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
+      },
+      "slo": {
+        "availability_target": "99.9%",
+        "error_budget_window_days": 30,
+        "latency_budget": "p95 <= 1000ms for bounded control operations"
+      }
+    },
+    {
+      "blast_radius": "tenant/project scoped requests handled by recovery-control; no cross-tenant fail-open behavior",
+      "data_stores": [
+        "postgresql",
+        "object-store",
+        "immutable-audit-export",
+        "source-control-manifests"
+      ],
+      "degraded_behavior": "fail closed for authorization/publication; expose bounded read-only metadata where explicitly safe",
+      "dependency_controls": {
+        "circuit_breaker": "open after bounded consecutive failures; half-open probe",
+        "connect_timeout_seconds": 3,
+        "cross_region_failover": "deny unless pre-approved",
+        "request_timeout_seconds": 15
+      },
+      "events_consumed": [],
+      "events_produced": [
+        "backup.expiry_completed",
+        "backup.expiry_recorded",
+        "deletion.graph_created",
+        "deletion.graph_planned",
+        "deletion.purge_approved",
+        "deletion.purge_completed",
+        "deletion.purge_requested",
+        "migration.exercise_completed",
+        "migration.legacy_validated",
+        "preservation.fixity_checked",
+        "preservation.format_migrated",
+        "recovery.action_denied",
+        "recovery.backup_created",
+        "recovery.backup_expired",
+        "recovery.backup_verified",
+        "recovery.game_day_completed",
+        "recovery.key_exercise_completed",
+        "recovery.object_version_registered",
+        "recovery.object_version_restored",
+        "recovery.objective_registered",
+        "recovery.point_created",
+        "recovery.point_verified",
+        "recovery.production_admission_denied",
+        "recovery.restore_completed",
+        "recovery.restore_failed",
+        "retention.evaluated",
+        "retention.inventory_evaluated",
+        "tenant.offboarding_completed",
+        "tenant.offboarding_prepared"
+      ],
+      "inbound_apis": [
+        {
+          "method": "GET",
+          "operation_id": "health_live",
+          "path": "/health/live"
+        },
+        {
+          "method": "GET",
+          "operation_id": "health_ready",
+          "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_recovery_production_admission",
+          "path": "/v1/deployment/profiles/{deployment_profile_id}/recovery/production-admission"
+        },
+        {
+          "method": "POST",
+          "operation_id": "schedule_backup_expiry",
+          "path": "/v1/projects/{project_id}/backup-expiry"
+        },
+        {
+          "method": "POST",
+          "operation_id": "execute_backup_expiry",
+          "path": "/v1/projects/{project_id}/backup-expiry/{backup_expiry_id}/execute"
+        },
+        {
+          "method": "POST",
+          "operation_id": "build_deletion_graph",
+          "path": "/v1/projects/{project_id}/deletion-graphs"
+        },
+        {
+          "method": "POST",
+          "operation_id": "check_recovery_fixity",
+          "path": "/v1/projects/{project_id}/fixity-checks"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_recovery_format_migration",
+          "path": "/v1/projects/{project_id}/format-migrations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_legacy_migration",
+          "path": "/v1/projects/{project_id}/legacy-migrations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "request_recovery_purge",
+          "path": "/v1/projects/{project_id}/purges"
+        },
+        {
+          "method": "POST",
+          "operation_id": "approve_recovery_purge",
+          "path": "/v1/projects/{project_id}/purges/{purge_run_id}/approve"
+        },
+        {
+          "method": "POST",
+          "operation_id": "execute_recovery_purge",
+          "path": "/v1/projects/{project_id}/purges/{purge_run_id}/execute"
+        },
+        {
+          "method": "POST",
+          "operation_id": "run_recovery_game_day",
+          "path": "/v1/projects/{project_id}/recovery/game-days"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_recovery_point",
+          "path": "/v1/projects/{project_id}/recovery/points"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_recovery_point",
+          "path": "/v1/projects/{project_id}/recovery/points/{recovery_point_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_recovery_point",
+          "path": "/v1/projects/{project_id}/recovery/points/{recovery_point_id}/verify"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_recovery_restore",
+          "path": "/v1/projects/{project_id}/recovery/restores"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_retention_inventory",
+          "path": "/v1/projects/{project_id}/retention/evaluations"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_tenant_offboarding",
+          "path": "/v1/tenants/{tenant_id}/offboarding"
+        },
+        {
+          "method": "POST",
+          "operation_id": "exercise_recovery_key",
+          "path": "/v1/tenants/{tenant_id}/recovery/key-exercises"
+        },
+        {
+          "method": "POST",
+          "operation_id": "register_recovery_objective",
+          "path": "/v1/tenants/{tenant_id}/recovery/objectives"
+        }
+      ],
+      "kind": "service",
+      "name": "recovery-control",
+      "outbound_dependencies": [
+        "audit-service",
+        "deployment-control",
+        "evidence-service",
+        "export-service",
+        "identity-policy",
+        "operations-intelligence",
+        "security-ops",
+        "workflow-service"
+      ],
+      "owned_tables": [
+        "backup_expiry_evidence",
+        "backup_runs",
+        "deletion_dependency_graphs",
+        "deletion_evidence",
+        "deletion_requests",
+        "fixity_checks",
+        "format_migration_evidence",
+        "key_recovery_exercises",
+        "legacy_migration_runs",
+        "legal_holds",
+        "purge_runs",
+        "recovery_game_days",
+        "recovery_locks",
+        "recovery_objectives",
+        "recovery_points",
+        "recovery_restore_runs",
+        "retention_assignments",
+        "retention_rules",
+        "tenant_offboarding_runs"
+      ],
+      "owner": "recovery-retention",
+      "recovery_strategy": "restart from durable database/outbox state; verify audit and object hashes before readiness",
+      "repository_path": "services/recovery-control",
+      "retry_safety": "idempotency key or immutable command identifier required for mutations",
+      "rpo": "0 for committed transactional state; object writes verified before publication",
+      "rto": "15 minutes local/hybrid target; profile-specific production objective requires deployment validation",
+      "secret_references": [
+        "sip-runtime-secrets/SIP_DATABASE_URL",
+        "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
+      ],
+      "shared_kernel_exceptions": [
+        "backup_runs",
+        "deletion_evidence",
+        "deletion_requests",
+        "legal_holds",
+        "retention_rules"
       ],
       "shutdown": {
         "drain_seconds": 30,
@@ -3728,17 +3948,37 @@
       "audit-service",
       "evidence-service"
     ],
+    "backup_runs": [
+      "export-service",
+      "recovery-control"
+    ],
     "consent_grants": [
       "identity-policy",
       "liveforever"
+    ],
+    "deletion_evidence": [
+      "evidence-service",
+      "recovery-control"
+    ],
+    "deletion_requests": [
+      "evidence-service",
+      "recovery-control"
     ],
     "identities": [
       "control-api",
       "identity-policy"
     ],
+    "legal_holds": [
+      "evidence-service",
+      "recovery-control"
+    ],
     "provider_manifests": [
       "provider-registry",
       "representation-api"
+    ],
+    "retention_rules": [
+      "evidence-service",
+      "recovery-control"
     ],
     "role_bindings": [
       "control-api",

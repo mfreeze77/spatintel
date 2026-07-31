@@ -9,16 +9,19 @@ requirement: Index outage shall fall back to bounded metadata navigation rather 
 verification_method: Controlled verification
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/ops_intelligence.py
 - src/sip/operations.py
 - src/sip/search.py
 - src/sip/database.py
-- docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
 - tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation
 - tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom
+- tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency
+- tests/integration/test_progress10_backup_restore.py::test_progress10_restore_requires_queue_reconciliation_before_writes_reopen
 retained_evidence:
-- build/evidence/demo-progress08-operations.json
+- build/evidence/demo-progress10-recovery.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 controlled_procedure:

@@ -1,0 +1,105 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/deletion-graph.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deletion_graph_id": {
+      "title": "Deletion Graph Id",
+      "type": "string"
+    },
+    "edges": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "eligible": {
+      "title": "Eligible",
+      "type": "boolean"
+    },
+    "exceptions": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Exceptions",
+      "type": "array"
+    },
+    "graph_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Graph Hash",
+      "type": "string"
+    },
+    "holds": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Holds",
+      "type": "array"
+    },
+    "nodes": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "scope_id": {
+      "title": "Scope Id",
+      "type": "string"
+    },
+    "scope_type": {
+      "enum": [
+        "asset",
+        "subject",
+        "project",
+        "tenant"
+      ],
+      "title": "Scope Type",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "planned",
+        "superseded",
+        "executed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "store_plan": {
+      "additionalProperties": true,
+      "title": "Store Plan",
+      "type": "object"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "deletion_graph_id",
+    "tenant_id",
+    "project_id",
+    "scope_type",
+    "scope_id",
+    "nodes",
+    "edges",
+    "holds",
+    "exceptions",
+    "store_plan",
+    "eligible",
+    "graph_hash",
+    "state"
+  ],
+  "title": "DeletionGraphContract",
+  "type": "object"
+}

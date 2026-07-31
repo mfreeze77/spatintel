@@ -10,18 +10,19 @@ requirement: Preservation packages shall include originals, technical metadata, 
 verification_method: Controlled verification
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
+- src/sip/exporting.py
 - src/sip/liveforever.py
 - src/sip/api.py
 - src/sip/archive_safety.py
 - src/sip/database.py
-- migrations/versions/0014_vertical_mvp.py
-- migrations/versions/0015_progress06_r1_security_controls.py
-- docs/operator/LIVEFOREVER_PRESERVATION.md
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
 - tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration
 - tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation
 - tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline
 - tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable
 - tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest
 - tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys
 - tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests

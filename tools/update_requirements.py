@@ -247,10 +247,10 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         "",
         "## Governing release posture",
         "",
-        "- Progress 07: **accepted and closed** at commit `986c198a127616f8bf1d2379e9f9df5138dabc40`.",
         "- Progress 08: **accepted and closed** at commit `cc3c24ca3acff704144ed7d112566a2acaa88d79`.",
-        "- Progress 09: **authorized only for the bounded OPS-003 deployment-profile and production-shaped infrastructure milestone**.",
-        "- Progress 10: **unauthorized**.",
+        "- Progress 09: **accepted and closed** at commit `f293d6425182ef04f5893275724e2a4bd28cf00e`.",
+        "- Progress 10: **authorized only for the bounded OPS-004 recovery, retention, deletion, preservation, and migration milestone**.",
+        "- Progress 11: **unauthorized**.",
         "- Production promotion: **NO-GO**. Production authorization remains fail-closed.",
     ]
     (ROOT / "requirements/coverage-report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -292,10 +292,10 @@ def _write_reports(ledger: dict[str, Any]) -> None:
         "",
         "Release mode remains fail-closed until every gap is either verified or explicitly governed under the specification's allowed external-validation/waiver rules.",
         "",
-        "- Progress 07: **accepted and closed** at `986c198a127616f8bf1d2379e9f9df5138dabc40`.",
         "- Progress 08: **accepted and closed** at `cc3c24ca3acff704144ed7d112566a2acaa88d79`.",
-        "- Progress 09: **authorized only for bounded OPS-003 development**.",
-        "- Progress 10: **unauthorized**.",
+        "- Progress 09: **accepted and closed** at `f293d6425182ef04f5893275724e2a4bd28cf00e`.",
+        "- Progress 10: **authorized only for bounded OPS-004 development and review**.",
+        "- Progress 11: **unauthorized**.",
         "- Production: **NO-GO**.",
     ]
     (ROOT / "IMPLEMENTATION_STATUS.md").write_text("\n".join(status_lines) + "\n", encoding="utf-8")

@@ -7,11 +7,17 @@ source:
   section: 4. Normative requirements
 requirement: Consent revocation shall stop future processing immediately and trigger policy-defined handling of prior derivatives.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/recovery.py
+- src/sip/lifecycle.py
+- src/sip/database.py
+- docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md
 automated_test_ids:
-- REQ-DATRET-003
-retained_evidence: []
+- tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences
+retained_evidence:
+- build/reports/test-matrix.json
+- build/reports/tests/privacy.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +26,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

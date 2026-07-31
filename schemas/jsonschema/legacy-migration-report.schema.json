@@ -1,0 +1,112 @@
+{
+  "$id": "https://schemas.sip.local/v1.1.0/legacy-migration-report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_mappings": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Asset Mappings",
+      "type": "array"
+    },
+    "compatibility_report": {
+      "additionalProperties": true,
+      "title": "Compatibility Report",
+      "type": "object"
+    },
+    "legacy_migration_run_id": {
+      "title": "Legacy Migration Run Id",
+      "type": "string"
+    },
+    "policy_diffs": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Policy Diffs",
+      "type": "array"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "quarantines": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Quarantines",
+      "type": "array"
+    },
+    "report_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Report Hash",
+      "type": "string"
+    },
+    "rollback_evidence": {
+      "additionalProperties": true,
+      "title": "Rollback Evidence",
+      "type": "object"
+    },
+    "signed_report": {
+      "title": "Signed Report",
+      "type": "string"
+    },
+    "source_release": {
+      "title": "Source Release",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "planned",
+        "validated",
+        "rolled_back",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "target_release": {
+      "title": "Target Release",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "unresolved_anchors": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Unresolved Anchors",
+      "type": "array"
+    },
+    "validation": {
+      "additionalProperties": true,
+      "title": "Validation",
+      "type": "object"
+    }
+  },
+  "required": [
+    "legacy_migration_run_id",
+    "tenant_id",
+    "project_id",
+    "source_release",
+    "target_release",
+    "asset_mappings",
+    "quarantines",
+    "unresolved_anchors",
+    "policy_diffs",
+    "validation",
+    "rollback_evidence",
+    "compatibility_report",
+    "state",
+    "report_hash",
+    "signed_report"
+  ],
+  "title": "LegacyMigrationReportContract",
+  "type": "object"
+}

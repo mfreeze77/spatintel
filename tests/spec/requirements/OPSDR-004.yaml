@@ -7,11 +7,23 @@ source:
   section: 4. Normative requirements
 requirement: Key recovery shall be tested without exposing root keys to ordinary operators.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/recovery.py
+- src/sip/lifecycle.py
+- src/sip/exporting.py
+- src/sip/security_ops.py
+- src/sip/database.py
+- docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md
 automated_test_ids:
-- REQ-OPSDR-004
-retained_evidence: []
+- tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed
+- tests/security/test_progress10_recovery_security.py::test_progress10_key_recovery_requires_quorum_opaque_reference_and_no_root_exposure
+retained_evidence:
+- build/evidence/demo-progress10-recovery.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
+- build/reports/tests/integration.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +32,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

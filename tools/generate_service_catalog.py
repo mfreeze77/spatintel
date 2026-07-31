@@ -67,6 +67,23 @@ SERVICE_METADATA: dict[str, dict[str, Any]] = {
             "workflow-service", "audit-service", "export-service",
         ],
     },
+    "recovery-control": {
+        "owner": "recovery-retention",
+        "stores": ["postgresql", "object-store", "immutable-audit-export", "source-control-manifests"],
+        "tables": [
+            "recovery_objectives", "recovery_points", "recovery_restore_runs", "recovery_locks",
+            "key_recovery_exercises", "retention_assignments", "deletion_dependency_graphs",
+            "purge_runs", "backup_expiry_evidence", "tenant_offboarding_runs",
+            "fixity_checks", "format_migration_evidence", "recovery_game_days",
+            "legacy_migration_runs", "retention_rules", "legal_holds",
+            "backup_runs", "deletion_requests", "deletion_evidence"
+        ],
+        "dependencies": [
+            "identity-policy", "security-ops", "deployment-control",
+            "operations-intelligence", "workflow-service", "audit-service",
+            "evidence-service", "export-service"
+        ],
+    },
     "representation-api": {"owner": "hybrid-representations", "stores": ["postgresql", "object-store"], "tables": ["representations", "representation_bindings", "provider_manifests"], "dependencies": ["identity-policy", "workflow-service", "provider-registry"]},
     "provider-registry": {"owner": "model-provider-governance", "stores": ["postgresql", "source-control-manifests"], "tables": ["provider_manifests", "model_manifests"], "dependencies": ["audit-service"]},
     "representation-publisher": {"owner": "scene-core", "stores": ["postgresql"], "tables": [], "dependencies": ["identity-policy", "representation-api", "scene-service", "audit-service"]},
@@ -101,6 +118,11 @@ SHARED_KERNEL_EXCEPTIONS = {
     "role_bindings": ["control-api", "identity-policy"],
     "provider_manifests": ["provider-registry", "representation-api"],
     "consent_grants": ["identity-policy", "liveforever"],
+    "retention_rules": ["evidence-service", "recovery-control"],
+    "legal_holds": ["evidence-service", "recovery-control"],
+    "deletion_requests": ["evidence-service", "recovery-control"],
+    "deletion_evidence": ["evidence-service", "recovery-control"],
+    "backup_runs": ["export-service", "recovery-control"],
 }
 
 WORKER_OWNER: dict[str, str] = {

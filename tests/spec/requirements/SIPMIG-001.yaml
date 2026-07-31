@@ -10,19 +10,25 @@ requirement: Migration shall preserve every canonical v1.0 source asset and shal
 verification_method: Hash and migration test
 implementation_status: IMPLEMENTED_UNVERIFIED
 implementation_files:
+- src/sip/recovery.py
 - migrations
 - src/sip/database.py
 - src/sip/scene.py
 - src/sip/assets.py
+- docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md
 automated_test_ids:
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed
 - tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes
 - tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes
 retained_evidence:
 - build/reports/test-matrix.json
+- build/reports/tests/integration.xml
 - build/reports/tests/migration.xml
+- docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md
 - migrations
 - src/sip/assets.py
 - src/sip/database.py
+- src/sip/recovery.py
 - src/sip/scene.py
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

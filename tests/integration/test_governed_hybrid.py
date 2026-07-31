@@ -627,7 +627,7 @@ def test_provider_or_validation_snapshot_changes_block_publication(bootstrapped)
 @pytest.mark.integration
 @pytest.mark.security
 def test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt(bootstrapped) -> None:
-    """REQ: RECCLEAN-004, RECPROV-008, RECPROV-009, SECEXT-004, SECEXT-009 manual tools use controlled derivative export, custody receipts, exact return hashes, quarantine, and independent validation."""
+    """REQ: RECCLEAN-004, RECPROV-008, RECPROV-009, SECEXT-004, SECEXT-009, PLTIO-008 manual tools use controlled derivative export, custody receipts, exact return hashes, quarantine, and independent validation."""
     context, tenant_id, project_id, actor = bootstrapped
     scene, derivative = _frame_scene_asset(
         context,

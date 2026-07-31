@@ -95,6 +95,11 @@
       "byte_count": 33248,
       "path": "migrations/versions/0019_progress09_deployment_profiles.py",
       "sha256": "22e3ceb60be68f02a0cfa68f832ab19ecd2c9e0c831b61f4b32bc4db5eabe8f4"
+    },
+    {
+      "byte_count": 29254,
+      "path": "migrations/versions/0020_progress10_recovery_retention.py",
+      "sha256": "4a306e130ff3785128d3f281a995859daf390f39c971713b888a5c1a32084dbb"
     }
   ],
   "schema_version": "1.1.0"

@@ -36,6 +36,7 @@ API_SERVICE_ACCOUNTS = {
     "security-ops",
     "operations-intelligence",
     "deployment-control",
+    "recovery-control",
     "representation-api",
     "provider-registry",
     "representation-publisher",

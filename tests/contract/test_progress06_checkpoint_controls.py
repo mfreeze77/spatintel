@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import zipfile
@@ -60,6 +61,14 @@ def test_progress06_verifier_rehashes_manifest_and_content_root(tmp_path: Path) 
     assert "CONTENT_ROOT_MISMATCH" in codes
 
 
+def test_progress06_accepted_scope_and_traceability_snapshots_are_immutable() -> None:
+    """CONTROL: accepted historical milestone evidence cannot be rewritten by later implementation progress."""
+    scope = ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_06.json"
+    audit = ROOT / "requirements/progress-06-traceability-audit.json"
+    assert hashlib.sha256(scope.read_bytes()).hexdigest() == "fa1d7070d7b6328f517e8efcd8a8e03dfa5353dcc623e49f946d86dca19ce217"
+    assert hashlib.sha256(audit.read_bytes()).hexdigest() == "1b0eaf783926766027ab348e157029f2761ccf070e6c1c924a42743f0eaad908"
+
+
 def test_progress06_checkpoint_scope_and_predecessor_are_exact() -> None:
     """CONTROL: Progress 06 cannot drift beyond the 206 authorized requirements or the accepted R2 base."""
     scope = json.loads((ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_06.json").read_text(encoding="utf-8"))
@@ -78,7 +87,6 @@ def test_progress06_checkpoint_scope_and_predecessor_are_exact() -> None:
 def test_progress06_migration_and_viewer_truth_are_fail_closed() -> None:
     """CONTROL: revision 0014 is byte-locked and PLTVIEW-007 remains unverified."""
     migration = ROOT / "migrations/versions/0014_vertical_mvp.py"
-    import hashlib
 
     assert migration.stat().st_size == EXPECTED_MIGRATION_BYTES
     assert hashlib.sha256(migration.read_bytes()).hexdigest() == EXPECTED_MIGRATION_SHA256
@@ -121,3 +129,28 @@ def test_progress06_packaged_coverage_retains_progress07_and_production_posture(
     assert "Progress 07" in text
     assert "unauthorized" in text
     assert "NO-GO" in text
+
+
+def test_progress06_historical_scope_is_immutable_while_progress10_truth_advances() -> None:
+    """CONTROL: later preservation work updates global truth without rewriting accepted Progress 06 scope."""
+    scope = json.loads((ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_06.json").read_text(encoding="utf-8"))
+    ledger = json.loads((ROOT / "requirements/requirements-ledger.json").read_text(encoding="utf-8"))
+    progress10 = json.loads((ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_10.json").read_text(encoding="utf-8"))
+    deferred = {item["requirement_id"] for item in scope["deferred_requirements"]}
+    current = {item["requirement_id"]: item for item in ledger["requirements"]}
+    progress10_ids = {
+        item["requirement_id"]
+        for key in ("included_requirements", "deferred_requirements")
+        for item in progress10[key]
+    }
+    assert "LIFPRESV-002" in deferred
+    assert current["LIFPRESV-002"]["implementation_status"] == "IMPLEMENTED_UNVERIFIED"
+    assert "LIFPRESV-002" in progress10_ids
+    result = subprocess.run(
+        ["python", "tools/audit_progress06_traceability.py", "--check"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr

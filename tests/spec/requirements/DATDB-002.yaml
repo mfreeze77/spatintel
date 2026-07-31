@@ -18,6 +18,7 @@ automated_test_ids:
 - tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked
 - tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked
 - tests/contract/test_progress09_checkpoint_controls.py::test_progress09_append_only_migration_is_integrity_locked
+- tests/contract/test_progress10_checkpoint_controls.py::test_progress10_append_only_migration_is_integrity_locked
 retained_evidence:
 - build/reports/test-matrix.json
 - build/reports/tests/contract.xml

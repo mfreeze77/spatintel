@@ -9,16 +9,22 @@ requirement: Portability verification shall run on a clean offline viewer/refere
 verification_method: Controlled verification
 implementation_status: VERIFIED
 implementation_files:
+- src/sip/recovery.py
 - src/sip/exporting.py
 - src/sip/lifecycle.py
+- src/sip/hybrid.py
 - tools/run_demo.py
 - apps/web
 automated_test_ids:
+- tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo
 - tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration
 - tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state
+- tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline
 retained_evidence:
+- build/evidence/demo-progress10-recovery.json
 - build/evidence/demos/foundation.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/e2e.xml
 - build/reports/tests/integration.xml
 controlled_procedure:

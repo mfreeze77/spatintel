@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-31T17:29:27.755567+00:00",
+  "generated_at": "2026-07-31T20:18:03.883156+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -27946,11 +27946,12 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/ops_intelligence.py",
         "src/sip/operations.py",
         "src/sip/search.py",
         "src/sip/database.py",
-        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -27967,14 +27968,19 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed",
         "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
-        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-001.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demo-progress08-operations.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Each component shall declare blast radius, retry safety, recovery point, recovery time, and degraded behavior.",
       "verification_method": "Controlled verification",
@@ -28003,20 +28009,21 @@
         "OPS-002",
         "OPS-004"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/ops_intelligence.py",
         "src/sip/operations.py",
         "src/sip/search.py",
         "src/sip/database.py",
-        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
-      "owner": "SIP Engineering",
+      "notes": "Execute GPU/worker resource-exhaustion and OOM isolation on supported deployed runtimes, proving shared control-plane continuity and retaining resource, container, driver, and recovery evidence.",
+      "owner": "Platform Reliability Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "ARCRES-002",
@@ -28027,14 +28034,18 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed",
         "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
-        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-002.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demo-progress08-operations.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Worker resource exhaustion shall terminate the job without terminating shared control-plane services.",
       "verification_method": "Controlled verification",
@@ -28066,11 +28077,12 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/ops_intelligence.py",
         "src/sip/operations.py",
         "src/sip/search.py",
         "src/sip/database.py",
-        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -28087,11 +28099,12 @@
       "source_title": "Failure Domains, Resilience, and Degraded Modes",
       "supersession_links": [],
       "test_ids": [
-        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity"
+        "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_resilience_profile_worker_exhaustion_and_postwrite_integrity",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-003.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demo-progress08-operations.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
       ],
@@ -28125,11 +28138,12 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/ops_intelligence.py",
         "src/sip/operations.py",
         "src/sip/search.py",
         "src/sip/database.py",
-        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -28147,11 +28161,13 @@
       "supersession_links": [],
       "test_ids": [
         "tests/integration/test_progress08_resilience_gpu_incidents.py::test_progress08_index_outage_metadata_fallback_authorizes_before_navigation",
-        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_requires_queue_reconciliation_before_writes_reopen"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-004.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demo-progress08-operations.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
       ],
@@ -28182,20 +28198,21 @@
         "OPS-002",
         "OPS-004"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/ops_intelligence.py",
         "src/sip/operations.py",
         "src/sip/search.py",
         "src/sip/database.py",
-        "docs/operator/PROGRESS_08_OPERATIONS_RUNBOOK.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
-      "owner": "SIP Engineering",
+      "notes": "Execute an approved provider-region-loss exercise under real residency policies and credentials, proving no unapproved cross-region movement and retaining network, audit, provider, and policy evidence.",
+      "owner": "Cloud Reliability / Privacy Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "ARCRES-005",
@@ -28207,13 +28224,16 @@
       "supersession_links": [],
       "test_ids": [
         "tests/integration/test_governed_hybrid.py::test_arcres_005_provider_region_failure_never_moves_data_to_unapproved_region",
-        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom"
+        "tests/integration/test_progress08_resilience_gpu_sre.py::test_progress08_resilience_profiles_compute_compatibility_and_explicit_oom",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_recovery_denials_retain_audit_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/ARCRES-005.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demo-progress08-operations.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "Provider-region failure shall not trigger unapproved cross-region data movement.",
       "verification_method": "Controlled verification",
@@ -43214,7 +43234,8 @@
         "tests/contract/test_progress06_r1_checkpoint_verifier.py::test_progress06_r1_scope_predecessor_migration_and_posture_are_exact",
         "tests/contract/test_progress07_checkpoint_controls.py::test_progress07_append_only_migration_is_integrity_locked",
         "tests/contract/test_progress08_checkpoint_controls.py::test_progress08_append_only_migration_is_integrity_locked",
-        "tests/contract/test_progress09_checkpoint_controls.py::test_progress09_append_only_migration_is_integrity_locked"
+        "tests/contract/test_progress09_checkpoint_controls.py::test_progress09_append_only_migration_is_integrity_locked",
+        "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_append_only_migration_is_integrity_locked"
       ],
       "test_plan_path": "tests/spec/requirements/DATDB-002.yaml",
       "test_result_evidence_paths": [
@@ -44948,14 +44969,15 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/lifecycle.py",
         "src/sip/database.py",
-        "docs/runbooks/CONTROLLED_DELETION.md"
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
@@ -44967,6 +44989,7 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge",
         "tests/integration/test_spatial_truth_twin.py::test_conmeas_measurement_supersession_scope_tombstone_and_permitted_use_guards"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-001.yaml",
@@ -44999,11 +45022,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "DATRET-002",
@@ -45014,10 +45043,19 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATRET-002"
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current",
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_deletion_scope_isolated_between_projects",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "A deletion request shall produce impact analysis, authorization, execution plan, completion evidence, and unresolved exceptions.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -45043,11 +45081,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "DATRET-003",
@@ -45058,10 +45102,13 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATRET-003"
+        "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/privacy.xml"
+      ],
       "text": "Consent revocation shall stop future processing immediately and trigger policy-defined handling of prior derivatives.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -45087,11 +45134,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "DATRET-004",
@@ -45102,10 +45155,17 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATRET-004"
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_backup_expiry_is_bounded_hold_aware_and_idempotent",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Backups shall expire deleted data within a documented bounded period while preventing ordinary restoration from resurrecting access.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -45131,11 +45191,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "DATRET-005",
@@ -45146,10 +45212,17 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATRET-005"
+        "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo",
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Tenant offboarding shall provide a verified export and deletion/retention report.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -45175,11 +45248,17 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RETENTION_DELETION_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "DATRET-006",
@@ -45190,10 +45269,15 @@
       "source_title": "Retention, Legal Hold, Deletion, and Portability",
       "supersession_links": [],
       "test_ids": [
-        "REQ-DATRET-006"
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_deletion_scope_isolated_between_projects",
+        "tests/integration/test_progress10_retention_deletion.py::test_progress10_retention_inventory_legal_hold_and_governed_purge"
       ],
       "test_plan_path": "tests/spec/requirements/DATRET-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Deletion shall propagate to derived search/vector indexes and cached viewer assets.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -49701,11 +49785,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTIO-001",
@@ -49716,10 +49808,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-001"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "An import shall report accepted, transformed, skipped, duplicate, conflicting, unsupported, and quarantined items.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -49750,11 +49847,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTIO-002",
@@ -49765,10 +49870,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-002"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "An export shall include source commit, query/scope, permissions/consent decision, redactions, transformations, output hashes, and limitations.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -49800,8 +49910,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
         "tools/run_demo.py",
         "apps/web"
       ],
@@ -49820,15 +49932,19 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo",
         "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration",
         "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state",
         "tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity",
-        "tests/integration/test_export_restore.py::test_preservation_collision_remaps_proxy_measurement_and_anchor_history"
+        "tests/integration/test_export_restore.py::test_preservation_collision_remaps_proxy_measurement_and_anchor_history",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
         "build/evidence/demos/foundation.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml",
         "build/reports/tests/integration.xml"
       ],
@@ -49862,11 +49978,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTIO-004",
@@ -49877,10 +50001,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-004"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The system shall support dry-run migration and deterministic re-execution.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -49911,11 +50040,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTIO-005",
@@ -49926,10 +50063,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-005"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Password-protected or encrypted input shall never be weakened or logged without explicit authorized handling.",
       "verification_method": "Automated test",
       "waiver_expiration": null,
@@ -49961,8 +50103,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
         "tools/run_demo.py",
         "apps/web"
       ],
@@ -49981,13 +50125,17 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo",
         "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration",
-        "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
         "build/evidence/demos/foundation.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml",
         "build/reports/tests/integration.xml"
       ],
@@ -50021,11 +50169,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTIO-007",
@@ -50036,10 +50192,16 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-007"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-007.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Hybrid export shall preserve role, authority, transform, derivation, use suitability, limitations, support maps, and policy labels.",
       "verification_method": "Independent import test",
       "waiver_expiration": null,
@@ -50070,11 +50232,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTIO-008",
@@ -50085,10 +50255,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-008"
+        "tests/integration/test_governed_hybrid.py::test_manual_external_path_exports_only_non_authoritative_derivatives_and_retains_receipt"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-008.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "External/manual provider export shall be minimized, purpose-limited, hashed, expiring, and receipted.",
       "verification_method": "Security workflow test",
       "waiver_expiration": null,
@@ -50119,11 +50294,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "PLTIO-009",
@@ -50134,10 +50317,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-009"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-009.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Import shall quarantine unknown providers, roles, extensions, transforms, and authority claims.",
       "verification_method": "Adversarial import test",
       "waiver_expiration": null,
@@ -50168,11 +50356,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTIO-010",
@@ -50183,10 +50379,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-010"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-010.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Full-project export shall include visual, metric, interaction, design, evidence, and non-splat fallback assets when authorized.",
       "verification_method": "Portability test",
       "waiver_expiration": null,
@@ -50217,11 +50418,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
+        "tools/run_demo.py",
+        "apps/web"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "PLTIO-011",
@@ -50232,10 +50441,15 @@
       "source_title": "Import, Export, Packaging, and Migration",
       "supersession_links": [],
       "test_ids": [
-        "REQ-PLTIO-011"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-011.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/evidence/demos/foundation.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "Format conversion shall retain irreversible-loss declarations and source relationships.",
       "verification_method": "Round-trip test",
       "waiver_expiration": null,
@@ -50267,8 +50481,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/exporting.py",
         "src/sip/lifecycle.py",
+        "src/sip/hybrid.py",
         "tools/run_demo.py",
         "apps/web"
       ],
@@ -50289,10 +50505,12 @@
       "test_ids": [
         "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration",
         "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state",
-        "tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity"
+        "tests/integration/test_export_restore.py::test_pltio_foundation_open_export_collision_safe_import_preserves_hash_and_semantic_identity",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_hybrid_and_full_project_portability_reconstructs_offline"
       ],
       "test_plan_path": "tests/spec/requirements/PLTIO-012.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
         "build/evidence/demos/foundation.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/e2e.xml",
@@ -61457,13 +61675,13 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
         "src/sip/liveforever.py",
         "src/sip/api.py",
         "src/sip/archive_safety.py",
         "src/sip/database.py",
-        "migrations/versions/0014_vertical_mvp.py",
-        "migrations/versions/0015_progress06_r1_security_controls.py",
-        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61484,6 +61702,7 @@
         "tests/contract/test_progress06_vertical_api.py::test_progress06_liveforever_api_memory_room_consent_and_preservation",
         "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
         "tests/integration/test_progress06_r1_integrity_and_provenance.py::test_progress06_r1_preservation_replay_revalidates_current_package_bytes",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable",
         "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_accepts_only_complete_exact_sha256_manifest",
         "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_duplicate_checksum_manifest_keys",
         "tests/unit/test_progress06_r1_package_integrity.py::test_progress06_r1_vertical_verifier_rejects_empty_partial_and_malformed_manifests",
@@ -61534,11 +61753,20 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "src/sip/liveforever.py",
+        "src/sip/api.py",
+        "src/sip/archive_safety.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "LIFPRESV-002",
@@ -61549,10 +61777,16 @@
       "source_title": "Long-Term Preservation and Digital Legacy",
       "supersession_links": [],
       "test_ids": [
-        "REQ-LIFPRESV-002"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/LIFPRESV-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/export.json",
+        "build/evidence/demos/liveforever.json",
+        "build/evidence/demos/restore.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml"
+      ],
       "text": "The system shall perform scheduled fixity checks and repair from independent replicas when authorized.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -61585,13 +61819,13 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
         "src/sip/liveforever.py",
         "src/sip/api.py",
         "src/sip/archive_safety.py",
         "src/sip/database.py",
-        "migrations/versions/0014_vertical_mvp.py",
-        "migrations/versions/0015_progress06_r1_security_controls.py",
-        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61608,7 +61842,8 @@
       "source_title": "Long-Term Preservation and Digital Legacy",
       "supersession_links": [],
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/LIFPRESV-003.yaml",
       "test_result_evidence_paths": [
@@ -61650,13 +61885,13 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
         "src/sip/liveforever.py",
         "src/sip/api.py",
         "src/sip/archive_safety.py",
         "src/sip/database.py",
-        "migrations/versions/0014_vertical_mvp.py",
-        "migrations/versions/0015_progress06_r1_security_controls.py",
-        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61673,8 +61908,10 @@
       "source_title": "Long-Term Preservation and Digital Legacy",
       "supersession_links": [],
       "test_ids": [
+        "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo",
         "tests/acceptance/test_vertical_demonstrations.py::test_liveforever_synthetic_acceptance_demonstration",
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/LIFPRESV-004.yaml",
       "test_result_evidence_paths": [
@@ -61717,13 +61954,13 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
         "src/sip/liveforever.py",
         "src/sip/api.py",
         "src/sip/archive_safety.py",
         "src/sip/database.py",
-        "migrations/versions/0014_vertical_mvp.py",
-        "migrations/versions/0015_progress06_r1_security_controls.py",
-        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61740,7 +61977,8 @@
       "source_title": "Long-Term Preservation and Digital Legacy",
       "supersession_links": [],
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/LIFPRESV-005.yaml",
       "test_result_evidence_paths": [
@@ -61782,13 +62020,13 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
         "src/sip/liveforever.py",
         "src/sip/api.py",
         "src/sip/archive_safety.py",
         "src/sip/database.py",
-        "migrations/versions/0014_vertical_mvp.py",
-        "migrations/versions/0015_progress06_r1_security_controls.py",
-        "docs/operator/LIVEFOREVER_PRESERVATION.md"
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -61805,7 +62043,8 @@
       "source_title": "Long-Term Preservation and Digital Legacy",
       "supersession_links": [],
       "test_ids": [
-        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline"
+        "tests/integration/test_progress06_liveforever_workflows.py::test_progress06_liveforever_open_preservation_is_policy_scoped_labeled_and_offline",
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_fixity_format_migration_and_offboarding_are_open_and_verifiable"
       ],
       "test_plan_path": "tests/spec/requirements/LIFPRESV-006.yaml",
       "test_result_evidence_paths": [
@@ -65836,11 +66075,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSDR-001",
@@ -65851,10 +66098,20 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSDR-001"
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current",
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed",
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-001.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Recovery objectives shall be declared by data/service class and deployment profile.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65878,13 +66135,21 @@
       "epic_ids": [
         "OPS-004"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Configure production PostgreSQL point-in-time recovery and object-version backup, execute an isolated account-backed restore to a matched recovery point, measure RPO/RTO, and retain manifests, hashes, and reconciliation evidence.",
+      "owner": "Site Reliability Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSDR-002",
@@ -65895,10 +66160,20 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSDR-002"
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Database backups shall support point-in-time recovery and periodic isolated restore tests.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65922,13 +66197,21 @@
       "epic_ids": [
         "OPS-004"
       ],
-      "external_validation_status": "NOT_REQUIRED",
+      "external_validation_status": "REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Enable managed object versioning or immutable equivalent, execute accidental and malicious deletion recovery, verify exact object versions and retention locks, and retain provider-backed evidence.",
+      "owner": "Storage Reliability Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "OPSDR-003",
@@ -65939,10 +66222,20 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSDR-003"
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_recovery_service_is_production_shaped_and_fail_closed",
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Object storage shall use versioning/immutability or equivalent protections against accidental/malicious deletion.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -65968,11 +66261,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSDR-004",
@@ -65983,10 +66284,17 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSDR-004"
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_key_recovery_requires_quorum_opaque_reference_and_no_root_exposure"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Key recovery shall be tested without exposing root keys to ordinary operators.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -66013,15 +66321,17 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "src/sip/lifecycle.py",
         "src/sip/exporting.py",
-        "docs/operator/BACKUP_RESTORE.md",
-        "tools/run_demo.py"
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
@@ -66033,15 +66343,26 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
+        "tests/contract/test_progress10_infrastructure.py::test_progress10_generated_service_and_openapi_contracts_are_current",
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_is_authenticated_scoped_and_idempotent",
         "tests/e2e/test_platform_demonstrations.py::test_foundation_portability_demonstration",
-        "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state"
+        "tests/integration/test_export_restore.py::test_open_preservation_clean_restore_rehydrates_authoritative_rows_and_fails_closed_for_executable_state",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_corruption_missing_objects_scope_and_residency_fail_closed",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_local_recovery_point_restore_and_idempotency",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_refuses_to_resurrect_executed_deletion",
+        "tests/integration/test_progress10_backup_restore.py::test_progress10_restore_requires_queue_reconciliation_before_writes_reopen",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_missing_backup_bytes_and_object_manifest_fail_closed",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_recovery_denials_retain_audit_evidence",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_restore_and_deletion_lock_is_fail_closed"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-005.yaml",
       "test_result_evidence_paths": [
-        "build/evidence/demos/foundation.json",
+        "build/evidence/demo-progress10-recovery.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
         "build/reports/tests/e2e.xml",
-        "build/reports/tests/integration.xml"
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
       ],
       "text": "A restore shall reconcile manifests/hashes, database references, object assets, audit chronology, and queued jobs before reopening writes.",
       "verification_method": "Automated test",
@@ -66068,11 +66389,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/lifecycle.py",
+        "src/sip/exporting.py",
+        "src/sip/security_ops.py",
+        "src/sip/database.py",
+        "docs/operator/PROGRESS_10_RECOVERY_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "OPSDR-006",
@@ -66083,10 +66412,19 @@
       "source_title": "Backup, Restore, and Disaster Recovery",
       "supersession_links": [],
       "test_ids": [
-        "REQ-OPSDR-006"
+        "tests/acceptance/test_progress10_recovery_demo.py::test_progress10_synthetic_recovery_game_day_and_portability_demo",
+        "tests/contract/test_progress10_recovery_api.py::test_progress10_recovery_api_keeps_destructive_and_production_paths_fail_closed",
+        "tests/security/test_progress10_recovery_security.py::test_progress10_production_admission_requires_external_recovery_evidence"
       ],
       "test_plan_path": "tests/spec/requirements/OPSDR-006.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/demo-progress10-recovery.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/integration.xml",
+        "build/reports/tests/security.xml"
+      ],
       "text": "Disaster tests shall include a complete tenant/project portability export when service recovery is not practical.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,
@@ -71243,8 +71581,8 @@
         "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates",
         "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_audit_artifact_has_no_drift",
         "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids",
-        "tests/contract/test_progress06_traceability_audit.py::test_progress06_scope_and_traceability_artifacts_have_no_drift",
-        "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_semantically_audits_all_authorized_epics",
+        "tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth",
+        "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot",
         "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements"
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-003.yaml",
@@ -74487,10 +74825,12 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "migrations",
         "src/sip/database.py",
         "src/sip/scene.py",
-        "src/sip/assets.py"
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74507,16 +74847,20 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed",
         "tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes",
         "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-001.yaml",
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
         "build/reports/tests/migration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
         "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
+        "src/sip/recovery.py",
         "src/sip/scene.py"
       ],
       "text": "Migration shall preserve every canonical v1.0 source asset and shall create additive v1.1 records rather than rewriting geometry bytes in place.",
@@ -74553,11 +74897,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "SIPMIG-002",
@@ -74568,10 +74920,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-002"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Role and authority assignment shall be based on provenance and verification evidence, never file extension or visual appearance.",
       "verification_method": "Migration policy test",
       "waiver_expiration": null,
@@ -74606,11 +74967,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "SIPMIG-003",
@@ -74621,10 +74990,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-003"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Ambiguous assets, frames, anchors, or measurements shall be quarantined or conservatively classified and shall not receive privileged intended uses.",
       "verification_method": "Negative migration test",
       "waiver_expiration": null,
@@ -74659,11 +75037,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "SIPMIG-004",
@@ -74674,10 +75060,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-004"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-004.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Existing permissions, classification, consent, retention, legal hold, and deletion dependencies shall remain equivalent or more restrictive after migration.",
       "verification_method": "Policy-diff test",
       "waiver_expiration": null,
@@ -74712,11 +75107,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "SIPMIG-005",
@@ -74727,10 +75130,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-005"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-005.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Legacy proxy-like or visual measurements shall remain approximate unless eligible metric/field evidence supports a higher status.",
       "verification_method": "Measurement migration test",
       "waiver_expiration": null,
@@ -74766,10 +75178,12 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
+        "src/sip/recovery.py",
         "migrations",
         "src/sip/database.py",
         "src/sip/scene.py",
-        "src/sip/assets.py"
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74786,15 +75200,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed",
         "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-006.yaml",
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
         "build/reports/tests/migration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
         "migrations",
         "src/sip/assets.py",
         "src/sip/database.py",
+        "src/sip/recovery.py",
         "src/sip/scene.py"
       ],
       "text": "Entity identity and source evidence shall survive migration independently of mesh primitive IDs and renderer objects.",
@@ -74831,11 +75249,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "SIPMIG-007",
@@ -74846,10 +75272,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-007"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-007.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Rollback shall be demonstrated from a restorable v1.0 backup without loss or mutation of original assets.",
       "verification_method": "Recovery exercise",
       "waiver_expiration": null,
@@ -74884,11 +75319,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "SIPMIG-008",
@@ -74899,10 +75342,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-008"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-008.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Compatibility APIs shall translate read behavior conservatively and shall prevent v1.0 clients from bypassing v1.1 authority or publication rules.",
       "verification_method": "API compatibility test",
       "waiver_expiration": null,
@@ -74937,11 +75389,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "SIPMIG-009",
@@ -74952,10 +75412,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-009"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-009.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Down-level exports shall report omitted or degraded v1.1 content and shall not relabel proxy/design/generated assets as metric or observed.",
       "verification_method": "Export compatibility test",
       "waiver_expiration": null,
@@ -74990,11 +75459,19 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "migrations",
+        "src/sip/database.py",
+        "src/sip/scene.py",
+        "src/sip/assets.py",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P1",
       "release_gate": "CONTROLLED_POST_P0_MILESTONE",
       "requirement_id": "SIPMIG-010",
@@ -75005,10 +75482,19 @@
       "source_title": "Migration from SIP v1.0 to v1.1",
       "supersession_links": [],
       "test_ids": [
-        "REQ-SIPMIG-010"
+        "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-010.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/integration.xml",
+        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
+        "migrations",
+        "src/sip/assets.py",
+        "src/sip/database.py",
+        "src/sip/recovery.py",
+        "src/sip/scene.py"
+      ],
       "text": "Migration shall produce a signed report of asset mappings, quarantines, unresolved anchors, policy diffs, validation results, and rollback evidence.",
       "verification_method": "Audit report review",
       "waiver_expiration": null,

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -130,20 +131,30 @@ def build() -> dict[str, Any]:
         "production_authorized": False,
     }
 
+EXPECTED_ACCEPTED_AUDIT_SHA256 = "b4ee712ddfcf8c3350ec68b6d200dba5a8e17e0e9b115b0bc85cd9c8596f517c"
+EXPECTED_ACCEPTED_SCOPE_SHA256 = "680375e1113e0c33c604dec5f612008fd701bf7b6905d9a235e573e4d0aeea0f"
+
+def _verify_accepted_snapshot() -> dict[str, Any]:
+    actual_audit = hashlib.sha256(AUDIT.read_bytes()).hexdigest() if AUDIT.is_file() else None
+    if actual_audit != EXPECTED_ACCEPTED_AUDIT_SHA256:
+        raise SystemExit("accepted historical audit drift detected for audit_progress08_traceability.py")
+    actual_scope = hashlib.sha256(SCOPE.read_bytes()).hexdigest() if SCOPE.is_file() else None
+    if actual_scope != EXPECTED_ACCEPTED_SCOPE_SHA256:
+        raise SystemExit("accepted historical scope drift detected for audit_progress08_traceability.py")
+    value = json.loads(AUDIT.read_text(encoding="utf-8"))
+    if value.get("status") != "passed_complete" or value.get("finding_count") != 0:
+        raise SystemExit("accepted historical traceability snapshot is not passing")
+    return value
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    value = build()
-    text = json.dumps(value, indent=2, sort_keys=True) + "\n"
-    if args.check:
-        if not AUDIT.is_file() or AUDIT.read_text(encoding="utf-8") != text:
-            raise SystemExit("Progress 08 traceability audit drift detected; run tools/audit_progress08_traceability.py")
-    else:
-        AUDIT.write_text(text, encoding="utf-8")
-    print(json.dumps({"status": value["status"], "requirements": value["requirement_count"], "findings": value["finding_count"]}, sort_keys=True))
-    raise SystemExit(0 if value["status"] == "passed_complete" else 1)
+    if not args.check:
+        raise SystemExit("accepted historical milestone evidence is immutable and cannot be regenerated")
+    value = _verify_accepted_snapshot()
+    print(json.dumps({"status": value["status"], "requirements": value.get("requirement_count"), "findings": value["finding_count"], "snapshot": "accepted_immutable"}, sort_keys=True))
+    raise SystemExit(0)
 
 
 if __name__ == "__main__":

@@ -1695,3 +1695,120 @@ class DeploymentAdmissionContract(ContractModel):
     obligations: list[str]
     evidence_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
     decided_at: datetime
+
+
+class RecoveryObjectiveContract(ContractModel):
+    recovery_objective_id: str
+    tenant_id: str | None = None
+    project_id: str | None = None
+    deployment_profile_id: str
+    data_class: str
+    service_class: str
+    rpo_seconds: int = Field(ge=0)
+    rto_seconds: int = Field(gt=0)
+    degraded_behavior: dict[str, Any] = Field(min_length=1)
+    recovery_method: dict[str, Any] = Field(min_length=1)
+    evidence_class: Literal["local_controlled", "local_executed", "synthetic", "cloud_executed", "external_witnessed"]
+    objective_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    state: Literal["active", "superseded", "revoked"]
+
+
+class RecoveryPointContract(ContractModel):
+    recovery_point_id: str
+    tenant_id: str
+    project_id: str
+    deployment_profile_id: str
+    region: str
+    evidence_class: str
+    database_profile: str
+    package_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    package_root_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    database_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    object_root_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    configuration_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    requested_point_at: datetime
+    snapshot_at: datetime
+    immutable_until: datetime
+    state: Literal["created", "verified", "expired", "quarantined"]
+    recovery_point_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotent_replay: bool = False
+
+
+class RestoreRunContract(ContractModel):
+    restore_id: str
+    tenant_id: str
+    project_id: str
+    recovery_point_id: str
+    target_tenant_id: str
+    target_project_id: str
+    target_region: str
+    restore_mode: Literal["isolated_clone", "in_place_rehearsal", "portability_fallback"]
+    requested_point_at: datetime
+    state: Literal["requested", "running", "reconciliation_required", "completed", "failed"]
+    reconciliation: dict[str, Any]
+    output: dict[str, Any]
+    rpo_seconds_observed: int | None = Field(default=None, ge=0)
+    rto_seconds_observed: int | None = Field(default=None, ge=0)
+    writes_reopened: bool
+    idempotent_replay: bool = False
+
+
+class DeletionGraphContract(ContractModel):
+    deletion_graph_id: str
+    tenant_id: str
+    project_id: str
+    scope_type: Literal["asset", "subject", "project", "tenant"]
+    scope_id: str
+    nodes: list[dict[str, Any]]
+    edges: list[dict[str, Any]]
+    holds: list[dict[str, Any]]
+    exceptions: list[dict[str, Any]]
+    store_plan: dict[str, Any]
+    eligible: bool
+    graph_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    state: Literal["planned", "superseded", "executed"]
+
+
+class PurgeRunContract(ContractModel):
+    purge_run_id: str
+    tenant_id: str
+    project_id: str
+    deletion_graph_id: str
+    state: Literal["awaiting_approval", "approved", "executed", "blocked", "failed"]
+    store_results: dict[str, Any]
+    unresolved_exceptions: list[dict[str, Any]]
+    backup_expiry: list[dict[str, Any]]
+    cryptographic_erasure: dict[str, Any]
+    evidence_hash: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    idempotent_replay: bool = False
+
+
+class RecoveryGameDayContract(ContractModel):
+    recovery_game_day_id: str
+    deployment_profile_id: str
+    scenario: str
+    evidence_class: Literal["synthetic", "local_executed", "cloud_executed", "external_witnessed"]
+    tenant_id: str
+    project_id: str
+    state: Literal["passed", "passed_with_gaps", "failed"]
+    metrics: dict[str, Any]
+    findings: list[dict[str, Any]]
+    game_day_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class LegacyMigrationReportContract(ContractModel):
+    legacy_migration_run_id: str
+    tenant_id: str
+    project_id: str
+    source_release: str
+    target_release: str
+    asset_mappings: list[dict[str, Any]]
+    quarantines: list[dict[str, Any]]
+    unresolved_anchors: list[dict[str, Any]]
+    policy_diffs: list[dict[str, Any]]
+    validation: dict[str, Any]
+    rollback_evidence: dict[str, Any]
+    compatibility_report: dict[str, Any]
+    state: Literal["planned", "validated", "rolled_back", "failed"]
+    report_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    signed_report: str

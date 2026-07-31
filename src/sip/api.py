@@ -1685,6 +1685,100 @@ class ProviderReplacementCreate(StrictModel):
     data_exit: dict[str, Any] = Field(min_length=1)
     limitations: list[str] = Field(default_factory=list)
 
+
+class RecoveryObjectiveCreate(StrictModel):
+    project_id: str | None = None
+    deployment_profile_id: str
+    data_class: str = Field(min_length=1, max_length=128)
+    service_class: str = Field(min_length=1, max_length=128)
+    rpo_seconds: int = Field(ge=0)
+    rto_seconds: int = Field(gt=0)
+    degraded_behavior: dict[str, Any] = Field(min_length=1)
+    recovery_method: dict[str, Any] = Field(min_length=1)
+    evidence_class: Literal['synthetic', 'local_controlled', 'local_executed', 'cloud_executed', 'external_witnessed']
+
+class RecoveryPointCreate(StrictModel):
+    deployment_profile_id: str
+    region: str = Field(min_length=1, max_length=64)
+    requested_point_at: datetime
+    immutability_days: int = Field(gt=0, le=3650)
+    evidence_class: Literal['local_executed']
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+class RecoveryRestoreCreate(StrictModel):
+    target_region: str = Field(min_length=1, max_length=64)
+    requested_point_at: datetime
+    restore_mode: Literal['isolated_clone', 'in_place_rehearsal', 'portability_fallback'] = 'isolated_clone'
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+class KeyRecoveryExerciseCreate(StrictModel):
+    project_id: str | None = None
+    key_scope_id: str
+    guardian_approvals: list[dict[str, Any]] = Field(min_length=1)
+    recovery_artifact_reference: str = Field(min_length=8)
+    root_key_exposed: bool = False
+    evidence: dict[str, Any] = Field(min_length=1)
+
+class DeletionGraphCreate(StrictModel):
+    scope_type: Literal['asset', 'subject', 'project', 'tenant']
+    scope_id: str = Field(min_length=1, max_length=128)
+
+class PurgeRequestCreate(StrictModel):
+    deletion_graph_id: str
+    recovery_point_id: str
+    idempotency_key: str = Field(min_length=1, max_length=256)
+
+class PurgeExecuteCreate(StrictModel):
+    key_erasure: dict[str, Any] = Field(min_length=1)
+
+class BackupExpiryScheduleCreate(StrictModel):
+    recovery_point_id: str
+    resource_scope: dict[str, Any] = Field(min_length=1)
+    scheduled_for: datetime
+    residuals: list[dict[str, Any]] = Field(min_length=1)
+
+class BackupExpiryExecuteCreate(StrictModel):
+    now: datetime | None = None
+
+class FixityCheckCreate(StrictModel):
+    asset_id: str
+    replica_asset_ids: list[str] = Field(default_factory=list)
+    recovery_point_ids: list[str] = Field(default_factory=list)
+    repair_if_needed: bool = False
+
+class FormatMigrationCreate(StrictModel):
+    source_asset_id: str
+    derivative_asset_id: str
+    source_format: str = Field(min_length=1, max_length=128)
+    target_format: str = Field(min_length=1, max_length=128)
+    migration_tool: dict[str, Any] = Field(min_length=1)
+    validation: dict[str, Any] = Field(min_length=1)
+
+class TenantOffboardingCreate(StrictModel):
+    destination_name: str = Field(pattern=r'^[A-Za-z0-9._-]+$', min_length=1, max_length=128)
+
+class RecoveryGameDayCreate(StrictModel):
+    deployment_profile_id: str
+    scenario: str = Field(min_length=1, max_length=128)
+    evidence_class: Literal['synthetic', 'local_executed']
+    affected_services: list[str] = Field(min_length=1)
+    affected_region: str | None = None
+    recovery_point_id: str | None = None
+    portability_name: str = Field(pattern=r'^[A-Za-z0-9._-]+$', min_length=1, max_length=128)
+    timeline: list[dict[str, Any]] = Field(min_length=1)
+    metrics: dict[str, Any] = Field(min_length=1)
+    findings: list[dict[str, Any]] = Field(default_factory=list)
+
+class LegacyMigrationCreate(StrictModel):
+    source_backup_id: str
+    source_release: str
+    target_release: str
+    candidates: list[dict[str, Any]] = Field(min_length=1)
+    unresolved_anchors: list[dict[str, Any]] = Field(default_factory=list)
+    policy_diffs: list[dict[str, Any]] = Field(default_factory=list)
+    rollback_evidence: dict[str, Any] = Field(min_length=1)
+    compatibility_report: dict[str, Any] = Field(min_length=1)
+
 def _context(request: Request) -> PlatformContext:
     return request.app.state.platform
 
@@ -1725,6 +1819,7 @@ def _routers() -> dict[str, APIRouter]:
     security_ops = APIRouter(tags=['security-ops'])
     operations_intelligence = APIRouter(tags=['operations-intelligence'])
     deployment_control = APIRouter(tags=['deployment-control'])
+    recovery_control = APIRouter(tags=['recovery-control'])
 
     @control.get('/version', operation_id='get_version')
     def version(request: Request) -> dict[str, Any]:
@@ -4220,7 +4315,115 @@ def _routers() -> dict[str, APIRouter]:
         _require(request, principal, action='deployment:admit', tenant_id=principal.tenant_id)
         return _context(request).deployment.production_admission(deployment_profile_id=profile_id, **body.model_dump(), actor_id=principal.subject_id)
 
-    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence, 'deployment-control': deployment_control}
+
+
+    @recovery_control.post('/v1/tenants/{tenant_id}/recovery/objectives', status_code=201, operation_id='register_recovery_objective')
+    def register_recovery_objective(tenant_id: str, body: RecoveryObjectiveCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:objective_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).recovery.register_recovery_objective(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/recovery/points', status_code=201, operation_id='create_recovery_point')
+    def create_recovery_point(project_id: str, body: RecoveryPointCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:backup_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.create_recovery_point(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.get('/v1/projects/{project_id}/recovery/points/{recovery_point_id}', operation_id='get_recovery_point')
+    def get_recovery_point(project_id: str, recovery_point_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:backup_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.get_recovery_point(tenant_id=principal.tenant_id, project_id=project_id, recovery_point_id=recovery_point_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/recovery/points/{recovery_point_id}/verify', operation_id='verify_recovery_point')
+    def verify_recovery_point(project_id: str, recovery_point_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:backup_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.verify_recovery_point(tenant_id=principal.tenant_id, project_id=project_id, recovery_point_id=recovery_point_id, actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/recovery/restores', status_code=201, operation_id='create_recovery_restore')
+    def create_recovery_restore(project_id: str, body: RecoveryRestoreCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:restore', tenant_id=principal.tenant_id, project_id=project_id)
+        nonce = new_uuid()
+        return _context(request).recovery.restore(
+            tenant_id=principal.tenant_id,
+            project_id=project_id,
+            target_tenant_id=f'restore-{principal.tenant_id}-{nonce}',
+            target_project_id=f'restore-{project_id}-{nonce}',
+            **body.model_dump(),
+            actor_id=principal.subject_id,
+        )
+
+    @recovery_control.post('/v1/tenants/{tenant_id}/recovery/key-exercises', status_code=201, operation_id='exercise_recovery_key')
+    def exercise_recovery_key(tenant_id: str, body: KeyRecoveryExerciseCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:key_recover', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).recovery.exercise_key_recovery(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/retention/evaluations', status_code=201, operation_id='evaluate_retention_inventory')
+    def evaluate_retention_inventory(project_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='retention:manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.evaluate_retention_inventory(tenant_id=principal.tenant_id, project_id=project_id, actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/deletion-graphs', status_code=201, operation_id='build_deletion_graph')
+    def build_deletion_graph(project_id: str, body: DeletionGraphCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deletion:plan', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.build_deletion_graph(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/purges', status_code=201, operation_id='request_recovery_purge')
+    def request_recovery_purge(project_id: str, body: PurgeRequestCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deletion:plan', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.request_purge(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/purges/{purge_run_id}/approve', operation_id='approve_recovery_purge')
+    def approve_recovery_purge(project_id: str, purge_run_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deletion:approve', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.approve_purge(tenant_id=principal.tenant_id, project_id=project_id, purge_run_id=purge_run_id, actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/purges/{purge_run_id}/execute', operation_id='execute_recovery_purge')
+    def execute_recovery_purge(project_id: str, purge_run_id: str, body: PurgeExecuteCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deletion:execute', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.execute_purge(tenant_id=principal.tenant_id, project_id=project_id, purge_run_id=purge_run_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/backup-expiry', status_code=201, operation_id='schedule_backup_expiry')
+    def schedule_backup_expiry(project_id: str, body: BackupExpiryScheduleCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='retention:manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.schedule_backup_expiry(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/backup-expiry/{backup_expiry_id}/execute', operation_id='execute_backup_expiry')
+    def execute_backup_expiry(project_id: str, backup_expiry_id: str, body: BackupExpiryExecuteCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='deletion:execute', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.execute_backup_expiry(tenant_id=principal.tenant_id, project_id=project_id, backup_expiry_id=backup_expiry_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/fixity-checks', status_code=201, operation_id='check_recovery_fixity')
+    def check_recovery_fixity(project_id: str, body: FixityCheckCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:backup_manage', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.check_fixity(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/format-migrations', status_code=201, operation_id='record_recovery_format_migration')
+    def record_recovery_format_migration(project_id: str, body: FormatMigrationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='migration:exercise', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.record_format_migration(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/tenants/{tenant_id}/offboarding', status_code=201, operation_id='create_tenant_offboarding')
+    def create_tenant_offboarding(tenant_id: str, body: TenantOffboardingCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='tenant:offboard', tenant_id=tenant_id)
+        destination = _context(request).recovery.recovery_root / 'offboarding' / body.destination_name
+        return _context(request).recovery.create_tenant_offboarding(tenant_id=tenant_id, destination=destination, actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/recovery/game-days', status_code=201, operation_id='run_recovery_game_day')
+    def run_recovery_game_day(project_id: str, body: RecoveryGameDayCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:game_day', tenant_id=principal.tenant_id, project_id=project_id)
+        values = body.model_dump(exclude={'portability_name'})
+        destination = _context(request).recovery.recovery_root / 'game-days' / body.portability_name
+        return _context(request).recovery.run_game_day(tenant_id=principal.tenant_id, project_id=project_id, portability_destination=destination, **values, actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/projects/{project_id}/legacy-migrations', status_code=201, operation_id='record_legacy_migration')
+    def record_legacy_migration(project_id: str, body: LegacyMigrationCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='migration:exercise', tenant_id=principal.tenant_id, project_id=project_id)
+        return _context(request).recovery.record_legacy_migration(tenant_id=principal.tenant_id, project_id=project_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @recovery_control.post('/v1/deployment/profiles/{deployment_profile_id}/recovery/production-admission', operation_id='evaluate_recovery_production_admission')
+    def evaluate_recovery_production_admission(deployment_profile_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='recovery:production_admit', tenant_id=principal.tenant_id)
+        return _context(request).recovery.production_recovery_admission(deployment_profile_id=deployment_profile_id, actor_id=principal.subject_id)
+
+    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence, 'deployment-control': deployment_control, 'recovery-control': recovery_control}
 SERVICE_DEPENDENCIES: dict[str, set[str]] = {'control-api': {'control-api', 'construction', 'liveforever', 'collaboration'}, 'all': set(_routers().keys())}
 
 def create_app(*, context: PlatformContext | None=None, service_name: str | None=None) -> FastAPI:
