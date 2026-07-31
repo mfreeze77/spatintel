@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-07-31T20:18:03.883156+00:00",
+  "generated_at": "2026-07-31T20:39:58.909598+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -69960,11 +69960,18 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "TSTSTRAT-003",
@@ -69975,10 +69982,13 @@
       "source_title": "Master Test Strategy",
       "supersession_links": [],
       "test_ids": [
-        "REQ-TSTSTRAT-003"
+        "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability"
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-003.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ],
       "text": "The strategy shall cover unit, property, contract, integration, end-to-end, field, benchmark, load, resilience, security, privacy, accessibility, migration, backup, and acceptance testing.",
       "verification_method": "Controlled verification",
       "waiver_expiration": null,

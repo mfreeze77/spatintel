@@ -172,6 +172,17 @@ def test_matrix_report_root_override_is_explicit_and_rooted(tmp_path: Path, monk
     assert _configured_output_path("SIP_TEST_REPORT_ROOT", default, root=tmp_path) == absolute
 
 
+
+def test_progress10_acceptance_runs_all_declared_traceability_dependencies() -> None:
+    """CONTROL: exact-commit acceptance generates every evidence artifact declared by traceability."""
+
+    from tools.run_progress10_checkpoint_acceptance import REQUIRED_TARGETS, TARGET_REPORT_PATHS
+
+    assert "demo-deployment" in REQUIRED_TARGETS
+    assert TARGET_REPORT_PATHS["demo-deployment"] == "build/evidence/demo-progress09-deployment.json"
+    traceability = (ROOT / "requirements/implementation-map.json").read_text(encoding="utf-8")
+    assert "build/evidence/demo-progress09-deployment.json" in traceability
+
 def test_progress10_coverage_report_retains_later_phase_denial() -> None:
     """CONTROL: packaged coverage keeps Progress 11 unauthorized and production fail closed."""
 
@@ -188,3 +199,18 @@ def test_progress10_coverage_report_retains_later_phase_denial() -> None:
     assert "Progress 10" in text and "delivered" in text
     assert "Progress 11" in text and "unauthorized" in text
     assert "Production" in text and "NO-GO" in text
+
+
+def test_progress10_acceptance_runs_deployment_demo_before_traceability() -> None:
+    """REQ: TSTSTRAT-003 exact-commit acceptance retains every prerequisite demonstration before evidence-bound traceability."""
+
+    from tools.run_progress10_checkpoint_acceptance import (
+        POST_EVIDENCE_TARGETS,
+        REQUIRED_TARGETS,
+        TARGET_REPORT_PATHS,
+    )
+
+    assert "demo-deployment" in REQUIRED_TARGETS
+    assert REQUIRED_TARGETS.index("demo-deployment") < REQUIRED_TARGETS.index("demo-recovery")
+    assert TARGET_REPORT_PATHS["demo-deployment"] == "build/evidence/demo-progress09-deployment.json"
+    assert POST_EVIDENCE_TARGETS == ["traceability-evidence"]

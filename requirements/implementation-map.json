@@ -11865,6 +11865,27 @@
         "build/reports/tests/contract.xml",
         "build/reports/tests/e2e.xml"
       ]
+    },
+    "TSTSTRAT-003": {
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ]
     }
   },
   "schema_version": "1.0"
