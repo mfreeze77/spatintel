@@ -8,7 +8,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from tools.build_progress10_checkpoint import SECURITY_DIRECT_EVIDENCE_PATH, _render_coverage
+from tools.build_progress10_checkpoint import (
+    SECURITY_DIRECT_EVIDENCE_PATH,
+    _render_coverage,
+    _render_final_implementation_report,
+)
 from tools.verify_progress10_checkpoint import (
     EXPECTED_BASE_COMMIT,
     EXPECTED_BASE_OUTER_SHA256,
@@ -214,3 +218,35 @@ def test_progress10_acceptance_runs_deployment_demo_before_traceability() -> Non
     assert REQUIRED_TARGETS.index("demo-deployment") < REQUIRED_TARGETS.index("demo-recovery")
     assert TARGET_REPORT_PATHS["demo-deployment"] == "build/evidence/demo-progress09-deployment.json"
     assert POST_EVIDENCE_TARGETS == ["traceability-evidence"]
+
+
+def test_progress10_final_implementation_report_is_current_and_package_bound() -> None:
+    """CONTROL: the final report describes Progress 10 and binds exact package facts."""
+
+    source_report = (ROOT / "FINAL_IMPLEMENTATION_REPORT.md").read_text(encoding="utf-8")
+    assert "Progress 10" in source_report
+    assert "Progress 07 Candidate" not in source_report
+    rendered = _render_final_implementation_report(
+        {
+            "branch": "progress-10-recovery",
+            "commit": "a" * 40,
+            "parent": "b" * 40,
+            "tree": "c" * 40,
+            "commit_timestamp": "2026-07-31T00:00:00Z",
+            "source_tree_root_sha256": "d" * 64,
+            "tested_detached_worktree": True,
+            "python_tests_passed": 1,
+            "swift_tests_passed": 1,
+            "web_runtime_tests_passed": 1,
+            "web_source_checks_passed": 1,
+            "desktop_tests_passed": 1,
+            "generated_contract_artifacts": 1,
+            "requirements_total": 1,
+        },
+        {"IMPLEMENTED_UNVERIFIED": 1},
+        {"summary": {"included": 1, "deferred": 0}},
+    )
+    assert "SIP v1.1.0 Progress 10 Final Implementation Report" in rendered
+    assert "`aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`" in rendered
+    assert "Progress 11 authorized: `false`" in rendered
+    assert "Production authorized: `false`" in rendered

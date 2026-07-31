@@ -209,6 +209,84 @@ def _render_status(facts: dict[str, Any], counts: dict[str, int]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _render_final_implementation_report(
+    facts: dict[str, Any],
+    counts: dict[str, int],
+    milestone: dict[str, Any],
+) -> str:
+    """Render the exact, package-bound Progress 10 implementation report."""
+
+    status_lines = "\n".join(f"- `{status}`: **{count:,}**" for status, count in sorted(counts.items()))
+    external_lines = "\n".join(f"- {item}" for item in EXTERNAL_GAPS)
+    return f"""# SIP v1.1.0 Progress 10 Final Implementation Report
+
+## Source and release identity
+
+- Branch: `{facts['branch']}`
+- Commit: `{facts['commit']}`
+- Parent: `{facts['parent']}`
+- Git tree: `{facts['tree']}`
+- Commit timestamp: `{facts['commit_timestamp']}`
+- Canonical source root: `{facts['source_tree_root_sha256']}`
+- Clean detached acceptance: `{str(facts['tested_detached_worktree']).lower()}`
+- Production authorized: `false`
+- Progress 11 authorized: `false`
+
+## Architecture delivered
+
+Progress 10 adds the governed `recovery-control` boundary for recovery objectives and immutable recovery points; isolated point-in-time and object-version restore workflows; source, evidence, semantic, and root-hash reconciliation; retention and legal-hold evaluation; dependency-aware deletion plans and independently approved purge execution; purge propagation and exception evidence; backup-expiry and cryptographic-erasure accounting; fixity and replica repair; original-preserving format migration; tenant offboarding and open portability contingency; synthetic recovery game days; and fail-closed production recovery admission.
+
+## Acceptance results
+
+- Python: **{facts['python_tests_passed']} passed, 0 failed, 0 errors, 0 skipped**
+- Swift Linux fixtures: **{facts['swift_tests_passed']} passed**
+- Web dependency-free runtime: **{facts['web_runtime_tests_passed']} passed**
+- Web source/accessibility checks: **{facts['web_source_checks_passed']} passed**
+- Desktop local-first runtime: **{facts['desktop_tests_passed']} passed**
+- Generated contract artifacts: **{facts['generated_contract_artifacts']}**
+- Acceptance posture: `passed_with_external_gaps`
+
+## Milestone and requirements
+
+- Authorized epic: `OPS-004`
+- Included milestone requirements: **{milestone['summary']['included']}**
+- Deferred milestone requirements: **{milestone['summary']['deferred']}**
+- Normative requirements retained: **{facts['requirements_total']:,}**
+
+{status_lines}
+
+## Migration and rollback
+
+Migration `0020_progress10_recovery_retention` is append-only over `0019_progress09_deployment_profiles`. Destructive downgrade remains fail-closed without explicit enablement plus retained backup, dry-run, audit, and rehearsal evidence. Locally executed restore and migration rehearsals are retained; managed cloud and multi-region certification remain external.
+
+## Commands
+
+```bash
+make test
+make migrations
+make security
+make demo-recovery
+make export-demo
+make restore-demo
+make release
+```
+
+The project checkpoint is built with `tools/build_progress10_checkpoint.py`; it is independently verified with `tools/verify_progress10_checkpoint.py`. The consolidated envelope is verified with `tools/verify_progress10_delivery_envelope.py`.
+
+## Security, privacy, dependencies, and licensing
+
+Tenant/project/residency admission, recovery locks, legal holds, independent purge approval, audit survival on denied actions, anti-resurrection behavior, immutable evidence validation, and fail-closed production admission are exercised in the retained matrix. Provider, model, dependency, and license governance remain fail-closed. No production credentials or customer data were used.
+
+## Known limitations and external validation
+
+{external_lines}
+
+## Exact next action
+
+{NEXT_CLUSTER}
+"""
+
+
 def _render_resume(facts: dict[str, Any]) -> str:
     return "\n".join([
         "# Resume Implementation — SIP v1.1.0 Progress 10",
