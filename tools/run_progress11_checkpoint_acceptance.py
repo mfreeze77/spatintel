@@ -5,13 +5,13 @@ from __future__ import annotations
 import argparse
 import fcntl
 import hashlib
-from contextlib import contextmanager
 import json
 import os
 import subprocess
 import sys
 import tempfile
 import time
+from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -295,7 +295,7 @@ def _run_target(target: str, *, env: dict[str, str], log_root: Path) -> dict[str
     }
 
 
-def run(*, attestation_path: Path) -> dict[str, Any]:
+def run(*, attestation_path: Path, provisional_output_path: Path | None = None) -> dict[str, Any]:
     attestation = _load(attestation_path)
     binding_before = current_source_binding(ROOT)
     if binding_before["commit"] != attestation.get("commit"):
@@ -314,8 +314,29 @@ def run(*, attestation_path: Path) -> dict[str, Any]:
         "SIP_TEST_WORKTREE_CLEAN_AT_START": "true",
     }
     log_root = ROOT / "build/evidence/gates"
+    provisional_output_path = provisional_output_path or ROOT / "build/reports/checkpoint-acceptance-gates.json"
     results: list[dict[str, Any]] = []
     for target in [*ADDITIONAL_LOCAL_TARGETS, *REQUIRED_TARGETS, "release", *EXPECTED_BLOCKED_TARGETS, *POST_EVIDENCE_TARGETS]:
+        if target in POST_EVIDENCE_TARGETS:
+            provisional = {
+                "schema": "sip.checkpoint-acceptance-gates/v1",
+                "status": "provisional_non_authorizing",
+                "provisional": True,
+                "checkpoint_id": "sip-v1.1.0-progress-11",
+                "captured_at": datetime.now(UTC).isoformat(),
+                "source": binding_before,
+                "attestation_path": attestation_path.relative_to(ROOT).as_posix(),
+                "results": results,
+                "release_authorized": False,
+                "progress_11_authorized": True,
+                "progress_12_authorized": False,
+                "production_authorized": False,
+            }
+            provisional_output_path.parent.mkdir(parents=True, exist_ok=True)
+            provisional_output_path.write_text(
+                json.dumps(provisional, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
         result = _run_target(target, env=env, log_root=log_root)
         if target in EXPECTED_BLOCKED_TARGETS:
             result["expected"] = "blocked_or_passed_complete"
@@ -380,7 +401,7 @@ def main() -> None:
     args = parser.parse_args()
     output_path = _rooted_output_path(args.output)
     with _exclusive_acceptance_lock():
-        report = run(attestation_path=args.attestation.resolve())
+        report = run(attestation_path=args.attestation.resolve(), provisional_output_path=output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
         output_path.write_text(rendered, encoding="utf-8")

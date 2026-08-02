@@ -8992,6 +8992,453 @@
         "title": "PurgeRequestCreate",
         "type": "object"
       },
+      "QACampaignCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "checkpoint_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Checkpoint Id",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "operating_envelope": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Operating Envelope",
+            "type": "object"
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Project Id"
+          },
+          "recovery_plan": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Recovery Plan",
+            "type": "object"
+          },
+          "release_class": {
+            "default": "development",
+            "enum": [
+              "research",
+              "development",
+              "pilot",
+              "production",
+              "enterprise"
+            ],
+            "title": "Release Class",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Scope",
+            "type": "object"
+          },
+          "support_plan": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Support Plan",
+            "type": "object"
+          },
+          "test_data": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Test Data",
+            "type": "object"
+          }
+        },
+        "required": [
+          "checkpoint_id",
+          "scope",
+          "test_data",
+          "operating_envelope",
+          "support_plan",
+          "recovery_plan"
+        ],
+        "title": "QACampaignCreate",
+        "type": "object"
+      },
+      "QACandidateCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "release_manifest": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Release Manifest",
+            "type": "object"
+          },
+          "signer_key_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Signer Key Id",
+            "type": "string"
+          },
+          "source_commit": {
+            "pattern": "^[a-f0-9]{40,64}$",
+            "title": "Source Commit",
+            "type": "string"
+          },
+          "source_root_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Root Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_commit",
+          "source_root_sha256",
+          "release_manifest",
+          "signer_key_id"
+        ],
+        "title": "QACandidateCreate",
+        "type": "object"
+      },
+      "QAGateCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "control_status": {
+            "enum": [
+              "passed_complete",
+              "passed_with_external_gaps",
+              "blocked",
+              "failed"
+            ],
+            "title": "Control Status",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "execution_status": {
+            "enum": [
+              "completed_successfully",
+              "completed_with_findings",
+              "not_executed",
+              "failed"
+            ],
+            "title": "Execution Status",
+            "type": "string"
+          },
+          "external_gap": {
+            "default": false,
+            "title": "External Gap",
+            "type": "boolean"
+          },
+          "findings": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Findings",
+            "type": "array"
+          },
+          "gate_type": {
+            "enum": [
+              "requirements",
+              "license_model_rights",
+              "security_privacy",
+              "accessibility",
+              "load_performance",
+              "backup_restore",
+              "migration",
+              "rollback",
+              "open_export",
+              "hybrid_authority",
+              "support_recovery",
+              "sbom_vulnerability",
+              "release_manifest",
+              "construction_acceptance",
+              "liveforever_acceptance"
+            ],
+            "title": "Gate Type",
+            "type": "string"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "result": {
+            "additionalProperties": true,
+            "title": "Result",
+            "type": "object"
+          },
+          "thresholds": {
+            "additionalProperties": true,
+            "title": "Thresholds",
+            "type": "object"
+          }
+        },
+        "required": [
+          "gate_type",
+          "execution_status",
+          "control_status"
+        ],
+        "title": "QAGateCreate",
+        "type": "object"
+      },
+      "QARollbackCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "after_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "After Hashes",
+            "type": "object"
+          },
+          "before_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "Before Hashes",
+            "type": "object"
+          },
+          "from_release": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "From Release",
+            "type": "string"
+          },
+          "recovery_point_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recovery Point Id"
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "blocked"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Steps",
+            "type": "array"
+          },
+          "to_release": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "To Release",
+            "type": "string"
+          },
+          "verification": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Verification",
+            "type": "object"
+          }
+        },
+        "required": [
+          "from_release",
+          "to_release",
+          "before_hashes",
+          "after_hashes",
+          "steps",
+          "verification",
+          "status"
+        ],
+        "title": "QARollbackCreate",
+        "type": "object"
+      },
+      "QAScenarioCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "assertions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Assertions",
+            "type": "array"
+          },
+          "environment": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Environment",
+            "type": "object"
+          },
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "evidence_class": {
+            "enum": [
+              "synthetic",
+              "local_controlled",
+              "local_executed",
+              "browser_executed",
+              "device_executed",
+              "cloud_executed",
+              "external_witnessed"
+            ],
+            "title": "Evidence Class",
+            "type": "string"
+          },
+          "input_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "Input Hashes",
+            "type": "object"
+          },
+          "metrics": {
+            "additionalProperties": true,
+            "title": "Metrics",
+            "type": "object"
+          },
+          "output_hashes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "Output Hashes",
+            "type": "object"
+          },
+          "profile": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Profile",
+            "type": "string"
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Project Id"
+          },
+          "scenario_type": {
+            "enum": [
+              "construction",
+              "liveforever"
+            ],
+            "title": "Scenario Type",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "blocked"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario_type",
+          "profile",
+          "evidence_class",
+          "input_hashes",
+          "output_hashes",
+          "assertions",
+          "evidence",
+          "environment",
+          "status"
+        ],
+        "title": "QAScenarioCreate",
+        "type": "object"
+      },
+      "QAWaiverCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "compensating_control": {
+            "additionalProperties": true,
+            "minProperties": 1,
+            "title": "Compensating Control",
+            "type": "object"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "owner": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Owner",
+            "type": "string"
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ],
+            "title": "Priority",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "requirement_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Requirement Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "requirement_id",
+          "priority",
+          "reason",
+          "compensating_control",
+          "owner",
+          "expires_at"
+        ],
+        "title": "QAWaiverCreate",
+        "type": "object"
+      },
       "QueueSnapshotCreate": {
         "additionalProperties": false,
         "properties": {
@@ -51873,6 +52320,1707 @@
         "summary": "Create Project",
         "tags": [
           "control"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns": {
+      "post": {
+        "operationId": "create_qa_campaign",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QACampaignCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Create Qa Campaign",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Qa Campaign",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}": {
+      "get": {
+        "operationId": "get_qa_campaign",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Qa Campaign",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Qa Campaign",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/candidates": {
+      "post": {
+        "operationId": "sign_qa_release_candidate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QACandidateCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Sign Qa Release Candidate",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Sign Qa Release Candidate",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/gates": {
+      "post": {
+        "operationId": "record_qa_gate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QAGateCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Qa Gate",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Qa Gate",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/rollback": {
+      "post": {
+        "operationId": "record_qa_rollback",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QARollbackCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Qa Rollback",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Qa Rollback",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/scenarios": {
+      "post": {
+        "operationId": "record_qa_scenario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QAScenarioCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Record Qa Scenario",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Qa Scenario",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/waivers": {
+      "post": {
+        "operationId": "approve_qa_waiver",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QAWaiverCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Approve Qa Waiver",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Qa Waiver",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}": {
+      "get": {
+        "operationId": "get_qa_release_candidate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "release_candidate_id",
+            "required": true,
+            "schema": {
+              "title": "Release Candidate Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Get Qa Release Candidate",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Qa Release Candidate",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/production-admission": {
+      "post": {
+        "operationId": "evaluate_qa_production_admission",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "release_candidate_id",
+            "required": true,
+            "schema": {
+              "title": "Release Candidate Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Evaluate Qa Production Admission",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evaluate Qa Production Admission",
+        "tags": [
+          "release-assurance"
+        ]
+      }
+    },
+    "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/verify": {
+      "post": {
+        "operationId": "verify_qa_release_candidate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "release_candidate_id",
+            "required": true,
+            "schema": {
+              "title": "Release Candidate Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-tenant",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Tenant"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Subject"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-projects",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Projects"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-roles",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Roles"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-purposes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Purposes"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-sip-audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Sip-Audience"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Verify Qa Release Candidate",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Verify Qa Release Candidate",
+        "tags": [
+          "release-assurance"
         ]
       }
     },

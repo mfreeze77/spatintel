@@ -499,6 +499,35 @@ def _stage_owner_path(staged_shard_root: Path) -> Path:
     return staged_shard_root / ".writer-token"
 
 
+def _publish_directory(staged: Path, destination: Path, *, writer_token: str) -> None:
+    """Copy external resumable state to a destination-local stage before replacement."""
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    candidate = destination.parent / f".{destination.name}.{writer_token}.next"
+    shutil.rmtree(candidate, ignore_errors=True)
+    try:
+        shutil.copytree(staged, candidate)
+        shutil.rmtree(destination, ignore_errors=True)
+        candidate.replace(destination)
+    except Exception:
+        shutil.rmtree(candidate, ignore_errors=True)
+        raise
+    shutil.rmtree(staged)
+
+
+def _publish_file(staged: Path, destination: Path, *, writer_token: str) -> None:
+    """Publish an external staged file through a sibling on the destination filesystem."""
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    candidate = destination.parent / f".{destination.name}.{writer_token}.next"
+    candidate.unlink(missing_ok=True)
+    try:
+        shutil.copy2(staged, candidate)
+        candidate.replace(destination)
+    except Exception:
+        candidate.unlink(missing_ok=True)
+        raise
+    staged.unlink()
+
+
 def _write_stage_owner(staged_shard_root: Path, writer_token: str) -> None:
     staged_shard_root.mkdir(parents=True, exist_ok=True)
     temporary = staged_shard_root / f".writer-token.{os.getpid()}.tmp"
@@ -971,8 +1000,7 @@ def _suite_unlocked(
     _write_merged_log(shards, staged_log, suite_name=name)
     _assert_stage_owner(staged_shard_root, writer_token)
     _stage_owner_path(staged_shard_root).unlink()
-    shutil.rmtree(final_shard_root, ignore_errors=True)
-    staged_shard_root.replace(final_shard_root)
+    _publish_directory(staged_shard_root, final_shard_root, writer_token=writer_token)
     finalized_shards = _finalize_shard_records(shards, final_shard_root=final_shard_root)
     manifest = _shard_manifest_payload(
         name=name,
@@ -983,8 +1011,8 @@ def _suite_unlocked(
     )
     final_manifest = final_shard_root / "manifest.json"
     final_manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    staged_junit.replace(junit)
-    staged_log.replace(log)
+    _publish_file(staged_junit, junit, writer_token=writer_token)
+    _publish_file(staged_log, log, writer_token=writer_token)
     elapsed = time.perf_counter() - started
     tests, failures, errors, skipped = _junit_counts(junit)
     status = "passed" if all(shard["status"] == "passed" for shard in shards) else "failed"

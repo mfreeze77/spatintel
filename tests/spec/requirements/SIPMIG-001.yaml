@@ -8,19 +8,20 @@ source:
 requirement: Migration shall preserve every canonical v1.0 source asset and shall create additive v1.1 records rather than
   rewriting geometry bytes in place.
 verification_method: Hash and migration test
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
 - src/sip/recovery.py
-- migrations
-- src/sip/database.py
-- src/sip/scene.py
-- src/sip/assets.py
-- docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md
+- src/sip/exporting.py
+- migrations/versions/0020_progress10_recovery_retention.py
+- tests/integration/test_progress10_preservation_migration.py
 automated_test_ids:
 - tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed
 - tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes
 - tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 - build/reports/tests/migration.xml
@@ -39,5 +40,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

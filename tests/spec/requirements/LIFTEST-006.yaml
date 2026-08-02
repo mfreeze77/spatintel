@@ -8,11 +8,23 @@ source:
 requirement: Accessibility tests shall cover captions, keyboard navigation, screen-reader metadata, reduced motion, and non-voice
   experience.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- tools/run_demo.py
+- tools/demo_progress11_release.py
+- src/sip/liveforever.py
+- src/sip/exporting.py
 automated_test_ids:
-- REQ-LIFTEST-006
-retained_evidence: []
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience
+- tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent
+retained_evidence:
+- build/evidence/demos/liveforever.json
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,6 +32,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  status: REQUIRED
+  owner: True North / External Validation Owner
+  gap: The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device,
+    GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.

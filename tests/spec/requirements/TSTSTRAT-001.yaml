@@ -8,17 +8,21 @@ source:
 requirement: Every P0 requirement shall map to an automated test, controlled field procedure, review artifact, or continuously
   monitored control.
 verification_method: Controlled verification
-implementation_status: IN_PROGRESS
+implementation_status: VERIFIED
 implementation_files:
+- src/sip/release_assurance.py
+- requirements/PROGRESS_11_TEST_STRATEGY.json
 - tools/run_test_matrix.py
-- tools/update_requirements.py
-- src/sip/spec_lint.py
-- tests/contract/test_progress06_r1_test_matrix_isolation.py
-- requirements/requirements-ledger.json
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies
 - tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
@@ -29,5 +33,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

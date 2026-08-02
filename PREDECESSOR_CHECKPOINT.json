@@ -102,6 +102,17 @@
     "source_tree_root_sha256": "7043fbee94838d69fb5b70afc570f9004acc21b9110907f6a551fe3c1db3cdcb",
     "tree": "bb2a616e5df4817bec146af9692f0a3c4375cecd"
   },
+  "accepted_progress_10_checkpoint": {
+    "branch": "progress-10-recovery",
+    "checkpoint_id": "sip-v1.1.0-progress-10",
+    "commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+    "outer_delivery_zip_sha256": "1e0c962a59a55a2a6395179c98467778ff56e2e394319b0ca46367551b5027dc",
+    "parent": "f293d6425182ef04f5893275724e2a4bd28cf00e",
+    "project_zip_sha256": "46d850b6035d0ee86386ff256aabdc65751d49398f6ea4e4084eb4d50d6c669c",
+    "relationship": "Accepted Progress 10 is the exact source-history and evidence base authorized by True North for bounded Progress 11 QA-002.",
+    "source_tree_root_sha256": "0c93009874f99c72c3670d6cfca47af00ff04b762e4f4ddddffa20ab03ed8678",
+    "tree": "ced38981c7f41891a9c1288b789400b597a28b44"
+  },
   "import_mapping": {
     "commit": "36e9c44d21a9c47d85971ee945daec8fc98e26d6",
     "relationship": "The import commit reproduces all 2,419 files of the predecessor Progress 04 ZIP byte-for-byte. The predecessor Git object originally claimed by Progress 04 was unavailable, so continuity is represented explicitly as an archive-to-import-commit mapping rather than a false parent relationship.",

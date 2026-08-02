@@ -16,6 +16,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "requirements/spec-index.json"
 DESTINATION = ROOT / "requirements/implementation-map.json"
+PROGRESS11_SCOPE = ROOT / "requirements/MILESTONE_SCOPE_PROGRESS_11.json"
 REQ_PATTERN = re.compile(r"\b[A-Z][A-Z0-9]+-\d{3}\b")
 
 VERIFIED = {
@@ -98,6 +99,12 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "CONPROG": ["src/sip/construction.py", "src/sip/api.py", "src/sip/database.py", "docs/operator/CONSTRUCTION_VERTICAL_OPERATIONS.md"],
     "CONHAND": ["src/sip/construction.py", "src/sip/api.py", "src/sip/archive_safety.py", "src/sip/database.py", "migrations/versions/0014_vertical_mvp.py", "migrations/versions/0015_progress06_r1_security_controls.py", "docs/operator/CONSTRUCTION_OWNER_HANDOFF.md"],
     "CONREP": ["src/sip/construction.py", "src/sip/api.py", "docs/user/CONSTRUCTION.md"],
+    "CONTEST": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py",
+    ],
     "DATBIM": ["src/sip/construction.py", "src/sip/api.py", "src/sip/database.py", "migrations/versions/0014_vertical_mvp.py", "migrations/versions/0015_progress06_r1_security_controls.py", "docs/developer/VERTICAL_MVP_ARCHITECTURE.md"],
     "DATDB": ["src/sip/database.py", "migrations", "tools/rehearse_migrations.py"],
     "DATFRAME": ["src/sip/spatial_data.py", "src/sip/contracts.py", "src/sip/database.py", "schemas/jsonschema/coordinate-frame.schema.json", "migrations/versions/0010_spatial_truth_and_twin_controls.py"],
@@ -114,6 +121,17 @@ IMPLEMENTATION_GROUPS: dict[str, list[str]] = {
     "DATSEARC": ["src/sip/search.py", "src/sip/spatial_query.py", "src/sip/database.py", "schemas/jsonschema/spatial-query.schema.json", "migrations/versions/0009_authorized_spatial_search_and_agents.py"],
     "DELDEV": ["Makefile", "justfile", "tools/static_checks.py", "tools/typecheck.py", "docs/developer/GETTING_STARTED.md", "CONTRIBUTING.md"],
     "DELDOD": ["docs/developer", "docs/operator", "docs/user", "docs/release", "src/sip/errors.py", "src/sip/audit.py"],
+    "DELMVP": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py",
+    ],
+    "DELROAD": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+    ],
     "GOVDOC": ["src/sip/spec_lint.py", "tools/update_requirements.py", "requirements/spec-index.json", "requirements/requirements-ledger.json"],
     "GOVOPEN": ["governance/open-questions.json", "tools/check_governance.py", "requirements/blockers.md"],
     "GOVRISK": ["governance/risk-register.json", "governance/service-catalog.json", "tools/check_governance.py", "docs/runbooks/OPERATIONS_INCIDENTS.md"],
@@ -562,6 +580,14 @@ def _declared_passing_results(test_map: dict[str, list[str]]) -> tuple[dict[str,
     return python_results, swift_seen
 
 
+def _progress11_policy() -> dict[str, dict[str, Any]]:
+    """Load the generated, source-controlled QA-002 policy built before this map."""
+    payload = json.loads(PROGRESS11_SCOPE.read_text(encoding="utf-8"))
+    if payload.get("schema") != "sip.milestone-scope/v1":
+        raise ValueError("Progress 11 scope has an unsupported schema")
+    return {item["requirement_id"]: item for item in payload["included_requirements"]}
+
+
 def build(
     *,
     python_results: dict[str, str] | None = None,
@@ -574,6 +600,7 @@ def build(
     unknown = sorted(set(test_map) - known)
     if unknown:
         raise ValueError(f"tests reference unknown requirement IDs: {unknown}")
+    progress11_policy = _progress11_policy()
     if declared_source_state:
         python_results, swift_ok = _declared_passing_results(test_map)
     else:
@@ -588,7 +615,12 @@ def build(
     overlays: dict[str, Any] = {}
     for requirement_id, test_ids in test_map.items():
         prefix = _prefix(requirement_id)
-        status = _status(requirement_id)
+        milestone_policy = progress11_policy.get(requirement_id)
+        status = (
+            str(milestone_policy["implementation_status"])
+            if milestone_policy is not None
+            else _status(requirement_id)
+        )
         tests_passed, failed_or_missing_tests = _tests_passed(
             test_ids,
             python_results=python_results,
@@ -596,10 +628,17 @@ def build(
         )
         if status == "VERIFIED" and not tests_passed:
             status = "IMPLEMENTED_UNVERIFIED"
-        files = [path for path in IMPLEMENTATION_GROUPS.get(prefix, []) if (ROOT / path).exists()]
+        declared_files = (
+            milestone_policy["implementation_files"]
+            if milestone_policy is not None
+            else IMPLEMENTATION_GROUPS.get(prefix, [])
+        )
+        files = [path for path in declared_files if (ROOT / path).exists()]
         if not files:
             raise ValueError(f"no implementation files configured for {requirement_id}")
         evidence = _evidence_for(test_ids, prefix)
+        if milestone_policy is not None:
+            evidence = sorted(set(evidence) | set(milestone_policy["evidence_paths"]))
         if status == "VERIFIED" and not evidence:
             raise ValueError(f"verified requirement {requirement_id} has no retained evidence")
         overlay: dict[str, Any] = {
@@ -616,7 +655,15 @@ def build(
         if status == "VERIFIED":
             overlay["notes"] = "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred."
         elif status == "EXTERNAL_VALIDATION_REQUIRED":
-            owner, gap = EXTERNAL_DETAILS[requirement_id]
+            owner, gap = EXTERNAL_DETAILS.get(
+                requirement_id,
+                (
+                    "True North / External Validation Owner",
+                    "The local or synthetic implementation boundary exists, but the normative requirement requires "
+                    "mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other "
+                    "external evidence. No unavailable evidence is inferred.",
+                ),
+            )
             overlay.update({"owner": owner, "external_validation_status": "REQUIRED", "notes": gap})
         elif status == "IN_PROGRESS":
             overlay["notes"] = "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress."

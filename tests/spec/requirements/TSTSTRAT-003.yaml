@@ -8,17 +8,21 @@ source:
 requirement: The strategy shall cover unit, property, contract, integration, end-to-end, field, benchmark, load, resilience,
   security, privacy, accessibility, migration, backup, and acceptance testing.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
+- src/sip/release_assurance.py
+- requirements/PROGRESS_11_TEST_STRATEGY.json
 - tools/run_test_matrix.py
-- tools/update_requirements.py
-- src/sip/spec_lint.py
-- tests/contract/test_progress06_r1_test_matrix_isolation.py
-- requirements/requirements-ledger.json
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
 - tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
@@ -29,5 +33,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

@@ -8,11 +8,19 @@ source:
 requirement: A completed UI shall include loading/error/empty/restricted states, accessibility, source labels, analytics/telemetry
   policy, and end-to-end tests.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- src/sip/release_assurance.py
+- schemas/openapi/release-assurance.openapi.json
+- docs/operator/PROGRESS_11_RELEASE_GATES.md
 automated_test_ids:
-- REQ-DELDOD-004
-retained_evidence: []
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit
+retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,6 +28,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  status: REQUIRED
+  owner: True North / External Validation Owner
+  gap: The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device,
+    GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.

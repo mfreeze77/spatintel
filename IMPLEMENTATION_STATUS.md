@@ -3,11 +3,11 @@
 This repository remains under active implementation. The status below is generated from the authoritative ledger; it is not a production-complete claim.
 
 - Normative requirements: **1,028**
-- Verified: **103**
-- Implemented but unverified: **343**
-- In progress: **21**
-- Not started: **552**
-- External validation required: **9**
+- Verified: **165**
+- Implemented but unverified: **331**
+- In progress: **15**
+- Not started: **492**
+- External validation required: **25**
 
 Release mode remains fail-closed until every gap is either verified or explicitly governed under the specification's allowed external-validation/waiver rules.
 

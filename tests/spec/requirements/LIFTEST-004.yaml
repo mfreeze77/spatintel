@@ -7,17 +7,22 @@ source:
   section: 4. Normative requirements
 requirement: A family reviewer shall propose a correction without altering the original recording/transcript.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
+- tools/run_demo.py
+- tools/demo_progress11_release.py
 - src/sip/liveforever.py
 - src/sip/exporting.py
-- tools/run_demo.py
-- verticals/liveforever
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience
 - tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony
 retained_evidence:
 - build/evidence/demos/liveforever.json
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
@@ -28,5 +33,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

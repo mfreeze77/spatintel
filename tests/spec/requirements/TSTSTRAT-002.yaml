@@ -8,20 +8,20 @@ source:
 requirement: Test evidence shall include input hashes, environment, version, output, result, thresholds, and reviewer when
   manual.
 verification_method: Automated test
-implementation_status: IN_PROGRESS
+implementation_status: VERIFIED
 implementation_files:
+- src/sip/release_assurance.py
+- requirements/PROGRESS_11_TEST_STRATEGY.json
 - tools/run_test_matrix.py
-- tools/update_requirements.py
-- src/sip/spec_lint.py
-- tests/contract/test_progress06_r1_test_matrix_isolation.py
-- requirements/requirements-ledger.json
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
 - tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots
 - tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans
 - tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix
 - tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup
 - tests/contract/test_test_matrix_resume.py::test_default_matrix_control_root_is_outside_generated_repository_state
 - tests/contract/test_test_matrix_resume.py::test_default_matrix_target_allows_migration_headroom
+- tests/contract/test_test_matrix_resume.py::test_external_staging_publishes_through_destination_local_candidates
 - tests/contract/test_test_matrix_resume.py::test_finalized_shard_records_use_repository_relative_live_paths
 - tests/contract/test_test_matrix_resume.py::test_generated_traceability_outputs_do_not_create_a_test_evidence_bootstrap_loop
 - tests/contract/test_test_matrix_resume.py::test_isolated_pytest_runner_terminates_when_controller_disappears
@@ -41,7 +41,11 @@ automated_test_ids:
 - tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit
 - tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 - build/reports/tests/e2e.xml
 controlled_procedure:
@@ -53,5 +57,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

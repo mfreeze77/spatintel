@@ -11,12 +11,15 @@ implementation_status: VERIFIED
 implementation_files:
 - src/sip/failures.py
 - governance/failure-catalog.json
-- docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md
+- tests/unit/test_failure_catalog.py
 automated_test_ids:
 - tests/unit/test_failure_catalog.py::test_catalog_json_is_deterministic_and_has_no_duplicate_codes
 - tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
 - build/reports/governance-check.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
 - build/reports/tests/unit.xml
 - governance/failure-catalog.json

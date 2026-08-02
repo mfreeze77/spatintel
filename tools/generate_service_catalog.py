@@ -84,6 +84,27 @@ SERVICE_METADATA: dict[str, dict[str, Any]] = {
             "evidence-service", "export-service"
         ],
     },
+    "release-assurance": {
+        "owner": "release-assurance",
+        "stores": ["postgresql", "source-control-manifests", "immutable-audit-export"],
+        "tables": [
+            "qa_acceptance_campaigns",
+            "qa_scenario_results",
+            "qa_gate_results",
+            "qa_release_waivers",
+            "qa_rollback_rehearsals",
+            "qa_release_candidates",
+        ],
+        "dependencies": [
+            "identity-policy",
+            "audit-service",
+            "deployment-control",
+            "recovery-control",
+            "operations-intelligence",
+            "construction",
+            "liveforever",
+        ],
+    },
     "representation-api": {"owner": "hybrid-representations", "stores": ["postgresql", "object-store"], "tables": ["representations", "representation_bindings", "provider_manifests"], "dependencies": ["identity-policy", "workflow-service", "provider-registry"]},
     "provider-registry": {"owner": "model-provider-governance", "stores": ["postgresql", "source-control-manifests"], "tables": ["provider_manifests", "model_manifests"], "dependencies": ["audit-service"]},
     "representation-publisher": {"owner": "scene-core", "stores": ["postgresql"], "tables": [], "dependencies": ["identity-policy", "representation-api", "scene-service", "audit-service"]},

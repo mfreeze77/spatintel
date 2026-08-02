@@ -8,18 +8,20 @@ source:
 requirement: A completed schema change shall include compatibility, migration, rollback/recovery, fixtures, and generated
   clients.
 verification_method: Automated test
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
-- docs/developer
-- docs/operator
-- docs/user
-- docs/release
-- src/sip/errors.py
-- src/sip/audit.py
+- src/sip/release_assurance.py
+- schemas/openapi/release-assurance.openapi.json
+- docs/operator/PROGRESS_11_RELEASE_GATES.md
 automated_test_ids:
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit
 - tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/contract.xml
 - build/reports/tests/migration.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
@@ -30,5 +32,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

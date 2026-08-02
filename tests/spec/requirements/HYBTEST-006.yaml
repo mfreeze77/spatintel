@@ -8,11 +8,21 @@ source:
 requirement: Security tests shall prove unapproved external-provider denial before data mount and complete derivative invalidation
   after privacy or consent change.
 verification_method: Security integration test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/representations.py
+- src/sip/scene.py
+- tools/demo_progress11_release.py
 automated_test_ids:
-- REQ-HYBTEST-006
-retained_evidence: []
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +31,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

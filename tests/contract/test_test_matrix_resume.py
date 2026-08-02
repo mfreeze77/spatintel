@@ -597,6 +597,34 @@ def test_missing_junit_is_replaced_with_controller_error_evidence(tmp_path: Path
     assert "pytest shard exceeded 300s" in payload
 
 
+def test_external_staging_publishes_through_destination_local_candidates(tmp_path: Path) -> None:
+    """REQ: TSTSTRAT-002 external resumable state publishes across filesystem boundaries."""
+    module = _module()
+    staged_root = tmp_path / "external" / "contract-shards"
+    staged_root.mkdir(parents=True)
+    (staged_root / "shard.xml").write_text("<testsuite />", encoding="utf-8")
+    destination_root = tmp_path / "repository" / "build" / "reports" / "tests" / "contract-shards"
+    destination_root.mkdir(parents=True)
+    (destination_root / "stale.txt").write_text("stale", encoding="utf-8")
+
+    module._publish_directory(staged_root, destination_root, writer_token="controller")
+
+    assert not staged_root.exists()
+    assert (destination_root / "shard.xml").read_text(encoding="utf-8") == "<testsuite />"
+    assert not (destination_root / "stale.txt").exists()
+
+    staged_file = tmp_path / "external" / "contract.next.xml"
+    staged_file.parent.mkdir(parents=True, exist_ok=True)
+    staged_file.write_text("new evidence", encoding="utf-8")
+    destination_file = destination_root.parent / "contract.xml"
+    destination_file.write_text("old evidence", encoding="utf-8")
+
+    module._publish_file(staged_file, destination_file, writer_token="controller")
+
+    assert not staged_file.exists()
+    assert destination_file.read_text(encoding="utf-8") == "new evidence"
+
+
 def test_default_matrix_target_allows_migration_headroom() -> None:
     """REQ: TSTSTRAT-002 the hermetic matrix retains enough timeout headroom under parallel load."""
     makefile = (ROOT / "Makefile").read_text(encoding="utf-8")

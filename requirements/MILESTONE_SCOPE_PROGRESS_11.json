@@ -463,6 +463,9 @@
           "test_id": "tests/contract/test_test_matrix_resume.py::test_missing_junit_is_replaced_with_controller_error_evidence"
         },
         {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_external_staging_publishes_through_destination_local_candidates"
+        },
+        {
           "test_id": "tests/contract/test_test_matrix_resume.py::test_default_matrix_target_allows_migration_headroom"
         },
         {

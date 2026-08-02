@@ -1,6 +1,6 @@
 # Requirements coverage report
 
-Generated: `2026-08-01T21:36:27.974608+00:00`
+Generated: `2026-08-02T22:25:31.719290+00:00`
 
 Total normative requirements: **1,028**
 
@@ -19,8 +19,6 @@ Blocked: **0**
 
 - Progress 08: **accepted and closed** at commit `cc3c24ca3acff704144ed7d112566a2acaa88d79`.
 - Progress 09: **accepted and closed** at commit `f293d6425182ef04f5893275724e2a4bd28cf00e`.
-- Progress 10: **accepted and closed** at commit `ab409f6ac7ca583535f69e5806b7a3bdbfe08214`.
-- Progress 11: **authorized only for bounded `QA-002` implementation and independent milestone review**.
-- Progress 12: **unauthorized**.
-- Production promotion: **NO-GO**.
-- Production authorized: **false**.
+- Progress 10: **authorized only for the bounded OPS-004 recovery, retention, deletion, preservation, and migration milestone**.
+- Progress 11: **unauthorized**.
+- Production promotion: **NO-GO**. Production authorization remains fail-closed.

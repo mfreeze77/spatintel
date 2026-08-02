@@ -10,15 +10,20 @@ requirement: Mesh-to-splat and splat-to-surface round trips shall report informa
 verification_method: Interoperability test
 implementation_status: VERIFIED
 implementation_files:
-- src/sip/geometry.py
+- src/sip/hybrid.py
 - src/sip/representations.py
-- src/sip/worker_sandbox.py
-- tools/run_demo.py
+- src/sip/scene.py
+- tools/demo_progress11_release.py
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative
 - tests/e2e/test_platform_demonstrations.py::test_mesh_splat_surface_roundtrip_reports_irreversible_loss
 retained_evidence:
 - build/evidence/demos/hybrid.json
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/e2e.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.

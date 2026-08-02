@@ -2032,6 +2032,132 @@
       }
     },
     {
+      "blast_radius": "tenant/project scoped requests handled by release-assurance; no cross-tenant fail-open behavior",
+      "data_stores": [
+        "postgresql",
+        "source-control-manifests",
+        "immutable-audit-export"
+      ],
+      "degraded_behavior": "fail closed for authorization/publication; expose bounded read-only metadata where explicitly safe",
+      "dependency_controls": {
+        "circuit_breaker": "open after bounded consecutive failures; half-open probe",
+        "connect_timeout_seconds": 3,
+        "cross_region_failover": "deny unless pre-approved",
+        "request_timeout_seconds": 15
+      },
+      "events_consumed": [],
+      "events_produced": [
+        "qa.campaign.created",
+        "qa.candidate.signed",
+        "qa.gate.recorded",
+        "qa.production_admission.denied",
+        "qa.rollback.recorded",
+        "qa.scenario.recorded",
+        "qa.waiver.approved"
+      ],
+      "inbound_apis": [
+        {
+          "method": "GET",
+          "operation_id": "health_live",
+          "path": "/health/live"
+        },
+        {
+          "method": "GET",
+          "operation_id": "health_ready",
+          "path": "/health/ready"
+        },
+        {
+          "method": "POST",
+          "operation_id": "create_qa_campaign",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_qa_campaign",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "sign_qa_release_candidate",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/candidates"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_qa_gate",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/gates"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_qa_rollback",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/rollback"
+        },
+        {
+          "method": "POST",
+          "operation_id": "record_qa_scenario",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/scenarios"
+        },
+        {
+          "method": "POST",
+          "operation_id": "approve_qa_waiver",
+          "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/waivers"
+        },
+        {
+          "method": "GET",
+          "operation_id": "get_qa_release_candidate",
+          "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}"
+        },
+        {
+          "method": "POST",
+          "operation_id": "evaluate_qa_production_admission",
+          "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/production-admission"
+        },
+        {
+          "method": "POST",
+          "operation_id": "verify_qa_release_candidate",
+          "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/verify"
+        }
+      ],
+      "kind": "service",
+      "name": "release-assurance",
+      "outbound_dependencies": [
+        "audit-service",
+        "construction",
+        "deployment-control",
+        "identity-policy",
+        "liveforever",
+        "operations-intelligence",
+        "recovery-control"
+      ],
+      "owned_tables": [
+        "qa_acceptance_campaigns",
+        "qa_gate_results",
+        "qa_release_candidates",
+        "qa_release_waivers",
+        "qa_rollback_rehearsals",
+        "qa_scenario_results"
+      ],
+      "owner": "release-assurance",
+      "recovery_strategy": "restart from durable database/outbox state; verify audit and object hashes before readiness",
+      "repository_path": "services/release-assurance",
+      "retry_safety": "idempotency key or immutable command identifier required for mutations",
+      "rpo": "0 for committed transactional state; object writes verified before publication",
+      "rto": "15 minutes local/hybrid target; profile-specific production objective requires deployment validation",
+      "secret_references": [
+        "sip-runtime-secrets/SIP_DATABASE_URL",
+        "sip-runtime-secrets/SIP_WORKLOAD_IDENTITY"
+      ],
+      "shared_kernel_exceptions": [],
+      "shutdown": {
+        "drain_seconds": 30,
+        "in_flight_behavior": "finish committed transaction; return or requeue uncommitted work"
+      },
+      "slo": {
+        "availability_target": "99.9%",
+        "error_budget_window_days": 30,
+        "latency_budget": "p95 <= 1000ms for bounded control operations"
+      }
+    },
+    {
       "blast_radius": "tenant/project scoped requests handled by representation-api; no cross-tenant fail-open behavior",
       "data_stores": [
         "postgresql",

@@ -55,6 +55,54 @@ def test_progress11_scope_traceability_and_posture_are_exact() -> None:
     assert len(audit["requirements_audited"]) == EXPECTED_SCOPE_TOTAL
 
 
+def test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound() -> None:
+    """REQ: DELROAD-001, DELROAD-002, DELROAD-003, DELROAD-004, DELROAD-005, DELROAD-006 the Progress 11 roadmap is dependency-ordered, evidence-driven, reversible, local-first, and non-authorizing."""
+    roadmap = _json("requirements/PROGRESS_11_ROADMAP.json")
+    assert roadmap["schema"] == "sip.progress11-roadmap/v1"
+    assert roadmap["checkpoint_id"] == CHECKPOINT_ID
+    assert roadmap["sequencing_basis"] == "dependency_graph_not_calendar_quarters"
+    assert roadmap["local_only_commitment"] is True
+    assert roadmap["open_export_commitment"] is True
+    assert roadmap["production_authorized"] is False
+    assert roadmap["progress_12_authorized"] is False
+    assert {
+        "benchmark results",
+        "cost and capacity evidence",
+        "support burden",
+        "consent incidents",
+        "security and privacy incidents",
+    } <= set(roadmap["review_inputs"])
+
+    stages = roadmap["stages"]
+    assert [stage["order"] for stage in stages] == [1, 2, 3]
+    assert len({stage["stage_id"] for stage in stages}) == len(stages)
+    for stage in stages:
+        assert stage["reversible"] is True
+        assert stage["open_local_path"] is True
+        assert stage["owner"]
+        assert stage["prerequisites"]
+        assert stage["exit_criteria"]
+        assert stage["fallback_exit"]
+        assert stage["risks"]
+        assert stage["architecture_impact"]
+        assert stage["customer_outcome"]
+        assert stage["deprecation_migration"]
+
+    qualification, external, future = stages
+    assert qualification["stage_id"] == "qa002-local-release-qualification"
+    assert {"benchmarks", "cost reports", "support burden", "security incidents", "privacy incidents"} <= set(
+        qualification["evidence_inputs"]
+    )
+    assert external["stage_id"] == "external-evidence-closure"
+    assert external["research_spike"] == {
+        "decision_required": True,
+        "permanent_fork_allowed": False,
+        "time_bounded": True,
+    }
+    assert future["stage_id"] == "future-pilot-readiness"
+    assert future["architecture_impact"] == "No implementation authorized by Progress 11."
+
+
 def test_progress11_append_only_migration_is_byte_locked() -> None:
     """REQ: SIPMIG-003 Progress 11 release-assurance schema is append-only and byte-locked at revision 0021."""
     import hashlib
@@ -108,7 +156,7 @@ def test_progress11_acceptance_lock_is_outside_generated_repository_paths(tmp_pa
 
 def test_progress11_make_and_acceptance_order_include_all_release_dependencies() -> None:
     """REQ: TSTSTRAT-001, TSTGATE-003 exact-commit acceptance includes dual vertical, recovery, release, and evidence-bound traceability gates."""
-    from tools.run_progress11_checkpoint_acceptance import REQUIRED_TARGETS, POST_EVIDENCE_TARGETS, TARGET_REPORT_PATHS
+    from tools.run_progress11_checkpoint_acceptance import POST_EVIDENCE_TARGETS, REQUIRED_TARGETS, TARGET_REPORT_PATHS
     makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
     assert "demo-release:" in makefile
     assert "build_progress11_scope.py --check" in makefile
@@ -157,6 +205,7 @@ def test_progress11_builder_and_verifiers_are_milestone_specific_and_fail_closed
 def test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record(tmp_path, monkeypatch):
     """REQ: TSTGATE-003, TSTGATE-007, TSTGATE-009 The post-evidence gate sees a fail-closed provisional record, never a fabricated final acceptance."""
     import json
+
     import tools.run_progress11_checkpoint_acceptance as acceptance
 
     source = {

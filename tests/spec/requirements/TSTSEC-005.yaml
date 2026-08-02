@@ -7,15 +7,17 @@ source:
   section: 4. Normative requirements
 requirement: Deletion tests shall verify canonical, derivatives, indexes, caches, links, and backup expiry behavior.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
-- src/sip/capture.py
-- src/sip/security.py
-- src/sip/worker_sandbox.py
-- tests/fixtures
+- src/sip/release_assurance.py
+- src/sip/policy.py
+- tests/security/test_progress11_release_adversarial.py
 automated_test_ids:
 - tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 controlled_procedure:
@@ -27,5 +29,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

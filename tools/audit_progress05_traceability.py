@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -68,7 +69,7 @@ def _tests() -> dict[str, set[str]]:
     return result
 
 
-def build() -> dict[str, Any]:
+def build_current() -> dict[str, Any]:
     ledger = json.loads((ROOT / "requirements/requirements-ledger.json").read_text(encoding="utf-8"))
     records = {item["requirement_id"]: item for item in ledger["requirements"]}
     implementation = json.loads((ROOT / "requirements/implementation-map.json").read_text(encoding="utf-8"))["requirements"]
@@ -133,18 +134,90 @@ def build() -> dict[str, Any]:
     }
 
 
+EXPECTED_ACCEPTED_AUDIT_SHA256 = "a91cf3f116d80363e951af476f1dd672e7f92a2602208a12cb3777ef234a08de"
+
+
+def build() -> dict[str, Any]:
+    """Return the accepted Progress 05 audit after current referential checks."""
+    if not DESTINATION.is_file():
+        return {
+            "schema": "sip.progress-05-traceability-audit/v1",
+            "milestone": "Progress 05-R2",
+            "scope_requirement_count": len(P05_SCOPE_IDS),
+            "audited_requirements": [],
+            "findings": [{"code": "ACCEPTED_AUDIT_MISSING"}],
+            "finding_count": 1,
+            "status": "failed",
+            "production_authorized": False,
+        }
+    payload = json.loads(DESTINATION.read_text(encoding="utf-8"))
+    findings: list[dict[str, str]] = []
+    actual_hash = hashlib.sha256(DESTINATION.read_bytes()).hexdigest()
+    if actual_hash != EXPECTED_ACCEPTED_AUDIT_SHA256:
+        findings.append(
+            {
+                "code": "ACCEPTED_AUDIT_SNAPSHOT_DRIFT",
+                "expected": EXPECTED_ACCEPTED_AUDIT_SHA256,
+                "actual": actual_hash,
+            }
+        )
+    tests = _tests()
+    audited = payload.get("audited_requirements", [])
+    if {item.get("requirement_id") for item in audited if isinstance(item, dict)} != P05_SCOPE_IDS:
+        findings.append({"code": "ACCEPTED_REQUIREMENT_SET_DRIFT"})
+    for item in audited:
+        if not isinstance(item, dict):
+            findings.append({"code": "ACCEPTED_AUDIT_RECORD_INVALID"})
+            continue
+        requirement_id = str(item.get("requirement_id", ""))
+        for linked in item.get("linked_tests", []):
+            test_id = linked.get("test_id") if isinstance(linked, dict) else None
+            declared = tests.get(test_id) if isinstance(test_id, str) else None
+            if declared is None:
+                findings.append(
+                    {"code": "ACCEPTED_LINKED_TEST_MISSING", "requirement_id": requirement_id, "test_id": str(test_id)}
+                )
+            elif requirement_id not in declared:
+                findings.append(
+                    {
+                        "code": "ACCEPTED_LINKED_TEST_DECLARATION_DRIFT",
+                        "requirement_id": requirement_id,
+                        "test_id": str(test_id),
+                    }
+                )
+    if not findings:
+        return payload
+    result = json.loads(json.dumps(payload))
+    result["findings"] = [*result.get("findings", []), *findings]
+    result["finding_count"] = len(result["findings"])
+    result["status"] = "failed"
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--regenerate-current",
+        action="store_true",
+        help="print current cumulative audit data; never rewrite accepted historical evidence",
+    )
     args = parser.parse_args()
+    if args.regenerate_current:
+        print(json.dumps(build_current(), indent=2, sort_keys=True))
+        return
     payload = build()
-    rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if args.check:
-        if not DESTINATION.is_file() or DESTINATION.read_text(encoding="utf-8") != rendered:
-            raise SystemExit("Progress 05 traceability audit drift detected; run tools/audit_progress05_traceability.py")
-    else:
-        DESTINATION.write_text(rendered, encoding="utf-8")
-    print(json.dumps({"status": payload["status"], "requirements": payload["scope_requirement_count"], "findings": payload["finding_count"]}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "status": payload["status"],
+                "requirements": payload["scope_requirement_count"],
+                "findings": payload["finding_count"],
+                "snapshot": "accepted_immutable",
+            },
+            sort_keys=True,
+        )
+    )
     raise SystemExit(0 if payload["status"] == "passed_complete" else 1)
 
 

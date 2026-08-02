@@ -8,12 +8,13 @@ source:
 requirement: Production release shall pass all P0 requirements, vulnerability/SBOM/license review, benchmark thresholds, consent/truth-label
   tests, backup restore, migration, load, and acceptance scenarios.
 verification_method: Controlled verification
-implementation_status: IN_PROGRESS
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
 implementation_files:
-- src/sip/spec_lint.py
-- tools/release.py
-- .github/workflows/release.yml
+- src/sip/release_assurance.py
+- tools/demo_progress11_release.py
+- docs/operator/PROGRESS_11_RELEASE_GATES.md
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
 - tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot
 - tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error
 - tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository
@@ -24,12 +25,37 @@ automated_test_ids:
 - tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids
 - tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth
 - tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot
+- tests/contract/test_progress10_historical_snapshot.py::test_current_global_implementation_map_is_not_a_historical_equality_input
+- tests/contract/test_progress10_historical_snapshot.py::test_later_status_improvement_does_not_rewrite_accepted_progress10_status
+- tests/contract/test_progress10_historical_snapshot.py::test_missing_accepted_test_or_requirement_fails_referential_integrity
+- tests/contract/test_progress10_historical_snapshot.py::test_missing_historical_snapshot_field_fails_closed
+- tests/contract/test_progress10_historical_snapshot.py::test_progress10_accepted_snapshot_is_immutable_and_valid
+- tests/contract/test_progress10_historical_snapshot.py::test_progress11_and_all_closed_milestone_audits_remain_complete
+- tests/contract/test_progress10_historical_snapshot.py::test_snapshot_scope_and_audit_byte_mutation_are_detected
+- tests/contract/test_progress10_historical_snapshot.py::test_ungoverned_historical_linked_test_change_is_rejected
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_implementation_map_changes_do_not_create_historical_drift
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_status_can_improve_without_historical_status_rewrite
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_historical_scope_and_snapshot_mutation_are_detected
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_later_test_addition_does_not_rewrite_closed_snapshot
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_linked_test_change_requires_governed_amendment
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_required_snapshot_field_deletion_fails_closed
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress10_scope_tool_refuses_historical_regeneration
+- tests/contract/test_progress10_immutable_snapshot.py::test_progress11_traceability_remains_complete_after_progress10_snapshot_repair
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record
 - tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements
+- tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence
+- tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
 - build/reports/release-report.json
 - build/reports/spec-lint.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
+- build/reports/tests/security.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -37,7 +63,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  status: REQUIRED
+  owner: True North / External Validation Owner
+  gap: The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device,
+    GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.

@@ -8,11 +8,21 @@ source:
 requirement: Human evaluation shall be task-based and shall test recognition of authority/truth labels, evidence access, comfort,
   accessibility, and failure communication.
 verification_method: Controlled user study
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: EXTERNAL_VALIDATION_REQUIRED
+implementation_files:
+- src/sip/hybrid.py
+- src/sip/representations.py
+- src/sip/scene.py
+- tools/demo_progress11_release.py
 automated_test_ids:
-- REQ-HYBTEST-013
-retained_evidence: []
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative
+retained_evidence:
+- build/evidence/demos/hybrid.json
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,6 +30,7 @@ controlled_procedure:
 - Confirm negative/failure behavior and authority, consent, security, recovery, or licensing controls applicable to the requirement.
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
-  status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  status: REQUIRED
+  owner: True North / External Validation Owner
+  gap: The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device,
+    GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.

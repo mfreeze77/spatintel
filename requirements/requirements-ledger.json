@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-08-01T21:36:27.974608+00:00",
+  "generated_at": "2026-08-02T22:25:31.719290+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -56552,6 +56552,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -56609,6 +56610,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -56666,6 +56668,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -56723,6 +56726,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -56780,6 +56784,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -56837,6 +56842,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -62148,10 +62154,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62173,6 +62179,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-001.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -62204,10 +62213,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62229,6 +62238,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-002.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -62260,10 +62272,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62285,6 +62297,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-003.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -62316,10 +62331,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62342,6 +62357,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-004.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
@@ -62374,10 +62392,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62399,6 +62417,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-005.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -62430,10 +62451,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/liveforever.py",
-        "src/sip/exporting.py",
         "tools/run_demo.py",
-        "verticals/liveforever"
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -62456,6 +62477,9 @@
       "test_plan_path": "tests/spec/requirements/LIFTEST-006.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/security.xml"
@@ -69935,11 +69959,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -69962,6 +69984,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
@@ -69999,11 +70024,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70027,6 +70050,7 @@
         "tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup",
         "tests/contract/test_test_matrix_resume.py::test_default_matrix_control_root_is_outside_generated_repository_state",
         "tests/contract/test_test_matrix_resume.py::test_default_matrix_target_allows_migration_headroom",
+        "tests/contract/test_test_matrix_resume.py::test_external_staging_publishes_through_destination_local_candidates",
         "tests/contract/test_test_matrix_resume.py::test_finalized_shard_records_use_repository_relative_live_paths",
         "tests/contract/test_test_matrix_resume.py::test_generated_traceability_outputs_do_not_create_a_test_evidence_bootstrap_loop",
         "tests/contract/test_test_matrix_resume.py::test_isolated_pytest_runner_terminates_when_controller_disappears",
@@ -70048,6 +70072,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
@@ -70086,11 +70113,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70113,6 +70138,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
@@ -70150,11 +70178,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70175,6 +70201,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -70211,11 +70240,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70236,6 +70263,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -70272,11 +70302,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "tools/run_test_matrix.py",
-        "tools/update_requirements.py",
-        "src/sip/spec_lint.py",
-        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
-        "requirements/requirements-ledger.json"
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70297,6 +70325,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSTRAT-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -70944,10 +70975,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -70974,8 +71004,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
@@ -71013,10 +71044,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71038,8 +71068,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/privacy.xml"
@@ -71077,10 +71108,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71102,8 +71132,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/e2e.xml"
@@ -71141,10 +71172,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71167,8 +71197,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
@@ -71207,10 +71238,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71231,8 +71261,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
       ],
@@ -71269,10 +71300,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/capture.py",
-        "src/sip/security.py",
-        "src/sip/worker_sandbox.py",
-        "tests/fixtures"
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71296,8 +71326,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTSEC-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
-        "build/reports/security-report.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
@@ -71636,9 +71667,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71660,6 +71691,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -71694,9 +71727,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71718,6 +71751,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -71752,9 +71787,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71807,6 +71842,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -71842,9 +71879,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71866,6 +71903,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -71900,9 +71939,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71923,6 +71962,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -71956,9 +71997,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -71980,6 +72021,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72013,9 +72056,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72039,6 +72082,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-007.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72074,9 +72119,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72098,6 +72143,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-008.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72132,9 +72179,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72158,6 +72205,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-009.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72193,9 +72242,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72217,6 +72266,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-010.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72251,9 +72302,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72277,6 +72328,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-011.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72311,9 +72364,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/spec_lint.py",
-        "tools/release.py",
-        ".github/workflows/release.yml"
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -72336,6 +72389,8 @@
       ],
       "test_plan_path": "tests/spec/requirements/TSTGATE-012.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
@@ -72397,6 +72452,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72455,6 +72511,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72513,6 +72570,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72571,6 +72629,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72629,6 +72688,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72687,6 +72747,7 @@
       "test_result_evidence_paths": [
         "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -72740,10 +72801,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "Every roadmap item shall name prerequisites, customer outcome, architecture impact, risk, acceptance, and deprecation/migration implications.",
       "verification_method": "Controlled verification",
@@ -72795,10 +72857,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "Quarter labels shall not substitute for dependency-based sequencing.",
       "verification_method": "Controlled verification",
@@ -72850,10 +72913,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "Research spikes shall have time bounds and decisions, not become unowned permanent forks.",
       "verification_method": "Controlled verification",
@@ -72905,10 +72969,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "Commercial dependencies shall have fallback/exit paths.",
       "verification_method": "Controlled verification",
@@ -72960,10 +73025,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "Roadmap review shall use pilot evidence, benchmark results, cost, support burden, and consent/security incidents.",
       "verification_method": "Controlled verification",
@@ -73015,10 +73081,11 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELROAD-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml",
-        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
-        "requirements/PROGRESS_11_ROADMAP.json"
+        "build/reports/tests/contract.xml"
       ],
       "text": "The roadmap shall preserve local-only and open-export commitments as capabilities expand.",
       "verification_method": "Controlled verification",
@@ -73339,12 +73406,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73367,6 +73431,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73401,12 +73466,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73428,6 +73490,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73462,12 +73525,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73488,6 +73548,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73521,12 +73582,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73547,6 +73605,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73580,12 +73639,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73607,6 +73663,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73641,12 +73698,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73668,6 +73722,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73702,12 +73757,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73728,6 +73780,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-007.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73761,12 +73814,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73787,6 +73837,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-008.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73820,12 +73871,9 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73846,6 +73894,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-009.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73879,12 +73928,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73905,6 +73951,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-010.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73938,12 +73985,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -73964,6 +74008,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-011.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -73997,12 +74042,9 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "docs/developer",
-        "docs/operator",
-        "docs/user",
-        "docs/release",
-        "src/sip/errors.py",
-        "src/sip/audit.py"
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74024,6 +74066,7 @@
       ],
       "test_plan_path": "tests/spec/requirements/DELDOD-012.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
         "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/release-report.json",
         "build/reports/test-matrix.json",
@@ -74058,10 +74101,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74083,6 +74126,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-001.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74114,10 +74160,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74139,6 +74185,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-002.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74170,10 +74219,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74195,6 +74244,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-003.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74226,10 +74278,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74251,6 +74303,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-004.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74282,10 +74337,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74307,6 +74362,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-005.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74338,10 +74396,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74363,6 +74421,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-006.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74394,10 +74455,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74419,6 +74480,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-007.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74450,10 +74514,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74475,6 +74539,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-008.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74506,10 +74573,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74531,6 +74598,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-009.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74562,10 +74632,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74587,6 +74657,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-010.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74618,10 +74691,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74643,6 +74716,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-011.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74674,10 +74750,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74699,6 +74775,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-012.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74730,10 +74809,10 @@
       "external_validation_status": "REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74755,6 +74834,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-013.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74786,10 +74868,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74811,6 +74893,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-014.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml"
       ],
@@ -74842,10 +74927,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74868,6 +74953,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-015.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml"
@@ -74900,10 +74988,10 @@
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
       "implementation_files": [
-        "src/sip/geometry.py",
+        "src/sip/hybrid.py",
         "src/sip/representations.py",
-        "src/sip/worker_sandbox.py",
-        "tools/run_demo.py"
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74926,6 +75014,9 @@
       "test_plan_path": "tests/spec/requirements/HYBTEST-016.yaml",
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml"
@@ -74965,7 +75056,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -74986,7 +75077,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75026,7 +75120,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75047,7 +75141,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75087,7 +75184,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75108,7 +75205,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75148,7 +75248,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75169,7 +75269,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75209,7 +75312,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75230,7 +75333,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75270,7 +75376,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75291,7 +75397,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75331,7 +75440,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75352,7 +75461,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-007.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75392,7 +75504,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75413,7 +75525,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-008.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75453,7 +75568,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75474,7 +75589,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-009.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75514,7 +75632,7 @@
       "implementation_files": [
         "src/sip/failures.py",
         "governance/failure-catalog.json",
-        "docs/adr/ADR-0007-versioned-failure-catalog-and-new-lineage-recovery.md"
+        "tests/unit/test_failure_catalog.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75536,7 +75654,10 @@
       ],
       "test_plan_path": "tests/spec/requirements/APPFAIL-010.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
         "build/reports/governance-check.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/unit.xml",
         "governance/failure-catalog.json"
@@ -75577,11 +75698,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75604,6 +75723,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-001.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/migration.xml",
@@ -75650,11 +75772,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75675,6 +75795,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-002.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -75720,11 +75843,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75746,6 +75867,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-003.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
@@ -75792,11 +75916,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75817,6 +75939,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-004.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -75862,11 +75987,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75887,6 +76010,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-005.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -75932,11 +76058,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -75958,6 +76082,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-006.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/migration.xml",
@@ -76004,11 +76131,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -76029,6 +76154,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-007.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -76074,11 +76202,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -76099,6 +76225,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-008.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -76144,11 +76273,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -76169,6 +76296,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-009.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
@@ -76214,11 +76344,9 @@
       "first_passing_release": null,
       "implementation_files": [
         "src/sip/recovery.py",
-        "migrations",
-        "src/sip/database.py",
-        "src/sip/scene.py",
-        "src/sip/assets.py",
-        "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
       ],
       "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
@@ -76239,6 +76367,9 @@
       ],
       "test_plan_path": "tests/spec/requirements/SIPMIG-010.yaml",
       "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",

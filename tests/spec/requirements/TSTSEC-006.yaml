@@ -7,18 +7,20 @@ source:
   section: 4. Normative requirements
 requirement: Incident and support access controls shall be exercised through realistic scenarios.
 verification_method: Controlled verification
-implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_status: VERIFIED
 implementation_files:
-- src/sip/capture.py
-- src/sip/security.py
-- src/sip/worker_sandbox.py
-- tests/fixtures
+- src/sip/release_assurance.py
+- src/sip/policy.py
+- tests/security/test_progress11_release_adversarial.py
 automated_test_ids:
 - tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity
 - tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_workload_and_key_directive_boundaries
 - tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries
 - tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
 - build/reports/test-matrix.json
 - build/reports/tests/integration.xml
 - build/reports/tests/security.xml
@@ -31,5 +33,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
-    is intentionally not marked verified.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

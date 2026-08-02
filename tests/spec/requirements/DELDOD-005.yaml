@@ -7,11 +7,21 @@ source:
   section: 4. Normative requirements
 requirement: A completed operational service shall include SLO, alerts, runbooks, backup/recovery, capacity, and ownership.
 verification_method: Controlled verification
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: VERIFIED
+implementation_files:
+- src/sip/release_assurance.py
+- schemas/openapi/release-assurance.openapi.json
+- docs/operator/PROGRESS_11_RELEASE_GATES.md
 automated_test_ids:
-- REQ-DELDOD-005
-retained_evidence: []
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
+- tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit
+retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
+- build/reports/release-report.json
+- build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
+- build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -20,5 +30,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

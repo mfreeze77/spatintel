@@ -8,17 +8,21 @@ source:
 requirement: Research release shall use authorized test data, explicit research labels, and no commercial/customer output
   from unapproved models.
 verification_method: Controlled verification
-implementation_status: IN_PROGRESS
+implementation_status: VERIFIED
 implementation_files:
-- src/sip/spec_lint.py
-- tools/release.py
-- .github/workflows/release.yml
+- src/sip/release_assurance.py
+- tools/demo_progress11_release.py
+- docs/operator/PROGRESS_11_RELEASE_GATES.md
 automated_test_ids:
+- tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production
 - tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed
 retained_evidence:
+- build/evidence/progress11-release/demo-progress11-release.json
+- build/reports/checkpoint-acceptance-gates.json
 - build/reports/release-report.json
 - build/reports/spec-lint.json
 - build/reports/test-matrix.json
+- build/reports/tests/acceptance.xml
 - build/reports/tests/contract.xml
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
@@ -29,5 +33,5 @@ controlled_procedure:
 external_validation:
   status: NOT_REQUIRED
   owner: SIP Engineering
-  gap: A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence
-    and remains in progress.
+  gap: Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence;
+    no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.

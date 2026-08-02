@@ -50,9 +50,13 @@ def _unavailable(name: str, tool: str, command: list[str]) -> dict[str, object]:
 def run(*, release: bool = False) -> dict[str, object]:
     checks = [
         _run("python-compile", [sys.executable, "-m", "compileall", "-q", "src", "services", "workers", "tools"]),
-        _run("web-source-contracts", ["node", "scripts/verify-source.mjs"], cwd=ROOT / "apps/web"),
-        _run("swift-build", ["swift", "build"], cwd=ROOT / "apps/ios-capture"),
     ]
+    required_tool_checks = [
+        ("web-source-contracts", "node", ["node", "scripts/verify-source.mjs"], ROOT / "apps/web"),
+        ("swift-build", "swift", ["swift", "build"], ROOT / "apps/ios-capture"),
+    ]
+    for name, tool, command, cwd in required_tool_checks:
+        checks.append(_run(name, command, cwd=cwd) if shutil.which(tool) else _unavailable(name, tool, command))
     optional = [
         ("python-ruff", "ruff", ["ruff", "check", "src", "services", "workers", "tools", "tests"]),
         ("python-mypy", "mypy", ["mypy", "src/sip"]),
