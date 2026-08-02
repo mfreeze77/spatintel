@@ -23,6 +23,22 @@ make test
 
 `make bootstrap` regenerates worker manifests, generated contracts, Kubernetes manifests, and local development secret files. It does not download model weights or grant provider approval.
 
+## Reproducible acceptance toolchain
+
+The acceptance image combines the digest-pinned Python 3.13.14, Swift 6.2.4,
+and Node 24.18.0 official images used by the local checkpoint gates:
+
+```bash
+docker build -f infrastructure/containers/Dockerfile.acceptance \
+  -t sip-progress11-acceptance:local .
+docker run --rm -v "$PWD:/workspace" -w /workspace \
+  sip-progress11-acceptance:local make test-all
+```
+
+This image proves the Linux Swift fixture and dependency-free web profiles. It
+does not substitute for Xcode/physical-device, mounted-browser, GPU/model,
+credentialed-cloud, independent-review, pilot, or production evidence.
+
 ## Run the API
 
 ```bash
@@ -46,7 +62,7 @@ Linux/macOS package tests exercise the journal, state machine, package writer, s
 The renderer-independent runtime checks need no dependency install:
 
 ```bash
-npm --workspace apps/web run verify-runtime
+make web-test
 ```
 
 The complete profile is release-gated:

@@ -420,8 +420,14 @@ def main() -> None:
             "progress_12_authorized": False,
             "production_authorized": False,
             "external_validation_gaps": [
-                "Ruff and mypy were unavailable; deterministic source policy and Python compilation ran instead.",
-                "Node 24.18.0, pnpm 10.28.2, a frozen pnpm lockfile, installed dependencies, TypeScript typecheck, ESLint, and the Next production build were unavailable.",
+                (
+                    "Ruff and mypy retain repository-wide findings; deterministic source policy and Python "
+                    "compilation also ran."
+                ),
+                (
+                    "The frozen pnpm dependency profile, installed web dependency tree, TypeScript typecheck, "
+                    "ESLint, and Next production build remain unavailable unless separately proven by web acceptance."
+                ),
                 "pip-audit, Gitleaks, and Trivy were unavailable.",
                 "Mounted browser/runtime, physical iOS/LiDAR, approved model/GPU, credentialed cloud, externally witnessed review, customer, family, legal, privacy, accessibility, and penetration evidence were unavailable.",
                 "Progress 11 dual-vertical and release-gate evidence is local or synthetic; no production, customer-data, multi-region, cloud, or physical-edge recovery certification is claimed.",

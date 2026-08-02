@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1.7
+ARG PYTHON_IMAGE=python:3.13.14-slim-bookworm@sha256:9d7f287598e1a5a978c015ee176d8216435aaf335ed69ac3c38dd1bbb10e8d64
+ARG SWIFT_IMAGE=swift:6.2.4-bookworm@sha256:065ccfb40b3f99a13e9bb9803c306e7c9bb769bd8361ef8451b1c6b705b07279
+ARG NODE_IMAGE=node:24.18.0-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d
+
+FROM ${PYTHON_IMAGE} AS python-toolchain
+FROM ${NODE_IMAGE} AS node-toolchain
+FROM ${SWIFT_IMAGE} AS acceptance
+
+# The three official, digest-pinned toolchains share Debian 12 as their base.
+# Merge their disjoint /usr/local payloads, then add only the small orchestration
+# tools required by the repository-owned acceptance controller.
+COPY --from=python-toolchain /usr/local/ /usr/local/
+COPY --from=node-toolchain /usr/local/bin/node /usr/local/bin/node
+COPY --from=node-toolchain /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+
+RUN apt-get update \
+ && apt-get install --yes --no-install-recommends make \
+ && rm -rf /var/lib/apt/lists/* \
+ && ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+ && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
+ && ln -s ../lib/node_modules/corepack/dist/corepack.js /usr/local/bin/corepack
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_ROOT_USER_ACTION=ignore \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /opt/sip-dependencies
+COPY pyproject.toml README.md LICENSE NOTICE.md ./
+COPY src ./src
+RUN python -m pip install --upgrade 'pip==25.1.1' \
+ && python -m pip install '.[dev,postgres,redis,telemetry]'
+
+WORKDIR /workspace
+CMD ["bash"]

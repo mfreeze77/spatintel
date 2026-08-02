@@ -67,11 +67,11 @@ dev:
 	SIP_ENV=development SIP_ALLOW_DEVELOPMENT_AUTH=true PYTHONPATH=$(PYTHONPATH) $(PYTHON) services/control-api/main.py
 
 test:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 600
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 900
 
 web-test:
 	@mkdir -p build/evidence build/reports
-	npm --workspace apps/web run verify-runtime 2>&1 | tee build/evidence/web-runtime-test.log
+	(cd apps/web && node --test test/*.test.mjs && node scripts/verify-source.mjs) 2>&1 | tee build/evidence/web-runtime-test.log
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) tools/record_test_evidence.py
 
 desktop-test:

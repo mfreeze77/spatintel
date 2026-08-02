@@ -628,7 +628,7 @@ def test_external_staging_publishes_through_destination_local_candidates(tmp_pat
 def test_default_matrix_target_allows_migration_headroom() -> None:
     """REQ: TSTSTRAT-002 the hermetic matrix retains enough timeout headroom under parallel load."""
     makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
-    assert "tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 600" in makefile
+    assert "tools/run_test_matrix.py --jobs 4 --shard-jobs 4 --timeout 900" in makefile
 
 
 def test_default_matrix_control_root_is_outside_generated_repository_state() -> None:

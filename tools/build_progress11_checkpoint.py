@@ -240,6 +240,10 @@ def build(*, output: Path, attestation_path: Path, branch: str = BRANCH) -> dict
         raise RuntimeError("acceptance report is not bound to Progress 11 source")
     if acceptance.get("source", {}).get("source_tree_root_sha256") != source_root:
         raise RuntimeError("acceptance source root differs")
+    if acceptance.get("status") not in {"passed_complete", "passed_with_external_gaps"}:
+        raise RuntimeError("Progress 11 checkpoint acceptance did not pass")
+    if int(acceptance.get("required_failure_count", -1)) != 0:
+        raise RuntimeError("Progress 11 checkpoint acceptance reports required failures")
     totals = matrix.get("totals", {})
     passed, failed, errors, skipped = _matrix_counts(totals)
     if passed < MIN_PYTHON_TESTS or any((failed, errors, skipped)):
@@ -261,11 +265,14 @@ def build(*, output: Path, attestation_path: Path, branch: str = BRANCH) -> dict
     if pview.get("implementation_status") != "IMPLEMENTED_UNVERIFIED":
         raise RuntimeError("PLTVIEW-007 status drifted")
 
+    swift_report = _load(ROOT / "build/reports/swift-test-report.json")
+    web_report = _load(ROOT / "build/reports/web-runtime-test-report.json")
+    desktop_report = _load(ROOT / "build/reports/desktop-review-test-report.json")
     additional = {
-        "swift_passed": int(_load(ROOT / "build/reports/swift-test-report.json").get("passed", 0)),
-        "web_runtime_passed": int(_load(ROOT / "build/reports/web-runtime-test-report.json").get("runtime_tests_passed", _load(ROOT / "build/reports/web-runtime-test-report.json").get("passed", 0))),
-        "web_source_passed": int(_load(ROOT / "build/reports/web-runtime-test-report.json").get("source_checks_passed", 0)),
-        "desktop_passed": int(_load(ROOT / "build/reports/desktop-review-test-report.json").get("passed", 0)),
+        "swift_passed": int(swift_report.get("tests_passed", 0)),
+        "web_runtime_passed": int(web_report.get("tests_passed", 0)),
+        "web_source_passed": int(web_report.get("source_invariant_checks", 0)),
+        "desktop_passed": int(desktop_report.get("tests_passed", 0)),
     }
 
     migration = ROOT / MIGRATION_PATH
