@@ -1,0 +1,34 @@
+{
+  "accepted_base": {
+    "checkpoint": "sip-v1.1.0-progress-10",
+    "commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+    "inner_zip_sha256": "46d850b6035d0ee86386ff256aabdc65751d49398f6ea4e4084eb4d50d6c669c",
+    "outer_zip_sha256": "1e0c962a59a55a2a6395179c98467778ff56e2e394319b0ca46367551b5027dc"
+  },
+  "authorized_scope": "QA-002 \u2014 Dual vertical acceptance and release gates",
+  "classification": "interim_reconstruction_not_true_north_checkpoint",
+  "generated_at": "2026-08-02T19:42:00.531333+00:00",
+  "limitations": [
+    "The exact historical Progress 11 Git objects are not present in the active runtime.",
+    "The reconstructed project combines the accepted Progress 10 source with the latest surviving Progress 11 file variants.",
+    "The reconstructed interim commit has not undergone complete clean-detached Progress 11 acceptance.",
+    "No authoritative Progress 11 inner or outer checkpoint is claimed.",
+    "Progress 12 and production remain unauthorized."
+  ],
+  "production_authorized": false,
+  "production_posture": "NO-GO",
+  "progress_11_milestone_closed": false,
+  "progress_12_authorized": false,
+  "schema": "sip.progress11.most-complete-working-snapshot/v1",
+  "surviving_progress11_evidence": {
+    "highest_retained_precommit_python_matrix_errors": 0,
+    "highest_retained_precommit_python_matrix_failures": 0,
+    "highest_retained_precommit_python_matrix_skipped": 0,
+    "highest_retained_precommit_python_matrix_tests": 494,
+    "retained_clean_source_attestations": [
+      "65ce122c7ab05782f253ef1ed00b0e694b0557f6",
+      "cb8aea047bbc78b1d9827477fe8f6d0404542eb2",
+      "e24d67b7fd79e82431bd3d614e54062bac6f5a21"
+    ]
+  }
+}

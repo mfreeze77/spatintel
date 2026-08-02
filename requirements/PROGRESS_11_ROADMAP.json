@@ -1,0 +1,117 @@
+{
+  "checkpoint_id": "sip-v1.1.0-progress-11",
+  "local_only_commitment": true,
+  "open_export_commitment": true,
+  "production_authorized": false,
+  "progress_12_authorized": false,
+  "review_inputs": [
+    "pilot evidence when separately authorized",
+    "benchmark results",
+    "cost and capacity evidence",
+    "support burden",
+    "consent incidents",
+    "security and privacy incidents"
+  ],
+  "schema": "sip.progress11-roadmap/v1",
+  "sequencing_basis": "dependency_graph_not_calendar_quarters",
+  "stages": [
+    {
+      "architecture_impact": "Adds a release-assurance control plane, typed contracts, immutable evidence, and fail-closed promotion.",
+      "customer_outcome": "Auditable dual-vertical development release evidence without overclaiming external acceptance.",
+      "deprecation_migration": "Append-only migration 0021; no historical milestone scope rewrite.",
+      "evidence_inputs": [
+        "benchmarks",
+        "cost reports",
+        "support burden",
+        "security incidents",
+        "privacy incidents"
+      ],
+      "exit_criteria": [
+        "exact-commit matrix green",
+        "dual-vertical scenarios green",
+        "production admission denied"
+      ],
+      "fallback_exit": "Retain Progress 10 as the active accepted checkpoint and open preservation exports.",
+      "open_local_path": true,
+      "order": 1,
+      "owner": "SIP Engineering",
+      "prerequisites": [
+        "Progress 10 accepted",
+        "QA-002 scope frozen",
+        "synthetic fixtures"
+      ],
+      "research_spike": null,
+      "reversible": true,
+      "risks": [
+        "stale evidence",
+        "authority overclaim",
+        "consent regression",
+        "rollback failure"
+      ],
+      "stage_id": "qa002-local-release-qualification"
+    },
+    {
+      "architecture_impact": "Evidence adapters only; no alternate product fork.",
+      "customer_outcome": "Evidence-backed decisions for browser, physical-device, GPU, cloud, privacy, accessibility, and legal gates.",
+      "deprecation_migration": "No migration until evidence justifies a governed change.",
+      "evidence_inputs": [],
+      "exit_criteria": [
+        "retained executed evidence",
+        "reviewer identity",
+        "scope and expiry",
+        "no production inference from local tests"
+      ],
+      "fallback_exit": "Use local CPU/reference providers, semantic fallback, and open export.",
+      "open_local_path": true,
+      "order": 2,
+      "owner": "True North / External Validation Owners",
+      "prerequisites": [
+        "approved frozen web toolchain",
+        "approved device/GPU/cloud environments",
+        "independent reviewers"
+      ],
+      "research_spike": {
+        "decision_required": true,
+        "permanent_fork_allowed": false,
+        "time_bounded": true
+      },
+      "reversible": true,
+      "risks": [
+        "vendor lock-in",
+        "unapproved model rights",
+        "incomplete accessibility",
+        "privacy exposure"
+      ],
+      "stage_id": "external-evidence-closure"
+    },
+    {
+      "architecture_impact": "No implementation authorized by Progress 11.",
+      "customer_outcome": "Controlled pilot readiness without production or safety claims.",
+      "deprecation_migration": "Not applicable until separately authorized.",
+      "evidence_inputs": [],
+      "exit_criteria": [
+        "separate authorization",
+        "operating envelope",
+        "support and rollback",
+        "consent and data minimization"
+      ],
+      "fallback_exit": "Synthetic and non-sensitive demonstrations only.",
+      "open_local_path": true,
+      "order": 3,
+      "owner": "True North / External Validation Owners",
+      "prerequisites": [
+        "separate True North authorization",
+        "customer or subject consent",
+        "external security/privacy/legal review"
+      ],
+      "research_spike": null,
+      "reversible": true,
+      "risks": [
+        "confidential facility exposure",
+        "human-subject harm",
+        "measurement misuse"
+      ],
+      "stage_id": "future-pilot-readiness"
+    }
+  ]
+}

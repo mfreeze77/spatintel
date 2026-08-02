@@ -180,6 +180,7 @@ SERVICES = [
     "operations-intelligence",
     "deployment-control",
     "recovery-control",
+    "release-assurance",
 ]
 
 
@@ -217,22 +218,25 @@ def main() -> None:
 
     build_root = root / "build" / "generated" / "openapi"
     context = PlatformContext.create(temporary_settings(build_root / "runtime-schema-codegen"))
-    for service in SERVICES:
-        schema = create_app(context=context, service_name=service).openapi()
-        generated[root / "schemas" / "openapi" / f"{service}.openapi.json"] = json.dumps(schema, indent=2, sort_keys=True) + "\n"
-        manifest_path = root / "services" / service / "service.json"
-        if service not in {"all"} and manifest_path.is_file():
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            manifest["operations"] = sorted(
-                [
-                    {"method": method.upper(), "path": route, "operation_id": operation["operationId"]}
-                    for route, methods in schema.get("paths", {}).items()
-                    for method, operation in methods.items()
-                    if method.lower() in {"get", "post", "put", "patch", "delete"}
-                ],
-                key=lambda item: (item["path"], item["method"], item["operation_id"]),
-            )
-            generated[manifest_path] = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    try:
+        for service in SERVICES:
+            schema = create_app(context=context, service_name=service).openapi()
+            generated[root / "schemas" / "openapi" / f"{service}.openapi.json"] = json.dumps(schema, indent=2, sort_keys=True) + "\n"
+            manifest_path = root / "services" / service / "service.json"
+            if service not in {"all"} and manifest_path.is_file():
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                manifest["operations"] = sorted(
+                    [
+                        {"method": method.upper(), "path": route, "operation_id": operation["operationId"]}
+                        for route, methods in schema.get("paths", {}).items()
+                        for method, operation in methods.items()
+                        if method.lower() in {"get", "post", "put", "patch", "delete"}
+                    ],
+                    key=lambda item: (item["path"], item["method"], item["operation_id"]),
+                )
+                generated[manifest_path] = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    finally:
+        context.database.dispose()
 
     failures: list[str] = []
     for path, content in generated.items():

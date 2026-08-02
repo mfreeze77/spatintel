@@ -1,0 +1,489 @@
+SIP v1.1.0 Progress 11 — Track B Finalization Directive
+
+Decision date: 2026-08-01Authority: True North milestone governanceAccepted predecessor: Progress 10Accepted predecessor commit: ab409f6ac7ca583535f69e5806b7a3bdbfe08214Authorized milestone: QA-002 — Dual vertical acceptance and release gates
+
+Decision
+
+Progress 11 reconstruction: accepted as the active Track B continuation
+
+Progress 11 source state: substantially complete but uncommitted
+
+Progress 11 checkpoint: not yet created
+
+Progress 11 milestone: remains open
+
+Progress 12: unauthorized
+
+Production: NO-GO
+
+Production authorized: false
+
+The submitted ZIP is still the accepted Progress 10 package:
+
+SHA-256:
+1e0c962a59a55a2a6395179c98467778ff56e2e394319b0ca46367551b5027dc
+
+It is the correct reconstruction base but not a Progress 11 delivery artifact.
+
+Current Track B identity
+
+Repository:
+/mnt/data/sip-progress-11-resume
+
+Branch:
+progress-11-release-gates
+
+Accepted base/current HEAD:
+ab409f6ac7ca583535f69e5806b7a3bdbfe08214
+
+Current reconstructed source root:
+3be50c5f829f3ebee795c75db5b90114a11ef96b002efff0c5af34f69e49c4c2
+
+Progress 11 final commit:
+not created
+
+Clean-detached acceptance:
+not run
+
+Inner Progress 11 ZIP:
+not created
+
+Outer Progress 11 envelope:
+not created
+
+The reconstruction correctly uses a new Track B source identity and does not claim the unavailable historical Progress 11 commit.
+
+Provisional implementation evidence
+
+The current source-bound matrix is accepted as provisional implementation evidence:
+
+490 passed
+0 failed
+0 errors
+0 skipped
+
+It cannot become the final checkpoint matrix because one source repair remains. Once source bytes change, the matrix is stale for acceptance purposes.
+
+The current milestone truth remains:
+
+Authorized epic:
+QA-002
+
+Included requirements:
+96
+
+Deferred requirements:
+0
+
+Progress 11 traceability findings:
+0
+
+Global normative requirements:
+1,028
+
+PLTVIEW-007:
+IMPLEMENTED_UNVERIFIED
+
+Sole current stop-line
+
+The blocking control is historical Progress 10 traceability drift.
+
+The current audit_progress10_traceability.py behavior rebuilds the closed Progress 10 milestone from the current global implementation map. Progress 11 legitimately adds tests and evidence to the global map, but later evidence must not rewrite an accepted historical milestone snapshot.
+
+The repair must preserve two truths simultaneously:
+
+Progress 10 retains its exact accepted historical scope, statuses, mappings, and evidence posture.
+
+Progress 11 retains all new current implementation and test evidence in the global ledger and Progress 11 scope.
+
+Binding repair requirements
+
+The next worker shall make the narrowest source change that satisfies all of the following.
+
+1. Introduce or normalize an immutable accepted Progress 10 snapshot
+
+The repository shall contain a controlled Progress 10 historical snapshot that captures at minimum:
+
+accepted Progress 10 requirement IDs;
+
+accepted scope classification;
+
+accepted statuses;
+
+accepted linked-test identifiers;
+
+accepted evidence identifiers;
+
+accepted traceability findings;
+
+accepted checkpoint/source identity;
+
+accepted milestone metadata.
+
+The snapshot must be derived from the accepted Progress 10 checkpoint records, not regenerated from the current Progress 11 global implementation map.
+
+2. Rework the Progress 10 audit
+
+tools/audit_progress10_traceability.py --check shall:
+
+load the immutable accepted Progress 10 snapshot;
+
+confirm every referenced requirement still exists;
+
+confirm every accepted linked test still exists where the historical control requires ongoing existence;
+
+confirm requirement IDs and historical semantics remain valid;
+
+confirm the snapshot itself has not drifted;
+
+avoid importing newer Progress 11 mappings into the historical Progress 10 snapshot;
+
+fail closed if the accepted snapshot is missing, malformed, internally inconsistent, or silently rewritten.
+
+The audit shall not demand that the current global implementation map equal the historical snapshot.
+
+3. Preserve current evidence separately
+
+The current global implementation map, requirements ledger, Progress 11 milestone scope, and Progress 11 traceability audit shall retain all legitimate Progress 11 additions.
+
+Historical milestone evidence and current cumulative evidence must be separate controlled concepts.
+
+4. Add direct regression tests
+
+Add tests proving at least:
+
+a later milestone may add a new test for an older requirement without changing the closed milestone snapshot;
+
+a later milestone may improve current cumulative status without silently rewriting the accepted historical status;
+
+deletion or mutation of a required historical snapshot field fails the audit;
+
+changing an accepted historical linked-test identifier fails unless an explicit governed amendment mechanism is used;
+
+changing only the current global implementation map does not create historical drift;
+
+actual historical snapshot mutation is detected;
+
+Progress 11 traceability remains complete after the repair.
+
+5. Preserve prior milestone behavior
+
+Do not regress the already repaired immutable-snapshot controls for Progress 05 through Progress 09.
+
+Run all historical milestone audits individually and through make spec-check.
+
+Required execution sequence
+
+Phase A — repair and local validation
+
+cd /mnt/data/sip-progress-11-resume
+
+# Implement the immutable Progress 10 snapshot repair and regression tests.
+
+PYTHONPATH=src:. python tools/audit_progress10_traceability.py
+PYTHONPATH=src:. python tools/audit_progress10_traceability.py --check
+make spec-check
+
+Required result:
+
+Progress 05:
+passed_complete
+
+Progress 06:
+passed_complete
+
+Progress 06-R1:
+passed_complete
+
+Progress 06-R2:
+passed_complete
+
+Progress 07:
+passed_complete
+
+Progress 08:
+passed_complete
+
+Progress 09:
+passed_complete
+
+Progress 10:
+passed_complete
+
+Progress 11:
+passed_complete
+
+No historical milestone may be silently regenerated from the current cumulative implementation map.
+
+Phase B — regenerate controlled evidence
+
+After the source repair:
+
+regenerate schemas and OpenAPI artifacts;
+
+regenerate service and event catalogs;
+
+regenerate fixtures and worker manifests;
+
+regenerate implementation map;
+
+regenerate JSON, CSV, and SQLite requirements ledgers;
+
+regenerate coverage report;
+
+regenerate Progress 11 traceability audit;
+
+regenerate release and demonstration evidence;
+
+verify no generated drift remains.
+
+Any controlled-byte change must be included in the final commit.
+
+Phase C — rerun the complete source-bound matrix
+
+The previous 490-test matrix is superseded after source changes.
+
+Run:
+
+PYTHONPATH=src:. PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python tools/run_test_matrix.py   --jobs 1   --shard-jobs 1   --timeout 900
+
+Required outcome:
+
+failures: 0
+errors: 0
+skipped: 0
+
+The final count may exceed 490 because new regression tests are required.
+
+Rerun every affected locally executable gate, including specification controls, migrations, security, privacy, release assurance, export, restore, rollback, and the Progress 11 demonstration.
+
+Phase D — evidence fixed point
+
+Before commit:
+
+make spec-check
+
+PYTHONPATH=src:. python tools/schema_codegen/generate.py   --root . --check
+
+PYTHONPATH=src:. python tools/build_traceability_map.py   --check-evidence
+
+PYTHONPATH=src:. python tools/audit_progress11_traceability.py   --check
+
+No generated or evidence drift may remain.
+
+Recompute the canonical source root. The current root:
+
+3be50c5f829f3ebee795c75db5b90114a11ef96b002efff0c5af34f69e49c4c2
+
+must not be reused after any source change.
+
+Phase E — create the final Track B commit
+
+git status --short
+git add --all
+
+git commit -m   "feat: implement bounded Progress 11 dual-vertical release assurance"
+
+Record:
+
+new commit SHA;
+
+parent SHA;
+
+Git tree SHA;
+
+commit timestamp;
+
+branch;
+
+new canonical source root;
+
+source-root file count;
+
+complete source-file count;
+
+ancestry from accepted Progress 10.
+
+This new Track B commit is the only valid final Progress 11 source identity.
+
+Phase F — clean detached acceptance
+
+rm -rf /mnt/data/sip-progress-11-acceptance
+
+git worktree add   --detach   /mnt/data/sip-progress-11-acceptance   <FINAL_PROGRESS_11_COMMIT>
+
+cd /mnt/data/sip-progress-11-acceptance
+
+PYTHONPATH=src:. python tools/create_source_attestation.py   --branch progress-11-release-gates   --output build/evidence/source-attestation.json
+
+PYTHONPATH=src:. PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python tools/run_progress11_checkpoint_acceptance.py   --attestation build/evidence/source-attestation.json   --output build/reports/checkpoint-acceptance-gates.json
+
+The final exact-commit matrix must record:
+
+git_commit:
+<FINAL_PROGRESS_11_COMMIT>
+
+git_dirty:
+false
+
+source_tree_root_sha256:
+<FINAL_PROGRESS_11_SOURCE_ROOT>
+
+failures:
+0
+
+errors:
+0
+
+skipped:
+0
+
+If any source bytes change after this run, create a new commit and repeat the full clean-detached sequence.
+
+Required release-assurance evidence
+
+The exact-commit acceptance must retain direct evidence for:
+
+complete Construction acceptance scenario;
+
+complete LiveForever acceptance scenario;
+
+proxy and measurement-authority stop-lines;
+
+restricted search, count, facet, export, and support-bundle controls;
+
+consent-revocation propagation;
+
+generated-content labeling and model lineage;
+
+conflicting-recollection preservation;
+
+quiet mode, evidence mode, captions, reduced motion, pause, reset, and safe exit;
+
+open offline export;
+
+independent restore;
+
+rollback and prior-release restoration;
+
+migration and recovery;
+
+security and privacy;
+
+accessibility controls;
+
+load/reference performance;
+
+release-manifest integrity;
+
+known limitations;
+
+operating envelope;
+
+support and escalation;
+
+fail-closed production admission.
+
+Unavailable external controls must remain blocked or externally required. They cannot be converted to passing status through local simulation.
+
+Checkpoint and envelope construction
+
+Only after exact-commit acceptance passes may the worker build:
+
+Spatial-Intelligence-Platform-v1.1.0-progress-11.zip
+
+Spatial-Intelligence-Platform-v1.1.0-progress-11-delivery-package.zip
+
+Run the dedicated inner verifier twice and the dedicated outer verifier twice.
+
+All four final executions must return:
+
+status: passed_complete
+findings: 0
+
+The outer verifier must freshly verify the actual nested inner ZIP bytes.
+
+Generate and validate:
+
+Git bundle;
+
+exact source archive;
+
+source commit record;
+
+complete source-file manifest;
+
+predecessor continuity;
+
+Git/source equivalence;
+
+inner and outer manifests;
+
+content roots;
+
+acceptance records;
+
+final delivery record;
+
+final handoff consistency record;
+
+checksums;
+
+completed resume record.
+
+Stop-line prohibitions
+
+The worker shall not:
+
+commit before the historical Progress 10 snapshot repair passes;
+
+treat the 490-test matrix as final after source changes;
+
+regenerate Progress 10 history from current cumulative evidence;
+
+remove legitimate Progress 11 evidence to make Progress 10 pass;
+
+modify accepted migration history before revision 0021;
+
+reuse the old source root after changes;
+
+package a dirty worktree;
+
+package before exact-commit acceptance completes;
+
+promote PLTVIEW-007;
+
+claim physical-device, mounted-browser, cloud, legal, privacy, accessibility, customer, or human-subject validation without executed evidence;
+
+authorize Progress 12;
+
+authorize production.
+
+Governing posture
+
+Progress 10:
+ACCEPTED BASE
+
+Progress 11 reconstruction:
+ACTIVE TRACK B CONTINUATION
+
+Progress 11 current matrix:
+490 PASSED — PROVISIONAL
+
+Progress 11 remaining blocker:
+IMMUTABLE PROGRESS 10 TRACEABILITY SNAPSHOT
+
+Progress 11 final commit:
+NOT CREATED
+
+Progress 11 checkpoint:
+NOT CREATED
+
+Progress 11 milestone:
+OPEN
+
+Progress 12:
+UNAUTHORIZED
+
+Production:
+NO-GO

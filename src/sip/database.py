@@ -3227,6 +3227,139 @@ class RecoveryLockRow(Base):
     )
 
 
+
+class QAAcceptanceCampaignRow(Base):
+    __tablename__ = "qa_acceptance_campaigns"
+    campaign_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str | None] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    checkpoint_id: Mapped[str] = mapped_column(String(128), index=True)
+    release_class: Mapped[str] = mapped_column(String(32), index=True)
+    scope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    test_data_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    operating_envelope_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    limitations_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    support_plan_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    recovery_plan_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    state: Mapped[str] = mapped_column(String(32), default="draft", index=True)
+    campaign_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now, onupdate=db_now)
+    __table_args__ = (
+        UniqueConstraint("tenant_id", "checkpoint_id", name="uq_qa_campaign_checkpoint"),
+    )
+
+
+class QAScenarioResultRow(Base):
+    __tablename__ = "qa_scenario_results"
+    scenario_result_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    campaign_id: Mapped[str] = mapped_column(ForeignKey("qa_acceptance_campaigns.campaign_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    project_id: Mapped[str | None] = mapped_column(ForeignKey("projects.project_id", ondelete="RESTRICT"), index=True)
+    scenario_type: Mapped[str] = mapped_column(String(64), index=True)
+    profile: Mapped[str] = mapped_column(String(128), index=True)
+    evidence_class: Mapped[str] = mapped_column(String(64), index=True)
+    input_hashes_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    output_hashes_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    metrics_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    assertions_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    evidence_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    environment_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    scenario_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    recorded_by: Mapped[str] = mapped_column(String(128))
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "scenario_type", "profile", name="uq_qa_scenario_profile"),
+    )
+
+
+class QAGateResultRow(Base):
+    __tablename__ = "qa_gate_results"
+    gate_result_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    campaign_id: Mapped[str] = mapped_column(ForeignKey("qa_acceptance_campaigns.campaign_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    gate_type: Mapped[str] = mapped_column(String(64), index=True)
+    required: Mapped[bool] = mapped_column(Boolean, default=True)
+    execution_status: Mapped[str] = mapped_column(String(64), index=True)
+    control_status: Mapped[str] = mapped_column(String(64), index=True)
+    thresholds_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    result_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    findings_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    evidence_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    external_gap: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    gate_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    recorded_by: Mapped[str] = mapped_column(String(128))
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "gate_type", name="uq_qa_gate_type"),
+    )
+
+
+class QAReleaseWaiverRow(Base):
+    __tablename__ = "qa_release_waivers"
+    waiver_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    campaign_id: Mapped[str] = mapped_column(ForeignKey("qa_acceptance_campaigns.campaign_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    requirement_id: Mapped[str] = mapped_column(String(64), index=True)
+    priority: Mapped[str] = mapped_column(String(8), index=True)
+    reason: Mapped[str] = mapped_column(Text)
+    compensating_control_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    owner: Mapped[str] = mapped_column(String(128))
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    state: Mapped[str] = mapped_column(String(32), default="active", index=True)
+    waiver_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    approved_by: Mapped[str] = mapped_column(String(128))
+    approved_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "requirement_id", name="uq_qa_waiver_requirement"),
+    )
+
+
+class QARollbackRehearsalRow(Base):
+    __tablename__ = "qa_rollback_rehearsals"
+    rehearsal_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    campaign_id: Mapped[str] = mapped_column(ForeignKey("qa_acceptance_campaigns.campaign_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    from_release: Mapped[str] = mapped_column(String(128))
+    to_release: Mapped[str] = mapped_column(String(128))
+    recovery_point_id: Mapped[str | None] = mapped_column(String(64), index=True)
+    before_hashes_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    after_hashes_json: Mapped[dict[str, str]] = mapped_column(JSON, default=dict)
+    steps_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    verification_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    status: Mapped[str] = mapped_column(String(32), index=True)
+    rehearsal_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    rehearsed_by: Mapped[str] = mapped_column(String(128))
+    rehearsed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "from_release", "to_release", name="uq_qa_rollback_path"),
+    )
+
+
+class QAReleaseCandidateRow(Base):
+    __tablename__ = "qa_release_candidates"
+    release_candidate_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    campaign_id: Mapped[str] = mapped_column(ForeignKey("qa_acceptance_campaigns.campaign_id", ondelete="RESTRICT"), index=True)
+    tenant_id: Mapped[str] = mapped_column(ForeignKey("tenants.tenant_id", ondelete="RESTRICT"), index=True)
+    source_commit: Mapped[str] = mapped_column(String(64), index=True)
+    source_root_sha256: Mapped[str] = mapped_column(String(64), index=True)
+    manifest_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    manifest_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    signature: Mapped[str] = mapped_column(Text)
+    public_key: Mapped[str] = mapped_column(Text)
+    signer_key_id: Mapped[str] = mapped_column(String(128))
+    blockers_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    external_gaps_json: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+    status: Mapped[str] = mapped_column(String(64), index=True)
+    production_authorized: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    created_by: Mapped[str] = mapped_column(String(128))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=db_now)
+    __table_args__ = (
+        UniqueConstraint("campaign_id", "source_commit", "source_root_sha256", name="uq_qa_candidate_source"),
+    )
+
 class Database:
     def __init__(self, url: str, *, create: bool = False) -> None:
         self.url = url

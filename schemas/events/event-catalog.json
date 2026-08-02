@@ -866,6 +866,55 @@
       "version": "1.0.0"
     },
     {
+      "aggregate": "qa_campaign",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.campaign.created",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_release_candidate",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.candidate.signed",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_gate",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.gate.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_release_candidate",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.production_admission.denied",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_rollback",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.rollback.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_scenario",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.scenario.recorded",
+      "version": "1.0.0"
+    },
+    {
+      "aggregate": "qa_waiver",
+      "classification": "inherits_project",
+      "owner": "release-assurance",
+      "type": "qa.waiver.approved",
+      "version": "1.0.0"
+    },
+    {
       "aggregate": "queue_snapshot",
       "classification": "inherits_project",
       "owner": "operations-intelligence",

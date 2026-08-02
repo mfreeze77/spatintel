@@ -1812,3 +1812,130 @@ class LegacyMigrationReportContract(ContractModel):
     state: Literal["planned", "validated", "rolled_back", "failed"]
     report_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
     signed_report: str
+
+
+class QAAcceptanceCampaignContract(ContractModel):
+    campaign_id: str
+    tenant_id: str
+    project_id: str | None = None
+    checkpoint_id: str
+    release_class: Literal["research", "development", "pilot", "production", "enterprise"]
+    scope: dict[str, Any]
+    test_data: dict[str, Any]
+    operating_envelope: dict[str, Any]
+    limitations: list[dict[str, Any]]
+    support_plan: dict[str, Any]
+    recovery_plan: dict[str, Any]
+    state: Literal["draft", "active", "evaluated", "closed"]
+    campaign_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    created_by: str
+    created_at: str
+    idempotent_replay: bool = False
+
+
+class QAScenarioResultContract(ContractModel):
+    scenario_result_id: str
+    campaign_id: str
+    tenant_id: str
+    project_id: str | None = None
+    scenario_type: Literal["construction", "liveforever"]
+    profile: str
+    evidence_class: Literal[
+        "synthetic",
+        "local_controlled",
+        "local_executed",
+        "browser_executed",
+        "device_executed",
+        "cloud_executed",
+        "external_witnessed",
+    ]
+    input_hashes: dict[str, str]
+    output_hashes: dict[str, str]
+    metrics: dict[str, Any]
+    assertions: list[dict[str, Any]]
+    evidence: list[dict[str, Any]]
+    environment: dict[str, Any]
+    status: Literal["passed", "failed", "blocked"]
+    scenario_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotent_replay: bool = False
+
+
+class QAGateResultContract(ContractModel):
+    gate_result_id: str
+    campaign_id: str
+    tenant_id: str
+    gate_type: str
+    required: bool
+    execution_status: Literal[
+        "completed_successfully", "completed_with_findings", "not_executed", "failed"
+    ]
+    control_status: Literal["passed_complete", "passed_with_external_gaps", "blocked", "failed"]
+    thresholds: dict[str, Any]
+    result: dict[str, Any]
+    findings: list[dict[str, Any]]
+    evidence: list[dict[str, Any]]
+    external_gap: bool
+    gate_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotent_replay: bool = False
+
+
+class QAReleaseWaiverContract(ContractModel):
+    waiver_id: str
+    campaign_id: str
+    tenant_id: str
+    requirement_id: str
+    priority: Literal["P1", "P2"]
+    reason: str
+    compensating_control: dict[str, Any]
+    owner: str
+    expires_at: str
+    state: Literal["active", "expired", "revoked"]
+    waiver_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    approved_by: str
+    idempotent_replay: bool = False
+
+
+class QARollbackRehearsalContract(ContractModel):
+    rehearsal_id: str
+    campaign_id: str
+    tenant_id: str
+    from_release: str
+    to_release: str
+    recovery_point_id: str | None = None
+    before_hashes: dict[str, str]
+    after_hashes: dict[str, str]
+    steps: list[dict[str, Any]]
+    verification: dict[str, Any]
+    status: Literal["passed", "failed", "blocked"]
+    rehearsal_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    idempotent_replay: bool = False
+
+
+class QAReleaseCandidateContract(ContractModel):
+    release_candidate_id: str
+    campaign_id: str
+    tenant_id: str
+    source_commit: str = Field(pattern=r"^[a-f0-9]{64}$")
+    source_root_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    manifest: dict[str, Any]
+    manifest_hash: str = Field(pattern=r"^[a-f0-9]{64}$")
+    signature: str
+    public_key: str
+    signer_key_id: str
+    blockers: list[dict[str, Any]]
+    external_gaps: list[dict[str, Any]]
+    status: Literal["passed_complete", "passed_with_external_gaps", "blocked"]
+    production_authorized: bool = False
+    progress_12_authorized: bool = False
+    created_by: str
+    created_at: str
+    idempotent_replay: bool = False
+
+
+class QAProductionAdmissionContract(ContractModel):
+    release_candidate_id: str
+    admitted: bool = False
+    production_authorized: bool = False
+    progress_12_authorized: bool = False
+    blockers: list[dict[str, Any]]
+    evaluated_at: str

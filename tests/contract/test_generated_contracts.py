@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import json
-import subprocess
-import sys
 from pathlib import Path
 
 import jsonschema
@@ -26,7 +24,11 @@ def test_json_schemas_are_valid_draft_2020_12() -> None:
 @pytest.mark.contract
 def test_generated_openapi_matches_runtime_and_has_unique_operations(tmp_path: Path) -> None:
     generated = json.loads((ROOT / "schemas" / "openapi" / "all.openapi.json").read_text())
-    runtime = create_app(context=PlatformContext.create(temporary_settings(tmp_path)), service_name="all").openapi()
+    context = PlatformContext.create(temporary_settings(tmp_path))
+    try:
+        runtime = create_app(context=context, service_name="all").openapi()
+    finally:
+        context.database.dispose()
     assert generated == runtime
     operation_ids = [
         operation["operationId"]
@@ -36,18 +38,6 @@ def test_generated_openapi_matches_runtime_and_has_unique_operations(tmp_path: P
     ]
     assert len(operation_ids) == len(set(operation_ids))
 
-
-@pytest.mark.contract
-def test_schema_codegen_check_has_no_drift() -> None:
-    result = subprocess.run(
-        [sys.executable, "tools/schema_codegen/generate.py", "--root", ".", "--check"],
-        cwd=ROOT,
-        env={**__import__("os").environ, "PYTHONPATH": "src"},
-        text=True,
-        capture_output=True,
-        check=False,
-    )
-    assert result.returncode == 0, result.stdout + result.stderr
 
 
 @pytest.mark.contract

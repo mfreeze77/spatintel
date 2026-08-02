@@ -1,0 +1,1150 @@
+{
+  "accepted_base_commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+  "base_checkpoint": "sip-v1.1.0-progress-10",
+  "excluded_from_project_overlay": [
+    "build/evidence/source-attestation.json"
+  ],
+  "generated_at": "2026-08-02T19:42:00.530768+00:00",
+  "note": "This is a best-effort union of surviving Progress 11 files. All source variants are retained separately in the outer working bundle.",
+  "overlay_precedence_low_to_high": [
+    "sip-progress-11-work",
+    "sip-progress-11-final",
+    "sip-progress-11-authoritative",
+    "sip-progress-11-rebuild2",
+    "sip-progress-11-trackb",
+    "sip-progress-11-resume",
+    "sip-progress-11-finalrun"
+  ],
+  "schema": "sip.progress11.interim-file-selection/v1",
+  "selection": {
+    "PROGRESS_11_MILESTONE_REPORT.md": {
+      "candidates": [
+        {
+          "precedence": 2,
+          "sha256": "207918fd5ad3720089cf9ecbb35e38691ea57155c71a12b58ccf282d65672367",
+          "size": 868,
+          "source_root": "sip-progress-11-authoritative"
+        }
+      ],
+      "chosen": {
+        "precedence": 2,
+        "sha256": "207918fd5ad3720089cf9ecbb35e38691ea57155c71a12b58ccf282d65672367",
+        "size": 868,
+        "source_root": "sip-progress-11-authoritative"
+      },
+      "conflict": false
+    },
+    "RECONSTRUCTION_PROVENANCE_PROGRESS_11.json": {
+      "candidates": [
+        {
+          "precedence": 4,
+          "sha256": "59e63cd16768961f2ca78375d84593423df4f0b3a731728ecf88731478bc76af",
+          "size": 1366,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "59e63cd16768961f2ca78375d84593423df4f0b3a731728ecf88731478bc76af",
+          "size": 1366,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "59e63cd16768961f2ca78375d84593423df4f0b3a731728ecf88731478bc76af",
+          "size": 1366,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "59e63cd16768961f2ca78375d84593423df4f0b3a731728ecf88731478bc76af",
+        "size": 1366,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": false
+    },
+    "build/reports/test-matrix.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "708d180a6bedeb79c9d56bbefcd7237dabd76c2e28d0b72049b9a2e8e8826f91",
+          "size": 49221,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "ebb247f8de5d82b7e53d1917ff2a883cea772ff5723550837d730859b9635e4b",
+          "size": 49620,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "60c6fcb9eb3feb1fa7c7ba7e7d2bb12ef71b28e0b93e14edd52187bc0a2aa96f",
+          "size": 49547,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "a23e8da5ee8df94d867242145767a3dd38fbe51071282eed626503647ac4a82e",
+          "size": 48242,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "a23e8da5ee8df94d867242145767a3dd38fbe51071282eed626503647ac4a82e",
+        "size": 48242,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "build/reports/tests/contract.evidence.json": {
+      "candidates": [
+        {
+          "precedence": 3,
+          "sha256": "b1e4da5b2f9280fa194a7d3983416ac5b94231f5ea30b5ac863a3b015087187a",
+          "size": 16348,
+          "source_root": "sip-progress-11-rebuild2"
+        }
+      ],
+      "chosen": {
+        "precedence": 3,
+        "sha256": "b1e4da5b2f9280fa194a7d3983416ac5b94231f5ea30b5ac863a3b015087187a",
+        "size": 16348,
+        "source_root": "sip-progress-11-rebuild2"
+      },
+      "conflict": false
+    },
+    "docs/operator/PROGRESS_11_CHECKPOINT_VERIFICATION.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "aa5b01dd95e031d40a02df76b88c668c818a94bf2ff788f25c39b9913d9a6d2e",
+          "size": 566,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "aa5b01dd95e031d40a02df76b88c668c818a94bf2ff788f25c39b9913d9a6d2e",
+        "size": 566,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "docs/operator/PROGRESS_11_OPERATING_ENVELOPE.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "d90a937257037a57f1d35e9e9e8fcce04df95f462e3ce38f74e4e65cc5454777",
+          "size": 1579,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "d90a937257037a57f1d35e9e9e8fcce04df95f462e3ce38f74e4e65cc5454777",
+        "size": 1579,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "docs/operator/PROGRESS_11_RECOVERY_AND_ROLLBACK.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "a89d3cfb232e6da26e687bf36a13735e8bc6195d88d1eba0bff5d448501ce2db",
+          "size": 967,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "a89d3cfb232e6da26e687bf36a13735e8bc6195d88d1eba0bff5d448501ce2db",
+        "size": 967,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "docs/operator/PROGRESS_11_RELEASE_GATES.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "d764bf2473f1ca6b4d227a264fb541a26286d35c23191bc83233d363bbc6daa1",
+          "size": 1771,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "43e34ef857b938119bf864440b0513b937f95d6822f0fbfce652de7cb85d6eb8",
+          "size": 1868,
+          "source_root": "sip-progress-11-authoritative"
+        }
+      ],
+      "chosen": {
+        "precedence": 2,
+        "sha256": "43e34ef857b938119bf864440b0513b937f95d6822f0fbfce652de7cb85d6eb8",
+        "size": 1868,
+        "source_root": "sip-progress-11-authoritative"
+      },
+      "conflict": true
+    },
+    "docs/operator/PROGRESS_11_SUPPORT_AND_ESCALATION.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "a4d22c947d18b5fcc3ab85d72277b27bda9bfe9159da943657e61c1d1a9667e1",
+          "size": 799,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "a4d22c947d18b5fcc3ab85d72277b27bda9bfe9159da943657e61c1d1a9667e1",
+        "size": 799,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "docs/release/PROGRESS_11_KNOWN_LIMITATIONS.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "e5d9cf6c4118dafad6c4e906f80303006bd58b82c4b913fc710bee894f927ef0",
+          "size": 754,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "3b7592a794578bbe144e60012c819d5ac77cf3ca06b86a15d4ea26237a1e3089",
+          "size": 960,
+          "source_root": "sip-progress-11-authoritative"
+        }
+      ],
+      "chosen": {
+        "precedence": 2,
+        "sha256": "3b7592a794578bbe144e60012c819d5ac77cf3ca06b86a15d4ea26237a1e3089",
+        "size": 960,
+        "source_root": "sip-progress-11-authoritative"
+      },
+      "conflict": true
+    },
+    "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "448da79023de7adea07d162dd48b245b90b3f809784fb326b0916045c0c274d0",
+          "size": 2425,
+          "source_root": "sip-progress-11-final"
+        }
+      ],
+      "chosen": {
+        "precedence": 1,
+        "sha256": "448da79023de7adea07d162dd48b245b90b3f809784fb326b0916045c0c274d0",
+        "size": 2425,
+        "source_root": "sip-progress-11-final"
+      },
+      "conflict": false
+    },
+    "docs/security/PROGRESS_11_RELEASE_SECURITY.md": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "43b04cfa9ed4ea7f10db5a68bacd591dbc24c8a41c15d6f90efe9f277483fac7",
+          "size": 872,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "43b04cfa9ed4ea7f10db5a68bacd591dbc24c8a41c15d6f90efe9f277483fac7",
+        "size": 872,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "migrations/versions/0021_progress11_release_assurance.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff",
+          "size": 11821,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff",
+          "size": 11821,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff",
+          "size": 11821,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff",
+        "size": 11821,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    },
+    "requirements/MILESTONE_SCOPE_PROGRESS_11.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "e4144b0229d16b781b2efb79ee6143ee5f0c82c9af6c79d9210a975c769a2514",
+          "size": 143069,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 1,
+          "sha256": "e4144b0229d16b781b2efb79ee6143ee5f0c82c9af6c79d9210a975c769a2514",
+          "size": 143069,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 2,
+          "sha256": "8bf2812dff1faf56078d1c341585977aa3df5a3cc610a1a36c4aed3f2e101cc7",
+          "size": 143151,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 3,
+          "sha256": "f9694c6cf9859dd7bc15f2bbb7bcd42ca8fdb0ebaea6a022d45cd2e00ca7185b",
+          "size": 142784,
+          "source_root": "sip-progress-11-rebuild2"
+        },
+        {
+          "precedence": 4,
+          "sha256": "87a2235390d1e983560280de8faf1ec4b5d8fbd9f9efbdd386d8d751958a99c8",
+          "size": 143321,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "e0565df349c2249752333d511191e00724476a3b1ba5886839a3fa1442104606",
+          "size": 137730,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "1433788a0b897200bf26e39c17700dc0434d1ae7b3e58f235326fa87b59efdaf",
+          "size": 132017,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "1433788a0b897200bf26e39c17700dc0434d1ae7b3e58f235326fa87b59efdaf",
+        "size": 132017,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/PROGRESS_11_ROADMAP.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "a6dfdc6caaf963d2489a92b907ef8b2d1ef0f5d477d46054edb63598280b8288",
+          "size": 3152,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 1,
+          "sha256": "7c40220ff169014fff3ae795ffd02ed0731364b7f2ce3dfcca6f53afb6c05432",
+          "size": 4076,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 5,
+          "sha256": "7c40220ff169014fff3ae795ffd02ed0731364b7f2ce3dfcca6f53afb6c05432",
+          "size": 4076,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "7c40220ff169014fff3ae795ffd02ed0731364b7f2ce3dfcca6f53afb6c05432",
+        "size": 4076,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "requirements/PROGRESS_11_TEST_STRATEGY.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "2c7d144a216efa12ef5e74c818c840b9704fefce6446cde72c9f4269a70528e4",
+          "size": 2371,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 1,
+          "sha256": "ef01aa08f310610ca2f7352c0aaa2f45c3f70254ea5e8c2d4683140eceb9906b",
+          "size": 2476,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 5,
+          "sha256": "de6ea45eb553abdc51ea6effd9ed49ad4ecf11a54a447bea1071d33e7dcdd744",
+          "size": 2563,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "de6ea45eb553abdc51ea6effd9ed49ad4ecf11a54a447bea1071d33e7dcdd744",
+        "size": 2563,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "requirements/coverage-report.md": {
+      "candidates": [
+        {
+          "precedence": 2,
+          "sha256": "e7cbbd8228f4762ddaba69af916f5114019a04fce27eae8ab7b7c609c4ba6314",
+          "size": 987,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "3a7f22dc556db35bb834da3e02e556129b9585dd79e292e4fc570d86b777628b",
+          "size": 1004,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "5cce1068ed498d8fb745c8aba77696569bd75aae2a6c46e30af70d0528e27529",
+          "size": 1063,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "5cce1068ed498d8fb745c8aba77696569bd75aae2a6c46e30af70d0528e27529",
+        "size": 1063,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/implementation-map.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "6985349a302f73baef443dc49344f699a1c05ffb1993b97d86e7cabf1825a8db",
+          "size": 677593,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "e1e2fc213de538bfef19dc351fcd6df3d4d463fa930508f224e786ccdbabfebf",
+          "size": 677649,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "d5eb7d049c90686743ef5b42d9b4fc00568a21340d9581d61792e579e7bacd33",
+          "size": 679850,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "4c042d7977c385ab5e786448f05e36a4f35cdd734283e69469fcd06a6b058b33",
+          "size": 665743,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "4c042d7977c385ab5e786448f05e36a4f35cdd734283e69469fcd06a6b058b33",
+        "size": 665743,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/progress-11-traceability-audit.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "1ecf241db5d3064f2e720b41edff70de22eca536aadbcefd3ebeae5bc373b0d4",
+          "size": 16026,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "a66769515af44529300e87f8b0339d8c0bfe1143353358b287c57af585303a4d",
+          "size": 209893,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 3,
+          "sha256": "519f1fb189d4adf66ac6df979b72c5983949f10c31826a9269e32f8bc4f1137e",
+          "size": 208970,
+          "source_root": "sip-progress-11-rebuild2"
+        },
+        {
+          "precedence": 4,
+          "sha256": "76d7de6b4f6c1560859efb7a109177fd863ff2bdfb7e52fa492a64e572fc6aa4",
+          "size": 210260,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "0186720e15b83a27f2a1f7acddb25690db7129fbcc146aad68af5d3027834f96",
+          "size": 187798,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "80aef8dc74052fcac56a42246ca34943514ff48409933fb46201e1cdc0429cc6",
+          "size": 171008,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "80aef8dc74052fcac56a42246ca34943514ff48409933fb46201e1cdc0429cc6",
+        "size": 171008,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/requirements-ledger.csv": {
+      "candidates": [
+        {
+          "precedence": 2,
+          "sha256": "b78d3a42a661e7eac5fd9628a0e5355b0548c51c0629539af0b7ec882956cba1",
+          "size": 851497,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 4,
+          "sha256": "1c5685e8fe8d2b010d55b49e1f244245998bf973337a0771b1b57b24bddabd1b",
+          "size": 848689,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "d34e410c7d588dd6f022d0003673dfe50ff85ffe8c3c97a9634964ba1c755638",
+          "size": 853109,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "de753d356fcf29d853c916e7579e1c0f85ef3986970e7fbf419d8bbbf246f524",
+          "size": 839975,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "de753d356fcf29d853c916e7579e1c0f85ef3986970e7fbf419d8bbbf246f524",
+        "size": 839975,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/requirements-ledger.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "3cd3330de2c55bab6b47ca82f370bf57360cc27369ca97403da914f3299be1a0",
+          "size": 3269765,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "8139adb3b6c1c4c745fc9e0ba34073e6b4adeb228ba8484552bb727840eb4cf4",
+          "size": 3269821,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 4,
+          "sha256": "a13b68948cdca91c9daee1d70c56f21e9ec7f2dfbd512d151a62d1445db20b64",
+          "size": 3267356,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "5c263831642260cfc7b2f6ebe3dfe96ae9c970a259686913ad5ec51847dfad8e",
+          "size": 3272022,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "ce9e2b4c6205df22023c005bb7a5adcecf24b431bee792a27dc1e450e1143b33",
+          "size": 3257915,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "ce9e2b4c6205df22023c005bb7a5adcecf24b431bee792a27dc1e450e1143b33",
+        "size": 3257915,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/requirements-ledger.sqlite": {
+      "candidates": [
+        {
+          "precedence": 2,
+          "sha256": "8a55fc1fa5d2244deb6a891299fbf25dfaae7c51d5b770930028b98bf41ff348",
+          "size": 1572864,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 4,
+          "sha256": "75d57c66a04626b7e748eda417a18f1fcfced52cfebe993e1766ade6118b87c4",
+          "size": 1560576,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "16031bb0cf9edc1526681e6c2a3c0175eeabc4fb1d4b7eaf4b56beb71220c341",
+          "size": 1572864,
+          "source_root": "sip-progress-11-resume"
+        },
+        {
+          "precedence": 6,
+          "sha256": "bdcfa53cc2f7f1c99c93cddb8c2c5a248144c764c6ec0b772198005e088c4ef5",
+          "size": 1552384,
+          "source_root": "sip-progress-11-finalrun"
+        }
+      ],
+      "chosen": {
+        "precedence": 6,
+        "sha256": "bdcfa53cc2f7f1c99c93cddb8c2c5a248144c764c6ec0b772198005e088c4ef5",
+        "size": 1552384,
+        "source_root": "sip-progress-11-finalrun"
+      },
+      "conflict": true
+    },
+    "requirements/test-quarantine.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "9bbb8f4b75c680d09f24f30127d4ae06ab5355b9dd6d6a92584cec91cf315c3d",
+          "size": 137,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "9bbb8f4b75c680d09f24f30127d4ae06ab5355b9dd6d6a92584cec91cf315c3d",
+        "size": 137,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "schemas/events/event-catalog.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "20b23abf7fc693034781ca88be4474ccd732d71fa18f0fd282ed42f0afa9b53f",
+          "size": 38587,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "20b23abf7fc693034781ca88be4474ccd732d71fa18f0fd282ed42f0afa9b53f",
+        "size": 38587,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "schemas/openapi/release-assurance.openapi.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "d96ba42a19dae9638410673aa22292ad058df7ea556d645bd30feba4dc34c4fe",
+          "size": 56319,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 5,
+          "sha256": "d96ba42a19dae9638410673aa22292ad058df7ea556d645bd30feba4dc34c4fe",
+          "size": 56319,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "d96ba42a19dae9638410673aa22292ad058df7ea556d645bd30feba4dc34c4fe",
+        "size": 56319,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    },
+    "services/release-assurance/service.json": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "2aed8065d73d66406d05fa040dfb069efdcab1d66d3bab53825a405fb9c3f08f",
+          "size": 2546,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 5,
+          "sha256": "2aed8065d73d66406d05fa040dfb069efdcab1d66d3bab53825a405fb9c3f08f",
+          "size": 2546,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "2aed8065d73d66406d05fa040dfb069efdcab1d66d3bab53825a405fb9c3f08f",
+        "size": 2546,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    },
+    "src/sip/api.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "b70dc4eb1b6fb4a4b8b881db647fe932bc6c6a75ccbca5b0a5e8bdf6c8105bea",
+          "size": 274527,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "b70dc4eb1b6fb4a4b8b881db647fe932bc6c6a75ccbca5b0a5e8bdf6c8105bea",
+        "size": 274527,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "src/sip/context.py": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "87e0973e04612277e01c95a6c6f6c558232d71428928ab1745dc1c29c1455f15",
+          "size": 8361,
+          "source_root": "sip-progress-11-final"
+        }
+      ],
+      "chosen": {
+        "precedence": 1,
+        "sha256": "87e0973e04612277e01c95a6c6f6c558232d71428928ab1745dc1c29c1455f15",
+        "size": 8361,
+        "source_root": "sip-progress-11-final"
+      },
+      "conflict": false
+    },
+    "src/sip/contracts.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "33799ef64c73898fef362db8a0b2db5e3be785c2370f21c30375c1214ba87e84",
+          "size": 83571,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "33799ef64c73898fef362db8a0b2db5e3be785c2370f21c30375c1214ba87e84",
+        "size": 83571,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "src/sip/database.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "5d63806554d171e175406bbd3a19fa0d5b6b11a0ddc02c6a641da595065b2c25",
+          "size": 211948,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "5d63806554d171e175406bbd3a19fa0d5b6b11a0ddc02c6a641da595065b2c25",
+        "size": 211948,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "src/sip/policy.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "40cb15c964c7ed8cc1e762b58504237bd8e84fcd13e21bc478a8b3524d62547b",
+          "size": 13554,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "40cb15c964c7ed8cc1e762b58504237bd8e84fcd13e21bc478a8b3524d62547b",
+        "size": 13554,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "src/sip/release_assurance.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "1095d0e548b64a6ab5edf86c35075690fefd554cadc2b635c8226257d6f686bf",
+          "size": 49741,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 1,
+          "sha256": "ed7d49bcdc262d2a8d2ffd36e7205a84e12109256815f1728d648120cbe0c13d",
+          "size": 51699,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 2,
+          "sha256": "ed7d49bcdc262d2a8d2ffd36e7205a84e12109256815f1728d648120cbe0c13d",
+          "size": 51699,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "ed7d49bcdc262d2a8d2ffd36e7205a84e12109256815f1728d648120cbe0c13d",
+          "size": 51699,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "ed7d49bcdc262d2a8d2ffd36e7205a84e12109256815f1728d648120cbe0c13d",
+        "size": 51699,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "tests/acceptance/test_progress11_dual_vertical_release.py": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "afcfba71ccac84341924b5074fe569f5e5b72977528ceb9fc91833f25557c3e9",
+          "size": 6997,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 2,
+          "sha256": "b6ffe0d39a58834417973477b94db3eb2e4cbca6485b95eca70bc89e3d2082f9",
+          "size": 7004,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 5,
+          "sha256": "b6ffe0d39a58834417973477b94db3eb2e4cbca6485b95eca70bc89e3d2082f9",
+          "size": 7004,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "b6ffe0d39a58834417973477b94db3eb2e4cbca6485b95eca70bc89e3d2082f9",
+        "size": 7004,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "tests/contract/test_generated_contracts.py": {
+      "candidates": [
+        {
+          "precedence": 3,
+          "sha256": "79f799bd84e2ee9e1d9b27c3c2e197cf1f619dcffed0cc3a238e1e07ef5ab133",
+          "size": 5023,
+          "source_root": "sip-progress-11-rebuild2"
+        }
+      ],
+      "chosen": {
+        "precedence": 3,
+        "sha256": "79f799bd84e2ee9e1d9b27c3c2e197cf1f619dcffed0cc3a238e1e07ef5ab133",
+        "size": 5023,
+        "source_root": "sip-progress-11-rebuild2"
+      },
+      "conflict": false
+    },
+    "tests/contract/test_progress11_checkpoint_controls.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "37ac8ac96a1b16ef9810316ce475bb1684b2a821f7c7a0e7582a4fae48fdb3f3",
+          "size": 7727,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 2,
+          "sha256": "6975079285846b67d9c84b170f6d5458f36050da338a5ee33eb0c3a8a5977858",
+          "size": 10491,
+          "source_root": "sip-progress-11-authoritative"
+        },
+        {
+          "precedence": 4,
+          "sha256": "c319911f531c132ee327a666c779474707558a1eb15218f8eea6675709d0233a",
+          "size": 11204,
+          "source_root": "sip-progress-11-trackb"
+        }
+      ],
+      "chosen": {
+        "precedence": 4,
+        "sha256": "c319911f531c132ee327a666c779474707558a1eb15218f8eea6675709d0233a",
+        "size": 11204,
+        "source_root": "sip-progress-11-trackb"
+      },
+      "conflict": true
+    },
+    "tests/contract/test_schema_codegen_drift.py": {
+      "candidates": [
+        {
+          "precedence": 3,
+          "sha256": "44f4c3aadd895a30b141c09354285ddfd1e217fc58420b34ef749b2ee25d129a",
+          "size": 861,
+          "source_root": "sip-progress-11-rebuild2"
+        }
+      ],
+      "chosen": {
+        "precedence": 3,
+        "sha256": "44f4c3aadd895a30b141c09354285ddfd1e217fc58420b34ef749b2ee25d129a",
+        "size": 861,
+        "source_root": "sip-progress-11-rebuild2"
+      },
+      "conflict": false
+    },
+    "tests/security/test_progress11_release_adversarial.py": {
+      "candidates": [
+        {
+          "precedence": 5,
+          "sha256": "2f0fc24d983eb58d3e084362a068bb590262cc6fd42861aba70e769295282a01",
+          "size": 4090,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "2f0fc24d983eb58d3e084362a068bb590262cc6fd42861aba70e769295282a01",
+        "size": 4090,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    },
+    "tests/security/test_progress11_release_security.py": {
+      "candidates": [
+        {
+          "precedence": 5,
+          "sha256": "dc2f64a12827fa5e167770a76e0e8e91eca763a4f6ec0554af5ec87a783cf0c2",
+          "size": 3975,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "dc2f64a12827fa5e167770a76e0e8e91eca763a4f6ec0554af5ec87a783cf0c2",
+        "size": 3975,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    },
+    "tools/audit_progress11_traceability.py": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "f1b21e2ad11b0a1fbcd2f4243b4482860b5ee29617acb9e647b5e7189ce2a7fe",
+          "size": 7988,
+          "source_root": "sip-progress-11-final"
+        }
+      ],
+      "chosen": {
+        "precedence": 1,
+        "sha256": "f1b21e2ad11b0a1fbcd2f4243b4482860b5ee29617acb9e647b5e7189ce2a7fe",
+        "size": 7988,
+        "source_root": "sip-progress-11-final"
+      },
+      "conflict": false
+    },
+    "tools/build_progress11_checkpoint.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "2b8b8543061c3188299ba2618433056d81169132c8ac725302a9f7736978239e",
+          "size": 21669,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 4,
+          "sha256": "ea313e636212536a34b41234b2bf3fffdecd286e7dec403beda58301acdbed14",
+          "size": 22060,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "ea313e636212536a34b41234b2bf3fffdecd286e7dec403beda58301acdbed14",
+          "size": 22060,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "ea313e636212536a34b41234b2bf3fffdecd286e7dec403beda58301acdbed14",
+        "size": 22060,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "tools/build_progress11_scope.py": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "a39cd92b15a8bfc3ad667e64effec849de7d7c0fe4bf0a215398cc345be4f56d",
+          "size": 8665,
+          "source_root": "sip-progress-11-final"
+        }
+      ],
+      "chosen": {
+        "precedence": 1,
+        "sha256": "a39cd92b15a8bfc3ad667e64effec849de7d7c0fe4bf0a215398cc345be4f56d",
+        "size": 8665,
+        "source_root": "sip-progress-11-final"
+      },
+      "conflict": false
+    },
+    "tools/demo_progress11_release.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "ffb4afe45105cc607d00ae1b806688679bf15020d202e1b6d6c64bbde22b11c2",
+          "size": 22071,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 1,
+          "sha256": "d870f76776c624e4c12dcf09ba6c0d769898dc0d8870f2e74a2b400a51b0d0ff",
+          "size": 22535,
+          "source_root": "sip-progress-11-final"
+        },
+        {
+          "precedence": 5,
+          "sha256": "d870f76776c624e4c12dcf09ba6c0d769898dc0d8870f2e74a2b400a51b0d0ff",
+          "size": 22535,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "d870f76776c624e4c12dcf09ba6c0d769898dc0d8870f2e74a2b400a51b0d0ff",
+        "size": 22535,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "tools/run_demo.py": {
+      "candidates": [
+        {
+          "precedence": 1,
+          "sha256": "e381132c0af4eed02b060880281f2360e38f66e896049a41c2849b4e931a93ee",
+          "size": 90580,
+          "source_root": "sip-progress-11-final"
+        }
+      ],
+      "chosen": {
+        "precedence": 1,
+        "sha256": "e381132c0af4eed02b060880281f2360e38f66e896049a41c2849b4e931a93ee",
+        "size": 90580,
+        "source_root": "sip-progress-11-final"
+      },
+      "conflict": false
+    },
+    "tools/run_progress11_checkpoint_acceptance.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "46f5eadb985abdcdbf894d5ae65b431ed67c5c7ef7020713f081ea6a53f0dcf7",
+          "size": 19174,
+          "source_root": "sip-progress-11-work"
+        }
+      ],
+      "chosen": {
+        "precedence": 0,
+        "sha256": "46f5eadb985abdcdbf894d5ae65b431ed67c5c7ef7020713f081ea6a53f0dcf7",
+        "size": 19174,
+        "source_root": "sip-progress-11-work"
+      },
+      "conflict": false
+    },
+    "tools/schema_codegen/generate.py": {
+      "candidates": [
+        {
+          "precedence": 3,
+          "sha256": "d3b611edb4af0b1c93bdb0ac420a21e3f55b963c2e672b6763a4dac793bd1004",
+          "size": 10527,
+          "source_root": "sip-progress-11-rebuild2"
+        }
+      ],
+      "chosen": {
+        "precedence": 3,
+        "sha256": "d3b611edb4af0b1c93bdb0ac420a21e3f55b963c2e672b6763a4dac793bd1004",
+        "size": 10527,
+        "source_root": "sip-progress-11-rebuild2"
+      },
+      "conflict": false
+    },
+    "tools/verify_progress11_checkpoint.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "2b311ab9d1f360912098a4518161566a5737bc5c44dcd8d6f46f59a0530a1759",
+          "size": 25498,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 4,
+          "sha256": "7783425303c16013ced036e88f359c61fb13ae59bc350a972625b678f2f2464e",
+          "size": 25911,
+          "source_root": "sip-progress-11-trackb"
+        },
+        {
+          "precedence": 5,
+          "sha256": "7783425303c16013ced036e88f359c61fb13ae59bc350a972625b678f2f2464e",
+          "size": 25911,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "7783425303c16013ced036e88f359c61fb13ae59bc350a972625b678f2f2464e",
+        "size": 25911,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": true
+    },
+    "tools/verify_progress11_delivery_envelope.py": {
+      "candidates": [
+        {
+          "precedence": 0,
+          "sha256": "956e0daab1c01da404cc280b6aee3fbe0296d91768b5bf2f9bbc2fa8538da9d8",
+          "size": 12205,
+          "source_root": "sip-progress-11-work"
+        },
+        {
+          "precedence": 5,
+          "sha256": "956e0daab1c01da404cc280b6aee3fbe0296d91768b5bf2f9bbc2fa8538da9d8",
+          "size": 12205,
+          "source_root": "sip-progress-11-resume"
+        }
+      ],
+      "chosen": {
+        "precedence": 5,
+        "sha256": "956e0daab1c01da404cc280b6aee3fbe0296d91768b5bf2f9bbc2fa8538da9d8",
+        "size": 12205,
+        "source_root": "sip-progress-11-resume"
+      },
+      "conflict": false
+    }
+  }
+}

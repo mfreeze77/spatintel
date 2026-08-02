@@ -1,0 +1,28 @@
+{
+  "accepted_base": {
+    "checkpoint_id": "sip-v1.1.0-progress-10",
+    "commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+    "inner_zip_sha256": "46d850b6035d0ee86386ff256aabdc65751d49398f6ea4e4084eb4d50d6c669c",
+    "outer_zip_sha256": "1e0c962a59a55a2a6395179c98467778ff56e2e394319b0ca46367551b5027dc",
+    "source_root_sha256": "0c93009874f99c72c3670d6cfca47af00ff04b762e4f4ddddffa20ab03ed8678",
+    "tree": "ced38981c7f41891a9c1288b789400b597a28b44"
+  },
+  "historical_non_authoritative_inputs": {
+    "attested_commit": "65ce122c7ab05782f253ef1ed00b0e694b0557f6",
+    "attested_source_root": "0d9dab4f0540f1169da2f8e87b13d1f434639a071a746153dd867f0204b3c1f0",
+    "attested_tree": "b94be550599af50fe99e34e98173f22b30005bbd",
+    "authoritative_for_reconstruction": false,
+    "precommit_matrix_tests": 489
+  },
+  "reason": "The exact historical Progress 11 Git commit and tree could not be recovered from any available repository, bundle, archive, backup, or active runtime path.",
+  "reconstruction_rules": {
+    "fresh_exact_commit_matrix_required": true,
+    "fresh_inner_and_outer_verification_required": true,
+    "fresh_source_attestation_required": true,
+    "new_git_identity_required": true,
+    "production_authorized": false,
+    "progress_12_authorized": false
+  },
+  "schema": "sip.progress11-reconstruction-provenance/v1",
+  "track": "B"
+}

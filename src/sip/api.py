@@ -1769,6 +1769,66 @@ class RecoveryGameDayCreate(StrictModel):
     metrics: dict[str, Any] = Field(min_length=1)
     findings: list[dict[str, Any]] = Field(default_factory=list)
 
+
+class QACampaignCreate(StrictModel):
+    project_id: str | None = None
+    checkpoint_id: str = Field(min_length=1, max_length=128)
+    release_class: Literal['research', 'development', 'pilot', 'production', 'enterprise'] = 'development'
+    scope: dict[str, Any] = Field(min_length=1)
+    test_data: dict[str, Any] = Field(min_length=1)
+    operating_envelope: dict[str, Any] = Field(min_length=1)
+    limitations: list[dict[str, Any]] = Field(default_factory=list)
+    support_plan: dict[str, Any] = Field(min_length=1)
+    recovery_plan: dict[str, Any] = Field(min_length=1)
+
+class QAScenarioCreate(StrictModel):
+    project_id: str | None = None
+    scenario_type: Literal['construction', 'liveforever']
+    profile: str = Field(min_length=1, max_length=128)
+    evidence_class: Literal['synthetic', 'local_controlled', 'local_executed', 'browser_executed', 'device_executed', 'cloud_executed', 'external_witnessed']
+    input_hashes: dict[str, str] = Field(min_length=1)
+    output_hashes: dict[str, str] = Field(min_length=1)
+    metrics: dict[str, Any] = Field(default_factory=dict)
+    assertions: list[dict[str, Any]] = Field(min_length=1)
+    evidence: list[dict[str, Any]] = Field(min_length=1)
+    environment: dict[str, Any] = Field(min_length=1)
+    status: Literal['passed', 'failed', 'blocked']
+
+class QAGateCreate(StrictModel):
+    gate_type: Literal['requirements', 'license_model_rights', 'security_privacy', 'accessibility', 'load_performance', 'backup_restore', 'migration', 'rollback', 'open_export', 'hybrid_authority', 'support_recovery', 'sbom_vulnerability', 'release_manifest', 'construction_acceptance', 'liveforever_acceptance']
+    required: bool = True
+    execution_status: Literal['completed_successfully', 'completed_with_findings', 'not_executed', 'failed']
+    control_status: Literal['passed_complete', 'passed_with_external_gaps', 'blocked', 'failed']
+    thresholds: dict[str, Any] = Field(default_factory=dict)
+    result: dict[str, Any] = Field(default_factory=dict)
+    findings: list[dict[str, Any]] = Field(default_factory=list)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+    external_gap: bool = False
+
+class QAWaiverCreate(StrictModel):
+    requirement_id: str = Field(min_length=1, max_length=64)
+    priority: Literal['P0', 'P1', 'P2']
+    reason: str = Field(min_length=1)
+    compensating_control: dict[str, Any] = Field(min_length=1)
+    owner: str = Field(min_length=1, max_length=128)
+    expires_at: datetime
+
+class QARollbackCreate(StrictModel):
+    from_release: str = Field(min_length=1, max_length=128)
+    to_release: str = Field(min_length=1, max_length=128)
+    recovery_point_id: str | None = None
+    before_hashes: dict[str, str] = Field(min_length=1)
+    after_hashes: dict[str, str] = Field(min_length=1)
+    steps: list[dict[str, Any]] = Field(min_length=1)
+    verification: dict[str, Any] = Field(min_length=1)
+    status: Literal['passed', 'failed', 'blocked']
+
+class QACandidateCreate(StrictModel):
+    source_commit: str = Field(pattern=r'^[a-f0-9]{40,64}$')
+    source_root_sha256: str = Field(pattern=r'^[a-f0-9]{64}$')
+    release_manifest: dict[str, Any] = Field(min_length=1)
+    signer_key_id: str = Field(min_length=1, max_length=128)
+
 class LegacyMigrationCreate(StrictModel):
     source_backup_id: str
     source_release: str
@@ -1820,6 +1880,7 @@ def _routers() -> dict[str, APIRouter]:
     operations_intelligence = APIRouter(tags=['operations-intelligence'])
     deployment_control = APIRouter(tags=['deployment-control'])
     recovery_control = APIRouter(tags=['recovery-control'])
+    release_assurance = APIRouter(tags=['release-assurance'])
 
     @control.get('/version', operation_id='get_version')
     def version(request: Request) -> dict[str, Any]:
@@ -4423,7 +4484,73 @@ def _routers() -> dict[str, APIRouter]:
         _require(request, principal, action='recovery:production_admit', tenant_id=principal.tenant_id)
         return _context(request).recovery.production_recovery_admission(deployment_profile_id=deployment_profile_id, actor_id=principal.subject_id)
 
-    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence, 'deployment-control': deployment_control, 'recovery-control': recovery_control}
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns', status_code=201, operation_id='create_qa_campaign')
+    def create_qa_campaign(tenant_id: str, body: QACampaignCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='qa:campaign_manage', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).release_assurance.create_campaign(tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.get('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}', operation_id='get_qa_campaign')
+    def get_qa_campaign(tenant_id: str, campaign_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.campaign_project_scope(tenant_id=tenant_id, campaign_id=campaign_id)
+        _require(request, principal, action='qa:read', tenant_id=tenant_id, project_id=project_id)
+        return service.campaign(tenant_id=tenant_id, campaign_id=campaign_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/scenarios', status_code=201, operation_id='record_qa_scenario')
+    def record_qa_scenario(tenant_id: str, campaign_id: str, body: QAScenarioCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        _require(request, principal, action='qa:evidence_record', tenant_id=tenant_id, project_id=body.project_id)
+        return _context(request).release_assurance.record_scenario(campaign_id=campaign_id, tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/gates', status_code=201, operation_id='record_qa_gate')
+    def record_qa_gate(tenant_id: str, campaign_id: str, body: QAGateCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.campaign_project_scope(tenant_id=tenant_id, campaign_id=campaign_id)
+        _require(request, principal, action='qa:evidence_record', tenant_id=tenant_id, project_id=project_id)
+        return service.record_gate(campaign_id=campaign_id, tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/waivers', status_code=201, operation_id='approve_qa_waiver')
+    def approve_qa_waiver(tenant_id: str, campaign_id: str, body: QAWaiverCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.campaign_project_scope(tenant_id=tenant_id, campaign_id=campaign_id)
+        _require(request, principal, action='qa:waiver_approve', tenant_id=tenant_id, project_id=project_id)
+        return service.approve_waiver(campaign_id=campaign_id, tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/rollback', status_code=201, operation_id='record_qa_rollback')
+    def record_qa_rollback(tenant_id: str, campaign_id: str, body: QARollbackCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.campaign_project_scope(tenant_id=tenant_id, campaign_id=campaign_id)
+        _require(request, principal, action='qa:evidence_record', tenant_id=tenant_id, project_id=project_id)
+        return service.record_rollback(campaign_id=campaign_id, tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/candidates', status_code=201, operation_id='sign_qa_release_candidate')
+    def sign_qa_release_candidate(tenant_id: str, campaign_id: str, body: QACandidateCreate, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.campaign_project_scope(tenant_id=tenant_id, campaign_id=campaign_id)
+        _require(request, principal, action='qa:candidate_sign', tenant_id=tenant_id, project_id=project_id)
+        return service.evaluate_and_sign_candidate(campaign_id=campaign_id, tenant_id=tenant_id, **body.model_dump(), actor_id=principal.subject_id)
+
+    @release_assurance.get('/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}', operation_id='get_qa_release_candidate')
+    def get_qa_release_candidate(tenant_id: str, release_candidate_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.candidate_project_scope(tenant_id=tenant_id, release_candidate_id=release_candidate_id)
+        _require(request, principal, action='qa:read', tenant_id=tenant_id, project_id=project_id)
+        return service.candidate(tenant_id=tenant_id, release_candidate_id=release_candidate_id)
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/verify', operation_id='verify_qa_release_candidate')
+    def verify_qa_release_candidate(tenant_id: str, release_candidate_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.candidate_project_scope(tenant_id=tenant_id, release_candidate_id=release_candidate_id)
+        _require(request, principal, action='qa:read', tenant_id=tenant_id, project_id=project_id)
+        return service.candidate(tenant_id=tenant_id, release_candidate_id=release_candidate_id)['verification']
+
+    @release_assurance.post('/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/production-admission', operation_id='evaluate_qa_production_admission')
+    def evaluate_qa_production_admission(tenant_id: str, release_candidate_id: str, request: Request, principal: Principal) -> dict[str, Any]:
+        service = _context(request).release_assurance
+        project_id = service.candidate_project_scope(tenant_id=tenant_id, release_candidate_id=release_candidate_id)
+        _require(request, principal, action='qa:production_admit', tenant_id=tenant_id, project_id=project_id)
+        return service.production_admission(tenant_id=tenant_id, release_candidate_id=release_candidate_id, actor_id=principal.subject_id)
+
+    return {'control-api': control, 'identity-policy': identity, 'capture-service': capture, 'workflow-service': workflow, 'scene-service': scene, 'evidence-service': evidence, 'search-service': search, 'export-service': export, 'notification-service': notification, 'audit-service': audit, 'representation-api': representation, 'provider-registry': providers, 'representation-publisher': publisher, 'construction': construction, 'liveforever': memory, 'collaboration': collaboration, 'security-ops': security_ops, 'operations-intelligence': operations_intelligence, 'deployment-control': deployment_control, 'recovery-control': recovery_control, 'release-assurance': release_assurance}
 SERVICE_DEPENDENCIES: dict[str, set[str]] = {'control-api': {'control-api', 'construction', 'liveforever', 'collaboration'}, 'all': set(_routers().keys())}
 
 def create_app(*, context: PlatformContext | None=None, service_name: str | None=None) -> FastAPI:

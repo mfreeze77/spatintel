@@ -1,0 +1,5020 @@
+{
+  "accepted_base_commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+  "authorized_epics": [
+    "QA-002"
+  ],
+  "deferred_requirement_count": 0,
+  "finding_count": 0,
+  "findings": [],
+  "included_requirement_count": 96,
+  "milestone": "Progress 11 bounded QA-002 dual-vertical acceptance and release gates",
+  "production_authorized": false,
+  "progress_11_authorized": true,
+  "progress_12_authorized": false,
+  "requirement_count": 96,
+  "requirements_audited": [
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-001",
+            "APPFAIL-002",
+            "APPFAIL-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "APPFAIL-001",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-001",
+            "APPFAIL-002",
+            "APPFAIL-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "APPFAIL-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-003",
+            "APPFAIL-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_diagnostics_are_allowlisted_bounded_and_contain_no_raw_sensitive_content"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "APPFAIL-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-004",
+            "APPFAIL-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_unsafe_and_fatal_failures_block_or_withdraw_publication"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "APPFAIL-004",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_recovery_creates_new_lineage_and_never_rewrites_failed_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "APPFAIL-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-003",
+            "APPFAIL-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_diagnostics_are_allowlisted_bounded_and_contain_no_raw_sensitive_content"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "APPFAIL-006",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-004",
+            "APPFAIL-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_unsafe_and_fatal_failures_block_or_withdraw_publication"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "APPFAIL-007",
+      "verification_method": "Failure-catalog audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-008",
+            "APPFAIL-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_hybrid_failure_preserves_prior_assets_and_has_independent_component_fallbacks"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "APPFAIL-008",
+      "verification_method": "Fault-injection test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-008",
+            "APPFAIL-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_hybrid_failure_preserves_prior_assets_and_has_independent_component_fallbacks"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "APPFAIL-009",
+      "verification_method": "Component failure test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-001",
+            "APPFAIL-002",
+            "APPFAIL-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        },
+        {
+          "declared_requirement_ids": [
+            "APPFAIL-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/unit/test_failure_catalog.py::test_catalog_json_is_deterministic_and_has_no_duplicate_codes"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "APPFAIL-010",
+      "verification_method": "Recovery audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "CONTEST-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "CONTEST-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "CONTEST-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "CONTEST-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "CONTEST-005",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "CONTEST-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_documentation.py::test_required_documentation_and_readme_links_exist"
+        },
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-002",
+            "DELDOD-003",
+            "DELDOD-004",
+            "DELDOD-005",
+            "DELDOD-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATDB-004",
+            "DELDOD-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-002",
+            "DELDOD-003",
+            "DELDOD-004",
+            "DELDOD-005",
+            "DELDOD-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-002",
+            "DELDOD-003",
+            "DELDOD-004",
+            "DELDOD-005",
+            "DELDOD-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "DELDOD-002",
+            "DELDOD-003",
+            "DELDOD-004",
+            "DELDOD-005",
+            "DELDOD-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-007",
+      "verification_method": "Definition-of-done audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-008",
+      "verification_method": "Acceptance audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "DELDOD-009",
+      "verification_method": "End-to-end test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-010",
+      "verification_method": "Portability test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-011",
+      "verification_method": "Security audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "DELDOD-002",
+            "DELDOD-003",
+            "DELDOD-004",
+            "DELDOD-005",
+            "DELDOD-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELDOD-012",
+      "verification_method": "Traceability audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELMVP-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELMVP-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELMVP-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELMVP-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELMVP-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELMVP-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELROAD-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELROAD-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "DELROAD-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELROAD-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELROAD-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELROAD-001",
+            "DELROAD-002",
+            "DELROAD-003",
+            "DELROAD-004",
+            "DELROAD-005",
+            "DELROAD-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "DELROAD-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-001",
+      "verification_method": "Benchmark framework test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-002",
+      "verification_method": "Dataset review"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-003",
+      "verification_method": "Metrics test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-004",
+      "verification_method": "Negative policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-005",
+      "verification_method": "Conformance suite"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-006",
+      "verification_method": "Security integration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-007",
+      "verification_method": "Vertical E2E tests"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "HYBTEST-008",
+      "verification_method": "Release review"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-009",
+      "verification_method": "Automated interaction test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-010",
+      "verification_method": "Profile benchmark"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-011",
+      "verification_method": "Building-scale test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-012",
+      "verification_method": "Upgrade gate"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-013",
+      "verification_method": "Controlled user study"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-014",
+      "verification_method": "Evidence audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        },
+        {
+          "declared_requirement_ids": [
+            "HYBTEST-015",
+            "RECBIDI-003",
+            "RECBIDI-008"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_mesh_splat_surface_roundtrip_reports_irreversible_loss"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-015",
+      "verification_method": "Interoperability test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-007",
+            "DELDOD-008",
+            "DELDOD-009",
+            "DELDOD-010",
+            "DELDOD-011",
+            "HYBTEST-001",
+            "HYBTEST-002",
+            "HYBTEST-003",
+            "HYBTEST-005",
+            "HYBTEST-006",
+            "HYBTEST-008",
+            "HYBTEST-009",
+            "HYBTEST-010",
+            "HYBTEST-011",
+            "HYBTEST-012",
+            "HYBTEST-013",
+            "HYBTEST-014",
+            "HYBTEST-015",
+            "HYBTEST-016"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        },
+        {
+          "declared_requirement_ids": [
+            "HYBTEST-016",
+            "TSTLAY-002",
+            "TSTSEC-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "HYBTEST-016",
+      "verification_method": "Fuzz and abuse test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "LIFTEST-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "LIFTEST-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "LIFTEST-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFDISP-002",
+            "LIFGRAPH-004",
+            "LIFTEST-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "LIFTEST-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "LIFTEST-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFTEST-006",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "LIFTEST-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001",
+            "SIPMIG-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-001",
+      "verification_method": "Hash and migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-002",
+      "verification_method": "Migration policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_append_only_migration_is_byte_locked"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-003",
+      "verification_method": "Negative migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-004",
+      "verification_method": "Policy-diff test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-005",
+      "verification_method": "Measurement migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "declared_requirement_ids": [
+            "SIPMIG-001",
+            "SIPMIG-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-006",
+      "verification_method": "Anchor/entity regression test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "SIPMIG-007",
+      "verification_method": "Recovery exercise"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "SIPMIG-008",
+      "verification_method": "API compatibility test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "SIPMIG-009",
+      "verification_method": "Export compatibility test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "PLTIO-001",
+            "PLTIO-002",
+            "PLTIO-004",
+            "PLTIO-005",
+            "PLTIO-007",
+            "PLTIO-009",
+            "PLTIO-011",
+            "SIPMIG-001",
+            "SIPMIG-002",
+            "SIPMIG-003",
+            "SIPMIG-004",
+            "SIPMIG-005",
+            "SIPMIG-006",
+            "SIPMIG-007",
+            "SIPMIG-008",
+            "SIPMIG-009",
+            "SIPMIG-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "SIPMIG-010",
+      "verification_method": "Audit report review"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "GOVDOC-001",
+            "TSTGATE-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-002",
+            "TSTGATE-004",
+            "TSTGATE-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwritten"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSCICD-002",
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_audit_artifact_has_no_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_progress10_accepted_snapshot_is_immutable_and_valid"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_later_status_improvement_does_not_rewrite_accepted_progress10_status"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_current_global_implementation_map_is_not_a_historical_equality_input"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_missing_historical_snapshot_field_fails_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_ungoverned_historical_linked_test_change_is_rejected"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_snapshot_scope_and_audit_byte_mutation_are_detected"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_missing_accepted_test_or_requirement_fails_referential_integrity"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_progress11_and_all_closed_milestone_audits_remain_complete"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_later_test_addition_does_not_rewrite_closed_snapshot"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_status_can_improve_without_historical_status_rewrite"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_required_snapshot_field_deletion_fails_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_linked_test_change_requires_governed_amendment"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_implementation_map_changes_do_not_create_historical_drift"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_historical_scope_and_snapshot_mutation_are_detected"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_scope_tool_refuses_historical_regeneration"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress11_traceability_remains_complete_after_progress10_snapshot_repair"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTSTRAT-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-011"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-011",
+            "TSTGATE-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-002",
+            "TSTGATE-004",
+            "TSTGATE-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-006",
+            "TSTSTRAT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-011"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-002",
+            "TSTGATE-004",
+            "TSTGATE-007"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-007",
+      "verification_method": "Release review"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-008",
+      "verification_method": "Quality-profile test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-009"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-009",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTGATE-009",
+      "verification_method": "Acceptance test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "CONTEST-001",
+            "CONTEST-002",
+            "CONTEST-003",
+            "CONTEST-004",
+            "CONTEST-005",
+            "CONTEST-006",
+            "DELMVP-001",
+            "DELMVP-002",
+            "DELMVP-003",
+            "DELMVP-004",
+            "DELMVP-006",
+            "HYBTEST-004",
+            "HYBTEST-007",
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-008",
+            "TSTGATE-009",
+            "TSTGATE-010"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-010",
+      "verification_method": "Release evidence audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-007",
+            "TSTGATE-011"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-011",
+            "TSTGATE-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-011",
+            "TSTGATE-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-011",
+      "verification_method": "Documentation/UI test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-011",
+            "TSTGATE-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTGATE-011",
+            "TSTGATE-012"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTGATE-012",
+      "verification_method": "Governance test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-006",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-009",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied"
+        },
+        {
+          "declared_requirement_ids": [
+            "LIFTEST-006",
+            "TSTSEC-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELMVP-005",
+            "LIFTEST-001",
+            "LIFTEST-002",
+            "LIFTEST-003",
+            "LIFTEST-004",
+            "LIFTEST-005",
+            "LIFTEST-006",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "declared_requirement_ids": [
+            "DATRET-003",
+            "LIFCONS-002",
+            "TSTSEC-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-002",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTLAY-002",
+            "TSTLAY-004",
+            "TSTSEC-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed"
+        },
+        {
+          "declared_requirement_ids": [
+            "HYBTEST-016",
+            "TSTLAY-002",
+            "TSTSEC-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSEC-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-004",
+            "OPSTHR-008",
+            "OPSTHR-011",
+            "OPSTHR-012",
+            "SECEXT-003",
+            "SECEXT-004",
+            "SECEXT-005",
+            "SECEXT-006",
+            "SECEXT-007",
+            "SECEXT-008",
+            "SECEXT-012",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "declared_requirement_ids": [
+            "PLTAGENT-001",
+            "PLTAGENT-002",
+            "PLTAGENT-004",
+            "PLTAGENT-006",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_authorized_search_agents.py::test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSAUDIT-001",
+            "OPSAUDIT-002",
+            "OPSAUDIT-003",
+            "OPSAUDIT-004",
+            "OPSAUDIT-005",
+            "TSTSEC-004"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_audit_integrity_and_denial_durability"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "TSTSEC-005"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "OPSSRE-006",
+            "OPSTHR-007",
+            "OPSTHREA-001",
+            "OPSTHREA-002",
+            "OPSTHREA-003",
+            "OPSTHREA-004",
+            "OPSTHREA-005",
+            "OPSTHREA-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSKEY-001",
+            "OPSKEY-002",
+            "OPSKEY-003",
+            "OPSKEY-004",
+            "OPSKEY-005",
+            "OPSKEY-006",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_workload_and_key_directive_boundaries"
+        },
+        {
+          "declared_requirement_ids": [
+            "OPSSEC-001",
+            "OPSSEC-002",
+            "OPSSEC-003",
+            "OPSSEC-006",
+            "SECEXT-001",
+            "SECEXT-002",
+            "TSTSEC-001",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        },
+        {
+          "declared_requirement_ids": [
+            "SECEXT-012",
+            "TSTSEC-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSEC-006",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-003",
+            "TSTSTRAT-001"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-001",
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSTRAT-001",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTLAY-003",
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-001",
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_generated_traceability_outputs_do_not_create_a_test_evidence_bootstrap_loop"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_suite_sidecar_rejects_changed_source_or_tampered_outputs"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_is_hash_bound_and_rejects_mutation"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_rejects_evidence_outside_atomic_staging_root"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_traceability_shard_resume_is_invalidated_by_generated_input_change_without_matrix_bootstrap"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_source_tree_hash_prunes_generated_trees_and_changes_only_for_relevant_source"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_finalized_shard_records_use_repository_relative_live_paths"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_stage_owner_token_rejects_orphaned_shard_writes"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_suite_writer_lease_serializes_independent_processes"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_isolated_pytest_runner_terminates_when_controller_disappears"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_single_suite_worker_uses_main_thread_controller"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_single_shard_worker_executes_directly_without_nested_thread_pool"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_missing_junit_is_replaced_with_controller_error_evidence"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_default_matrix_target_allows_migration_headroom"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_default_matrix_control_root_is_outside_generated_repository_state"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_matrix_controller_lock_is_external_and_rejects_a_second_writer"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_traceability_evidence.py::test_post_commit_traceability_gate_requires_every_declared_artifact"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_traceability_evidence.py::test_evidence_traceability_loads_canonical_result_snapshot_once"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-002"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSTRAT-002",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTGATE-006",
+            "TSTSTRAT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root"
+        },
+        {
+          "declared_requirement_ids": [
+            "TSTSTRAT-003"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement_id": "TSTSTRAT-003",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSTRAT-004",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSTRAT-005",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "declared_requirement_ids": [
+            "DELDOD-001",
+            "DELDOD-005",
+            "DELDOD-006",
+            "DELDOD-012",
+            "TSTGATE-001",
+            "TSTGATE-002",
+            "TSTGATE-003",
+            "TSTGATE-004",
+            "TSTGATE-005",
+            "TSTGATE-006",
+            "TSTGATE-007",
+            "TSTGATE-011",
+            "TSTGATE-012",
+            "TSTSTRAT-001",
+            "TSTSTRAT-002",
+            "TSTSTRAT-003",
+            "TSTSTRAT-004",
+            "TSTSTRAT-005",
+            "TSTSTRAT-006"
+          ],
+          "declares_requirement_id": true,
+          "exists": true,
+          "present_in_implementation_map": true,
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement_id": "TSTSTRAT-006",
+      "verification_method": "Controlled verification"
+    }
+  ],
+  "schema": "sip.progress11-traceability-audit/v1",
+  "status": "passed_complete"
+}

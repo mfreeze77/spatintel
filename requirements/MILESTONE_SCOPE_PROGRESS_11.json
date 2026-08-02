@@ -1,0 +1,2991 @@
+{
+  "acceptance_criteria": [
+    "Construction and LiveForever scenarios retain direct, requirement-declared, source-bound evidence without using confidential or human-subject data.",
+    "Measurement authority, restricted-data, consent, generated-content, conflicting-recollection, quiet-mode, accessibility, and offline-export stop-lines fail closed.",
+    "Release gates distinguish command execution from control completeness and preserve external gaps.",
+    "Release manifests reject stale, incomplete, mismatched, unsigned, or source-unbound evidence.",
+    "Rollback, migration, export, restore, security, privacy, load, operating-envelope, support, and known-limitation evidence are retained.",
+    "The exact committed source passes clean-detached acceptance and both dedicated package verifiers return zero findings.",
+    "Progress 12 and production remain unauthorized."
+  ],
+  "accepted_base_commit": "ab409f6ac7ca583535f69e5806b7a3bdbfe08214",
+  "authorized_epics": [
+    "QA-002"
+  ],
+  "branch": "progress-11-release-gates",
+  "checkpoint_id": "sip-v1.1.0-progress-11",
+  "deferred_requirement_count": 0,
+  "deferred_requirements": [],
+  "dependency_rationale": "Progress 10 closed OPS-004 and True North authorized only QA-002 as its bounded successor.",
+  "explicitly_out_of_scope": [
+    "PILOT-001 and all customer or human-subject pilots",
+    "Progress 12",
+    "production credentials, data, traffic, or promotion"
+  ],
+  "external_gaps": [
+    "Mounted browser/runtime and formal accessibility execution remain external.",
+    "Physical iOS/LiDAR/device execution remains external.",
+    "Approved LingBot checkpoint, model rights, CUDA/GPU, and real-scene execution remain external.",
+    "Credentialed cloud deployment and recovery remain external.",
+    "Independent penetration, privacy, legal, usability, evidentiary, customer, and human-subject review remain external."
+  ],
+  "included_requirement_count": 96,
+  "included_requirements": [
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "The pilot shall capture at least one mechanical/electrical room, corridor, controlled door, and fire-alarm device set using the same platform.",
+      "requirement_id": "CONTEST-001",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "Independent ground truth shall measure selected dimensions, device locations, and inventory.",
+      "requirement_id": "CONTEST-002",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "The pilot shall demonstrate an RFI/document link, issue lifecycle, return-visit change, and commissioning/test evidence.",
+      "requirement_id": "CONTEST-003",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Unauthorized roles shall be unable to discover restricted security-system entities through search, viewer, exports, counts, or URLs.",
+      "requirement_id": "CONTEST-004",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A full project export shall open in the reference offline viewer and validated third-party format consumers.",
+      "requirement_id": "CONTEST-005",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Operators shall complete capture recovery after an intentional app interruption without source loss.",
+      "requirement_id": "CONTEST-006",
+      "source_document": "70-construction/712_construction_acceptance_tests.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "The pilot shall capture one meaningful room, at least three spatially anchored interview stories, photographs/documents, one object, and a timeline.",
+      "requirement_id": "LIFTEST-001",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "The pilot shall demonstrate direct evidence, uncertain date, conflicting recollection, source-constrained reconstruction, and clearly labeled generated fill.",
+      "requirement_id": "LIFTEST-002",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "A contributor shall restrict one segment and the restriction shall propagate to search, viewer, agent, reports, share links, and export.",
+      "requirement_id": "LIFTEST-003",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "test_id": "tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A family reviewer shall propose a correction without altering the original recording/transcript.",
+      "requirement_id": "LIFTEST-004",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "The system shall export an offline package with originals, transcript, graph, scene, labels, consent summary, and checksums.",
+      "requirement_id": "LIFTEST-005",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "Accessibility tests shall cover captions, keyboard navigation, screen-reader metadata, reduced motion, and non-voice experience.",
+      "requirement_id": "LIFTEST-006",
+      "source_document": "80-liveforever/812_liveforever_acceptance_tests.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies"
+        },
+        {
+          "test_id": "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Every P0 requirement shall map to an automated test, controlled field procedure, review artifact, or continuously monitored control.",
+      "requirement_id": "TSTSTRAT-001",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots"
+        },
+        {
+          "test_id": "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans"
+        },
+        {
+          "test_id": "tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_generated_traceability_outputs_do_not_create_a_test_evidence_bootstrap_loop"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_suite_sidecar_rejects_changed_source_or_tampered_outputs"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_is_hash_bound_and_rejects_mutation"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_staged_shard_resume_rejects_evidence_outside_atomic_staging_root"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_traceability_shard_resume_is_invalidated_by_generated_input_change_without_matrix_bootstrap"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_source_tree_hash_prunes_generated_trees_and_changes_only_for_relevant_source"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_finalized_shard_records_use_repository_relative_live_paths"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_stage_owner_token_rejects_orphaned_shard_writes"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_suite_writer_lease_serializes_independent_processes"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_isolated_pytest_runner_terminates_when_controller_disappears"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_active_staging_is_isolated_from_published_report_cleanup"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_single_suite_worker_uses_main_thread_controller"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_single_shard_worker_executes_directly_without_nested_thread_pool"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_missing_junit_is_replaced_with_controller_error_evidence"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_default_matrix_target_allows_migration_headroom"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_default_matrix_control_root_is_outside_generated_repository_state"
+        },
+        {
+          "test_id": "tests/contract/test_test_matrix_resume.py::test_matrix_controller_lock_is_external_and_rejects_a_second_writer"
+        },
+        {
+          "test_id": "tests/contract/test_traceability_evidence.py::test_traceability_rejects_stale_or_tampered_canonical_junit"
+        },
+        {
+          "test_id": "tests/contract/test_traceability_evidence.py::test_post_commit_traceability_gate_requires_every_declared_artifact"
+        },
+        {
+          "test_id": "tests/contract/test_traceability_evidence.py::test_evidence_traceability_loads_canonical_result_snapshot_once"
+        },
+        {
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_demo_evidence_wrapper_serializes_temporal_values_and_hashes_exact_report"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Test evidence shall include input hashes, environment, version, output, result, thresholds, and reviewer when manual.",
+      "requirement_id": "TSTSTRAT-002",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "The strategy shall cover unit, property, contract, integration, end-to-end, field, benchmark, load, resilience, security, privacy, accessibility, migration, backup, and acceptance testing.",
+      "requirement_id": "TSTSTRAT-003",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Failed critical tests shall block release unless an allowed waiver with compensating control exists.",
+      "requirement_id": "TSTSTRAT-004",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Test data shall be synthetic or consented and follow retention/access policy.",
+      "requirement_id": "TSTSTRAT-005",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "requirements/PROGRESS_11_TEST_STRATEGY.json",
+        "tools/run_test_matrix.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Flaky tests shall be quarantined only with owner and expiry and cannot represent sole P0 evidence.",
+      "requirement_id": "TSTSTRAT-006",
+      "source_document": "95-testing-delivery/950_test_strategy.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe"
+        },
+        {
+          "test_id": "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status"
+        },
+        {
+          "test_id": "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants"
+        },
+        {
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Tests shall attempt unauthorized discovery through IDs, counts, search snippets, vectors, thumbnails, tiles, caches, logs, share links, signed URLs, exports, and agent tools.",
+      "requirement_id": "TSTSEC-001",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        },
+        {
+          "test_id": "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Consent restriction/revocation shall propagate to processing, viewer, search, agents, reports, notifications, exports, and future model training.",
+      "requirement_id": "TSTSEC-002",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed"
+        },
+        {
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "File ingestion shall test malicious archives, media parsers, oversized dimensions, embedded scripts, and metadata injection.",
+      "requirement_id": "TSTSEC-003",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes"
+        },
+        {
+          "test_id": "tests/integration/test_authorized_search_agents.py::test_pltagent_001_002_tools_are_scoped_grounded_and_cannot_operate_life_safety"
+        },
+        {
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_audit_integrity_and_denial_durability"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Agent tests shall cover destructive requests, role confusion, evidence fabrication, source-label removal, and speaking as an unconsented person.",
+      "requirement_id": "TSTSEC-004",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Deletion tests shall verify canonical, derivatives, indexes, caches, links, and backup expiry behavior.",
+      "requirement_id": "TSTSEC-005",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity"
+        },
+        {
+          "test_id": "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_workload_and_key_directive_boundaries"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        },
+        {
+          "test_id": "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "src/sip/policy.py",
+        "tests/security/test_progress11_release_adversarial.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Incident and support access controls shall be exercised through realistic scenarios.",
+      "requirement_id": "TSTSEC-006",
+      "source_document": "95-testing-delivery/953_security_privacy_tests.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Research release shall use authorized test data, explicit research labels, and no commercial/customer output from unapproved models.",
+      "requirement_id": "TSTGATE-001",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "Pilot release shall define operating envelope, customer consent, support plan, measurement limitations, and rollback/export.",
+      "requirement_id": "TSTGATE-002",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository"
+        },
+        {
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot"
+        },
+        {
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_separates_command_execution_from_child_control_completeness"
+        },
+        {
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error"
+        },
+        {
+          "test_id": "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_snapshots_each_child_report_before_a_shared_path_is_overwritten"
+        },
+        {
+          "test_id": "tests/contract/test_delivery_tools.py::test_release_readiness_fails_closed_for_open_gates"
+        },
+        {
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids"
+        },
+        {
+          "test_id": "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_audit_artifact_has_no_drift"
+        },
+        {
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot"
+        },
+        {
+          "test_id": "tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_progress10_accepted_snapshot_is_immutable_and_valid"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_later_status_improvement_does_not_rewrite_accepted_progress10_status"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_current_global_implementation_map_is_not_a_historical_equality_input"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_missing_historical_snapshot_field_fails_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_ungoverned_historical_linked_test_change_is_rejected"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_snapshot_scope_and_audit_byte_mutation_are_detected"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_missing_accepted_test_or_requirement_fails_referential_integrity"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_historical_snapshot.py::test_progress11_and_all_closed_milestone_audits_remain_complete"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_later_test_addition_does_not_rewrite_closed_snapshot"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_status_can_improve_without_historical_status_rewrite"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_required_snapshot_field_deletion_fails_closed"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_linked_test_change_requires_governed_amendment"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_implementation_map_changes_do_not_create_historical_drift"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_historical_scope_and_snapshot_mutation_are_detected"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_scope_tool_refuses_historical_regeneration"
+        },
+        {
+          "test_id": "tests/contract/test_progress10_immutable_snapshot.py::test_progress11_traceability_remains_complete_after_progress10_snapshot_repair"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema"
+        },
+        {
+          "test_id": "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "Production release shall pass all P0 requirements, vulnerability/SBOM/license review, benchmark thresholds, consent/truth-label tests, backup restore, migration, load, and acceptance scenarios.",
+      "requirement_id": "TSTGATE-003",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "Enterprise release shall additionally pass tenant isolation, SSO/audit, retention/legal hold, DR, scale, and support controls.",
+      "requirement_id": "TSTGATE-004",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Known limitations shall be included in release notes and UI where they affect use.",
+      "requirement_id": "TSTGATE-005",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Rollback shall be rehearsed before production promotion.",
+      "requirement_id": "TSTGATE-006",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "A surface provider shall not enter production without current legal, privacy, security, reproducibility, and stratified benchmark approval.",
+      "requirement_id": "TSTGATE-007",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 136,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Release review"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Raycast, render, collision, navigation, occlusion, audio, and measurement suitability shall be gated independently.",
+      "requirement_id": "TSTGATE-008",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 137,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Quality-profile test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Production promotion shall prove proxy authority restrictions in Construction and LiveForever end-to-end scenarios.",
+      "requirement_id": "TSTGATE-009",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 138,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Acceptance test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Release evidence shall include native-hybrid comparison, open export/import, non-splat fallback, provider replacement, and rollback.",
+      "requirement_id": "TSTGATE-010",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 139,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Release evidence audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Known proxy gaps and prohibited uses shall appear in machine-readable limitations and applicable UI/report surfaces.",
+      "requirement_id": "TSTGATE-011",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 140,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Documentation/UI test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate"
+        },
+        {
+          "test_id": "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "tools/demo_progress11_release.py",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A provider/license/terms change shall trigger re-review before subsequent production execution.",
+      "requirement_id": "TSTGATE-012",
+      "source_document": "95-testing-delivery/955_release_gates.md",
+      "source_line": 141,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Governance test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "MVP shall ingest first-party iPhone and Polycam raw capture fixtures.",
+      "requirement_id": "DELMVP-001",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "MVP shall run ARKit/LiDAR metric processing, a gated LingBot research adapter, alignment, TSDF/mesh, quality summary, and browser publication.",
+      "requirement_id": "DELMVP-002",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "MVP shall create stable entities, anchors, evidence, assertions, tasks, scene commits, diff, search, and open export.",
+      "requirement_id": "DELMVP-003",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Construction demo shall include a systems room, devices/door/equipment, drawing link, issue, measurement verification, and report.",
+      "requirement_id": "DELMVP-004",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "LiveForever demo shall include a room, object, interview stories, old media, uncertainty/conflict, evidence view, consent, and preservation export.",
+      "requirement_id": "DELMVP-005",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "MVP shall run local workstation or hybrid and document production blockers.",
+      "requirement_id": "DELMVP-006",
+      "source_document": "95-testing-delivery/956_mvp_plan.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Every roadmap item shall name prerequisites, customer outcome, architecture impact, risk, acceptance, and deprecation/migration implications.",
+      "requirement_id": "DELROAD-001",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Quarter labels shall not substitute for dependency-based sequencing.",
+      "requirement_id": "DELROAD-002",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Research spikes shall have time bounds and decisions, not become unowned permanent forks.",
+      "requirement_id": "DELROAD-003",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Commercial dependencies shall have fallback/exit paths.",
+      "requirement_id": "DELROAD-004",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Roadmap review shall use pilot evidence, benchmark results, cost, support burden, and consent/security incidents.",
+      "requirement_id": "DELROAD-005",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "The roadmap shall preserve local-only and open-export commitments as capabilities expand.",
+      "requirement_id": "DELROAD-006",
+      "source_document": "95-testing-delivery/957_roadmap.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_documentation.py::test_required_documentation_and_readme_links_exist"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "A completed feature shall satisfy linked requirements and acceptance tests, include typed contracts, errors, audit, metrics, authorization, retention, and user documentation.",
+      "requirement_id": "DELDOD-001",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        },
+        {
+          "test_id": "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "A completed schema change shall include compatibility, migration, rollback/recovery, fixtures, and generated clients.",
+      "requirement_id": "DELDOD-002",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "A completed model integration shall include approval manifest, adapter isolation, benchmarks, failure detection, cost, monitoring, rollback, and reproducibility.",
+      "requirement_id": "DELDOD-003",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "A completed UI shall include loading/error/empty/restricted states, accessibility, source labels, analytics/telemetry policy, and end-to-end tests.",
+      "requirement_id": "DELDOD-004",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A completed operational service shall include SLO, alerts, runbooks, backup/recovery, capacity, and ownership.",
+      "requirement_id": "DELDOD-005",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Acceptance evidence shall be linked to the release or epic record.",
+      "requirement_id": "DELDOD-006",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "A completed provider adapter shall include signed manifest, isolation, contract tests, quarantine, stable errors, cost/resource limits, cancellation, and rollback.",
+      "requirement_id": "DELDOD-007",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 136,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Definition-of-done audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "A completed proxy pipeline shall include per-use validation, limitations, protected regions, support maps, authority restrictions, and replacement.",
+      "requirement_id": "DELDOD-008",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 137,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Acceptance audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P0",
+      "requirement": "A completed hybrid viewer shall prove semantic stability, measurement re-resolution, security, safe locomotion, accessibility, and fallback.",
+      "requirement_id": "DELDOD-009",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 138,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "End-to-end test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A completed conversion path shall include loss declaration, open export/import, provenance, policy inheritance, and preservation behavior.",
+      "requirement_id": "DELDOD-010",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 139,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Portability test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A completed external/manual workflow shall include minimization, receipt, expiry, quarantine, provider status, and data-class denial tests.",
+      "requirement_id": "DELDOD-011",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 140,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Security audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+        },
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/release_assurance.py",
+        "schemas/openapi/release-assurance.openapi.json",
+        "docs/operator/PROGRESS_11_RELEASE_GATES.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Acceptance evidence shall be linked to requirement, provider version, benchmark profile, scene class, and release.",
+      "requirement_id": "DELDOD-012",
+      "source_document": "95-testing-delivery/960_definition_of_done.md",
+      "source_line": 141,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Traceability audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Provider and runtime claims shall be evaluated by versioned intended-use profiles rather than a single visual quality score.",
+      "requirement_id": "HYBTEST-001",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 287,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Benchmark framework test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Ground truth shall be independent of the candidate provider and shall include exact/surveyed geometry, semantic regions, held-out views, or annotated behavior appropriate to the claim.",
+      "requirement_id": "HYBTEST-002",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 288,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Dataset review"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Geometry metrics shall be reported globally and by critical semantic region so averages cannot hide missing doors, stairs, devices, objects, or false walls.",
+      "requirement_id": "HYBTEST-003",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 289,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Metrics test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Authority tests shall prove that proxy, visual, design, generated, and provider-self-validated outputs cannot receive prohibited status.",
+      "requirement_id": "HYBTEST-004",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 290,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Negative policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Provider conformance shall cover policy admission, hashes, coordinates, resources, progress, cancellation, recovery, isolation, outputs, provenance, and publication separation.",
+      "requirement_id": "HYBTEST-005",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 291,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Conformance suite"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Security tests shall prove unapproved external-provider denial before data mount and complete derivative invalidation after privacy or consent change.",
+      "requirement_id": "HYBTEST-006",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 292,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Security integration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Construction and LiveForever acceptance scenarios shall pass with retained source, operation, validation, viewer, review, and export evidence.",
+      "requirement_id": "HYBTEST-007",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 293,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Vertical E2E tests"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P0",
+      "requirement": "Production release shall include at least one approved local or project-private conversion/proxy path and shall not depend solely on a public manual web tool.",
+      "requirement_id": "HYBTEST-008",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 294,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Release review"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Selection tests shall measure role resolution, entity precision/recall, hit error, metric snap residual, LOD stability, and remap behavior.",
+      "requirement_id": "HYBTEST-009",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 295,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated interaction test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Collision and navigation shall be benchmarked separately for declared actor profiles and shall not imply safety, accessibility, egress, or robotics approval.",
+      "requirement_id": "HYBTEST-010",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 296,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Profile benchmark"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "Large-scene tests shall cover tiling, seams, streaming, independent regeneration, cross-tile identity, memory, and degraded modes.",
+      "requirement_id": "HYBTEST-011",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 297,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Building-scale test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "priority": "P1",
+      "requirement": "Provider upgrades shall run in shadow and compare quality, behavior, performance, cost, security, license, and reproducibility against the active version.",
+      "requirement_id": "HYBTEST-012",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 298,
+      "status_at_scope_freeze": "IMPLEMENTED_UNVERIFIED",
+      "verification_method": "Upgrade gate"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "external_validation_required",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "priority": "P1",
+      "requirement": "Human evaluation shall be task-based and shall test recognition of authority/truth labels, evidence access, comfort, accessibility, and failure communication.",
+      "requirement_id": "HYBTEST-013",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 299,
+      "status_at_scope_freeze": "EXTERNAL_VALIDATION_REQUIRED",
+      "verification_method": "Controlled user study"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "All benchmark evidence shall be machine-readable, content-addressed, reproducible where claimed, and attached to provider and release records.",
+      "requirement_id": "HYBTEST-014",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 300,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Evidence audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        },
+        {
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_mesh_splat_surface_roundtrip_reports_irreversible_loss"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Mesh-to-splat and splat-to-surface round trips shall report information loss and shall not claim representation equivalence.",
+      "requirement_id": "HYBTEST-015",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 301,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Interoperability test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+        },
+        {
+          "test_id": "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/hybrid.py",
+        "src/sip/representations.py",
+        "src/sip/scene.py",
+        "tools/demo_progress11_release.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Malformed and adversarial spatial files shall be parsed in isolation with bounded resources and no publication side effect.",
+      "requirement_id": "HYBTEST-016",
+      "source_document": "95-testing-delivery/961_splat_surface_benchmark_acceptance.md",
+      "source_line": 302,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Fuzz and abuse test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "The catalog shall cover mobile interruption, tracking loss, corrupt package, hash mismatch, clock error, bad calibration, pose collapse, misalignment, false loop, depth-scale error, dynamic contamination, mesh defect, model/license block, queue/provider outage, index staleness, permission leak, redaction failure, and deletion error.",
+      "requirement_id": "APPFAIL-001",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 36,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Each failure shall have severity, retryability, safe checkpoint, operator action, customer message, audit requirement, and test reference.",
+      "requirement_id": "APPFAIL-002",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 37,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_diagnostics_are_allowlisted_bounded_and_contain_no_raw_sensitive_content"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Fatal failures shall preserve diagnostic manifests without exposing sensitive raw data.",
+      "requirement_id": "APPFAIL-003",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 38,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_unsafe_and_fatal_failures_block_or_withdraw_publication"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "A failure classified as unsafe shall prevent publication even when partial outputs exist.",
+      "requirement_id": "APPFAIL-004",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 39,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_recovery_creates_new_lineage_and_never_rewrites_failed_evidence"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Recovery shall create new run/commit lineage rather than rewriting the failed record.",
+      "requirement_id": "APPFAIL-005",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 40,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Controlled verification"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_diagnostics_are_allowlisted_bounded_and_contain_no_raw_sensitive_content"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Failure-code compatibility shall be maintained for API clients and support analytics.",
+      "requirement_id": "APPFAIL-006",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 41,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Automated test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_unsafe_and_fatal_failures_block_or_withdraw_publication"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "The failure catalog shall cover provider denial/revocation, malformed outputs, transform error, false geometry, anchor failure, redaction propagation, authority misuse, and immersive safety.",
+      "requirement_id": "APPFAIL-007",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 147,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Failure-catalog audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_hybrid_failure_preserves_prior_assets_and_has_independent_component_fallbacks"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Hybrid failure shall preserve source, metric, visual, evidence, and prior accepted assets without partial publication.",
+      "requirement_id": "APPFAIL-008",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 148,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Fault-injection test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_hybrid_failure_preserves_prior_assets_and_has_independent_component_fallbacks"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Picking, collision, navigation, occlusion, audio, and visual rendering shall fail independently with explicit fallbacks.",
+      "requirement_id": "APPFAIL-009",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 149,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Component failure test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_failure_catalog_covers_mandated_modes_with_complete_stable_fields"
+        },
+        {
+          "test_id": "tests/unit/test_failure_catalog.py::test_catalog_json_is_deterministic_and_has_no_duplicate_codes"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/failures.py",
+        "governance/failure-catalog.json",
+        "tests/unit/test_failure_catalog.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Recovery shall create new operation/revision lineage and shall not erase failed provider evidence.",
+      "requirement_id": "APPFAIL-010",
+      "source_document": "99-appendices/995_failure_mode_catalog.md",
+      "source_line": 150,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Recovery audit"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        },
+        {
+          "test_id": "tests/migration/test_migrations.py::test_append_only_migration_manifest_matches_bytes"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Migration shall preserve every canonical v1.0 source asset and shall create additive v1.1 records rather than rewriting geometry bytes in place.",
+      "requirement_id": "SIPMIG-001",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 147,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Hash and migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Role and authority assignment shall be based on provenance and verification evidence, never file extension or visual appearance.",
+      "requirement_id": "SIPMIG-002",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 148,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Migration policy test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_append_only_migration_is_byte_locked"
+        },
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Ambiguous assets, frames, anchors, or measurements shall be quarantined or conservatively classified and shall not receive privileged intended uses.",
+      "requirement_id": "SIPMIG-003",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 149,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Negative migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Existing permissions, classification, consent, retention, legal hold, and deletion dependencies shall remain equivalent or more restrictive after migration.",
+      "requirement_id": "SIPMIG-004",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 150,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Policy-diff test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Legacy proxy-like or visual measurements shall remain approximate unless eligible metric/field evidence supports a higher status.",
+      "requirement_id": "SIPMIG-005",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 151,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Measurement migration test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        },
+        {
+          "test_id": "tests/migration/test_migrations.py::test_upgrade_from_foundation_preserves_immutable_identifiers_and_hashes"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Entity identity and source evidence shall survive migration independently of mesh primitive IDs and renderer objects.",
+      "requirement_id": "SIPMIG-006",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 152,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Anchor/entity regression test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P0",
+      "requirement": "Rollback shall be demonstrated from a restorable v1.0 backup without loss or mutation of original assets.",
+      "requirement_id": "SIPMIG-007",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 153,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Recovery exercise"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Compatibility APIs shall translate read behavior conservatively and shall prevent v1.0 clients from bypassing v1.1 authority or publication rules.",
+      "requirement_id": "SIPMIG-008",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 154,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "API compatibility test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Down-level exports shall report omitted or degraded v1.1 content and shall not relabel proxy/design/generated assets as metric or observed.",
+      "requirement_id": "SIPMIG-009",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 155,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Export compatibility test"
+    },
+    {
+      "direct_tests": [
+        {
+          "test_id": "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
+        }
+      ],
+      "evidence_class": "local_or_synthetic_executed",
+      "evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json"
+      ],
+      "implementation_files": [
+        "src/sip/recovery.py",
+        "src/sip/exporting.py",
+        "migrations/versions/0020_progress10_recovery_retention.py",
+        "tests/integration/test_progress10_preservation_migration.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "priority": "P1",
+      "requirement": "Migration shall produce a signed report of asset mappings, quarantines, unresolved anchors, policy diffs, validation results, and rollback evidence.",
+      "requirement_id": "SIPMIG-010",
+      "source_document": "MIGRATION_FROM_1.0.md",
+      "source_line": 156,
+      "status_at_scope_freeze": "VERIFIED",
+      "verification_method": "Audit report review"
+    }
+  ],
+  "production_authorized": false,
+  "progress_11_authorized": true,
+  "progress_12_authorized": false,
+  "schema": "sip.milestone-scope/v1",
+  "scope_statement": "Progress 11 is limited to QA-002 dual-vertical acceptance and release gates. It may retain local and synthetic acceptance evidence while leaving every unavailable mounted-browser, physical-device, GPU, credentialed-cloud, external-review, pilot, and production gate explicitly unpassed."
+}

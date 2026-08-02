@@ -21,6 +21,7 @@ from .ops_intelligence import OperationsIntelligenceService
 from .policy import PolicyService
 from .representations import ProviderRegistry, RepresentationPublisher, RepresentationService
 from .recovery import RecoveryOperationsService
+from .release_assurance import ReleaseAssuranceService
 from .scene import SceneService
 from .scene_runtime import SceneRuntimeService
 from .search import SearchService
@@ -63,6 +64,7 @@ class PlatformContext:
     operations_intelligence: OperationsIntelligenceService
     deployment: DeploymentService
     recovery: RecoveryOperationsService
+    release_assurance: ReleaseAssuranceService
 
     @classmethod
     def create(cls, settings: Settings | None = None, *, create_schema: bool | None = None) -> "PlatformContext":
@@ -149,6 +151,12 @@ class PlatformContext:
             recovery_root=settings.object_store_root.parent / "recovery",
             environment=settings.environment,
         )
+        release_assurance = ReleaseAssuranceService(
+            database,
+            audit,
+            settings.signing_key,
+            environment=settings.environment,
+        )
         assets.set_deployment_service(deployment)
         operations.set_deployment_service(deployment)
         return cls(
@@ -183,6 +191,7 @@ class PlatformContext:
             operations_intelligence=operations_intelligence,
             deployment=deployment,
             recovery=recovery,
+            release_assurance=release_assurance,
         )
 
 

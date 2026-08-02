@@ -139,7 +139,9 @@ def _git() -> dict[str, Any]:
 
 
 def _bootstrap(output: Path, *, vertical: str, classification: str = "internal") -> tuple[PlatformContext, str, str, str]:
-    context = PlatformContext.create(temporary_settings(output / "runtime"))
+    runtime_root = output / "runtime"
+    shutil.rmtree(runtime_root, ignore_errors=True)
+    context = PlatformContext.create(temporary_settings(runtime_root))
     actor = f"demo-{vertical}-operator"
     tenant_id = context.tenancy.create_tenant(f"Synthetic {vertical.title()} Tenant", tenant_id=f"tenant-demo-{vertical}", actor_id=actor)
     project_id = context.tenancy.create_project(
@@ -278,7 +280,9 @@ def _preserve_and_restore(
     package_path = output / "preservation.sip-preservation.zip"
     package = context.preservation.export_project(tenant_id, project_id, package_path, actor_id=actor)
     verified = context.preservation.verify_export(package_path)
-    restore_context = PlatformContext.create(temporary_settings(output / "restore-runtime"))
+    restore_runtime = output / "restore-runtime"
+    shutil.rmtree(restore_runtime, ignore_errors=True)
+    restore_context = PlatformContext.create(temporary_settings(restore_runtime))
     restored = restore_context.preservation.import_project(
         package_path,
         new_tenant_id=f"tenant-restored-{restored_suffix}",
@@ -964,6 +968,7 @@ def construction(output: Path) -> dict[str, Any]:
     building = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="building", name="Reference Building", parent_id=site, state="observed", actor_id=actor)
     level = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="level", name="Level 1", parent_id=building, state="observed", actor_id=actor)
     room = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="room", name="Electrical 101", parent_id=level, state="observed", actor_id=actor)
+    corridor = context.construction.create_hierarchy_item(tenant_id=tenant_id, project_id=project_id, record_type="zone", name="Level 1 East Corridor", parent_id=level, state="observed", actor_id=actor, attributes={"space_type": "corridor"})
     system_specs = [
         ("fire_alarm_panel", "entity-facp", {"manufacturer": "Synthetic", "model": "FACP-1", "circuits": ["SLC-1"], "network_address": "192.0.2.10"}, [evidence["panel-photo.jpg"]]),
         ("fire_alarm_device", "entity-smoke-1", {"manufacturer": "Synthetic", "model": "Smoke-1", "device_type": "smoke_detector", "address": "001"}, [evidence["panel-photo.jpg"]]),
@@ -1022,7 +1027,7 @@ def construction(output: Path) -> dict[str, Any]:
         project_id=project_id,
         name="Synthetic electrical-room spatial survey",
         objectives=["document room hierarchy", "inventory life-safety and MEP systems", "retain inaccessible regions"],
-        required_place_ids=[room],
+        required_place_ids=[room, corridor],
         required_system_types=["fire_alarm_panel", "access_opening", "bas_equipment"],
         sensitive_regions=[{"region_id": "panel-cabinet-interior", "classification": "restricted", "capture": "prohibited"}],
         control_requirements={"known_scale": True, "coordinate_frame_id": "world"},
@@ -1038,7 +1043,7 @@ def construction(output: Path) -> dict[str, Any]:
         tenant_id=tenant_id,
         project_id=project_id,
         survey_id=survey["survey_id"],
-        scope={"rooms": [room], "systems": systems},
+        scope={"rooms": [room, corridor], "systems": systems},
         capture_ids=[capture_asset],
         checklist=[
             {"id": "room-coverage", "status": "complete"},
@@ -1178,7 +1183,7 @@ def construction(output: Path) -> dict[str, Any]:
         tenant_id=tenant_id,
         project_id=project_id,
         destination=output / "handoff" / "owner-handoff.zip",
-        scope={"rooms": [room], "systems": ["fire_alarm", "access_control", "mep"]},
+        scope={"rooms": [room, corridor], "systems": ["fire_alarm", "access_control", "mep"]},
         accepted_scene_commit_id=scene["commit_id"],
         warranties=[{"equipment_id": systems[0], "status": "synthetic"}],
         training=[{"topic": "offline owner viewer", "status": "complete"}],
@@ -1201,8 +1206,15 @@ def construction(output: Path) -> dict[str, Any]:
             "resumed_checkpoint": resumed_checkpoint["checkpoint"],
             "finalized_locally": capture_finalized["output"]["finalized_locally"],
         },
-        "hierarchy": {"site": site, "building": building, "level": level, "room": room},
+        "independent_ground_truth": {
+            "panel_height_m": 1.52,
+            "measurement_tolerance_m": 0.01,
+            "inventory": [item[0] for item in system_specs],
+            "required_places": ["mechanical_electrical_room", "corridor"],
+        },
+        "hierarchy": {"site": site, "building": building, "level": level, "room": room, "corridor": corridor},
         "systems": systems,
+        "system_inventory": [{"system_type": item[0], "entity_id": item[1]} for item in system_specs],
         "documents": documents,
         "deficiency": {"id": deficiency, "correction": correction},
         "measurement": {"id": measurement, "source": technical["measurements"][0]},

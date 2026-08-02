@@ -1,0 +1,99 @@
+{
+  "categories": [
+    "unit",
+    "property",
+    "schema_compatibility",
+    "api_contract",
+    "event_contract",
+    "database_migration",
+    "integration",
+    "end_to_end",
+    "field_procedure",
+    "benchmark",
+    "load",
+    "resilience",
+    "security",
+    "privacy",
+    "accessibility",
+    "backup_restore",
+    "export_import",
+    "acceptance",
+    "performance",
+    "migration",
+    "restore"
+  ],
+  "checkpoint_id": "sip-v1.1.0-progress-11",
+  "critical_gate_policy": {
+    "allowed_non_p0_waiver_requires": [
+      "owner",
+      "expiry",
+      "reason",
+      "compensating_control",
+      "independent_approval"
+    ],
+    "failed_critical_blocks_release": true,
+    "p0_waiver_allowed": false,
+    "truth_consent_authority_security_waiver_allowed": false
+  },
+  "epic": "QA-002",
+  "evidence_contract": {
+    "content_addressed": true,
+    "exact_commit_required": true,
+    "mutable_path_only_evidence_prohibited": true,
+    "required_fields": [
+      "requirement_ids",
+      "input_hashes",
+      "environment",
+      "code_commit",
+      "source_root_sha256",
+      "output_hashes",
+      "result",
+      "thresholds",
+      "reviewer_when_manual"
+    ]
+  },
+  "external_evidence_classes": [
+    "mounted_browser",
+    "physical_ios_lidar",
+    "approved_gpu_model",
+    "credentialed_cloud",
+    "customer_construction_pilot",
+    "human_subject_liveforever_pilot",
+    "independent_penetration_review",
+    "formal_privacy_review",
+    "formal_accessibility_review",
+    "legal_and_model_rights_approval"
+  ],
+  "flaky_test_policy": {
+    "automatic_release_credit": false,
+    "expiry_required": true,
+    "owner_required": true,
+    "registry": "requirements/test-quarantine.json",
+    "sole_p0_evidence_allowed": false
+  },
+  "machine_readable_evidence_required": true,
+  "production_authorized": false,
+  "progress_12_authorized": false,
+  "release_stop_lines": [
+    "missing_p0_evidence",
+    "stale_or_mismatched_evidence",
+    "failed_critical_gate",
+    "unsigned_or_incomplete_release_manifest",
+    "unapproved_model_or_provider",
+    "authority_or_consent_regression",
+    "failed_backup_restore_or_migration_reconciliation",
+    "missing_external_production_evidence"
+  ],
+  "requirement_metadata_required": true,
+  "schema": "sip.qa-test-strategy/v1",
+  "test_data_policy": {
+    "allowed": [
+      "synthetic",
+      "documented_consent"
+    ],
+    "customer_data_allowed": false,
+    "human_subject_pilot_allowed": false,
+    "raw_sensitive_data_in_logs": false,
+    "retention": "ephemeral_or_policy_bound"
+  }
+}

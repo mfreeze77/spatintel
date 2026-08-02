@@ -3044,6 +3044,141 @@
         "build/reports/tests/integration.xml"
       ]
     },
+    "CONTEST-001": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "CONTEST-002": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "CONTEST-003": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "CONTEST-004": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "CONTEST-005": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "CONTEST-006": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/construction.py",
+        "src/sip/scene.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
     "DATANCH-001": {
       "implementation_files": [
         "src/sip/spatial_data.py",
@@ -4373,16 +4508,21 @@
         "src/sip/errors.py",
         "src/sip/audit.py"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/contract/test_documentation.py::test_required_documentation_and_readme_links_exist"
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_documentation.py::test_required_documentation_and_readme_links_exist",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
       ]
     },
@@ -4395,17 +4535,528 @@
         "src/sip/errors.py",
         "src/sip/audit.py"
       ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit",
+        "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/migration.xml"
+      ]
+    },
+    "DELDOD-003": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ]
+    },
+    "DELDOD-004": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml"
+      ]
+    },
+    "DELDOD-005": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml"
+      ]
+    },
+    "DELDOD-006": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_release_assurance_service_contract_and_events_are_generated"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml"
+      ]
+    },
+    "DELDOD-007": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELDOD-008": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELDOD-009": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELDOD-010": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELDOD-011": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELDOD-012": {
+      "implementation_files": [
+        "docs/developer",
+        "docs/operator",
+        "docs/user",
+        "docs/release",
+        "src/sip/errors.py",
+        "src/sip/audit.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_documentation_and_external_evidence_posture_are_explicit"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/release-report.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml"
+      ]
+    },
+    "DELMVP-001": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELMVP-002": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
       "implementation_status": "IMPLEMENTED_UNVERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
-        "tests/migration/test_migrations.py::test_clean_install_reaches_head_and_matches_canonical_tables"
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELMVP-003": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELMVP-004": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELMVP-005": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELMVP-006": {
+      "implementation_files": [
+        "tools/run_demo.py",
+        "tools/demo_progress11_release.py",
+        "src/sip/capture.py",
+        "src/sip/scene.py",
+        "src/sip/exporting.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/progress11-release/demo-progress11-release.json",
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "DELROAD-001": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
-        "build/reports/tests/migration.xml"
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
+      ]
+    },
+    "DELROAD-002": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
+      ]
+    },
+    "DELROAD-003": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
+      ]
+    },
+    "DELROAD-004": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
+      ]
+    },
+    "DELROAD-005": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
+      ]
+    },
+    "DELROAD-006": {
+      "implementation_files": [
+        "requirements/PROGRESS_11_ROADMAP.json",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_roadmap_is_dependency_ordered_reversible_and_evidence_bound"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
+        "docs/release/PROGRESS_11_ROADMAP_EVIDENCE.md",
+        "requirements/PROGRESS_11_ROADMAP.json"
       ]
     },
     "GOVDOC-001": {
@@ -5083,6 +5734,302 @@
         "build/reports/tests/integration.xml"
       ]
     },
+    "HYBTEST-001": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-002": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-003": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-004": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-005": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-006": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-007": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-008": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-009": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-010": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-011": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-012": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-013": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "HYBTEST-014": {
+      "implementation_files": [
+        "src/sip/geometry.py",
+        "src/sip/representations.py",
+        "src/sip/worker_sandbox.py",
+        "tools/run_demo.py"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/hybrid.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
     "HYBTEST-015": {
       "implementation_files": [
         "src/sip/geometry.py",
@@ -5096,11 +6043,13 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative",
         "tests/e2e/test_platform_demonstrations.py::test_mesh_splat_surface_roundtrip_reports_irreversible_loss"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml"
       ]
     },
@@ -5117,11 +6066,13 @@
       "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_hybrid_benchmark_evidence_is_profiled_and_conservative",
         "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/hybrid.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/e2e.xml"
       ]
     },
@@ -6352,6 +7303,72 @@
         "build/reports/tests/security.xml"
       ]
     },
+    "LIFTEST-001": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py",
+        "tools/run_demo.py",
+        "verticals/liveforever"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "LIFTEST-002": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py",
+        "tools/run_demo.py",
+        "verticals/liveforever"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "LIFTEST-003": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py",
+        "tools/run_demo.py",
+        "verticals/liveforever"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
     "LIFTEST-004": {
       "implementation_files": [
         "src/sip/liveforever.py",
@@ -6359,18 +7376,65 @@
         "tools/run_demo.py",
         "verticals/liveforever"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience",
         "tests/contract/test_progress06_vertical_api.py::test_progress06_family_revision_api_preserves_original_testimony"
       ],
       "test_result_evidence_paths": [
         "build/evidence/demos/liveforever.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
+      ]
+    },
+    "LIFTEST-005": {
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py",
+        "tools/run_demo.py",
+        "verticals/liveforever"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "LIFTEST-006": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/liveforever.py",
+        "src/sip/exporting.py",
+        "tools/run_demo.py",
+        "verticals/liveforever"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience",
+        "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/demos/liveforever.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "LIFUX-001": {
@@ -11269,10 +12333,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed",
@@ -11300,10 +12364,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11328,16 +12392,18 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_append_only_migration_is_byte_locked",
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md",
         "migrations",
@@ -11356,10 +12422,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11384,10 +12450,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11412,10 +12478,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed",
@@ -11442,10 +12508,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11470,10 +12536,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11498,10 +12564,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11526,10 +12592,10 @@
         "src/sip/assets.py",
         "docs/operator/PROGRESS_10_MIGRATION_RUNBOOK.md"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress10_preservation_migration.py::test_progress10_legacy_migration_is_additive_conservative_and_signed"
@@ -11551,33 +12617,61 @@
         "tools/release.py",
         ".github/workflows/release.yml"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
         "tests/contract/test_progress06_r1_checkpoint_controls.py::test_progress06_r1_scope_traceability_and_release_posture_are_fail_closed"
       ],
       "test_result_evidence_paths": [
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
       ]
     },
-    "TSTGATE-003": {
+    "TSTGATE-002": {
+      "external_validation_status": "REQUIRED",
       "implementation_files": [
         "src/sip/spec_lint.py",
         "tools/release.py",
         ".github/workflows/release.yml"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
-      "owner": "SIP Engineering",
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-003": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_parses_make_prefixed_doctor_json_and_retains_external_gap_snapshot",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_preserves_blocked_child_and_distinguishes_command_error",
         "tests/contract/test_checkpoint_acceptance_status.py::test_acceptance_relative_output_is_rooted_in_repository",
@@ -11588,13 +12682,251 @@
         "tests/contract/test_progress05_traceability_audit.py::test_progress05_traceability_is_semantically_audited_and_linked_tests_declare_ids",
         "tests/contract/test_progress06_traceability_audit.py::test_progress06_historical_scope_does_not_hide_current_progress10_truth",
         "tests/contract/test_progress06_traceability_audit.py::test_progress06_traceability_preserves_the_true_north_accepted_snapshot",
-        "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements"
+        "tests/contract/test_progress10_historical_snapshot.py::test_current_global_implementation_map_is_not_a_historical_equality_input",
+        "tests/contract/test_progress10_historical_snapshot.py::test_later_status_improvement_does_not_rewrite_accepted_progress10_status",
+        "tests/contract/test_progress10_historical_snapshot.py::test_missing_accepted_test_or_requirement_fails_referential_integrity",
+        "tests/contract/test_progress10_historical_snapshot.py::test_missing_historical_snapshot_field_fails_closed",
+        "tests/contract/test_progress10_historical_snapshot.py::test_progress10_accepted_snapshot_is_immutable_and_valid",
+        "tests/contract/test_progress10_historical_snapshot.py::test_progress11_and_all_closed_milestone_audits_remain_complete",
+        "tests/contract/test_progress10_historical_snapshot.py::test_snapshot_scope_and_audit_byte_mutation_are_detected",
+        "tests/contract/test_progress10_historical_snapshot.py::test_ungoverned_historical_linked_test_change_is_rejected",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_implementation_map_changes_do_not_create_historical_drift",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_current_status_can_improve_without_historical_status_rewrite",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_historical_scope_and_snapshot_mutation_are_detected",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_later_test_addition_does_not_rewrite_closed_snapshot",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_linked_test_change_requires_governed_amendment",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_required_snapshot_field_deletion_fails_closed",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress10_scope_tool_refuses_historical_regeneration",
+        "tests/contract/test_progress10_immutable_snapshot.py::test_progress11_traceability_remains_complete_after_progress10_snapshot_repair",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record",
+        "tests/contract/test_spec_lint.py::test_release_spec_gate_fails_closed_on_unverified_requirements",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence",
+        "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
       ],
       "test_result_evidence_paths": [
         "build/reports/release-report.json",
         "build/reports/spec-lint.json",
         "build/reports/test-matrix.json",
-        "build/reports/tests/contract.xml"
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-004": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-005": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "TSTGATE-006": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root",
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "TSTGATE-007": {
+      "external_validation_status": "REQUIRED",
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "EXTERNAL_VALIDATION_REQUIRED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "The local or synthetic implementation boundary exists, but the normative requirement requires mounted-browser, physical-device, GPU, credentialed-cloud, independent-review, pilot, or other external evidence. No unavailable evidence is inferred.",
+      "owner": "True North / External Validation Owner",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence",
+        "tests/security/test_progress11_release_security.py::test_progress11_external_evidence_cannot_be_labeled_complete"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-008": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-009": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_traceability_reads_a_non_authorizing_provisional_acceptance_record",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable",
+        "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/contract.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-010": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_construction_acceptance_is_complete_and_authority_safe",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_critical_p0_truth_consent_authority_and_security_requirements_are_nonwaivable"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-011": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_release_artifact_manifest_rejects_stale_incomplete_unsigned_and_unsafe_evidence",
+        "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
+      ]
+    },
+    "TSTGATE-012": {
+      "implementation_files": [
+        "src/sip/spec_lint.py",
+        "tools/release.py",
+        ".github/workflows/release.yml"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/security/test_progress11_release_adversarial.py::test_progress11_production_admission_fails_closed_even_for_valid_candidate",
+        "tests/security/test_progress11_release_security.py::test_progress11_signed_manifest_never_authorizes_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/release-report.json",
+        "build/reports/spec-lint.json",
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
+        "build/reports/tests/security.xml"
       ]
     },
     "TSTLAY-002": {
@@ -11672,19 +13004,23 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_desktop_review.py::test_desktop_http_profile_is_loopback_host_origin_and_csrf_safe",
         "tests/integration/test_desktop_review.py::test_desktop_live_http_authorizes_before_emitting_exactly_one_status",
         "tests/integration/test_scene_runtime_review.py::test_scene_runtime_scope_is_fail_closed_across_tenants",
         "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_privileged_access_directive_boundaries",
-        "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries"
+        "tests/security/test_progress07_security_controls.py::test_progress07_jit_and_workload_identity_adversarial_boundaries",
+        "tests/security/test_progress11_release_security.py::test_progress11_cross_tenant_release_evidence_is_denied",
+        "tests/security/test_progress11_release_security.py::test_progress11_test_data_must_be_synthetic_or_documented_consent"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
@@ -11697,16 +13033,20 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_liveforever_acceptance_preserves_truth_consent_and_safe_experience",
         "tests/privacy/test_policy_propagation.py::test_liveforever_revocation_removes_derivative_from_all_affected_audiences"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/privacy.xml"
       ]
     },
@@ -11717,16 +13057,18 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/contract/test_delivery_tools.py::test_synthetic_fixture_corpus_is_deterministic_hashed_and_fail_closed",
         "tests/e2e/test_platform_demonstrations.py::test_malformed_spatial_archive_is_bounded_and_cannot_publish"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/e2e.xml"
@@ -11739,10 +13081,10 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/contract/test_progress07_security_api.py::test_progress07_transport_capture_provider_output_and_immersive_routes",
@@ -11750,6 +13092,8 @@
         "tests/security/test_progress07_binding_directive_adversarial.py::test_progress07_audit_integrity_and_denial_durability"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/contract.xml",
         "build/reports/tests/integration.xml",
@@ -11763,15 +13107,17 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_lifecycle_recovery.py::test_dataret_001_deletion_requires_hold_release_backup_two_person_approval_and_evidence"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml"
       ]
@@ -11783,10 +13129,10 @@
         "src/sip/worker_sandbox.py",
         "tests/fixtures"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
         "tests/integration/test_progress07_security_ops.py::test_progress07_threat_manifest_jit_and_workload_identity",
@@ -11795,6 +13141,8 @@
         "tests/security/test_progress07_security_controls.py::test_progress07_provider_incident_withdrawal_preserves_evidence_and_invalidates_every_surface"
       ],
       "test_result_evidence_paths": [
+        "build/reports/checkpoint-acceptance-gates.json",
+        "build/reports/security-report.json",
         "build/reports/test-matrix.json",
         "build/reports/tests/integration.xml",
         "build/reports/tests/security.xml"
@@ -11808,16 +13156,19 @@
         "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "requirements/requirements-ledger.json"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
+        "tests/contract/test_progress11_checkpoint_controls.py::test_progress11_make_and_acceptance_order_include_all_release_dependencies",
         "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
       ]
     },
@@ -11829,12 +13180,13 @@
         "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "requirements/requirements-ledger.json"
       ],
-      "implementation_status": "IN_PROGRESS",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "A controlled implementation/test boundary exists, but the normative requirement is broader than the retained evidence and remains in progress.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
         "tests/contract/test_progress06_r1_test_matrix_isolation.py::test_progress06_r1_parallel_shards_receive_unique_database_and_runtime_roots",
         "tests/contract/test_spec_lint.py::test_requirements_outputs_are_queryable_and_have_controlled_test_plans",
         "tests/contract/test_spec_lint.py::test_test_matrix_contract_is_fail_closed_without_reading_the_live_matrix",
@@ -11862,6 +13214,7 @@
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml",
         "build/reports/tests/e2e.xml"
       ]
@@ -11874,17 +13227,83 @@
         "tests/contract/test_progress06_r1_test_matrix_isolation.py",
         "requirements/requirements-ledger.json"
       ],
-      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "implementation_status": "VERIFIED",
       "last_regression_result": "build/reports/test-matrix.json",
       "linked_tests_passed": true,
-      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_release_demonstration_is_repeatable_on_same_dedicated_root",
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production",
         "tests/contract/test_progress10_checkpoint_controls.py::test_progress10_acceptance_runs_deployment_demo_before_traceability"
       ],
       "test_result_evidence_paths": [
         "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml",
         "build/reports/tests/contract.xml"
+      ]
+    },
+    "TSTSTRAT-004": {
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "TSTSTRAT-005": {
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
+      ]
+    },
+    "TSTSTRAT-006": {
+      "implementation_files": [
+        "tools/run_test_matrix.py",
+        "tools/update_requirements.py",
+        "src/sip/spec_lint.py",
+        "tests/contract/test_progress06_r1_test_matrix_isolation.py",
+        "requirements/requirements-ledger.json"
+      ],
+      "implementation_status": "VERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Verified in the deterministic local reference profile by the exact linked automated test(s) and retained evidence; no external hardware, cloud, GPU, legal, or customer-pilot result is inferred.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "tests/acceptance/test_progress11_dual_vertical_release.py::test_progress11_signed_candidate_retains_external_gaps_and_denies_production"
+      ],
+      "test_result_evidence_paths": [
+        "build/reports/test-matrix.json",
+        "build/reports/tests/acceptance.xml"
       ]
     }
   },

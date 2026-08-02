@@ -1,0 +1,42 @@
+{
+  "checks": {
+    "focused_progress11_pytest": {
+      "checkpoint_accepted": false,
+      "errors": 2,
+      "missing_files": [
+        "tests/progress11_helpers.py"
+      ],
+      "production_authorized": false,
+      "reason": "The surviving Progress 11 artifact set does not contain tests/progress11_helpers.py, which is imported by the retained release-security and adversarial tests.",
+      "status": "failed_collection"
+    },
+    "git_diff_check": {
+      "status": "passed"
+    },
+    "python_compileall": {
+      "scope": [
+        "src/sip",
+        "tools",
+        "tests/contract",
+        "tests/security",
+        "tests/acceptance"
+      ],
+      "status": "passed"
+    }
+  },
+  "classification": "interim_only_not_checkpoint_acceptance",
+  "conclusion": "The interim reconstructed source is packageable for preservation and continuation, but it is not a valid Progress 11 checkpoint and is not represented as runnable or accepted until missing source and complete clean-detached evidence are restored.",
+  "generated_at": "2026-08-02T19:42:58.916637+00:00",
+  "retained_historical_evidence": {
+    "highest_precommit_matrix": {
+      "authoritative_checkpoint_evidence": false,
+      "errors": 0,
+      "failures": 0,
+      "git_dirty": true,
+      "skipped": 0,
+      "source_root": "494082e568973d93fa80890ee3d41105079da0180805ba3cc5e3bcd458ba6200",
+      "tests": 494
+    }
+  },
+  "schema": "sip.progress11.interim-validation/v1"
+}

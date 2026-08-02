@@ -1,0 +1,88 @@
+{
+  "co_location_allowed": true,
+  "default_port": 8080,
+  "health_paths": [
+    "/health/live",
+    "/health/ready",
+    "/metrics"
+  ],
+  "logical_boundary": true,
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "health_live",
+      "path": "/health/live"
+    },
+    {
+      "method": "GET",
+      "operation_id": "health_ready",
+      "path": "/health/ready"
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_qa_campaign",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_qa_campaign",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "sign_qa_release_candidate",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/candidates"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_qa_gate",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/gates"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_qa_rollback",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/rollback"
+    },
+    {
+      "method": "POST",
+      "operation_id": "record_qa_scenario",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/scenarios"
+    },
+    {
+      "method": "POST",
+      "operation_id": "approve_qa_waiver",
+      "path": "/v1/tenants/{tenant_id}/qa/campaigns/{campaign_id}/waivers"
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_qa_release_candidate",
+      "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}"
+    },
+    {
+      "method": "POST",
+      "operation_id": "evaluate_qa_production_admission",
+      "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/production-admission"
+    },
+    {
+      "method": "POST",
+      "operation_id": "verify_qa_release_candidate",
+      "path": "/v1/tenants/{tenant_id}/qa/candidates/{release_candidate_id}/verify"
+    }
+  ],
+  "required_environment": {
+    "SIP_DATABASE_URL": "secret_reference",
+    "SIP_PRODUCTION_AUTHORIZED": "false",
+    "SIP_SERVICE_NAME": "release-assurance",
+    "SIP_SIGNING_KEY": "secret_reference"
+  },
+  "schema": "sip.service-manifest",
+  "schema_version": "1.1.0",
+  "security": {
+    "development_auth_prohibited_in_production": true,
+    "network_egress_default_deny": true,
+    "non_root_required": true,
+    "read_only_root_filesystem_required": true,
+    "short_lived_workload_identity_required": true
+  },
+  "service_name": "release-assurance"
+}

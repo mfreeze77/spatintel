@@ -1,0 +1,6 @@
+{
+  "schema": "sip.test-quarantine/v1",
+  "checkpoint_id": "sip-v1.1.0-progress-11",
+  "production_authorized": false,
+  "entries": []
+}
