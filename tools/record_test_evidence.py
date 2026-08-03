@@ -104,25 +104,33 @@ def main() -> None:
     web_path = ROOT / "build/evidence/web-runtime-test.log"
     if web_path.is_file():
         web_text = web_path.read_text(encoding="utf-8")
-        match = re.search(r"# pass (\d+)", web_text)
+        match = re.search(r"(?:#|\N{INFORMATION SOURCE})\s+pass\s+(\d+)", web_text)
+        failure_match = re.search(r"(?:#|\N{INFORMATION SOURCE})\s+fail\s+(\d+)", web_text)
         web_count = int(match.group(1)) if match else 0
+        web_failures = int(failure_match.group(1)) if failure_match else -1
         invariant_match = re.search(r'"invariantChecks":(\d+)', web_text)
         node_version = subprocess.run(["node", "--version"], capture_output=True, text=True, check=False).stdout.strip()
+        limitations = [
+            "Dependency-free source/runtime checks only; installed dependencies, Next production build, browser E2E, "
+            "and accessibility audit remain external."
+        ]
+        if node_version != "v24.18.0":
+            limitations.append("The pinned Node 24.18.0 release runtime was not used for this local fixture run.")
         _write(
             "web-runtime",
             {
             "schema": "sip.test-report/v1",
             "suite": "web-dependency-free-runtime",
-            "status": "passed_with_external_gaps" if web_count > 0 and "# fail 0" in web_text else "failed",
+            "status": "passed_with_external_gaps" if web_count > 0 and web_failures == 0 else "failed",
             "tests_passed": web_count,
-            "tests_failed": 0,
+            "tests_failed": max(web_failures, 0),
             "source_invariant_checks": int(invariant_match.group(1)) if invariant_match else 0,
             "node_version": node_version,
             "platform": platform.platform(),
             "transcript": str(web_path.relative_to(ROOT)),
             "transcript_sha256": sha256_file(web_path),
             "git": git,
-            "limitations": ["Dependency-free source/runtime checks only; Node 24, installed dependencies, Next production build, browser E2E, and accessibility audit remain external."],
+            "limitations": limitations,
             },
         )
         generated.append("build/reports/web-runtime-test-report.json")

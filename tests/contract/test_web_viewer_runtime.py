@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import subprocess
 from pathlib import Path
 
@@ -17,6 +18,12 @@ def _node(*args: str) -> str:
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
     return completed.stdout + completed.stderr
+
+
+def _node_test_count(output: str, label: str) -> int:
+    match = re.search(rf"(?:#|\N{{INFORMATION SOURCE}})\s+{label}\s+(\d+)", output)
+    assert match is not None, output
+    return int(match.group(1))
 
 
 def test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_integrated() -> None:
@@ -43,7 +50,7 @@ def test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_inte
         "apps/web/test/runtime.test.mjs",
     )
     assert "PLTVIEW-007 reference layer directives cover visibility opacity labels and pickability" in output
-    assert "# pass 1" in output
+    assert _node_test_count(output, "pass") == 1
 
 
 def test_pltview_005_accessibility_controls_and_semantic_fallback_are_executable() -> None:
@@ -66,6 +73,6 @@ def test_pltview_005_accessibility_controls_and_semantic_fallback_are_executable
         "--test-name-pattern=semantic fallback and keyboard navigation",
         "apps/web/test/runtime.test.mjs",
     )
-    assert "# pass 1" in runtime_output
+    assert _node_test_count(runtime_output, "pass") == 1
     source_output = _node("apps/web/scripts/verify-source.mjs")
     assert '"status":"passed"' in source_output
