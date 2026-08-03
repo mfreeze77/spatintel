@@ -28,6 +28,9 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
+          # Checkpoint-lineage contract tests run `git merge-base --is-ancestor`
+          # against historical commits, which a shallow clone does not contain.
+          fetch-depth: 0
       - name: Install Python 3.13
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
@@ -86,7 +89,9 @@ jobs:
 
   swift-fixtures:
     name: Swift capture fixture profile
-    runs-on: macos-15
+    # apps/ios-capture declares swift-tools-version 6.2; the macos-15 image
+    # only ships Swift 6.1, which refuses to resolve the manifest.
+    runs-on: macos-26
     timeout-minutes: 25
     steps:
       - name: Check out source
@@ -110,5 +115,7 @@ jobs:
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: "3.13.14"
+      - name: Install pinned Python dependencies
+        run: python -m pip install -e '.[dev,postgres,redis,telemetry]'
       - name: Validate Compose, Kubernetes, and Terraform structure
         run: PYTHONPATH=src:. python tools/validate_infrastructure.py
