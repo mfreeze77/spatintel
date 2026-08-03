@@ -40,7 +40,7 @@ jobs:
           node-version: "24.18.0"
       - name: Install pinned Python dependencies and release scanners
         run: |
-          python -m pip install --require-virtualenv=false -e '.[dev,postgres,redis,telemetry]'
+          python -m pip install -e '.[dev,postgres,redis,telemetry]'
           python -m pip install pip-audit==2.9.0
       - name: Require a frozen JavaScript dependency graph
         run: |

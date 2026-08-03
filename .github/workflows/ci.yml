@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: "3.13.14"
       - name: Install pinned Python dependencies
-        run: python -m pip install --require-virtualenv=false -e '.[dev,postgres,redis,telemetry]'
+        run: python -m pip install -e '.[dev,postgres,redis,telemetry]'
       - name: Verify generated artifacts and source policy
         run: make lint
       - name: Verify specification and requirements control
