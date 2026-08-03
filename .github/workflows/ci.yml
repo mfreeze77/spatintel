@@ -58,7 +58,7 @@ jobs:
           make demo-construction
           make demo-liveforever
       - name: Build release candidate metadata
-        run: python tools/release.py --mode candidate
+        run: PYTHONPATH=src:. python tools/release.py --mode candidate
       - name: Upload retained reports
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
