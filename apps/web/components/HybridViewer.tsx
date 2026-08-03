@@ -14,6 +14,7 @@ import {
   type RepresentationKind,
   type StableAnchor
 } from "../lib/spatial-runtime";
+import { parseLocalViewerBundle, type LocalViewerBundle } from "../lib/local-scene-bundle";
 
 const surfaces: readonly MetricSurface[] = [
   { surfaceId: "surface-room-wall", entityId: "room-101", coordinateFrameId: "building-frame", point: [2, 1.2, -0.4], toleranceM: 0.18, uncertaintyM: 0.025, sourceAssetIds: ["asset-depth-001"] }
@@ -29,6 +30,7 @@ export function HybridViewer(): React.ReactNode {
   const [reducedMotion, setReducedMotion] = useState(true);
   const [highContrast, setHighContrast] = useState(false);
   const [clippingEnabled, setClippingEnabled] = useState(false);
+  const [localBundle, setLocalBundle] = useState<LocalViewerBundle | null>(null);
   const reprojection = useMemo(() => reprojectAnchors(anchors, surfaces), []);
 
   const patchLayer = (kind: RepresentationKind, patch: Partial<Pick<LayerState, "visible" | "opacity">>): void => {
@@ -41,17 +43,29 @@ export function HybridViewer(): React.ReactNode {
   const tryDirectMeasurement = (): void => {
     try { directProxyMeasurement(); } catch (error) { setMessage(error instanceof Error ? error.message : "Measurement denied"); }
   };
+  const openBundle = async (file: File | undefined): Promise<void> => {
+    if (!file) return;
+    try {
+      const parsed = parseLocalViewerBundle(JSON.parse(await file.text()));
+      setLocalBundle(parsed);
+      setMessage(`Loaded local iPhone scene bundle ${parsed.bundle_hash.slice(0, 12)}. Measurement remains metric-only.`);
+    } catch (error) {
+      setLocalBundle(null);
+      setMessage(error instanceof Error ? error.message : "VIEWER_BUNDLE_INVALID");
+    }
+  };
 
   return (
     <section className="viewer-shell" aria-labelledby="viewer-heading">
       <div className="viewer-toolbar">
-        <div><h2 id="viewer-heading">Hybrid spatial viewer</h2><p>Scene commit <code>demo-main-0007</code></p></div>
+        <div><h2 id="viewer-heading">Hybrid spatial viewer</h2><p>{localBundle ? <>Local bundle <code>{localBundle.bundle_hash.slice(0, 12)}</code></> : <>Scene commit <code>demo-main-0007</code></>}</p></div>
         <div className="toolbar-actions"><button type="button" onClick={inspectProxy}>Inspect proxy hit</button><button type="button" onClick={tryDirectMeasurement}>Attempt direct measurement</button></div>
       </div>
+      <label className="local-bundle-picker">Open local <code>viewer-bundle.json</code><input type="file" accept="application/json,.json" onChange={(event) => void openBundle(event.target.files?.[0])} /></label>
       <div className="viewer-grid">
         <LayerControls layers={layers} onToggle={(kind, visible) => patchLayer(kind, { visible })} onOpacity={(kind, opacity) => patchLayer(kind, { opacity })} />
         <div className="viewport" tabIndex={0} role="application" aria-label="Hybrid spatial scene. Arrow keys or W A S D navigate; Home restores the saved view; the semantic scene tree remains available.">
-          <HybridCanvas layers={layers} reducedMotion={reducedMotion} highContrast={highContrast} clippingEnabled={clippingEnabled} comparisonSplit={0.72} onSemanticPick={(entityId) => { inspectProxy(); setMessage(`Interaction proxy selected ${entityId}. Metric re-resolution is required before measurement.`); }} />
+          <HybridCanvas layers={layers} bundle={localBundle} reducedMotion={reducedMotion} highContrast={highContrast} clippingEnabled={clippingEnabled} comparisonSplit={0.72} onSemanticPick={(entityId) => { inspectProxy(); setMessage(`Interaction proxy selected ${entityId}. Metric re-resolution is required before measurement.`); }} />
           <div className="truth-overlay" aria-label="Persistent truth labels">
             <AuthorityBadge authority="observed" confidence={0.91} />
             <AuthorityBadge authority="generated" />

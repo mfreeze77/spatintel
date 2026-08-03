@@ -13,7 +13,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "1304bbff6a812a4c129400f4c22c2c8805d3048d35870e0c6a0ed3ca43f05131",
+  "manifest_sha256": "a01596aac4ba924fd34bb727d8d9e5ac72648972d397e848f9b0bf4d52a0a013",
   "name": "mesh-lod",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

@@ -7,8 +7,10 @@ import {
   type LayerState,
   type RenderLayerDirective
 } from "../lib/spatial-runtime";
+import type { LocalViewerBundle } from "../lib/local-scene-bundle";
 
 type HybridCanvasProps = Readonly<{
+  bundle: LocalViewerBundle | null;
   layers: readonly LayerState[];
   reducedMotion: boolean;
   highContrast: boolean;
@@ -17,7 +19,7 @@ type HybridCanvasProps = Readonly<{
   onSemanticPick: (stableEntityId: string) => void;
 }>;
 
-export function HybridCanvas({ layers, reducedMotion, highContrast, clippingEnabled, comparisonSplit, onSemanticPick }: HybridCanvasProps): React.ReactNode {
+export function HybridCanvas({ bundle, layers, reducedMotion, highContrast, clippingEnabled, comparisonSplit, onSemanticPick }: HybridCanvasProps): React.ReactNode {
   const host = useRef<HTMLDivElement>(null);
   const [fallback, setFallback] = useState<string | null>(null);
   const directives = useMemo(() => buildLayerRenderDirectives(layers, comparisonSplit), [comparisonSplit, layers]);
@@ -67,19 +69,34 @@ export function HybridCanvas({ layers, reducedMotion, highContrast, clippingEnab
       renderer.domElement.dataset.renderer = "native-three-mesh-splat";
       container.replaceChildren(renderer.domElement);
 
+      const metricGeometry = bundle ? new THREE.BufferGeometry() : new THREE.BoxGeometry(4, 2.8, 5);
+      if (bundle) {
+        metricGeometry.setAttribute("position", new THREE.Float32BufferAttribute(bundle.metric.vertices.flat(), 3));
+        metricGeometry.setIndex(bundle.metric.faces.flat());
+        if (bundle.metric.colors.length === bundle.metric.vertices.length) metricGeometry.setAttribute("color", new THREE.Float32BufferAttribute(bundle.metric.colors.flat(), 3));
+        metricGeometry.computeVertexNormals();
+      }
       const metric = new THREE.Mesh(
-        new THREE.BoxGeometry(4, 2.8, 5),
-        new THREE.MeshStandardMaterial({ color: 0x486581, transparent: true, side: THREE.DoubleSide })
+        metricGeometry,
+        new THREE.MeshStandardMaterial({ color: 0x486581, vertexColors: Boolean(bundle?.metric.colors.length), transparent: true, side: THREE.DoubleSide })
       );
       metric.name = "metric:room-101";
       metric.userData = { role: "metric", stableEntityId: "room-101" };
-      metric.position.y = 1.4;
+      if (!bundle) metric.position.y = 1.4;
       applyDirective(metric, layerDirective(directives, "metric"));
       scene.add(metric);
 
-      const splatPositions = new Float32Array(1500 * 3);
-      const splatColors = new Float32Array(1500 * 3);
-      for (let i = 0; i < 1500; i += 1) {
+      const splatCount = bundle?.visual.positions.length ?? 1500;
+      const splatPositions = new Float32Array(splatCount * 3);
+      const splatColors = new Float32Array(splatCount * 3);
+      for (let i = 0; i < splatCount; i += 1) {
+        if (bundle) {
+          const position = bundle.visual.positions[i];
+          if (!position) throw new Error("VIEWER_BUNDLE_SPLAT_POSITION_MISSING");
+          splatPositions.set(position, i * 3);
+          splatColors.set(bundle.visual.colors[i] ?? [0.55, 0.65, 0.75], i * 3);
+          continue;
+        }
         const seed = (i * 2654435761) >>> 0;
         splatPositions[i * 3] = ((seed & 1023) / 1023 - 0.5) * 4;
         splatPositions[i * 3 + 1] = (((seed >>> 10) & 1023) / 1023) * 2.8;
@@ -110,11 +127,17 @@ export function HybridCanvas({ layers, reducedMotion, highContrast, clippingEnab
       applyDirective(design, layerDirective(directives, "design"));
       scene.add(design);
 
+      const interactionGeometry = bundle ? new THREE.BufferGeometry() : new THREE.BoxGeometry(4.05, 2.85, 5.05);
+      if (bundle) {
+        interactionGeometry.setAttribute("position", new THREE.Float32BufferAttribute(bundle.interaction.vertices.flat(), 3));
+        interactionGeometry.setIndex(bundle.interaction.faces.flat());
+        interactionGeometry.computeVertexNormals();
+      }
       const interaction = new THREE.Mesh(
-        new THREE.BoxGeometry(4.05, 2.85, 5.05),
+        interactionGeometry,
         new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false })
       );
-      interaction.position.y = 1.425;
+      if (!bundle) interaction.position.y = 1.425;
       interaction.name = "interaction:room-101";
       interaction.userData = { role: "interaction", stableEntityId: "room-101" };
       const interactionDirective = layerDirective(directives, "interaction");
@@ -196,7 +219,7 @@ export function HybridCanvas({ layers, reducedMotion, highContrast, clippingEnab
       for (const item of disposables) item.dispose();
       container.replaceChildren();
     };
-  }, [clippingEnabled, directives, highContrast, onSemanticPick, reducedMotion]);
+  }, [bundle, clippingEnabled, directives, highContrast, onSemanticPick, reducedMotion]);
 
   return (
     <div className="hybrid-canvas-shell" data-visible-roles={visibleRoles}>

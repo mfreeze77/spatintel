@@ -9,6 +9,8 @@ htmlcov/
 .env
 node_modules/
 .next/
+.pnpm-store/
+*.tsbuildinfo
 .swiftpm/
 .build/
 DerivedData/

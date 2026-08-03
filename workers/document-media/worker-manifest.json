@@ -19,7 +19,7 @@
   "idempotent": true,
   "input_contract": "sip.worker-input/v1",
   "least_privilege": true,
-  "manifest_sha256": "cc2eca99b7e3d6f9c89935b9b77b7f1d12f677bcbe8a214c03ae8ef0de0c2b79",
+  "manifest_sha256": "c828782901b846898b17cc220a73d26a83e95567466a3ada6df3cf45dae98b8a",
   "name": "document-media",
   "network_access": false,
   "output_contract": "sip.worker-result/v1",
@@ -49,7 +49,7 @@
     "max_wall_seconds": 900
   },
   "runtime_module": "src/sip/worker_runtime.py",
-  "runtime_sha256": "339e3f20f94f43cddceb93e43886a77ba1594c9f954823efa8d4aba0ece88311",
+  "runtime_sha256": "05314c529258738a7d741b0cda71ac0cf38ee1a95e779dcaecce601e29fe5343",
   "sandbox_module": "src/sip/worker_sandbox.py",
   "sandbox_sha256": "70ca3f95f8c75720748902d738bb794db461584d427e68ffab4e31296997e879",
   "schema": "sip.worker-manifest/v1",

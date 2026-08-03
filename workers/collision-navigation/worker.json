@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "294df25d9ac73e9adfb03934fe43cfee11b0d3b290987bac328a08b5c1187cb1",
+  "manifest_sha256": "46bfdbb8e30e26d08e6eee4ea39378e8b430223d79a5bd5b2f29e08e8dc53251",
   "name": "collision-navigation",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

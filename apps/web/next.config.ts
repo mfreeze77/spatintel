@@ -4,9 +4,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: true
-  },
+  typedRoutes: true,
   headers: async () => [
     {
       source: "/:path*",

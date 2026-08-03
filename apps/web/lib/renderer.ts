@@ -1,4 +1,5 @@
-import type { Camera, Object3D, Scene, WebGLRenderer, WebGPURenderer } from "three";
+import type { Camera, Object3D, Scene, WebGLRenderer } from "three";
+import type { WebGPURenderer } from "three/webgpu";
 
 export interface SpatialRendererAdapter {
   readonly adapterId: string;

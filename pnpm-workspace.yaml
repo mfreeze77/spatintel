@@ -1,3 +1,7 @@
 packages:
-  - apps/web
-  - packages/contracts/typescript
+  - "apps/web"
+  - "packages/contracts/typescript"
+
+overrides:
+  postcss: 8.5.25
+  sharp: 0.35.3

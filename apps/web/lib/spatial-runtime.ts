@@ -242,7 +242,15 @@ function assertNoCapabilities(value: unknown, path = "root"): void {
     assertNoCapabilities(item, `${path}.${key}`);
   }
 }
-export function validateViewerSessionState(state: Readonly<Record<string, any>>): true {
+type ViewerSessionState = Readonly<{
+  sceneCommitIds?: unknown;
+  redaction?: Readonly<{ serverEnforced?: unknown }>;
+  accessibility?: Readonly<Record<string, unknown>>;
+  comparison?: Readonly<{ secondaryCommitId?: unknown }>;
+  [key: string]: unknown;
+}>;
+
+export function validateViewerSessionState(state: ViewerSessionState): true {
   assertNoCapabilities(state);
   if (!Array.isArray(state.sceneCommitIds) || state.sceneCommitIds.length < 1 || state.sceneCommitIds.length > 2) throw new Error("VIEWER_COMMIT_SET_INVALID");
   if (new Set(state.sceneCommitIds).size !== state.sceneCommitIds.length) throw new Error("VIEWER_COMMIT_SET_DUPLICATE");

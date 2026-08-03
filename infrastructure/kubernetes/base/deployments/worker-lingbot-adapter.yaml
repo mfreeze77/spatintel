@@ -20,7 +20,7 @@ spec:
     metadata:
       labels: *id001
       annotations:
-        sip.platform/worker-manifest-sha256: 17ee94dd8e9f3609a9381f1d43337144fc8b1e9ab1767b3c7a75a568ea017fd7
+        sip.platform/worker-manifest-sha256: 63b7840570168af041cb4145460806f617b9b77e2bf34d3ea44f589011dd2256
         sip.platform/publication-permission: denied
         sip.platform/network-during-compute: denied
         prometheus.io/scrape: 'true'
@@ -53,7 +53,7 @@ spec:
         - name: SIP_WORKLOAD_IDENTITY
           value: sip-worker:lingbot-adapter
         - name: SIP_WORKER_MANIFEST_SHA256
-          value: 17ee94dd8e9f3609a9381f1d43337144fc8b1e9ab1767b3c7a75a568ea017fd7
+          value: 63b7840570168af041cb4145460806f617b9b77e2bf34d3ea44f589011dd2256
         - name: SIP_WORKER_PUBLICATION_PERMISSION
           value: 'false'
         - name: SIP_WORKER_COMPUTE_NETWORK_ACCESS

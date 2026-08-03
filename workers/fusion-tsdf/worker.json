@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "806938ee1d7346ed82e1fb86fe5e726a6c3e94d476575f2440afc80b5354228e",
+  "manifest_sha256": "a8fdd25175e8ba0119862037045529ac4a555bb67ae6bfc763b2694ac7e81673",
   "name": "fusion-tsdf",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

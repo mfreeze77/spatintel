@@ -1285,6 +1285,25 @@
         "build/reports/test-matrix.json"
       ]
     },
+    "CAPCSCP-002": {
+      "implementation_files": [
+        "apps/ios-capture/Tests/CaptureCoreTests",
+        "src/sip/capture.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
+      "test_ids": [
+        "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed asset storage writes complete bytes and open mesh encoding"
+      ],
+      "test_result_evidence_paths": [
+        "build/evidence/swift-test-linux.log",
+        "build/reports/swift-test-report.json",
+        "build/reports/test-matrix.json"
+      ]
+    },
     "CAPCSCP-005": {
       "implementation_files": [
         "apps/ios-capture/Tests/CaptureCoreTests",
@@ -1585,6 +1604,7 @@
       "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
       "owner": "SIP Engineering",
       "test_ids": [
+        "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed asset storage writes complete bytes and open mesh encoding",
         "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-3:CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics"
       ],
       "test_result_evidence_paths": [

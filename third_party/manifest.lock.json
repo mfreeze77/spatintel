@@ -193,7 +193,7 @@
       "ecosystem": "npm",
       "group": "dependencies",
       "name": "next",
-      "version": "16.2.11"
+      "version": "16.2.12"
     },
     {
       "ecosystem": "npm",
@@ -241,13 +241,13 @@
       "ecosystem": "npm",
       "group": "devDependencies",
       "name": "eslint",
-      "version": "10.7.0"
+      "version": "9.39.5"
     },
     {
       "ecosystem": "npm",
       "group": "devDependencies",
       "name": "eslint-config-next",
-      "version": "16.2.11"
+      "version": "16.2.12"
     },
     {
       "ecosystem": "npm",
@@ -373,7 +373,7 @@
       "runtime_state": "format_reference_only_no_runtime_dependency"
     }
   ],
-  "lock_root_sha256": "427240c91e96fa1cb851baaf0b538cefaa009badb2a8ead547ec2763402539b3",
+  "lock_root_sha256": "558686d26fce1aa9f8000f87aa1c8fba669876c5110760ac13fc4af1a99a75a9",
   "runtime_downloads_allowed": false,
   "schema": "sip.third-party-manifest-lock/v1",
   "specification_version": "1.1.0"

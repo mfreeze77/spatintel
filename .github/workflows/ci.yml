@@ -72,7 +72,7 @@ jobs:
           retention-days: 30
 
   web-source:
-    name: Web dependency-free contracts
+    name: Web contracts and production build
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -84,8 +84,18 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: "24.18.0"
+      - name: Install frozen web dependencies
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.2 --activate
+          pnpm install --frozen-lockfile --ignore-scripts
       - name: Verify renderer-independent runtime contracts
-        run: npm --workspace apps/web run verify-runtime
+        run: pnpm --dir apps/web verify-runtime
+      - name: Audit, typecheck, and build web application
+        run: |
+          pnpm audit --prod
+          pnpm --dir apps/web typecheck
+          pnpm --dir apps/web build
 
   swift-fixtures:
     name: Swift capture fixture profile

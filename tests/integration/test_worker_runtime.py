@@ -18,6 +18,7 @@ def test_worker_registry_covers_all_declared_worker_boundaries() -> None:
     expected = {
         "capture.normalize",
         "capture.polyform.normalize",
+        "capture.reconstruct",
         "capture.validate",
         "change.detect",
         "collision.navigation",
@@ -458,6 +459,7 @@ def test_candidate_staging_is_idempotent_when_completion_fails_then_retries(boot
     assert len(candidates) == 1
     assert len(events) == 1
     assert bindings == []
+
 
 @pytest.mark.integration
 def test_lingbot_checkpoint_is_hard_denied_and_operation_records_failure(bootstrapped) -> None:

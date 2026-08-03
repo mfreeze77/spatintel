@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "75c4efb7aeadbd628f54ed2345fb33f2ac2e51d114dda3a87448d889394def1f",
+  "manifest_sha256": "0c3bc502169dac6d27dae5c9781d027c7b51046d8f220866ff7365a8119f5eb1",
   "name": "change-detection",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

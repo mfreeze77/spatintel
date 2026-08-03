@@ -51,6 +51,11 @@ to the metric representation and its source evidence.
   verified measurement.
 - Vertex colors are supported, but texture-image and physically based material
   baking are not yet implemented.
-- The conditional iOS capture code still needs its physical buffer writer wired
-  to real asset serialization and verified on the configured iPhone/LiDAR
-  device. Repository fixtures do not substitute for that proof.
+- The conditional iOS capture path now serializes real camera, depth,
+  confidence, motion, and ARKit mesh-anchor assets and can finalize a protected
+  local directory. It still requires an Xcode build and physical verification
+  on the configured iPhone/LiDAR device; repository fixtures do not substitute
+  for that proof.
+
+See `IPHONE_CAPTURE_PIPELINE.md` for the exact device output and workstation
+commands.

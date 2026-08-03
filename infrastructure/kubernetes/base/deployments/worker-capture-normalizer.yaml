@@ -20,7 +20,7 @@ spec:
     metadata:
       labels: *id001
       annotations:
-        sip.platform/worker-manifest-sha256: 9b8fe84972742ffb70780fe12156b84a4403543eb53b29d409a354fdf7aae06c
+        sip.platform/worker-manifest-sha256: 805e315aff9bcf2cd4031de1d3eff9464a02b3afb753b3ec9e93e9a765f2b4fe
         sip.platform/publication-permission: denied
         sip.platform/network-during-compute: denied
         prometheus.io/scrape: 'true'
@@ -53,7 +53,7 @@ spec:
         - name: SIP_WORKLOAD_IDENTITY
           value: sip-worker:capture-normalizer
         - name: SIP_WORKER_MANIFEST_SHA256
-          value: 9b8fe84972742ffb70780fe12156b84a4403543eb53b29d409a354fdf7aae06c
+          value: 805e315aff9bcf2cd4031de1d3eff9464a02b3afb753b3ec9e93e9a765f2b4fe
         - name: SIP_WORKER_PUBLICATION_PERMISSION
           value: 'false'
         - name: SIP_WORKER_COMPUTE_NETWORK_ACCESS

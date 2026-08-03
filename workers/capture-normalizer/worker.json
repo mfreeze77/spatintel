@@ -4,7 +4,8 @@
   "capabilities": [
     "capture.validate",
     "capture.normalize",
-    "capture.polyform.normalize"
+    "capture.polyform.normalize",
+    "capture.reconstruct"
   ],
   "checkpointed": true,
   "durable": true,
@@ -14,7 +15,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "9b8fe84972742ffb70780fe12156b84a4403543eb53b29d409a354fdf7aae06c",
+  "manifest_sha256": "805e315aff9bcf2cd4031de1d3eff9464a02b3afb753b3ec9e93e9a765f2b4fe",
   "name": "capture-normalizer",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

@@ -22407,7 +22407,7 @@
       "title": "Controlled customer pilots"
     }
   ],
-  "generated_at": "2026-08-02T22:25:31.719290+00:00",
+  "generated_at": "2026-08-03T06:59:23.716469+00:00",
   "open_questions": [
     {
       "downstream_blockers": [
@@ -29955,6 +29955,7 @@
       "source_title": "ARKit, LiDAR, RGB, Mesh, and IMU Acquisition",
       "supersession_links": [],
       "test_ids": [
+        "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed asset storage writes complete bytes and open mesh encoding",
         "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-3:CAPSENS-001 CAPSENS-002 frame metadata preserves invalid depth semantics"
       ],
       "test_plan_path": "tests/spec/requirements/CAPSENS-001.yaml",
@@ -30537,11 +30538,15 @@
       ],
       "external_validation_status": "NOT_REQUIRED",
       "first_passing_release": null,
-      "implementation_files": [],
-      "implementation_status": "NOT_STARTED",
-      "last_regression_result": null,
-      "notes": "",
-      "owner": "UNASSIGNED",
+      "implementation_files": [
+        "apps/ios-capture/Tests/CaptureCoreTests",
+        "src/sip/capture.py"
+      ],
+      "implementation_status": "IMPLEMENTED_UNVERIFIED",
+      "last_regression_result": "build/reports/test-matrix.json",
+      "linked_tests_passed": true,
+      "notes": "Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement is intentionally not marked verified.",
+      "owner": "SIP Engineering",
       "priority": "P0",
       "release_gate": "FIRST_PRODUCTION_BLOCKING",
       "requirement_id": "CAPCSCP-002",
@@ -30552,10 +30557,14 @@
       "source_title": "Canonical Spatial Capture Package",
       "supersession_links": [],
       "test_ids": [
-        "REQ-CAPCSCP-002"
+        "apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed asset storage writes complete bytes and open mesh encoding"
       ],
       "test_plan_path": "tests/spec/requirements/CAPCSCP-002.yaml",
-      "test_result_evidence_paths": [],
+      "test_result_evidence_paths": [
+        "build/evidence/swift-test-linux.log",
+        "build/reports/swift-test-report.json",
+        "build/reports/test-matrix.json"
+      ],
       "text": "Every asset entry shall include path/reference, media type, byte size, SHA-256, creation source, encryption status, and retention class.",
       "verification_method": "Automated test",
       "waiver_expiration": null,

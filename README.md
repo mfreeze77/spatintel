@@ -113,6 +113,10 @@ swift test
 
 The ARKit/AVFoundation/CoreMotion implementation is compiled only on supported Apple platforms. Physical LiDAR, thermal, battery, interruption, cable transfer, and background-task acceptance are tracked as external validation rather than claimed from Linux fixtures.
 
+The local iPhone-to-viewer workflow, exact sensor formats, reconstruction
+commands, and first-device acceptance evidence are documented in
+`docs/developer/IPHONE_CAPTURE_PIPELINE.md`.
+
 ## Web viewer
 
 ```bash

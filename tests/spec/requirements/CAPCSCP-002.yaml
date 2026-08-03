@@ -8,11 +8,17 @@ source:
 requirement: Every asset entry shall include path/reference, media type, byte size, SHA-256, creation source, encryption status,
   and retention class.
 verification_method: Automated test
-implementation_status: NOT_STARTED
-implementation_files: []
+implementation_status: IMPLEMENTED_UNVERIFIED
+implementation_files:
+- apps/ios-capture/Tests/CaptureCoreTests
+- src/sip/capture.py
 automated_test_ids:
-- REQ-CAPCSCP-002
-retained_evidence: []
+- apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed
+  asset storage writes complete bytes and open mesh encoding
+retained_evidence:
+- build/evidence/swift-test-linux.log
+- build/reports/swift-test-report.json
+- build/reports/test-matrix.json
 controlled_procedure:
 - Verify all listed implementation files exist at the reviewed commit.
 - Execute each listed automated test or the documented controlled procedure in an isolated environment.
@@ -21,5 +27,6 @@ controlled_procedure:
 - Update the ledger only after evidence paths exist and independently match the claimed result.
 external_validation:
   status: NOT_REQUIRED
-  owner: UNASSIGNED
-  gap: ''
+  owner: SIP Engineering
+  gap: Implementation and automated checks exist, but production-environment or full-scope evidence is incomplete; this requirement
+    is intentionally not marked verified.

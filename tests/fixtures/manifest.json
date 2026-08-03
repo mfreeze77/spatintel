@@ -2,40 +2,40 @@
   "fixture_count": 15,
   "fixtures": [
     {
-      "byte_count": 13215,
+      "byte_count": 13906,
       "category": "capture",
       "description": "Valid deterministic canonical room capture with RGB, depth, confidence, poses, and calibration.",
       "expected_error_code": null,
       "expected_result": "accepted",
       "path": "capture/canonical-room.sipcapture",
-      "sha256": "34b6c1a38ab31a593b91946803cd8913e5bf3dd3b2c11456487a32a93cbf51ae"
+      "sha256": "0fda8ce9e3fec4abbbf8085adeb74e034803d16d5bf011173ce3063126747c17"
     },
     {
-      "byte_count": 13216,
+      "byte_count": 13907,
       "category": "capture",
       "description": "Structurally valid archive declaring an unsupported future major schema.",
       "expected_error_code": "CAPTURE_FUTURE_SCHEMA",
       "expected_result": "rejected",
       "path": "capture/future-schema.sipcapture",
-      "sha256": "a1174797a470eafd49326b6a65e3e32a03bb7cee1eef3aee3fdd79afb30991da"
+      "sha256": "076bc86338543a1a30834831097800b777a62720616e51d4aa90cdde027e5cb4"
     },
     {
-      "byte_count": 13223,
+      "byte_count": 13914,
       "category": "capture",
       "description": "Canonical package with one content byte stream changed without updating its hash.",
       "expected_error_code": "CAPTURE_ASSET_INTEGRITY",
       "expected_result": "rejected",
       "path": "capture/tampered-asset.sipcapture",
-      "sha256": "a9982e71aa24ee5c96d299182c24d64c0bc7c942c3caed1509ff53a5ab42006b"
+      "sha256": "400bd0fb461d1f3953f34f6476347f400962fbcbb697d66176419fbdb04de288"
     },
     {
-      "byte_count": 4405,
+      "byte_count": 4635,
       "category": "capture",
       "description": "Truncated ZIP for parser and recovery rejection.",
       "expected_error_code": "CAPTURE_ARCHIVE_INVALID",
       "expected_result": "rejected",
       "path": "capture/truncated.sipcapture",
-      "sha256": "cc361ce7706e540d26deeabae297031eac8b98a72297948e36d34e21928b3aa5"
+      "sha256": "b9a877d541eb9c7b41eeae5986f2adc244da7df2c4a2082825623f65a7a8d3a1"
     },
     {
       "byte_count": 1171,

@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "34669df368750baa8a7f8389f9976391f4553fec7014f0ebc8dd631cf957c3d2",
+  "manifest_sha256": "52e85deb329f3f393960fe9c1516910d672fb5b72449812bca440df52a414d52",
   "name": "report-export",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2025",
-    "lib": ["dom", "dom.iterable", "es2025"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2025"
+    ],
     "allowJs": false,
     "skipLibCheck": false,
     "strict": true,
@@ -13,11 +17,29 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{"name": "next"}],
-    "types": ["node", "react", "react-dom"]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "test", "scripts"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test",
+    "scripts"
+  ]
 }

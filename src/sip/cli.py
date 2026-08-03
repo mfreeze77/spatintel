@@ -3,15 +3,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import platform
 import shutil
 import subprocess
-import sys
 from pathlib import Path
 from typing import Any
 
-from .capture import CapturePackage
+from .capture import CapturePackage, IPhoneCaptureDirectoryImporter
+from .capture_pipeline import reconstruct_to_scene_bundle
 from .spec_lint import run as run_spec_lint
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,7 +24,6 @@ def _version(command: list[str]) -> str | None:
         return (result.stdout or result.stderr).strip().splitlines()[0]
     except Exception:
         return "present-but-version-query-failed"
-
 
 
 def _sha256(path: Path) -> str:
@@ -52,7 +50,14 @@ def _nvidia_report() -> dict[str, Any]:
     for line in result.stdout.splitlines():
         fields = [part.strip() for part in line.split(",")]
         if len(fields) >= 4:
-            devices.append({"name": fields[0], "driver_version": fields[1], "memory_mib": fields[2], "compute_capability": fields[3]})
+            devices.append(
+                {
+                    "name": fields[0],
+                    "driver_version": fields[1],
+                    "memory_mib": fields[2],
+                    "compute_capability": fields[3],
+                }
+            )
     return {"available": bool(devices), "devices": devices, "error": None if devices else "no CUDA device reported"}
 
 
@@ -93,24 +98,48 @@ def _approved_local_checkpoints(manifest_root: Path | None = None) -> dict[str, 
             rejected.append({"manifest": str(manifest_path), "reason": "invalid_json"})
             continue
         if manifest.get("approval_state") != "approved":
-            rejected.append({"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "not_approved"})
+            rejected.append(
+                {"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "not_approved"}
+            )
             continue
         checkpoint_hash = str(manifest.get("checkpoint_hash", "")).lower()
         checkpoint_path_value = manifest.get("local_path")
         if not checkpoint_path_value or not __import__("re").fullmatch(r"[0-9a-f]{64}", checkpoint_hash):
-            rejected.append({"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "approved_manifest_missing_local_path_or_hash"})
+            rejected.append(
+                {
+                    "manifest": str(manifest_path),
+                    "model_id": manifest.get("model_id"),
+                    "reason": "approved_manifest_missing_local_path_or_hash",
+                }
+            )
             continue
         checkpoint_path = Path(str(checkpoint_path_value)).expanduser()
         if not checkpoint_path.is_absolute():
             checkpoint_path = (ROOT / checkpoint_path).resolve()
         if not checkpoint_path.is_file():
-            rejected.append({"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "checkpoint_missing"})
+            rejected.append(
+                {"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "checkpoint_missing"}
+            )
             continue
         actual = _sha256(checkpoint_path)
         if actual != checkpoint_hash:
-            rejected.append({"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "reason": "checkpoint_hash_mismatch", "actual_sha256": actual})
+            rejected.append(
+                {
+                    "manifest": str(manifest_path),
+                    "model_id": manifest.get("model_id"),
+                    "reason": "checkpoint_hash_mismatch",
+                    "actual_sha256": actual,
+                }
+            )
             continue
-        accepted.append({"manifest": str(manifest_path), "model_id": manifest.get("model_id"), "checkpoint_path": str(checkpoint_path), "checkpoint_sha256": actual})
+        accepted.append(
+            {
+                "manifest": str(manifest_path),
+                "model_id": manifest.get("model_id"),
+                "checkpoint_path": str(checkpoint_path),
+                "checkpoint_sha256": actual,
+            }
+        )
     return {"approved": accepted, "rejected": rejected, "implicit_downloads_allowed": False}
 
 
@@ -138,6 +167,7 @@ def gpu_doctor(manifest_root: Path | None = None) -> dict[str, Any]:
         "reasons": reasons,
         "local_execution_ready": status == "ready",
     }
+
 
 def doctor() -> dict[str, Any]:
     tools = {
@@ -177,6 +207,18 @@ def main() -> None:
     spec.add_argument("--release", action="store_true")
     capture = sub.add_parser("validate-capture")
     capture.add_argument("path", type=Path)
+    reconstruct = sub.add_parser("reconstruct-capture")
+    reconstruct.add_argument("path", type=Path)
+    reconstruct.add_argument("output", type=Path)
+    reconstruct.add_argument("--voxel-size-m", type=float, default=0.03)
+    reconstruct.add_argument("--frame-stride", type=int, default=1)
+    reconstruct.add_argument("--pixel-stride", type=int, default=2)
+    reconstruct.add_argument("--splat-samples", type=int, default=20_000)
+    reconstruct.add_argument("--lod-target-faces", type=int, default=20_000)
+    reconstruct.add_argument("--seed", type=int, default=0)
+    iphone = sub.add_parser("import-iphone-capture")
+    iphone.add_argument("directory", type=Path)
+    iphone.add_argument("output", type=Path)
     args = parser.parse_args()
 
     if args.command == "doctor":
@@ -185,6 +227,19 @@ def main() -> None:
         result = run_spec_lint(release=args.release)
     elif args.command == "validate-capture":
         result = CapturePackage.validate(args.path)
+    elif args.command == "reconstruct-capture":
+        result = reconstruct_to_scene_bundle(
+            args.path,
+            args.output,
+            voxel_size_m=args.voxel_size_m,
+            frame_stride=args.frame_stride,
+            pixel_stride=args.pixel_stride,
+            splat_samples=args.splat_samples,
+            lod_target_faces=args.lod_target_faces,
+            seed=args.seed,
+        )
+    elif args.command == "import-iphone-capture":
+        result = IPhoneCaptureDirectoryImporter().convert(args.directory, args.output)
     else:
         parser.error("unknown command")
         return

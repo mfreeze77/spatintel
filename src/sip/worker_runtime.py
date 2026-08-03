@@ -10,16 +10,18 @@ import socket
 import sys
 import time
 import uuid
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 import numpy as np
 from sqlalchemy import select
 
-from .canonical import canonical_json, canonical_sha256, sha256_file
+from .canonical import canonical_json, canonical_sha256
 from .capture import CapturePackage, PolyformImporter
+from .capture_pipeline import reconstruct_to_scene_bundle
 from .context import PlatformContext
 from .database import CoordinateFrameRow, OperationRow, ProjectRow, SceneCommitRow
 from .errors import AuthenticationError, AuthorizationError, ConflictError, NotFoundError, ValidationError
@@ -35,12 +37,6 @@ from .geometry import (
     unproject_depth,
     voxel_fuse,
 )
-from .observability import (
-    PlatformObservability,
-    configure_logging,
-    operation_span,
-    pseudonymize_identifier,
-)
 from .models import (
     AuthorityClass,
     Classification,
@@ -48,6 +44,12 @@ from .models import (
     ProvenanceRef,
     RepresentationKind,
     SourceClass,
+)
+from .observability import (
+    PlatformObservability,
+    configure_logging,
+    operation_span,
+    pseudonymize_identifier,
 )
 from .worker_manifest import WorkerManifest, WorkerResourceLimits, create_manifest_payload, load_worker_manifest
 from .worker_protocol import (
@@ -186,7 +188,9 @@ class LocalWorkerControlGateway:
         return self._context.operations.get(operation_id)
 
     def heartbeat(self, operation_id: str) -> dict[str, Any]:
-        return self._context.operations.heartbeat(operation_id, worker_id=self.worker_id, lease_seconds=self.lease_seconds)
+        return self._context.operations.heartbeat(
+            operation_id, worker_id=self.worker_id, lease_seconds=self.lease_seconds
+        )
 
     def checkpoint(self, operation_id: str, *, progress: float, checkpoint: dict[str, Any]) -> dict[str, Any]:
         return self._context.operations.checkpoint(
@@ -226,7 +230,7 @@ class LocalWorkerControlGateway:
         self,
         *,
         lease: WorkerLease,
-        admission: "CandidateAdmission",
+        admission: CandidateAdmission,
         handler_output: dict[str, Any],
         worker_manifest: WorkerManifest,
         code_commit: str,
@@ -325,9 +329,7 @@ class LocalWorkerControlGateway:
             actor_id=lease.workload_identity,
             asset_id=asset_id,
         )
-        prohibited_uses = sorted(
-            set(request.prohibited_uses) | {"automatic_publication", "verified_measurement"}
-        )
+        prohibited_uses = sorted(set(request.prohibited_uses) | {"automatic_publication", "verified_measurement"})
         created_representation_id = self._context.representations.create_candidate(
             tenant_id=tenant_id,
             project_id=project_id,
@@ -444,7 +446,9 @@ class WorkerExecution:
             )
         self.checkpoints.append(record)
         if current["cancel_requested"] or updated["state"] == OperationState.CANCELLED.value:
-            raise ConflictError("OPERATION_CANCELLED", "worker observed a cancellation request at a declared safe point")
+            raise ConflictError(
+                "OPERATION_CANCELLED", "worker observed a cancellation request at a declared safe point"
+            )
 
     def authorize_lingbot(
         self,
@@ -478,7 +482,10 @@ class CapabilityRegistry:
         return decorator
 
     def execute(self, operation_type: str, manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
-        if operation_type != execution.lease.operation_type or canonical_sha256(manifest) != execution.lease.input_manifest_hash:
+        if (
+            operation_type != execution.lease.operation_type
+            or canonical_sha256(manifest) != execution.lease.input_manifest_hash
+        ):
             raise AuthenticationError("WORKER_LEASE_INPUT_MISMATCH", "worker input is not bound to the signed lease")
         handler = self._handlers.get(operation_type)
         if handler is None:
@@ -553,6 +560,32 @@ def normalize_capture(manifest: dict[str, Any], execution: WorkerExecution) -> d
     }
 
 
+@REGISTRY.register("capture.reconstruct")
+def reconstruct_capture(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
+    package = Path(str(manifest["package_path"]))
+    output = Path(str(manifest["output_path"]))
+    execution.checkpoint(0.1, {"stage": "capture_validation"})
+    result = reconstruct_to_scene_bundle(
+        package,
+        output,
+        voxel_size_m=float(manifest.get("voxel_size_m", 0.03)),
+        frame_stride=int(manifest.get("frame_stride", 1)),
+        pixel_stride=int(manifest.get("pixel_stride", 2)),
+        splat_samples=int(manifest.get("splat_samples", 20_000)),
+        lod_target_faces=int(manifest.get("lod_target_faces", 20_000)),
+        seed=int(manifest.get("seed", 0)),
+    )
+    execution.checkpoint(
+        0.9,
+        {
+            "stage": "scene_bundle_written",
+            "metric_source": result["quality"]["metric_source"],
+            "accepted_depth_frames": result["quality"]["accepted_depth_frames"],
+        },
+    )
+    return result
+
+
 @REGISTRY.register("pose.optimize")
 def optimize_pose(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
     source = _points(manifest["source_points"], "source_points")
@@ -574,7 +607,7 @@ def optimize_pose(manifest: dict[str, Any], execution: WorkerExecution) -> dict[
         "transform": estimate.matrix().tolist(),
         "scale": estimate.scale,
         "inlier_count": int(inliers.sum()),
-        "correspondence_count": int(len(source)),
+        "correspondence_count": len(source),
         "rmse_m": float(np.sqrt(np.mean(residual**2))),
         "authority": "metric_observation_derived_unverified",
     }
@@ -653,7 +686,12 @@ def geometry_cleanup(manifest: dict[str, Any], execution: WorkerExecution) -> di
     return {
         "vertices": cleaned["vertices"].tolist(),
         "faces": cleaned["faces"].tolist(),
-        "repair": {"input_vertices": len(vertices), "output_vertices": len(cleaned["vertices"]), "input_faces": len(faces), "output_faces": len(cleaned["faces"])},
+        "repair": {
+            "input_vertices": len(vertices),
+            "output_vertices": len(cleaned["vertices"]),
+            "input_faces": len(faces),
+            "output_faces": len(cleaned["faces"]),
+        },
     }
 
 
@@ -707,7 +745,9 @@ def collision_navigation(manifest: dict[str, Any], execution: WorkerExecution) -
     lengths = np.linalg.norm(normals, axis=1)
     normals = normals / np.maximum(lengths[:, None], 1e-12)
     walkable = np.where(normals[:, 1] >= np.cos(np.deg2rad(float(manifest.get("maximum_slope_degrees", 35)))))[0]
-    result.update({"walkable_face_indices": walkable.tolist(), "collision_ready": True, "safe_navigation_review_required": True})
+    result.update(
+        {"walkable_face_indices": walkable.tolist(), "collision_ready": True, "safe_navigation_review_required": True}
+    )
     return result
 
 
@@ -715,7 +755,9 @@ def collision_navigation(manifest: dict[str, Any], execution: WorkerExecution) -
 def generate_splat(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
     vertices = _points(manifest["vertices"], "vertices")
     faces = np.asarray(manifest["faces"], dtype=np.int64)
-    splats = mesh_to_splats(vertices, faces, samples=int(manifest.get("count", 1024)), seed=int(manifest.get("seed", 0)))
+    splats = mesh_to_splats(
+        vertices, faces, samples=int(manifest.get("count", 1024)), seed=int(manifest.get("seed", 0))
+    )
     execution.checkpoint(0.9, {"stage": "mesh_to_splat", "splat_count": len(splats["positions"])})
     return {key: value.tolist() if hasattr(value, "tolist") else value for key, value in splats.items()} | {
         "lossy": True,
@@ -732,7 +774,12 @@ def normalize_splat(manifest: dict[str, Any], execution: WorkerExecution) -> dic
         raise ValidationError("SPLAT_SHAPE_INVALID", "splat scales/opacities do not match positions")
     opacities = np.clip(opacities, 0, 1)
     execution.checkpoint(0.9, {"stage": "splat_normalized", "splat_count": len(positions)})
-    return {"positions": positions.tolist(), "scales": scales.tolist(), "opacities": opacities.tolist(), "coordinate_frame_id": manifest["coordinate_frame_id"]}
+    return {
+        "positions": positions.tolist(),
+        "scales": scales.tolist(),
+        "opacities": opacities.tolist(),
+        "coordinate_frame_id": manifest["coordinate_frame_id"],
+    }
 
 
 @REGISTRY.register("splat.surface")
@@ -753,9 +800,11 @@ def splat_surface(manifest: dict[str, Any], execution: WorkerExecution) -> dict[
 def detect_change(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
     before = _points(manifest["before_points"], "before_points")
     after = _points(manifest["after_points"], "after_points")
-    report = change_detection(before, after, threshold=float(manifest.get("threshold_m", 0.05)))
+    report = change_detection(before, after, threshold_m=float(manifest.get("threshold_m", 0.05)))
     execution.checkpoint(0.9, {"stage": "change_detected"})
-    return {key: value.tolist() if hasattr(value, "tolist") else value for key, value in report.items()} | {"review_required": True}
+    return {key: value.tolist() if hasattr(value, "tolist") else value for key, value in report.items()} | {
+        "review_required": True
+    }
 
 
 @REGISTRY.register("representation.quality")
@@ -766,9 +815,19 @@ def representation_quality(manifest: dict[str, Any], execution: WorkerExecution)
     missing = sorted(set(thresholds) - set(metrics))
     if missing:
         raise ValidationError("QUALITY_METRICS_MISSING", "required quality metrics are missing", {"missing": missing})
-    failures = {key: {"actual": metrics[key], "minimum": limit} for key, limit in thresholds.items() if float(metrics[key]) < float(limit)}
+    failures = {
+        key: {"actual": metrics[key], "minimum": limit}
+        for key, limit in thresholds.items()
+        if float(metrics[key]) < float(limit)
+    }
     execution.checkpoint(0.9, {"stage": "quality_evaluated", "passed": not failures})
-    return {"intended_use": intended_use, "passed": not failures, "failures": failures, "metrics": metrics, "thresholds": thresholds}
+    return {
+        "intended_use": intended_use,
+        "passed": not failures,
+        "failures": failures,
+        "metrics": metrics,
+        "thresholds": thresholds,
+    }
 
 
 @REGISTRY.register("semantics.suggest")
@@ -788,12 +847,21 @@ def document_media(manifest: dict[str, Any], execution: WorkerExecution) -> dict
     normalized = " ".join(text.split())
     terms = sorted({token.lower().strip(".,:;!?()[]{}") for token in normalized.split() if len(token) > 1})
     execution.checkpoint(0.9, {"stage": "document_indexed", "term_count": len(terms)})
-    return {"normalized_text": normalized, "terms": terms, "source_asset_id": manifest.get("source_asset_id"), "semantic_review_required": True}
+    return {
+        "normalized_text": normalized,
+        "terms": terms,
+        "source_asset_id": manifest.get("source_asset_id"),
+        "semantic_review_required": True,
+    }
 
 
 @REGISTRY.register("report.export")
 def report_export(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
-    report = {"title": manifest["title"], "sections": manifest.get("sections", []), "generated_from": manifest.get("source_ids", [])}
+    report = {
+        "title": manifest["title"],
+        "sections": manifest.get("sections", []),
+        "generated_from": manifest.get("source_ids", []),
+    }
     execution.checkpoint(0.9, {"stage": "report_manifest"})
     return {"report": report, "report_hash": canonical_sha256(report), "format": manifest.get("format", "json")}
 
@@ -807,7 +875,10 @@ def lingbot_reconstruct(manifest: dict[str, Any], execution: WorkerExecution) ->
         region=str(manifest.get("region", "local")),
         checkpoint_hash=str(manifest.get("checkpoint_hash", "UNAVAILABLE")),
     )
-    raise AuthorizationError("LINGBOT_EXECUTION_UNREACHABLE", "governance unexpectedly allowed the denied-by-default LingBot checkpoint")
+    raise AuthorizationError(
+        "LINGBOT_EXECUTION_UNREACHABLE", "governance unexpectedly allowed the denied-by-default LingBot checkpoint"
+    )
+
 
 class WorkerRuntime:
     def __init__(
@@ -1305,9 +1376,7 @@ def _candidate_package_from_persisted(
     environment_hash: str,
     handler_output: dict[str, Any],
 ) -> CandidatePackage:
-    prohibited_uses = sorted(
-        set(request.prohibited_uses) | {"automatic_publication", "verified_measurement"}
-    )
+    prohibited_uses = sorted(set(request.prohibited_uses) | {"automatic_publication", "verified_measurement"})
     limitations = set(request.limitations)
     limitations.add("independent validation required before publication")
     if policy.kind == RepresentationKind.VISUAL:
@@ -1408,10 +1477,7 @@ def _bounded_result_summary(value: Any, *, depth: int = 0) -> Any:
     if depth >= 3:
         return {"type": type(value).__name__, "sha256": canonical_sha256(value)}
     if isinstance(value, dict):
-        return {
-            str(key): _bounded_result_summary(item, depth=depth + 1)
-            for key, item in sorted(value.items())
-        }
+        return {str(key): _bounded_result_summary(item, depth=depth + 1) for key, item in sorted(value.items())}
     if isinstance(value, list):
         return {
             "type": "array",
@@ -1489,14 +1555,18 @@ def _model_artifacts(input_manifest: dict[str, Any]) -> dict[str, Any]:
     def visit(value: Any) -> None:
         if isinstance(value, dict):
             for key, child in value.items():
-                if key in {
-                    "provider_id",
-                    "model_manifest_id",
-                    "model_checkpoint_hash",
-                    "checkpoint_hash",
-                    "model_version",
-                    "source_revision",
-                } and child is not None:
+                if (
+                    key
+                    in {
+                        "provider_id",
+                        "model_manifest_id",
+                        "model_checkpoint_hash",
+                        "checkpoint_hash",
+                        "model_version",
+                        "source_revision",
+                    }
+                    and child is not None
+                ):
                     retained[key] = child
                 visit(child)
         elif isinstance(value, list):
@@ -1630,7 +1700,9 @@ def main() -> None:
     if context.settings.environment == "production" and args.manifest is None:
         raise ValidationError("WORKER_MANIFEST_REQUIRED", "production workers require an immutable worker manifest")
     if args.manifest is not None and args.capabilities:
-        raise ValidationError("WORKER_CAPABILITY_OVERRIDE_DENIED", "capabilities cannot override an immutable worker manifest")
+        raise ValidationError(
+            "WORKER_CAPABILITY_OVERRIDE_DENIED", "capabilities cannot override an immutable worker manifest"
+        )
     manifest = load_worker_manifest(args.manifest) if args.manifest is not None else None
     capabilities = set(manifest.capabilities if manifest else args.capabilities or REGISTRY.operation_types)
     worker_id = os.getenv("SIP_WORKER_ID", f"{socket.gethostname()}-{os.getpid()}")

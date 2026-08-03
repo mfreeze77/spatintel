@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "88004c252a4b03075de8d3d86b5b9411ae3b1dcf959bb289a563b78bd03f5d9f",
+  "manifest_sha256": "41488f694a5d955a85690ecf4be98fd56ea4d4d6251b1bf1863b8b116f8df089",
   "name": "geometry-cleanup",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

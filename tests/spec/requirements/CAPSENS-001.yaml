@@ -13,6 +13,8 @@ implementation_files:
 - apps/ios-capture/Sources/CaptureSensors
 - apps/ios-capture/Tests/CaptureCoreTests
 automated_test_ids:
+- apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-13:CAPSENS-001 CAPCSCP-002 content-addressed
+  asset storage writes complete bytes and open mesh encoding
 - apps/ios-capture/Tests/CaptureCoreTests/CaptureCoreTests.swift::swift-test-3:CAPSENS-001 CAPSENS-002 frame metadata preserves
   invalid depth semantics
 retained_evidence:

@@ -31,6 +31,7 @@ def test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_inte
     viewer = (WEB / "components/HybridViewer.tsx").read_text(encoding="utf-8")
     canvas = (WEB / "components/HybridCanvas.tsx").read_text(encoding="utf-8")
     runtime = (WEB / "lib/spatial-runtime.ts").read_text(encoding="utf-8")
+    local_bundle = (WEB / "lib/local-scene-bundle.ts").read_text(encoding="utf-8")
 
     assert "<HybridCanvas layers={layers}" in viewer
     assert "buildLayerRenderDirectives(layers, comparisonSplit)" in canvas
@@ -43,6 +44,9 @@ def test_pltview_007_reference_layer_contract_is_implemented_but_not_viewer_inte
     assert "interaction.userData.authorized" in canvas
     assert "LAYER_AUTHORIZATION_DENIED" in runtime
     assert "evidence / immutable source record" in runtime
+    assert "parseLocalViewerBundle" in local_bundle
+    assert "viewer-bundle.json" in viewer
+    assert "bundle.metric.vertices" in canvas
 
     output = _node(
         "--test",

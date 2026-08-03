@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "17ee94dd8e9f3609a9381f1d43337144fc8b1e9ab1767b3c7a75a568ea017fd7",
+  "manifest_sha256": "63b7840570168af041cb4145460806f617b9b77e2bf34d3ea44f589011dd2256",
   "name": "lingbot-adapter",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

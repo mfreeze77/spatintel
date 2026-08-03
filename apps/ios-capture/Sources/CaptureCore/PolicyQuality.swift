@@ -83,6 +83,11 @@ public struct QualitySignals: Codable, Sendable, Equatable {
     public let depthCoverage: Double
     public let viewpointDiversity: Double
     public let weakSurfaceFraction: Double
+    public let calculationVersion: String
+    public let knownBlindSpots: [String]
+    public init(blur: Double, exposureClippingFraction: Double, angularVelocityRadiansPerSecond: Double, trackingState: TrackingState, depthCoverage: Double, viewpointDiversity: Double, weakSurfaceFraction: Double, calculationVersion: String = "sip.iphone-frame-quality/v1", knownBlindSpots: [String] = ["viewpoint diversity requires session-level aggregation", "frame score does not establish metric accuracy"]) {
+        self.blur = blur; self.exposureClippingFraction = exposureClippingFraction; self.angularVelocityRadiansPerSecond = angularVelocityRadiansPerSecond; self.trackingState = trackingState; self.depthCoverage = depthCoverage; self.viewpointDiversity = viewpointDiversity; self.weakSurfaceFraction = weakSurfaceFraction; self.calculationVersion = calculationVersion; self.knownBlindSpots = knownBlindSpots
+    }
 }
 
 public struct QualityWarning: Codable, Sendable, Equatable {

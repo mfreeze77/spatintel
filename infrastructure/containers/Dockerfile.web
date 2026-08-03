@@ -2,14 +2,16 @@
 ARG NODE_IMAGE=node:24.18.0-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d
 FROM ${NODE_IMAGE} AS dependencies
 WORKDIR /app
-COPY package.json package-lock.json* ./
+RUN corepack enable && corepack prepare pnpm@10.28.2 --activate
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/web/package.json ./apps/web/package.json
-RUN npm ci --ignore-scripts
+COPY packages/contracts/typescript/package.json ./packages/contracts/typescript/package.json
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 FROM dependencies AS builder
 COPY apps/web ./apps/web
 COPY packages/contracts/typescript ./packages/contracts/typescript
-RUN npm --workspace apps/web run build
+RUN pnpm --dir apps/web build
 
 FROM ${NODE_IMAGE} AS runtime
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000

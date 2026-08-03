@@ -73,14 +73,35 @@ public struct MotionSample: Codable, Sendable, Equatable {
     public let acceleration: [Double]
     public let rotationRate: [Double]
     public let attitudeQuaternion: [Double]
+    public init(timestampNanoseconds: UInt64, acceleration: [Double], rotationRate: [Double], attitudeQuaternion: [Double]) throws {
+        guard acceleration.count == 3, rotationRate.count == 3, attitudeQuaternion.count == 4 else {
+            throw CaptureCoreError.packageInvalid("motion sample vectors have invalid dimensions")
+        }
+        self.timestampNanoseconds = timestampNanoseconds
+        self.acceleration = acceleration
+        self.rotationRate = rotationRate
+        self.attitudeQuaternion = attitudeQuaternion
+    }
 }
 
 public struct MeshObservation: Codable, Sendable, Equatable {
     public enum Change: String, Codable, Sendable { case added, updated, removed }
     public let anchorID: String
+    public let timestampNanoseconds: UInt64?
     public let change: Change
     public let transform: [Double]
     public let geometryAssetID: String?
+    public init(anchorID: String, timestampNanoseconds: UInt64? = nil, change: Change, transform: [Double], geometryAssetID: String?) throws {
+        guard transform.count == 16 else { throw CaptureCoreError.invalidMatrix("mesh transform must contain 16 values") }
+        if change != .removed, geometryAssetID == nil {
+            throw CaptureCoreError.packageInvalid("added or updated mesh observations require geometry")
+        }
+        self.anchorID = anchorID
+        self.timestampNanoseconds = timestampNanoseconds
+        self.change = change
+        self.transform = transform
+        self.geometryAssetID = geometryAssetID
+    }
 }
 
 public struct FrameObservation: Codable, Sendable, Equatable {
@@ -100,12 +121,18 @@ public struct FrameObservation: Codable, Sendable, Equatable {
     public let meshObservations: [MeshObservation]
     public let privacyRegionIDs: [String]
     public let invalidDepthPreserved: Bool
-    public init(frameID: String, timestampNanoseconds: UInt64, imageAssetID: String, depthAssetID: String?, confidenceAssetID: String?, cameraTransform: [Double], intrinsics: [Double], resolution: ImageResolution, trackingState: TrackingState, limitedTrackingReason: LimitedTrackingReason?, exposure: ExposureMetadata, orientation: InterfaceOrientation, motionSamples: [MotionSample] = [], meshObservations: [MeshObservation] = [], privacyRegionIDs: [String] = [], invalidDepthPreserved: Bool = true) throws {
+    public let imageEncoding: String
+    public let depthResolution: ImageResolution?
+    public let depthEncoding: String?
+    public let confidenceEncoding: String?
+    public let transformConvention: String
+    public let qualitySignals: QualitySignals?
+    public init(frameID: String, timestampNanoseconds: UInt64, imageAssetID: String, depthAssetID: String?, confidenceAssetID: String?, cameraTransform: [Double], intrinsics: [Double], resolution: ImageResolution, trackingState: TrackingState, limitedTrackingReason: LimitedTrackingReason?, exposure: ExposureMetadata, orientation: InterfaceOrientation, motionSamples: [MotionSample] = [], meshObservations: [MeshObservation] = [], privacyRegionIDs: [String] = [], invalidDepthPreserved: Bool = true, imageEncoding: String = "bgra8", depthResolution: ImageResolution? = nil, depthEncoding: String? = nil, confidenceEncoding: String? = nil, transformConvention: String = "arkit_column_major_camera_to_world_column_vector", qualitySignals: QualitySignals? = nil) throws {
         guard cameraTransform.count == 16 else { throw CaptureCoreError.invalidMatrix("cameraTransform must contain 16 values") }
         guard intrinsics.count == 9 else { throw CaptureCoreError.invalidMatrix("intrinsics must contain 9 values") }
         guard resolution.width > 0, resolution.height > 0 else { throw CaptureCoreError.invalidDimensions }
         if trackingState == .normal, limitedTrackingReason != nil { throw CaptureCoreError.invalidTrackingState }
-        self.frameID = frameID; self.timestampNanoseconds = timestampNanoseconds; self.imageAssetID = imageAssetID; self.depthAssetID = depthAssetID; self.confidenceAssetID = confidenceAssetID; self.cameraTransform = cameraTransform; self.intrinsics = intrinsics; self.resolution = resolution; self.trackingState = trackingState; self.limitedTrackingReason = limitedTrackingReason; self.exposure = exposure; self.orientation = orientation; self.motionSamples = motionSamples; self.meshObservations = meshObservations; self.privacyRegionIDs = privacyRegionIDs; self.invalidDepthPreserved = invalidDepthPreserved
+        self.frameID = frameID; self.timestampNanoseconds = timestampNanoseconds; self.imageAssetID = imageAssetID; self.depthAssetID = depthAssetID; self.confidenceAssetID = confidenceAssetID; self.cameraTransform = cameraTransform; self.intrinsics = intrinsics; self.resolution = resolution; self.trackingState = trackingState; self.limitedTrackingReason = limitedTrackingReason; self.exposure = exposure; self.orientation = orientation; self.motionSamples = motionSamples; self.meshObservations = meshObservations; self.privacyRegionIDs = privacyRegionIDs; self.invalidDepthPreserved = invalidDepthPreserved; self.imageEncoding = imageEncoding; self.depthResolution = depthAssetID == nil ? nil : (depthResolution ?? resolution); self.depthEncoding = depthAssetID == nil ? nil : (depthEncoding ?? "float32_little_endian_meters"); self.confidenceEncoding = confidenceAssetID == nil ? nil : (confidenceEncoding ?? "arkit_0_low_1_medium_2_high"); self.transformConvention = transformConvention; self.qualitySignals = qualitySignals
     }
 }
 

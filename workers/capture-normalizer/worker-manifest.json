@@ -4,6 +4,7 @@
   "capabilities": [
     "capture.normalize",
     "capture.polyform.normalize",
+    "capture.reconstruct",
     "capture.validate"
   ],
   "checkpointed": true,
@@ -21,7 +22,7 @@
   "idempotent": true,
   "input_contract": "sip.worker-input/v1",
   "least_privilege": true,
-  "manifest_sha256": "9b8fe84972742ffb70780fe12156b84a4403543eb53b29d409a354fdf7aae06c",
+  "manifest_sha256": "805e315aff9bcf2cd4031de1d3eff9464a02b3afb753b3ec9e93e9a765f2b4fe",
   "name": "capture-normalizer",
   "network_access": false,
   "output_contract": "sip.worker-result/v1",
@@ -51,7 +52,7 @@
     "max_wall_seconds": 900
   },
   "runtime_module": "src/sip/worker_runtime.py",
-  "runtime_sha256": "339e3f20f94f43cddceb93e43886a77ba1594c9f954823efa8d4aba0ece88311",
+  "runtime_sha256": "05314c529258738a7d741b0cda71ac0cf38ee1a95e779dcaecce601e29fe5343",
   "sandbox_module": "src/sip/worker_sandbox.py",
   "sandbox_sha256": "70ca3f95f8c75720748902d738bb794db461584d427e68ffab4e31296997e879",
   "schema": "sip.worker-manifest/v1",

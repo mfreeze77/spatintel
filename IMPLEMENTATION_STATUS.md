@@ -4,9 +4,9 @@ This repository remains under active implementation. The status below is generat
 
 - Normative requirements: **1,028**
 - Verified: **165**
-- Implemented but unverified: **331**
+- Implemented but unverified: **332**
 - In progress: **15**
-- Not started: **492**
+- Not started: **491**
 - External validation required: **25**
 
 Release mode remains fail-closed until every gap is either verified or explicitly governed under the specification's allowed external-validation/waiver rules.

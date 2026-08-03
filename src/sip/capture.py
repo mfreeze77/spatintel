@@ -2,19 +2,22 @@ from __future__ import annotations
 
 import json
 import math
-import shutil
+import re
 import struct
 import tempfile
 import zipfile
+from itertools import pairwise
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+import numpy as np
+
 from .canonical import canonical_sha256, merkle_root, new_uuid, sha256_bytes, sha256_file
+from .capture_formats import encode_mesh_anchor
 from .errors import ValidationError
 from .temporal import db_now
 
-
-CAPTURE_SCHEMA_VERSION = "1.0.0"
+CAPTURE_SCHEMA_VERSION = "1.1.0"
 MAX_ARCHIVE_FILES = 200_000
 MAX_ARCHIVE_UNCOMPRESSED_BYTES = 100 * 1024 * 1024 * 1024
 MAX_COMPRESSION_RATIO = 200
@@ -27,7 +30,9 @@ class CapturePackage:
         for path, payload in files.items():
             safe = _safe_relative_path(path)
             if safe in normalized:
-                raise ValidationError("CAPTURE_DUPLICATE_PATH", "capture package contains a duplicate path", {"path": safe})
+                raise ValidationError(
+                    "CAPTURE_DUPLICATE_PATH", "capture package contains a duplicate path", {"path": safe}
+                )
             normalized[safe] = payload
         assets = [
             {
@@ -44,7 +49,7 @@ class CapturePackage:
             "assets": assets,
         }
         semantic_hash = canonical_sha256(body)
-        asset_merkle = merkle_root((item["path"], item["sha256"]) for item in assets)
+        asset_merkle = merkle_root((str(item["path"]), str(item["sha256"])) for item in assets)
         root_manifest = {**body, "semantic_hash": semantic_hash, "asset_merkle_root": asset_merkle}
         root_manifest["root_hash"] = canonical_sha256(root_manifest)
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -73,6 +78,9 @@ class CapturePackage:
             except Exception as exc:
                 raise ValidationError("CAPTURE_MANIFEST_INVALID", "capture manifest is not valid JSON") from exc
             _validate_manifest_shape(manifest)
+            declared_paths = [str(item.get("path", "")) for item in manifest["assets"]]
+            if len(declared_paths) != len(set(declared_paths)):
+                raise ValidationError("CAPTURE_ASSET_DUPLICATE", "capture asset paths must be unique")
             checks: list[dict[str, Any]] = []
             for asset in manifest["assets"]:
                 asset_path = _safe_relative_path(asset["path"])
@@ -83,8 +91,14 @@ class CapturePackage:
                 valid = actual == asset["sha256"] and len(payload) == asset["byte_count"]
                 checks.append({"path": asset_path, "valid": valid, "sha256": actual, "byte_count": len(payload)})
                 if not valid:
-                    raise ValidationError("CAPTURE_ASSET_INTEGRITY", "capture asset failed size/hash verification", checks[-1])
-            body = {key: value for key, value in manifest.items() if key not in {"semantic_hash", "asset_merkle_root", "root_hash"}}
+                    raise ValidationError(
+                        "CAPTURE_ASSET_INTEGRITY", "capture asset failed size/hash verification", checks[-1]
+                    )
+            body = {
+                key: value
+                for key, value in manifest.items()
+                if key not in {"semantic_hash", "asset_merkle_root", "root_hash"}
+            }
             semantic_hash = canonical_sha256(body)
             if semantic_hash != manifest["semantic_hash"]:
                 raise ValidationError("CAPTURE_SEMANTIC_HASH", "capture semantic manifest hash does not match")
@@ -95,6 +109,8 @@ class CapturePackage:
             if canonical_sha256(root_body) != manifest["root_hash"]:
                 raise ValidationError("CAPTURE_ROOT_HASH", "capture root hash does not match")
             _validate_frames(manifest.get("frames", []), {item["path"] for item in manifest["assets"]})
+            _validate_coordinate_frames(manifest.get("coordinate_frames", []))
+            _validate_iphone_contract(manifest)
             return {
                 "valid": True,
                 "capture_id": manifest["capture_id"],
@@ -114,7 +130,14 @@ class CapturePackage:
         return {**validation, "manifest": manifest}
 
 
-def create_synthetic_room_capture(destination: Path, *, seed: int = 7, frame_count: int = 12) -> dict[str, Any]:
+def create_synthetic_room_capture(
+    destination: Path,
+    *,
+    seed: int = 7,
+    frame_count: int = 12,
+    capture_source: str = "deterministic_synthetic_fixture",
+    device_model: str = "synthetic-room",
+) -> dict[str, Any]:
     if frame_count < 4:
         raise ValidationError("FIXTURE_FRAME_COUNT", "synthetic room fixture requires at least four frames")
     capture_id = f"synthetic-room-{seed}-{frame_count}"
@@ -127,7 +150,7 @@ def create_synthetic_room_capture(destination: Path, *, seed: int = 7, frame_cou
         image_path = f"frames/{index:06d}/rgb.bin"
         depth_path = f"frames/{index:06d}/depth.f32"
         confidence_path = f"frames/{index:06d}/confidence.u8"
-        image = bytes(((index * 17 + pixel * 13 + seed) % 256 for pixel in range(width * height * 3)))
+        image = bytes((index * 17 + pixel * 13 + seed) % 256 for pixel in range(width * height * 3))
         depths = [2.0 + 0.1 * math.sin(angle + pixel / 17) for pixel in range(width * height)]
         depth = b"".join(struct.pack("<f", value) for value in depths)
         confidence = bytes([2 if pixel % 7 else 1 for pixel in range(width * height)])
@@ -145,6 +168,7 @@ def create_synthetic_room_capture(destination: Path, *, seed: int = 7, frame_cou
                 "frame_id": f"frame-{index:06d}",
                 "timestamp_ns": 1_000_000_000 + index * 100_000_000,
                 "rgb_asset": image_path,
+                "rgb_encoding": "rgb8",
                 "depth_asset": depth_path,
                 "confidence_asset": confidence_path,
                 "image_size": [width, height],
@@ -154,28 +178,110 @@ def create_synthetic_room_capture(destination: Path, *, seed: int = 7, frame_cou
                 "intrinsics": intrinsics,
                 "camera_to_world": pose,
                 "pose_stream": "synthetic_metric",
+                "transform_convention": "row_major_camera_to_world_column_vector",
                 "tracking_state": "normal",
+                "limited_tracking_reason": None,
                 "exposure": {"duration_s": 1 / 120, "iso": 100},
+                "orientation": "landscape_right",
                 "motion": {"angular_velocity_rad_s": [0.0, 0.1, 0.0], "acceleration_m_s2": [0.0, 9.80665, 0.0]},
                 "quality": {"blur_score": 0.02, "coverage_hint": index / frame_count},
+                "invalid_depth_preserved": True,
             }
         )
+    mesh_vertices = np.asarray(
+        [
+            [-1.0, 0.0, -1.0],
+            [1.0, 0.0, -1.0],
+            [1.0, 2.5, -1.0],
+            [-1.0, 2.5, -1.0],
+            [-1.0, 0.0, 1.0],
+            [1.0, 0.0, 1.0],
+            [1.0, 2.5, 1.0],
+            [-1.0, 2.5, 1.0],
+        ],
+        dtype=np.float32,
+    )
+    mesh_faces = np.asarray(
+        [
+            [0, 2, 1],
+            [0, 3, 2],
+            [4, 5, 6],
+            [4, 6, 7],
+            [0, 1, 5],
+            [0, 5, 4],
+            [3, 7, 6],
+            [3, 6, 2],
+            [0, 4, 7],
+            [0, 7, 3],
+            [1, 2, 6],
+            [1, 6, 5],
+        ],
+        dtype=np.uint32,
+    )
+    mesh_path = "meshes/room-anchor.sipmesh"
+    files[mesh_path] = encode_mesh_anchor(mesh_vertices, mesh_faces)
     manifest = {
         "capture_id": capture_id,
         "created_at": "2026-01-01T00:00:00+00:00",
-        "capture_source": "deterministic_synthetic_fixture",
+        "capture_source": capture_source,
+        "device": {
+            "model": device_model,
+            "operating_system": "fixture",
+            "app_build": "fixture-v1",
+            "available_sensors": ["rgb", "lidar_depth", "confidence", "mesh", "motion"],
+            "calibration_camera_identity": "fixture-camera",
+        },
         "coordinate_frames": [
             {"frame_id": "world", "name": "fixture world", "convention": "right_handed_y_up_meters", "units": "meter"}
         ],
         "frames": frames,
         "motion_samples": [],
-        "mesh_anchors": [],
+        "mesh_anchors": [
+            {
+                "anchor_id": "fixture-room-anchor",
+                "timestamp_ns": 1_000_000_000,
+                "change": "added",
+                "anchor_to_world": [
+                    [1.0, 0.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0, 0.0],
+                    [0.0, 0.0, 1.0, 0.0],
+                    [0.0, 0.0, 0.0, 1.0],
+                ],
+                "geometry_asset": mesh_path,
+                "geometry_encoding": "sip_mesh_anchor_v1_little_endian",
+            }
+        ],
+        "segments": [
+            {
+                "segment_id": "segment-1",
+                "started_at_ns": frames[0]["timestamp_ns"],
+                "ended_at_ns": frames[-1]["timestamp_ns"],
+                "frame_ids": [frame["frame_id"] for frame in frames],
+                "overlap_control": "closed synthetic loop",
+            }
+        ],
+        "events": [],
         "restricted_regions": [],
         "calibration": {"known_scale": True, "scale_source": "fixture_definition", "uncertainty_m": 0.001},
         "privacy": {"contains_people": False, "redactions": []},
-        "provenance": {"generator": "sip.capture.create_synthetic_room_capture", "seed": seed},
+        "provenance": {
+            "generator": "sip.capture.create_synthetic_room_capture",
+            "seed": seed,
+            "physical_device_capture": False,
+        },
     }
     return CapturePackage.write(destination, manifest, files)
+
+
+def create_synthetic_iphone_capture(destination: Path, *, seed: int = 7, frame_count: int = 12) -> dict[str, Any]:
+    """Create a deterministic fixture with the exact first-party iPhone contract."""
+    return create_synthetic_room_capture(
+        destination,
+        seed=seed,
+        frame_count=frame_count,
+        capture_source="first_party_arkit_lidar",
+        device_model="fixture-iphone-lidar",
+    )
 
 
 class PolyformImporter:
@@ -214,7 +320,10 @@ class PolyformImporter:
             has_corrected_cameras = corrected_camera_dir.is_dir()
             has_corrected_images = corrected_image_dir.is_dir()
             if has_corrected_cameras != has_corrected_images:
-                raise ValidationError("POLYFORM_CORRECTED_STREAM_AMBIGUOUS", "corrected cameras and corrected images must either both exist or both be absent")
+                raise ValidationError(
+                    "POLYFORM_CORRECTED_STREAM_AMBIGUOUS",
+                    "corrected cameras and corrected images must either both exist or both be absent",
+                )
             files: dict[str, bytes] = {}
             frames: list[dict[str, Any]] = []
             warnings: list[str] = []
@@ -283,8 +392,18 @@ class PolyformImporter:
                     }
                 )
             if not frames:
-                raise ValidationError("POLYFORM_NO_VALID_FRAMES", "raw export contains no complete image/camera/depth frame")
-            for optional in ["raw.glb", "raw.gltf", "mesh.obj", "mesh_info.json", "anchors.json", "thumbnail.jpg", "polycam.mp4"]:
+                raise ValidationError(
+                    "POLYFORM_NO_VALID_FRAMES", "raw export contains no complete image/camera/depth frame"
+                )
+            for optional in [
+                "raw.glb",
+                "raw.gltf",
+                "mesh.obj",
+                "mesh_info.json",
+                "anchors.json",
+                "thumbnail.jpg",
+                "polycam.mp4",
+            ]:
                 path = root / optional
                 if path.is_file():
                     files[f"source/{optional}"] = path.read_bytes()
@@ -329,8 +448,303 @@ class PolyformImporter:
             return {**package, "conversion_report": report, "conversion_report_path": str(report_path)}
 
 
+class IPhoneCaptureDirectoryImporter:
+    """Convert the first-party iOS capture directory into canonical `.sipcapture`."""
+
+    def convert(self, source: Path, destination: Path) -> dict[str, Any]:
+        root = source.resolve()
+        manifest_path = root / "manifest.json"
+        if not root.is_dir() or not manifest_path.is_file():
+            raise ValidationError("IPHONE_CAPTURE_DIRECTORY", "iPhone capture directory or manifest.json is missing")
+        manifest_bytes = manifest_path.read_bytes()
+        try:
+            source_manifest = json.loads(manifest_bytes)
+        except Exception as exc:
+            raise ValidationError("IPHONE_CAPTURE_MANIFEST", "iPhone manifest is not valid JSON") from exc
+        if source_manifest.get("schema") != "sip.cscp":
+            raise ValidationError("IPHONE_CAPTURE_SCHEMA", "iPhone directory has an unsupported package schema")
+        source_root_hash = source_manifest.get("rootHash")
+        source_rootless = {key: value for key, value in source_manifest.items() if key != "rootHash"}
+        if not isinstance(source_root_hash, str) or not _iphone_root_hash_valid(
+            manifest_bytes,
+            source_rootless,
+            source_root_hash,
+        ):
+            raise ValidationError("IPHONE_CAPTURE_ROOT_HASH", "iPhone directory manifest root hash does not verify")
+        asset_records = source_manifest.get("assets")
+        frame_records = source_manifest.get("frames")
+        if not isinstance(asset_records, list) or not isinstance(frame_records, list):
+            raise ValidationError("IPHONE_CAPTURE_RECORDS", "iPhone manifest assets and frames must be arrays")
+        assets_by_id: dict[str, dict[str, Any]] = {}
+        files: dict[str, bytes] = {"source/iphone-manifest.json": manifest_path.read_bytes()}
+        for record in asset_records:
+            asset_id = str(record.get("assetID", ""))
+            relative = _safe_relative_path(str(record.get("relativePath", "")))
+            if not asset_id or asset_id in assets_by_id:
+                raise ValidationError("IPHONE_CAPTURE_ASSET_ID", "iPhone asset identifiers must be present and unique")
+            path = (root / relative).resolve()
+            if root not in path.parents or not path.is_file():
+                raise ValidationError(
+                    "IPHONE_CAPTURE_ASSET_MISSING", "iPhone asset is missing or outside the package", {"path": relative}
+                )
+            payload = path.read_bytes()
+            if len(payload) != int(record.get("byteCount", -1)) or sha256_bytes(payload) != record.get("sha256"):
+                raise ValidationError(
+                    "IPHONE_CAPTURE_ASSET_INTEGRITY",
+                    "iPhone asset failed byte-count or hash validation",
+                    {"path": relative},
+                )
+            assets_by_id[asset_id] = record
+            files[relative] = payload
+
+        frames: list[dict[str, Any]] = []
+        mesh_anchors: list[dict[str, Any]] = []
+        motion_by_timestamp: dict[int, dict[str, Any]] = {}
+        for raw in frame_records:
+            image = _iphone_asset_path(assets_by_id, raw.get("imageAssetID"), "image")
+            depth = _iphone_optional_asset_path(assets_by_id, raw.get("depthAssetID"), "depth")
+            confidence = _iphone_optional_asset_path(assets_by_id, raw.get("confidenceAssetID"), "confidence")
+            resolution = raw.get("resolution", {})
+            depth_resolution = raw.get("depthResolution")
+            motion_samples = raw.get("motionSamples", [])
+            for sample in motion_samples:
+                timestamp = int(sample["timestampNanoseconds"])
+                motion_by_timestamp[timestamp] = {
+                    "timestamp_ns": timestamp,
+                    "clock_domain": "system_uptime_monotonic",
+                    "acceleration_m_s2": sample["acceleration"],
+                    "angular_velocity_rad_s": sample["rotationRate"],
+                    "attitude_quaternion_xyzw": sample["attitudeQuaternion"],
+                }
+            latest_motion = motion_samples[-1] if motion_samples else {}
+            frame = {
+                "frame_id": str(raw["frameID"]),
+                "timestamp_ns": int(raw["timestampNanoseconds"]),
+                "rgb_asset": image,
+                "rgb_encoding": str(raw.get("imageEncoding", "bgra8")),
+                "depth_asset": depth,
+                "confidence_asset": confidence,
+                "image_size": [int(resolution["width"]), int(resolution["height"])],
+                "depth_size": (
+                    [int(depth_resolution["width"]), int(depth_resolution["height"])]
+                    if depth_resolution is not None
+                    else None
+                ),
+                "depth_encoding": raw.get("depthEncoding"),
+                "confidence_encoding": raw.get("confidenceEncoding"),
+                "intrinsics": _column_major_matrix(raw["intrinsics"], 3),
+                "camera_to_world": _column_major_matrix(raw["cameraTransform"], 4),
+                "pose_stream": "arkit_native",
+                "transform_convention": "row_major_camera_to_world_column_vector",
+                "tracking_state": _swift_enum(raw["trackingState"]),
+                "limited_tracking_reason": _swift_optional_enum(raw.get("limitedTrackingReason")),
+                "exposure": {
+                    "duration_s": float(raw["exposure"]["durationSeconds"]),
+                    "iso": float(raw["exposure"]["iso"]),
+                    "target_offset": float(raw["exposure"]["exposureTargetOffset"]),
+                },
+                "orientation": _snake_case(str(raw.get("orientation", "unknown"))),
+                "motion": {
+                    "angular_velocity_rad_s": latest_motion.get("rotationRate", [0.0, 0.0, 0.0]),
+                    "acceleration_m_s2": latest_motion.get("acceleration", [0.0, 0.0, 0.0]),
+                },
+                "quality": _iphone_quality(raw.get("qualitySignals")),
+                "privacy_region_ids": raw.get("privacyRegionIDs", []),
+                "invalid_depth_preserved": bool(raw.get("invalidDepthPreserved", False)),
+                "maximum_depth_m": 5.0,
+            }
+            frames.append(frame)
+            for observation in raw.get("meshObservations", []):
+                geometry = _iphone_optional_asset_path(
+                    assets_by_id,
+                    observation.get("geometryAssetID"),
+                    "mesh geometry",
+                )
+                mesh_anchors.append(
+                    {
+                        "anchor_id": str(observation["anchorID"]),
+                        "timestamp_ns": frame["timestamp_ns"],
+                        "change": _swift_enum(observation["change"]),
+                        "anchor_to_world": _column_major_matrix(observation["transform"], 4),
+                        "geometry_asset": geometry,
+                        "geometry_encoding": None if geometry is None else "sip_mesh_anchor_v1_little_endian",
+                    }
+                )
+        for observation in source_manifest.get("meshObservations", []):
+            geometry = _iphone_optional_asset_path(
+                assets_by_id,
+                observation.get("geometryAssetID"),
+                "mesh geometry",
+            )
+            mesh_anchors.append(
+                {
+                    "anchor_id": str(observation["anchorID"]),
+                        "timestamp_ns": int(
+                            observation.get("timestampNanoseconds", source_manifest["endTimeNanoseconds"])
+                        ),
+                    "change": _swift_enum(observation["change"]),
+                    "anchor_to_world": _column_major_matrix(observation["transform"], 4),
+                    "geometry_asset": geometry,
+                    "geometry_encoding": None if geometry is None else "sip_mesh_anchor_v1_little_endian",
+                }
+            )
+        mesh_anchors = list(
+            {
+                (item["anchor_id"], item["timestamp_ns"], item["change"], item["geometry_asset"]): item
+                for item in mesh_anchors
+            }.values()
+        )
+        device = source_manifest.get("device", {})
+        coordinate_frames = [
+            {
+                "frame_id": str(item["frameID"]),
+                "parent_frame_id": item.get("parentFrameID"),
+                "name": str(item["frameID"]),
+                "convention": str(item["convention"]),
+                "units": str(item["units"]),
+                "transform_to_parent": (
+                    _column_major_matrix(item["transformToParent"], 4)
+                    if item.get("transformToParent") is not None
+                    else None
+                ),
+            }
+            for item in source_manifest.get("coordinateFrames", [])
+        ]
+        segments = [
+            {
+                "segment_id": str(item["segmentID"]),
+                "started_at_ns": int(item["startedAtNanoseconds"]),
+                "ended_at_ns": int(item["endedAtNanoseconds"]),
+                "frame_ids": [str(value) for value in item["frameIDs"]],
+                "overlap_control": str(item["overlapControl"]),
+            }
+            for item in source_manifest.get("segments", [])
+        ]
+        manifest = {
+            "capture_id": str(source_manifest["sessionID"]),
+            "created_at": db_now().isoformat(),
+            "capture_source": "first_party_arkit_lidar",
+            "device": {
+                "model": str(device["model"]),
+                "operating_system": str(device["operatingSystem"]),
+                "app_build": str(device["appBuild"]),
+                "available_sensors": [_snake_case(str(value)) for value in device["availableSensors"]],
+                "calibration_camera_identity": str(device["calibrationCameraIdentity"]),
+            },
+            "tenant_id": source_manifest.get("tenantID"),
+            "project_id": source_manifest.get("projectID"),
+            "coordinate_frames": coordinate_frames,
+            "segments": segments,
+            "frames": frames,
+            "motion_samples": [motion_by_timestamp[key] for key in sorted(motion_by_timestamp)],
+            "mesh_anchors": mesh_anchors,
+            "events": [
+                {
+                    "timestamp_ns": int(item["timestampNanoseconds"]),
+                    "event": str(item["event"]),
+                    "details": item.get("details", {}),
+                }
+                for item in source_manifest.get("events", [])
+            ],
+            "restricted_regions": [],
+            "calibration": {
+                "known_scale": True,
+                "scale_source": "arkit_lidar",
+                "camera_identity": str(device["calibrationCameraIdentity"]),
+                "uncertainty_m": None,
+            },
+            "privacy": {
+                "review_required": any(frame["privacy_region_ids"] for frame in frames),
+                "redactions": [],
+                "consent_context": source_manifest.get("policy", {}).get("consentContext"),
+            },
+            "source_asset_records": asset_records,
+            "provenance": {
+                "adapter": "sip.IPhoneCaptureDirectoryImporter/v1",
+                "source_adapter": source_manifest.get("sourceAdapter"),
+                "source_manifest_sha256": sha256_file(manifest_path),
+                "source_root_hash": source_manifest.get("rootHash"),
+                "journal_root_hash": source_manifest.get("journalRootHash"),
+                "signature_status": source_manifest.get("signatureStatus"),
+                "capture_origin_claim": "first_party_ios_directory",
+                "physical_device_evidence": "unverified",
+            },
+        }
+        result = CapturePackage.write(destination, manifest, files)
+        return {**result, "source_directory": str(root), "source_manifest_sha256": sha256_file(manifest_path)}
+
+
+def _iphone_asset_path(records: dict[str, dict[str, Any]], asset_id: Any, role: str) -> str:
+    value = str(asset_id or "")
+    if value not in records:
+        raise ValidationError(
+            "IPHONE_CAPTURE_ASSET_REFERENCE", f"iPhone {role} references an unknown asset", {"asset_id": value}
+        )
+    return _safe_relative_path(str(records[value]["relativePath"]))
+
+
+def _iphone_root_hash_valid(raw_manifest: bytes, rootless: dict[str, Any], expected: str) -> bool:
+    if canonical_sha256(rootless) == expected:
+        return True
+    # Foundation's sorted JSON is already the byte stream Swift hashed. Removing
+    # the one top-level rootHash member avoids cross-runtime float rendering drift.
+    fragment = b',"rootHash":"' + expected.encode("ascii", errors="ignore") + b'"'
+    if raw_manifest.count(fragment) != 1:
+        return False
+    return bool(sha256_bytes(raw_manifest.replace(fragment, b"", 1)) == expected)
+
+
+def _iphone_optional_asset_path(records: dict[str, dict[str, Any]], asset_id: Any, role: str) -> str | None:
+    return None if asset_id is None else _iphone_asset_path(records, asset_id, role)
+
+
+def _column_major_matrix(value: Any, size: int) -> list[list[float]]:
+    if not isinstance(value, list) or len(value) != size * size:
+        raise ValidationError("IPHONE_CAPTURE_MATRIX", f"matrix must contain {size * size} column-major values")
+    matrix = [[float(value[column * size + row]) for column in range(size)] for row in range(size)]
+    if not all(math.isfinite(item) for row in matrix for item in row):
+        raise ValidationError("IPHONE_CAPTURE_MATRIX", "matrix contains non-finite values")
+    return matrix
+
+
+def _snake_case(value: str) -> str:
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", value).lower()
+
+
+def _swift_enum(value: Any) -> str:
+    return _snake_case(str(value))
+
+
+def _swift_optional_enum(value: Any) -> str | None:
+    return None if value is None else _swift_enum(value)
+
+
+def _iphone_quality(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        return {"status": "not_recorded"}
+    return {
+        "blur_score": float(value["blur"]),
+        "exposure_clipping_fraction": float(value["exposureClippingFraction"]),
+        "angular_velocity_rad_s": float(value["angularVelocityRadiansPerSecond"]),
+        "depth_coverage": float(value["depthCoverage"]),
+        "viewpoint_diversity": float(value["viewpointDiversity"]),
+        "weak_surface_fraction": float(value["weakSurfaceFraction"]),
+        "calculation_version": value.get("calculationVersion", "sip.iphone-frame-quality/v1"),
+        "known_blind_spots": value.get("knownBlindSpots", []),
+    }
+
+
 def _validate_manifest_shape(manifest: dict[str, Any]) -> None:
-    required = {"schema_version", "capture_id", "capture_source", "frames", "assets", "semantic_hash", "asset_merkle_root", "root_hash"}
+    required = {
+        "schema_version",
+        "capture_id",
+        "capture_source",
+        "frames",
+        "assets",
+        "semantic_hash",
+        "asset_merkle_root",
+        "root_hash",
+    }
     missing = sorted(required - manifest.keys())
     if missing:
         raise ValidationError("CAPTURE_MANIFEST_FIELDS", "capture manifest lacks required fields", {"missing": missing})
@@ -352,7 +766,11 @@ def _validate_frames(frames: list[dict[str, Any]], asset_paths: set[str]) -> Non
         required = {"frame_id", "timestamp_ns", "rgb_asset", "intrinsics", "camera_to_world", "pose_stream"}
         missing = sorted(required - frame.keys())
         if missing:
-            raise ValidationError("CAPTURE_FRAME_FIELDS", "capture frame lacks required fields", {"frame": frame.get("frame_id"), "missing": missing})
+            raise ValidationError(
+                "CAPTURE_FRAME_FIELDS",
+                "capture frame lacks required fields",
+                {"frame": frame.get("frame_id"), "missing": missing},
+            )
         if frame["frame_id"] in frame_ids:
             raise ValidationError("CAPTURE_FRAME_DUPLICATE", "capture frame identifiers must be unique")
         frame_ids.add(frame["frame_id"])
@@ -361,7 +779,11 @@ def _validate_frames(frames: list[dict[str, Any]], asset_paths: set[str]) -> Non
         for key in ["rgb_asset", "depth_asset", "confidence_asset", "camera_metadata_asset"]:
             value = frame.get(key)
             if value and value not in asset_paths:
-                raise ValidationError("CAPTURE_FRAME_ASSET_REFERENCE", "capture frame references an undeclared asset", {"frame": frame["frame_id"], "path": value})
+                raise ValidationError(
+                    "CAPTURE_FRAME_ASSET_REFERENCE",
+                    "capture frame references an undeclared asset",
+                    {"frame": frame["frame_id"], "path": value},
+                )
         intrinsics = frame["intrinsics"]
         if len(intrinsics) != 3 or any(len(row) != 3 for row in intrinsics):
             raise ValidationError("CAPTURE_INTRINSICS", "camera intrinsics must be a 3x3 matrix")
@@ -371,8 +793,89 @@ def _validate_frames(frames: list[dict[str, Any]], asset_paths: set[str]) -> Non
         flat = [float(item) for row in transform for item in row]
         if not all(math.isfinite(item) for item in flat):
             raise ValidationError("CAPTURE_NONFINITE", "camera pose contains a non-finite value")
-    if any(current <= previous for previous, current in zip(timestamps, timestamps[1:])):
+        for key in ["image_size", "depth_size"]:
+            if key in frame and frame[key] is not None:
+                dimensions = frame[key]
+                if (
+                    not isinstance(dimensions, list)
+                    or len(dimensions) != 2
+                    or any(int(value) <= 0 for value in dimensions)
+                ):
+                    raise ValidationError("CAPTURE_DIMENSIONS", f"{key} must contain positive width and height")
+    if any(current <= previous for previous, current in pairwise(timestamps)):
         raise ValidationError("CAPTURE_TIMESTAMPS", "capture frame timestamps must be strictly increasing")
+
+
+def _validate_coordinate_frames(frames: list[dict[str, Any]]) -> None:
+    identifiers = [str(frame.get("frame_id", "")) for frame in frames]
+    if not identifiers or any(not value for value in identifiers) or len(identifiers) != len(set(identifiers)):
+        raise ValidationError("CAPTURE_COORDINATE_FRAMES", "coordinate frame identifiers must be present and unique")
+    parents = {str(frame["frame_id"]): frame.get("parent_frame_id") for frame in frames}
+    for frame_id, parent in parents.items():
+        if parent is not None and parent not in parents:
+            raise ValidationError(
+                "CAPTURE_COORDINATE_PARENT", "coordinate frame references an unknown parent", {"frame_id": frame_id}
+            )
+        visited: set[str] = set()
+        current: str | None = frame_id
+        while current is not None:
+            if current in visited:
+                raise ValidationError("CAPTURE_COORDINATE_CYCLE", "coordinate frame graph contains a cycle")
+            visited.add(current)
+            current = parents[current]
+
+
+def _validate_iphone_contract(manifest: dict[str, Any]) -> None:
+    if manifest.get("capture_source") != "first_party_arkit_lidar":
+        return
+    required = {
+        "device",
+        "segments",
+        "motion_samples",
+        "mesh_anchors",
+        "events",
+        "calibration",
+        "privacy",
+        "provenance",
+    }
+    missing = sorted(required - manifest.keys())
+    if missing:
+        raise ValidationError(
+            "CAPTURE_IPHONE_FIELDS", "iPhone package lacks required synchronized records", {"missing": missing}
+        )
+    device_required = {"model", "operating_system", "app_build", "available_sensors", "calibration_camera_identity"}
+    device_missing = sorted(device_required - set(manifest["device"]))
+    if device_missing:
+        raise ValidationError(
+            "CAPTURE_IPHONE_DEVICE", "iPhone device record is incomplete", {"missing": device_missing}
+        )
+    frame_required = {
+        "rgb_encoding",
+        "image_size",
+        "tracking_state",
+        "limited_tracking_reason",
+        "exposure",
+        "orientation",
+        "transform_convention",
+        "invalid_depth_preserved",
+    }
+    for frame in manifest["frames"]:
+        missing_frame = sorted(frame_required - set(frame))
+        if missing_frame:
+            raise ValidationError(
+                "CAPTURE_IPHONE_FRAME_FIELDS",
+                "iPhone frame lacks required sensor interpretation metadata",
+                {"frame": frame.get("frame_id"), "missing": missing_frame},
+            )
+        if frame.get("depth_asset"):
+            depth_required = {"depth_size", "depth_encoding", "confidence_encoding"}
+            missing_depth = sorted(depth_required - set(frame))
+            if missing_depth:
+                raise ValidationError(
+                    "CAPTURE_IPHONE_DEPTH_FIELDS", "iPhone depth metadata is incomplete", {"missing": missing_depth}
+                )
+        if frame.get("invalid_depth_preserved") is not True:
+            raise ValidationError("CAPTURE_IPHONE_DEPTH_SEMANTICS", "iPhone depth must preserve invalid values")
 
 
 def _validate_archive_metadata(archive: zipfile.ZipFile) -> None:
@@ -385,7 +888,9 @@ def _validate_archive_metadata(archive: zipfile.ZipFile) -> None:
         if total > MAX_ARCHIVE_UNCOMPRESSED_BYTES:
             raise ValidationError("ARCHIVE_UNCOMPRESSED_SIZE", "archive expands beyond the configured safety limit")
         if info.compress_size and info.file_size / info.compress_size > MAX_COMPRESSION_RATIO:
-            raise ValidationError("ARCHIVE_COMPRESSION_RATIO", "archive entry has a suspicious compression ratio", {"path": info.filename})
+            raise ValidationError(
+                "ARCHIVE_COMPRESSION_RATIO", "archive entry has a suspicious compression ratio", {"path": info.filename}
+            )
 
 
 def _safe_relative_path(value: str) -> str:
@@ -407,12 +912,20 @@ def _load_camera(path: Path) -> dict[str, Any]:
     try:
         camera = json.loads(path.read_text())
     except Exception as exc:
-        raise ValidationError("POLYFORM_CAMERA_INVALID", "camera metadata is invalid JSON", {"path": str(path)}) from exc
-    required = ["fx", "fy", "cx", "cy", "width", "height"] + [f"t_{row}{column}" for row in range(3) for column in range(4)]
+        raise ValidationError(
+            "POLYFORM_CAMERA_INVALID", "camera metadata is invalid JSON", {"path": str(path)}
+        ) from exc
+    required = ["fx", "fy", "cx", "cy", "width", "height"] + [
+        f"t_{row}{column}" for row in range(3) for column in range(4)
+    ]
     missing = [key for key in required if key not in camera]
     if missing:
-        raise ValidationError("POLYFORM_CAMERA_FIELDS", "camera metadata lacks required values", {"path": str(path), "missing": missing})
-    transform = [[float(camera[f"t_{row}{column}"]) for column in range(4)] for row in range(3)] + [[0.0, 0.0, 0.0, 1.0]]
+        raise ValidationError(
+            "POLYFORM_CAMERA_FIELDS", "camera metadata lacks required values", {"path": str(path), "missing": missing}
+        )
+    transform = [[float(camera[f"t_{row}{column}"]) for column in range(4)] for row in range(3)] + [
+        [0.0, 0.0, 0.0, 1.0]
+    ]
     return {
         "fx": float(camera["fx"]),
         "fy": float(camera["fy"]),
@@ -447,5 +960,6 @@ def _media_type(path: str) -> str:
         ".obj": "model/obj",
         ".f32": "application/vnd.sip.depth-f32",
         ".u8": "application/vnd.sip.confidence-u8",
+        ".sipmesh": "application/vnd.sip.mesh-anchor-v1",
         ".bin": "application/octet-stream",
     }.get(suffix, "application/octet-stream")

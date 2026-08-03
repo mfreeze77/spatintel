@@ -44,6 +44,15 @@ public struct SegmentManifest: Codable, Sendable, Equatable {
     public let overlapControl: String
 }
 
+public struct CaptureEventRecord: Codable, Sendable, Equatable {
+    public let timestampNanoseconds: UInt64
+    public let event: String
+    public let details: [String: String]
+    public init(timestampNanoseconds: UInt64, event: String, details: [String: String] = [:]) {
+        self.timestampNanoseconds = timestampNanoseconds; self.event = event; self.details = details
+    }
+}
+
 public struct CapturePackageManifest: Codable, Sendable, Equatable {
     public let schema: String
     public let schemaVersion: String
@@ -58,6 +67,8 @@ public struct CapturePackageManifest: Codable, Sendable, Equatable {
     public let segments: [SegmentManifest]
     public let assets: [AssetReference]
     public let frames: [FrameObservation]
+    public let meshObservations: [MeshObservation]
+    public let events: [CaptureEventRecord]
     public let journalRootHash: String
     public let signatureStatus: String
     public let policy: CapturePolicyBundle
@@ -68,17 +79,18 @@ public struct CapturePackageManifest: Codable, Sendable, Equatable {
         let schema: String; let schemaVersion: String; let sessionID: String; let tenantID: String?; let projectID: String?
         let sourceAdapter: String; let device: DeviceManifest; let startTimeNanoseconds: UInt64; let endTimeNanoseconds: UInt64
         let coordinateFrames: [CoordinateFrameManifest]; let segments: [SegmentManifest]; let assets: [AssetReference]
-        let frames: [FrameObservation]; let journalRootHash: String; let signatureStatus: String; let policy: CapturePolicyBundle
+        let frames: [FrameObservation]; let meshObservations: [MeshObservation]; let events: [CaptureEventRecord]
+        let journalRootHash: String; let signatureStatus: String; let policy: CapturePolicyBundle
         let unknownOptionalFields: [String: String]
     }
 
-    public static func finalized(sessionID: String, tenantID: String?, projectID: String?, sourceAdapter: String, device: DeviceManifest, startTimeNanoseconds: UInt64, endTimeNanoseconds: UInt64, coordinateFrames: [CoordinateFrameManifest], segments: [SegmentManifest], assets: [AssetReference], frames: [FrameObservation], journalRootHash: String, signatureStatus: String, policy: CapturePolicyBundle, unknownOptionalFields: [String: String] = [:]) throws -> CapturePackageManifest {
-        let rootless = Rootless(schema: "sip.cscp", schemaVersion: "1.1.0", sessionID: sessionID, tenantID: tenantID, projectID: projectID, sourceAdapter: sourceAdapter, device: device, startTimeNanoseconds: startTimeNanoseconds, endTimeNanoseconds: endTimeNanoseconds, coordinateFrames: coordinateFrames, segments: segments, assets: assets, frames: frames, journalRootHash: journalRootHash, signatureStatus: signatureStatus, policy: policy, unknownOptionalFields: unknownOptionalFields)
-        return CapturePackageManifest(schema: rootless.schema, schemaVersion: rootless.schemaVersion, sessionID: rootless.sessionID, tenantID: rootless.tenantID, projectID: rootless.projectID, sourceAdapter: rootless.sourceAdapter, device: rootless.device, startTimeNanoseconds: rootless.startTimeNanoseconds, endTimeNanoseconds: rootless.endTimeNanoseconds, coordinateFrames: rootless.coordinateFrames, segments: rootless.segments, assets: rootless.assets, frames: rootless.frames, journalRootHash: rootless.journalRootHash, signatureStatus: rootless.signatureStatus, policy: rootless.policy, unknownOptionalFields: rootless.unknownOptionalFields, rootHash: try CanonicalJSON.hash(rootless))
+    public static func finalized(sessionID: String, tenantID: String?, projectID: String?, sourceAdapter: String, device: DeviceManifest, startTimeNanoseconds: UInt64, endTimeNanoseconds: UInt64, coordinateFrames: [CoordinateFrameManifest], segments: [SegmentManifest], assets: [AssetReference], frames: [FrameObservation], journalRootHash: String, signatureStatus: String, policy: CapturePolicyBundle, unknownOptionalFields: [String: String] = [:], meshObservations: [MeshObservation] = [], events: [CaptureEventRecord] = []) throws -> CapturePackageManifest {
+        let rootless = Rootless(schema: "sip.cscp", schemaVersion: "1.1.0", sessionID: sessionID, tenantID: tenantID, projectID: projectID, sourceAdapter: sourceAdapter, device: device, startTimeNanoseconds: startTimeNanoseconds, endTimeNanoseconds: endTimeNanoseconds, coordinateFrames: coordinateFrames, segments: segments, assets: assets, frames: frames, meshObservations: meshObservations, events: events, journalRootHash: journalRootHash, signatureStatus: signatureStatus, policy: policy, unknownOptionalFields: unknownOptionalFields)
+        return CapturePackageManifest(schema: rootless.schema, schemaVersion: rootless.schemaVersion, sessionID: rootless.sessionID, tenantID: rootless.tenantID, projectID: rootless.projectID, sourceAdapter: rootless.sourceAdapter, device: rootless.device, startTimeNanoseconds: rootless.startTimeNanoseconds, endTimeNanoseconds: rootless.endTimeNanoseconds, coordinateFrames: rootless.coordinateFrames, segments: rootless.segments, assets: rootless.assets, frames: rootless.frames, meshObservations: rootless.meshObservations, events: rootless.events, journalRootHash: rootless.journalRootHash, signatureStatus: rootless.signatureStatus, policy: rootless.policy, unknownOptionalFields: rootless.unknownOptionalFields, rootHash: try CanonicalJSON.hash(rootless))
     }
 
     public func verifyRootHash() throws {
-        let expected = try Self.finalized(sessionID: sessionID, tenantID: tenantID, projectID: projectID, sourceAdapter: sourceAdapter, device: device, startTimeNanoseconds: startTimeNanoseconds, endTimeNanoseconds: endTimeNanoseconds, coordinateFrames: coordinateFrames, segments: segments, assets: assets, frames: frames, journalRootHash: journalRootHash, signatureStatus: signatureStatus, policy: policy, unknownOptionalFields: unknownOptionalFields).rootHash
+        let expected = try Self.finalized(sessionID: sessionID, tenantID: tenantID, projectID: projectID, sourceAdapter: sourceAdapter, device: device, startTimeNanoseconds: startTimeNanoseconds, endTimeNanoseconds: endTimeNanoseconds, coordinateFrames: coordinateFrames, segments: segments, assets: assets, frames: frames, journalRootHash: journalRootHash, signatureStatus: signatureStatus, policy: policy, unknownOptionalFields: unknownOptionalFields, meshObservations: meshObservations, events: events).rootHash
         guard expected == rootHash else { throw CaptureCoreError.packageInvalid("capture package root hash mismatch") }
     }
 }
@@ -117,9 +129,15 @@ public enum CapturePackageValidator {
             for optional in [frame.depthAssetID, frame.confidenceAssetID].compactMap({ $0 }) where !knownAssets.contains(optional) {
                 throw CaptureCoreError.packageInvalid("frame references a missing optional asset")
             }
+            for mesh in frame.meshObservations where mesh.geometryAssetID != nil && !knownAssets.contains(mesh.geometryAssetID!) {
+                throw CaptureCoreError.packageInvalid("frame mesh observation references a missing geometry asset")
+            }
             if frame.trackingState != .normal && frame.cameraTransform != Array(repeating: 0, count: 16) {
                 // Transform is retained for forensics, but downstream validity is controlled by tracking state.
             }
+        }
+        for mesh in manifest.meshObservations where mesh.geometryAssetID != nil && !knownAssets.contains(mesh.geometryAssetID!) {
+            throw CaptureCoreError.packageInvalid("mesh observation references a missing geometry asset")
         }
         let frameSet = Set(frameIDs)
         for segment in manifest.segments {

@@ -158,3 +158,22 @@ func packageValidation() throws {
     try Data("corrupt".utf8).write(to: root.appendingPathComponent("rgb.bin"))
     #expect(throws: CaptureCoreError.self) { try CapturePackageValidator.validate(manifest, packageDirectory: root) }
 }
+
+@Test("CAPSENS-001 CAPCSCP-002 content-addressed asset storage writes complete bytes and open mesh encoding")
+func contentAddressedSensorAssets() throws {
+    let root = try temporaryDirectory()
+    let store = try CaptureAssetStore(rootURL: root)
+    let payload = Data("camera-bytes".utf8)
+    let first = try store.write(payload, relativePath: "frames/000001/rgb.bgra8", mediaType: "application/vnd.sip.image-bgra8", creationSource: "fixture")
+    let again = try store.write(payload, relativePath: "frames/000002/rgb.bgra8", mediaType: "application/vnd.sip.image-bgra8", creationSource: "fixture")
+    #expect(first == again)
+    #expect(first.sha256 == SHA256Digest.hex(payload))
+    #expect(try Data(contentsOf: root.appendingPathComponent(first.relativePath)) == payload)
+    let mesh = try MeshAnchorBinary.encode(
+        vertices: [.init(0,0,0), .init(1,0,0), .init(0,1,0)],
+        normals: [.init(0,0,1), .init(0,0,1), .init(0,0,1)],
+        faces: [.init(0,1,2)],
+        classifications: [3]
+    )
+    #expect(mesh.prefix(8) == Data([0x53, 0x49, 0x50, 0x4d, 0x53, 0x48, 0x31, 0x00]))
+}

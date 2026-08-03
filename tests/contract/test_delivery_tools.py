@@ -151,7 +151,7 @@ def test_release_readiness_fails_closed_for_open_gates(monkeypatch: pytest.Monke
     codes = {item.code for item in blockers}
     assert "REQUIREMENTS_RELEASE_GATES_OPEN" in codes
     assert "RELEASE_SIGNING_KEY_MISSING" in codes
-    assert "WEB_LOCKFILE_MISSING" in codes
+    assert "WEB_LOCKFILE_MISSING" not in codes
     monkeypatch.setenv("SIP_RELEASE_SIGNING_KEY_B64", base64.b64encode(b"short").decode("ascii"))
     key, error = module._signing_key()
     assert key is None
@@ -168,7 +168,7 @@ def test_cyclonedx_sbom_covers_runtime_web_workers_and_governance() -> None:
     components = sbom["components"]
     purls = {item.get("purl") for item in components}
     assert "pkg:pypi/fastapi@0.128.2" in purls
-    assert "pkg:npm/next@16.2.11" in purls
+    assert "pkg:npm/next@16.2.12" in purls
     types = {item["type"] for item in components}
     assert {"application", "container", "service", "machine-learning-model"} <= types
     worker_components = [item for item in components if str(item["bom-ref"]).startswith("urn:sip:worker:")]

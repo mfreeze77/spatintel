@@ -1,4 +1,5 @@
-import type { Camera, Intersection, Object3D, Plane, Scene, WebGLRenderer, WebGPURenderer } from "three";
+import type { Camera, Intersection, Object3D, Plane, Scene, WebGLRenderer } from "three";
+import type { WebGPURenderer } from "three/webgpu";
 import { pickInteractionOnly, planResourceAdmission, type HybridRole, type ResourceBudget } from "./spatial-runtime";
 
 export interface HybridRenderable {
