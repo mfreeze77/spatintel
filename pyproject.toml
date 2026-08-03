@@ -39,7 +39,7 @@ dev = [
 postgres = ["psycopg[binary]==3.3.3"]
 redis = ["redis==7.1.0"]
 telemetry = [
-  "opentelemetry-api==1.39.1",
+  "opentelemetry-api==1.44.0",
   "opentelemetry-sdk==1.39.1",
   "opentelemetry-exporter-otlp-proto-http==1.39.1",
 ]
