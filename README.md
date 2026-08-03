@@ -2,6 +2,8 @@
 
 SIP is an open, self-hostable spatial-intelligence platform that keeps **metric truth, visual appearance, interaction geometry, design intent, and source evidence separate**. The repository contains a deterministic CPU reference implementation, versioned API/contracts, iOS capture core, web hybrid-viewer runtime, durable worker protocol, Construction Spatial Reference and LiveForever domain implementations, preservation export/restore, governance controls, tests, and deployment profiles.
 
+This checkout is configured as a private, local-first internal tool. Hosted processing and implicit model downloads remain disabled unless explicitly configured later.
+
 > **Release posture:** this repository is production-shaped, but it is not represented as production-complete until the generated requirements ledger and release gates say so. Hardware, GPU/model, cloud-account, legal, customer-pilot, and human-subject validations remain explicitly external unless retained evidence exists.
 
 ## Authoritative specification
@@ -84,7 +86,7 @@ SIP enforces these invariants in domain code and tests:
 - Construction measurements retain units, uncertainty, calibration, verifier, and verification date.
 - LiveForever recollection, corroborated fact, inference, and generated reconstruction remain separate labels.
 - Consent and audience policy are server-side and reevaluated when opening historical links.
-- Providers and model checkpoints fail closed unless an approved, unexpired manifest allows the exact purpose, classification, region, and model hash.
+- Hosted providers and unknown checkpoints stay disabled. Local checkpoints run only when a hash-locked internal manifest matches the purpose, classification, region, and model bytes.
 - Long operations are durable, idempotent, observable, cancellable, and auditable.
 - Preservation export and clean restore are first-class acceptance paths.
 
@@ -121,13 +123,15 @@ pnpm --dir apps/web test
 
 The renderer-independent runtime has deterministic verification that can run without WebGL or third-party rendering packages. The application keeps metric, visual, design, interaction, and evidence layers distinct and displays authority/confidence labels.
 
-## Governance and third parties
+## Local models and third-party components
 
-LingBot-Map source is pinned to commit `1f480aeb8a47a24656090d46d053115b7fe60435` behind an isolated adapter. No model weights are bundled. Source licensing does not imply checkpoint, training-data, or commercial approval; execution is denied by default until a signed model dossier is approved.
+LingBot-Map source is pinned to commit `1f480aeb8a47a24656090d46d053115b7fe60435` behind an isolated adapter. No model weights are bundled. A local checkpoint can be added by recording its exact hash, source, input/output terms, supported purposes, and quality profile. Until a checkpoint is configured, the deterministic local reconstruction lane remains available and the LingBot worker stays inactive.
 
 The Polyform-compatible importer independently implements the documented user-export format. It preserves the original archive and separately records native ARKit and corrected pose streams; SIP does not copy proprietary Polycam application code or depend on the Polycam application.
 
 See `third_party/manifest.lock.json`, `NOTICE.md`, and `docs/operator/PROVIDER_GOVERNANCE.md`.
+
+The recommended internal capture-to-output pipeline and its current implementation limits are documented in `docs/developer/INTERNAL_MESH_QUALITY.md`.
 
 ## Evidence and status
 
@@ -140,4 +144,4 @@ See `third_party/manifest.lock.json`, `NOTICE.md`, and `docs/operator/PROVIDER_G
 
 ## License
 
-SIP source is licensed under Apache-2.0. Third-party components retain their own notices and approval status. See `LICENSE`, `NOTICE.md`, `LICENSES/`, and `third_party/manifest.lock.json`.
+SIP source is licensed under Apache-2.0. Third-party components retain their own notices and recorded compatibility status. See `LICENSE`, `NOTICE.md`, `LICENSES/`, and `third_party/manifest.lock.json`.

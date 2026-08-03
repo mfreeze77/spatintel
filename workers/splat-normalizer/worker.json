@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "8ddfdaab4633a1a5e6ba6fba0c50722dcbe682ed3c660cf3aca89cde5f145bbd",
+  "manifest_sha256": "0af5843277172d3f7808a3d57ca4c3de66a2b351dd34e6e31a54cb007e6d8ac5",
   "name": "splat-normalizer",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

@@ -14,7 +14,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "a1ebfd05d69f8c4254028aa69f87571bbda96cfacb5dbe931e58779c873228ca",
+  "manifest_sha256": "9b8fe84972742ffb70780fe12156b84a4403543eb53b29d409a354fdf7aae06c",
   "name": "capture-normalizer",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

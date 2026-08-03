@@ -27,6 +27,7 @@ def test_worker_registry_covers_all_declared_worker_boundaries() -> None:
         "fusion.tsdf",
         "geometry.cleanup",
         "lingbot.reconstruct",
+        "mesh.compose",
         "mesh.lod",
         "pose.anomaly.detect",
         "pose.optimize",
@@ -38,6 +39,37 @@ def test_worker_registry_covers_all_declared_worker_boundaries() -> None:
         "splat.surface",
     }
     assert set(REGISTRY.operation_types) == expected
+
+
+@pytest.mark.integration
+def test_mesh_compose_worker_returns_separate_local_quality_lanes(bootstrapped) -> None:
+    context, tenant_id, project_id, actor = bootstrapped
+    operation = context.operations.create(
+        tenant_id=tenant_id,
+        project_id=project_id,
+        operation_type="mesh.compose",
+        idempotency_key="mesh-compose-fixture-1",
+        input_manifest={
+            "vertices": [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]],
+            "faces": [[0, 1, 2], [0, 3, 1], [0, 2, 3], [1, 3, 2]],
+            "vertex_colors": [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 1]],
+            "splat_samples": 32,
+            "lod_target_faces": 4,
+            "seed": 5,
+        },
+        actor_id=actor,
+    )
+    runtime = WorkerRuntime(
+        context,
+        worker_id="mesh-compose-worker",
+        allowed_operation_types={"mesh.compose"},
+    )
+    result = runtime.run_operation(operation["operation_id"])
+    assert result["state"] == "succeeded"
+    assert result["output"]["metric"]["authority"] == "metric_unverified"
+    assert result["output"]["visual"]["authority"] == "visual_non_metric"
+    assert result["output"]["interaction"]["authoritative"] is False
+    assert result["output"]["composition"]["authority_lanes_preserved"] is True
 
 
 @pytest.mark.integration
@@ -442,7 +474,6 @@ def test_lingbot_checkpoint_is_hard_denied_and_operation_records_failure(bootstr
             "purpose": "research_shadow",
             "region": "local",
             "checkpoint_hash": "UNAVAILABLE",
-            "commercial": False,
         },
         actor_id=actor,
     )

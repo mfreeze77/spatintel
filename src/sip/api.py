@@ -1053,7 +1053,6 @@ class ModelRegister(StrictModel):
 class ModelAuthorize(StrictModel):
     checkpoint_hash: str
     purpose: str
-    commercial: bool
     classification: Classification
     region: str = 'local'
 
@@ -2539,7 +2538,6 @@ def _routers() -> dict[str, APIRouter]:
             model_id,
             checkpoint_hash=body.checkpoint_hash,
             purpose=body.purpose,
-            commercial=body.commercial,
             classification=body.classification,
             deployment=_context(request).settings.environment,
             region=body.region,

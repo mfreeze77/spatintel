@@ -13,7 +13,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "bdecca304b8eccc663ad4db2159f8d2259860f41f608ef35015661916d081738",
+  "manifest_sha256": "9583efad7e6eb4b9bdc449e0af16ea77e2a1abd0ab5fa69a3265f65d15d3e647",
   "name": "pose-optimizer",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

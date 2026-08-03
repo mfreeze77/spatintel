@@ -203,13 +203,13 @@ def test_gpu_doctor_requires_compatible_runtime_and_approved_local_checkpoint(tm
     )
     ready = cli.gpu_doctor(tmp_path)
     assert ready["status"] == "ready"
-    assert ready["production_execution_allowed"] is True
+    assert ready["local_execution_ready"] is True
     assert ready["checkpoints"]["implicit_downloads_allowed"] is False
 
     checkpoint.write_bytes(b"tampered")
     blocked = cli.gpu_doctor(tmp_path)
     assert blocked["status"] == "blocked"
-    assert blocked["production_execution_allowed"] is False
+    assert blocked["local_execution_ready"] is False
     assert blocked["checkpoints"]["rejected"][0]["reason"] == "checkpoint_hash_mismatch"
 
 

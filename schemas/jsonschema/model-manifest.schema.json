@@ -169,10 +169,6 @@
       "title": "Code Revision",
       "type": "string"
     },
-    "commercial_use": {
-      "title": "Commercial Use",
-      "type": "boolean"
-    },
     "customer_restrictions": {
       "$ref": "#/$defs/ManifestRestrictionContract"
     },
@@ -287,14 +283,14 @@
       "title": "Revoked At"
     },
     "schema": {
-      "const": "sip.model-manifest/v1.1",
-      "default": "sip.model-manifest/v1.1",
+      "const": "sip.model-manifest/v1.2",
+      "default": "sip.model-manifest/v1.2",
       "title": "Schema",
       "type": "string"
     },
     "schema_version": {
-      "const": "1.1.0",
-      "default": "1.1.0",
+      "const": "1.2.0",
+      "default": "1.2.0",
       "title": "Schema Version",
       "type": "string"
     },
@@ -311,6 +307,12 @@
       "minItems": 1,
       "title": "Source Urls",
       "type": "array"
+    },
+    "usage_scope": {
+      "const": "local_internal",
+      "default": "local_internal",
+      "title": "Usage Scope",
+      "type": "string"
     },
     "version": {
       "maxLength": 64,
@@ -340,7 +342,6 @@
     "dataset_terms",
     "output_terms",
     "approval_state",
-    "commercial_use",
     "allowed_classifications",
     "permitted_uses",
     "prohibited_uses",

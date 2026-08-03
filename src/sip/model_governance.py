@@ -22,7 +22,7 @@ INCOMPATIBLE_LICENSES = {
     "incompatible",
     "proprietary-unapproved",
 }
-RESEARCH_ONLY_LICENSES = {"research-only", "research_only", "noncommercial", "non-commercial"}
+LIMITED_USE_LICENSES = {"research-only", "research_only", "restricted-use"}
 EXECUTABLE_STATES = {"approved", "research_only"}
 
 
@@ -50,8 +50,8 @@ class ModelRegistry:
         provided_hash = raw.pop("manifest_hash", None)
         provided_signature = raw.pop("manifest_signature", raw.pop("signature", None))
         raw["signed_by"] = actor_id or raw.get("signed_by") or raw.get("approved_by")
-        raw.setdefault("schema", "sip.model-manifest/v1.1")
-        raw.setdefault("schema_version", "1.1.0")
+        raw.setdefault("schema", "sip.model-manifest/v1.2")
+        raw.setdefault("schema_version", "1.2.0")
 
         # Validate and normalize before hashing. Placeholder values are replaced
         # immediately and never persisted or returned.
@@ -113,9 +113,8 @@ class ModelRegistry:
         *,
         checkpoint_hash: str,
         purpose: str,
-        commercial: bool,
         classification: Classification,
-        deployment: str = "production",
+        deployment: str = "development",
         region: str = "local",
         customer_id: str | None = None,
     ) -> dict[str, Any]:
@@ -144,7 +143,7 @@ class ModelRegistry:
 
             now = db_now()
             state = contract.approval_state
-            research_execution = state == "research_only" and deployment in {"development", "test"} and not commercial
+            research_execution = state == "research_only" and deployment in {"development", "test"}
             if state != "approved" and not research_execution:
                 reasons.append("state_not_executable")
             if deployment == "production" and state != "approved":
@@ -165,8 +164,8 @@ class ModelRegistry:
                 reasons.append("purpose_not_permitted")
             if purpose in contract.prohibited_uses:
                 reasons.append("purpose_prohibited")
-            if commercial and not contract.commercial_use:
-                reasons.append("commercial_use_not_allowed")
+            if contract.usage_scope != "local_internal":
+                reasons.append("usage_scope_not_local_internal")
             if classification not in contract.allowed_classifications:
                 reasons.append("classification_not_allowed")
             if not _restriction_allows(contract.geographic_restrictions.model_dump(), region):
@@ -177,7 +176,7 @@ class ModelRegistry:
             license_name = contract.weights_license.strip().lower()
             if license_name in INCOMPATIBLE_LICENSES:
                 reasons.append("weights_license_incompatible")
-            if license_name in RESEARCH_ONLY_LICENSES and not research_execution:
+            if license_name in LIMITED_USE_LICENSES and not research_execution:
                 reasons.append("weights_license_research_only")
             if state in EXECUTABLE_STATES and not _license_evidence_complete(contract):
                 reasons.append("license_evidence_incomplete")
@@ -217,7 +216,7 @@ class ModelRegistry:
                 "executable model manifests require verified code, weights, dataset, and output license evidence",
             )
         if contract.approval_state == "approved":
-            if contract.weights_license.strip().lower() in INCOMPATIBLE_LICENSES | RESEARCH_ONLY_LICENSES:
+            if contract.weights_license.strip().lower() in INCOMPATIBLE_LICENSES | LIMITED_USE_LICENSES:
                 raise ValidationError("MODEL_WEIGHTS_LICENSE_INCOMPATIBLE", "approved model weights rights are incompatible")
             if contract.review_due_at <= db_now():
                 raise ValidationError("MODEL_REVIEW_EXPIRED", "approved model review date must be in the future")
@@ -242,7 +241,7 @@ class ModelRegistry:
             "dataset_terms_json": contract.dataset_terms,
             "output_terms": contract.output_terms,
             "approval_state": contract.approval_state,
-            "commercial_use": contract.commercial_use,
+            "usage_scope": contract.usage_scope,
             "allowed_purposes_json": contract.permitted_uses,
             "expires_at": contract.expires_at,
             "manifest_hash": contract.manifest_hash,
@@ -269,7 +268,7 @@ class ModelRegistry:
     def _contract_from_row(self, row: ModelManifestRow) -> ModelManifestContract:
         return ModelManifestContract.model_validate(
             {
-                "schema": "sip.model-manifest/v1.1",
+                "schema": "sip.model-manifest/v1.2",
                 "schema_version": row.schema_version,
                 "model_id": row.model_id,
                 "provider": row.provider,
@@ -285,7 +284,7 @@ class ModelRegistry:
                 "dataset_terms": row.dataset_terms_json,
                 "output_terms": row.output_terms,
                 "approval_state": row.approval_state,
-                "commercial_use": row.commercial_use,
+                "usage_scope": row.usage_scope,
                 "allowed_classifications": row.allowed_classifications_json,
                 "permitted_uses": row.permitted_uses_json,
                 "prohibited_uses": row.prohibited_uses_json,
@@ -322,14 +321,14 @@ def lingbot_source_manifest() -> dict[str, Any]:
         "allowed_purposes": ["synthetic_evaluation", "research_shadow"],
         "allowed_regions": ["local"],
         "retention_days": 0,
-        "notes": "Source approval does not approve any checkpoint, training data, or commercial model use.",
+        "notes": "Source readiness does not include a model checkpoint or its training data.",
     }
 
 
 def lingbot_checkpoint_denied_manifest() -> dict[str, Any]:
     return {
-        "schema": "sip.model-manifest/v1.1",
-        "schema_version": "1.1.0",
+        "schema": "sip.model-manifest/v1.2",
+        "schema_version": "1.2.0",
         "model_id": "lingbot-map-checkpoint",
         "provider": "Robbyant",
         "model_name": "LingBot-Map",
@@ -367,7 +366,7 @@ def lingbot_checkpoint_denied_manifest() -> dict[str, Any]:
             },
             {
                 "component": "output",
-                "title": "LingBot-Map output commercialization terms",
+                "title": "LingBot-Map output-use terms",
                 "license_id": "unknown",
                 "source_url": "https://huggingface.co/robbyant/lingbot-map",
                 "document_sha256": None,
@@ -380,10 +379,10 @@ def lingbot_checkpoint_denied_manifest() -> dict[str, Any]:
         "dataset_terms": ["unknown"],
         "output_terms": "unknown",
         "approval_state": "denied",
-        "commercial_use": False,
+        "usage_scope": "local_internal",
         "allowed_classifications": ["public", "internal"],
         "permitted_uses": ["synthetic_evaluation", "research_shadow"],
-        "prohibited_uses": ["commercial_production", "confidential_input", "verified_measurement"],
+        "prohibited_uses": ["external_distribution", "confidential_input", "verified_measurement"],
         "geographic_restrictions": {"mode": "allowlist", "values": ["local"]},
         "customer_restrictions": {"mode": "denylist", "values": ["*"]},
         "allowed_deployments": ["development", "test"],

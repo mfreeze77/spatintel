@@ -106,7 +106,7 @@ def test_clean_install_reaches_head_and_matches_canonical_tables(tmp_path: Path)
     expected = set(Base.metadata.tables)
     assert expected <= actual
     assert actual - expected == {"alembic_version"}
-    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0021_progress11_release_assurance"
+    assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0022_internal_tool_profile"
 
 
 @pytest.mark.migration
@@ -262,4 +262,5 @@ def test_append_only_migration_manifest_matches_bytes() -> None:
         "0019",
         "0020",
         "0021",
+        "0022",
     ]

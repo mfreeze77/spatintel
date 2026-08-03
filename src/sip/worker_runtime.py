@@ -26,6 +26,7 @@ from .errors import AuthenticationError, AuthorizationError, ConflictError, NotF
 from .geometry import (
     change_detection,
     cleanup_mesh,
+    compose_mesh_representations,
     detect_pose_anomalies,
     interaction_proxy,
     mesh_to_splats,
@@ -202,7 +203,6 @@ class LocalWorkerControlGateway:
         purpose: str,
         region: str,
         checkpoint_hash: str,
-        commercial: bool,
         customer_id: str,
     ) -> None:
         self._context.providers.authorize_execution(
@@ -216,7 +216,6 @@ class LocalWorkerControlGateway:
             "lingbot-map-checkpoint",
             checkpoint_hash=checkpoint_hash,
             purpose=purpose,
-            commercial=commercial,
             classification=classification,
             deployment=self._context.settings.environment,
             region=region,
@@ -454,7 +453,6 @@ class WorkerExecution:
         purpose: str,
         region: str,
         checkpoint_hash: str,
-        commercial: bool,
     ) -> None:
         with self.sandbox.trusted_control_io():
             self.control.authorize_lingbot(
@@ -462,7 +460,6 @@ class WorkerExecution:
                 purpose=purpose,
                 region=region,
                 checkpoint_hash=checkpoint_hash,
-                commercial=commercial,
                 customer_id=self.lease.output_staging_scope.tenant_id,
             )
 
@@ -508,6 +505,19 @@ def _points(value: Any, name: str) -> np.ndarray:
     if array.ndim != 2 or array.shape[1] != 3 or not np.isfinite(array).all():
         raise ValidationError("POINTS_INVALID", f"{name} must be a finite Nx3 array")
     return array
+
+
+def _json_arrays(value: Any) -> Any:
+    """Convert nested NumPy values into canonical-JSON-compatible values."""
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, dict):
+        return {key: _json_arrays(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_arrays(item) for item in value]
+    if isinstance(value, np.generic):
+        return value.item()
+    return value
 
 
 @REGISTRY.register("capture.validate")
@@ -662,6 +672,32 @@ def mesh_lod(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, 
     }
 
 
+@REGISTRY.register("mesh.compose")
+def mesh_compose(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
+    vertices = _points(manifest["vertices"], "vertices")
+    faces = np.asarray(manifest["faces"], dtype=np.int64)
+    vertex_colors = manifest.get("vertex_colors")
+    colors = np.asarray(vertex_colors, dtype=np.float64) if vertex_colors is not None else None
+    result = compose_mesh_representations(
+        vertices,
+        faces,
+        vertex_colors=colors,
+        splat_samples=int(manifest.get("splat_samples", 4096)),
+        lod_target_faces=int(manifest.get("lod_target_faces", 5000)),
+        seed=int(manifest.get("seed", 0)),
+    )
+    execution.checkpoint(
+        0.9,
+        {
+            "stage": "mesh_composed",
+            "metric_faces": result["quality"]["face_count"],
+            "visual_splats": len(result["visual"]["positions"]),
+            "interaction_faces": len(result["interaction"]["faces"]),
+        },
+    )
+    return _json_arrays(result)
+
+
 @REGISTRY.register("collision.navigation")
 def collision_navigation(manifest: dict[str, Any], execution: WorkerExecution) -> dict[str, Any]:
     result = mesh_lod(manifest, execution)
@@ -770,7 +806,6 @@ def lingbot_reconstruct(manifest: dict[str, Any], execution: WorkerExecution) ->
         purpose=str(manifest.get("purpose", "research_shadow")),
         region=str(manifest.get("region", "local")),
         checkpoint_hash=str(manifest.get("checkpoint_hash", "UNAVAILABLE")),
-        commercial=bool(manifest.get("commercial", False)),
     )
     raise AuthorizationError("LINGBOT_EXECUTION_UNREACHABLE", "governance unexpectedly allowed the denied-by-default LingBot checkpoint")
 

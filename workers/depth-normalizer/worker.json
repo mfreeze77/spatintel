@@ -13,7 +13,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "a07ff6d35cd0e0ebb4191ca3d671b8eaafa356b2554d45fef30a00218af304d3",
+  "manifest_sha256": "81ebbbf6b8685172d056bb03161e91e34aa868ad6c648233bfc47b48fea36da5",
   "name": "depth-normalizer",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

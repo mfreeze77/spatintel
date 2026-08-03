@@ -103,10 +103,6 @@
           "classification": {
             "$ref": "#/components/schemas/Classification"
           },
-          "commercial": {
-            "title": "Commercial",
-            "type": "boolean"
-          },
           "purpose": {
             "title": "Purpose",
             "type": "string"
@@ -120,7 +116,6 @@
         "required": [
           "checkpoint_hash",
           "purpose",
-          "commercial",
           "classification"
         ],
         "title": "ModelAuthorize",

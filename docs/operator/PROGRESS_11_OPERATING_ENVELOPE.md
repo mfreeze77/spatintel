@@ -21,6 +21,6 @@
 
 ## Retained external gaps
 
-The frozen Node/pnpm production build, mounted-browser accessibility audit, Apple physical-device validation, approved LingBot checkpoint and commercial rights, CUDA/GPU execution, credentialed cloud deployment/recovery, independent penetration/privacy/accessibility/usability/legal review, customer pilots, and human-subject pilots remain external. These gaps are machine-readable in the milestone scope and candidate manifest.
+The frozen Node/pnpm build, mounted-browser accessibility review, Apple physical-device validation, configured LingBot checkpoint, CUDA/GPU execution, credentialed cloud deployment/recovery, independent penetration/privacy/accessibility/usability review, field trials, and human-subject trials remain external to the Progress 11 snapshot. These gaps are machine-readable in the milestone scope and candidate manifest.
 
 Generated, reconstructed, artistic, inferred, design, visual, and interaction content retains its explicit label and cannot be promoted to observed fact or authoritative measurement by the release process.

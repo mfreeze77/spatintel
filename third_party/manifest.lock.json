@@ -1,5 +1,4 @@
 {
-  "approval_policy": "deny_by_default_exact_hash_purpose_classification_region_retention",
   "container_images": [
     {
       "digest": "sha256:6ac590e7cabc2fbe8d7b8fc1ce9c9f0582177b334e0df9c927ebd9670469440f",
@@ -257,6 +256,7 @@
       "version": "6.0.3"
     }
   ],
+  "execution_policy": "local_internal_exact_hash_purpose_classification_region_retention",
   "governance_manifests": [
     {
       "approval_state": "recorded",
@@ -275,7 +275,7 @@
       "path": "third_party/models/lingbot-map-checkpoint.json",
       "runtime_download": false,
       "schema": "sip.model-manifest/v1",
-      "sha256": "c5086ee12852d49f809d5fa611b960494ac08055345e1b10772b26e09c066e8e",
+      "sha256": "ee9aa2d7a039f2b1a4ae17e918415f86f1f3f0ec1e3368e91871bf03d694bc8d",
       "source_revision": "1f480aeb8a47a24656090d46d053115b7fe60435"
     },
     {
@@ -373,7 +373,7 @@
       "runtime_state": "format_reference_only_no_runtime_dependency"
     }
   ],
-  "lock_root_sha256": "f5f667fdfdc17bbf3ed7a1238389683378fb12185a0bbfc09d2833cd4d2971b4",
+  "lock_root_sha256": "427240c91e96fa1cb851baaf0b538cefaa009badb2a8ead547ec2763402539b3",
   "runtime_downloads_allowed": false,
   "schema": "sip.third-party-manifest-lock/v1",
   "specification_version": "1.1.0"

@@ -14,7 +14,7 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 MODEL_SUFFIXES = {".pt", ".pth", ".ckpt", ".safetensors", ".onnx", ".gguf", ".bin"}
 VALID_APPROVALS = {"approved", "denied", "quarantined", "expired"}
-INCOMPATIBLE_LICENSES = {"unknown", "research-only", "noncommercial", "non-commercial", "proprietary-unapproved"}
+INCOMPATIBLE_LICENSES = {"unknown", "research-only", "restricted-use", "proprietary-unapproved"}
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -52,8 +52,8 @@ def validate(*, release: bool = False) -> dict[str, Any]:
     lingbot_lock = _load(ROOT / "adapters/lingbot-map/source.lock.json")
     if lingbot_lock.get("commit") != expected_lingbot:
         error("LINGBOT_REVISION_MISMATCH", "adapters/lingbot-map/source.lock.json", "authoritative LingBot commit changed")
-    if lingbot_lock.get("checkpoint_approval") != "denied":
-        error("LINGBOT_CHECKPOINT_MUST_DENY", "adapters/lingbot-map/source.lock.json", "checkpoint must remain denied until separately approved")
+    if lingbot_lock.get("checkpoint_status") != "not_configured":
+        error("LINGBOT_CHECKPOINT_STATUS_INVALID", "adapters/lingbot-map/source.lock.json", "checkpoint must remain inactive until a local model is configured")
     dockerfile = (ROOT / "adapters/lingbot-map/Dockerfile").read_text()
     if expected_lingbot not in dockerfile:
         error("LINGBOT_DOCKER_REVISION_MISSING", "adapters/lingbot-map/Dockerfile", "Docker context does not enforce the pinned revision")
@@ -62,7 +62,7 @@ def validate(*, release: bool = False) -> dict[str, Any]:
     warning(
         "LINGBOT_BASE_IMAGE_VULNERABILITIES_REQUIRE_RESCAN",
         "adapters/lingbot-map/Dockerfile",
-        "deny-by-default adapter image must be rebuilt on a scan-clean CUDA/PyTorch baseline before approval",
+        "the inactive adapter image must be rebuilt on a scan-clean CUDA/PyTorch baseline before local use",
     )
 
     provider_count = 0
@@ -96,11 +96,13 @@ def validate(*, release: bool = False) -> dict[str, Any]:
             error("MODEL_APPROVAL_INVALID", path, f"invalid approval state {state!r}")
         required = {
             "model_id", "version", "checkpoint_hash", "code_revision", "code_license", "weights_license",
-            "dataset_terms", "output_terms", "approval_state", "commercial_use", "allowed_purposes",
+            "dataset_terms", "output_terms", "approval_state", "usage_scope", "allowed_purposes",
         }
         missing = sorted(required - manifest.keys())
         if missing:
             error("MODEL_MANIFEST_INCOMPLETE", path, f"missing {missing}")
+        if manifest.get("usage_scope") != "local_internal":
+            error("MODEL_USAGE_SCOPE_INVALID", path, "internal tooling accepts only the local_internal usage scope")
         if state == "approved":
             if not HEX64.fullmatch(str(manifest.get("checkpoint_hash", ""))):
                 error("APPROVED_MODEL_HASH_INVALID", path, "approved model requires an exact SHA-256 checkpoint hash")

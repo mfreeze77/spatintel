@@ -903,10 +903,10 @@ class ManifestRestrictionContract(ContractModel):
 
 
 class ModelManifestContract(ContractModel):
-    schema_name: Literal["sip.model-manifest/v1.1"] = Field(
-        default="sip.model-manifest/v1.1", alias="schema", serialization_alias="schema"
+    schema_name: Literal["sip.model-manifest/v1.2"] = Field(
+        default="sip.model-manifest/v1.2", alias="schema", serialization_alias="schema"
     )
-    schema_version: Literal["1.1.0"] = "1.1.0"
+    schema_version: Literal["1.2.0"] = "1.2.0"
     model_id: str = Field(min_length=1, max_length=128)
     provider: str = Field(min_length=1, max_length=256)
     model_name: str = Field(min_length=1, max_length=256)
@@ -921,7 +921,7 @@ class ModelManifestContract(ContractModel):
     dataset_terms: list[str] = Field(min_length=1)
     output_terms: str = Field(min_length=1)
     approval_state: Literal["approved", "denied", "expired", "revoked", "research_only", "pending"]
-    commercial_use: bool
+    usage_scope: Literal["local_internal"] = "local_internal"
     allowed_classifications: list[Classification] = Field(min_length=1)
     permitted_uses: list[str] = Field(min_length=1)
     prohibited_uses: list[str] = Field(min_length=1)

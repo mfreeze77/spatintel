@@ -105,6 +105,11 @@
       "byte_count": 11821,
       "path": "migrations/versions/0021_progress11_release_assurance.py",
       "sha256": "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff"
+    },
+    {
+      "byte_count": 2237,
+      "path": "migrations/versions/0022_internal_tool_profile.py",
+      "sha256": "371a28e2c632d5654ce98aa6c9d432dcc0437ef74eac5dcf1b04589ca807a771"
     }
   ],
   "schema_version": "1.1.0"

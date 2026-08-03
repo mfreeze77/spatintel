@@ -89,8 +89,8 @@ def _third_party_findings() -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     lock_path = ROOT / "third_party/manifest.lock.json"
     lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if not lock.get("approval_policy"):
-        findings.append({"code": "THIRD_PARTY_APPROVAL_POLICY_MISSING"})
+    if not lock.get("execution_policy"):
+        findings.append({"code": "THIRD_PARTY_EXECUTION_POLICY_MISSING"})
     for image in lock.get("container_images", []):
         if not re.fullmatch(r"sha256:[a-f0-9]{64}", str(image.get("digest", ""))):
             findings.append({"code": "THIRD_PARTY_CONTAINER_DIGEST_INVALID", "entry": image})

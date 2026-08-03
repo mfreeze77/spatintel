@@ -251,8 +251,66 @@ def cleanup_mesh(vertices: np.ndarray, faces: np.ndarray) -> dict[str, np.ndarra
         a, b, c = unique[remapped[:, 0]], unique[remapped[:, 1]], unique[remapped[:, 2]]
         area = np.linalg.norm(np.cross(b - a, c - a), axis=1) / 2
         remapped = remapped[area > 1e-12]
-    canonical_faces = np.unique(np.sort(remapped, axis=1), axis=0) if len(remapped) else remapped
+    if len(remapped):
+        # Use orientation-independent keys to remove duplicate triangles, but
+        # retain the first triangle's winding. Sorting the returned face itself
+        # destroys the surface orientation and corrupts downstream normals.
+        face_keys = np.sort(remapped, axis=1)
+        _, first_indices = np.unique(face_keys, axis=0, return_index=True)
+        canonical_faces = remapped[np.sort(first_indices)]
+    else:
+        canonical_faces = remapped
     return {"vertices": unique.astype(np.float64), "faces": canonical_faces.astype(np.int64)}
+
+
+def mesh_quality_report(
+    vertices: np.ndarray,
+    faces: np.ndarray,
+    *,
+    vertex_colors: np.ndarray | None = None,
+) -> dict[str, Any]:
+    """Return deterministic topology and appearance coverage facts for a mesh."""
+    clean = cleanup_mesh(vertices, faces)
+    verts = clean["vertices"]
+    tri = clean["faces"]
+    if len(tri):
+        a, b, c = verts[tri[:, 0]], verts[tri[:, 1]], verts[tri[:, 2]]
+        face_areas = np.linalg.norm(np.cross(b - a, c - a), axis=1) / 2
+        edges = np.vstack((tri[:, [0, 1]], tri[:, [1, 2]], tri[:, [2, 0]]))
+        edge_keys = np.sort(edges, axis=1)
+        _, edge_counts = np.unique(edge_keys, axis=0, return_counts=True)
+        boundary_edges = int(np.count_nonzero(edge_counts == 1))
+        nonmanifold_edges = int(np.count_nonzero(edge_counts > 2))
+    else:
+        face_areas = np.asarray([], dtype=np.float64)
+        boundary_edges = 0
+        nonmanifold_edges = 0
+    bounds_min = verts.min(axis=0).tolist() if len(verts) else [0.0, 0.0, 0.0]
+    bounds_max = verts.max(axis=0).tolist() if len(verts) else [0.0, 0.0, 0.0]
+    color_coverage = 0.0
+    if vertex_colors is not None:
+        colors = np.asarray(vertex_colors, dtype=np.float64)
+        if colors.ndim != 2 or colors.shape[0] != len(np.asarray(vertices)) or colors.shape[1] not in {3, 4}:
+            raise ValidationError(
+                "MESH_VERTEX_COLORS_INVALID",
+                "vertex colors must be Nx3 or Nx4 and align with input vertices",
+            )
+        if not np.isfinite(colors).all():
+            raise ValidationError("MESH_VERTEX_COLORS_INVALID", "vertex colors must be finite")
+        color_coverage = (
+            float(np.count_nonzero(np.any(colors[:, :3] != 0, axis=1)) / len(colors)) if len(colors) else 0.0
+        )
+    return {
+        "vertex_count": len(verts),
+        "face_count": len(tri),
+        "surface_area_m2": float(face_areas.sum()),
+        "boundary_edge_count": boundary_edges,
+        "nonmanifold_edge_count": nonmanifold_edges,
+        "watertight": bool(len(tri) and boundary_edges == 0 and nonmanifold_edges == 0),
+        "bounds_min_m": bounds_min,
+        "bounds_max_m": bounds_max,
+        "vertex_color_coverage": color_coverage,
+    }
 
 
 def interaction_proxy(vertices: np.ndarray, faces: np.ndarray, *, target_faces: int = 5000) -> dict[str, Any]:
@@ -285,7 +343,16 @@ def interaction_proxy(vertices: np.ndarray, faces: np.ndarray, *, target_faces: 
     }
 
 
-def mesh_to_splats(vertices: np.ndarray, faces: np.ndarray, *, samples: int = 1024, seed: int = 0) -> dict[str, np.ndarray | bool]:
+def mesh_to_splats(
+    vertices: np.ndarray,
+    faces: np.ndarray,
+    *,
+    samples: int = 1024,
+    seed: int = 0,
+    vertex_colors: np.ndarray | None = None,
+) -> dict[str, Any]:
+    if samples <= 0:
+        raise ValidationError("SPLAT_SAMPLE_COUNT_INVALID", "splat sample count must be positive")
     mesh = cleanup_mesh(vertices, faces)
     verts, tri = mesh["vertices"], mesh["faces"]
     if len(tri) == 0:
@@ -303,7 +370,7 @@ def mesh_to_splats(vertices: np.ndarray, faces: np.ndarray, *, samples: int = 10
     normals /= np.maximum(np.linalg.norm(normals, axis=1, keepdims=True), 1e-12)
     radii = np.sqrt(np.maximum(areas[selected], 1e-12) / samples)
     covariance = np.stack([radii, radii, radii * 0.1], axis=1)
-    return {
+    result: dict[str, Any] = {
         "positions": positions,
         "normals": normals,
         "scales": covariance,
@@ -316,6 +383,73 @@ def mesh_to_splats(vertices: np.ndarray, faces: np.ndarray, *, samples: int = 10
             "sample density bounds recoverable geometric detail",
         ],
         "authority": "visual_non_metric",
+    }
+    if vertex_colors is not None:
+        colors = np.asarray(vertex_colors, dtype=np.float64)
+        if colors.ndim != 2 or colors.shape[0] != len(vertices) or colors.shape[1] not in {3, 4}:
+            raise ValidationError(
+                "MESH_VERTEX_COLORS_INVALID",
+                "vertex colors must be Nx3 or Nx4 and align with input vertices",
+            )
+        if not np.isfinite(colors).all():
+            raise ValidationError("MESH_VERTEX_COLORS_INVALID", "vertex colors must be finite")
+        rounded = np.round(np.asarray(vertices, dtype=np.float64), decimals=9)
+        unique_vertices, inverse = np.unique(rounded, axis=0, return_inverse=True)
+        color_sums = np.zeros((len(unique_vertices), colors.shape[1]), dtype=np.float64)
+        color_counts = np.zeros(len(unique_vertices), dtype=np.float64)
+        np.add.at(color_sums, inverse, colors)
+        np.add.at(color_counts, inverse, 1.0)
+        clean_colors = color_sums / color_counts[:, None]
+        if not np.array_equal(unique_vertices, verts):
+            raise ValidationError("MESH_COLOR_ALIGNMENT_FAILED", "cleaned vertices do not align with vertex colors")
+        w1 = uv[:, :1]
+        w2 = uv[:, 1:]
+        w0 = 1.0 - w1 - w2
+        result["colors"] = (
+            w0 * clean_colors[tri[selected, 0]]
+            + w1 * clean_colors[tri[selected, 1]]
+            + w2 * clean_colors[tri[selected, 2]]
+        )
+        result["information_loss"] = [
+            item for item in result["information_loss"] if "material and texture" not in item
+        ] + ["vertex colors are interpolated; texture images and material response are not retained"]
+    return result
+
+
+def compose_mesh_representations(
+    vertices: np.ndarray,
+    faces: np.ndarray,
+    *,
+    vertex_colors: np.ndarray | None = None,
+    splat_samples: int = 4096,
+    lod_target_faces: int = 5000,
+    seed: int = 0,
+) -> dict[str, Any]:
+    """Compose metric, visual, and interaction lanes without collapsing authority."""
+    clean = cleanup_mesh(vertices, faces)
+    visual = mesh_to_splats(
+        vertices,
+        faces,
+        samples=splat_samples,
+        seed=seed,
+        vertex_colors=vertex_colors,
+    )
+    interaction = interaction_proxy(clean["vertices"], clean["faces"], target_faces=lod_target_faces)
+    return {
+        "metric": {
+            "vertices": clean["vertices"],
+            "faces": clean["faces"],
+            "authority": "metric_unverified",
+            "intended_uses": ["measurement_with_source_resolution", "alignment", "change_review"],
+        },
+        "visual": visual,
+        "interaction": interaction,
+        "quality": mesh_quality_report(vertices, faces, vertex_colors=vertex_colors),
+        "composition": {
+            "authority_lanes_preserved": True,
+            "visual_resolves_to_metric_for_measurement": True,
+            "interaction_resolves_to_metric_for_measurement": True,
+        },
     }
 
 

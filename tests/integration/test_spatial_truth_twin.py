@@ -88,8 +88,8 @@ def _provider(context, actor: str, provider_id: str) -> None:
 def _approved_model_manifest(*, model_id: str, actor: str, checkpoint_hash: str) -> dict:
     reviewed_at = datetime.now(UTC) - timedelta(days=1)
     return {
-        "schema": "sip.model-manifest/v1.1",
-        "schema_version": "1.1.0",
+        "schema": "sip.model-manifest/v1.2",
+        "schema_version": "1.2.0",
         "model_id": model_id,
         "provider": "sip.synthetic",
         "model_name": "deterministic-lineage-fixture",
@@ -114,7 +114,7 @@ def _approved_model_manifest(*, model_id: str, actor: str, checkpoint_hash: str)
         "dataset_terms": ["synthetic_fixture_only"],
         "output_terms": "Apache-2.0",
         "approval_state": "approved",
-        "commercial_use": True,
+        "usage_scope": "local_internal",
         "allowed_classifications": ["internal"],
         "permitted_uses": ["spatial-truth-test"],
         "prohibited_uses": ["biometric_identification"],
@@ -1049,7 +1049,6 @@ def test_pltmodel_datevid_model_derivation_has_signed_governance_receipt_and_his
                 "classification": "internal",
                 "deployment": "test",
                 "region": "local",
-                "commercial": False,
             },
         },
         "started_at": now,

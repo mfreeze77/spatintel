@@ -6,7 +6,7 @@
 
 ## Context
 
-A repository license does not establish checkpoint, dataset, hosted-service, output, regional, retention, or commercial rights. Runtime downloads also make an audited release non-reproducible.
+A repository checkout does not establish the checkpoint, dataset, hosted-service behavior, output terms, region, retention, or quality envelope. Runtime downloads also make an audited run non-reproducible.
 
 ## Decision
 
