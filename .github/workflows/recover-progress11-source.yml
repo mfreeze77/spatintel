@@ -1,0 +1,46 @@
+name: Recover Progress 11 source
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    if: github.head_ref == 'agent/recover-progress11-source-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out complete repository history
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build exact immutable recovery artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=f444a0ace952c6779f538e84e9290579c517d8e7
+          git cat-file -e "${target}^{commit}"
+          git branch -f recovered-progress11 "${target}"
+          mkdir -p recovery-artifact
+          git archive --format=zip --prefix="spatintel-${target}/" \
+            --output="recovery-artifact/spatintel-${target}.zip" "${target}"
+          git archive --format=tar.gz --prefix="spatintel-${target}/" \
+            --output="recovery-artifact/spatintel-${target}.tar.gz" "${target}"
+          git bundle create "recovery-artifact/spatintel-${target}.bundle" recovered-progress11
+          git -C . bundle verify "recovery-artifact/spatintel-${target}.bundle" \
+            >"recovery-artifact/bundle-verify.txt" 2>&1
+          git show -s --format='%H%n%P%n%T%n%aI%n%cI%n%an <%ae>%n%cn <%ce>%n%s' "${target}" \
+            >"recovery-artifact/source-commit.txt"
+          git ls-tree -r --full-tree "${target}" >"recovery-artifact/source-tree.txt"
+          (cd recovery-artifact && sha256sum * >SHA256SUMS)
+      - name: Upload exact recovery source
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: sip-progress11-exact-source-f444a0a
+          path: recovery-artifact
+          if-no-files-found: error
+          retention-days: 7
