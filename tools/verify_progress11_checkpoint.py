@@ -46,6 +46,21 @@ def _matrix_counts(totals: dict[str, Any]) -> tuple[int, int, int, int]:
     errors = int(totals.get("errors", 0))
     skipped = int(totals.get("skipped", 0))
     return passed, failed, errors, skipped
+
+
+def _audited_requirement_ids(value: object) -> set[str]:
+    """Return an exact unique requirement-id set for the audit's canonical list."""
+
+    if not isinstance(value, list):
+        return set()
+    identifiers = {
+        str(item.get("requirement_id"))
+        for item in value
+        if isinstance(item, dict) and isinstance(item.get("requirement_id"), str)
+    }
+    return identifiers if len(identifiers) == len(value) else set()
+
+
 EXPECTED_MIGRATION_BYTES = 11821
 EXPECTED_MIGRATION_SHA256 = "0cb8f6d60e9a8a1f90b4d341116467fb81089b7ffaa07480544c749505d279ff"
 MAX_FILES = 10000
@@ -68,6 +83,31 @@ class Verification:
 
     def fail(self, code: str, message: str, path: str | None = None) -> None:
         self.findings.append(Finding(code, message, path))
+
+
+def _verify_bundle_integrity(bundle: Path, verification: Verification) -> None:
+    """Verify a bundle without assuming the caller is inside a Git repository."""
+
+    with tempfile.TemporaryDirectory(prefix="sip-p11-bundle-verify-") as temp:
+        verification_repository = Path(temp) / "verification.git"
+        result = subprocess.run(
+            ["git", "init", "--bare", "-q", str(verification_repository)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            verification.fail("GIT_VERIFY_REPOSITORY", result.stderr or result.stdout, bundle.name)
+            return
+        result = subprocess.run(
+            ["git", "bundle", "verify", str(bundle)],
+            cwd=verification_repository,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            verification.fail("GIT_BUNDLE_INVALID", result.stderr or result.stdout, bundle.name)
 
 
 def _load(path: Path, verification: Verification, code: str) -> dict[str, Any] | None:
@@ -263,11 +303,10 @@ def _verify_source(root: Path, verification: Verification) -> dict[str, Any] | N
         verification.fail("GIT_BUNDLE_MISSING", "exact Progress 11 Git bundle is missing", "artifacts")
     else:
         bundle = bundles[0]
-        result = subprocess.run(["git", "bundle", "verify", str(bundle)], capture_output=True, text=True, check=False)
-        if result.returncode != 0:
-            verification.fail("GIT_BUNDLE_INVALID", result.stderr or result.stdout, bundle.name)
+        _verify_bundle_integrity(bundle, verification)
         with tempfile.TemporaryDirectory(prefix="sip-p11-bundle-") as temp:
-            clone = Path(temp) / "clone"
+            temporary = Path(temp)
+            clone = temporary / "clone"
             result = subprocess.run(["git", "clone", "-q", "-b", EXPECTED_BRANCH, str(bundle), str(clone)], capture_output=True, text=True, check=False)
             if result.returncode != 0:
                 verification.fail("GIT_CLONE_FAILED", result.stderr, bundle.name)
@@ -326,7 +365,11 @@ def _verify_control_records(root: Path, verification: Verification, source_recor
         verification.fail("SCOPE_COUNTS", "milestone scope count differs", "MILESTONE_SCOPE_PROGRESS_11.json")
     if scope.get("authorized_epics") != ["QA-002"] or scope.get("progress_12_authorized") is not False or scope.get("production_authorized") is not False:
         verification.fail("SCOPE_POSTURE", "scope authorization posture differs", "MILESTONE_SCOPE_PROGRESS_11.json")
-    if audit.get("status") != "passed_complete" or int(audit.get("finding_count", -1)) != 0 or int(audit.get("requirements_audited", -1)) != EXPECTED_SCOPE_TOTAL:
+    if (
+        audit.get("status") != "passed_complete"
+        or int(audit.get("finding_count", -1)) != 0
+        or _audited_requirement_ids(audit.get("requirements_audited")) != ids
+    ):
         verification.fail("TRACEABILITY", "Progress 11 traceability audit is not complete", "progress-11-traceability-audit.json")
     requirements = ledger.get("requirements") if isinstance(ledger.get("requirements"), list) else []
     if len(requirements) != 1028:
@@ -342,9 +385,9 @@ def _verify_control_records(root: Path, verification: Verification, source_recor
     if acceptance.get("progress_12_authorized") is not False or acceptance.get("production_authorized") is not False:
         verification.fail("ACCEPTANCE_POSTURE", "acceptance authorizes Progress 12 or production")
     totals = matrix.get("totals", {})
-    passed = int(totals.get("passed", 0))
+    passed, failed, errors, skipped = _matrix_counts(totals)
     verification.facts["python_tests_passed"] = passed
-    if passed < MIN_PYTHON_TESTS or any(int(totals.get(key, 0)) for key in ("failed", "errors", "skipped")):
+    if passed < MIN_PYTHON_TESTS or any((failed, errors, skipped)):
         verification.fail("MATRIX", "Python matrix has insufficient passes or nonzero findings")
     if checkpoint.get("checkpoint_id") != CHECKPOINT_ID or checkpoint.get("commit") != source_record.get("commit") or checkpoint.get("source_tree_root_sha256") != source_record.get("source_tree_root_sha256"):
         verification.fail("CHECKPOINT_BINDING", "checkpoint record is not bound to source")
@@ -375,7 +418,12 @@ def _verify_control_records(root: Path, verification: Verification, source_recor
             verification.fail("MIGRATION_LOCK", "Progress 11 migration lock differs", EXPECTED_MIGRATION_PATH)
         migration_manifest = _load(root / "source/migrations/manifest.json", verification, "MIGRATION_MANIFEST_INVALID")
         if migration_manifest:
-            matches = [item for item in migration_manifest.get("migrations", []) if isinstance(item, dict) and item.get("path") == MIGRATION_PATH]
+            manifest_path = EXPECTED_MIGRATION_PATH.removeprefix("source/")
+            matches = [
+                item
+                for item in migration_manifest.get("migrations", [])
+                if isinstance(item, dict) and item.get("path") == manifest_path
+            ]
             if len(matches) != 1 or int(matches[0].get("byte_count", -1)) != EXPECTED_MIGRATION_BYTES or matches[0].get("sha256") != EXPECTED_MIGRATION_SHA256:
                 verification.fail("MIGRATION_MANIFEST_LOCK", "migration manifest does not retain the exact 0021 revision", "source/migrations/manifest.json")
     spec = root / "source/spec/source/Spatial-Intelligence-Platform-Spec-v1.1.zip"

@@ -268,7 +268,7 @@ def test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema() -> 
     """REQ: TSTGATE-003 — Checkpoint tooling consumes the canonical hermetic matrix schema."""
 
     from tools.build_progress11_checkpoint import _matrix_counts as build_counts
-    from tools.verify_progress11_checkpoint import _matrix_counts as verify_counts
+    from tools.verify_progress11_checkpoint import _audited_requirement_ids, _matrix_counts as verify_counts
 
     canonical = {"tests": 489, "failures": 0, "errors": 0, "skipped": 0}
     historical = {"passed": 489, "failed": 0, "errors": 0, "skipped": 0}
@@ -276,3 +276,42 @@ def test_progress11_checkpoint_tools_accept_canonical_matrix_totals_schema() -> 
     assert verify_counts(canonical) == (489, 0, 0, 0)
     assert build_counts(historical) == (489, 0, 0, 0)
     assert verify_counts(historical) == (489, 0, 0, 0)
+
+    audit_records = [{"requirement_id": f"REQ-{index:03d}"} for index in range(96)]
+    assert _audited_requirement_ids(audit_records) == {f"REQ-{index:03d}" for index in range(96)}
+    assert _audited_requirement_ids([*audit_records, audit_records[0]]) == set()
+    assert _audited_requirement_ids(96) == set()
+
+
+def test_progress11_bundle_verification_does_not_require_caller_repository(tmp_path: Path) -> None:
+    """CONTROL: independent checkpoint verification can validate a Git bundle outside any checkout."""
+
+    from tools.verify_progress11_checkpoint import Verification, _verify_bundle_integrity
+
+    repository = tmp_path / "source"
+    repository.mkdir()
+    subprocess.run(["git", "init", "-q"], cwd=repository, check=True)
+    (repository / "proof.txt").write_text("bundle proof\n", encoding="utf-8")
+    subprocess.run(["git", "add", "proof.txt"], cwd=repository, check=True)
+    subprocess.run(
+        [
+            "git",
+            "-c",
+            "user.name=SIP Test",
+            "-c",
+            "user.email=sip-test@local.invalid",
+            "commit",
+            "-q",
+            "-m",
+            "test bundle",
+        ],
+        cwd=repository,
+        check=True,
+    )
+    bundle = tmp_path / "source.bundle"
+    subprocess.run(["git", "bundle", "create", str(bundle), "--all"], cwd=repository, check=True)
+
+    verification = Verification()
+    _verify_bundle_integrity(bundle, verification)
+
+    assert verification.findings == []
