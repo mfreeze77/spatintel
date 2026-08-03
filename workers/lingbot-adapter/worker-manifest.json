@@ -19,7 +19,7 @@
   "idempotent": true,
   "input_contract": "sip.worker-input/v1",
   "least_privilege": true,
-  "manifest_sha256": "bdb62299af737b8f576e38eb52e5fd82b89680cbf4b4fe56e43d752166429704",
+  "manifest_sha256": "17ee94dd8e9f3609a9381f1d43337144fc8b1e9ab1767b3c7a75a568ea017fd7",
   "name": "lingbot-adapter",
   "network_access": false,
   "output_contract": "sip.worker-result/v1",
@@ -49,7 +49,7 @@
     "max_wall_seconds": 3600
   },
   "runtime_module": "src/sip/worker_runtime.py",
-  "runtime_sha256": "e16d65095f5a5b34387b659532011a94e7cecff030dfb6cfd8a174f31c93e368",
+  "runtime_sha256": "339e3f20f94f43cddceb93e43886a77ba1594c9f954823efa8d4aba0ece88311",
   "sandbox_module": "src/sip/worker_sandbox.py",
   "sandbox_sha256": "70ca3f95f8c75720748902d738bb794db461584d427e68ffab4e31296997e879",
   "schema": "sip.worker-manifest/v1",

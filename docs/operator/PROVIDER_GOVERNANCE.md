@@ -2,7 +2,7 @@
 
 ## Default state
 
-Every unregistered, unsigned, expired, revoked, research-only, or rights-unclear provider/model is denied before decrypted source access. Source-code licensing does not establish checkpoint, training-data, dataset, output-commercialization, privacy, or export-control permission.
+Every unregistered, unsigned, expired, revoked, research-only, or technically incomplete provider/model is denied before decrypted source access. A source checkout does not identify the checkpoint, training data, supported inputs, output terms, or quality envelope needed for a reproducible local run.
 
 ## Approval dossier
 

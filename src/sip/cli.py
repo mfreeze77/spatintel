@@ -136,7 +136,7 @@ def gpu_doctor(manifest_root: Path | None = None) -> dict[str, Any]:
         "torch": torch,
         "checkpoints": checkpoints,
         "reasons": reasons,
-        "production_execution_allowed": status == "ready",
+        "local_execution_ready": status == "ready",
     }
 
 def doctor() -> dict[str, Any]:

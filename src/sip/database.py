@@ -973,7 +973,7 @@ class ModelManifestRow(Base):
     dataset_terms_json: Mapped[list[str]] = mapped_column(JSON, default=list)
     output_terms: Mapped[str] = mapped_column(Text, default="unknown")
     approval_state: Mapped[str] = mapped_column(String(32), default="denied")
-    commercial_use: Mapped[bool] = mapped_column(Boolean, default=False)
+    usage_scope: Mapped[str] = mapped_column(String(32), default="local_internal")
     # Retained for append-only compatibility with v1.0 rows. New manifests also
     # persist the canonical permitted_uses_json field added in migration 0008.
     allowed_purposes_json: Mapped[list[str]] = mapped_column(JSON, default=list)

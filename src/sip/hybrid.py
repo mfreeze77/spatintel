@@ -210,7 +210,6 @@ class HybridControlService:
             hardware_profile = _required_text(policy_context, "hardware_profile")
             region = _required_text(policy_context, "region")
             deployment_mode = str(policy_context.get("deployment_mode") or "local_only")
-            commercial = bool(policy_context.get("commercial", True))
             required_capabilities = _string_list(contract.provider_selector.get("required_capabilities", []), "required_capabilities")
             forbidden_capabilities = _string_list(contract.provider_selector.get("forbidden_capabilities", []), "forbidden_capabilities")
             preferred = _string_list(contract.provider_selector.get("preferred_provider_ids", []), "preferred_provider_ids")
@@ -233,11 +232,10 @@ class HybridControlService:
             if promotion_state in {"shadow", "research_isolated"} and not (
                 self.environment in {"development", "test"}
                 and bool(policy_context.get("research_isolated", False))
-                and not commercial
             ):
                 raise AuthorizationError(
                     "HYB_PROVIDER_PROMOTION_NOT_PRODUCTION_ELIGIBLE",
-                    "shadow or research-isolated promotions require an explicit noncommercial isolated test context",
+                    "shadow or research-isolated promotions require an explicit isolated test context",
                 )
             external = bool(selected["security"].get("external_processing", False))
             # Platform-wide data-transfer prohibitions are evaluated before provider-specific
@@ -269,7 +267,6 @@ class HybridControlService:
                 selected=selected,
                 purpose=contract.purpose,
                 classification=effective_classification,
-                commercial=commercial,
                 deployment_mode=deployment_mode,
                 region=region,
                 tenant_id=contract.tenant_id,
@@ -583,7 +580,6 @@ class HybridControlService:
 
         region = _required_text(policy_context, "region")
         deployment_mode = str(policy_context.get("deployment_mode") or "local_only")
-        commercial = bool(policy_context.get("commercial", True))
         self.providers.authorize_execution(
             provider_snapshot["provider_id"],
             classification=Classification(classification),
@@ -604,7 +600,6 @@ class HybridControlService:
             selected=provider_snapshot,
             purpose=immutable_snapshot["purpose"],
             classification=classification,
-            commercial=commercial,
             deployment_mode=deployment_mode,
             region=region,
             tenant_id=claims["tenant_id"],
@@ -2467,7 +2462,6 @@ class HybridControlService:
         selected: dict[str, Any],
         purpose: str,
         classification: str,
-        commercial: bool,
         deployment_mode: str,
         region: str,
         tenant_id: str,
@@ -2483,7 +2477,6 @@ class HybridControlService:
                 model_id,
                 checkpoint_hash=checkpoint_hash,
                 purpose=purpose,
-                commercial=commercial,
                 classification=Classification(classification),
                 deployment=self.environment,
                 region=region,

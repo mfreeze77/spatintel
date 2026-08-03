@@ -136,7 +136,7 @@ def _descriptor(
         "allowed_purposes": [PURPOSE],
         "allowed_regions": ["local"],
         "prohibited_purposes": ["life_safety_certification"],
-        "output_rights": "commercial_derivatives_allowed",
+        "output_rights": "internal_derivatives_allowed",
         "retention_days": 0,
         "approval_state": approval_state,
         "reviewed_at": reviewed,
@@ -246,7 +246,6 @@ def _request(tenant_id: str, project_id: str, scene: dict[str, str], asset, acto
             "hardware_profile": "cpu-reference",
             "region": "local",
             "deployment_mode": deployment,
-            "commercial": True,
             "audience": "project",
             "allowed_audiences": ["project"],
             "allow_external_transfer": allow_external,
@@ -1158,10 +1157,10 @@ def test_provider_admission_denials_fail_closed_and_retain_safe_evidence(bootstr
         context.hybrid.create_conversion(critical_request, actor_id=actor)
     assert critical_denial.value.code == "HYB_SENSITIVE_EXTERNAL_PROCESSING_DENIED", critical_denial.value.details
 
-    context.providers.register(_descriptor("shadow-commercial"), actor_id=actor)
-    _promote(context, "shadow-commercial", state="shadow")
-    shadow_request = _request(tenant_id, project_id, scene, source, actor, key="shadow-commercial")
-    shadow_request["provider_selector"]["preferred_provider_ids"] = ["shadow-commercial"]  # type: ignore[index]
+    context.providers.register(_descriptor("shadow-local"), actor_id=actor)
+    _promote(context, "shadow-local", state="shadow")
+    shadow_request = _request(tenant_id, project_id, scene, source, actor, key="shadow-local")
+    shadow_request["provider_selector"]["preferred_provider_ids"] = ["shadow-local"]  # type: ignore[index]
     with pytest.raises(AuthorizationError) as shadow_denial:
         context.hybrid.create_conversion(shadow_request, actor_id=actor)
     assert shadow_denial.value.code == "HYB_PROVIDER_PROMOTION_NOT_PRODUCTION_ELIGIBLE"

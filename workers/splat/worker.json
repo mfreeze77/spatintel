@@ -12,7 +12,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "f7c19dfc70636ba095fa1f9645d2bf74bfcb4ae1f762e8382d0da726a6cb16e0",
+  "manifest_sha256": "3f5a8c60948ba8c659b4cd357b52dc237722314d776f30d77115ceca40355f44",
   "name": "splat",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

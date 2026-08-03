@@ -2,7 +2,8 @@
   "audited": true,
   "cancellable": true,
   "capabilities": [
-    "mesh.lod"
+    "mesh.lod",
+    "mesh.compose"
   ],
   "checkpointed": true,
   "durable": true,
@@ -12,7 +13,7 @@
   "idempotent": true,
   "input_contract": "operation.input@v1",
   "least_privilege": true,
-  "manifest_sha256": "779f04d24ff2099c8654922b62ee4133bba341e81e1493b260579d891f738c53",
+  "manifest_sha256": "1304bbff6a812a4c129400f4c22c2c8805d3048d35870e0c6a0ed3ca43f05131",
   "name": "mesh-lod",
   "output_contract": "operation.output@v1",
   "production_placeholders": false,

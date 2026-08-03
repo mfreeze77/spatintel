@@ -85,7 +85,7 @@ def register_provider(context: PlatformContext, *, provider_id: str = "p07-provi
             "allowed_regions": ["local"],
             "deployments": ["local"],
             "retention_days": 0,
-            "output_rights": "commercial_derivatives_allowed",
+            "output_rights": "internal_derivatives_allowed",
         },
         actor_id="provider-governance",
     )

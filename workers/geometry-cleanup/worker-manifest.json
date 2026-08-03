@@ -19,7 +19,7 @@
   "idempotent": true,
   "input_contract": "sip.worker-input/v1",
   "least_privilege": true,
-  "manifest_sha256": "219818fc3fa16f6e5c4a99d9cdeace1ef80a4d0d5edafb30a430f6012b6afb2e",
+  "manifest_sha256": "88004c252a4b03075de8d3d86b5b9411ae3b1dcf959bb289a563b78bd03f5d9f",
   "name": "geometry-cleanup",
   "network_access": false,
   "output_contract": "sip.worker-result/v1",
@@ -49,7 +49,7 @@
     "max_wall_seconds": 900
   },
   "runtime_module": "src/sip/worker_runtime.py",
-  "runtime_sha256": "e16d65095f5a5b34387b659532011a94e7cecff030dfb6cfd8a174f31c93e368",
+  "runtime_sha256": "339e3f20f94f43cddceb93e43886a77ba1594c9f954823efa8d4aba0ece88311",
   "sandbox_module": "src/sip/worker_sandbox.py",
   "sandbox_sha256": "70ca3f95f8c75720748902d738bb794db461584d427e68ffab4e31296997e879",
   "schema": "sip.worker-manifest/v1",

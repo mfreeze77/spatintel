@@ -42,8 +42,8 @@ def _asset(context, tenant: str, project: str, name: str):
 def _approved_model_manifest(model_id: str, checkpoint_hash: str) -> dict:
     reviewed_at = datetime.now(UTC) - timedelta(days=1)
     return {
-        "schema": "sip.model-manifest/v1.1",
-        "schema_version": "1.1.0",
+        "schema": "sip.model-manifest/v1.2",
+        "schema_version": "1.2.0",
         "model_id": model_id,
         "provider": "sip.synthetic",
         "model_name": "progress07-adversarial-fixture",
@@ -68,7 +68,7 @@ def _approved_model_manifest(model_id: str, checkpoint_hash: str) -> dict:
         "dataset_terms": ["synthetic_fixture_only"],
         "output_terms": "Apache-2.0",
         "approval_state": "approved",
-        "commercial_use": True,
+        "usage_scope": "local_internal",
         "allowed_classifications": ["internal"],
         "permitted_uses": ["security-test"],
         "prohibited_uses": ["biometric_identification"],
@@ -415,7 +415,7 @@ def test_progress07_provider_model_and_runtime_directive_boundaries(tmp_path: Pa
             "source_revision": "a" * 40, "license_id": "Apache-2.0", "approval_state": "denied",
             "allowed_classifications": ["internal"], "allowed_purposes": ["reconstruction"],
             "allowed_regions": ["local"], "deployments": ["local"], "retention_days": 0,
-            "output_rights": "commercial_derivatives_allowed",
+            "output_rights": "internal_derivatives_allowed",
         }, actor_id="governance",
     )
     with pytest.raises(AuthorizationError):
@@ -450,13 +450,13 @@ def test_progress07_provider_model_and_runtime_directive_boundaries(tmp_path: Pa
     context.models.register(_approved_model_manifest("p07-model", checkpoint), actor_id="model-reviewer")
     with pytest.raises(AuthorizationError) as wrong_checkpoint:
         context.models.authorize(
-            "p07-model", checkpoint_hash="0" * 64, purpose="security-test", commercial=True,
+            "p07-model", checkpoint_hash="0" * 64, purpose="security-test",
             classification=Classification.INTERNAL, deployment="test", region="local", customer_id="p07-model-tenant",
         )
     assert "checkpoint_hash_mismatch" in wrong_checkpoint.value.details["reasons"]
     with pytest.raises(AuthorizationError):
         context.models.authorize(
-            "p07-model", checkpoint_hash=checkpoint, purpose="other", commercial=True,
+            "p07-model", checkpoint_hash=checkpoint, purpose="other",
             classification=Classification.INTERNAL, deployment="test", region="local", customer_id="p07-model-tenant",
         )
 

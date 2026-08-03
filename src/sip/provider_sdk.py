@@ -25,7 +25,7 @@ class ProviderExecutionContext:
     purpose: str
     classification: Classification
     region: str = "local"
-    commercial: bool = False
+    usage_scope: str = "local_internal"
 
 
 @runtime_checkable

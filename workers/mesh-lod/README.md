@@ -2,6 +2,10 @@
 
 Capability-scoped SIP durable worker.
 
-Capabilities: `mesh.lod`
+Capabilities: `mesh.lod`, `mesh.compose`
 
-The runtime leases an operation, checks cancellation, writes checkpoints, retains an audited terminal result, and rejects operation types outside this manifest.
+`mesh.compose` cleans the metric mesh without changing face winding, derives a
+colored visual splat lane when vertex colors are available, creates a bounded
+interaction LOD, and reports topology/appearance coverage. The three lanes
+remain separate so a visually attractive result cannot silently become metric
+evidence.

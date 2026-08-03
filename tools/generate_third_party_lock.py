@@ -129,7 +129,7 @@ def build() -> dict[str, Any]:
         "governance_manifests": _manifest_records(),
         "dependencies": _python_dependencies() + _web_dependencies(),
         "container_images": _container_images(),
-        "approval_policy": "deny_by_default_exact_hash_purpose_classification_region_retention",
+        "execution_policy": "local_internal_exact_hash_purpose_classification_region_retention",
     }
     payload["lock_root_sha256"] = _sha256(_canonical(payload))
     return payload

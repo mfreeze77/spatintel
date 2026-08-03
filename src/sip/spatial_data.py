@@ -1381,9 +1381,9 @@ class SpatialDataService:
             if not isinstance(execution, dict):
                 raise ValidationError(
                     "DERIVATION_MODEL_EXECUTION_CONTEXT_REQUIRED",
-                    "model-backed derivations require purpose, classification, deployment, region, and commercial-use context",
+                    "model-backed derivations require purpose, classification, deployment, and region context",
                 )
-            required_execution = {"purpose", "classification", "deployment", "region", "commercial"}
+            required_execution = {"purpose", "classification", "deployment", "region"}
             missing_execution = sorted(required_execution - execution.keys())
             if missing_execution:
                 raise ValidationError(
@@ -1408,7 +1408,6 @@ class SpatialDataService:
                 model_manifest_id,
                 checkpoint_hash=checkpoint_hash,
                 purpose=str(execution["purpose"]),
-                commercial=bool(execution["commercial"]),
                 classification=classification,
                 deployment=str(execution["deployment"]),
                 region=str(execution["region"]),
