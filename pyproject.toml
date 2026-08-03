@@ -19,7 +19,7 @@ dependencies = [
   "jsonschema==4.26.0",
   "numpy==2.3.5",
   "orjson==3.11.9",
-  "prometheus-client==0.25.0",
+  "prometheus-client==0.26.0",
   "pydantic==2.13.4",
   "scipy==1.17.0",
   "sqlalchemy==2.0.50",
